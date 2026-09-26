@@ -1,0 +1,996 @@
+[
+  {
+    "id": "15-fatores-humanos#TEMA-01#E01",
+    "ref": "15-fatores-humanos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"O usuário é o elo mais fraco\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Treinamento resolve *phishing*\"",
+      "\"Um percentual conhecido de incidentes vem de erro humano\"",
+      "Descreva a decisão atacada e o controle que faltou no caminho",
+      "\"*Phishing* é um problema de e-mail\""
+    ],
+    "correta": 2,
+    "justificativa": "A frase atribui culpa a quem operou dentro da autorização que recebeu, e encerra a análise antes de chegar ao controle ausente"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-01#E02",
+    "ref": "15-fatores-humanos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Treinamento resolve *phishing*\"\". Qual é a correção?",
+    "alternativas": [
+      "\"O usuário é o elo mais fraco\"",
+      "\"Um percentual conhecido de incidentes vem de erro humano\"",
+      "\"*Phishing* é um problema de e-mail\"",
+      "Trate treinamento e MFA resistente a *phishing* como metas distintas e obrigatórias"
+    ],
+    "correta": 3,
+    "justificativa": "O próprio guia do CISA diz que credencial comprometida continua autenticando quando o MFA não é resistente a *phishing*"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-01#E03",
+    "ref": "15-fatores-humanos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Um percentual conhecido de incidentes vem de erro humano\"\". Qual é a correção?",
+    "alternativas": [
+      "Use a lista de decisões atacadas no seu ambiente, que você consegue levantar",
+      "\"O usuário é o elo mais fraco\"",
+      "\"Treinamento resolve *phishing*\"",
+      "\"*Phishing* é um problema de e-mail\""
+    ],
+    "correta": 0,
+    "justificativa": "Não há estatística desse tipo confirmada em fonte primária nesta execução"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-01#E04",
+    "ref": "15-fatores-humanos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"*Phishing* é um problema de e-mail\"\". Qual é a correção?",
+    "alternativas": [
+      "\"O usuário é o elo mais fraco\"",
+      "Cubra no programa os canais que a organização efetivamente usa",
+      "\"Treinamento resolve *phishing*\"",
+      "\"Um percentual conhecido de incidentes vem de erro humano\""
+    ],
+    "correta": 1,
+    "justificativa": "O guia descreve SMS, chats em plataformas colaborativas e falsificação de chamada por VoIP"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-01#E05",
+    "ref": "15-fatores-humanos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Trabalho híbrido não muda a exposição\"\". Qual é a correção?",
+    "alternativas": [
+      "\"O usuário é o elo mais fraco\"",
+      "\"Treinamento resolve *phishing*\"",
+      "Ajuste canal e conteúdo do programa ao modelo de trabalho real",
+      "\"Um percentual conhecido de incidentes vem de erro humano\""
+    ],
+    "correta": 2,
+    "justificativa": "O guia registra que menos interação presencial aumenta a chance de a vítima ser enganada por abordagem ajustada às plataformas que ela usa"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-02#E01",
+    "ref": "15-fatores-humanos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"*Phishing* é problema de e-mail\"\". Qual é a correção?",
+    "alternativas": [
+      "\"O filtro de e-mail resolve\"",
+      "\"Basta habilitar MFA\"",
+      "\"Bloquear domínio malicioso encerra o problema\"",
+      "Cubra no programa e na coleta de log os canais que a organização usa"
+    ],
+    "correta": 3,
+    "justificativa": "O guia nomeia SMS, aplicativos de mensagem e VoIP com identificação falsificada"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-02#E02",
+    "ref": "15-fatores-humanos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"O filtro de e-mail resolve\"\". Qual é a correção?",
+    "alternativas": [
+      "Some a filtragem a monitoração de correio e mensagens internas",
+      "\"*Phishing* é problema de e-mail\"",
+      "\"Basta habilitar MFA\"",
+      "\"Bloquear domínio malicioso encerra o problema\""
+    ],
+    "correta": 0,
+    "justificativa": "Ele não vê mensagem originada dentro da organização nem tráfego em aplicativo de mensagem"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-02#E03",
+    "ref": "15-fatores-humanos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Basta habilitar MFA\"\". Qual é a correção?",
+    "alternativas": [
+      "\"*Phishing* é problema de e-mail\"",
+      "Trate tipo de MFA como decisão por classe de conta",
+      "\"O filtro de e-mail resolve\"",
+      "\"Bloquear domínio malicioso encerra o problema\""
+    ],
+    "correta": 1,
+    "justificativa": "Sem FIDO ou PKI o atacante com credencial autentica no portal verdadeiro; sem *number matching* ele insiste no *push*"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-02#E04",
+    "ref": "15-fatores-humanos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Bloquear domínio malicioso encerra o problema\"\". Qual é a correção?",
+    "alternativas": [
+      "\"*Phishing* é problema de e-mail\"",
+      "\"O filtro de e-mail resolve\"",
+      "Priorize padrão de comportamento e restrinja o que pode executar",
+      "\"Basta habilitar MFA\""
+    ],
+    "correta": 2,
+    "justificativa": "Listas de bloqueio são úteis e não conhecem o domínio criado hoje"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-02#E05",
+    "ref": "15-fatores-humanos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Anunciar a simulação educa\"\". Qual é a correção?",
+    "alternativas": [
+      "\"*Phishing* é problema de e-mail\"",
+      "\"O filtro de e-mail resolve\"",
+      "\"Basta habilitar MFA\"",
+      "Defina o que se mede antes de escolher se a simulação é anunciada"
+    ],
+    "correta": 3,
+    "justificativa": "Anúncio muda o indicador, não necessariamente a decisão"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-02#E06",
+    "ref": "15-fatores-humanos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Treinar uma vez por ano basta\"\". Qual é a correção?",
+    "alternativas": [
+      "Combine revisão anual com verificação de retenção e canal de reporte ativo",
+      "\"*Phishing* é problema de e-mail\"",
+      "\"O filtro de e-mail resolve\"",
+      "\"Basta habilitar MFA\""
+    ],
+    "correta": 0,
+    "justificativa": "A recomendação do guia para pequenas e médias empresas é revisão anual do material e verificação de retenção ao final do programa"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-02#R02",
+    "ref": "15-fatores-humanos#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que o guia considera a monitoração de correio e mensagens internas essencial?",
+    "alternativas": [
+      "Porque a pessoa pode ser enganada por origem interna ou sem que o time de segurança saiba, e o equilíbrio de tráfego interno permite notar desvio em relação à linha de base.",
+      "Concentra o acesso e reduz a chance de a pessoa ser convencida a entregar credencial, além de produzir trilha de auditoria que pode ser examinada de forma proativa ou retroativa após suspeita ou confirmação de incidente.",
+      "O canal de reporte com resposta registrada. Sem ele nenhuma camada fica sabendo que a tentativa existiu, e não há dado para decidir o próximo investimento."
+    ],
+    "correta": 0,
+    "justificativa": "\"*Phishing* é problema de e-mail\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-02#R05",
+    "ref": "15-fatores-humanos#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Como a autenticação única participa da defesa contra engenharia social, segundo o guia?",
+    "alternativas": [
+      "Concentra o acesso e reduz a chance de a pessoa ser convencida a entregar credencial, além de produzir trilha de auditoria que pode ser examinada de forma proativa ou retroativa após suspeita ou confirmação de incidente.",
+      "Porque a pessoa pode ser enganada por origem interna ou sem que o time de segurança saiba, e o equilíbrio de tráfego interno permite notar desvio em relação à linha de base.",
+      "O canal de reporte com resposta registrada. Sem ele nenhuma camada fica sabendo que a tentativa existiu, e não há dado para decidir o próximo investimento."
+    ],
+    "correta": 0,
+    "justificativa": "\"*Phishing* é problema de e-mail\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-02#R06",
+    "ref": "15-fatores-humanos#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CISA, NSA, FBI e MS-ISAC — Phishing Guidance: Stopping the Attack Cycle at Phase One, outubro de 2023",
+      "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é o primeiro controle a implantar quando não há orçamento novo, e por que ele é o primeiro?",
+    "alternativas": [
+      "Porque a pessoa pode ser enganada por origem interna ou sem que o time de segurança saiba, e o equilíbrio de tráfego interno permite notar desvio em relação à linha de base.",
+      "O canal de reporte com resposta registrada. Sem ele nenhuma camada fica sabendo que a tentativa existiu, e não há dado para decidir o próximo investimento.",
+      "Concentra o acesso e reduz a chance de a pessoa ser convencida a entregar credencial, além de produzir trilha de auditoria que pode ser examinada de forma proativa ou retroativa após suspeita ou confirmação de incidente."
+    ],
+    "correta": 1,
+    "justificativa": "\"*Phishing* é problema de e-mail\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#E01",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Programa é o curso anual obrigatório\"\". Qual é a correção?",
+    "alternativas": [
+      "Declare as quatro etapas do ciclo e o retorno da avaliação para o desenho",
+      "\"Conteúdo único atende todos\"",
+      "\"100% de conclusão prova eficácia\"",
+      "\"Segurança e privacidade são campanhas separadas\""
+    ],
+    "correta": 0,
+    "justificativa": "A NIST descreve ciclo de vida com pós-implementação e avaliação, e não um evento"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#E02",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Conteúdo único atende todos\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Programa é o curso anual obrigatório\"",
+      "Segmente pelo menos em conscientização, papel e educação",
+      "\"100% de conclusão prova eficácia\"",
+      "\"Segurança e privacidade são campanhas separadas\""
+    ],
+    "correta": 1,
+    "justificativa": "A origem legal das diretrizes é o treinamento baseado em papéis organizacionais"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#E03",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"100% de conclusão prova eficácia\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Programa é o curso anual obrigatório\"",
+      "\"Conteúdo único atende todos\"",
+      "Verifique retenção e observe a decisão no dado operacional",
+      "\"Segurança e privacidade são campanhas separadas\""
+    ],
+    "correta": 2,
+    "justificativa": "Conclusão mede presença"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#E04",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Segurança e privacidade são campanhas separadas\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Programa é o curso anual obrigatório\"",
+      "\"Conteúdo único atende todos\"",
+      "\"100% de conclusão prova eficácia\"",
+      "Um programa, um calendário, dois conteúdos"
+    ],
+    "correta": 3,
+    "justificativa": "A publicação de 2024 trata o programa como de segurança cibernética e privacidade"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#E05",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Depois de um incidente, basta reforçar o mesmo material\"\". Qual é a correção?",
+    "alternativas": [
+      "Gere material novo a partir do caso real, com prazo declarado",
+      "\"Programa é o curso anual obrigatório\"",
+      "\"Conteúdo único atende todos\"",
+      "\"100% de conclusão prova eficácia\""
+    ],
+    "correta": 0,
+    "justificativa": "O incidente aponta uma decisão específica que o material não cobriu"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#E06",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Sem plataforma não há programa\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Programa é o curso anual obrigatório\"",
+      "Registre com o meio disponível e não prometa certificação automática",
+      "\"Conteúdo único atende todos\"",
+      "\"100% de conclusão prova eficácia\""
+    ],
+    "correta": 1,
+    "justificativa": "A publicação trata de organizações de portes diferentes e de quem está começando do zero"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#R01",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são as quatro etapas do ciclo de vida descritas na edição de 2003 da NIST SP 800-50, e qual seção cobre cada uma?",
+    "alternativas": [
+      "A SP 800-50 de outubro de 2003, que trabalhava o nível estratégico de construção do programa, e a SP 800-16 de abril de 1998, que descrevia o treinamento baseado em papel, no nível tático.",
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
+      "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material."
+    ],
+    "correta": 1,
+    "justificativa": "\"Programa é o curso anual obrigatório\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#R03",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais publicações a SP 800-50 Rev. 1 substitui, e o que cada uma cobria?",
+    "alternativas": [
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
+      "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material.",
+      "A SP 800-50 de outubro de 2003, que trabalhava o nível estratégico de construção do programa, e a SP 800-16 de abril de 1998, que descrevia o treinamento baseado em papel, no nível tático."
+    ],
+    "correta": 3,
+    "justificativa": "\"Programa é o curso anual obrigatório\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#R04",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual obrigação legal de 1987 está na origem das diretrizes de conscientização e treinamento, e qual característica ela impôs?",
+    "alternativas": [
+      "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
+      "A SP 800-50 de outubro de 2003, que trabalhava o nível estratégico de construção do programa, e a SP 800-16 de abril de 1998, que descrevia o treinamento baseado em papel, no nível tático.",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material."
+    ],
+    "correta": 0,
+    "justificativa": "\"Programa é o curso anual obrigatório\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#R05",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que o guia do CISA recomenda como verificação ao final de um programa de treinamento antiphishing?",
+    "alternativas": [
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material.",
+      "A SP 800-50 de outubro de 2003, que trabalhava o nível estratégico de construção do programa, e a SP 800-16 de abril de 1998, que descrevia o treinamento baseado em papel, no nível tático.",
+      "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais."
+    ],
+    "correta": 1,
+    "justificativa": "\"Programa é o curso anual obrigatório\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-03#R06",
+    "ref": "15-fatores-humanos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é a diferença entre medir conclusão e verificar retenção?",
+    "alternativas": [
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
+      "A SP 800-50 de outubro de 2003, que trabalhava o nível estratégico de construção do programa, e a SP 800-16 de abril de 1998, que descrevia o treinamento baseado em papel, no nível tático.",
+      "Conclusão registra que a pessoa passou pelo conteúdo. Retenção verifica o que permaneceu depois, e é a única das duas que pode ser ligada a uma decisão futura.",
+      "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais."
+    ],
+    "correta": 2,
+    "justificativa": "\"Programa é o curso anual obrigatório\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-04#E01",
+    "ref": "15-fatores-humanos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Cultura se resolve com comunicação interna\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Cultura é responsabilidade do time de segurança\"",
+      "Ataque as decisões que contradizem a mensagem, e não o alcance da mensagem",
+      "\"Pesquisa de clima mede cultura\"",
+      "\"Toda exceção é falha de cultura\""
+    ],
+    "correta": 1,
+    "justificativa": "A NIST trata cultura como desfecho de programa dentro de processo de toda a organização, com mudança de comportamento como parte da gestão de risco"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-04#E02",
+    "ref": "15-fatores-humanos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Cultura é responsabilidade do time de segurança\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Cultura se resolve com comunicação interna\"",
+      "\"Pesquisa de clima mede cultura\"",
+      "Nomeie o dono de cada decisão de conflito e o critério dele",
+      "\"Toda exceção é falha de cultura\""
+    ],
+    "correta": 2,
+    "justificativa": "O critério de exceção e o precedente de quem tem autoridade ficam fora da alçada do time"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-04#E03",
+    "ref": "15-fatores-humanos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Pesquisa de clima mede cultura\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Cultura se resolve com comunicação interna\"",
+      "\"Cultura é responsabilidade do time de segurança\"",
+      "\"Toda exceção é falha de cultura\"",
+      "Observe exceção concedida, reporte feito e desvio tratado"
+    ],
+    "correta": 3,
+    "justificativa": "Percepção medida em um momento não é comportamento observado no conflito"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-04#E04",
+    "ref": "15-fatores-humanos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Toda exceção é falha de cultura\"\". Qual é a correção?",
+    "alternativas": [
+      "Trate como problema a exceção sem critério e sem prazo",
+      "\"Cultura se resolve com comunicação interna\"",
+      "\"Cultura é responsabilidade do time de segurança\"",
+      "\"Pesquisa de clima mede cultura\""
+    ],
+    "correta": 0,
+    "justificativa": "Exceção com critério, prazo e dono é decisão de risco legítima"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-04#E05",
+    "ref": "15-fatores-humanos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Uma campanha forte muda o comportamento\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Cultura se resolve com comunicação interna\"",
+      "Faça o critério ser escrito antes do material de campanha",
+      "\"Cultura é responsabilidade do time de segurança\"",
+      "\"Pesquisa de clima mede cultura\""
+    ],
+    "correta": 1,
+    "justificativa": "O comportamento contradito pela prática diária volta ao padrão anterior"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-04#E06",
+    "ref": "15-fatores-humanos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"O exemplo da liderança tem efeito mensurável conhecido\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Cultura se resolve com comunicação interna\"",
+      "\"Cultura é responsabilidade do time de segurança\"",
+      "Trate como hipótese operacional e teste na sua própria organização",
+      "\"Pesquisa de clima mede cultura\""
+    ],
+    "correta": 2,
+    "justificativa": "Nenhuma medição desse efeito foi confirmada em fonte primária nesta execução"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-05#E01",
+    "ref": "15-fatores-humanos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "SEI, Carnegie Mellon — Common Sense Guide to Mitigating Insider Threats, Seventh Edition, 07/09/2022",
+      "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Risco interno é assunto do time de segurança\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Instalar monitoração resolve\"",
+      "\"Insider threat é o mesmo que PAM\"",
+      "Envolva gestão, Recursos Humanos, Jurídico, segurança física e donos de dado",
+      "\"Todo acesso fora de horário indica risco interno\""
+    ],
+    "correta": 2,
+    "justificativa": "O SEI descreve esforço de toda a organização e nomeia oito partes interessadas, sendo cinco externas à segurança"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-05#E02",
+    "ref": "15-fatores-humanos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "SEI, Carnegie Mellon — Common Sense Guide to Mitigating Insider Threats, Seventh Edition, 07/09/2022",
+      "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Instalar monitoração resolve\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Risco interno é assunto do time de segurança\"",
+      "\"Insider threat é o mesmo que PAM\"",
+      "\"Todo acesso fora de horário indica risco interno\"",
+      "Escreva o critério com Jurídico e Recursos Humanos antes de coletar"
+    ],
+    "correta": 3,
+    "justificativa": "Sem critério de escalonamento e sem base legal, o dado coletado não vira decisão defensável"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-05#E03",
+    "ref": "15-fatores-humanos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "SEI, Carnegie Mellon — Common Sense Guide to Mitigating Insider Threats, Seventh Edition, 07/09/2022",
+      "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Insider threat é o mesmo que PAM\"\". Qual é a correção?",
+    "alternativas": [
+      "Trate os dois como camadas distintas e complementares",
+      "\"Risco interno é assunto do time de segurança\"",
+      "\"Instalar monitoração resolve\"",
+      "\"Todo acesso fora de horário indica risco interno\""
+    ],
+    "correta": 0,
+    "justificativa": "O cofre controla a credencial e o registro do empréstimo; o risco interno trata a decisão de quem tem acesso legítimo"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-05#E04",
+    "ref": "15-fatores-humanos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "SEI, Carnegie Mellon — Common Sense Guide to Mitigating Insider Threats, Seventh Edition, 07/09/2022",
+      "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Todo acesso fora de horário indica risco interno\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Risco interno é assunto do time de segurança\"",
+      "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
+      "\"Instalar monitoração resolve\"",
+      "\"Insider threat é o mesmo que PAM\""
+    ],
+    "correta": 1,
+    "justificativa": "Produção, plantão e rotina agendada explicam a maior parte desses acessos"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-05#E05",
+    "ref": "15-fatores-humanos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "SEI, Carnegie Mellon — Common Sense Guide to Mitigating Insider Threats, Seventh Edition, 07/09/2022",
+      "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Exportação em massa é motivo para desligar alguém\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Risco interno é assunto do time de segurança\"",
+      "\"Instalar monitoração resolve\"",
+      "Separe contenção, correção do acesso e decisão disciplinar",
+      "\"Insider threat é o mesmo que PAM\""
+    ],
+    "correta": 2,
+    "justificativa": "A correção do controle independe da conclusão sobre intenção, e a decisão sobre a pessoa tem rito próprio"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-05#E06",
+    "ref": "15-fatores-humanos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "SEI, Carnegie Mellon — Common Sense Guide to Mitigating Insider Threats, Seventh Edition, 07/09/2022",
+      "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"O programa começa pela ferramenta\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Risco interno é assunto do time de segurança\"",
+      "\"Instalar monitoração resolve\"",
+      "\"Insider threat é o mesmo que PAM\"",
+      "Comece por privilégio, revisão de acesso e critério de escalonamento"
+    ],
+    "correta": 3,
+    "justificativa": "As práticas do SEI incluem medidas de ganho rápido, muitas delas de processo e de acesso"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-05#R02",
+    "ref": "15-fatores-humanos#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "SEI, Carnegie Mellon — Common Sense Guide to Mitigating Insider Threats, Seventh Edition, 07/09/2022",
+      "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quantas práticas a sétima edição do guia do SEI apresenta, e sobre quantos casos a pesquisa se baseia?",
+    "alternativas": [
+      "Gestão, Recursos Humanos, Jurídico, segurança física, Tecnologia da Informação, segurança da informação, donos de dado e engenheiros de software.",
+      "Porque o controle que permitiu o alcance do ativo está errado independentemente da conclusão sobre a intenção, e misturar as duas coisas adia a correção até o fim de uma apuração que pode levar meses.",
+      "Vinte e duas práticas, baseadas na análise de 3.000 casos de risco interno."
+    ],
+    "correta": 2,
+    "justificativa": "\"Risco interno é assunto do time de segurança\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-05#R03",
+    "ref": "15-fatores-humanos#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "SEI, Carnegie Mellon — Common Sense Guide to Mitigating Insider Threats, Seventh Edition, 07/09/2022",
+      "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais partes interessadas o SEI nomeia como destinatárias dos recursos de cada prática?",
+    "alternativas": [
+      "Gestão, Recursos Humanos, Jurídico, segurança física, Tecnologia da Informação, segurança da informação, donos de dado e engenheiros de software.",
+      "Vinte e duas práticas, baseadas na análise de 3.000 casos de risco interno.",
+      "Porque o controle que permitiu o alcance do ativo está errado independentemente da conclusão sobre a intenção, e misturar as duas coisas adia a correção até o fim de uma apuração que pode levar meses."
+    ],
+    "correta": 0,
+    "justificativa": "\"Risco interno é assunto do time de segurança\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-05#R06",
+    "ref": "15-fatores-humanos#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "SEI, Carnegie Mellon — Common Sense Guide to Mitigating Insider Threats, Seventh Edition, 07/09/2022",
+      "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que a correção do acesso deve ser tratada separadamente da decisão sobre a pessoa?",
+    "alternativas": [
+      "Porque o controle que permitiu o alcance do ativo está errado independentemente da conclusão sobre a intenção, e misturar as duas coisas adia a correção até o fim de uma apuração que pode levar meses.",
+      "Vinte e duas práticas, baseadas na análise de 3.000 casos de risco interno.",
+      "Gestão, Recursos Humanos, Jurídico, segurança física, Tecnologia da Informação, segurança da informação, donos de dado e engenheiros de software."
+    ],
+    "correta": 0,
+    "justificativa": "\"Risco interno é assunto do time de segurança\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#E01",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Taxa de cliques mede suscetibilidade\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Anunciar a simulação melhora o indicador\"",
+      "\"Relatório individual de quem falhou aumenta a accountability\"",
+      "\"Conclusão de 100% é a meta do programa\"",
+      "Meça tempo e volume de reporte em mensagem real"
+    ],
+    "correta": 3,
+    "justificativa": "O clique ocorre em mensagem fabricada pela própria organização, e o número descreve o desenho da isca"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#E02",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Anunciar a simulação melhora o indicador\"\". Qual é a correção?",
+    "alternativas": [
+      "Se anunciar, não use o resultado como medida de risco",
+      "\"Taxa de cliques mede suscetibilidade\"",
+      "\"Relatório individual de quem falhou aumenta a accountability\"",
+      "\"Conclusão de 100% é a meta do programa\""
+    ],
+    "correta": 0,
+    "justificativa": "A melhora vem da expectativa, não do comportamento"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#E03",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Relatório individual de quem falhou aumenta a accountability\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Taxa de cliques mede suscetibilidade\"",
+      "Trate reporte como comportamento a ser reforçado, sem exposição individual",
+      "\"Anunciar a simulação melhora o indicador\"",
+      "\"Conclusão de 100% é a meta do programa\""
+    ],
+    "correta": 1,
+    "justificativa": "Cria incentivo contra o reporte e destrói a única fonte que vê tentativa sem log"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#E04",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Conclusão de 100% é a meta do programa\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Taxa de cliques mede suscetibilidade\"",
+      "\"Anunciar a simulação melhora o indicador\"",
+      "Declare o comportamento esperado e a verificação de retenção",
+      "\"Relatório individual de quem falhou aumenta a accountability\""
+    ],
+    "correta": 2,
+    "justificativa": "A NIST liga o programa a mudança de comportamento como parte da gestão de risco"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#E05",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Sem plataforma é impossível medir\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Taxa de cliques mede suscetibilidade\"",
+      "\"Anunciar a simulação melhora o indicador\"",
+      "\"Relatório individual de quem falhou aumenta a accountability\"",
+      "Use o registro disponível e declare o que não é medido"
+    ],
+    "correta": 3,
+    "justificativa": "O recurso recomendado para organizações com poucos recursos é verificação de retenção e canal de reporte, que não exigem plataforma"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#E06",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Métrica boa é métrica que sempre melhora\"\". Qual é a correção?",
+    "alternativas": [
+      "Defina o limiar que muda canal, conteúdo ou dono do risco",
+      "\"Taxa de cliques mede suscetibilidade\"",
+      "\"Anunciar a simulação melhora o indicador\"",
+      "\"Relatório individual de quem falhou aumenta a accountability\""
+    ],
+    "correta": 0,
+    "justificativa": "Indicador que só melhora não dispara decisão nenhuma"
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#R01",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são os cinco elementos que um indicador precisa ter para ser levado a um comitê?",
+    "alternativas": [
+      "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara.",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material. Ela mede retenção, e não a decisão de clicar.",
+      "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência.",
+      "Que a orientação inclui métricas sugeridas e métodos de avaliação, para melhorar e atualizar o programa conforme as necessidades mudam."
+    ],
+    "correta": 0,
+    "justificativa": "\"Taxa de cliques mede suscetibilidade\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#R03",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual verificação o guia do CISA recomenda ao final de um programa de treinamento, e o que ela mede?",
+    "alternativas": [
+      "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara.",
+      "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência.",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material. Ela mede retenção, e não a decisão de clicar.",
+      "Que a orientação inclui métricas sugeridas e métodos de avaliação, para melhorar e atualizar o programa conforme as necessidades mudam."
+    ],
+    "correta": 2,
+    "justificativa": "\"Taxa de cliques mede suscetibilidade\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#R04",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que o guia do CISA diz sobre o valor de reportar atividade suspeita?",
+    "alternativas": [
+      "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara.",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material. Ela mede retenção, e não a decisão de clicar.",
+      "Que a orientação inclui métricas sugeridas e métodos de avaliação, para melhorar e atualizar o programa conforme as necessidades mudam.",
+      "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência."
+    ],
+    "correta": 3,
+    "justificativa": "\"Taxa de cliques mede suscetibilidade\""
+  },
+  {
+    "id": "15-fatores-humanos#TEMA-06#R05",
+    "ref": "15-fatores-humanos#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que a NIST SP 800-50 Rev. 1 declara sobre o uso de métricas no programa?",
+    "alternativas": [
+      "Que a orientação inclui métricas sugeridas e métodos de avaliação, para melhorar e atualizar o programa conforme as necessidades mudam.",
+      "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara.",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material. Ela mede retenção, e não a decisão de clicar.",
+      "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência."
+    ],
+    "correta": 0,
+    "justificativa": "\"Taxa de cliques mede suscetibilidade\""
+  }
+]

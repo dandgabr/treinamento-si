@@ -1,0 +1,1110 @@
+[
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-01#E01",
+    "ref": "09-aplicacoes-devsecops#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-218 — Secure Software Development Framework (SSDF) Version 1.1, publicado em fevereiro de 2022, DOI 10.6028/NIST.SP.800-218, substitui o CSWP 13 de 23/04/2020; a página da publicação lista o Executive Order 14028 entre as normas relacionadas e traz o SP 800-218A como parte",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Segurança é a fase de teste antes do lançamento\". Qual é a correção?",
+    "alternativas": [
+      "Ter política de desenvolvimento seguro equivale a praticá-lo",
+      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
+      "Distribuir verificação por etapa, com o teste final como confirmação",
+      "Citar requisito sem versão é suficiente"
+    ],
+    "correta": 2,
+    "justificativa": "O custo de correção cresce a cada etapa e o teste final não vê decisão de desenho"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-01#E02",
+    "ref": "09-aplicacoes-devsecops#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-218 — Secure Software Development Framework (SSDF) Version 1.1, publicado em fevereiro de 2022, DOI 10.6028/NIST.SP.800-218, substitui o CSWP 13 de 23/04/2020; a página da publicação lista o Executive Order 14028 entre as normas relacionadas e traz o SP 800-218A como parte",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Ter política de desenvolvimento seguro equivale a praticá-lo\". Qual é a correção?",
+    "alternativas": [
+      "Segurança é a fase de teste antes do lançamento",
+      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
+      "Citar requisito sem versão é suficiente",
+      "Exigir o registro da revisão e da varredura de cada versão"
+    ],
+    "correta": 3,
+    "justificativa": "Política é intenção; delegação sem artefato não é evidência"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-01#E03",
+    "ref": "09-aplicacoes-devsecops#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-218 — Secure Software Development Framework (SSDF) Version 1.1, publicado em fevereiro de 2022, DOI 10.6028/NIST.SP.800-218, substitui o CSWP 13 de 23/04/2020; a página da publicação lista o Executive Order 14028 entre as normas relacionadas e traz o SP 800-218A como parte",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"O SSDF é um framework a ser implantado por completo antes de produzir efeito\". Qual é a correção?",
+    "alternativas": [
+      "Escolher as práticas que atacam as causas raiz dos seus achados e instrumentá-las",
+      "Segurança é a fase de teste antes do lançamento",
+      "Ter política de desenvolvimento seguro equivale a praticá-lo",
+      "Citar requisito sem versão é suficiente"
+    ],
+    "correta": 0,
+    "justificativa": "Ele é um núcleo de práticas de alto nível que se integra ao modelo de ciclo de vida existente"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-01#E04",
+    "ref": "09-aplicacoes-devsecops#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-218 — Secure Software Development Framework (SSDF) Version 1.1, publicado em fevereiro de 2022, DOI 10.6028/NIST.SP.800-218, substitui o CSWP 13 de 23/04/2020; a página da publicação lista o Executive Order 14028 entre as normas relacionadas e traz o SP 800-218A como parte",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Citar requisito sem versão é suficiente\". Qual é a correção?",
+    "alternativas": [
+      "Segurança é a fase de teste antes do lançamento",
+      "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5",
+      "Ter política de desenvolvimento seguro equivale a praticá-lo",
+      "O SSDF é um framework a ser implantado por completo antes de produzir efeito"
+    ],
+    "correta": 1,
+    "justificativa": "Os identificadores mudam entre versões do padrão e a citação fica impossível de auditar"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-01#E05",
+    "ref": "09-aplicacoes-devsecops#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-218 — Secure Software Development Framework (SSDF) Version 1.1, publicado em fevereiro de 2022, DOI 10.6028/NIST.SP.800-218, substitui o CSWP 13 de 23/04/2020; a página da publicação lista o Executive Order 14028 entre as normas relacionadas e traz o SP 800-218A como parte",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Todos os gates devem bloquear para ter efeito\". Qual é a correção?",
+    "alternativas": [
+      "Segurança é a fase de teste antes do lançamento",
+      "Ter política de desenvolvimento seguro equivale a praticá-lo",
+      "Definir o que bloqueia onde, e registrar o que apenas alerta",
+      "O SSDF é um framework a ser implantado por completo antes de produzir efeito"
+    ],
+    "correta": 2,
+    "justificativa": "Gate que bloqueia tudo atrasa a entrega, gera pedido de exceção e acaba desativado"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-01#E06",
+    "ref": "09-aplicacoes-devsecops#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-218 — Secure Software Development Framework (SSDF) Version 1.1, publicado em fevereiro de 2022, DOI 10.6028/NIST.SP.800-218, substitui o CSWP 13 de 23/04/2020; a página da publicação lista o Executive Order 14028 entre as normas relacionadas e traz o SP 800-218A como parte",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Exceção aceita é decisão técnica\". Qual é a correção?",
+    "alternativas": [
+      "Segurança é a fase de teste antes do lançamento",
+      "Ter política de desenvolvimento seguro equivale a praticá-lo",
+      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
+      "Exceção com dono, justificativa, prazo e reavaliação registrados"
+    ],
+    "correta": 3,
+    "justificativa": "Sem dono de risco e prazo, a exceção vira regra permanente"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-01#R01",
+    "ref": "09-aplicacoes-devsecops#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-218 — Secure Software Development Framework (SSDF) Version 1.1, publicado em fevereiro de 2022, DOI 10.6028/NIST.SP.800-218, substitui o CSWP 13 de 23/04/2020; a página da publicação lista o Executive Order 14028 entre as normas relacionadas e traz o SP 800-218A como parte",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais três resultados o SSDF declara perseguir, segundo o resumo do NIST?",
+    "alternativas": [
+      "No build. Fora dele, a informação sobre o que foi compilado, com quais entradas e por qual processo, já não está disponível de forma confiável, e reconstruí-la exige investigar histórico e máquina.",
+      "Reduzir o número de vulnerabilidades na versão publicada; mitigar o impacto potencial da exploração de vulnerabilidades não detectadas ou não tratadas; endereçar as causas raiz para evitar recorrência.",
+      "Porque cria fila, atrasa entrega e transforma o pedido de exceção em rotina; o processo perde autoridade e o controle é removido por decisão informal."
+    ],
+    "correta": 1,
+    "justificativa": "Segurança é a fase de teste antes do lançamento"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-01#R04",
+    "ref": "09-aplicacoes-devsecops#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-218 — Secure Software Development Framework (SSDF) Version 1.1, publicado em fevereiro de 2022, DOI 10.6028/NIST.SP.800-218, substitui o CSWP 13 de 23/04/2020; a página da publicação lista o Executive Order 14028 entre as normas relacionadas e traz o SP 800-218A como parte",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Em que etapa do fluxo a proveniência do build é produzida e por que ela não pode ser reconstruída depois sem custo?",
+    "alternativas": [
+      "Reduzir o número de vulnerabilidades na versão publicada; mitigar o impacto potencial da exploração de vulnerabilidades não detectadas ou não tratadas; endereçar as causas raiz para evitar recorrência.",
+      "No build. Fora dele, a informação sobre o que foi compilado, com quais entradas e por qual processo, já não está disponível de forma confiável, e reconstruí-la exige investigar histórico e máquina.",
+      "Porque cria fila, atrasa entrega e transforma o pedido de exceção em rotina; o processo perde autoridade e o controle é removido por decisão informal."
+    ],
+    "correta": 1,
+    "justificativa": "Segurança é a fase de teste antes do lançamento"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-01#R05",
+    "ref": "09-aplicacoes-devsecops#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-218 — Secure Software Development Framework (SSDF) Version 1.1, publicado em fevereiro de 2022, DOI 10.6028/NIST.SP.800-218, substitui o CSWP 13 de 23/04/2020; a página da publicação lista o Executive Order 14028 entre as normas relacionadas e traz o SP 800-218A como parte",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que um gate que bloqueia toda mudança pequena tende a ser desativado em poucos meses?",
+    "alternativas": [
+      "Reduzir o número de vulnerabilidades na versão publicada; mitigar o impacto potencial da exploração de vulnerabilidades não detectadas ou não tratadas; endereçar as causas raiz para evitar recorrência.",
+      "No build. Fora dele, a informação sobre o que foi compilado, com quais entradas e por qual processo, já não está disponível de forma confiável, e reconstruí-la exige investigar histórico e máquina.",
+      "Porque cria fila, atrasa entrega e transforma o pedido de exceção em rotina; o processo perde autoridade e o controle é removido por decisão informal."
+    ],
+    "correta": 2,
+    "justificativa": "Segurança é a fase de teste antes do lançamento"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-02#E01",
+    "ref": "09-aplicacoes-devsecops#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs em 10 categorias e 968 CWEs no dicionário MITRE na data de lançamento",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"O Top 10 é uma lista de verificação de conformidade\". Qual é a correção?",
+    "alternativas": [
+      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
+      "A posição na lista é o grau de risco da minha aplicação",
+      "As categorias de 2021 servem para relatório de 2026",
+      "Usar para comunicar e priorizar; usar o ASVS para verificar requisito por requisito"
+    ],
+    "correta": 3,
+    "justificativa": "É documento de conscientização ordenado por prevalência medida em amostra do setor"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-02#E02",
+    "ref": "09-aplicacoes-devsecops#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs em 10 categorias e 968 CWEs no dicionário MITRE na data de lançamento",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação\". Qual é a correção?",
+    "alternativas": [
+      "Tratar zero achado como hipótese a investigar, não como resultado",
+      "O Top 10 é uma lista de verificação de conformidade",
+      "A posição na lista é o grau de risco da minha aplicação",
+      "As categorias de 2021 servem para relatório de 2026"
+    ],
+    "correta": 0,
+    "justificativa": "Os dados e os testes cobrem o que é testável de forma automatizada, e há defasagem de anos entre a descoberta da classe de falha e o teste em escala"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-02#E03",
+    "ref": "09-aplicacoes-devsecops#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs em 10 categorias e 968 CWEs no dicionário MITRE na data de lançamento",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"A posição na lista é o grau de risco da minha aplicação\". Qual é a correção?",
+    "alternativas": [
+      "O Top 10 é uma lista de verificação de conformidade",
+      "Medir o risco na sua aplicação e usar a posição como contexto",
+      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
+      "As categorias de 2021 servem para relatório de 2026"
+    ],
+    "correta": 1,
+    "justificativa": "A posição é prevalência no setor"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-02#E04",
+    "ref": "09-aplicacoes-devsecops#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs em 10 categorias e 968 CWEs no dicionário MITRE na data de lançamento",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"As categorias de 2021 servem para relatório de 2026\". Qual é a correção?",
+    "alternativas": [
+      "O Top 10 é uma lista de verificação de conformidade",
+      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
+      "Declarar a versão da taxonomia em todo relatório e remapear o histórico",
+      "A posição na lista é o grau de risco da minha aplicação"
+    ],
+    "correta": 2,
+    "justificativa": "A taxonomia mudou, com duas categorias novas e duas renomeadas"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-02#E05",
+    "ref": "09-aplicacoes-devsecops#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs em 10 categorias e 968 CWEs no dicionário MITRE na data de lançamento",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"Categoria nova significa risco novo\". Qual é a correção?",
+    "alternativas": [
+      "O Top 10 é uma lista de verificação de conformidade",
+      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
+      "A posição na lista é o grau de risco da minha aplicação",
+      "Ler o que a categoria cobre antes de tratar como novidade"
+    ],
+    "correta": 3,
+    "justificativa": "A03:2025 é expansão de uma categoria anterior e A10:2025 foi votada pela comunidade"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-02#E06",
+    "ref": "09-aplicacoes-devsecops#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs em 10 categorias e 968 CWEs no dicionário MITRE na data de lançamento",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"Monitoramento registrado é suficiente\". Qual é a correção?",
+    "alternativas": [
+      "Verificar alerta, não só log",
+      "O Top 10 é uma lista de verificação de conformidade",
+      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
+      "A posição na lista é o grau de risco da minha aplicação"
+    ],
+    "correta": 0,
+    "justificativa": "O documento mudou o nome da categoria para alerta justamente porque registro sem alerta tem valor mínimo"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-02#R01",
+    "ref": "09-aplicacoes-devsecops#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs em 10 categorias e 968 CWEs no dicionário MITRE na data de lançamento",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quantas categorias foram ranqueadas na edição 2025 e quantas delas vieram do levantamento com a comunidade?",
+    "alternativas": [
+      "248 CWEs dentro das dez categorias, contra 968 CWEs no dicionário MITRE disponível na data do lançamento.",
+      "Doze categorias foram ranqueadas; oito entraram por dado e duas foram promovidas pela votação da comunidade, totalizando as dez publicadas.",
+      "A02:2025 Security Misconfiguration, com 3,00% das aplicações testadas apresentando ao menos uma das 16 CWEs da categoria."
+    ],
+    "correta": 1,
+    "justificativa": "O Top 10 é uma lista de verificação de conformidade"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-02#R02",
+    "ref": "09-aplicacoes-devsecops#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs em 10 categorias e 968 CWEs no dicionário MITRE na data de lançamento",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quantas CWEs existem dentro das dez categorias e quantas existiam no dicionário MITRE na data do lançamento?",
+    "alternativas": [
+      "Doze categorias foram ranqueadas; oito entraram por dado e duas foram promovidas pela votação da comunidade, totalizando as dez publicadas.",
+      "A02:2025 Security Misconfiguration, com 3,00% das aplicações testadas apresentando ao menos uma das 16 CWEs da categoria.",
+      "248 CWEs dentro das dez categorias, contra 968 CWEs no dicionário MITRE disponível na data do lançamento."
+    ],
+    "correta": 2,
+    "justificativa": "O Top 10 é uma lista de verificação de conformidade"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-02#R03",
+    "ref": "09-aplicacoes-devsecops#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs em 10 categorias e 968 CWEs no dicionário MITRE na data de lançamento",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual categoria subiu da posição 5 em 2021 para a posição 2 em 2025, e que percentual de aplicações testadas apresentou ao menos uma das 16 CWEs dela?",
+    "alternativas": [
+      "A02:2025 Security Misconfiguration, com 3,00% das aplicações testadas apresentando ao menos uma das 16 CWEs da categoria.",
+      "Doze categorias foram ranqueadas; oito entraram por dado e duas foram promovidas pela votação da comunidade, totalizando as dez publicadas.",
+      "248 CWEs dentro das dez categorias, contra 968 CWEs no dicionário MITRE disponível na data do lançamento."
+    ],
+    "correta": 0,
+    "justificativa": "O Top 10 é uma lista de verificação de conformidade"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#E01",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Modelar o sistema inteiro antes de modelar a função\". Qual é a correção?",
+    "alternativas": [
+      "Modelar a função que está em especificação, com o detalhe que gera teste",
+      "Modelo de ameaças é uma reunião",
+      "A resposta mitigar encerra o assunto",
+      "Aceitar é decidir não fazer nada"
+    ],
+    "correta": 0,
+    "justificativa": "O escopo largo produz frases genéricas e nenhum requisito testável"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#E02",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Modelo de ameaças é uma reunião\". Qual é a correção?",
+    "alternativas": [
+      "Modelar o sistema inteiro antes de modelar a função",
+      "Manter diagrama, lista, respostas, requisitos e data de revisão",
+      "A resposta mitigar encerra o assunto",
+      "Aceitar é decidir não fazer nada"
+    ],
+    "correta": 1,
+    "justificativa": "Sem artefato mantido, a decisão de 2023 não responde à pergunta de 2026"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#E03",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"A resposta mitigar encerra o assunto\". Qual é a correção?",
+    "alternativas": [
+      "Modelar o sistema inteiro antes de modelar a função",
+      "Modelo de ameaças é uma reunião",
+      "Escrever o requisito e o teste na mesma sessão",
+      "Aceitar é decidir não fazer nada"
+    ],
+    "correta": 2,
+    "justificativa": "Sem requisito com identificador e teste, a mitigação não existe em produção"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#E04",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Aceitar é decidir não fazer nada\". Qual é a correção?",
+    "alternativas": [
+      "Modelar o sistema inteiro antes de modelar a função",
+      "Modelo de ameaças é uma reunião",
+      "A resposta mitigar encerra o assunto",
+      "Registrar dono de risco, justificativa e data de reavaliação"
+    ],
+    "correta": 3,
+    "justificativa": "Aceitar é decisão de risco, e risco tem dono e prazo"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#E05",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Caminhos automáticos não precisam de modelo\". Qual é a correção?",
+    "alternativas": [
+      "Marcar esses caminhos no diagrama e tratá-los como limite de confiança",
+      "Modelar o sistema inteiro antes de modelar a função",
+      "Modelo de ameaças é uma reunião",
+      "A resposta mitigar encerra o assunto"
+    ],
+    "correta": 0,
+    "justificativa": "Webhook, fila e tarefa agendada entram sem usuário na frente e concentram falha de autorização"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#E06",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Revisar por calendário resolve\". Qual é a correção?",
+    "alternativas": [
+      "Modelar o sistema inteiro antes de modelar a função",
+      "Definir gatilhos de revisão ligados à mudança",
+      "Modelo de ameaças é uma reunião",
+      "A resposta mitigar encerra o assunto"
+    ],
+    "correta": 1,
+    "justificativa": "A aplicação muda por integração e por dado novo, não por aniversário"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#R01",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais cinco elementos o diagrama de fluxo de dados precisa mostrar para sustentar a etapa de enumeração?",
+    "alternativas": [
+      "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
+      "Entidades externas, processos, depósitos de dado, fluxos de dado e limites de confiança.",
+      "Aceitar é decisão registrada, com dono de risco, justificativa, prazo e reavaliação; ignorar é ausência de decisão, e a ameaça continua aberta sem que ninguém saiba.",
+      "Troca de fornecedor ou de versão da interface, entrada de tipo de dado novo, mudança no formato da chamada de retorno, mudança relevante de arquitetura e incidente que explore caminho previsto ou não previsto no modelo."
+    ],
+    "correta": 1,
+    "justificativa": "Modelar o sistema inteiro antes de modelar a função"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#R04",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que webhook, fila e tarefa agendada merecem tratamento próprio no desenho?",
+    "alternativas": [
+      "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
+      "Entidades externas, processos, depósitos de dado, fluxos de dado e limites de confiança.",
+      "Aceitar é decisão registrada, com dono de risco, justificativa, prazo e reavaliação; ignorar é ausência de decisão, e a ameaça continua aberta sem que ninguém saiba.",
+      "Troca de fornecedor ou de versão da interface, entrada de tipo de dado novo, mudança no formato da chamada de retorno, mudança relevante de arquitetura e incidente que explore caminho previsto ou não previsto no modelo."
+    ],
+    "correta": 0,
+    "justificativa": "Modelar o sistema inteiro antes de modelar a função"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#R05",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual a diferença entre aceitar uma ameaça e ignorá-la?",
+    "alternativas": [
+      "Entidades externas, processos, depósitos de dado, fluxos de dado e limites de confiança.",
+      "Aceitar é decisão registrada, com dono de risco, justificativa, prazo e reavaliação; ignorar é ausência de decisão, e a ameaça continua aberta sem que ninguém saiba.",
+      "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
+      "Troca de fornecedor ou de versão da interface, entrada de tipo de dado novo, mudança no formato da chamada de retorno, mudança relevante de arquitetura e incidente que explore caminho previsto ou não previsto no modelo."
+    ],
+    "correta": 1,
+    "justificativa": "Modelar o sistema inteiro antes de modelar a função"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-03#R06",
+    "ref": "09-aplicacoes-devsecops#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com o texto de A06:2025 Insecure Design sobre melhora da indústria em modelagem de ameaças, e a prevalência de A01:2025 e A02:2025",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Que gatilhos de revisão você definiria para uma aplicação que integra dois fornecedores externos?",
+    "alternativas": [
+      "Entidades externas, processos, depósitos de dado, fluxos de dado e limites de confiança.",
+      "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
+      "Troca de fornecedor ou de versão da interface, entrada de tipo de dado novo, mudança no formato da chamada de retorno, mudança relevante de arquitetura e incidente que explore caminho previsto ou não previsto no modelo.",
+      "Aceitar é decisão registrada, com dono de risco, justificativa, prazo e reavaliação; ignorar é ausência de decisão, e a ameaça continua aberta sem que ninguém saiba."
+    ],
+    "correta": 2,
+    "justificativa": "Modelar o sistema inteiro antes de modelar a função"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-04#E01",
+    "ref": "09-aplicacoes-devsecops#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com a declaração de que os dados se limitam ao que a indústria consegue testar de forma automatizada e com os números de CVE mapeados a CWEs extraídos do OWASP Dependency Check",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Instalar ferramenta é implementar controle\". Qual é a correção?",
+    "alternativas": [
+      "Gate que bloqueia tudo é mais rigoroso",
+      "Escrever a política de gate, os prazos e o caminho de exceção",
+      "Bloquear a ramificação de trabalho acelera a correção",
+      "Todos os críticos têm o mesmo esforço de correção"
+    ],
+    "correta": 1,
+    "justificativa": "Ferramenta produz achado; controle é o que garante correção com dono e prazo"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-04#E02",
+    "ref": "09-aplicacoes-devsecops#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com a declaração de que os dados se limitam ao que a indústria consegue testar de forma automatizada e com os números de CVE mapeados a CWEs extraídos do OWASP Dependency Check",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Gate que bloqueia tudo é mais rigoroso\". Qual é a correção?",
+    "alternativas": [
+      "Instalar ferramenta é implementar controle",
+      "Bloquear a ramificação de trabalho acelera a correção",
+      "Bloquear achado novo e severo na linha principal; registrar o resto",
+      "Todos os críticos têm o mesmo esforço de correção"
+    ],
+    "correta": 2,
+    "justificativa": "Bloqueio amplo empurra a correção para o fim da fila e ensina o time a contornar"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-04#E03",
+    "ref": "09-aplicacoes-devsecops#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com a declaração de que os dados se limitam ao que a indústria consegue testar de forma automatizada e com os números de CVE mapeados a CWEs extraídos do OWASP Dependency Check",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Bloquear a ramificação de trabalho acelera a correção\". Qual é a correção?",
+    "alternativas": [
+      "Instalar ferramenta é implementar controle",
+      "Gate que bloqueia tudo é mais rigoroso",
+      "Todos os críticos têm o mesmo esforço de correção",
+      "Bloquear na promoção do artefato, com data de corte para o estoque antigo"
+    ],
+    "correta": 3,
+    "justificativa": "O trabalho ainda está sendo escrito e o bloqueio interrompe o fluxo sem critério"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-04#E04",
+    "ref": "09-aplicacoes-devsecops#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com a declaração de que os dados se limitam ao que a indústria consegue testar de forma automatizada e com os números de CVE mapeados a CWEs extraídos do OWASP Dependency Check",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Todos os críticos têm o mesmo esforço de correção\". Qual é a correção?",
+    "alternativas": [
+      "Separar por natureza e por classe de ferramenta ao priorizar",
+      "Instalar ferramenta é implementar controle",
+      "Gate que bloqueia tudo é mais rigoroso",
+      "Bloquear a ramificação de trabalho acelera a correção"
+    ],
+    "correta": 0,
+    "justificativa": "Achado em dependência com correção disponível se resolve com atualização; achado em código próprio exige teste e revisão"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-04#E05",
+    "ref": "09-aplicacoes-devsecops#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com a declaração de que os dados se limitam ao que a indústria consegue testar de forma automatizada e com os números de CVE mapeados a CWEs extraídos do OWASP Dependency Check",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Falso positivo não precisa de registro\". Qual é a correção?",
+    "alternativas": [
+      "Instalar ferramenta é implementar controle",
+      "Registrar a análise que concluiu pelo falso positivo, com autor e data",
+      "Gate que bloqueia tudo é mais rigoroso",
+      "Bloquear a ramificação de trabalho acelera a correção"
+    ],
+    "correta": 1,
+    "justificativa": "Sem justificativa documentada, o mesmo alerta volta todo mês e consome tempo"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-04#E06",
+    "ref": "09-aplicacoes-devsecops#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com a declaração de que os dados se limitam ao que a indústria consegue testar de forma automatizada e com os números de CVE mapeados a CWEs extraídos do OWASP Dependency Check",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"O relatório de varredura prova o que foi publicado\". Qual é a correção?",
+    "alternativas": [
+      "Instalar ferramenta é implementar controle",
+      "Gate que bloqueia tudo é mais rigoroso",
+      "Ligar o achado ao artefato exato e ao registro de build",
+      "Bloquear a ramificação de trabalho acelera a correção"
+    ],
+    "correta": 2,
+    "justificativa": "Sem identificador do artefato e sem proveniência, não se sabe qual versão foi analisada"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-04#R01",
+    "ref": "09-aplicacoes-devsecops#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com a declaração de que os dados se limitam ao que a indústria consegue testar de forma automatizada e com os números de CVE mapeados a CWEs extraídos do OWASP Dependency Check",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Que pergunta o SAST responde e que pergunta ele não responde?",
+    "alternativas": [
+      "Responde se o código escrito contém padrão conhecido de falha e se dado não confiável chega a ponto sensível. Não responde como o sistema se comporta em execução, nem se a configuração do ambiente está segura.",
+      "Porque dependência transitiva não aparece na lista declarada: o pacote que você usa traz outros que você não escolheu, e é no inventário gerado no build que eles aparecem.",
+      "Identificador do artefato exato analisado e versão do conjunto de regras. Sem os dois, não há como provar que a versão publicada foi a versão verificada, nem comparar resultado entre execuções."
+    ],
+    "correta": 0,
+    "justificativa": "Instalar ferramenta é implementar controle"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-04#R02",
+    "ref": "09-aplicacoes-devsecops#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com a declaração de que os dados se limitam ao que a indústria consegue testar de forma automatizada e com os números de CVE mapeados a CWEs extraídos do OWASP Dependency Check",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que a análise de dependência precisa de um inventário do que foi construído, e não apenas da lista de dependências declaradas?",
+    "alternativas": [
+      "Responde se o código escrito contém padrão conhecido de falha e se dado não confiável chega a ponto sensível. Não responde como o sistema se comporta em execução, nem se a configuração do ambiente está segura.",
+      "Porque dependência transitiva não aparece na lista declarada: o pacote que você usa traz outros que você não escolheu, e é no inventário gerado no build que eles aparecem.",
+      "Identificador do artefato exato analisado e versão do conjunto de regras. Sem os dois, não há como provar que a versão publicada foi a versão verificada, nem comparar resultado entre execuções."
+    ],
+    "correta": 1,
+    "justificativa": "Instalar ferramenta é implementar controle"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-04#R06",
+    "ref": "09-aplicacoes-devsecops#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, com a declaração de que os dados se limitam ao que a indústria consegue testar de forma automatizada e com os números de CVE mapeados a CWEs extraídos do OWASP Dependency Check",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Que dois elementos o relatório de varredura precisa carregar para ser rastreável, e por quê?",
+    "alternativas": [
+      "Responde se o código escrito contém padrão conhecido de falha e se dado não confiável chega a ponto sensível. Não responde como o sistema se comporta em execução, nem se a configuração do ambiente está segura.",
+      "Porque dependência transitiva não aparece na lista declarada: o pacote que você usa traz outros que você não escolheu, e é no inventário gerado no build que eles aparecem.",
+      "Identificador do artefato exato analisado e versão do conjunto de regras. Sem os dois, não há como provar que a versão publicada foi a versão verificada, nem comparar resultado entre execuções."
+    ],
+    "correta": 2,
+    "justificativa": "Instalar ferramenta é implementar controle"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#E01",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Inventário de componentes é documento de conformidade\". Qual é a correção?",
+    "alternativas": [
+      "Gerar o inventário uma vez por ano resolve",
+      "Varredura de vulnerabilidade substitui o inventário",
+      "Gerar no build, amarrar ao artefato e usar na resposta a incidente",
+      "Dependência transitiva é responsabilidade de quem a escreveu"
+    ],
+    "correta": 2,
+    "justificativa": "O valor está em responder à falha divulgada e à diligência de cliente"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#E02",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Gerar o inventário uma vez por ano resolve\". Qual é a correção?",
+    "alternativas": [
+      "Inventário de componentes é documento de conformidade",
+      "Varredura de vulnerabilidade substitui o inventário",
+      "Dependência transitiva é responsabilidade de quem a escreveu",
+      "Gerar a cada build e guardar por versão"
+    ],
+    "correta": 3,
+    "justificativa": "A cada publicação a lista muda, e a pergunta de incidente é sobre a versão publicada"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#E03",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Varredura de vulnerabilidade substitui o inventário\". Qual é a correção?",
+    "alternativas": [
+      "Manter os dois, com o inventário como base",
+      "Inventário de componentes é documento de conformidade",
+      "Gerar o inventário uma vez por ano resolve",
+      "Dependência transitiva é responsabilidade de quem a escreveu"
+    ],
+    "correta": 0,
+    "justificativa": "A varredura responde o que tem falha conhecida; sem inventário ela não sabe o que existe"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#E04",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Dependência transitiva é responsabilidade de quem a escreveu\". Qual é a correção?",
+    "alternativas": [
+      "Inventário de componentes é documento de conformidade",
+      "Medir a contagem no artefato construído, não na lista declarada",
+      "Gerar o inventário uma vez por ano resolve",
+      "Varredura de vulnerabilidade substitui o inventário"
+    ],
+    "correta": 1,
+    "justificativa": "Ela entra no seu artefato e é você que responde ao cliente"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#E05",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Proveniência é assunto de time de plataforma\". Qual é a correção?",
+    "alternativas": [
+      "Inventário de componentes é documento de conformidade",
+      "Gerar o inventário uma vez por ano resolve",
+      "Definir o nível de build como decisão de risco, com o dono do risco",
+      "Varredura de vulnerabilidade substitui o inventário"
+    ],
+    "correta": 2,
+    "justificativa": "Ela é o que permite provar que a versão publicada é a versão verificada"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#E06",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Declarar não afetado é sempre resposta aceitável\". Qual é a correção?",
+    "alternativas": [
+      "Inventário de componentes é documento de conformidade",
+      "Gerar o inventário uma vez por ano resolve",
+      "Varredura de vulnerabilidade substitui o inventário",
+      "Registrar a análise que sustenta o não afetado, com autor e data"
+    ],
+    "correta": 3,
+    "justificativa": "Declaração sem prova de análise vira promessa vazia"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#R02",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual a diferença entre inventário de componentes, varredura de vulnerabilidade e proveniência de build?",
+    "alternativas": [
+      "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
+      "O VEX declara, para cada falha, se o produto é afetado, não afetado ou afetado sob condição. Sem ele, cada cliente repete a análise e o fornecedor responde a mesma pergunta várias vezes.",
+      "Versão 1.7, publicada em 21 de outubro de 2025, registrada como norma ECMA-424, com comitê técnico na TC54 e manutenção da OWASP Foundation com a Ecma International.",
+      "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído."
+    ],
+    "correta": 0,
+    "justificativa": "Inventário de componentes é documento de conformidade"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#R03",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Para que serve o VEX, e o que acontece quando ele não existe?",
+    "alternativas": [
+      "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
+      "O VEX declara, para cada falha, se o produto é afetado, não afetado ou afetado sob condição. Sem ele, cada cliente repete a análise e o fornecedor responde a mesma pergunta várias vezes.",
+      "Versão 1.7, publicada em 21 de outubro de 2025, registrada como norma ECMA-424, com comitê técnico na TC54 e manutenção da OWASP Foundation com a Ecma International.",
+      "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído."
+    ],
+    "correta": 1,
+    "justificativa": "Inventário de componentes é documento de conformidade"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#R04",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é a versão corrente do CycloneDX, quando foi publicada e sob qual norma ela é registrada?",
+    "alternativas": [
+      "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
+      "O VEX declara, para cada falha, se o produto é afetado, não afetado ou afetado sob condição. Sem ele, cada cliente repete a análise e o fornecedor responde a mesma pergunta várias vezes.",
+      "Versão 1.7, publicada em 21 de outubro de 2025, registrada como norma ECMA-424, com comitê técnico na TC54 e manutenção da OWASP Foundation com a Ecma International.",
+      "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído."
+    ],
+    "correta": 2,
+    "justificativa": "Inventário de componentes é documento de conformidade"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-05#R06",
+    "ref": "09-aplicacoes-devsecops#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CycloneDX — Specification Overview, versão corrente 1.7, publicada em 21/10/2025, norma ECMA-424, comitê técnico TC54, tipos de mídia registrados e nomes de arquivo convencionais bom.json e bom.xml",
+      "url": "https://cyclonedx.org/specification/overview/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que a contagem de componentes do artefato construído é maior que a contagem do arquivo de dependências declaradas?",
+    "alternativas": [
+      "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído.",
+      "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
+      "O VEX declara, para cada falha, se o produto é afetado, não afetado ou afetado sob condição. Sem ele, cada cliente repete a análise e o fornecedor responde a mesma pergunta várias vezes.",
+      "Versão 1.7, publicada em 21 de outubro de 2025, registrada como norma ECMA-424, com comitê técnico na TC54 e manutenção da OWASP Foundation com a Ecma International."
+    ],
+    "correta": 0,
+    "justificativa": "Inventário de componentes é documento de conformidade"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-06#E01",
+    "ref": "09-aplicacoes-devsecops#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP API Security Top 10 — edição 2023, com os riscos API1:2023 a API10:2023 e a descrição de cada um",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de API: um colega afirma que \"Token válido no gateway resolve acesso\". Qual é a correção?",
+    "alternativas": [
+      "Limite de frequência protege contra quebra de autorização",
+      "Filtrar a resposta é o mesmo que não devolver o dado",
+      "Documentar a API resolve o inventário",
+      "Verificar titularidade no serviço que acessa o dado, por objeto"
+    ],
+    "correta": 3,
+    "justificativa": "O token prova quem chamou, não que aquele objeto pertence a quem chamou"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-06#E02",
+    "ref": "09-aplicacoes-devsecops#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP API Security Top 10 — edição 2023, com os riscos API1:2023 a API10:2023 e a descrição de cada um",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de API: um colega afirma que \"Limite de frequência protege contra quebra de autorização\". Qual é a correção?",
+    "alternativas": [
+      "Tratar limite como controle de consumo e autorização como controle separado",
+      "Token válido no gateway resolve acesso",
+      "Filtrar a resposta é o mesmo que não devolver o dado",
+      "Documentar a API resolve o inventário"
+    ],
+    "correta": 0,
+    "justificativa": "Limite reduz abuso de volume e não decide quem pode ler o quê"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-06#E03",
+    "ref": "09-aplicacoes-devsecops#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP API Security Top 10 — edição 2023, com os riscos API1:2023 a API10:2023 e a descrição de cada um",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de API: um colega afirma que \"Filtrar a resposta é o mesmo que não devolver o dado\". Qual é a correção?",
+    "alternativas": [
+      "Token válido no gateway resolve acesso",
+      "Definir lista de campos permitidos na resposta e na entrada",
+      "Limite de frequência protege contra quebra de autorização",
+      "Documentar a API resolve o inventário"
+    ],
+    "correta": 1,
+    "justificativa": "Exposição excessiva de propriedade e atribuição em massa são o mesmo problema visto de dois lados"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-06#E04",
+    "ref": "09-aplicacoes-devsecops#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP API Security Top 10 — edição 2023, com os riscos API1:2023 a API10:2023 e a descrição de cada um",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de API: um colega afirma que \"Documentar a API resolve o inventário\". Qual é a correção?",
+    "alternativas": [
+      "Token válido no gateway resolve acesso",
+      "Limite de frequência protege contra quebra de autorização",
+      "Inventariar hosts e versões em uso, com consumidor e prazo de encerramento",
+      "Filtrar a resposta é o mesmo que não devolver o dado"
+    ],
+    "correta": 2,
+    "justificativa": "Documento desatualizado é pior que documento ausente, porque cria confiança falsa"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-06#E05",
+    "ref": "09-aplicacoes-devsecops#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP API Security Top 10 — edição 2023, com os riscos API1:2023 a API10:2023 e a descrição de cada um",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de API: um colega afirma que \"Dado de API de terceiro é confiável por vir do parceiro\". Qual é a correção?",
+    "alternativas": [
+      "Token válido no gateway resolve acesso",
+      "Limite de frequência protege contra quebra de autorização",
+      "Filtrar a resposta é o mesmo que não devolver o dado",
+      "Validar esquema, verificar origem e assinatura, limitar tamanho e tempo de espera"
+    ],
+    "correta": 3,
+    "justificativa": "A descrição de API10:2023 registra que a confiança no terceiro costuma ser maior que a confiança na entrada do usuário, e é por isso que o atacante escolhe o integrador"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-06#E06",
+    "ref": "09-aplicacoes-devsecops#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP API Security Top 10 — edição 2023, com os riscos API1:2023 a API10:2023 e a descrição de cada um",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de API: um colega afirma que \"Endpoint de depuração é assunto de time de desenvolvimento\". Qual é a correção?",
+    "alternativas": [
+      "Verificar exposição externa como parte da publicação da versão",
+      "Token válido no gateway resolve acesso",
+      "Limite de frequência protege contra quebra de autorização",
+      "Filtrar a resposta é o mesmo que não devolver o dado"
+    ],
+    "correta": 0,
+    "justificativa": "Endpoint de depuração exposto é item nomeado do risco de inventário"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-06#R02",
+    "ref": "09-aplicacoes-devsecops#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP API Security Top 10 — edição 2023, com os riscos API1:2023 a API10:2023 e a descrição de cada um",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que o risco API3:2023 unificou em relação à edição de 2019?",
+    "alternativas": [
+      "Porque APIs expõem mais endpoints que aplicações web tradicionais, e inventário incompleto mantém versões obsoletas e endpoints de depuração acessíveis, sem dono.",
+      "A01:2025 Broken Access Control absorveu Server-Side Request Forgery, e a prevalência medida foi de 3,73% das aplicações testadas com ao menos uma das 40 CWEs da categoria.",
+      "Unificou Excessive Data Exposure e Mass Assignment da edição de 2019, apontando a causa raiz comum: ausência ou falha de verificação de autorização no nível da propriedade do objeto."
+    ],
+    "correta": 2,
+    "justificativa": "Token válido no gateway resolve acesso"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-06#R03",
+    "ref": "09-aplicacoes-devsecops#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP API Security Top 10 — edição 2023, com os riscos API1:2023 a API10:2023 e a descrição de cada um",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que inventário de hosts e versões aparece como risco próprio na lista?",
+    "alternativas": [
+      "Porque APIs expõem mais endpoints que aplicações web tradicionais, e inventário incompleto mantém versões obsoletas e endpoints de depuração acessíveis, sem dono.",
+      "Unificou Excessive Data Exposure e Mass Assignment da edição de 2019, apontando a causa raiz comum: ausência ou falha de verificação de autorização no nível da propriedade do objeto.",
+      "A01:2025 Broken Access Control absorveu Server-Side Request Forgery, e a prevalência medida foi de 3,73% das aplicações testadas com ao menos uma das 40 CWEs da categoria."
+    ],
+    "correta": 0,
+    "justificativa": "Token válido no gateway resolve acesso"
+  },
+  {
+    "id": "09-aplicacoes-devsecops#TEMA-06#R06",
+    "ref": "09-aplicacoes-devsecops#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP API Security Top 10 — edição 2023, com os riscos API1:2023 a API10:2023 e a descrição de cada um",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Que categoria da edição 2025 do Top 10 de aplicação web absorveu Server-Side Request Forgery, e qual a prevalência medida dessa categoria?",
+    "alternativas": [
+      "A01:2025 Broken Access Control absorveu Server-Side Request Forgery, e a prevalência medida foi de 3,73% das aplicações testadas com ao menos uma das 40 CWEs da categoria.",
+      "Unificou Excessive Data Exposure e Mass Assignment da edição de 2019, apontando a causa raiz comum: ausência ou falha de verificação de autorização no nível da propriedade do objeto.",
+      "Porque APIs expõem mais endpoints que aplicações web tradicionais, e inventário incompleto mantém versões obsoletas e endpoints de depuração acessíveis, sem dono."
+    ],
+    "correta": 0,
+    "justificativa": "Token válido no gateway resolve acesso"
+  }
+]

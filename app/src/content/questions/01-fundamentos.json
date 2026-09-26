@@ -1,0 +1,1456 @@
+[
+  {
+    "id": "01-fundamentos#TEMA-01#E01",
+    "ref": "01-fundamentos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — information security",
+      "url": "https://csrc.nist.gov/glossary/term/information_security",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança da informação, segurança cibernética e privacidade: um colega afirma que \"Segurança da informação e segurança cibernética são sinônimos\". Qual é a correção?",
+    "alternativas": [
+      "Privacidade é sinônimo de confidencialidade",
+      "Segurança da informação é problema exclusivo do time de segurança",
+      "Se o jurídico cuida de privacidade, o CISO não precisa acompanhar",
+      "Separe pelo caminho: se envolve identidade, dispositivo, rede ou fornecedor, é cibersegurança"
+    ],
+    "correta": 3,
+    "justificativa": "O primeiro parte do dado e do sistema; o segundo inclui ambiente digital e terceiros"
+  },
+  {
+    "id": "01-fundamentos#TEMA-01#E02",
+    "ref": "01-fundamentos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — information security",
+      "url": "https://csrc.nist.gov/glossary/term/information_security",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança da informação, segurança cibernética e privacidade: um colega afirma que \"Privacidade é sinônimo de confidencialidade\". Qual é a correção?",
+    "alternativas": [
+      "Um dado público pode gerar problema de privacidade se coletado sem base e mantido além do prazo",
+      "Segurança da informação e segurança cibernética são sinônimos",
+      "Segurança da informação é problema exclusivo do time de segurança",
+      "Se o jurídico cuida de privacidade, o CISO não precisa acompanhar"
+    ],
+    "correta": 0,
+    "justificativa": "Confidencialidade trata de quem acessa; privacidade trata de legitimidade, finalidade e retenção"
+  },
+  {
+    "id": "01-fundamentos#TEMA-01#E03",
+    "ref": "01-fundamentos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — information security",
+      "url": "https://csrc.nist.gov/glossary/term/information_security",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança da informação, segurança cibernética e privacidade: um colega afirma que \"Segurança da informação é problema exclusivo do time de segurança\". Qual é a correção?",
+    "alternativas": [
+      "Segurança da informação e segurança cibernética são sinônimos",
+      "O CISO define o controle; o dono do ativo responde pelo uso e pelo prazo",
+      "Privacidade é sinônimo de confidencialidade",
+      "Se o jurídico cuida de privacidade, o CISO não precisa acompanhar"
+    ],
+    "correta": 1,
+    "justificativa": "A definição do NIST cobre informação e sistemas, e o dono do dado está no negócio"
+  },
+  {
+    "id": "01-fundamentos#TEMA-01#E04",
+    "ref": "01-fundamentos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — information security",
+      "url": "https://csrc.nist.gov/glossary/term/information_security",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança da informação, segurança cibernética e privacidade: um colega afirma que \"Se o jurídico cuida de privacidade, o CISO não precisa acompanhar\". Qual é a correção?",
+    "alternativas": [
+      "Segurança da informação e segurança cibernética são sinônimos",
+      "Privacidade é sinônimo de confidencialidade",
+      "O CISO entra nos dois; o que muda é quem assina a comunicação",
+      "Segurança da informação é problema exclusivo do time de segurança"
+    ],
+    "correta": 2,
+    "justificativa": "O mesmo incidente aparece nos três escopos e a resposta técnica é a mesma"
+  },
+  {
+    "id": "01-fundamentos#TEMA-01#E05",
+    "ref": "01-fundamentos#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — information security",
+      "url": "https://csrc.nist.gov/glossary/term/information_security",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança da informação, segurança cibernética e privacidade: um colega afirma que \"Incidente sem invasão não gera obrigação\". Qual é a correção?",
+    "alternativas": [
+      "Segurança da informação e segurança cibernética são sinônimos",
+      "Privacidade é sinônimo de confidencialidade",
+      "Segurança da informação é problema exclusivo do time de segurança",
+      "Exposição sem invasão continua sendo evento tratável"
+    ],
+    "correta": 3,
+    "justificativa": "Envio por canal inseguro expõe dado sem ataque nenhum"
+  },
+  {
+    "id": "01-fundamentos#TEMA-01#R02",
+    "ref": "01-fundamentos#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — information security",
+      "url": "https://csrc.nist.gov/glossary/term/information_security",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Cite uma decisão que muda de dono quando o caso é classificado como privacidade em vez de segurança da informação.",
+    "alternativas": [
+      "Porque uma norma de gestão de controles não decide finalidade, base legal nem prazo de retenção, e uma lei de proteção de dados não define catálogo de controles nem escopo de certificação. Os objetos são diferentes.",
+      "Definir e aprovar o prazo de retenção de um dado pessoal, ou decidir a finalidade do tratamento. Essas decisões pertencem ao negócio e à função de privacidade, com apoio jurídico.",
+      "Sim. Um ataque de negação de serviço contra um serviço de nuvem derruba a operação sem expor ou alterar informação, e circula pelos escopos de cibersegurança e de disponibilidade."
+    ],
+    "correta": 1,
+    "justificativa": "Segurança da informação e segurança cibernética são sinônimos"
+  },
+  {
+    "id": "01-fundamentos#TEMA-01#R03",
+    "ref": "01-fundamentos#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — information security",
+      "url": "https://csrc.nist.gov/glossary/term/information_security",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que tratar LGPD como sinônimo de ISO/IEC 27001 está errado?",
+    "alternativas": [
+      "Definir e aprovar o prazo de retenção de um dado pessoal, ou decidir a finalidade do tratamento. Essas decisões pertencem ao negócio e à função de privacidade, com apoio jurídico.",
+      "Sim. Um ataque de negação de serviço contra um serviço de nuvem derruba a operação sem expor ou alterar informação, e circula pelos escopos de cibersegurança e de disponibilidade.",
+      "Porque uma norma de gestão de controles não decide finalidade, base legal nem prazo de retenção, e uma lei de proteção de dados não define catálogo de controles nem escopo de certificação. Os objetos são diferentes."
+    ],
+    "correta": 2,
+    "justificativa": "Segurança da informação e segurança cibernética são sinônimos"
+  },
+  {
+    "id": "01-fundamentos#TEMA-01#R04",
+    "ref": "01-fundamentos#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — information security",
+      "url": "https://csrc.nist.gov/glossary/term/information_security",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Um evento sem dado pessoal e sem exposição de informação ainda pode ser incidente de cibersegurança? Dê um exemplo.",
+    "alternativas": [
+      "Sim. Um ataque de negação de serviço contra um serviço de nuvem derruba a operação sem expor ou alterar informação, e circula pelos escopos de cibersegurança e de disponibilidade.",
+      "Definir e aprovar o prazo de retenção de um dado pessoal, ou decidir a finalidade do tratamento. Essas decisões pertencem ao negócio e à função de privacidade, com apoio jurídico.",
+      "Porque uma norma de gestão de controles não decide finalidade, base legal nem prazo de retenção, e uma lei de proteção de dados não define catálogo de controles nem escopo de certificação. Os objetos são diferentes."
+    ],
+    "correta": 0,
+    "justificativa": "Segurança da informação e segurança cibernética são sinônimos"
+  },
+  {
+    "id": "01-fundamentos#TEMA-02#E01",
+    "ref": "01-fundamentos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — confidentiality",
+      "url": "https://csrc.nist.gov/glossary/term/confidentiality",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Objetivos de segurança em conflito e o custo do high water mark: um colega afirma que \"Integridade significa apenas não alterar dados\". Qual é a correção?",
+    "alternativas": [
+      "Fraude por falsa identidade de remetente é falha de integridade",
+      "Confidencialidade exige sigilo total",
+      "Disponibilidade se mede por uptime do servidor",
+      "A tríade tem três itens e nada mais"
+    ],
+    "correta": 0,
+    "justificativa": "A definição do NIST inclui não-repúdio e autenticidade"
+  },
+  {
+    "id": "01-fundamentos#TEMA-02#E02",
+    "ref": "01-fundamentos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — confidentiality",
+      "url": "https://csrc.nist.gov/glossary/term/confidentiality",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Objetivos de segurança em conflito e o custo do high water mark: um colega afirma que \"Confidencialidade exige sigilo total\". Qual é a correção?",
+    "alternativas": [
+      "Integridade significa apenas não alterar dados",
+      "O critério é autorização, não ocultação",
+      "Disponibilidade se mede por uptime do servidor",
+      "A tríade tem três itens e nada mais"
+    ],
+    "correta": 1,
+    "justificativa": "A definição fala de restrições autorizadas de acesso e divulgação"
+  },
+  {
+    "id": "01-fundamentos#TEMA-02#E03",
+    "ref": "01-fundamentos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — confidentiality",
+      "url": "https://csrc.nist.gov/glossary/term/confidentiality",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Objetivos de segurança em conflito e o custo do high water mark: um colega afirma que \"Disponibilidade se mede por uptime do servidor\". Qual é a correção?",
+    "alternativas": [
+      "Integridade significa apenas não alterar dados",
+      "Confidencialidade exige sigilo total",
+      "Latência e perda de transação contam como indisponibilidade",
+      "A tríade tem três itens e nada mais"
+    ],
+    "correta": 2,
+    "justificativa": "A definição exige acesso pontual e confiável ao uso"
+  },
+  {
+    "id": "01-fundamentos#TEMA-02#E04",
+    "ref": "01-fundamentos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — confidentiality",
+      "url": "https://csrc.nist.gov/glossary/term/confidentiality",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Objetivos de segurança em conflito e o custo do high water mark: um colega afirma que \"A tríade tem três itens e nada mais\". Qual é a correção?",
+    "alternativas": [
+      "Integridade significa apenas não alterar dados",
+      "Confidencialidade exige sigilo total",
+      "Disponibilidade se mede por uptime do servidor",
+      "Nomeie o objetivo extra em vez de escondê-lo dentro de outro"
+    ],
+    "correta": 3,
+    "justificativa": "Autenticidade, não-repúdio e rastreabilidade aparecem como objetivos próprios na política de muitas empresas"
+  },
+  {
+    "id": "01-fundamentos#TEMA-02#E05",
+    "ref": "01-fundamentos#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — confidentiality",
+      "url": "https://csrc.nist.gov/glossary/term/confidentiality",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Objetivos de segurança em conflito e o custo do high water mark: um colega afirma que \"Melhorar um objetivo nunca piora outro\". Qual é a correção?",
+    "alternativas": [
+      "Declare o trade-off e o dono do sacrifício",
+      "Integridade significa apenas não alterar dados",
+      "Confidencialidade exige sigilo total",
+      "Disponibilidade se mede por uptime do servidor"
+    ],
+    "correta": 0,
+    "justificativa": "Toda configuração move o equilíbrio"
+  },
+  {
+    "id": "01-fundamentos#TEMA-02#R02",
+    "ref": "01-fundamentos#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — confidentiality",
+      "url": "https://csrc.nist.gov/glossary/term/confidentiality",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Uma política de criptografia de disco atrasou em 40 minutos o atendimento em um posto de saúde. Qual objetivo foi afetado e por quê?",
+    "alternativas": [
+      "Autenticação multifator melhora integridade e autenticidade, e expõe disponibilidade quando o segundo fator fica fora do ar para quem está em plantão.",
+      "Porque a informação precisa estar acessível no momento em que o negócio a usa, com resultado íntegro. Servidor no ar entregando resposta errada ou tardia continua sendo falha de disponibilidade.",
+      "Disponibilidade, na dimensão de prazo e confiabilidade. Registro do glossário do NIST: \"Ensuring timely and reliable access to and use of information\"."
+    ],
+    "correta": 2,
+    "justificativa": "Integridade significa apenas não alterar dados"
+  },
+  {
+    "id": "01-fundamentos#TEMA-02#R03",
+    "ref": "01-fundamentos#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — confidentiality",
+      "url": "https://csrc.nist.gov/glossary/term/confidentiality",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Dê um exemplo de controle que melhora dois objetivos e piora um terceiro.",
+    "alternativas": [
+      "Autenticação multifator melhora integridade e autenticidade, e expõe disponibilidade quando o segundo fator fica fora do ar para quem está em plantão.",
+      "Disponibilidade, na dimensão de prazo e confiabilidade. Registro do glossário do NIST: \"Ensuring timely and reliable access to and use of information\".",
+      "Porque a informação precisa estar acessível no momento em que o negócio a usa, com resultado íntegro. Servidor no ar entregando resposta errada ou tardia continua sendo falha de disponibilidade."
+    ],
+    "correta": 0,
+    "justificativa": "Integridade significa apenas não alterar dados"
+  },
+  {
+    "id": "01-fundamentos#TEMA-02#R04",
+    "ref": "01-fundamentos#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — confidentiality",
+      "url": "https://csrc.nist.gov/glossary/term/confidentiality",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que a definição de disponibilidade cita prazo e confiabilidade, e não apenas funcionamento?",
+    "alternativas": [
+      "Disponibilidade, na dimensão de prazo e confiabilidade. Registro do glossário do NIST: \"Ensuring timely and reliable access to and use of information\".",
+      "Porque a informação precisa estar acessível no momento em que o negócio a usa, com resultado íntegro. Servidor no ar entregando resposta errada ou tardia continua sendo falha de disponibilidade.",
+      "Autenticação multifator melhora integridade e autenticidade, e expõe disponibilidade quando o segundo fator fica fora do ar para quem está em plantão."
+    ],
+    "correta": 1,
+    "justificativa": "Integridade significa apenas não alterar dados"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#E01",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ativos, classificação e ciclo de vida da informação: um colega afirma que \"Inventário de ativos é inventário de servidores\". Qual é a correção?",
+    "alternativas": [
+      "Classificar tudo como confidencial protege mais",
+      "Contrato, conta, sala e planilha entram na lista",
+      "Dono do ativo é o administrador do sistema",
+      "Backup e ambiente de teste não são ativos"
+    ],
+    "correta": 1,
+    "justificativa": "A definição inclui pessoas, entidades físicas e informação"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#E02",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ativos, classificação e ciclo de vida da informação: um colega afirma que \"Classificar tudo como confidencial protege mais\". Qual é a correção?",
+    "alternativas": [
+      "Inventário de ativos é inventário de servidores",
+      "Dono do ativo é o administrador do sistema",
+      "Níveis diferentes compram conjuntos de controle diferentes",
+      "Backup e ambiente de teste não são ativos"
+    ],
+    "correta": 2,
+    "justificativa": "O custo do controle mais alto passa a valer para tudo, e o programa perde foco"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#E03",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ativos, classificação e ciclo de vida da informação: um colega afirma que \"Dono do ativo é o administrador do sistema\". Qual é a correção?",
+    "alternativas": [
+      "Inventário de ativos é inventário de servidores",
+      "Classificar tudo como confidencial protege mais",
+      "Backup e ambiente de teste não são ativos",
+      "Nomeie o dono com cargo, no negócio"
+    ],
+    "correta": 3,
+    "justificativa": "O administrador opera; o dono responde pelo uso e pelo prazo"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#E04",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ativos, classificação e ciclo de vida da informação: um colega afirma que \"Backup e ambiente de teste não são ativos\". Qual é a correção?",
+    "alternativas": [
+      "Inventarie as cópias derivadas, com o mesmo nível",
+      "Inventário de ativos é inventário de servidores",
+      "Classificar tudo como confidencial protege mais",
+      "Dono do ativo é o administrador do sistema"
+    ],
+    "correta": 0,
+    "justificativa": "Cada cópia tem o mesmo nível do original e quase nenhum controle"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#E05",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ativos, classificação e ciclo de vida da informação: um colega afirma que \"Retenção é assunto de arquivamento, não de segurança\". Qual é a correção?",
+    "alternativas": [
+      "Inventário de ativos é inventário de servidores",
+      "Retenção é campo obrigatório do inventário",
+      "Classificar tudo como confidencial protege mais",
+      "Dono do ativo é o administrador do sistema"
+    ],
+    "correta": 1,
+    "justificativa": "O prazo determina há quanto tempo um vazamento pode doer"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#E06",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ativos, classificação e ciclo de vida da informação: um colega afirma que \"Descarte sem registro é descarte\". Qual é a correção?",
+    "alternativas": [
+      "Inventário de ativos é inventário de servidores",
+      "Classificar tudo como confidencial protege mais",
+      "Registre o descarte com data, método e responsável",
+      "Dono do ativo é o administrador do sistema"
+    ],
+    "correta": 2,
+    "justificativa": "Sem prova, a auditoria trata o dado como existente"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#R01",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Escreva a definição de ativo registrada no glossário do NIST e explique por que ela depende do negócio.",
+    "alternativas": [
+      "Porque a decisão do que fazer com o dado (usar, compartilhar, guardar, descartar) pertence a quem responde pela consequência no negócio. O time de TI opera e não decide prazo nem finalidade.",
+      "Dono nomeado com cargo, nível de classificação e prazo de retenção, com a forma de descarte declarada.",
+      "\"An item of value to the achievement of organizational mission/business objectives\". O valor é atribuído pelo objetivo de negócio, então o mesmo item pode ser ativo em uma empresa e irrelevante em outra.",
+      "A lista completa de cópias derivadas, cada uma com dono e localização. O descarte é executável quando se sabe onde estão todas as réplicas e quem responde por cada uma."
+    ],
+    "correta": 2,
+    "justificativa": "Inventário de ativos é inventário de servidores"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#R02",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que o dono do ativo não pode ser o time de TI?",
+    "alternativas": [
+      "\"An item of value to the achievement of organizational mission/business objectives\". O valor é atribuído pelo objetivo de negócio, então o mesmo item pode ser ativo em uma empresa e irrelevante em outra.",
+      "Dono nomeado com cargo, nível de classificação e prazo de retenção, com a forma de descarte declarada.",
+      "A lista completa de cópias derivadas, cada uma com dono e localização. O descarte é executável quando se sabe onde estão todas as réplicas e quem responde por cada uma.",
+      "Porque a decisão do que fazer com o dado (usar, compartilhar, guardar, descartar) pertence a quem responde pela consequência no negócio. O time de TI opera e não decide prazo nem finalidade."
+    ],
+    "correta": 3,
+    "justificativa": "Inventário de ativos é inventário de servidores"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#R03",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais três campos do inventário precisam existir antes de decidir o conjunto de controles de um ativo?",
+    "alternativas": [
+      "Dono nomeado com cargo, nível de classificação e prazo de retenção, com a forma de descarte declarada.",
+      "\"An item of value to the achievement of organizational mission/business objectives\". O valor é atribuído pelo objetivo de negócio, então o mesmo item pode ser ativo em uma empresa e irrelevante em outra.",
+      "Porque a decisão do que fazer com o dado (usar, compartilhar, guardar, descartar) pertence a quem responde pela consequência no negócio. O time de TI opera e não decide prazo nem finalidade.",
+      "A lista completa de cópias derivadas, cada uma com dono e localização. O descarte é executável quando se sabe onde estão todas as réplicas e quem responde por cada uma."
+    ],
+    "correta": 0,
+    "justificativa": "Inventário de ativos é inventário de servidores"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#R04",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Uma auditoria pede prova de descarte e a empresa tem quatro cópias do conjunto de dados. O que faltava no inventário para o descarte ser executável?",
+    "alternativas": [
+      "\"An item of value to the achievement of organizational mission/business objectives\". O valor é atribuído pelo objetivo de negócio, então o mesmo item pode ser ativo em uma empresa e irrelevante em outra.",
+      "A lista completa de cópias derivadas, cada uma com dono e localização. O descarte é executável quando se sabe onde estão todas as réplicas e quem responde por cada uma.",
+      "Porque a decisão do que fazer com o dado (usar, compartilhar, guardar, descartar) pertence a quem responde pela consequência no negócio. O time de TI opera e não decide prazo nem finalidade.",
+      "Dono nomeado com cargo, nível de classificação e prazo de retenção, com a forma de descarte declarada."
+    ],
+    "correta": 1,
+    "justificativa": "Inventário de ativos é inventário de servidores"
+  },
+  {
+    "id": "01-fundamentos#TEMA-03#R05",
+    "ref": "01-fundamentos#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — asset",
+      "url": "https://csrc.nist.gov/glossary/term/asset",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual o efeito de classificar todos os ativos no nível mais alto?",
+    "alternativas": [
+      "\"An item of value to the achievement of organizational mission/business objectives\". O valor é atribuído pelo objetivo de negócio, então o mesmo item pode ser ativo em uma empresa e irrelevante em outra.",
+      "Porque a decisão do que fazer com o dado (usar, compartilhar, guardar, descartar) pertence a quem responde pela consequência no negócio. O time de TI opera e não decide prazo nem finalidade.",
+      "O custo do controle mais rigoroso passa a valer para todo o inventário, o orçamento não fecha e o caminho prático vira reduzir o escopo do programa.",
+      "Dono nomeado com cargo, nível de classificação e prazo de retenção, com a forma de descarte declarada."
+    ],
+    "correta": 2,
+    "justificativa": "Inventário de ativos é inventário de servidores"
+  },
+  {
+    "id": "01-fundamentos#TEMA-04#E01",
+    "ref": "01-fundamentos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — threat",
+      "url": "https://csrc.nist.gov/glossary/term/threat",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ameaças, atores e motivações: um colega afirma que \"\"Ciberataque\" é uma ameaça\". Qual é a correção?",
+    "alternativas": [
+      "Erro humano não é ameaça",
+      "Ameaça e vulnerabilidade são a mesma coisa",
+      "Escreva o ator, o evento e a consequência",
+      "Ator externo é sempre o risco principal"
+    ],
+    "correta": 2,
+    "justificativa": "Não nomeia fonte, nem evento, nem impacto"
+  },
+  {
+    "id": "01-fundamentos#TEMA-04#E02",
+    "ref": "01-fundamentos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — threat",
+      "url": "https://csrc.nist.gov/glossary/term/threat",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ameaças, atores e motivações: um colega afirma que \"Erro humano não é ameaça\". Qual é a correção?",
+    "alternativas": [
+      "\"Ciberataque\" é uma ameaça",
+      "Ameaça e vulnerabilidade são a mesma coisa",
+      "Ator externo é sempre o risco principal",
+      "Erro operacional entra na análise como fonte de ameaça"
+    ],
+    "correta": 3,
+    "justificativa": "A definição fala de circunstância ou evento com potencial de impacto adverso"
+  },
+  {
+    "id": "01-fundamentos#TEMA-04#E03",
+    "ref": "01-fundamentos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — threat",
+      "url": "https://csrc.nist.gov/glossary/term/threat",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ameaças, atores e motivações: um colega afirma que \"Ameaça e vulnerabilidade são a mesma coisa\". Qual é a correção?",
+    "alternativas": [
+      "Ameaça é o que pode causar; vulnerabilidade é a fraqueza explorável",
+      "\"Ciberataque\" é uma ameaça",
+      "Erro humano não é ameaça",
+      "Ator externo é sempre o risco principal"
+    ],
+    "correta": 0,
+    "justificativa": "Uma precisa da outra e nenhuma substitui a outra"
+  },
+  {
+    "id": "01-fundamentos#TEMA-04#E04",
+    "ref": "01-fundamentos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — threat",
+      "url": "https://csrc.nist.gov/glossary/term/threat",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ameaças, atores e motivações: um colega afirma que \"Ator externo é sempre o risco principal\". Qual é a correção?",
+    "alternativas": [
+      "\"Ciberataque\" é uma ameaça",
+      "Avalie o insider com o mesmo rigor",
+      "Erro humano não é ameaça",
+      "Ameaça e vulnerabilidade são a mesma coisa"
+    ],
+    "correta": 1,
+    "justificativa": "Ator com acesso legítimo dispensa entrada e supera muitos controles"
+  },
+  {
+    "id": "01-fundamentos#TEMA-04#E05",
+    "ref": "01-fundamentos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — threat",
+      "url": "https://csrc.nist.gov/glossary/term/threat",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ameaças, atores e motivações: um colega afirma que \"Mais firewall resolve qualquer ator\". Qual é a correção?",
+    "alternativas": [
+      "\"Ciberataque\" é uma ameaça",
+      "Erro humano não é ameaça",
+      "Escolha o controle depois de perfilar o ator",
+      "Ameaça e vulnerabilidade são a mesma coisa"
+    ],
+    "correta": 2,
+    "justificativa": "O controle muda com a motivação e o acesso do ator"
+  },
+  {
+    "id": "01-fundamentos#TEMA-04#E06",
+    "ref": "01-fundamentos#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — threat",
+      "url": "https://csrc.nist.gov/glossary/term/threat",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ameaças, atores e motivações: um colega afirma que \"Perfil de ameaça é trabalho de inteligência de ameaça dedicado\". Qual é a correção?",
+    "alternativas": [
+      "\"Ciberataque\" é uma ameaça",
+      "Erro humano não é ameaça",
+      "Ameaça e vulnerabilidade são a mesma coisa",
+      "Comece com cinco atores plausíveis e revise a cada incidente"
+    ],
+    "correta": 3,
+    "justificativa": "Um perfil inicial se faz com o conhecimento do time de negócio"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#E01",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Vulnerabilidades, exposição e superfície de ataque: um colega afirma que \"Vulnerabilidade é falha de software\". Qual é a correção?",
+    "alternativas": [
+      "Fora do escopo do scanner significa sem exposição",
+      "Corrigir tudo é sempre a resposta",
+      "Gravidade do fabricante define a prioridade",
+      "Processo deficiente é vulnerabilidade tanto quanto código"
+    ],
+    "correta": 3,
+    "justificativa": "A definição inclui procedimento, controle interno e implementação"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#E02",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Vulnerabilidades, exposição e superfície de ataque: um colega afirma que \"Fora do escopo do scanner significa sem exposição\". Qual é a correção?",
+    "alternativas": [
+      "Descreva a superfície antes de rodar a varredura",
+      "Vulnerabilidade é falha de software",
+      "Corrigir tudo é sempre a resposta",
+      "Gravidade do fabricante define a prioridade"
+    ],
+    "correta": 0,
+    "justificativa": "O scanner mede falha conhecida, não alcance"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#E03",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Vulnerabilidades, exposição e superfície de ataque: um colega afirma que \"Corrigir tudo é sempre a resposta\". Qual é a correção?",
+    "alternativas": [
+      "Vulnerabilidade é falha de software",
+      "Reduza o que ninguém usa antes de atualizar o que sobra",
+      "Fora do escopo do scanner significa sem exposição",
+      "Gravidade do fabricante define a prioridade"
+    ],
+    "correta": 1,
+    "justificativa": "Ponto removido não precisa de correção, monitoramento nem auditoria"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#E04",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Vulnerabilidades, exposição e superfície de ataque: um colega afirma que \"Gravidade do fabricante define a prioridade\". Qual é a correção?",
+    "alternativas": [
+      "Vulnerabilidade é falha de software",
+      "Fora do escopo do scanner significa sem exposição",
+      "Combine alcance e falha para priorizar",
+      "Corrigir tudo é sempre a resposta"
+    ],
+    "correta": 2,
+    "justificativa": "Gravidade ignora se o ponto é alcançável"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#E05",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Vulnerabilidades, exposição e superfície de ataque: um colega afirma que \"Superfície de ataque é assunto de aplicação web\". Qual é a correção?",
+    "alternativas": [
+      "Vulnerabilidade é falha de software",
+      "Fora do escopo do scanner significa sem exposição",
+      "Corrigir tudo é sempre a resposta",
+      "Identidade, rede, terceiro e dado também compõem a superfície"
+    ],
+    "correta": 3,
+    "justificativa": "A definição fala de sistema, componente e ambiente"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#E06",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Vulnerabilidades, exposição e superfície de ataque: um colega afirma que \"Inventário de superfície pode esperar o inventário de ativos\". Qual é a correção?",
+    "alternativas": [
+      "Trate os dois levantamentos como o mesmo trabalho",
+      "Vulnerabilidade é falha de software",
+      "Fora do escopo do scanner significa sem exposição",
+      "Corrigir tudo é sempre a resposta"
+    ],
+    "correta": 0,
+    "justificativa": "Sem o segundo, o primeiro é desconhecido em parte"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#R02",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que reduzir superfície pode valer mais do que corrigir a falha apontada pela varredura?",
+    "alternativas": [
+      "Sim. Falha não conhecida não é ausência de falha, e exposição por si só cria a oportunidade para fonte de ameaça com acesso. Risco depende também do impacto do ativo.",
+      "Porque ponto removido deixa de existir como trabalho futuro: não precisa de atualização, monitoramento, auditoria nem exceção documentada. A correção trata de um ponto que continua existindo.",
+      "Separe em duas colunas: quem alcança o ponto e o que se sabe sobre falha nele. A prioridade vem da combinação, não de nenhum dos dois isolado.",
+      "A varredura cobre o que foi incluído no escopo. Fora dele, a informação de alcance continua válida, e o ponto segue alcançável por quem tem acesso."
+    ],
+    "correta": 1,
+    "justificativa": "Vulnerabilidade é falha de software"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#R03",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Um sistema sem vulnerabilidade conhecida está publicado na internet. Ele tem risco? Por quê?",
+    "alternativas": [
+      "Porque ponto removido deixa de existir como trabalho futuro: não precisa de atualização, monitoramento, auditoria nem exceção documentada. A correção trata de um ponto que continua existindo.",
+      "Separe em duas colunas: quem alcança o ponto e o que se sabe sobre falha nele. A prioridade vem da combinação, não de nenhum dos dois isolado.",
+      "Sim. Falha não conhecida não é ausência de falha, e exposição por si só cria a oportunidade para fonte de ameaça com acesso. Risco depende também do impacto do ativo.",
+      "A varredura cobre o que foi incluído no escopo. Fora dele, a informação de alcance continua válida, e o ponto segue alcançável por quem tem acesso."
+    ],
+    "correta": 2,
+    "justificativa": "Vulnerabilidade é falha de software"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#R04",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Como separar exposição de vulnerabilidade em um relatório para a diretoria?",
+    "alternativas": [
+      "Porque ponto removido deixa de existir como trabalho futuro: não precisa de atualização, monitoramento, auditoria nem exceção documentada. A correção trata de um ponto que continua existindo.",
+      "Sim. Falha não conhecida não é ausência de falha, e exposição por si só cria a oportunidade para fonte de ameaça com acesso. Risco depende também do impacto do ativo.",
+      "A varredura cobre o que foi incluído no escopo. Fora dele, a informação de alcance continua válida, e o ponto segue alcançável por quem tem acesso.",
+      "Separe em duas colunas: quem alcança o ponto e o que se sabe sobre falha nele. A prioridade vem da combinação, não de nenhum dos dois isolado."
+    ],
+    "correta": 3,
+    "justificativa": "Vulnerabilidade é falha de software"
+  },
+  {
+    "id": "01-fundamentos#TEMA-05#R05",
+    "ref": "01-fundamentos#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — vulnerability",
+      "url": "https://csrc.nist.gov/glossary/term/vulnerability",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual o erro de tratar \"fora do escopo da varredura\" como \"sem exposição\"?",
+    "alternativas": [
+      "A varredura cobre o que foi incluído no escopo. Fora dele, a informação de alcance continua válida, e o ponto segue alcançável por quem tem acesso.",
+      "Porque ponto removido deixa de existir como trabalho futuro: não precisa de atualização, monitoramento, auditoria nem exceção documentada. A correção trata de um ponto que continua existindo.",
+      "Sim. Falha não conhecida não é ausência de falha, e exposição por si só cria a oportunidade para fonte de ameaça com acesso. Risco depende também do impacto do ativo.",
+      "Separe em duas colunas: quem alcança o ponto e o que se sabe sobre falha nele. A prioridade vem da combinação, não de nenhum dos dois isolado."
+    ],
+    "correta": 0,
+    "justificativa": "Vulnerabilidade é falha de software"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#E01",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: um colega afirma que \"Vulnerabilidade crítica é risco crítico\". Qual é a correção?",
+    "alternativas": [
+      "Risco combina falha, ameaça, probabilidade e impacto",
+      "Multiplicar pontuação estima prejuízo",
+      "Risco residual é zero depois do controle",
+      "Controle aprovado reduz risco"
+    ],
+    "correta": 0,
+    "justificativa": "Gravidade da falha ignora ameaça com acesso e impacto no negócio"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#E02",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: um colega afirma que \"Multiplicar pontuação estima prejuízo\". Qual é a correção?",
+    "alternativas": [
+      "Vulnerabilidade crítica é risco crítico",
+      "Use a pontuação para ordenar e outra técnica para estimar valor",
+      "Risco residual é zero depois do controle",
+      "Controle aprovado reduz risco"
+    ],
+    "correta": 1,
+    "justificativa": "O produto ordena itens e não mede dinheiro"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#E03",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: um colega afirma que \"Risco residual é zero depois do controle\". Qual é a correção?",
+    "alternativas": [
+      "Vulnerabilidade crítica é risco crítico",
+      "Multiplicar pontuação estima prejuízo",
+      "Declare o que sobra e quem aceita",
+      "Controle aprovado reduz risco"
+    ],
+    "correta": 2,
+    "justificativa": "A definição fala de porção remanescente"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#E04",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: um colega afirma que \"Controle aprovado reduz risco\". Qual é a correção?",
+    "alternativas": [
+      "Vulnerabilidade crítica é risco crítico",
+      "Multiplicar pontuação estima prejuízo",
+      "Risco residual é zero depois do controle",
+      "Registre a data de entrada em operação"
+    ],
+    "correta": 3,
+    "justificativa": "A formulação do NISTIR 8286 exige resposta documentada e executada"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#E05",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: um colega afirma que \"Aceitar risco é omissão\". Qual é a correção?",
+    "alternativas": [
+      "Formalize com dono, justificativa e data de revisão",
+      "Vulnerabilidade crítica é risco crítico",
+      "Multiplicar pontuação estima prejuízo",
+      "Risco residual é zero depois do controle"
+    ],
+    "correta": 0,
+    "justificativa": "Aceitar é uma das respostas possíveis, com dono e prazo"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#E06",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: um colega afirma que \"Escala de 1 a 5 dispensa definição\". Qual é a correção?",
+    "alternativas": [
+      "Vulnerabilidade crítica é risco crítico",
+      "Defina observação para probabilidade e unidade de negócio para impacto",
+      "Multiplicar pontuação estima prejuízo",
+      "Risco residual é zero depois do controle"
+    ],
+    "correta": 1,
+    "justificativa": "Sem âncora, a nota muda com quem preenche"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#R02",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Um risco com probabilidade baixa e impacto alto entra na fila antes de um com probabilidade alta e impacto baixo? Que critério decide?",
+    "alternativas": [
+      "É a parte do risco que continua existindo depois que os controles entram em operação. É o que a empresa decidiu conviver, e por isso precisa de assinatura e prazo.",
+      "Porque risco aceito sem dono volta como surpresa, e a auditoria cobra a decisão. O registro transforma omissão em decisão rastreável.",
+      "Depende do critério declarado, e não da intuição. O que ordena a fila é a escala aprovada, com o apetite de risco definido fora da área de segurança.",
+      "Mitigar reduz probabilidade ou impacto com um controle. Transferir move a consequência financeira para terceiro, por apólice ou contrato, e a probabilidade do evento permanece a mesma."
+    ],
+    "correta": 2,
+    "justificativa": "Vulnerabilidade crítica é risco crítico"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#R03",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Explique risco residual para um diretor financeiro em duas frases.",
+    "alternativas": [
+      "Depende do critério declarado, e não da intuição. O que ordena a fila é a escala aprovada, com o apetite de risco definido fora da área de segurança.",
+      "Porque risco aceito sem dono volta como surpresa, e a auditoria cobra a decisão. O registro transforma omissão em decisão rastreável.",
+      "Mitigar reduz probabilidade ou impacto com um controle. Transferir move a consequência financeira para terceiro, por apólice ou contrato, e a probabilidade do evento permanece a mesma.",
+      "É a parte do risco que continua existindo depois que os controles entram em operação. É o que a empresa decidiu conviver, e por isso precisa de assinatura e prazo."
+    ],
+    "correta": 3,
+    "justificativa": "Vulnerabilidade crítica é risco crítico"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#R04",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que aceitar um risco residual exige registro, dono e prazo?",
+    "alternativas": [
+      "Porque risco aceito sem dono volta como surpresa, e a auditoria cobra a decisão. O registro transforma omissão em decisão rastreável.",
+      "Depende do critério declarado, e não da intuição. O que ordena a fila é a escala aprovada, com o apetite de risco definido fora da área de segurança.",
+      "É a parte do risco que continua existindo depois que os controles entram em operação. É o que a empresa decidiu conviver, e por isso precisa de assinatura e prazo.",
+      "Mitigar reduz probabilidade ou impacto com um controle. Transferir move a consequência financeira para terceiro, por apólice ou contrato, e a probabilidade do evento permanece a mesma."
+    ],
+    "correta": 0,
+    "justificativa": "Vulnerabilidade crítica é risco crítico"
+  },
+  {
+    "id": "01-fundamentos#TEMA-06#R05",
+    "ref": "01-fundamentos#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — risk",
+      "url": "https://csrc.nist.gov/glossary/term/risk",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual a diferença entre transferir e mitigar?",
+    "alternativas": [
+      "Depende do critério declarado, e não da intuição. O que ordena a fila é a escala aprovada, com o apetite de risco definido fora da área de segurança.",
+      "Mitigar reduz probabilidade ou impacto com um controle. Transferir move a consequência financeira para terceiro, por apólice ou contrato, e a probabilidade do evento permanece a mesma.",
+      "É a parte do risco que continua existindo depois que os controles entram em operação. É o que a empresa decidiu conviver, e por isso precisa de assinatura e prazo.",
+      "Porque risco aceito sem dono volta como surpresa, e a auditoria cobra a decisão. O registro transforma omissão em decisão rastreável."
+    ],
+    "correta": 1,
+    "justificativa": "Vulnerabilidade crítica é risco crítico"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#E01",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Controles: preventivos, detectivos, corretivos e compensatórios: um colega afirma que \"Controle compensatório é exceção autorizada\". Qual é a correção?",
+    "alternativas": [
+      "Antivírus é preventivo ou detectivo",
+      "Colete aceite escrito de quem formulou o requisito",
+      "Controle aprovado é controle operante",
+      "Mais prevenção sempre reduz mais risco"
+    ],
+    "correta": 1,
+    "justificativa": "A exceção aceita o descumprimento; o compensatório substitui o mecanismo com efeito equivalente"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#E02",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Controles: preventivos, detectivos, corretivos e compensatórios: um colega afirma que \"Antivírus é preventivo ou detectivo\". Qual é a correção?",
+    "alternativas": [
+      "Controle compensatório é exceção autorizada",
+      "Controle aprovado é controle operante",
+      "Classifique pela função que gera evidência, não pelo produto",
+      "Mais prevenção sempre reduz mais risco"
+    ],
+    "correta": 2,
+    "justificativa": "A mesma ferramenta cumpre funções diferentes conforme a configuração"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#E03",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Controles: preventivos, detectivos, corretivos e compensatórios: um colega afirma que \"Controle aprovado é controle operante\". Qual é a correção?",
+    "alternativas": [
+      "Controle compensatório é exceção autorizada",
+      "Antivírus é preventivo ou detectivo",
+      "Mais prevenção sempre reduz mais risco",
+      "Registre a data de entrada em operação"
+    ],
+    "correta": 3,
+    "justificativa": "A definição de risco residual exige resposta documentada e executada"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#E04",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Controles: preventivos, detectivos, corretivos e compensatórios: um colega afirma que \"Mais prevenção sempre reduz mais risco\". Qual é a correção?",
+    "alternativas": [
+      "Distribua verba entre as três funções",
+      "Controle compensatório é exceção autorizada",
+      "Antivírus é preventivo ou detectivo",
+      "Controle aprovado é controle operante"
+    ],
+    "correta": 0,
+    "justificativa": "Nenhum controle preventivo é infalível, e sem detecção o tempo de descoberta fica indefinido"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#E05",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Controles: preventivos, detectivos, corretivos e compensatórios: um colega afirma que \"Controle sem requisito ainda serve\". Qual é a correção?",
+    "alternativas": [
+      "Controle compensatório é exceção autorizada",
+      "Escreva o requisito antes de comprar",
+      "Antivírus é preventivo ou detectivo",
+      "Controle aprovado é controle operante"
+    ],
+    "correta": 1,
+    "justificativa": "A definição do NIST exige atender a requisito definido"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#E06",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Controles: preventivos, detectivos, corretivos e compensatórios: um colega afirma que \"Evidência é papelada\". Qual é a correção?",
+    "alternativas": [
+      "Controle compensatório é exceção autorizada",
+      "Antivírus é preventivo ou detectivo",
+      "Evidência é o campo que mostra a regra que ficou esquecida",
+      "Controle aprovado é controle operante"
+    ],
+    "correta": 2,
+    "justificativa": "Sem evidência não existe prova de operação nem sinal de decadência"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#R02",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Auditoria exige MFA em sistema legado que não suporta o recurso. Descreva o controle compensatório e quem precisa concordar.",
+    "alternativas": [
+      "Indica tempo de descoberta dependente do acaso. Sem detecção, o evento é descoberto por terceiro, por cliente ou por impacto visível, e a resposta começa atrasada.",
+      "Monitoramento de integridade de arquivo detecta alteração depois que ela ocorreu, e não impede a alteração. A diferença é o ponto de intervenção: antes ou depois do evento.",
+      "A exceção aceita o descumprimento do requisito, com o risco correndo por conta da empresa. O compensatório troca o mecanismo por outro com efeito equivalente e mantém o requisito atendido.",
+      "Restringir origem de rede ao endereço conhecido, gravar a sessão, exigir aprovação nominal por acesso e revisar registros periodicamente. Precisa do aceite escrito de quem formulou o requisito, no caso o auditor."
+    ],
+    "correta": 3,
+    "justificativa": "Controle compensatório é exceção autorizada"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#R03",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Se 90% da verba está em prevenção, o que isso indica sobre a capacidade de responder a incidente?",
+    "alternativas": [
+      "Indica tempo de descoberta dependente do acaso. Sem detecção, o evento é descoberto por terceiro, por cliente ou por impacto visível, e a resposta começa atrasada.",
+      "Restringir origem de rede ao endereço conhecido, gravar a sessão, exigir aprovação nominal por acesso e revisar registros periodicamente. Precisa do aceite escrito de quem formulou o requisito, no caso o auditor.",
+      "Monitoramento de integridade de arquivo detecta alteração depois que ela ocorreu, e não impede a alteração. A diferença é o ponto de intervenção: antes ou depois do evento.",
+      "A exceção aceita o descumprimento do requisito, com o risco correndo por conta da empresa. O compensatório troca o mecanismo por outro com efeito equivalente e mantém o requisito atendido."
+    ],
+    "correta": 0,
+    "justificativa": "Controle compensatório é exceção autorizada"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#R04",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Dê um exemplo de controle detectivo que não sirva como preventivo, e explique a diferença.",
+    "alternativas": [
+      "Restringir origem de rede ao endereço conhecido, gravar a sessão, exigir aprovação nominal por acesso e revisar registros periodicamente. Precisa do aceite escrito de quem formulou o requisito, no caso o auditor.",
+      "Monitoramento de integridade de arquivo detecta alteração depois que ela ocorreu, e não impede a alteração. A diferença é o ponto de intervenção: antes ou depois do evento.",
+      "Indica tempo de descoberta dependente do acaso. Sem detecção, o evento é descoberto por terceiro, por cliente ou por impacto visível, e a resposta começa atrasada.",
+      "A exceção aceita o descumprimento do requisito, com o risco correndo por conta da empresa. O compensatório troca o mecanismo por outro com efeito equivalente e mantém o requisito atendido."
+    ],
+    "correta": 1,
+    "justificativa": "Controle compensatório é exceção autorizada"
+  },
+  {
+    "id": "01-fundamentos#TEMA-07#R05",
+    "ref": "01-fundamentos#TEMA-07",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — security control",
+      "url": "https://csrc.nist.gov/glossary/term/security_control",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que caracteriza uma exceção em contraste com um controle compensatório?",
+    "alternativas": [
+      "Restringir origem de rede ao endereço conhecido, gravar a sessão, exigir aprovação nominal por acesso e revisar registros periodicamente. Precisa do aceite escrito de quem formulou o requisito, no caso o auditor.",
+      "Indica tempo de descoberta dependente do acaso. Sem detecção, o evento é descoberto por terceiro, por cliente ou por impacto visível, e a resposta começa atrasada.",
+      "A exceção aceita o descumprimento do requisito, com o risco correndo por conta da empresa. O compensatório troca o mecanismo por outro com efeito equivalente e mantém o requisito atendido.",
+      "Monitoramento de integridade de arquivo detecta alteração depois que ela ocorreu, e não impede a alteração. A diferença é o ponto de intervenção: antes ou depois do evento."
+    ],
+    "correta": 2,
+    "justificativa": "Controle compensatório é exceção autorizada"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#E01",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Defesa em profundidade e o princípio do menor privilégio: um colega afirma que \"Defesa em profundidade é empilhar produtos iguais\". Qual é a correção?",
+    "alternativas": [
+      "Menor privilégio vale só para pessoas",
+      "Permissão ampla reduz atrito e não faz mal",
+      "Cada camada deve resistir a uma técnica diferente",
+      "Defesa em profundidade substitui detecção"
+    ],
+    "correta": 2,
+    "justificativa": "A definição pede barreiras de natureza variada entre camadas"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#E02",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Defesa em profundidade e o princípio do menor privilégio: um colega afirma que \"Menor privilégio vale só para pessoas\". Qual é a correção?",
+    "alternativas": [
+      "Defesa em profundidade é empilhar produtos iguais",
+      "Permissão ampla reduz atrito e não faz mal",
+      "Defesa em profundidade substitui detecção",
+      "Conta de serviço e chave de aplicação seguem a mesma regra"
+    ],
+    "correta": 3,
+    "justificativa": "A definição inclui processos agindo em nome de usuários"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#E03",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Defesa em profundidade e o princípio do menor privilégio: um colega afirma que \"Permissão ampla reduz atrito e não faz mal\". Qual é a correção?",
+    "alternativas": [
+      "Eleve por janela e reverte ao final",
+      "Defesa em profundidade é empilhar produtos iguais",
+      "Menor privilégio vale só para pessoas",
+      "Defesa em profundidade substitui detecção"
+    ],
+    "correta": 0,
+    "justificativa": "Permissão permanente sobrevive ao projeto que a justificou"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#E04",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Defesa em profundidade e o princípio do menor privilégio: um colega afirma que \"Defesa em profundidade substitui detecção\". Qual é a correção?",
+    "alternativas": [
+      "Defesa em profundidade é empilhar produtos iguais",
+      "Detecção reduz o tempo até a descoberta",
+      "Menor privilégio vale só para pessoas",
+      "Permissão ampla reduz atrito e não faz mal"
+    ],
+    "correta": 1,
+    "justificativa": "Camadas reduzem probabilidade e não eliminam falha"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#E05",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Defesa em profundidade e o princípio do menor privilégio: um colega afirma que \"Conta administrativa separada resolve o problema\". Qual é a correção?",
+    "alternativas": [
+      "Defesa em profundidade é empilhar produtos iguais",
+      "Menor privilégio vale só para pessoas",
+      "Combine separação de conta com privilégio mínimo e revisão",
+      "Permissão ampla reduz atrito e não faz mal"
+    ],
+    "correta": 2,
+    "justificativa": "Separar contas não limita o alcance dentro do domínio"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#E06",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Defesa em profundidade e o princípio do menor privilégio: um colega afirma que \"Revisão de acesso é anual e suficiente\". Qual é a correção?",
+    "alternativas": [
+      "Defesa em profundidade é empilhar produtos iguais",
+      "Menor privilégio vale só para pessoas",
+      "Permissão ampla reduz atrito e não faz mal",
+      "Revisão com dono nomeado por sistema, em ciclo definido"
+    ],
+    "correta": 3,
+    "justificativa": "Permissão acumula entre revisões e migra de função"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#R01",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Escreva a definição de defesa em profundidade registrada pelo NIST e diga quais três capacidades a estratégia integra.",
+    "alternativas": [
+      "O número de sistemas e funções que a credencial alcança. Com privilégio mínimo, a mesma credencial roubada lê e altera menos, e o deslocamento lateral encontra limites.",
+      "Menor privilégio, porque permissão concedida raramente é removida por iniciativa própria e tende a acumular ao longo do tempo.",
+      "Porque a mesma técnica derruba as duas. Barreiras só somam quando exigem do atacante capacidades ou caminhos diferentes.",
+      "\"Information security strategy integrating people, technology, and operations capabilities to establish variable barriers across multiple layers and missions of the organization\". Integra pessoas, tecnologia e operações."
+    ],
+    "correta": 3,
+    "justificativa": "Defesa em profundidade é empilhar produtos iguais"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#R03",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Uma credencial de analista é comprometida em uma rede sem segmentação. O que o menor privilégio teria limitado?",
+    "alternativas": [
+      "\"Information security strategy integrating people, technology, and operations capabilities to establish variable barriers across multiple layers and missions of the organization\". Integra pessoas, tecnologia e operações.",
+      "O número de sistemas e funções que a credencial alcança. Com privilégio mínimo, a mesma credencial roubada lê e altera menos, e o deslocamento lateral encontra limites.",
+      "Menor privilégio, porque permissão concedida raramente é removida por iniciativa própria e tende a acumular ao longo do tempo.",
+      "Porque a mesma técnica derruba as duas. Barreiras só somam quando exigem do atacante capacidades ou caminhos diferentes."
+    ],
+    "correta": 1,
+    "justificativa": "Defesa em profundidade é empilhar produtos iguais"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#R04",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual dos dois princípios exige revisão periódica de acessos, e por quê?",
+    "alternativas": [
+      "\"Information security strategy integrating people, technology, and operations capabilities to establish variable barriers across multiple layers and missions of the organization\". Integra pessoas, tecnologia e operações.",
+      "O número de sistemas e funções que a credencial alcança. Com privilégio mínimo, a mesma credencial roubada lê e altera menos, e o deslocamento lateral encontra limites.",
+      "Menor privilégio, porque permissão concedida raramente é removida por iniciativa própria e tende a acumular ao longo do tempo.",
+      "Porque a mesma técnica derruba as duas. Barreiras só somam quando exigem do atacante capacidades ou caminhos diferentes."
+    ],
+    "correta": 2,
+    "justificativa": "Defesa em profundidade é empilhar produtos iguais"
+  },
+  {
+    "id": "01-fundamentos#TEMA-08#R05",
+    "ref": "01-fundamentos#TEMA-08",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST CSRC Glossary — defense in depth",
+      "url": "https://csrc.nist.gov/glossary/term/defense_in_depth",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que duas camadas de mesma natureza não formam defesa em profundidade?",
+    "alternativas": [
+      "\"Information security strategy integrating people, technology, and operations capabilities to establish variable barriers across multiple layers and missions of the organization\". Integra pessoas, tecnologia e operações.",
+      "O número de sistemas e funções que a credencial alcança. Com privilégio mínimo, a mesma credencial roubada lê e altera menos, e o deslocamento lateral encontra limites.",
+      "Menor privilégio, porque permissão concedida raramente é removida por iniciativa própria e tende a acumular ao longo do tempo.",
+      "Porque a mesma técnica derruba as duas. Barreiras só somam quando exigem do atacante capacidades ou caminhos diferentes."
+    ],
+    "correta": 3,
+    "justificativa": "Defesa em profundidade é empilhar produtos iguais"
+  }
+]

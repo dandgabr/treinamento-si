@@ -1,0 +1,779 @@
+[
+  {
+    "id": "06-endpoint-plataforma#TEMA-01#E01",
+    "ref": "06-endpoint-plataforma#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
+      "url": "https://attack.mitre.org/tactics/TA0002/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Endpoint é sinônimo de estação de trabalho\". Qual é a correção?",
+    "alternativas": [
+      "Antivírus com assinatura atualizada resolve execução",
+      "Trate servidor e carga de trabalho como endpoint, com regime próprio",
+      "Agente instalado significa agente funcionando",
+      "Inventário de dispositivo é inventário de software"
+    ],
+    "correta": 1,
+    "justificativa": "O servidor, a instância em nuvem e o contêiner executam código e têm identidade própria"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-01#E02",
+    "ref": "06-endpoint-plataforma#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
+      "url": "https://attack.mitre.org/tactics/TA0002/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Antivírus com assinatura atualizada resolve execução\". Qual é a correção?",
+    "alternativas": [
+      "Endpoint é sinônimo de estação de trabalho",
+      "Agente instalado significa agente funcionando",
+      "Controle o que pode executar por autorização, e mantenha o antivírus ao lado disso",
+      "Inventário de dispositivo é inventário de software"
+    ],
+    "correta": 2,
+    "justificativa": "A maior parte das técnicas de execução reaproveita binário legítimo já instalado"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-01#E03",
+    "ref": "06-endpoint-plataforma#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
+      "url": "https://attack.mitre.org/tactics/TA0002/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Agente instalado significa agente funcionando\". Qual é a correção?",
+    "alternativas": [
+      "Endpoint é sinônimo de estação de trabalho",
+      "Antivírus com assinatura atualizada resolve execução",
+      "Inventário de dispositivo é inventário de software",
+      "Meça cobertura por tipo de evento e por janela de tempo"
+    ],
+    "correta": 3,
+    "justificativa": "Instalação é registro em inventário, não prova de envio de evento"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-01#E04",
+    "ref": "06-endpoint-plataforma#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
+      "url": "https://attack.mitre.org/tactics/TA0002/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Inventário de dispositivo é inventário de software\". Qual é a correção?",
+    "alternativas": [
+      "Mantenha as duas listas e cruze uma com a outra",
+      "Endpoint é sinônimo de estação de trabalho",
+      "Antivírus com assinatura atualizada resolve execução",
+      "Agente instalado significa agente funcionando"
+    ],
+    "correta": 0,
+    "justificativa": "O mesmo equipamento pode ter centenas de executáveis distintos em um dia"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-01#E05",
+    "ref": "06-endpoint-plataforma#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
+      "url": "https://attack.mitre.org/tactics/TA0002/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Privilégio administrativo local é questão de conforto do usuário\". Qual é a correção?",
+    "alternativas": [
+      "Endpoint é sinônimo de estação de trabalho",
+      "Trate privilégio local como decisão de segurança, com prazo e justificativa",
+      "Antivírus com assinatura atualizada resolve execução",
+      "Agente instalado significa agente funcionando"
+    ],
+    "correta": 1,
+    "justificativa": "A conta administrativa altera o próprio sensor e o próprio controle de execução"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-01#E06",
+    "ref": "06-endpoint-plataforma#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
+      "url": "https://attack.mitre.org/tactics/TA0002/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Bloquear tudo que não está na lista é o objetivo final\". Qual é a correção?",
+    "alternativas": [
+      "Endpoint é sinônimo de estação de trabalho",
+      "Antivírus com assinatura atualizada resolve execução",
+      "Passe primeiro por auditoria, publique o catálogo e só então aplique a política",
+      "Agente instalado significa agente funcionando"
+    ],
+    "correta": 2,
+    "justificativa": "Bloqueio sem catálogo consolidado para a operação no primeiro dia útil"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-02#E01",
+    "ref": "06-endpoint-plataforma#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Aplicar o benchmark inteiro é o objetivo\". Qual é a correção?",
+    "alternativas": [
+      "Endurecer de uma vez, sem medir antes",
+      "Linha de base é assunto de servidor",
+      "Classifique em aplicar agora, aplicar com teste e não aplicar, e registre o terceiro grupo",
+      "Imagem de instalação resolve a linha de base"
+    ],
+    "correta": 2,
+    "justificativa": "Item que quebra sistema de negócio gera exceção informal, e exceção informal não é medida"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-02#E02",
+    "ref": "06-endpoint-plataforma#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Endurecer de uma vez, sem medir antes\". Qual é a correção?",
+    "alternativas": [
+      "Aplicar o benchmark inteiro é o objetivo",
+      "Linha de base é assunto de servidor",
+      "Imagem de instalação resolve a linha de base",
+      "Rode a primeira varredura antes de mudar qualquer coisa"
+    ],
+    "correta": 3,
+    "justificativa": "Sem medição inicial não existe como provar melhoria nem separar o que já estava bom"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-02#E03",
+    "ref": "06-endpoint-plataforma#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Linha de base é assunto de servidor\". Qual é a correção?",
+    "alternativas": [
+      "Cubra também o parque de estações, com benchmark próprio",
+      "Aplicar o benchmark inteiro é o objetivo",
+      "Endurecer de uma vez, sem medir antes",
+      "Imagem de instalação resolve a linha de base"
+    ],
+    "correta": 0,
+    "justificativa": "Estação de trabalho é a maior parte do parque e a porta de entrada mais comum"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-02#E04",
+    "ref": "06-endpoint-plataforma#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Imagem de instalação resolve a linha de base\". Qual é a correção?",
+    "alternativas": [
+      "Aplicar o benchmark inteiro é o objetivo",
+      "Combine imagem, política contínua e varredura",
+      "Endurecer de uma vez, sem medir antes",
+      "Linha de base é assunto de servidor"
+    ],
+    "correta": 1,
+    "justificativa": "Ela corrige o estado inicial e não toca nas máquinas já instaladas"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-02#E05",
+    "ref": "06-endpoint-plataforma#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Desvio aceito é falha de conformidade\". Qual é a correção?",
+    "alternativas": [
+      "Aplicar o benchmark inteiro é o objetivo",
+      "Endurecer de uma vez, sem medir antes",
+      "Trate o registro de desvio como parte do artefato, não como exceção a esconder",
+      "Linha de base é assunto de servidor"
+    ],
+    "correta": 2,
+    "justificativa": "Desvio com dono, prazo e motivo é decisão de risco documentada"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-02#E06",
+    "ref": "06-endpoint-plataforma#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Controle de execução é ligar e esquecer\". Qual é a correção?",
+    "alternativas": [
+      "Aplicar o benchmark inteiro é o objetivo",
+      "Endurecer de uma vez, sem medir antes",
+      "Linha de base é assunto de servidor",
+      "Passe por auditoria e modo de avaliação antes do bloqueio"
+    ],
+    "correta": 3,
+    "justificativa": "Política de execução mal calibrada bloqueia processo de negócio em produção"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-03#E01",
+    "ref": "06-endpoint-plataforma#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"A ferramenta reportou sucesso, logo o item está corrigido\". Qual é a correção?",
+    "alternativas": [
+      "Severidade alta é prioridade alta",
+      "Patch é projeto com data de término",
+      "Software descontinuado sai da conta quando sai do suporte",
+      "Verifique a versão do componente no próprio dispositivo"
+    ],
+    "correta": 3,
+    "justificativa": "Instalação concluída com reinício pendente mantém o código antigo em execução"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-03#E02",
+    "ref": "06-endpoint-plataforma#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Severidade alta é prioridade alta\". Qual é a correção?",
+    "alternativas": [
+      "Combine exploração confirmada, probabilidade estimada e exposição do dispositivo",
+      "A ferramenta reportou sucesso, logo o item está corrigido",
+      "Patch é projeto com data de término",
+      "Software descontinuado sai da conta quando sai do suporte"
+    ],
+    "correta": 0,
+    "justificativa": "A nota descreve pior caso técnico e ignora a probabilidade de alguém explorar aquilo"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-03#E03",
+    "ref": "06-endpoint-plataforma#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Patch é projeto com data de término\". Qual é a correção?",
+    "alternativas": [
+      "A ferramenta reportou sucesso, logo o item está corrigido",
+      "Coloque janela recorrente no calendário e orçamento de base",
+      "Severidade alta é prioridade alta",
+      "Software descontinuado sai da conta quando sai do suporte"
+    ],
+    "correta": 1,
+    "justificativa": "Manutenção preventiva é recorrente, como revisão de elevador"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-03#E04",
+    "ref": "06-endpoint-plataforma#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Software descontinuado sai da conta quando sai do suporte\". Qual é a correção?",
+    "alternativas": [
+      "A ferramenta reportou sucesso, logo o item está corrigido",
+      "Severidade alta é prioridade alta",
+      "Decida entre substituição, isolamento e aceite formal do risco",
+      "Patch é projeto com data de término"
+    ],
+    "correta": 2,
+    "justificativa": "Sem correção publicada, o item nunca fecha por patch"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-03#E05",
+    "ref": "06-endpoint-plataforma#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Instalar em todas as máquinas ao mesmo tempo é eficiência\". Qual é a correção?",
+    "alternativas": [
+      "A ferramenta reportou sucesso, logo o item está corrigido",
+      "Severidade alta é prioridade alta",
+      "Patch é projeto com data de término",
+      "Use anéis com intervalo entre ondas"
+    ],
+    "correta": 3,
+    "justificativa": "Um patch defeituoso em todas as máquinas ao mesmo tempo vira incidente em todo o parque"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-03#E06",
+    "ref": "06-endpoint-plataforma#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"O inventário de software instalado é suficiente\". Qual é a correção?",
+    "alternativas": [
+      "Amplie o inventário por varredura de componentes no dispositivo",
+      "A ferramenta reportou sucesso, logo o item está corrigido",
+      "Severidade alta é prioridade alta",
+      "Patch é projeto com data de término"
+    ],
+    "correta": 0,
+    "justificativa": "Componente embarcado e biblioteca de terceiro não aparecem nessa lista"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-04#E01",
+    "ref": "06-endpoint-plataforma#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"EDR é antivírus com nome novo\". Qual é a correção?",
+    "alternativas": [
+      "Trate como ponto de decisão com escopo definido, não como assinatura de arquivo",
+      "Ligar todas as ações automáticas é o estado desejado",
+      "Isolar a máquina é sempre a primeira ação",
+      "Remover o artefato resolve o caso"
+    ],
+    "correta": 0,
+    "justificativa": "A diferença está na coleta contínua de evento e na capacidade de agir sobre o dispositivo"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-04#E02",
+    "ref": "06-endpoint-plataforma#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Ligar todas as ações automáticas é o estado desejado\". Qual é a correção?",
+    "alternativas": [
+      "EDR é antivírus com nome novo",
+      "Defina escopo por grupo de máquinas e por criticidade do serviço",
+      "Isolar a máquina é sempre a primeira ação",
+      "Remover o artefato resolve o caso"
+    ],
+    "correta": 1,
+    "justificativa": "Ação sem contexto de negócio contém dado legítimo em produção"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-04#E03",
+    "ref": "06-endpoint-plataforma#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Isolar a máquina é sempre a primeira ação\". Qual é a correção?",
+    "alternativas": [
+      "EDR é antivírus com nome novo",
+      "Ligar todas as ações automáticas é o estado desejado",
+      "Decida por tipo de dispositivo, com caminho de reversão declarado",
+      "Remover o artefato resolve o caso"
+    ],
+    "correta": 2,
+    "justificativa": "Isolamento interrompe serviço e pode custar mais que o incidente"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-04#E04",
+    "ref": "06-endpoint-plataforma#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Remover o artefato resolve o caso\". Qual é a correção?",
+    "alternativas": [
+      "EDR é antivírus com nome novo",
+      "Ligar todas as ações automáticas é o estado desejado",
+      "Isolar a máquina é sempre a primeira ação",
+      "Colete antes de remover, e trate remoção como decisão humana"
+    ],
+    "correta": 3,
+    "justificativa": "A remoção apaga a evidência que a análise de incidente precisa"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-04#E05",
+    "ref": "06-endpoint-plataforma#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"XDR elimina a necessidade de integrar fontes\". Qual é a correção?",
+    "alternativas": [
+      "Meça a cobertura por fonte e por tipo de evento",
+      "EDR é antivírus com nome novo",
+      "Ligar todas as ações automáticas é o estado desejado",
+      "Isolar a máquina é sempre a primeira ação"
+    ],
+    "correta": 0,
+    "justificativa": "A correlação depende das fontes; fonte ausente produz ponto cego silencioso"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-04#E06",
+    "ref": "06-endpoint-plataforma#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Ação automática dispensa registro\". Qual é a correção?",
+    "alternativas": [
+      "EDR é antivírus com nome novo",
+      "Registre horário, máquina, regra, ação e alerta de cada ação automática",
+      "Ligar todas as ações automáticas é o estado desejado",
+      "Isolar a máquina é sempre a primeira ação"
+    ],
+    "correta": 1,
+    "justificativa": "Sem registro não existe revisão, e sem revisão a política não evolui"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-04#R01",
+    "ref": "06-endpoint-plataforma#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são as três características que definem a categoria de detecção e resposta em endpoint, e qual delas a distingue do antivírus tradicional?",
+    "alternativas": [
+      "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência.",
+      "Horário, identificação da máquina, regra ou modelo que decidiu, ação executada e identificador do alerta correspondente.",
+      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos."
+    ],
+    "correta": 2,
+    "justificativa": "EDR é antivírus com nome novo"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-04#R03",
+    "ref": "06-endpoint-plataforma#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Liste as quatro ações de resposta no host em ordem crescente de impacto e diga qual delas destrói evidência.",
+    "alternativas": [
+      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
+      "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência.",
+      "Horário, identificação da máquina, regra ou modelo que decidiu, ação executada e identificador do alerta correspondente."
+    ],
+    "correta": 1,
+    "justificativa": "EDR é antivírus com nome novo"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-04#R05",
+    "ref": "06-endpoint-plataforma#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais cinco campos o registro de ação automática precisa conter?",
+    "alternativas": [
+      "Horário, identificação da máquina, regra ou modelo que decidiu, ação executada e identificador do alerta correspondente.",
+      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
+      "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência."
+    ],
+    "correta": 0,
+    "justificativa": "EDR é antivírus com nome novo"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-05#E01",
+    "ref": "06-endpoint-plataforma#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
+      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Criptografia de disco protege o dado em uso\". Qual é a correção?",
+    "alternativas": [
+      "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
+      "Trate criptografia como controle contra perda e roubo de equipamento",
+      "Bloquear tudo desde o primeiro dia é firmeza",
+      "Política de saída resolve o dado que sai por canal fora do dispositivo"
+    ],
+    "correta": 1,
+    "justificativa": "Com a sessão aberta o sistema decifra para o usuário; a proteção vale para o equipamento desligado ou bloqueado"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-05#E02",
+    "ref": "06-endpoint-plataforma#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
+      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Classificação é etapa dispensável se a ferramenta detecta conteúdo\". Qual é a correção?",
+    "alternativas": [
+      "Criptografia de disco protege o dado em uso",
+      "Bloquear tudo desde o primeiro dia é firmeza",
+      "Use rótulo e detecção por conteúdo em conjunto, com a segunda como rede de segurança",
+      "Política de saída resolve o dado que sai por canal fora do dispositivo"
+    ],
+    "correta": 2,
+    "justificativa": "Detecção por conteúdo tem falso positivo e falso negativo e não cobre dado sem padrão reconhecível"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-05#E03",
+    "ref": "06-endpoint-plataforma#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
+      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Bloquear tudo desde o primeiro dia é firmeza\". Qual é a correção?",
+    "alternativas": [
+      "Criptografia de disco protege o dado em uso",
+      "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
+      "Política de saída resolve o dado que sai por canal fora do dispositivo",
+      "Comece em modo de simulação e avance uma regra por vez"
+    ],
+    "correta": 3,
+    "justificativa": "Bloqueio sem medição prévia gera volume insustentável e a política acaba desligada"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-05#E04",
+    "ref": "06-endpoint-plataforma#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
+      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Política de saída resolve o dado que sai por canal fora do dispositivo\". Qual é a correção?",
+    "alternativas": [
+      "Cubra por canal e revise a lista de canais periodicamente",
+      "Criptografia de disco protege o dado em uso",
+      "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
+      "Bloquear tudo desde o primeiro dia é firmeza"
+    ],
+    "correta": 0,
+    "justificativa": "Canal não coberto pela ferramenta permanece invisível"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-05#E05",
+    "ref": "06-endpoint-plataforma#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
+      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Apagar o disco é procedimento óbvio e sem risco\". Qual é a correção?",
+    "alternativas": [
+      "Criptografia de disco protege o dado em uso",
+      "Defina método, responsável e evidência do descarte",
+      "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
+      "Bloquear tudo desde o primeiro dia é firmeza"
+    ],
+    "correta": 1,
+    "justificativa": "Sem método declarado e sem registro, o apagamento não é verificável"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-05#E06",
+    "ref": "06-endpoint-plataforma#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
+      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Registro de auditoria é consequência automática da ferramenta\". Qual é a correção?",
+    "alternativas": [
+      "Criptografia de disco protege o dado em uso",
+      "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
+      "Coloque a leitura do registro na rotina semanal com critério definido",
+      "Bloquear tudo desde o primeiro dia é firmeza"
+    ],
+    "correta": 2,
+    "justificativa": "O registro existe, mas ninguém o lê nem o correlaciona com resposta"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-06#E01",
+    "ref": "06-endpoint-plataforma#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Servidor é estação com mais memória\". Qual é a correção?",
+    "alternativas": [
+      "Aplicar o benchmark do sistema operacional cobre a carga",
+      "Corrigir o processo em execução resolve",
+      "Trate como regime próprio, com decisão codificada antes do evento",
+      "Configurar servidor à mão e depois documentar"
+    ],
+    "correta": 2,
+    "justificativa": "Não há operador para decidir, a superfície é serviço e a identidade que executa pertence à carga"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-06#E02",
+    "ref": "06-endpoint-plataforma#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Aplicar o benchmark do sistema operacional cobre a carga\". Qual é a correção?",
+    "alternativas": [
+      "Servidor é estação com mais memória",
+      "Corrigir o processo em execução resolve",
+      "Configurar servidor à mão e depois documentar",
+      "Escolha um benchmark por camada e declare as versões"
+    ],
+    "correta": 3,
+    "justificativa": "Motor de contêiner, orquestrador, hipervisor e serviço têm benchmarks próprios em versões distintas"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-06#E03",
+    "ref": "06-endpoint-plataforma#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Corrigir o processo em execução resolve\". Qual é a correção?",
+    "alternativas": [
+      "Corrija a imagem e substitua as instâncias",
+      "Servidor é estação com mais memória",
+      "Aplicar o benchmark do sistema operacional cobre a carga",
+      "Configurar servidor à mão e depois documentar"
+    ],
+    "correta": 0,
+    "justificativa": "A instância é recriada a partir da imagem antiga no próximo ciclo"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-06#E04",
+    "ref": "06-endpoint-plataforma#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Configurar servidor à mão e depois documentar\". Qual é a correção?",
+    "alternativas": [
+      "Servidor é estação com mais memória",
+      "Automatize o provisionamento e recrie a máquina divergente",
+      "Aplicar o benchmark do sistema operacional cobre a carga",
+      "Corrigir o processo em execução resolve"
+    ],
+    "correta": 1,
+    "justificativa": "Documentação posterior diverge do estado real e a máquina deixa de ser reproduzível"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-06#E05",
+    "ref": "06-endpoint-plataforma#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Telemetria do nó cobre o que acontece na carga\". Qual é a correção?",
+    "alternativas": [
+      "Servidor é estação com mais memória",
+      "Aplicar o benchmark do sistema operacional cobre a carga",
+      "Combine agente no nó com registro de auditoria do orquestrador",
+      "Corrigir o processo em execução resolve"
+    ],
+    "correta": 2,
+    "justificativa": "Quem criou a carga e com qual identidade aparece no registro do orquestrador"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-06#E06",
+    "ref": "06-endpoint-plataforma#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Carga sem dono é assunto administrativo\". Qual é a correção?",
+    "alternativas": [
+      "Servidor é estação com mais memória",
+      "Aplicar o benchmark do sistema operacional cobre a carga",
+      "Corrigir o processo em execução resolve",
+      "Nomeie dono por carga antes de prometer prazo de correção"
+    ],
+    "correta": 3,
+    "justificativa": "Sem dono não existe negociação de janela, escalonamento de alerta nem decisão de desligamento"
+  }
+]

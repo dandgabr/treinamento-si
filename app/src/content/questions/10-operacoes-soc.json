@@ -1,0 +1,716 @@
+[
+  {
+    "id": "10-operacoes-soc#TEMA-01#E01",
+    "ref": "10-operacoes-soc#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Comprar SIEM para \"ter um SOC\"\". Qual é a correção?",
+    "alternativas": [
+      "Tratar plantão como detalhe operacional",
+      "Supor que nível de analista é padrão normativo",
+      "escolher o modelo primeiro e dimensionar a ferramenta pela cobertura e pelo volume que ele exige",
+      "Contratar monitoramento esperando transferir responsabilidade"
+    ],
+    "correta": 2,
+    "justificativa": "a ferramenta não define dono, horário nem autoridade; o alerta sem decisão apenas acumula"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-01#E02",
+    "ref": "10-operacoes-soc#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Tratar plantão como detalhe operacional\". Qual é a correção?",
+    "alternativas": [
+      "Comprar SIEM para \"ter um SOC\"",
+      "Supor que nível de analista é padrão normativo",
+      "Contratar monitoramento esperando transferir responsabilidade",
+      "horário de cobertura é decisão de risco, com consequência contratual e regulatória"
+    ],
+    "correta": 3,
+    "justificativa": "sem plantão real, o prazo de notificação começa a correr com todo mundo dormindo"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-01#E03",
+    "ref": "10-operacoes-soc#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Supor que nível de analista é padrão normativo\". Qual é a correção?",
+    "alternativas": [
+      "o que as fontes verificadas exigem é coordenador de incidente designado e caminho de escalonamento documentado",
+      "Comprar SIEM para \"ter um SOC\"",
+      "Tratar plantão como detalhe operacional",
+      "Contratar monitoramento esperando transferir responsabilidade"
+    ],
+    "correta": 0,
+    "justificativa": "a escada de níveis de analista é convenção de mercado; NAO CONFIRMADO em fonte oficial uma definição normativa desses níveis nas fontes verificadas nesta execução"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-01#E04",
+    "ref": "10-operacoes-soc#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Contratar monitoramento esperando transferir responsabilidade\". Qual é a correção?",
+    "alternativas": [
+      "Comprar SIEM para \"ter um SOC\"",
+      "escrever o que o provedor pode fazer sozinho e o que volta para o cadastro interno de decisão",
+      "Tratar plantão como detalhe operacional",
+      "Supor que nível de analista é padrão normativo"
+    ],
+    "correta": 1,
+    "justificativa": "o provedor complementa a capacidade e não assume a decisão sobre o próprio ativo"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-02#E01",
+    "ref": "10-operacoes-soc#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Confundir \"registrar\" com \"ter log\"\". Qual é a correção?",
+    "alternativas": [
+      "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão",
+      "Coletar tudo para \"não perder nada\"",
+      "Guardar o log apenas na origem",
+      "o inventário precisa da coluna de retenção e da coluna de destino"
+    ],
+    "correta": 3,
+    "justificativa": "o sistema pode gravar e descartar em dias, ou nunca enviar para fora do próprio equipamento"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-02#E02",
+    "ref": "10-operacoes-soc#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão\". Qual é a correção?",
+    "alternativas": [
+      "conferir quais categorias de log existem no plano de controle e habilitar explicitamente",
+      "Confundir \"registrar\" com \"ter log\"",
+      "Coletar tudo para \"não perder nada\"",
+      "Guardar o log apenas na origem"
+    ],
+    "correta": 0,
+    "justificativa": "o modelo de responsabilidade compartilhada deixa parte da visibilidade com o cliente"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-02#E03",
+    "ref": "10-operacoes-soc#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Coletar tudo para \"não perder nada\"\". Qual é a correção?",
+    "alternativas": [
+      "Confundir \"registrar\" com \"ter log\"",
+      "cada fonte entra com a pergunta de investigação que ela responde",
+      "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão",
+      "Guardar o log apenas na origem"
+    ],
+    "correta": 1,
+    "justificativa": "volume sem pergunta associada encarece a plataforma e piora o tempo de consulta"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-02#E04",
+    "ref": "10-operacoes-soc#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Guardar o log apenas na origem\". Qual é a correção?",
+    "alternativas": [
+      "Confundir \"registrar\" com \"ter log\"",
+      "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão",
+      "centralizar a coleta e gerenciar o sensor por caminho fora de banda",
+      "Coletar tudo para \"não perder nada\""
+    ],
+    "correta": 2,
+    "justificativa": "no host comprometido o adversário pode alterar ou apagar o registro"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-03#E01",
+    "ref": "10-operacoes-soc#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Tactics, Enterprise, versão atual v19.2 vigente desde 28 de abril de 2026",
+      "url": "https://attack.mitre.org/tactics/enterprise/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Medir cobertura pela quantidade de regras\". Qual é a correção?",
+    "alternativas": [
+      "medir cobertura por tática com regra em produção, ativa e revisada",
+      "Tratar a lista de indicadores como detecção",
+      "Deixar a exceção na cabeça do analista",
+      "Não registrar a versão do framework usada"
+    ],
+    "correta": 0,
+    "justificativa": "regra duplicada, desligada ou sem dono infla o número sem cobrir tática nenhuma"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-03#E02",
+    "ref": "10-operacoes-soc#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Tactics, Enterprise, versão atual v19.2 vigente desde 28 de abril de 2026",
+      "url": "https://attack.mitre.org/tactics/enterprise/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Tratar a lista de indicadores como detecção\". Qual é a correção?",
+    "alternativas": [
+      "Medir cobertura pela quantidade de regras",
+      "usar padrão de comportamento como base e indicador como reforço temporário",
+      "Deixar a exceção na cabeça do analista",
+      "Não registrar a versão do framework usada"
+    ],
+    "correta": 1,
+    "justificativa": "o prazo de validade do indicador é curto e o adversário troca de infraestrutura entre campanhas"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-03#E03",
+    "ref": "10-operacoes-soc#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Tactics, Enterprise, versão atual v19.2 vigente desde 28 de abril de 2026",
+      "url": "https://attack.mitre.org/tactics/enterprise/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Deixar a exceção na cabeça do analista\". Qual é a correção?",
+    "alternativas": [
+      "Medir cobertura pela quantidade de regras",
+      "Tratar a lista de indicadores como detecção",
+      "declarar a exceção na regra ou no filtro compartilhado",
+      "Não registrar a versão do framework usada"
+    ],
+    "correta": 2,
+    "justificativa": "o conhecimento não sobrevive à troca de turno e some das métricas"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-03#E04",
+    "ref": "10-operacoes-soc#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Tactics, Enterprise, versão atual v19.2 vigente desde 28 de abril de 2026",
+      "url": "https://attack.mitre.org/tactics/enterprise/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Não registrar a versão do framework usada\". Qual é a correção?",
+    "alternativas": [
+      "Medir cobertura pela quantidade de regras",
+      "Tratar a lista de indicadores como detecção",
+      "Deixar a exceção na cabeça do analista",
+      "gravar a versão do ATT&CK em cada avaliação de cobertura"
+    ],
+    "correta": 3,
+    "justificativa": "TA0005 passou a se chamar Stealth e TA0112 Defense Impairment existe na versão corrente, o que muda relatório antigo"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-03#R01",
+    "ref": "10-operacoes-soc#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Tactics, Enterprise, versão atual v19.2 vigente desde 28 de abril de 2026",
+      "url": "https://attack.mitre.org/tactics/enterprise/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais campos da especificação Sigma são obrigatórios e quais são opcionais?",
+    "alternativas": [
+      "O campo `logsource`, que descreve o dado por categoria, produto e serviço e permite apontar a mesma regra para fontes equivalentes, em vez de replicar a lógica por produto.",
+      "Qual versão do ATT&CK foi usada, o que conta como coberta — regra em produção, ativa, com nível alto e dono — e se a contagem inclui técnica sem fonte de telemetria disponível no ambiente.",
+      "Obrigatórios: título, `logsource`, `detection` e `condition`. Opcionais, entre outros: `id`, `status`, `level`, `falsepositives`, `tags` e `scope`."
+    ],
+    "correta": 2,
+    "justificativa": "Medir cobertura pela quantidade de regras"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-03#R03",
+    "ref": "10-operacoes-soc#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Tactics, Enterprise, versão atual v19.2 vigente desde 28 de abril de 2026",
+      "url": "https://attack.mitre.org/tactics/enterprise/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Um analista propõe criar três regras separadas para o mesmo padrão, uma por produto de origem do log. Qual recurso da especificação evita essa triplicação e por quê?",
+    "alternativas": [
+      "Obrigatórios: título, `logsource`, `detection` e `condition`. Opcionais, entre outros: `id`, `status`, `level`, `falsepositives`, `tags` e `scope`.",
+      "O campo `logsource`, que descreve o dado por categoria, produto e serviço e permite apontar a mesma regra para fontes equivalentes, em vez de replicar a lógica por produto.",
+      "Qual versão do ATT&CK foi usada, o que conta como coberta — regra em produção, ativa, com nível alto e dono — e se a contagem inclui técnica sem fonte de telemetria disponível no ambiente."
+    ],
+    "correta": 1,
+    "justificativa": "Medir cobertura pela quantidade de regras"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-03#R04",
+    "ref": "10-operacoes-soc#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Tactics, Enterprise, versão atual v19.2 vigente desde 28 de abril de 2026",
+      "url": "https://attack.mitre.org/tactics/enterprise/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Um relatório de cobertura diz que a organização cobre 70% das técnicas de ATT&CK. Qual pergunta você faz antes de aceitar o número?",
+    "alternativas": [
+      "Obrigatórios: título, `logsource`, `detection` e `condition`. Opcionais, entre outros: `id`, `status`, `level`, `falsepositives`, `tags` e `scope`.",
+      "O campo `logsource`, que descreve o dado por categoria, produto e serviço e permite apontar a mesma regra para fontes equivalentes, em vez de replicar a lógica por produto.",
+      "Qual versão do ATT&CK foi usada, o que conta como coberta — regra em produção, ativa, com nível alto e dono — e se a contagem inclui técnica sem fonte de telemetria disponível no ambiente."
+    ],
+    "correta": 2,
+    "justificativa": "Medir cobertura pela quantidade de regras"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-04#E01",
+    "ref": "10-operacoes-soc#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Usar notícia de vulnerabilidade para definir severidade de incidente\". Qual é a correção?",
+    "alternativas": [
+      "Deixar o critério de severidade na cabeça do analista sênior",
+      "usar critério de incidente, como categoria, extensão, privilégio obtido e impacto",
+      "Contar a hora da notificação a partir da descoberta do time de segurança",
+      "Automatizar contenção antes de preservar evidência"
+    ],
+    "correta": 1,
+    "justificativa": "a nota descreve o potencial da falha, não o que ocorreu no seu ambiente"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-04#E02",
+    "ref": "10-operacoes-soc#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Deixar o critério de severidade na cabeça do analista sênior\". Qual é a correção?",
+    "alternativas": [
+      "Usar notícia de vulnerabilidade para definir severidade de incidente",
+      "Contar a hora da notificação a partir da descoberta do time de segurança",
+      "matriz escrita, datada e assinada por dono de sistema",
+      "Automatizar contenção antes de preservar evidência"
+    ],
+    "correta": 2,
+    "justificativa": "o critério não sobrevive à folga, à troca de turno nem à auditoria"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-04#E03",
+    "ref": "10-operacoes-soc#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Contar a hora da notificação a partir da descoberta do time de segurança\". Qual é a correção?",
+    "alternativas": [
+      "Usar notícia de vulnerabilidade para definir severidade de incidente",
+      "Deixar o critério de severidade na cabeça do analista sênior",
+      "Automatizar contenção antes de preservar evidência",
+      "registrar explicitamente o momento da determinação e quem a fez"
+    ],
+    "correta": 3,
+    "justificativa": "a fonte verificada conta a partir da determinação do incidente, que pode ser posterior"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-04#E04",
+    "ref": "10-operacoes-soc#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Automatizar contenção antes de preservar evidência\". Qual é a correção?",
+    "alternativas": [
+      "preservar memória e imagem antes da ação destrutiva, com registro de quem coletou",
+      "Usar notícia de vulnerabilidade para definir severidade de incidente",
+      "Deixar o critério de severidade na cabeça do analista sênior",
+      "Contar a hora da notificação a partir da descoberta do time de segurança"
+    ],
+    "correta": 0,
+    "justificativa": "destrói a prova do que aconteceu e prejudica notificação e apuração"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-04#R01",
+    "ref": "10-operacoes-soc#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são os quatro produtos obrigatórios de uma triagem?",
+    "alternativas": [
+      "Categoria, extensão, impacto e severidade com destinatário do escalonamento.",
+      "Evita tratar como ataque a atualização remota aplicada pelo administrador de rede à noite, que é o exemplo dado pelo próprio documento. Sem a verificação, o plantão isola produção ou descarta o alerta errado.",
+      "A autoridade central, junto com a polícia federal no caso dos Estados Unidos, conforme o playbook, e não a organização afetada."
+    ],
+    "correta": 0,
+    "justificativa": "Usar notícia de vulnerabilidade para definir severidade de incidente"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-04#R03",
+    "ref": "10-operacoes-soc#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O playbook do CISA exige procedimento para descartar conflito com atividade autorizada. Dê um exemplo concreto do que essa verificação evita.",
+    "alternativas": [
+      "Categoria, extensão, impacto e severidade com destinatário do escalonamento.",
+      "A autoridade central, junto com a polícia federal no caso dos Estados Unidos, conforme o playbook, e não a organização afetada.",
+      "Evita tratar como ataque a atualização remota aplicada pelo administrador de rede à noite, que é o exemplo dado pelo próprio documento. Sem a verificação, o plantão isola produção ou descarta o alerta errado."
+    ],
+    "correta": 2,
+    "justificativa": "Usar notícia de vulnerabilidade para definir severidade de incidente"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-04#R04",
+    "ref": "10-operacoes-soc#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quem decide escalar o incidente para instância superior de coordenação, segundo o material verificado?",
+    "alternativas": [
+      "A autoridade central, junto com a polícia federal no caso dos Estados Unidos, conforme o playbook, e não a organização afetada.",
+      "Categoria, extensão, impacto e severidade com destinatário do escalonamento.",
+      "Evita tratar como ataque a atualização remota aplicada pelo administrador de rede à noite, que é o exemplo dado pelo próprio documento. Sem a verificação, o plantão isola produção ou descarta o alerta errado."
+    ],
+    "correta": 0,
+    "justificativa": "Usar notícia de vulnerabilidade para definir severidade de incidente"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-05#E01",
+    "ref": "10-operacoes-soc#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-137 — Information Security Continuous Monitoring (ISCM) for Federal Information Systems and Organizations, setembro de 2011",
+      "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Apresentar volume de alertas como resultado\". Qual é a correção?",
+    "alternativas": [
+      "Comparar tempo médio sem definição de início e de fim",
+      "Tratar falso positivo como problema de postura do analista",
+      "apresentar cobertura, custo de atenção por caso e origem da descoberta",
+      "Otimizar eficiência e ignorar efetividade"
+    ],
+    "correta": 2,
+    "justificativa": "volume não informa capacidade nem cegueira"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-05#E02",
+    "ref": "10-operacoes-soc#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-137 — Information Security Continuous Monitoring (ISCM) for Federal Information Systems and Organizations, setembro de 2011",
+      "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Comparar tempo médio sem definição de início e de fim\". Qual é a correção?",
+    "alternativas": [
+      "Apresentar volume de alertas como resultado",
+      "Tratar falso positivo como problema de postura do analista",
+      "Otimizar eficiência e ignorar efetividade",
+      "congelar a definição por escrito, com o evento de início e o de fim"
+    ],
+    "correta": 3,
+    "justificativa": "o número muda de significado a cada trimestre e deixa de ser comparável"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-05#E03",
+    "ref": "10-operacoes-soc#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-137 — Information Security Continuous Monitoring (ISCM) for Federal Information Systems and Organizations, setembro de 2011",
+      "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Tratar falso positivo como problema de postura do analista\". Qual é a correção?",
+    "alternativas": [
+      "ajustar regra e nível, e declarar o falso positivo esperado no próprio arquivo da regra",
+      "Apresentar volume de alertas como resultado",
+      "Comparar tempo médio sem definição de início e de fim",
+      "Otimizar eficiência e ignorar efetividade"
+    ],
+    "correta": 0,
+    "justificativa": "o volume de evento benigno e a especificidade da regra determinam o resultado"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-05#E04",
+    "ref": "10-operacoes-soc#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-137 — Information Security Continuous Monitoring (ISCM) for Federal Information Systems and Organizations, setembro de 2011",
+      "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Otimizar eficiência e ignorar efetividade\". Qual é a correção?",
+    "alternativas": [
+      "Apresentar volume de alertas como resultado",
+      "acompanhar em par a hora por caso real e a origem da descoberta",
+      "Comparar tempo médio sem definição de início e de fim",
+      "Tratar falso positivo como problema de postura do analista"
+    ],
+    "correta": 1,
+    "justificativa": "uma operação pode ficar rápida fechando caso sem investigar"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-05#E05",
+    "ref": "10-operacoes-soc#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-137 — Information Security Continuous Monitoring (ISCM) for Federal Information Systems and Organizations, setembro de 2011",
+      "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Avaliar cobertura sem registrar a versão do framework\". Qual é a correção?",
+    "alternativas": [
+      "Apresentar volume de alertas como resultado",
+      "Comparar tempo médio sem definição de início e de fim",
+      "gravar versão e data em cada avaliação de cobertura",
+      "Tratar falso positivo como problema de postura do analista"
+    ],
+    "correta": 2,
+    "justificativa": "táticas são renomeadas e criadas entre versões do catálogo"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-05#R01",
+    "ref": "10-operacoes-soc#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-137 — Information Security Continuous Monitoring (ISCM) for Federal Information Systems and Organizations, setembro de 2011",
+      "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que a hora de triagem por caso real muda mais comportamento que a contagem de alertas?",
+    "alternativas": [
+      "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida.",
+      "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada.",
+      "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando.",
+      "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente."
+    ],
+    "correta": 3,
+    "justificativa": "Apresentar volume de alertas como resultado"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-05#R02",
+    "ref": "10-operacoes-soc#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-137 — Information Security Continuous Monitoring (ISCM) for Federal Information Systems and Organizations, setembro de 2011",
+      "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "A operação cortou pela metade o número de alertas semanais depois de desligar dez regras. Que outro número você consulta antes de aceitar isso como melhoria?",
+    "alternativas": [
+      "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida.",
+      "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente.",
+      "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada.",
+      "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando."
+    ],
+    "correta": 0,
+    "justificativa": "Apresentar volume de alertas como resultado"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-05#R03",
+    "ref": "10-operacoes-soc#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-137 — Information Security Continuous Monitoring (ISCM) for Federal Information Systems and Organizations, setembro de 2011",
+      "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Um analista diz que \"o tempo médio para detectar caiu 40 por cento\". Qual é a primeira pergunta?",
+    "alternativas": [
+      "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente.",
+      "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada.",
+      "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida.",
+      "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando."
+    ],
+    "correta": 1,
+    "justificativa": "Apresentar volume de alertas como resultado"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-05#R04",
+    "ref": "10-operacoes-soc#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-137 — Information Security Continuous Monitoring (ISCM) for Federal Information Systems and Organizations, setembro de 2011",
+      "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que o valor informativo do campo de nível de uma regra diz sobre abrir caso?",
+    "alternativas": [
+      "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente.",
+      "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida.",
+      "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando.",
+      "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada."
+    ],
+    "correta": 2,
+    "justificativa": "Apresentar volume de alertas como resultado"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-06#E01",
+    "ref": "10-operacoes-soc#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Automatizar primeiro a ação mais visível, como isolar máquina\". Qual é a correção?",
+    "alternativas": [
+      "Tratar automação como projeto de ferramenta",
+      "Automatizar antes de preservar evidência",
+      "Manter regras e playbooks sem controle de versão",
+      "começar por enriquecimento, abertura de chamado e ação reversível com expiração"
+    ],
+    "correta": 3,
+    "justificativa": "é a ação irreversível com maior alcance de erro"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-06#E02",
+    "ref": "10-operacoes-soc#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Tratar automação como projeto de ferramenta\". Qual é a correção?",
+    "alternativas": [
+      "padronizar o processo antes e usar a ferramenta como executor",
+      "Automatizar primeiro a ação mais visível, como isolar máquina",
+      "Automatizar antes de preservar evidência",
+      "Manter regras e playbooks sem controle de versão"
+    ],
+    "correta": 0,
+    "justificativa": "sem campo de chamado, papel nomeado e condição de encerramento, não há o que orquestrar"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-06#E03",
+    "ref": "10-operacoes-soc#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Automatizar antes de preservar evidência\". Qual é a correção?",
+    "alternativas": [
+      "Automatizar primeiro a ação mais visível, como isolar máquina",
+      "coleta antes da ação destrutiva, com registro do que, quando e por quem",
+      "Tratar automação como projeto de ferramenta",
+      "Manter regras e playbooks sem controle de versão"
+    ],
+    "correta": 1,
+    "justificativa": "a rotina apaga exatamente o dado que a apuração e a notificação exigem"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-06#E04",
+    "ref": "10-operacoes-soc#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Manter regras e playbooks sem controle de versão\". Qual é a correção?",
+    "alternativas": [
+      "Automatizar primeiro a ação mais visível, como isolar máquina",
+      "Tratar automação como projeto de ferramenta",
+      "repositório versionado, com migração acompanhando a versão da especificação",
+      "Automatizar antes de preservar evidência"
+    ],
+    "correta": 2,
+    "justificativa": "a plataforma muda de formato e a regra quebra sem aviso"
+  },
+  {
+    "id": "10-operacoes-soc#TEMA-06#E05",
+    "ref": "10-operacoes-soc#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "CISA — Cybersecurity Incident & Vulnerability Response Playbooks, publicação de novembro de 2021",
+      "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Revisar cobertura uma vez por ano\". Qual é a correção?",
+    "alternativas": [
+      "Automatizar primeiro a ação mais visível, como isolar máquina",
+      "Tratar automação como projeto de ferramenta",
+      "Automatizar antes de preservar evidência",
+      "gatilho de revisão declarado ligado à publicação de versão do catálogo"
+    ],
+    "correta": 3,
+    "justificativa": "o catálogo de táticas muda em intervalo menor, com versão maior e menor"
+  }
+]

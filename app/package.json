@@ -33,7 +33,9 @@
     "build:electron": "vite build --config vite.electron.config.ts",
     "desktop": "npm run preparar:conteudo && npm run build:desktop && npm run build:electron && electron .",
     "preview": "vite preview",
-    "preparar:conteudo": "npm run build:content && npm run check:content"
+    "preparar:conteudo": "npm run build:content && npm run check:content && npm run build:questions && npm run check:questions",
+    "build:questions": "tsx scripts/build-questions.ts",
+    "check:questions": "tsx scripts/check-questions.ts"
   },
   "dependencies": {
     "mermaid": "^11.4.1",

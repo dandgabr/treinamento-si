@@ -1,0 +1,679 @@
+[
+  {
+    "id": "14-dados-privacidade#TEMA-01#E01",
+    "ref": "14-dados-privacidade#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — texto atualizado, arts. 1º a 5º e 12",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Privacidade, dado pessoal e o que a distingue de segurança: um colega afirma que \"Dado anonimizado e dado pseudonimizado são a mesma coisa\". Qual é a correção?",
+    "alternativas": [
+      "Sem nome, sem dado pessoal",
+      "Criptografia encerra a obrigação de privacidade",
+      "Dado público não tem regime",
+      "O art. 13, §4º, mantém a informação adicional separada e exige ambiente controlado e seguro"
+    ],
+    "correta": 3,
+    "justificativa": "O anonimizado sai do regime; o pseudonimizado continua dado pessoal, porque a informação adicional existe"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-01#E02",
+    "ref": "14-dados-privacidade#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — texto atualizado, arts. 1º a 5º e 12",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Privacidade, dado pessoal e o que a distingue de segurança: um colega afirma que \"Sem nome, sem dado pessoal\". Qual é a correção?",
+    "alternativas": [
+      "Teste a identificabilidade pelos meios disponíveis, não pela presença de nome",
+      "Dado anonimizado e dado pseudonimizado são a mesma coisa",
+      "Criptografia encerra a obrigação de privacidade",
+      "Dado público não tem regime"
+    ],
+    "correta": 0,
+    "justificativa": "Informação identificável basta, e o art. 12, §2º, alcança o conjunto usado para perfil comportamental de pessoa identificada"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-01#E03",
+    "ref": "14-dados-privacidade#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — texto atualizado, arts. 1º a 5º e 12",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Privacidade, dado pessoal e o que a distingue de segurança: um colega afirma que \"Criptografia encerra a obrigação de privacidade\". Qual é a correção?",
+    "alternativas": [
+      "Dado anonimizado e dado pseudonimizado são a mesma coisa",
+      "A cifra é controle de segurança; ela não substitui a base legal",
+      "Sem nome, sem dado pessoal",
+      "Dado público não tem regime"
+    ],
+    "correta": 1,
+    "justificativa": "Confidencialidade protege contra acesso indevido; finalidade, necessidade e prazo continuam em aberto"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-01#E04",
+    "ref": "14-dados-privacidade#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — texto atualizado, arts. 1º a 5º e 12",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Privacidade, dado pessoal e o que a distingue de segurança: um colega afirma que \"Dado público não tem regime\". Qual é a correção?",
+    "alternativas": [
+      "Dado anonimizado e dado pseudonimizado são a mesma coisa",
+      "Sem nome, sem dado pessoal",
+      "Dado tornado manifestamente público dispensa consentimento, mas preserva princípios e direitos",
+      "Criptografia encerra a obrigação de privacidade"
+    ],
+    "correta": 2,
+    "justificativa": "O art. 7º, §3º, manda considerar finalidade, boa-fé e interesse público que justificaram a disponibilização"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-01#E05",
+    "ref": "14-dados-privacidade#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — texto atualizado, arts. 1º a 5º e 12",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Privacidade, dado pessoal e o que a distingue de segurança: um colega afirma que \"O fornecedor é responsável pelo dado do cliente\". Qual é a correção?",
+    "alternativas": [
+      "Dado anonimizado e dado pseudonimizado são a mesma coisa",
+      "Sem nome, sem dado pessoal",
+      "Criptografia encerra a obrigação de privacidade",
+      "Papel se define por quem decide, não por quem hospeda"
+    ],
+    "correta": 3,
+    "justificativa": "O fornecedor normalmente é operador e segue instrução; quem decide finalidade e prazo é o controlador"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-02#E01",
+    "ref": "14-dados-privacidade#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"O catálogo de dados do time de engenharia serve como inventário\". Qual é a correção?",
+    "alternativas": [
+      "O inventário é por processo de negócio, com as colunas que a lei e a fiscalização pedem",
+      "O inventário é um projeto com data de término",
+      "Marcar sensível é tarefa do jurídico",
+      "Registro das operações e relatório de impacto são o mesmo documento"
+    ],
+    "correta": 0,
+    "justificativa": "Ele descreve tabelas e colunas, sem hipótese legal, sem prazo e sem dono de negócio"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-02#E02",
+    "ref": "14-dados-privacidade#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"O inventário é um projeto com data de término\". Qual é a correção?",
+    "alternativas": [
+      "O catálogo de dados do time de engenharia serve como inventário",
+      "O inventário é um processo com dono, revisão periódica e porta de entrada no ciclo de mudança",
+      "Marcar sensível é tarefa do jurídico",
+      "Registro das operações e relatório de impacto são o mesmo documento"
+    ],
+    "correta": 1,
+    "justificativa": "Bases nascem em todo projeto e todo processo novo cria tratamento novo"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-02#E03",
+    "ref": "14-dados-privacidade#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"Marcar sensível é tarefa do jurídico\". Qual é a correção?",
+    "alternativas": [
+      "O catálogo de dados do time de engenharia serve como inventário",
+      "O inventário é um projeto com data de término",
+      "A regra de classificação vem do jurídico; a aplicação campo a campo é do dono do processo",
+      "Registro das operações e relatório de impacto são o mesmo documento"
+    ],
+    "correta": 2,
+    "justificativa": "Quem conhece o significado do código da coluna é quem opera o processo"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-02#E04",
+    "ref": "14-dados-privacidade#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"Registro das operações e relatório de impacto são o mesmo documento\". Qual é a correção?",
+    "alternativas": [
+      "O catálogo de dados do time de engenharia serve como inventário",
+      "O inventário é um projeto com data de término",
+      "Marcar sensível é tarefa do jurídico",
+      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio"
+    ],
+    "correta": 3,
+    "justificativa": "Um descreve o que se faz; o outro avalia risco e mitigação"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-02#E05",
+    "ref": "14-dados-privacidade#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"Guardar tudo é mais seguro que descartar\". Qual é a correção?",
+    "alternativas": [
+      "Prazo definido e eliminação comprovada reduzem a exposição",
+      "O catálogo de dados do time de engenharia serve como inventário",
+      "O inventário é um projeto com data de término",
+      "Marcar sensível é tarefa do jurídico"
+    ],
+    "correta": 0,
+    "justificativa": "Reter além do prazo mantém o risco e amplia o escopo de qualquer incidente futuro"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-02#R01",
+    "ref": "14-dados-privacidade#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que o art. 37 da LGPD exige de controlador e operador, e em que hipótese a menção é destacada?",
+    "alternativas": [
+      "Porque o processo tem dono, contrato, obrigação legal e ponto de partida e de término do tratamento; o sistema é apenas um dos lugares onde o dado passa.",
+      "Exige manter registro das operações de tratamento de dados pessoais que realizarem, especialmente quando o tratamento for baseado em legítimo interesse.",
+      "O registro das operações de tratamento dos dados pessoais afetados, conforme o art. 8º do Regulamento de Comunicação de Incidente de Segurança."
+    ],
+    "correta": 1,
+    "justificativa": "O catálogo de dados do time de engenharia serve como inventário"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-02#R03",
+    "ref": "14-dados-privacidade#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que o inventário se organiza por processo de negócio e não por sistema?",
+    "alternativas": [
+      "Porque o processo tem dono, contrato, obrigação legal e ponto de partida e de término do tratamento; o sistema é apenas um dos lugares onde o dado passa.",
+      "Exige manter registro das operações de tratamento de dados pessoais que realizarem, especialmente quando o tratamento for baseado em legítimo interesse.",
+      "O registro das operações de tratamento dos dados pessoais afetados, conforme o art. 8º do Regulamento de Comunicação de Incidente de Segurança."
+    ],
+    "correta": 0,
+    "justificativa": "O catálogo de dados do time de engenharia serve como inventário"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-02#R04",
+    "ref": "14-dados-privacidade#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Que documento da ANPD pode ser exigido durante a apuração de um incidente, além do relatório de impacto?",
+    "alternativas": [
+      "Exige manter registro das operações de tratamento de dados pessoais que realizarem, especialmente quando o tratamento for baseado em legítimo interesse.",
+      "O registro das operações de tratamento dos dados pessoais afetados, conforme o art. 8º do Regulamento de Comunicação de Incidente de Segurança.",
+      "Porque o processo tem dono, contrato, obrigação legal e ponto de partida e de término do tratamento; o sistema é apenas um dos lugares onde o dado passa."
+    ],
+    "correta": 1,
+    "justificativa": "O catálogo de dados do time de engenharia serve como inventário"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-03#E01",
+    "ref": "14-dados-privacidade#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 12, 15, 16, 18, 19, 40, 46, 47 e 49",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Manter o dado não incomoda ninguém\". Qual é a correção?",
+    "alternativas": [
+      "Backup é exceção permanente",
+      "Prazo definido e eliminação comprovada reduzem exposição e custo",
+      "Pseudonimizar resolve a retenção",
+      "O prazo de retenção é decisão da TI"
+    ],
+    "correta": 1,
+    "justificativa": "Reter além do prazo mantém o risco aberto e amplia o escopo de incidente e de pedido de titular"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-03#E02",
+    "ref": "14-dados-privacidade#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 12, 15, 16, 18, 19, 40, 46, 47 e 49",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Backup é exceção permanente\". Qual é a correção?",
+    "alternativas": [
+      "Manter o dado não incomoda ninguém",
+      "Pseudonimizar resolve a retenção",
+      "Documente o ciclo de rotação com data de expiração ou faça expurgo direcionado",
+      "O prazo de retenção é decisão da TI"
+    ],
+    "correta": 2,
+    "justificativa": "Backup com dado que já devia ter sido eliminado continua sendo tratamento ativo, sob o art. 47"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-03#E03",
+    "ref": "14-dados-privacidade#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 12, 15, 16, 18, 19, 40, 46, 47 e 49",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Pseudonimizar resolve a retenção\". Qual é a correção?",
+    "alternativas": [
+      "Manter o dado não incomoda ninguém",
+      "Backup é exceção permanente",
+      "O prazo de retenção é decisão da TI",
+      "Para sair do regime, a anonimização precisa resistir a reversão por esforços razoáveis"
+    ],
+    "correta": 3,
+    "justificativa": "Dado pseudonimizado continua sendo dado pessoal, pelo art. 13, §4º"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-03#E04",
+    "ref": "14-dados-privacidade#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 12, 15, 16, 18, 19, 40, 46, 47 e 49",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"O prazo de retenção é decisão da TI\". Qual é a correção?",
+    "alternativas": [
+      "Quem assina a tabela é o dono do processo, com validação jurídica",
+      "Manter o dado não incomoda ninguém",
+      "Backup é exceção permanente",
+      "Pseudonimizar resolve a retenção"
+    ],
+    "correta": 0,
+    "justificativa": "A base da conservação é obrigação legal ou decisão de negócio, não parâmetro de armazenamento"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-03#E05",
+    "ref": "14-dados-privacidade#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 12, 15, 16, 18, 19, 40, 46, 47 e 49",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Eliminar dado de saúde atende qualquer pedido de titular\". Qual é a correção?",
+    "alternativas": [
+      "Manter o dado não incomoda ninguém",
+      "A resposta ao titular informa o que foi eliminado e a obrigação que sustenta o que permanece",
+      "Backup é exceção permanente",
+      "Pseudonimizar resolve a retenção"
+    ],
+    "correta": 1,
+    "justificativa": "O art. 18, inciso VI, ressalva expressamente as hipóteses do art. 16"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-04#E01",
+    "ref": "14-dados-privacidade#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 6º a 22, 42 a 49 e 52",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Consentimento é a base legal mais segura\". Qual é a correção?",
+    "alternativas": [
+      "Legítimo interesse serve para qualquer uso comercial",
+      "O prazo de três dias úteis corre da conclusão da apuração",
+      "Prefira a hipótese que descreve a obrigação real; use consentimento quando o uso depende da vontade do titular",
+      "Comunicar ao titular é opcional quando o risco é baixo"
+    ],
+    "correta": 2,
+    "justificativa": "É uma hipótese entre dez, com ônus da prova no controlador, revogação a qualquer momento e nulidade de autorização genérica"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-04#E02",
+    "ref": "14-dados-privacidade#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 6º a 22, 42 a 49 e 52",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Legítimo interesse serve para qualquer uso comercial\". Qual é a correção?",
+    "alternativas": [
+      "Consentimento é a base legal mais segura",
+      "O prazo de três dias úteis corre da conclusão da apuração",
+      "Comunicar ao titular é opcional quando o risco é baixo",
+      "Documente o teste e o resultado, e não use legítimo interesse para dado sensível"
+    ],
+    "correta": 3,
+    "justificativa": "O art. 10 exige finalidade legítima avaliada em situação concreta, dados estritamente necessários e transparência, e cede se prevalecerem direitos e liberdades do titular"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-04#E03",
+    "ref": "14-dados-privacidade#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 6º a 22, 42 a 49 e 52",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"O prazo de três dias úteis corre da conclusão da apuração\". Qual é a correção?",
+    "alternativas": [
+      "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois",
+      "Consentimento é a base legal mais segura",
+      "Legítimo interesse serve para qualquer uso comercial",
+      "Comunicar ao titular é opcional quando o risco é baixo"
+    ],
+    "correta": 0,
+    "justificativa": "O regulamento conta o prazo do conhecimento de que o incidente afetou dados pessoais"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-04#E04",
+    "ref": "14-dados-privacidade#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 6º a 22, 42 a 49 e 52",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Comunicar ao titular é opcional quando o risco é baixo\". Qual é a correção?",
+    "alternativas": [
+      "Consentimento é a base legal mais segura",
+      "Decida com critério escrito; se decidir não comunicar, registre o fundamento e a evidência",
+      "Legítimo interesse serve para qualquer uso comercial",
+      "O prazo de três dias úteis corre da conclusão da apuração"
+    ],
+    "correta": 1,
+    "justificativa": "A obrigação do art. 48 abrange ANPD e titular na mesma frase, na hipótese de risco ou dano relevante"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-04#E05",
+    "ref": "14-dados-privacidade#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 6º a 22, 42 a 49 e 52",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Anonimizar depois do incidente resolve\". Qual é a correção?",
+    "alternativas": [
+      "Consentimento é a base legal mais segura",
+      "Legítimo interesse serve para qualquer uso comercial",
+      "Mantenha o dado ininteligível desde a origem, com cifra e chave segregada",
+      "O prazo de três dias úteis corre da conclusão da apuração"
+    ],
+    "correta": 2,
+    "justificativa": "O juízo de gravidade olha o que existia e as medidas adotadas; a anonimização posterior não reescreve o passado"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-04#E06",
+    "ref": "14-dados-privacidade#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 6º a 22, 42 a 49 e 52",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Dado de saúde em planilha de RH é problema do RH\". Qual é a correção?",
+    "alternativas": [
+      "Consentimento é a base legal mais segura",
+      "Legítimo interesse serve para qualquer uso comercial",
+      "O prazo de três dias úteis corre da conclusão da apuração",
+      "A classificação do dado sensível define controle em todos os pontos do ciclo"
+    ],
+    "correta": 3,
+    "justificativa": "O tratamento alcança também quem armazena e transmite"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-05#E01",
+    "ref": "14-dados-privacidade#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Regulamento (UE) 2016/679 — art. 44.º a 46.º e 49.º e art. 83.º, n.º 5",
+      "url": "https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:32016R0679",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Dado hospedado no Brasil não é transferência internacional\". Qual é a correção?",
+    "alternativas": [
+      "Cifra resolve a transferência",
+      "Vale a cláusula europeia para tudo",
+      "Derrogação por consentimento serve para operação de rotina",
+      "Mapeie armazenamento, acesso humano e custódia de chave separadamente"
+    ],
+    "correta": 3,
+    "justificativa": "Acesso remoto por suporte no exterior é tratamento no exterior e conta como transferência"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-05#E02",
+    "ref": "14-dados-privacidade#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Regulamento (UE) 2016/679 — art. 44.º a 46.º e 49.º e art. 83.º, n.º 5",
+      "url": "https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:32016R0679",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Cifra resolve a transferência\". Qual é a correção?",
+    "alternativas": [
+      "Instrumento contratual e custódia de chave são decisões distintas e complementares",
+      "Dado hospedado no Brasil não é transferência internacional",
+      "Vale a cláusula europeia para tudo",
+      "Derrogação por consentimento serve para operação de rotina"
+    ],
+    "correta": 0,
+    "justificativa": "Cifra reduz risco e ajuda a demonstrar ininteligibilidade, mas não substitui o instrumento legal"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-05#E03",
+    "ref": "14-dados-privacidade#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Regulamento (UE) 2016/679 — art. 44.º a 46.º e 49.º e art. 83.º, n.º 5",
+      "url": "https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:32016R0679",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Vale a cláusula europeia para tudo\". Qual é a correção?",
+    "alternativas": [
+      "Dado hospedado no Brasil não é transferência internacional",
+      "Cada regime exige seu instrumento; um contrato pode ter lacuna em um deles",
+      "Cifra resolve a transferência",
+      "Derrogação por consentimento serve para operação de rotina"
+    ],
+    "correta": 1,
+    "justificativa": "A ANPD define o conteúdo das cláusulas-padrão no regime brasileiro"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-05#E04",
+    "ref": "14-dados-privacidade#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Regulamento (UE) 2016/679 — art. 44.º a 46.º e 49.º e art. 83.º, n.º 5",
+      "url": "https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:32016R0679",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Derrogação por consentimento serve para operação de rotina\". Qual é a correção?",
+    "alternativas": [
+      "Dado hospedado no Brasil não é transferência internacional",
+      "Cifra resolve a transferência",
+      "Fluxo recorrente pede adequação ou garantias adequadas",
+      "Vale a cláusula europeia para tudo"
+    ],
+    "correta": 2,
+    "justificativa": "O art. 49.º trata de situações específicas, não de fluxo contínuo de dados"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-05#E05",
+    "ref": "14-dados-privacidade#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Regulamento (UE) 2016/679 — art. 44.º a 46.º e 49.º e art. 83.º, n.º 5",
+      "url": "https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:32016R0679",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Suboperador é problema do fornecedor\". Qual é a correção?",
+    "alternativas": [
+      "Dado hospedado no Brasil não é transferência internacional",
+      "Cifra resolve a transferência",
+      "Vale a cláusula europeia para tudo",
+      "Exija lista de suboperadores, país e instrumento aplicável a cada um"
+    ],
+    "correta": 3,
+    "justificativa": "O controlador responde pelo conjunto, e o art. 46.º alcança as transferências ulteriores"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-06#E01",
+    "ref": "14-dados-privacidade#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 41, 50, 51, 52 e 55-A a 55-L",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Nomear o encarregado cumpre a obrigação\". Qual é a correção?",
+    "alternativas": [
+      "Publique o contato em página de livre acesso e registre o fluxo de atendimento",
+      "Programa de privacidade é documento de política",
+      "Programa paralelo ao de segurança é sinal de maturidade",
+      "Relatório de impacto é obrigatório para todo tratamento"
+    ],
+    "correta": 0,
+    "justificativa": "A lei exige também divulgar publicamente identidade e contato, e o programa exige canal e atribuições em operação"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-06#E02",
+    "ref": "14-dados-privacidade#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 41, 50, 51, 52 e 55-A a 55-L",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Programa de privacidade é documento de política\". Qual é a correção?",
+    "alternativas": [
+      "Nomear o encarregado cumpre a obrigação",
+      "O programa é um conjunto de processos com dono, ata e evidência de execução",
+      "Programa paralelo ao de segurança é sinal de maturidade",
+      "Relatório de impacto é obrigatório para todo tratamento"
+    ],
+    "correta": 1,
+    "justificativa": "O art. 50, §2º, pede processo, supervisão e planos de resposta, com revisão contínua"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-06#E03",
+    "ref": "14-dados-privacidade#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 41, 50, 51, 52 e 55-A a 55-L",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Programa paralelo ao de segurança é sinal de maturidade\". Qual é a correção?",
+    "alternativas": [
+      "Nomear o encarregado cumpre a obrigação",
+      "Programa de privacidade é documento de política",
+      "Integre ao que já existe e acrescente o que é específico de privacidade",
+      "Relatório de impacto é obrigatório para todo tratamento"
+    ],
+    "correta": 2,
+    "justificativa": "Duplica avaliação de risco e resposta a incidente, e produz duas versões da verdade"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-06#E04",
+    "ref": "14-dados-privacidade#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 41, 50, 51, 52 e 55-A a 55-L",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Relatório de impacto é obrigatório para todo tratamento\". Qual é a correção?",
+    "alternativas": [
+      "Nomear o encarregado cumpre a obrigação",
+      "Programa de privacidade é documento de política",
+      "Programa paralelo ao de segurança é sinal de maturidade",
+      "Priorize tratamento de alto risco e registre o critério de priorização"
+    ],
+    "correta": 3,
+    "justificativa": "A lei prevê o relatório e a competência da ANPD de exigi-lo, com foco em alto risco"
+  },
+  {
+    "id": "14-dados-privacidade#TEMA-06#E05",
+    "ref": "14-dados-privacidade#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 41, 50, 51, 52 e 55-A a 55-L",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Responder ao titular é trabalho do jurídico\". Qual é a correção?",
+    "alternativas": [
+      "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa",
+      "Nomear o encarregado cumpre a obrigação",
+      "Programa de privacidade é documento de política",
+      "Programa paralelo ao de segurança é sinal de maturidade"
+    ],
+    "correta": 0,
+    "justificativa": "O art. 41, §2º, coloca a recepção de reclamações do titular no encarregado"
+  }
+]

@@ -1,0 +1,1016 @@
+[
+  {
+    "id": "03-arquitetura-engenharia#TEMA-01#E01",
+    "ref": "03-arquitetura-engenharia#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Saltzer e Schroeder — The Protection of Information in Computer Systems, 1975",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Princípio é discurso de arquiteto, configuração é trabalho real\". Qual é a correção?",
+    "alternativas": [
+      "Arquitetura é o desenho grande, configuração é o detalhe",
+      "Escreva o princípio como requisito verificável e como formato de exceção",
+      "Duas camadas iguais formam defesa em profundidade",
+      "Mediação completa significa ter autenticação"
+    ],
+    "correta": 1,
+    "justificativa": "Princípio é critério de decisão e só existe quando chega ao teste e à exceção"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-01#E02",
+    "ref": "03-arquitetura-engenharia#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Saltzer e Schroeder — The Protection of Information in Computer Systems, 1975",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Arquitetura é o desenho grande, configuração é o detalhe\". Qual é a correção?",
+    "alternativas": [
+      "Princípio é discurso de arquiteto, configuração é trabalho real",
+      "Duas camadas iguais formam defesa em profundidade",
+      "Classifique pela reversão, não pelo tamanho",
+      "Mediação completa significa ter autenticação"
+    ],
+    "correta": 2,
+    "justificativa": "O critério é custo de reversão, e existem decisões pequenas irreversíveis"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-01#E03",
+    "ref": "03-arquitetura-engenharia#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Saltzer e Schroeder — The Protection of Information in Computer Systems, 1975",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Duas camadas iguais formam defesa em profundidade\". Qual é a correção?",
+    "alternativas": [
+      "Princípio é discurso de arquiteto, configuração é trabalho real",
+      "Arquitetura é o desenho grande, configuração é o detalhe",
+      "Mediação completa significa ter autenticação",
+      "Cada camada precisa exigir do atacante uma capacidade diferente"
+    ],
+    "correta": 3,
+    "justificativa": "A definição registrada pelo NIST fala de barreiras variáveis entre camadas"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-01#E04",
+    "ref": "03-arquitetura-engenharia#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Saltzer e Schroeder — The Protection of Information in Computer Systems, 1975",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Mediação completa significa ter autenticação\". Qual é a correção?",
+    "alternativas": [
+      "Procure o caminho que contorna o serviço, não o que passa por ele",
+      "Princípio é discurso de arquiteto, configuração é trabalho real",
+      "Arquitetura é o desenho grande, configuração é o detalhe",
+      "Duas camadas iguais formam defesa em profundidade"
+    ],
+    "correta": 0,
+    "justificativa": "Mediação completa exige que todo caminho passe pelo ponto de verificação, inclusive caminhos administrativos"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-01#E05",
+    "ref": "03-arquitetura-engenharia#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Saltzer e Schroeder — The Protection of Information in Computer Systems, 1975",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Menor privilégio vale só para pessoas\". Qual é a correção?",
+    "alternativas": [
+      "Princípio é discurso de arquiteto, configuração é trabalho real",
+      "Aplique a scripts, integrações e contas de serviço, que costumam ter mais permissão",
+      "Arquitetura é o desenho grande, configuração é o detalhe",
+      "Duas camadas iguais formam defesa em profundidade"
+    ],
+    "correta": 1,
+    "justificativa": "A definição alcança entidades, incluindo processos que agem em nome de usuários"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-01#E06",
+    "ref": "03-arquitetura-engenharia#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "Saltzer e Schroeder — The Protection of Information in Computer Systems, 1975",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Exceção aprovada é falha de governança\". Qual é a correção?",
+    "alternativas": [
+      "Princípio é discurso de arquiteto, configuração é trabalho real",
+      "Arquitetura é o desenho grande, configuração é o detalhe",
+      "Padronize o formato da exceção em vez de proibi-la",
+      "Duas camadas iguais formam defesa em profundidade"
+    ],
+    "correta": 2,
+    "justificativa": "Exceção é parte normal da operação; o problema é exceção sem dono e sem prazo"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-01#R03",
+    "ref": "03-arquitetura-engenharia#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Saltzer e Schroeder — The Protection of Information in Computer Systems, 1975",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é o critério prático que separa decisão de arquitetura de ajuste de configuração?",
+    "alternativas": [
+      "Porque barreiras de mesma natureza são derrubadas pela mesma técnica. Variedade, e não quantidade, é o que obriga o adversário a usar caminhos e capacidades diferentes.",
+      "A decisão tomada, o princípio que a sustenta, a proteção que se aceitou sacrificar e o nome de quem aprovou. Sem a terceira e a quarta colunas, o registro não permite reconstruir a troca nem cobrar autoria.",
+      "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é."
+    ],
+    "correta": 2,
+    "justificativa": "Princípio é discurso de arquiteto, configuração é trabalho real"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-01#R04",
+    "ref": "03-arquitetura-engenharia#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Saltzer e Schroeder — The Protection of Information in Computer Systems, 1975",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que o vocabulário da definição de defesa em profundidade usa \"barreiras variáveis\"?",
+    "alternativas": [
+      "Porque barreiras de mesma natureza são derrubadas pela mesma técnica. Variedade, e não quantidade, é o que obriga o adversário a usar caminhos e capacidades diferentes.",
+      "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é.",
+      "A decisão tomada, o princípio que a sustenta, a proteção que se aceitou sacrificar e o nome de quem aprovou. Sem a terceira e a quarta colunas, o registro não permite reconstruir a troca nem cobrar autoria."
+    ],
+    "correta": 0,
+    "justificativa": "Princípio é discurso de arquiteto, configuração é trabalho real"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-01#R05",
+    "ref": "03-arquitetura-engenharia#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Saltzer e Schroeder — The Protection of Information in Computer Systems, 1975",
+      "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que um registro de decisão de arquitetura precisa conter para sobreviver à troca de gestor?",
+    "alternativas": [
+      "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é.",
+      "A decisão tomada, o princípio que a sustenta, a proteção que se aceitou sacrificar e o nome de quem aprovou. Sem a terceira e a quarta colunas, o registro não permite reconstruir a troca nem cobrar autoria.",
+      "Porque barreiras de mesma natureza são derrubadas pela mesma técnica. Variedade, e não quantidade, é o que obriga o adversário a usar caminhos e capacidades diferentes."
+    ],
+    "correta": 1,
+    "justificativa": "Princípio é discurso de arquiteto, configuração é trabalho real"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-02#E01",
+    "ref": "03-arquitetura-engenharia#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelagem de ameaças é uma reunião\". Qual é a correção?",
+    "alternativas": [
+      "Sem atacante identificado não há ameaça relevante",
+      "A matriz de probabilidade e impacto resolve a prioridade",
+      "Produza diagrama, lista de ameaças, respostas e data de revisão",
+      "Mitigação anotada é mitigação feita"
+    ],
+    "correta": 2,
+    "justificativa": "Reunião não deixa artefato mantido, e o sistema muda depois dela"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-02#E02",
+    "ref": "03-arquitetura-engenharia#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Sem atacante identificado não há ameaça relevante\". Qual é a correção?",
+    "alternativas": [
+      "Modelagem de ameaças é uma reunião",
+      "A matriz de probabilidade e impacto resolve a prioridade",
+      "Mitigação anotada é mitigação feita",
+      "Percorra as categorias por elemento e por limite de confiança"
+    ],
+    "correta": 3,
+    "justificativa": "As categorias do STRIDE descrevem classes de falha, e várias se aplicam sem adversário dedicado"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-02#E03",
+    "ref": "03-arquitetura-engenharia#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"A matriz de probabilidade e impacto resolve a prioridade\". Qual é a correção?",
+    "alternativas": [
+      "Ordene por exposição, alcance e esforço de correção",
+      "Modelagem de ameaças é uma reunião",
+      "Sem atacante identificado não há ameaça relevante",
+      "Mitigação anotada é mitigação feita"
+    ],
+    "correta": 0,
+    "justificativa": "Os dois fatores são difíceis de calcular e ignoram o custo de corrigir"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-02#E04",
+    "ref": "03-arquitetura-engenharia#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Mitigação anotada é mitigação feita\". Qual é a correção?",
+    "alternativas": [
+      "Modelagem de ameaças é uma reunião",
+      "Escreva o requisito e o critério de teste que o verifica",
+      "Sem atacante identificado não há ameaça relevante",
+      "A matriz de probabilidade e impacto resolve a prioridade"
+    ],
+    "correta": 1,
+    "justificativa": "Mitigação precisa virar requisito testável, anexado à especificação"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-02#E05",
+    "ref": "03-arquitetura-engenharia#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelar uma vez e arquivar\". Qual é a correção?",
+    "alternativas": [
+      "Modelagem de ameaças é uma reunião",
+      "Sem atacante identificado não há ameaça relevante",
+      "Revisite na mudança de arquitetura, na entrada de novo dado e no incidente",
+      "A matriz de probabilidade e impacto resolve a prioridade"
+    ],
+    "correta": 2,
+    "justificativa": "O sistema muda e o modelo desatualizado dá falsa segurança"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-02#E06",
+    "ref": "03-arquitetura-engenharia#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelar só no fim do projeto\". Qual é a correção?",
+    "alternativas": [
+      "Modelagem de ameaças é uma reunião",
+      "Sem atacante identificado não há ameaça relevante",
+      "A matriz de probabilidade e impacto resolve a prioridade",
+      "Modele no desenho e refaça a cada mudança relevante"
+    ],
+    "correta": 3,
+    "justificativa": "Sobra pouco espaço de projeto para responder às ameaças encontradas"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#E01",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Ter VLAN é ter segmentação\". Qual é a correção?",
+    "alternativas": [
+      "Rede interna é zona de confiança",
+      "Segmentar por identidade dispensa segmentar por rede",
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente",
+      "Escreva a matriz de fluxo e configure nela a negação por padrão"
+    ],
+    "correta": 3,
+    "justificativa": "VLAN separa tráfego e não restringe fluxo entre uma VLAN e outra sem regra explícita"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#E02",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Rede interna é zona de confiança\". Qual é a correção?",
+    "alternativas": [
+      "Trate a localização como contenção, não como autorização",
+      "Ter VLAN é ter segmentação",
+      "Segmentar por identidade dispensa segmentar por rede",
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente"
+    ],
+    "correta": 0,
+    "justificativa": "O SP 800-207 afirma que a localização não concede confiança implícita"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#E03",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Segmentar por identidade dispensa segmentar por rede\". Qual é a correção?",
+    "alternativas": [
+      "Ter VLAN é ter segmentação",
+      "Combine as duas: caminho negado é melhor que ator verificado",
+      "Rede interna é zona de confiança",
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente"
+    ],
+    "correta": 1,
+    "justificativa": "Rede restringe caminho; identidade restringe ator, e as duas atuam em camadas diferentes"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#E04",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Exceção de acesso remoto de fornecedor é inevitável e permanente\". Qual é a correção?",
+    "alternativas": [
+      "Ter VLAN é ter segmentação",
+      "Rede interna é zona de confiança",
+      "Dê prazo, dono e a regra que a substitui",
+      "Segmentar por identidade dispensa segmentar por rede"
+    ],
+    "correta": 2,
+    "justificativa": "Exceção permanente reintroduz o caminho que a zona fechou"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#E05",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Matriz de fluxo é documento de rede\". Qual é a correção?",
+    "alternativas": [
+      "Ter VLAN é ter segmentação",
+      "Rede interna é zona de confiança",
+      "Segmentar por identidade dispensa segmentar por rede",
+      "Revise a matriz a cada mudança relevante e registre quem aprovou"
+    ],
+    "correta": 3,
+    "justificativa": "Ela é documento de decisão de arquitetura, e o dono é quem responde pelo risco"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#E06",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Microssegmentação exige trocar toda a rede\". Qual é a correção?",
+    "alternativas": [
+      "Comece pelas cargas de trabalho que mais contêm dado sensível",
+      "Ter VLAN é ter segmentação",
+      "Rede interna é zona de confiança",
+      "Segmentar por identidade dispensa segmentar por rede"
+    ],
+    "correta": 0,
+    "justificativa": "Microssegmentação é granularidade de regra, não substituição de infraestrutura"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#R03",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é o critério para agrupar ativos em uma zona de confiança?",
+    "alternativas": [
+      "Listar zonas a partir de dados e funções, montar a matriz de fluxo com negação por padrão, declarar o que cada zona não permite e tratar as exceções com prazo e dono.",
+      "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos.",
+      "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
+      "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo."
+    ],
+    "correta": 2,
+    "justificativa": "Ter VLAN é ter segmentação"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#R04",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são os quatro passos do desenho de zonas apresentados no tema, na ordem?",
+    "alternativas": [
+      "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
+      "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos.",
+      "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo.",
+      "Listar zonas a partir de dados e funções, montar a matriz de fluxo com negação por padrão, declarar o que cada zona não permite e tratar as exceções com prazo e dono."
+    ],
+    "correta": 3,
+    "justificativa": "Ter VLAN é ter segmentação"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#R05",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que a zona de gestão é a que mais rende quando é separada?",
+    "alternativas": [
+      "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos.",
+      "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
+      "Listar zonas a partir de dados e funções, montar a matriz de fluxo com negação por padrão, declarar o que cada zona não permite e tratar as exceções com prazo e dono.",
+      "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo."
+    ],
+    "correta": 0,
+    "justificativa": "Ter VLAN é ter segmentação"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-03#R06",
+    "ref": "03-arquitetura-engenharia#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Lateral Movement, Tactic TA0008",
+      "url": "https://attack.mitre.org/tactics/TA0008/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Que campos mínimos uma exceção precisa ter para não virar arquitetura permanente?",
+    "alternativas": [
+      "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
+      "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo.",
+      "Listar zonas a partir de dados e funções, montar a matriz de fluxo com negação por padrão, declarar o que cada zona não permite e tratar as exceções com prazo e dono.",
+      "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos."
+    ],
+    "correta": 1,
+    "justificativa": "Ter VLAN é ter segmentação"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-04#E01",
+    "ref": "03-arquitetura-engenharia#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-207 — Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Zero trust é produto\". Qual é a correção?",
+    "alternativas": [
+      "Verifique se a proposta descreve decisão por sessão e por recurso",
+      "Ter VPN e segundo fator é ser zero trust",
+      "Zero trust dispensa segmentação",
+      "Defesa em profundidade é ter dois produtos de segurança"
+    ],
+    "correta": 0,
+    "justificativa": "É um conjunto de princípios de desenho, e o resumo do SP 800-207 fala de paradigmas, não de tecnologia"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-04#E02",
+    "ref": "03-arquitetura-engenharia#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-207 — Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Ter VPN e segundo fator é ser zero trust\". Qual é a correção?",
+    "alternativas": [
+      "Zero trust é produto",
+      "Avalie cada recurso, não apenas a entrada na rede",
+      "Zero trust dispensa segmentação",
+      "Defesa em profundidade é ter dois produtos de segurança"
+    ],
+    "correta": 1,
+    "justificativa": "Se depois da entrada o acesso continua autorizado por localização, a confiança implícita permaneceu"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-04#E03",
+    "ref": "03-arquitetura-engenharia#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-207 — Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Zero trust dispensa segmentação\". Qual é a correção?",
+    "alternativas": [
+      "Zero trust é produto",
+      "Ter VPN e segundo fator é ser zero trust",
+      "Combine decisão por identidade com caminho restrito",
+      "Defesa em profundidade é ter dois produtos de segurança"
+    ],
+    "correta": 2,
+    "justificativa": "O próprio SP 800-207 fala de proteger recursos e não segmentos, e contenção continua sendo camada separada"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-04#E04",
+    "ref": "03-arquitetura-engenharia#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-207 — Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Defesa em profundidade é ter dois produtos de segurança\". Qual é a correção?",
+    "alternativas": [
+      "Zero trust é produto",
+      "Ter VPN e segundo fator é ser zero trust",
+      "Zero trust dispensa segmentação",
+      "Cada barreira precisa exigir do atacante algo diferente"
+    ],
+    "correta": 3,
+    "justificativa": "A definição fala de barreiras variáveis entre camadas e dimensões"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-04#E05",
+    "ref": "03-arquitetura-engenharia#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-207 — Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Detecção é acessório depois da prevenção\". Qual é a correção?",
+    "alternativas": [
+      "Trate prevenção e detecção como camadas de naturezas distintas",
+      "Zero trust é produto",
+      "Ter VPN e segundo fator é ser zero trust",
+      "Zero trust dispensa segmentação"
+    ],
+    "correta": 0,
+    "justificativa": "Detecção reduz o tempo de convivência com a falha e cobre o que a prevenção não pega"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-04#E06",
+    "ref": "03-arquitetura-engenharia#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-207 — Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Menor privilégio vale só para pessoas\". Qual é a correção?",
+    "alternativas": [
+      "Zero trust é produto",
+      "Aplique às contas de serviço e às identidades de carga de trabalho",
+      "Ter VPN e segundo fator é ser zero trust",
+      "Zero trust dispensa segmentação"
+    ],
+    "correta": 1,
+    "justificativa": "A definição do NIST alcança entidades, incluindo processos que agem em nome de usuários"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#E01",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Requisito não funcional é detalhe técnico do time\". Qual é a correção?",
+    "alternativas": [
+      "\"Aderente às melhores práticas\" é requisito",
+      "Escreva objeto, condição, limite e evidência, com dono nomeado",
+      "Segurança por design é revisar no fim do projeto",
+      "Todo requisito de segurança custa disponibilidade"
+    ],
+    "correta": 1,
+    "justificativa": "É a obrigação verificável que liga risco a entrega, e o dono é quem responde pelo risco"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#E02",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"\"Aderente às melhores práticas\" é requisito\". Qual é a correção?",
+    "alternativas": [
+      "Requisito não funcional é detalhe técnico do time",
+      "Segurança por design é revisar no fim do projeto",
+      "Nomeie a referência, a versão e o critério observável",
+      "Todo requisito de segurança custa disponibilidade"
+    ],
+    "correta": 2,
+    "justificativa": "Não define objeto, limite nem forma de verificação"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#E03",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Segurança por design é revisar no fim do projeto\". Qual é a correção?",
+    "alternativas": [
+      "Requisito não funcional é detalhe técnico do time",
+      "\"Aderente às melhores práticas\" é requisito",
+      "Todo requisito de segurança custa disponibilidade",
+      "Decida na etapa de desenho, com modelo de ameaças como insumo"
+    ],
+    "correta": 3,
+    "justificativa": "No fim sobram poucas decisões abertas e o custo já está contratado"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#E04",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Todo requisito de segurança custa disponibilidade\". Qual é a correção?",
+    "alternativas": [
+      "Declare o trade-off e registre quem o aprovou",
+      "Requisito não funcional é detalhe técnico do time",
+      "\"Aderente às melhores práticas\" é requisito",
+      "Segurança por design é revisar no fim do projeto"
+    ],
+    "correta": 0,
+    "justificativa": "O custo depende da escolha, e a escolha é de negócio"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#E05",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Métrica de segurança é assunto de dashboard\". Qual é a correção?",
+    "alternativas": [
+      "Requisito não funcional é detalhe técnico do time",
+      "Amarre o limite ao critério de aceite da entrega",
+      "\"Aderente às melhores práticas\" é requisito",
+      "Segurança por design é revisar no fim do projeto"
+    ],
+    "correta": 1,
+    "justificativa": "Métrica sem limite acordado não gera obrigação nem bloqueio de entrega"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#E06",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Requisito verificável exige ferramenta cara\". Qual é a correção?",
+    "alternativas": [
+      "Requisito não funcional é detalhe técnico do time",
+      "\"Aderente às melhores práticas\" é requisito",
+      "Comece pelo critério testável e depois automatize",
+      "Segurança por design é revisar no fim do projeto"
+    ],
+    "correta": 2,
+    "justificativa": "Um caso de teste escrito à mão verifica muitos requisitos"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#R01",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Descreva a diferença entre segurança construída no desenho e segurança aplicada por cima, usando o argumento de custo registrado pela OWASP.",
+    "alternativas": [
+      "Objeto, condição, limite observável e evidência com quem verifica.",
+      "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação.",
+      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
+      "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção."
+    ],
+    "correta": 2,
+    "justificativa": "Requisito não funcional é detalhe técnico do time"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#R02",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são as quatro partes de um requisito verificável?",
+    "alternativas": [
+      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
+      "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação.",
+      "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção.",
+      "Objeto, condição, limite observável e evidência com quem verifica."
+    ],
+    "correta": 3,
+    "justificativa": "Requisito não funcional é detalhe técnico do time"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#R03",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Liste as quatro famílias de requisito não funcional de segurança apresentadas no tema.",
+    "alternativas": [
+      "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação.",
+      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
+      "Objeto, condição, limite observável e evidência com quem verifica.",
+      "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção."
+    ],
+    "correta": 0,
+    "justificativa": "Requisito não funcional é detalhe técnico do time"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#R05",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é a diferença entre \"protection needs\" e \"engineering trades\" no vocabulário do SP 800-160 Rev. 1?",
+    "alternativas": [
+      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
+      "Objeto, condição, limite observável e evidência com quem verifica.",
+      "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção.",
+      "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação."
+    ],
+    "correta": 2,
+    "justificativa": "Requisito não funcional é detalhe técnico do time"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-05#R06",
+    "ref": "03-arquitetura-engenharia#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que um requisito sem evidência definida é negociado a cada reunião?",
+    "alternativas": [
+      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
+      "Objeto, condição, limite observável e evidência com quem verifica.",
+      "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação.",
+      "Porque sem evidência não há aceite nem recusa formalmente registrada, e a decisão sobre cumprir ou não volta a depender de quem argumenta melhor na reunião."
+    ],
+    "correta": 3,
+    "justificativa": "Requisito não funcional é detalhe técnico do time"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-06#E01",
+    "ref": "03-arquitetura-engenharia#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet — quarta pergunta e critério de revisão e validação",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Revisão anual é suficiente\". Qual é a correção?",
+    "alternativas": [
+      "Dívida de segurança é vulnerabilidade não corrigida",
+      "Revisão serve para achar culpa",
+      "Defina gatilhos de convocação além do calendário",
+      "Achado sem dono continua vivo"
+    ],
+    "correta": 2,
+    "justificativa": "O desenho muda entre revisões, e um ano é tempo suficiente para a exceção virar arquitetura"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-06#E02",
+    "ref": "03-arquitetura-engenharia#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet — quarta pergunta e critério de revisão e validação",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Dívida de segurança é vulnerabilidade não corrigida\". Qual é a correção?",
+    "alternativas": [
+      "Revisão anual é suficiente",
+      "Revisão serve para achar culpa",
+      "Achado sem dono continua vivo",
+      "Separe as filas e os instrumentos de medição"
+    ],
+    "correta": 3,
+    "justificativa": "O fato gerador é diferente: decisão de desenho adiada versus falha explorável hoje"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-06#E03",
+    "ref": "03-arquitetura-engenharia#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet — quarta pergunta e critério de revisão e validação",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Revisão serve para achar culpa\". Qual é a correção?",
+    "alternativas": [
+      "Publique o critério antes e avalie o desenho, não as pessoas",
+      "Revisão anual é suficiente",
+      "Dívida de segurança é vulnerabilidade não corrigida",
+      "Achado sem dono continua vivo"
+    ],
+    "correta": 0,
+    "justificativa": "Sem critério publicado, a reunião vira disputa de memória"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-06#E04",
+    "ref": "03-arquitetura-engenharia#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet — quarta pergunta e critério de revisão e validação",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Achado sem dono continua vivo\". Qual é a correção?",
+    "alternativas": [
+      "Revisão anual é suficiente",
+      "Nomeie dono, prazo e evidência de encerramento em cada linha",
+      "Dívida de segurança é vulnerabilidade não corrigida",
+      "Revisão serve para achar culpa"
+    ],
+    "correta": 1,
+    "justificativa": "Sem dono, o item não tem quem o apresente no comitê nem quem decida o prazo"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-06#E05",
+    "ref": "03-arquitetura-engenharia#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet — quarta pergunta e critério de revisão e validação",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Dívida técnica e dívida de segurança são a mesma coisa\". Qual é a correção?",
+    "alternativas": [
+      "Revisão anual é suficiente",
+      "Dívida de segurança é vulnerabilidade não corrigida",
+      "Trate a dívida de segurança como item de risco, com reporte próprio",
+      "Revisão serve para achar culpa"
+    ],
+    "correta": 2,
+    "justificativa": "A primeira afeta manutenção; a segunda afeta risco, e o custo de corrigir cresce com o alcance do desenho"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-06#E06",
+    "ref": "03-arquitetura-engenharia#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet — quarta pergunta e critério de revisão e validação",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Contar itens basta como métrica\". Qual é a correção?",
+    "alternativas": [
+      "Revisão anual é suficiente",
+      "Dívida de segurança é vulnerabilidade não corrigida",
+      "Revisão serve para achar culpa",
+      "Meça também idade do item e concentração por serviço"
+    ],
+    "correta": 3,
+    "justificativa": "Quantidade não mostra o envelhecimento nem a concentração em um sistema"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-06#R02",
+    "ref": "03-arquitetura-engenharia#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet — quarta pergunta e critério de revisão e validação",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são os quatro gatilhos de convocação de revisão apresentados no tema?",
+    "alternativas": [
+      "O que está diferente do aprovado, o risco criado, o dono, o prazo e o custo estimado. Os três primeiros campos separam dívida de opinião; os dois últimos separam dívida de intenção.",
+      "Mudança de arquitetura, entrada de novo tipo de dado ou novo fluxo, incidente com causa ligada a desenho e renovação de contrato de fornecedor relevante.",
+      "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente."
+    ],
+    "correta": 1,
+    "justificativa": "Revisão anual é suficiente"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-06#R04",
+    "ref": "03-arquitetura-engenharia#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet — quarta pergunta e critério de revisão e validação",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Descreva os cinco campos do registro de achado e o que cada par de campos separa.",
+    "alternativas": [
+      "O que está diferente do aprovado, o risco criado, o dono, o prazo e o custo estimado. Os três primeiros campos separam dívida de opinião; os dois últimos separam dívida de intenção.",
+      "Mudança de arquitetura, entrada de novo tipo de dado ou novo fluxo, incidente com causa ligada a desenho e renovação de contrato de fornecedor relevante.",
+      "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente."
+    ],
+    "correta": 0,
+    "justificativa": "Revisão anual é suficiente"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-06#R06",
+    "ref": "03-arquitetura-engenharia#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet — quarta pergunta e critério de revisão e validação",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Cite um indicador de dívida de segurança que sobrevive ao comitê e explique por que ele funciona melhor que a contagem simples.",
+    "alternativas": [
+      "Mudança de arquitetura, entrada de novo tipo de dado ou novo fluxo, incidente com causa ligada a desenho e renovação de contrato de fornecedor relevante.",
+      "O que está diferente do aprovado, o risco criado, o dono, o prazo e o custo estimado. Os três primeiros campos separam dívida de opinião; os dois últimos separam dívida de intenção.",
+      "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente."
+    ],
+    "correta": 2,
+    "justificativa": "Revisão anual é suficiente"
+  }
+]

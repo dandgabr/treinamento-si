@@ -1,0 +1,776 @@
+[
+  {
+    "id": "16-ia-seguranca#TEMA-01#E01",
+    "ref": "16-ia-seguranca#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"\"Não treinamos modelo, então não temos risco de IA\"\". Qual é a correção?",
+    "alternativas": [
+      "\"O fornecedor é responsável por tudo\"",
+      "A empresa que consome API é deployer e responde por supervisão, monitoramento e uso conforme a finalidade",
+      "Classificar pelo tipo de modelo",
+      "Inventário só com uso aprovado"
+    ],
+    "correta": 1,
+    "justificativa": "O risco de aplicação nasce do uso, do dado que entra e da saída que circula; o OWASP Top 10 for LLM Applications 2025 é escrito para quem constrói e para quem integra aplicação"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-01#E02",
+    "ref": "16-ia-seguranca#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"\"O fornecedor é responsável por tudo\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Não treinamos modelo, então não temos risco de IA\"",
+      "Classificar pelo tipo de modelo",
+      "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
+      "Inventário só com uso aprovado"
+    ],
+    "correta": 2,
+    "justificativa": "O papel na cadeia define obrigações próprias para quem coloca o sistema em uso"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-01#E03",
+    "ref": "16-ia-seguranca#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Classificar pelo tipo de modelo\". Qual é a correção?",
+    "alternativas": [
+      "\"Não treinamos modelo, então não temos risco de IA\"",
+      "\"O fornecedor é responsável por tudo\"",
+      "Inventário só com uso aprovado",
+      "Classifique pela finalidade declarada e pelo efeito sobre pessoa"
+    ],
+    "correta": 3,
+    "justificativa": "Modelo de uso geral aparece em usos de risco alto e em usos de risco mínimo, com obrigações diferentes"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-01#E04",
+    "ref": "16-ia-seguranca#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Inventário só com uso aprovado\". Qual é a correção?",
+    "alternativas": [
+      "Uso não aprovado entra na lista com situação própria e decisão registrada",
+      "\"Não treinamos modelo, então não temos risco de IA\"",
+      "\"O fornecedor é responsável por tudo\"",
+      "Classificar pelo tipo de modelo"
+    ],
+    "correta": 0,
+    "justificativa": "O risco mora justamente no que não passou pelo processo"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-01#E05",
+    "ref": "16-ia-seguranca#TEMA-01",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Tratar o OWASP Top 10 for LLM como catálogo de controles\". Qual é a correção?",
+    "alternativas": [
+      "\"Não treinamos modelo, então não temos risco de IA\"",
+      "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04",
+      "\"O fornecedor é responsável por tudo\"",
+      "Classificar pelo tipo de modelo"
+    ],
+    "correta": 1,
+    "justificativa": "É uma lista de riscos e mitigações de aplicação, sem o fechamento de um catálogo de controles de gestão"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-02#E01",
+    "ref": "16-ia-seguranca#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Prompt injection é jailbreak\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Filtro de palavras proibidas resolve\"",
+      "\"Só leio documento interno, então estou protegido\"",
+      "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo",
+      "\"O assistente herda a permissão do usuário, então é mais seguro\""
+    ],
+    "correta": 2,
+    "justificativa": "Jailbreak desvia a política do modelo; injection faz o sistema executar instrução de terceiro"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-02#E02",
+    "ref": "16-ia-seguranca#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Filtro de palavras proibidas resolve\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Prompt injection é jailbreak\"",
+      "\"Só leio documento interno, então estou protegido\"",
+      "\"O assistente herda a permissão do usuário, então é mais seguro\"",
+      "Reduza agência e confirme ação humana; filtro é camada auxiliar"
+    ],
+    "correta": 3,
+    "justificativa": "A instrução pode chegar em outro idioma, codificada, dentro de imagem ou escrita em forma indireta"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-02#E03",
+    "ref": "16-ia-seguranca#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Só leio documento interno, então estou protegido\"\". Qual é a correção?",
+    "alternativas": [
+      "Toda fonte que o assistente lê é entrada não confiável, inclusive a intranet",
+      "\"Prompt injection é jailbreak\"",
+      "\"Filtro de palavras proibidas resolve\"",
+      "\"O assistente herda a permissão do usuário, então é mais seguro\""
+    ],
+    "correta": 0,
+    "justificativa": "Documento interno é escrito por gente e recebe anexo de terceiro; a base de conhecimento é entrada"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-02#E04",
+    "ref": "16-ia-seguranca#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"O assistente herda a permissão do usuário, então é mais seguro\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Prompt injection é jailbreak\"",
+      "Credencial própria do assistente, com menor privilégio e ação irreversível sob confirmação",
+      "\"Filtro de palavras proibidas resolve\"",
+      "\"Só leio documento interno, então estou protegido\""
+    ],
+    "correta": 1,
+    "justificativa": "A permissão do usuário é o que transforma uma resposta errada em ação com alcance real"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-02#E05",
+    "ref": "16-ia-seguranca#TEMA-02",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"O fornecedor do modelo garante que não acontece\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Prompt injection é jailbreak\"",
+      "\"Filtro de palavras proibidas resolve\"",
+      "A garantia que se pede ao fornecedor é contratual e de configuração, não de comportamento do modelo",
+      "\"Só leio documento interno, então estou protegido\""
+    ],
+    "correta": 2,
+    "justificativa": "O desenho da aplicação, o contexto montado e as ferramentas expostas são escolha de quem integra"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-02#R02",
+    "ref": "16-ia-seguranca#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é a diferença prática entre injection direta e indireta, com um exemplo de cada?",
+    "alternativas": [
+      "Retirar agência: credencial própria com menor privilégio, ferramenta restrita, confirmação humana em ação irreversível e validação da saída antes do uso.",
+      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
+      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura."
+    ],
+    "correta": 1,
+    "justificativa": "\"Prompt injection é jailbreak\""
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-02#R04",
+    "ref": "16-ia-seguranca#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual controle reduz o impacto quando a injeção tem sucesso mesmo assim?",
+    "alternativas": [
+      "Retirar agência: credencial própria com menor privilégio, ferramenta restrita, confirmação humana em ação irreversível e validação da saída antes do uso.",
+      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
+      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura."
+    ],
+    "correta": 0,
+    "justificativa": "\"Prompt injection é jailbreak\""
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-02#R05",
+    "ref": "16-ia-seguranca#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que a tentativa de injeção deve ser registrada como evento de segurança?",
+    "alternativas": [
+      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
+      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura.",
+      "Retirar agência: credencial própria com menor privilégio, ferramenta restrita, confirmação humana em ação irreversível e validação da saída antes do uso."
+    ],
+    "correta": 1,
+    "justificativa": "\"Prompt injection é jailbreak\""
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-03#E01",
+    "ref": "16-ia-seguranca#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"O controle de acesso da pasta é suficiente\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Removi da origem, então saiu do assistente\"",
+      "\"Não treino modelo, então não há envenenamento\"",
+      "\"O fornecedor já apaga tudo\"",
+      "Verifique permissão na recuperação, com a identidade do solicitante"
+    ],
+    "correta": 3,
+    "justificativa": "O índice é uma cópia do texto em outro armazenamento, consultada por outro caminho"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-03#E02",
+    "ref": "16-ia-seguranca#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Removi da origem, então saiu do assistente\"\". Qual é a correção?",
+    "alternativas": [
+      "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta",
+      "\"O controle de acesso da pasta é suficiente\"",
+      "\"Não treino modelo, então não há envenenamento\"",
+      "\"O fornecedor já apaga tudo\""
+    ],
+    "correta": 0,
+    "justificativa": "Índice, cache e histórico mantêm cópia até que alguém reconstrua ou expire"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-03#E03",
+    "ref": "16-ia-seguranca#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Não treino modelo, então não há envenenamento\"\". Qual é a correção?",
+    "alternativas": [
+      "\"O controle de acesso da pasta é suficiente\"",
+      "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa",
+      "\"Removi da origem, então saiu do assistente\"",
+      "\"O fornecedor já apaga tudo\""
+    ],
+    "correta": 1,
+    "justificativa": "Base de conhecimento e embedding continuam sob controle da empresa e alteram a resposta"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-03#E04",
+    "ref": "16-ia-seguranca#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"O fornecedor já apaga tudo\"\". Qual é a correção?",
+    "alternativas": [
+      "\"O controle de acesso da pasta é suficiente\"",
+      "\"Removi da origem, então saiu do assistente\"",
+      "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
+      "\"Não treino modelo, então não há envenenamento\""
+    ],
+    "correta": 2,
+    "justificativa": "Prazo de retenção e uso para treino próprio variam por contrato e por configuração"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-03#E05",
+    "ref": "16-ia-seguranca#TEMA-03",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Classificar depois é mais rápido\"\". Qual é a correção?",
+    "alternativas": [
+      "\"O controle de acesso da pasta é suficiente\"",
+      "\"Removi da origem, então saiu do assistente\"",
+      "\"Não treino modelo, então não há envenenamento\"",
+      "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento"
+    ],
+    "correta": 3,
+    "justificativa": "Índice sem marcação exige reconstrução para passar a filtrar"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-03#R02",
+    "ref": "16-ia-seguranca#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é o controle que impede um assistente de responder sobre documento que o solicitante não pode acessar?",
+    "alternativas": [
+      "A cópia no índice, no cache e no histórico permanece até expirar por prazo declarado ou até a reconstrução do índice. Sem prazo e sem dono, a eliminação na origem não chega ao pipeline.",
+      "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito.",
+      "Verificação de permissão no momento da recuperação, com a identidade do solicitante, aplicada ao trecho e não à interface."
+    ],
+    "correta": 2,
+    "justificativa": "\"O controle de acesso da pasta é suficiente\""
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-03#R03",
+    "ref": "16-ia-seguranca#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que muda no pipeline quando o dado é eliminado na origem?",
+    "alternativas": [
+      "A cópia no índice, no cache e no histórico permanece até expirar por prazo declarado ou até a reconstrução do índice. Sem prazo e sem dono, a eliminação na origem não chega ao pipeline.",
+      "Verificação de permissão no momento da recuperação, com a identidade do solicitante, aplicada ao trecho e não à interface.",
+      "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito."
+    ],
+    "correta": 0,
+    "justificativa": "\"O controle de acesso da pasta é suficiente\""
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-03#R05",
+    "ref": "16-ia-seguranca#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que marcar por trecho, e não apenas por documento?",
+    "alternativas": [
+      "Verificação de permissão no momento da recuperação, com a identidade do solicitante, aplicada ao trecho e não à interface.",
+      "A cópia no índice, no cache e no histórico permanece até expirar por prazo declarado ou até a reconstrução do índice. Sem prazo e sem dono, a eliminação na origem não chega ao pipeline.",
+      "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito."
+    ],
+    "correta": 2,
+    "justificativa": "\"O controle de acesso da pasta é suficiente\""
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-04#E01",
+    "ref": "16-ia-seguranca#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system",
+      "url": "https://www.iso.org/standard/42001",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"\"Declarar em ata que IA fica dentro do ISMS basta\"\". Qual é a correção?",
+    "alternativas": [
+      "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias",
+      "\"Como só consumimos API, não precisamos de nada disso\"",
+      "Copiar o escopo do ISMS",
+      "Contratar auditoria antes de rodar um ciclo"
+    ],
+    "correta": 0,
+    "justificativa": "O ISMS não obriga inventário de IA nem avaliação de impacto sobre pessoas"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-04#E02",
+    "ref": "16-ia-seguranca#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system",
+      "url": "https://www.iso.org/standard/42001",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"\"Como só consumimos API, não precisamos de nada disso\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
+      "O papel de deployer tem obrigação própria e exige evidência",
+      "Copiar o escopo do ISMS",
+      "Contratar auditoria antes de rodar um ciclo"
+    ],
+    "correta": 1,
+    "justificativa": "A ISO descreve o padrão para quem fornece ou usa IA, e o AI Act trata o deployer como responsável por supervisão e monitoramento"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-04#E03",
+    "ref": "16-ia-seguranca#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system",
+      "url": "https://www.iso.org/standard/42001",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Copiar o escopo do ISMS\". Qual é a correção?",
+    "alternativas": [
+      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
+      "\"Como só consumimos API, não precisamos de nada disso\"",
+      "Escopo próprio, com nome dos sistemas de IA e papel na cadeia",
+      "Contratar auditoria antes de rodar um ciclo"
+    ],
+    "correta": 2,
+    "justificativa": "Os objetos são diferentes e as dependências também"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-04#E04",
+    "ref": "16-ia-seguranca#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system",
+      "url": "https://www.iso.org/standard/42001",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Contratar auditoria antes de rodar um ciclo\". Qual é a correção?",
+    "alternativas": [
+      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
+      "\"Como só consumimos API, não precisamos de nada disso\"",
+      "Copiar o escopo do ISMS",
+      "Inventário, avaliação de impacto e análise crítica antes da auditoria"
+    ],
+    "correta": 3,
+    "justificativa": "Sem um ciclo completo existe evidência de intenção, não de operação"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-04#E05",
+    "ref": "16-ia-seguranca#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system",
+      "url": "https://www.iso.org/standard/42001",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Afirmar número de controles do Anexo A\". Qual é a correção?",
+    "alternativas": [
+      "Escreva `NAO CONFIRMADO` até conferir no texto adquirido",
+      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
+      "\"Como só consumimos API, não precisamos de nada disso\"",
+      "Copiar o escopo do ISMS"
+    ],
+    "correta": 0,
+    "justificativa": "O texto da norma é pago e a lista não foi confirmada nesta execução"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-04#E06",
+    "ref": "16-ia-seguranca#TEMA-04",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system",
+      "url": "https://www.iso.org/standard/42001",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Tratar governança de IA como projeto de ferramenta\". Qual é a correção?",
+    "alternativas": [
+      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
+      "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
+      "\"Como só consumimos API, não precisamos de nada disso\"",
+      "Copiar o escopo do ISMS"
+    ],
+    "correta": 1,
+    "justificativa": "Ferramenta ajuda a operar o sistema, e não define escopo, papel e alçada"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-05#E01",
+    "ref": "16-ia-seguranca#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01, LLM06 e LLM10",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"A demonstração do fornecedor acertou, então funciona\"\". Qual é a correção?",
+    "alternativas": [
+      "\"O modelo reduz falso positivo\"",
+      "Piloto às cegas com amostra rotulada pelo próprio time",
+      "\"A ferramenta só lê, não executa nada\"",
+      "\"O analista confere tudo depois\""
+    ],
+    "correta": 1,
+    "justificativa": "A demonstração usa dado escolhido pelo fornecedor"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-05#E02",
+    "ref": "16-ia-seguranca#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01, LLM06 e LLM10",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"O modelo reduz falso positivo\"\". Qual é a correção?",
+    "alternativas": [
+      "\"A demonstração do fornecedor acertou, então funciona\"",
+      "\"A ferramenta só lê, não executa nada\"",
+      "Peça precisão e cobertura medidas, com o processo de rotulagem descrito",
+      "\"O analista confere tudo depois\""
+    ],
+    "correta": 2,
+    "justificativa": "Sem número, base de teste e tamanho de amostra, é afirmação comercial"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-05#E03",
+    "ref": "16-ia-seguranca#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01, LLM06 e LLM10",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"A ferramenta só lê, não executa nada\"\". Qual é a correção?",
+    "alternativas": [
+      "\"A demonstração do fornecedor acertou, então funciona\"",
+      "\"O modelo reduz falso positivo\"",
+      "\"O analista confere tudo depois\"",
+      "Trate a telemetria como entrada não confiável e limite a agência da ferramenta"
+    ],
+    "correta": 3,
+    "justificativa": "Ler telemetria escrita pelo atacante e resumir já altera a decisão do analista"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-05#E04",
+    "ref": "16-ia-seguranca#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01, LLM06 e LLM10",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"O analista confere tudo depois\"\". Qual é a correção?",
+    "alternativas": [
+      "Meça se a evidência completa está no resumo e exija o original a um clique",
+      "\"A demonstração do fornecedor acertou, então funciona\"",
+      "\"O modelo reduz falso positivo\"",
+      "\"A ferramenta só lê, não executa nada\""
+    ],
+    "correta": 0,
+    "justificativa": "Sob volume, o resumo passa a ser a fonte de decisão na prática"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-05#E05",
+    "ref": "16-ia-seguranca#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01, LLM06 e LLM10",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"Dado agregado não é dado pessoal\"\". Qual é a correção?",
+    "alternativas": [
+      "\"A demonstração do fornecedor acertou, então funciona\"",
+      "Aplique retenção, região e base contratual como em qualquer tratamento",
+      "\"O modelo reduz falso positivo\"",
+      "\"A ferramenta só lê, não executa nada\""
+    ],
+    "correta": 1,
+    "justificativa": "Telemetria de rede e de endpoint carrega identidade, URL e conteúdo"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-05#E06",
+    "ref": "16-ia-seguranca#TEMA-05",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01, LLM06 e LLM10",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"Medir adoção pelo tempo economizado só\". Qual é a correção?",
+    "alternativas": [
+      "\"A demonstração do fornecedor acertou, então funciona\"",
+      "\"O modelo reduz falso positivo\"",
+      "Meça precisão e cobertura junto do tempo",
+      "\"A ferramenta só lê, não executa nada\""
+    ],
+    "correta": 2,
+    "justificativa": "Tempo cai também quando o analista investiga menos"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-06#E01",
+    "ref": "16-ia-seguranca#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "European Commission — AI Act, Regulation (EU) 2024/1689, obrigacoes de alfabetizacao em IA e papel do deployer",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"Bloquear o domínio resolve\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Isso é shadow IT, já sei tratar\"",
+      "\"O funcionário agiu de má-fé\"",
+      "Descubra, decida e ofereça alternativa aprovada",
+      "\"A ferramenta diz que não guarda dado\""
+    ],
+    "correta": 2,
+    "justificativa": "Empurra para rede pessoal e celular, e o uso sai do alcance de qualquer log"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-06#E02",
+    "ref": "16-ia-seguranca#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "European Commission — AI Act, Regulation (EU) 2024/1689, obrigacoes de alfabetizacao em IA e papel do deployer",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"Isso é shadow IT, já sei tratar\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Bloquear o domínio resolve\"",
+      "\"O funcionário agiu de má-fé\"",
+      "\"A ferramenta diz que não guarda dado\"",
+      "Some fontes de identidade, despesa, extensão e relato"
+    ],
+    "correta": 3,
+    "justificativa": "Uso de IA por navegador não instala nada e não aparece em inventário de dispositivo"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-06#E03",
+    "ref": "16-ia-seguranca#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "European Commission — AI Act, Regulation (EU) 2024/1689, obrigacoes de alfabetizacao em IA e papel do deployer",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"O funcionário agiu de má-fé\"\". Qual é a correção?",
+    "alternativas": [
+      "Trate como falha de política e de caminho aprovado, e mantenha o relato sem punição",
+      "\"Bloquear o domínio resolve\"",
+      "\"Isso é shadow IT, já sei tratar\"",
+      "\"A ferramenta diz que não guarda dado\""
+    ],
+    "correta": 0,
+    "justificativa": "Na maior parte dos casos a ferramenta resolve um problema real sem alternativa interna"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-06#E04",
+    "ref": "16-ia-seguranca#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "European Commission — AI Act, Regulation (EU) 2024/1689, obrigacoes de alfabetizacao em IA e papel do deployer",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"A ferramenta diz que não guarda dado\"\". Qual é a correção?",
+    "alternativas": [
+      "\"Bloquear o domínio resolve\"",
+      "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
+      "\"Isso é shadow IT, já sei tratar\"",
+      "\"O funcionário agiu de má-fé\""
+    ],
+    "correta": 1,
+    "justificativa": "A frase pode estar na tela e o contrato dizer outra coisa, ou não existir contrato"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-06#E05",
+    "ref": "16-ia-seguranca#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "European Commission — AI Act, Regulation (EU) 2024/1689, obrigacoes de alfabetizacao em IA e papel do deployer",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"Deixar o caso fora do registro quando a ferramenta é gratuita\". Qual é a correção?",
+    "alternativas": [
+      "\"Bloquear o domínio resolve\"",
+      "\"Isso é shadow IT, já sei tratar\"",
+      "Registre com situação e dono, como qualquer sistema de IA",
+      "\"O funcionário agiu de má-fé\""
+    ],
+    "correta": 2,
+    "justificativa": "Risco não depende de haver custo, e o dado enviado sai do controle do mesmo modo"
+  },
+  {
+    "id": "16-ia-seguranca#TEMA-06#E06",
+    "ref": "16-ia-seguranca#TEMA-06",
+    "origem": "erro-comum",
+    "fonte": {
+      "titulo": "European Commission — AI Act, Regulation (EU) 2024/1689, obrigacoes de alfabetizacao em IA e papel do deployer",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"Treinar uma vez e considerar cumprido\". Qual é a correção?",
+    "alternativas": [
+      "\"Bloquear o domínio resolve\"",
+      "\"Isso é shadow IT, já sei tratar\"",
+      "\"O funcionário agiu de má-fé\"",
+      "Registre treinamento por pessoa e mantenha no calendário de evidência"
+    ],
+    "correta": 3,
+    "justificativa": "Há obrigação de alfabetização em IA com aplicação declarada desde fevereiro de 2025"
+  }
+]
