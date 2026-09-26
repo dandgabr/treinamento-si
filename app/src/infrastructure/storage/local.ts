@@ -21,3 +21,11 @@ export function gravarTexto(chave: string, valor: string): void {
     // Armazenamento indisponivel: a sessao funciona, mas nao persiste.
   }
 }
+
+export function removerTexto(chave: string): void {
+  try {
+    window.localStorage.removeItem(chave)
+  } catch {
+    // Idem: nada a fazer se o armazenamento esta negado.
+  }
+}

@@ -20,5 +20,5 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["node"]
   },
-  "include": ["src", "scripts", "vite.config.ts", "vitest.config.ts"]
+  "include": ["src", "scripts", "electron", "vite.config.ts", "vite.electron.config.ts", "vitest.config.ts"]
 }

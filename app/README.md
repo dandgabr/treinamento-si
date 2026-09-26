@@ -36,6 +36,9 @@ navegador atual, para abrir o resultado.
 | `npm run dev` | roda `build:content` e sobe o Vite com recarga automática |
 | `npm run build` | encadeia `build:content`, `check:content` e `vite build` |
 | `npm run smoke` | abre o artefato por `file://` num Chrome headless e confere o DOM renderizado |
+| `npm run build:electron` | compila o processo principal e o preload para `dist-electron/` |
+| `npm run desktop` | build completo e abre o aplicativo desktop |
+| `npm run smoke:desktop` | abre a janela de verdade e confere a casca, o progresso em arquivo e o bloqueio de navegação |
 | `npm run empacotar` | monta a pasta que vai para quem estuda: `dist/Roadmap-CISO-Interativo/` |
 
 A ordem tem uma dependência real: `check:content` lê o JSON em disco, então sozinho ele não adianta
@@ -55,6 +58,34 @@ partir de `file://`.
 
 `dist/` está no `.gitignore` da raiz, então o HTML pronto não vai para o controle de versão. Quem
 quiser o arquivo precisa gerá-lo.
+
+## Aplicativo desktop
+
+`npm run desktop` abre o app em Electron. O renderer é exatamente o mesmo do navegador — os
+componentes, o domínio e os testes não mudaram; o que muda é a casca em volta e onde o progresso
+é guardado.
+
+| Peça | O que faz |
+|---|---|
+| `electron/main.ts` | janela, menu, protocolo `app://`, permissões negadas, bloqueio de navegação e de janela nova |
+| `electron/preload.ts` | ponte com lista fechada de canais; nenhum `ipcRenderer` cru exposto |
+| `electron/progresso.ts` | lê e grava `progresso.json` na pasta de dados do app, com troca atômica |
+| `src/infrastructure/storage/persistencia.ts` | escolhe o provedor: ponte do Electron ou `localStorage` |
+
+**O progresso vira arquivo.** No desktop ele fica em `progresso.json`, na pasta de dados do
+aplicativo (no Linux, `~/.config/roadmap-ciso-app/`), em vez do armazenamento do navegador. A
+primeira execução **migra** o que já foi estudado no navegador da mesma máquina. Exportar, importar
+e recomeçar estão no menu **Progresso** e também no painel — as duas portas chamam as mesmas ações.
+
+**O que a casca fecha.** O conteúdo é servido por um esquema próprio (`app://`), o que permite mandar
+a CSP como **header** e não só como meta tag. Não há Node no renderer (`contextIsolation`, `sandbox`,
+sem `nodeIntegration`), nenhuma permissão de câmera, microfone, localização, notificação ou
+clipboard é concedida, toda navegação para fora é bloqueada e link externo sai pelo navegador do
+sistema — e só `http(s)`. O caminho que serve os arquivos tem trava explícita contra travessia.
+
+O `npm run smoke:desktop` prova isso numa janela de verdade: abre, confere as preferências
+endurecidas, navega até um tema, renderiza o diagrama, escreve o progresso no arquivo, tenta sair
+para `file://` e é bloqueado, fecha e **reabre** com o estado no lugar.
 
 ## Como o app chega a quem estuda
 
@@ -181,12 +212,13 @@ botão para recomeçar nem para exportar; os dois entram com a exportação.
 
 Esse progresso é **local e não confidencial**. Em `file://`, no Chrome, todos os arquivos HTML
 locais compartilham o mesmo armazenamento — qualquer página local aberta no mesmo perfil enxerga a
-mesma chave. No Firefox o balde é por arquivo. Não guarde nada sensível ali, e note que apagar o
-progresso também não tem caminho pela interface ainda.
+mesma chave. No Firefox o balde é por arquivo. Não guarde nada sensível ali. Exportar, importar e
+recomeçar existem tanto no painel quanto no menu do aplicativo desktop.
 
-O launcher existe e está descrito acima. O que falta do lado do dado é o **exportar e importar** o
-progresso: hoje ele vive só no navegador, sem backup e sem como apagar. Entram juntos, e o import
-passa pelo mesmo normalizador que a leitura do `localStorage` usa.
+O launcher web continua existindo como via sem instalação, e o aplicativo desktop é o caminho
+principal. No desktop o progresso é um arquivo na pasta de dados do app; no navegador ele segue no
+armazenamento local, com as limitações de origem descritas acima. Os dois não compartilham progresso
+diretamente — o arquivo exportado é a ponte entre eles.
 
 ## Pendências conhecidas
 
@@ -199,7 +231,11 @@ em que entram.
 | Os 1328 links relativos (`../README.md`, `TEMA-*.md`) ficam mortos no arquivo único: precisam ser reescritos para as rotas do app. Os 586 externos abrem normalmente | 3 |
 | A fila de hoje agora é clicável, mas só lista os cinco primeiros: falta paginar ou abrir a lista inteira | 3 |
 | Os vereditos por item do checkpoint vivem em `useState`: o total persiste, mas após recarregar os botões voltam em branco, com o texto dizendo "último resultado registrado" | 3 |
-| Não há como recomeçar nem exportar o progresso; em `file://` no Chrome ele é compartilhado por qualquer HTML local | 7 |
+| Não há empacotamento do desktop: falta `electron-builder` para `.dmg`/`.zip`, NSIS e AppImage, com `asar` e os *fuses* endurecidos | 4.3 |
+| O desktop ainda carrega o bundle inteiro: falta registrar só o `flowchart` do Mermaid, ler o `content.json` do disco e dividir o bundle, que é o que reduz arranque e memória (O1, O4, O5) | 4.4 |
+| A CSP do desktop ainda precisa de `'unsafe-inline'` para o script inline; com o bundle dividido dá para trocar por `'self'` | 4.4 |
+| O desktop só foi exercitado no Linux. Falta abrir num Windows e num macOS de verdade, e assinar se for distribuído a terceiros | 7 |
+| O launcher web (`empacotar`) continua como via sem instalação; ele e o desktop não compartilham progresso, porque as origens são diferentes — o arquivo exportado é a ponte | 7 |
 | `npm run dev` não funciona: a CSP do `index.html` bloqueia o `<script src>` que o Vite injeta. O `<meta>` precisa ser injetado só no build | 3 |
 | Diagramas: falta um botão de ampliar (o fluxograma tem ~3000 px e rola na horizontal) e `aria-label` no SVG. Cabeçalho de tabela longa sem `position: sticky` | 3 |
 | Escala de confiança do pré-teste: alvos de 29 px, sem rótulo nas pontas (o que é 1 e o que é 5) e 25 paradas de tabulação no bloco | 3 |

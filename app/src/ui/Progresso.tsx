@@ -6,9 +6,14 @@ import { diasComEstudo, filaDoProgresso, resultadoDoCheckpoint } from '../domain
 import type { Area } from '../domain/types'
 import {
   abrirPassagem,
+  exportar,
+  importar,
   marcarLido,
+  ondeFicaOProgresso,
+  recomecarComConfirmacao,
   registrarCheckpoint,
   registrarRecuperacao,
+  useFalhaAoGravar,
   useProgresso,
 } from '../application/progresso-store'
 import { BlocoQA } from './Blocos'
@@ -105,7 +110,6 @@ export function ResumoProgresso() {
   const firmes = dominios.reduce((n, d) => n + d.firmes, 0)
   const aprovados = dominios.filter((d) => d.checkpointAprovado === true).length
   const respondidos = dominios.filter((d) => d.checkpointAprovado !== null).length
-
   return (
     <section className="resumo">
       <div className="resumo-item resumo-largo">
@@ -154,7 +158,48 @@ export function ResumoProgresso() {
           um dia conta quando há leitura, pré-teste, recuperação ou checkpoint.
         </span>
       </div>
+
+      <AcoesDeProgresso />
     </section>
+  )
+}
+
+/** Exportar, importar e recomeçar — as mesmas ações do menu do aplicativo desktop. */
+export function AcoesDeProgresso() {
+  const falhou = useFalhaAoGravar()
+  const [mensagem, setMensagem] = useState<string | null>(null)
+
+  async function agir(acao: () => Promise<string | null>): Promise<void> {
+    setMensagem(await acao())
+  }
+
+  return (
+    <div className="acoes-progresso">
+      <p className="resumo-detalhe">
+        Progresso guardado {ondeFicaOProgresso()}. Leve o arquivo exportado se trocar de máquina.
+      </p>
+      {falhou ? (
+        <p className="aviso-erro" role="alert">
+          Não consegui gravar o progresso nesta sessão. Exporte para não perder o que já estudou.
+        </p>
+      ) : null}
+      {mensagem ? (
+        <p className="aviso-erro" role="alert">
+          {mensagem}
+        </p>
+      ) : null}
+      <div className="veredito-botoes">
+        <button className="botao-secundario" onClick={() => void agir(exportar)}>
+          Exportar progresso
+        </button>
+        <button className="botao-secundario" onClick={() => void agir(importar)}>
+          Importar progresso
+        </button>
+        <button className="botao-secundario" onClick={() => void recomecarComConfirmacao()}>
+          Recomeçar
+        </button>
+      </div>
+    </div>
   )
 }
 
