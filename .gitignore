@@ -2,6 +2,8 @@
 node_modules/
 app/dist/
 app/dist-electron/
+# Instaladores: saem inteiros de dist/ e dist-electron/, e um .dmg passa de 100 MB.
+app/instalador/
 app/src/content/generated/
 app/.vite/
 app/coverage/

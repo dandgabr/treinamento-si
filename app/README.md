@@ -41,6 +41,9 @@ navegador atual, para abrir o resultado.
 | `npm run build:electron` | compila o processo principal e o preload para `dist-electron/` |
 | `npm run desktop` | build completo e abre o aplicativo desktop |
 | `npm run smoke:desktop` | abre a janela de verdade e confere a casca, o protocolo, o progresso em arquivo e o bloqueio de navegação |
+| `npm run distribuir:<sistema>` | empacota com o `electron-builder`: AppImage, NSIS ou `.dmg`/`.zip` |
+| `npm run smoke:pacote` | abre o **app empacotado** por CDP e confere os fuses, o asar e o progresso |
+| `npm run verificar:pacote` | empacota e roda o smoke do pacote — o portão de quem vai distribuir |
 | `npm run empacotar` | monta a pasta que vai para quem estuda: `dist/Roadmap-CISO-Interativo/` |
 
 A ordem tem uma dependência real: `check:content` lê o JSON em disco, então sozinho ele não adianta
@@ -105,10 +108,61 @@ processo principal, que é o único lugar de onde dá para conferir: `app://bund
 `bundle` também — do renderer não daria, porque a própria CSP tem `connect-src 'none'` e barraria o
 `fetch` antes de o handler ser chamado.
 
+## Empacotamento
+
+`npm run distribuir:linux` produz `instalador/Roadmap CISO-0.1.0.AppImage`. O alvo é o
+`electron-builder.yml`, e o endurecimento do binário é um `afterPack` (`scripts/fuses.mjs`).
+
+| O que | Medido em 2026-09-26, Linux x64, Electron 33.4.11 |
+|---|---|
+| AppImage | **105 MB** (O7) |
+| `app.asar` | 7,3 MB, 5 arquivos |
+| Pasta desempacotada | 270 MB — o binário do Electron sozinho tem 186 MB |
+
+Os 105 MB são quase todos o Electron. O que é nosso é 7,3 MB, e o desenho do pacote é o que
+mantém isso: a lista de `files` é explícita e termina com `!node_modules/**`. Sem essa linha, o
+electron-builder arrasta a árvore de produção inteira — 7480 dos 7487 arquivos do pacote, 137 MB
+dos 139 MB do AppImage anterior — mesmo com o React e o Mermaid já dentro do bundle inline de
+`dist/index.html` e com o processo principal usando só `node:` e `electron`. Código que nunca é
+executado, dentro do instalador de todo mundo.
+
+**Fuses do binário.** Sete chaves, conferidas pelo próprio `afterPack` (uma lista que não chegou
+ao binário seria promessa vazia) e de novo pelo `npm run smoke:pacote`:
+
+| Fuse | Estado | Por quê |
+|---|---|---|
+| `RunAsNode` | desligado | sem `ELECTRON_RUN_AS_NODE`, o nosso binário não vira um Node de propósito geral |
+| `EnableNodeOptionsEnvironmentVariable` | desligado | `NODE_OPTIONS` não injeta código no processo |
+| `EnableNodeCliInspectArguments` | desligado | `--inspect` não abre depurador |
+| `EnableEmbeddedAsarIntegrityValidation` | ligado | o asar é conferido (macOS e Windows; no Linux a chave fica gravada) |
+| `OnlyLoadAppFromAsar` | ligado | não roda a partir de pasta extraída |
+| `EnableCookieEncryption` | ligado | cofres locais do Chromium criptografados |
+| `GrantFileProtocolExtraPrivileges` | desligado | o app não usa `file://`; o padrão do Electron dá privilégio a mais |
+
+Sobraram dois limites, medidos e não supostos:
+
+- **Windows** precisa de `wine` no Linux (ausente aqui) ou de uma máquina Windows. O alvo `nsis` e
+  o `portable` estão configurados com `oneClick`, sem senha de administrador.
+- **macOS** precisa de um Mac: `.dmg` e `.zip` não se montam de fora. Sem assinatura, o Gatekeeper
+  pede "abrir mesmo assim" na primeira vez.
+
+O **`.deb` saiu da configuração** por decisão. Ele depende do `fpm` do electron-builder, que precisa
+de `libcrypt.so.1` — ausente no Fedora 44 —, e resolver isso é instalar pacote de sistema para gerar
+um formato que o AppImage já cobre com duplo clique.
+
+**Ícone.** `build/icon.png`, 1024×1024, versionado. O electron-builder deriva `.ico` e `.icns`
+dele. Sem esse arquivo ele usa o ícone do Electron — que é o que aparecia no instalador.
+
 ## Como o app chega a quem estuda
 
-`npm run empacotar` monta `dist/Roadmap-CISO-Interativo/`. A entrega é a pasta inteira; a pessoa
-clica em **Iniciar** e o navegador abre. Nada de terminal, nada de instalar.
+Duas vias, com o mesmo renderer e sem progresso compartilhado entre elas:
+
+| Via | Como se produz | O que a pessoa recebe |
+|---|---|---|
+| Aplicativo desktop | `npm run distribuir:<sistema>` | um instalador ou AppImage; abre com duplo clique |
+| Pasta com atalho | `npm run empacotar` | uma pasta; clica em **Iniciar** e o navegador abre |
+
+A segunda existe para quem não quer instalar nada:
 
 ```
 Roadmap-CISO-Interativo/
@@ -251,10 +305,10 @@ em que entram.
 
 | Pendência | Fase |
 |---|---|
-| **4.3 — Configurar** o `electron-builder` (está instalado, sem config nem script): `.dmg`/`.zip` arm64 e x64, NSIS e portátil, AppImage e `.deb`, com `asar` e os *fuses* endurecidos | 4.3 |
+| **4.3 — pronto no Linux.** O `electron-builder` está configurado, o AppImage sai com 105 MB (O7) e os sete fuses entram e são conferidos. Faltam os alvos que esta máquina não produz: `.dmg`/`.zip` (precisa de um Mac) e NSIS/portable (precisa de `wine` ou de um Windows). O `.deb` saiu da configuração por decisão | 4.3 |
 | **4.4 — Otimizar** o que a casca liberou: registrar só o `flowchart` do Mermaid, ler o `content.json` do disco em vez de inlinado, dividir o bundle. É o que reduz peso, arranque e memória (O1, O4, O5, O6) | 4.4 |
 | Trocar `script-src 'unsafe-inline'` por `'self'` nas duas CSPs — só é possível depois do bundle dividido | 4.4 |
-| **Nenhum número medido de O1–O8 e S1–S14.** O §16.3 do plano diz que sem medição o item não conta como feito: faltam arranque até a primeira pintura, memória após 20 navegações, diagramas renderizados por tela e tamanho do instalador | 4.4 |
+| **Só o O7 está medido** (105 MB, acima). O §16.3 do plano diz que sem medição o item não conta como feito: faltam arranque até a primeira pintura, memória após 20 navegações e diagramas renderizados por tela, além de S6, S7, S9, S10 e S13 | 4.4 |
 | **A Fase 5 inteira não existe**: banco de múltipla escolha, `check-questions.ts` e tela de Quiz. É decisão de autoria antes de ser código — exige template novo e auditoria de citação, pelas regras do `CONTRIBUTING` | 5 |
 | Os 1328 links relativos (`../README.md`, `TEMA-*.md`) ficam mortos no arquivo único: precisam ser reescritos para as rotas do app. Os 586 externos abrem normalmente | 6 |
 | Regras do material ainda não implementadas: "duas passagens falhas seguidas mandam para releitura completa" (`plano-12-meses.md`), revisão além de D+90, a tarefa concreta de cada intervalo, a coluna "Artefato produzido" do registro e o diagnóstico por item (hoje é um booleano por tema) | 6 |

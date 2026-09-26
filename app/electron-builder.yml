@@ -1,0 +1,82 @@
+# Empacotamento do aplicativo desktop.
+#
+# O app nao tem dependencia de runtime: o React e o Mermaid entram no bundle inline de
+# `dist/index.html` e o processo principal so usa `node:` e `electron`. Por isso a lista
+# de arquivos e explicita e nao ha `node_modules` dentro do pacote — o que tambem evita
+# levar junto a pasta do launcher web que o `empacotar` deixa em `dist/`.
+
+appId: br.roadmapciso.estudo
+productName: Roadmap CISO
+copyright: Roadmap CISO
+
+directories:
+  output: instalador
+
+# So o que o aplicativo le em tempo de execucao. `main` do package.json aponta para
+# dist-electron/main.cjs, que resolve `app.asar/dist` como raiz do esquema `app://`.
+#
+# `!node_modules/**` nao e economia de espaco por si: o React e o Mermaid ja estao dentro
+# do bundle inline de `dist/index.html`, e o processo principal so usa `node:` e `electron`.
+# Sem esta linha, o electron-builder arrasta a arvore de producao inteira — 7480 dos 7487
+# arquivos do pacote, 137 MB dos 139 MB do AppImage, codigo que nunca e executado.
+files:
+  - package.json
+  - dist/index.html
+  - dist-electron/main.cjs
+  - dist-electron/preload.cjs
+  - '!node_modules/**'
+
+# O codigo fica num arquivo so, e o `OnlyLoadAppFromAsar` (ver scripts/fuses.mjs) exige
+# que ele exista.
+asar: true
+
+# Sem assinatura e sem auto-atualizacao: a distribuicao e uma pasta ou um instalador que
+# a pessoa abre uma vez. Assinar e uma decisao separada (S14 do plano).
+publish: null
+
+# Endurecimento do binario: desliga o modo Node, o `NODE_OPTIONS` e a inspecao por
+# argumento de linha de comando, exige o asar e liga a criptografia de cookie.
+afterPack: scripts/fuses.mjs
+
+mac:
+  category: public.app-category.education
+  # Sem assinatura: o Gatekeeper vai pedir "abrir mesmo assim" na primeira vez. Está
+  # registrado como pendência — distribuir a terceiros exige a conta de desenvolvedor.
+  identity: null
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+    - target: zip
+      arch: [x64, arm64]
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+
+nsis:
+  # Um clique: instala na pasta do usuário, sem pedir senha de administrador e sem
+  # perguntas. É o público desta via — quem não tem conhecimento técnico.
+  oneClick: true
+  perMachine: false
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Roadmap CISO
+  # A desinstalação também leva o `progresso.json`? Não: ele fica na pasta de dados do
+  # aplicativo, fora da pasta de instalação.
+  deleteAppDataOnUninstall: false
+
+linux:
+  category: Education
+  synopsis: Estudo guiado para quem vai responder pela segurança da informação
+  description: >
+    Material de estudo com 18 áreas, 109 temas e três trilhas, com revisão espaçada,
+    pré-teste, recuperação ativa e acompanhamento do progresso.
+  # Só AppImage. O `.deb` saiu por decisão: ele depende do `fpm` do electron-builder, que
+  # precisa de `libcrypt.so.1` — ausente no Fedora 44 e um pré-requisito de sistema para
+  # gerar um pacote. O AppImage abre com duplo clique, que é o que esta via precisa.
+  target:
+    - target: AppImage
+      arch: [x64]
