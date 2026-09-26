@@ -1,6 +1,7 @@
 # Dependencias e build do app
 node_modules/
 app/dist/
+app/dist-electron/
 app/src/content/generated/
 app/.vite/
 app/coverage/

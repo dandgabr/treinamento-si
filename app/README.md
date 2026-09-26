@@ -207,8 +207,8 @@ continuar existindo. Se desaparecer, o caminho alternativo é `npm install --inc
 ## O que ainda não existe
 
 O progresso é gravado no navegador (`localStorage`, chave `roadmap:progresso`): leitura, confiança
-do pré-teste, veredito da recuperação com a revisão reagendada e resultado do checkpoint. Não há
-botão para recomeçar nem para exportar; os dois entram com a exportação.
+do pré-teste, veredito da recuperação com a revisão reagendada e resultado do checkpoint, além de
+exportar, importar e recomeçar.
 
 Esse progresso é **local e não confidencial**. Em `file://`, no Chrome, todos os arquivos HTML
 locais compartilham o mesmo armazenamento — qualquer página local aberta no mesmo perfil enxerga a
