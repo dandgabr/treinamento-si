@@ -25,15 +25,14 @@ código do diagrama como texto, nunca como imagem, e por isso não existe arquiv
 Node 22. A máquina de desenvolvimento roda v22.23.1 e o `@types/node` do projeto fixa `^22`. Um
 navegador atual, para abrir o resultado.
 
-## Cinco comandos
-
-Cinco comandos cobrem o ciclo inteiro.
+## Comandos
 
 | Comando | O que ele faz |
 |---|---|
 | `npm install` | instala as dependências. Leia a nota sobre `omit=dev` abaixo antes de rodar. |
 | `npm run build:content` | lê `conteudo/` e regrava `app/src/content/generated/content.json` |
 | `npm run check:content` | valida o JSON já gerado e falha o processo quando algo falta |
+| `npm test` | roda a suíte do Vitest: parser, gate e motor pedagógico |
 | `npm run dev` | roda `build:content` e sobe o Vite com recarga automática |
 | `npm run build` | encadeia `build:content`, `check:content` e `vite build` |
 | `npm run smoke` | abre o artefato por `file://` num Chrome headless e confere o DOM renderizado |
@@ -55,6 +54,28 @@ partir de `file://`.
 
 `dist/` está no `.gitignore` da raiz, então o HTML pronto não vai para o controle de versão. Quem
 quiser o arquivo precisa gerá-lo.
+
+## O motor pedagógico
+
+`app/src/domain/` não sabe nada de React nem de navegador: são funções puras sobre o estado do
+estudo, todas com teste. O que existe ali não foi inventado — cada regra veio do próprio material.
+
+| Módulo | O que decide | De onde veio a regra |
+|---|---|---|
+| `srs.ts` | intervalos D+1, D+7 e D+30; acerto avança, erro rebaixa | seção 11 de cada tema e o checkpoint do TEMA-05 de 00 |
+| `criterio.ts` | lê o critério de aprovação que o guia publica em prosa | campo `criterio` de cada guia (`4 dos 5`, `80%`) |
+| `progresso.ts` | estado do estudo: temas, respostas de pré-teste, dias ativos, streak | — |
+| `dominio.ts` | domínio por área, usando o critério do guia | — |
+| `gamificacao.ts` | XP derivado do estado e faixas de nível | — |
+| `calibracao.ts` | confiança declarada × acerto, com escore de Brier | seção 3 de cada tema |
+
+O XP é **derivado**: a mesma função sobre o mesmo estado devolve sempre o mesmo número. Isso é o
+que permite recalcular tudo a partir de um progresso importado, sem confiar num contador que pode
+ter sido adulterado.
+
+`app/scripts/lib/` guarda o parser e o gate como funções puras, para serem testados com fixtures
+pequenos. `gerar-conteudo.test.ts` fecha o contrato: parseia o material real e exige `validar()`
+vazio com os totais 18/109/22.
 
 ## Do Markdown para o JSON
 
@@ -107,13 +128,15 @@ continuar existindo. Se desaparecer, o caminho alternativo é `npm install --inc
 
 ## O que ainda não existe
 
-Nenhum progresso de estudo é gravado. O `localStorage` guarda uma única coisa, a preferência de tema
-claro ou escuro; não há tema marcado como concluído, contador de acertos, retomada de onde parou nem
-histórico de revisão espaçada. Gamificação, com pontos, marcos e sequência de dias, está fora desta
-versão. O launcher, que distribuiria o app para quem não tem Node nem terminal, também.
+Nenhum progresso de estudo é gravado. O motor pedagógico existe e tem teste, mas nenhuma tela o
+chama ainda: o `localStorage` guarda uma única coisa, a preferência de tema claro ou escuro, e o
+pré-teste e a recuperação ativa respondem só na sessão. Não há tema marcado como concluído, fila de
+revisão, contador de XP nem sequência de dias visível. O launcher, que distribuiria o app para quem
+não tem Node nem terminal, também não existe.
 
-O que a versão atual entrega é leitura, pré-teste e recuperação ativa num arquivo único. Nada além
-disso, e é melhor dizer isso do que deixar alguém procurando um placar que não está lá.
+O que a versão atual entrega é leitura, pré-teste e recuperação ativa num arquivo único, mais o
+motor que vai sustentar o acompanhamento ao longo do tempo. Nada além disso, e é melhor dizer isso
+do que deixar alguém procurando um placar que não está lá.
 
 ## Pendências conhecidas
 
@@ -128,10 +151,8 @@ Levantadas na revisão de segurança e na de testes, ainda em aberto, com a fase
 | O contrato de re-render do Mermaid mora na `key` do React, repetida em três arquivos, e remonta as seções na troca de tema; centralizar em `renderizarMermaid` | 3 |
 | O laço que renderiza seções está duplicado em três arquivos, com os números das seções interativas escritos à mão | 3 |
 | Acessibilidade pendente: `document.title` por rota, foco no `main` na troca de rota, link "pular para o conteúdo" e alvos de toque de 44 px | 3 |
-| Extrair o parser para funções puras e instalar o Vitest — hoje `build-content.ts` e `check-content.ts` chamam `main()` no topo e não podem ser importados por teste | 2 |
-| Validação de esquema do `content.json` no gate, e não só a checagem de forma que o app faz em runtime | 2 |
-| `noUncheckedIndexedAccess` no `tsconfig`, que hoje deixa `content.temas[ref]` passar por `Tema` sendo `undefined` em runtime | 2 |
-| O verificador do material (`conteudo/scripts/verificar-repo.py`) dá verde quando um sincronizador falha, trata o léxico apenas como aviso e não valida `templates/` nem `CONTRIBUTING.md` | 2 |
+| Ligar o motor pedagógico à interface: hoje o pré-teste e a recuperação ativa respondem só na sessão, e `src/domain/` ainda não é chamado por nenhuma tela | 3 |
+| O verificador do material (`conteudo/scripts/verificar-repo.py`) dá verde quando um sincronizador falha, trata o léxico apenas como aviso e não valida `templates/` nem `CONTRIBUTING.md` | 2 ou depois |
 | Commit do lockfile, `npm ci` e versões exatas das seis dependências que geram o artefato; SBOM e soma de verificação por release | 7 |
 | Launcher: bind em `127.0.0.1`, porta efêmera, servir um único arquivo, validar o header `Host` e usar token no caminho | 7 |
 | Importação de progresso: esquema com versão, corte de tamanho antes do `JSON.parse` e cópia campo a campo (nunca merge) | 7 |
