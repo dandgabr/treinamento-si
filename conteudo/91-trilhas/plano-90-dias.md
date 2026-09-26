@@ -208,7 +208,8 @@ indicador a horas de estudo, e nenhum indicador de risco da empresa tem essa dep
 
 ## 6. Fila de revisão
 
-Esta trilha é a dona do calendário e do estado. Os temas apenas sugerem os intervalos; a regra de
+Esta trilha define o calendário e o formato do estado; em runtime, o estado de cada usuário fica no
+aplicativo, e a tabela desta seção é o exemplo. Os temas apenas sugerem os intervalos; a regra de
 rebaixamento está registrada no TEMA-05 de 00 e no §11 de cada tema.
 
 | Tema | Intervalo devido | Próxima revisão | Resultado | Ação |

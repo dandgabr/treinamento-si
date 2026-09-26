@@ -237,8 +237,9 @@ documento existe, tem dono nomeado e foi usado pelo menos uma vez em uma decisã
 
 ## 6. Fila de revisão
 
-Esta trilha é a dona do calendário e do estado da revisão. Cada tema sugere os intervalos na sua
-seção 11; o estado fica aqui.
+Esta trilha define o calendário e o formato do estado da revisão. Cada tema sugere os intervalos na
+sua seção 11; em runtime, o estado de cada usuário fica no aplicativo, e a tabela desta seção é o
+exemplo.
 
 | Momento | O que entra na fila | Intervalos |
 |---|---|---|

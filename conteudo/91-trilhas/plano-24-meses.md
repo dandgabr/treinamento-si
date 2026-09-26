@@ -249,9 +249,9 @@ nenhum indicador de risco da empresa tem essa dependência.
 
 ## 6. Fila de revisão
 
-A trilha é a dona do calendário e do estado. O desenho da fila, a regra de rebaixamento e a
-distribuição semanal estão em [plano-12-meses.md](./plano-12-meses.md), seção 6; o que muda aqui é
-o intervalo entre as passagens.
+A trilha define o calendário e o formato do estado; em runtime, o estado de cada usuário fica no
+aplicativo. O desenho da fila, a regra de rebaixamento e a distribuição semanal estão em
+[plano-12-meses.md](./plano-12-meses.md), seção 6; o que muda aqui é o intervalo entre as passagens.
 
 | Momento | O que entra na fila | Intervalos |
 |---|---|---|

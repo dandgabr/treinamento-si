@@ -58,7 +58,7 @@ Duplicar informação garante divergência. Cada dado tem um só lugar:
 | Definição de termo | `glossario.md` | áreas, que listam os termos (seção 9) |
 | Domínios, pesos, custo de certificação | `90-certificacoes/` | guia (siglas) e tema (domínio coberto) |
 | Itens de recuperação ativa | tema, seção 10 | guia, que monta o somativo intercalado |
-| Calendário e estado de revisão espaçada | `91-trilhas/` | tema, que sugere os intervalos |
+| Calendário e estado de revisão espaçada | `91-trilhas/`, que define a cadência, a regra de rebaixamento e o formato do registro | o aplicativo, que guarda o estado de cada usuário em runtime; tema, que sugere os intervalos |
 | Fontes verificadas | cada documento, para as próprias afirmações | `99-fontes/`, que indexa |
 | Relações entre temas | o `relacoes` do frontmatter do tema | o guia da área e `mapa-relacoes.md`, que são visões derivadas |
 

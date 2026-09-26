@@ -170,14 +170,14 @@ Responda tudo antes de abrir o gabarito.
 1. Pré-teste com nota de confiança; leitura do conteúdo, incluindo o exemplo resolvido; recuperação ativa respondida com o arquivo fechado; agendamento das revisões em D+1, D+7 e D+30.
 2. Erro em D+7 rebaixa para D+3. Erro em D+30 rebaixa para D+7.
 3. Dia 30, lista de tipos de informação com nível de impacto e o nome de quem responde pela política e pelos dados; dia 60, registro de risco com responsáveis nomeados pela decisão; dia 90, ata de exercício de mesa e um aceite de risco assinado.
-4. A trilha em 91-trilhas, que mantém o registro de progresso e o campo `proxima_revisao`. O tema apenas sugere os intervalos.
+4. A trilha em 91-trilhas, que define a cadência, a regra de rebaixamento e o formato do registro. O estado de cada usuário, incluindo o campo `proxima_revisao`, fica no aplicativo. O tema apenas sugere os intervalos.
 5. Porque a política mexe na responsabilidade de todas as áreas antes de você ter leitura da organização, e o primeiro entregável deve produzir informação, não conflito.
 
 </details>
 
 ## 11. Revisão espaçada
 
-Os intervalos abaixo são sugestão. O calendário e o estado pertencem ao plano de estudo em [91-trilhas/](../91-trilhas/README.md), dono de `proxima_revisao`.
+Os intervalos abaixo são sugestão. O calendário pertence ao plano de estudo em [91-trilhas/](../91-trilhas/README.md), que define a cadência e o formato do registro; o estado de cada usuário fica no aplicativo.
 
 | Intervalo | O que fazer | Se errar |
 |---|---|---|

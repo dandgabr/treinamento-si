@@ -9,8 +9,9 @@ status_verificacao: rascunho
 
 # Trilhas
 
-Planos de estudo com marcos, carga horária e checkpoints. Cada trilha é a **dona** do calendário de
-revisão espaçada e do registro de progresso (os temas apenas sugerem os intervalos).
+Planos de estudo com marcos, carga horária e checkpoints. Cada trilha define o **calendário** da
+revisão espaçada: a cadência, a regra de rebaixamento e o formato do registro de progresso. Em
+runtime, o estado de cada usuário fica no aplicativo; aqui ficam a definição e o exemplo.
 
 | Trilha | Público | Carga |
 |---|---|---|
