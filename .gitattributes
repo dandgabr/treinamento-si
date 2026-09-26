@@ -1,0 +1,13 @@
+# Historico sempre em LF. Nenhum arquivo tinha CRLF quando esta regra entrou,
+# entao ela nao gera diff de renormalizacao.
+* text=auto eol=lf
+
+# cmd.exe precisa de CRLF nos scripts de Windows (a ultima regra vence).
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Nunca normalizar binarios.
+*.png binary
+*.jpg binary
+*.pdf binary
