@@ -73,9 +73,16 @@ componentes, o domínio e os testes não mudaram; o que muda é a casca em volta
 | `src/infrastructure/storage/persistencia.ts` | escolhe o provedor: ponte do Electron ou `localStorage` |
 
 **O progresso vira arquivo.** No desktop ele fica em `progresso.json`, na pasta de dados do
-aplicativo (no Linux, `~/.config/roadmap-ciso-app/`), em vez do armazenamento do navegador. A
-primeira execução **migra** o que já foi estudado no navegador da mesma máquina. Exportar, importar
-e recomeçar estão no menu **Progresso** e também no painel — as duas portas chamam as mesmas ações.
+aplicativo (no Linux, `~/.config/roadmap-ciso-app/`), em vez do armazenamento do navegador.
+Exportar, importar e recomeçar estão no menu **Progresso** e também no painel — as duas portas
+chamam as mesmas ações.
+
+**As duas vias não compartilham progresso, e não há migração automática.** O armazenamento local do
+navegador pertence à origem em que o app roda (`file://` ou `127.0.0.1:4173`); no desktop a origem é
+`app://bundle`, um balde próprio e vazio. Ler `localStorage` de dentro do desktop nunca acharia o
+estudo feito no navegador — por isso o caminho não existe no código. A ponte entre as vias é o
+**arquivo exportado**: exporte no navegador e importe no desktop, ou o contrário. Quando não há nada
+estudado, o painel diz isso e aponta o botão.
 
 **O que a casca fecha.** O conteúdo é servido por um esquema próprio (`app://`), o que permite mandar
 a CSP como **header** e não só como meta tag. Não há Node no renderer (`contextIsolation`, `sandbox`,
@@ -132,9 +139,10 @@ porque essa diferença importa para julgar o resultado.
 `conteudo/CONTRIBUTING.md` pede "marcos e autoavaliação; sem gamificação artificial", e todo insumo
 do placar era um clique do próprio usuário — não existe item objetivo no app, então ele media
 botões apertados, não aprendizagem. A faixa mais alta se chamava "CISO", que o material trata como
-designação formal (Resolução CMN 4.893/2021, art. 7º), não conquista. Ficaram as três coisas
+designação formal (Resolução CMN 4.893/2021, art. 7º), não conquista. Ficaram as quatro coisas
 acionáveis ou verificáveis, cada uma exibida com a régua ao lado: a **fila de hoje** (com link para
-cada tema), os **temas firmes** e os **checkpoints aprovados** no critério que o guia declara.
+cada tema), os **temas firmes**, os **checkpoints aprovados** no critério que o guia declara e os
+**dias com estudo**.
 
 A **calibração** saiu pelo mesmo motivo: cruzar a confiança declarada com o desfecho do tema mede
 ruído, porque as perguntas do pré-teste não são as da recuperação ativa. Medir calibração de verdade
@@ -180,16 +188,19 @@ direto. O que não vai para o controle de versão é o derivado: `app/src/conten
 `app/scripts/check-content.ts` guarda dois números fixos no código, 18 e 109, e compara com os
 totais do JSON gerado. Depois percorre cada tema e cada guia. Erra o build quem:
 
-- tiver contagem de áreas ou de temas diferente de 18 e 109;
+- tiver contagem de áreas ou de temas diferente de 18 e 109, ou `meta.totais` divergente dos dados;
 - perder o bloco "Por que isso importa" (a ancoragem no cargo do CISO);
 - perder a seção "Recuperação ativa", ou ficar com menos de 2 itens nela;
-- publicar item de recuperação sem gabarito;
-- chegar sem `fontes` no frontmatter;
+- publicar item de recuperação sem gabarito, ou seção sem HTML;
+- chegar com título, nível, tempo estimado ou objetivo de aprendizagem vazio;
+- chegar sem `fontes` no frontmatter, ou com fonte sem url/tipo;
 - ficar sem a tabela de erros comuns;
 - zerar o pré-teste;
 - apontar relação para tema inexistente, para alvo sem `#` ou sem `motivo`;
 - deixar guia de área sem checkpoint, ou com checkpoint sem gabarito ou sem critério declarado;
-- usar qualquer uma das 12 expressões do léxico proibido da seção 5 do `CONTRIBUTING`.
+- declarar um critério que o parser não entende (o limiar deixaria de ter régua);
+- declarar `revisao_inicial_dias` diferente da sequência que o escalonador implementa;
+- usar qualquer uma das 12 expressões do léxico proibido, em tema, guia ou página.
 
 O gate imprime `verificado: 18 areas, 109 temas, 22 paginas` quando passa. Quando falha, lista cada
 erro e sai com código 1, o que derruba o `npm run build` antes de o Vite entrar em ação.
@@ -204,21 +215,15 @@ found`.
 O arquivo `app/.npmrc` inverte a omissão só neste projeto, com uma linha: `include=dev`. Ele precisa
 continuar existindo. Se desaparecer, o caminho alternativo é `npm install --include=dev`.
 
-## O que ainda não existe
+## Onde o progresso mora
 
-O progresso é gravado no navegador (`localStorage`, chave `roadmap:progresso`): leitura, confiança
-do pré-teste, veredito da recuperação com a revisão reagendada e resultado do checkpoint, além de
-exportar, importar e recomeçar.
+No aplicativo desktop, num arquivo: `progresso.json`, na pasta de dados do app. Na versão de
+navegador, no armazenamento local — **local e não confidencial**: em `file://` no Chrome, todos os
+arquivos HTML locais compartilham a mesma chave, e qualquer página local do mesmo perfil enxerga o
+mesmo dado; no Firefox o balde é por arquivo. Não guarde nada sensível ali.
 
-Esse progresso é **local e não confidencial**. Em `file://`, no Chrome, todos os arquivos HTML
-locais compartilham o mesmo armazenamento — qualquer página local aberta no mesmo perfil enxerga a
-mesma chave. No Firefox o balde é por arquivo. Não guarde nada sensível ali. Exportar, importar e
-recomeçar existem tanto no painel quanto no menu do aplicativo desktop.
-
-O launcher web continua existindo como via sem instalação, e o aplicativo desktop é o caminho
-principal. No desktop o progresso é um arquivo na pasta de dados do app; no navegador ele segue no
-armazenamento local, com as limitações de origem descritas acima. Os dois não compartilham progresso
-diretamente — o arquivo exportado é a ponte entre eles.
+Exportar, importar e recomeçar existem nos dois, no painel e no menu do desktop. As duas vias não
+compartilham progresso direto: o **arquivo exportado** é a ponte.
 
 ## Pendências conhecidas
 
@@ -227,26 +232,27 @@ em que entram.
 
 | Pendência | Fase |
 |---|---|
-| Regras do material ainda não implementadas: "duas passagens falhas seguidas mandam para releitura completa" (`plano-12-meses.md`), revisão além de D+90, a tarefa concreta de cada intervalo, o artefato da fase e o diagnóstico por item (hoje é um booleano por tema) | 4 |
-| Os 1328 links relativos (`../README.md`, `TEMA-*.md`) ficam mortos no arquivo único: precisam ser reescritos para as rotas do app. Os 586 externos abrem normalmente | 3 |
-| A fila de hoje agora é clicável, mas só lista os cinco primeiros: falta paginar ou abrir a lista inteira | 3 |
-| Os vereditos por item do checkpoint vivem em `useState`: o total persiste, mas após recarregar os botões voltam em branco, com o texto dizendo "último resultado registrado" | 3 |
-| Não há empacotamento do desktop: falta `electron-builder` para `.dmg`/`.zip`, NSIS e AppImage, com `asar` e os *fuses* endurecidos | 4.3 |
-| O desktop ainda carrega o bundle inteiro: falta registrar só o `flowchart` do Mermaid, ler o `content.json` do disco e dividir o bundle, que é o que reduz arranque e memória (O1, O4, O5) | 4.4 |
-| A CSP do desktop ainda precisa de `'unsafe-inline'` para o script inline; com o bundle dividido dá para trocar por `'self'` | 4.4 |
-| O desktop só foi exercitado no Linux. Falta abrir num Windows e num macOS de verdade, e assinar se for distribuído a terceiros | 7 |
-| O launcher web (`empacotar`) continua como via sem instalação; ele e o desktop não compartilham progresso, porque as origens são diferentes — o arquivo exportado é a ponte | 7 |
-| `npm run dev` não funciona: a CSP do `index.html` bloqueia o `<script src>` que o Vite injeta. O `<meta>` precisa ser injetado só no build | 3 |
-| Diagramas: falta um botão de ampliar (o fluxograma tem ~3000 px e rola na horizontal) e `aria-label` no SVG. Cabeçalho de tabela longa sem `position: sticky` | 3 |
-| Escala de confiança do pré-teste: alvos de 29 px, sem rótulo nas pontas (o que é 1 e o que é 5) e 25 paradas de tabulação no bloco | 3 |
-| Acessibilidade: `document.title` fixo em todas as rotas, foco não vai para o `main` na troca de rota, falta link "pular para o conteúdo" e alvos de 44 px no celular | 3 |
-| Tema escuro não segue `prefers-color-scheme` e a primeira tela pisca branca enquanto o bundle de 7,6 MB monta | 3 |
-| Páginas de 35 mil px (mapa de relações) sem sumário ou âncoras; as 6 páginas de `99-fontes/` aparecem no menu do aluno, mas são a trilha de QA do mantenedor | 3 |
-| Sobre o JSON: o HTML das seções 3 e 10 dos temas (~0,25 MB) e o campo `errosComuns` nunca chegam à tela; o §9 dos guias é renderizado, ao contrário do que esta tabela dizia antes | 3 |
-| `glossario.md` e `mapa-relacoes.md` usam `## Título` sem número e caem inteiros no `intro`, sem seções | 3 |
-| 3,4 MB dos 7,6 MB do artefato são o bundle inteiro do Mermaid, e os 69 diagramas são todos `flowchart`: dá para registrar só esse tipo | 3 |
-| O contrato de re-render do Mermaid mora na `key` do React, repetido em três arquivos, e o laço de seções também está triplicado | 3 |
-| O verificador do material dá verde quando um sincronizador falha, trata o léxico apenas como aviso e não valida `templates/` nem `CONTRIBUTING.md` | 2 ou depois |
-| Importação de progresso: esquema com versão, corte de tamanho antes do `JSON.parse` e cópia campo a campo (nunca merge). A leitura do `localStorage` já faz isso | 7 |
-| O launcher só foi exercitado no Linux. Falta abrir num Windows e num macOS de verdade, e assinar o artefato para o Gatekeeper não pedir aceite manual | 7 |
-| Commit do lockfile (feito), `npm ci` e versões exatas; SBOM e soma de verificação por release. Há um advisory `dev-only` no Vitest | 7 |
+| **4.3 — Configurar** o `electron-builder` (está instalado, sem config nem script): `.dmg`/`.zip` arm64 e x64, NSIS e portátil, AppImage e `.deb`, com `asar` e os *fuses* endurecidos | 4.3 |
+| **4.4 — Otimizar** o que a casca liberou: registrar só o `flowchart` do Mermaid, ler o `content.json` do disco em vez de inlinado, dividir o bundle. É o que reduz peso, arranque e memória (O1, O4, O5, O6) | 4.4 |
+| Trocar `script-src 'unsafe-inline'` por `'self'` nas duas CSPs — só é possível depois do bundle dividido | 4.4 |
+| **Nenhum número medido de O1–O8 e S1–S14.** O §16.3 do plano diz que sem medição o item não conta como feito: faltam arranque até a primeira pintura, memória após 20 navegações, diagramas renderizados por tela e tamanho do instalador | 4.4 |
+| **A Fase 5 inteira não existe**: banco de múltipla escolha, `check-questions.ts` e tela de Quiz. É decisão de autoria antes de ser código — exige template novo e auditoria de citação, pelas regras do `CONTRIBUTING` | 5 |
+| Os 1328 links relativos (`../README.md`, `TEMA-*.md`) ficam mortos no arquivo único: precisam ser reescritos para as rotas do app. Os 586 externos abrem normalmente | 6 |
+| Regras do material ainda não implementadas: "duas passagens falhas seguidas mandam para releitura completa" (`plano-12-meses.md`), revisão além de D+90, a tarefa concreta de cada intervalo, a coluna "Artefato produzido" do registro e o diagnóstico por item (hoje é um booleano por tema) | 6 |
+| O **critério de aprovação não tem dono declarado** no `CONTRIBUTING` §3, e a trilha de 90 dias restringe o escopo de 02 ("valem apenas os itens 1 e 2") enquanto o app aplica o critério do guia — a tela pode dizer "reprovado" por uma régua que aquela trilha não aplica | 6 |
+| `glossario.md` e `mapa-relacoes.md` usam `## Título` sem número e caem inteiros no `intro`, sem seções; o glossário não é navegável por termo | 6 |
+| A fila de hoje é clicável, mas só lista os cinco primeiros: falta paginar ou abrir a lista inteira | 6 |
+| Os vereditos por item do checkpoint vivem em `useState`: o total persiste, mas após recarregar os botões voltam em branco, com o texto dizendo "último resultado registrado" | 6 |
+| `npm run dev` não funciona: a CSP do `index.html` bloqueia o `<script src>` que o Vite injeta. O `<meta>` precisa ser injetado só no build | 6 |
+| Diagramas: falta um botão de ampliar (o fluxograma tem ~3000 px e rola na horizontal) e `aria-label` no SVG. Cabeçalho de tabela longa sem `position: sticky` | 6 |
+| Escala de confiança do pré-teste: alvos de 29 px, sem rótulo nas pontas (o que é 1 e o que é 5) e 25 paradas de tabulação no bloco | 6 |
+| Acessibilidade: `document.title` fixo em todas as rotas, foco não vai para o `main` na troca de rota, falta link "pular para o conteúdo" e alvos de 44 px no celular | 6 |
+| Tema escuro não segue `prefers-color-scheme` e a primeira tela pisca branca enquanto o bundle monta | 6 |
+| Páginas de 35 mil px (mapa de relações) sem sumário ou âncoras; as 6 páginas de `99-fontes/` aparecem no menu do aluno, mas são a trilha de QA do mantenedor | 6 |
+| Sobre o JSON: o HTML das seções 3 e 10 dos temas (~0,25 MB) e o campo `errosComuns` nunca chegam à tela; e há 3,4 MB de bundle do Mermaid para 69 diagramas que são todos `flowchart` | 6 |
+| O contrato de re-render do Mermaid mora na `key` do React, repetido em três arquivos, e o laço de seções também está triplicado | 6 |
+| O verificador do material dá verde quando um sincronizador falha, trata o léxico apenas como aviso e não valida `templates/` nem `CONTRIBUTING.md` | 6 |
+| O desktop carrega um **Chromium 130, fora de linha** (Electron 33), e o `npm audit` acusa 1 crítica (`tar`, via `electron-builder`) e 13 altas — quase tudo em ferramenta de build. Pinar, subir de versão e declarar a cadência de patch | 7 |
+| *Fuses* e integridade do `asar` deixam de ser opcionais quando houver empacotamento distribuído, junto da assinatura | 7 |
+| O desktop só foi exercitado no Linux. Falta abrir num Windows e num macOS de verdade | 7 |
+| SBOM e soma de verificação por release; o `package-lock.json` já cobre electron, electron-builder e playwright | 7 |

@@ -25,6 +25,7 @@ const CSP = [
   "object-src 'none'",
   "base-uri 'none'",
   "form-action 'none'",
+  "frame-ancestors 'none'",
 ].join('; ')
 
 const TIPOS: Record<string, string> = {
@@ -38,8 +39,15 @@ const TIPOS: Record<string, string> = {
   '.map': 'application/json; charset=utf-8',
 }
 
+// `corsEnabled: true` e obrigatorio junto de `supportFetchAPI`: sem ele, uma pagina de
+// origem remota carregada neste renderer conseguiria ler os recursos de `app://`
+// (padrao do CVE-2026-70604 / GHSA-v3j7-r9gq-3gjw). Hoje nao existe pagina remota aqui,
+// mas a privilegiacao nao pode depender disso.
 protocol.registerSchemesAsPrivileged([
-  { scheme: ESQUEMA, privileges: { standard: true, secure: true, supportFetchAPI: true } },
+  {
+    scheme: ESQUEMA,
+    privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true },
+  },
 ])
 
 /** Abre no navegador do sistema, e so para http(s): nada de file:, smb: ou esquema proprio. */
@@ -54,14 +62,18 @@ function abrirFora(url: string): void {
 
 function registrarProtocolo(): void {
   protocol.handle(ESQUEMA, async (pedido) => {
-    const caminho = decodeURIComponent(new URL(pedido.url).pathname).replace(/^\/+/, '')
-    const alvo = path.resolve(RENDERER, caminho || 'index.html')
-    // Trava de travessia: o arquivo tem de estar dentro do build. E o unico ponto em que
-    // um caminho vindo de fora vira leitura de disco, entao a checagem e explicita.
-    if (alvo !== RENDERER && !alvo.startsWith(RENDERER + path.sep)) {
-      return new Response('nao encontrado', { status: 404 })
-    }
     try {
+      const url = new URL(pedido.url)
+      // Um host so. O handler ignorava o host, entao `app://qualquercoisa/...` era
+      // servido igual.
+      if (url.host !== 'bundle') return new Response('nao encontrado', { status: 404 })
+      const caminho = decodeURIComponent(url.pathname).replace(/^\/+/, '')
+      const alvo = path.resolve(RENDERER, caminho || 'index.html')
+      // Trava de travessia: o arquivo tem de estar dentro do build. E o unico ponto em
+      // que um caminho vindo de fora vira leitura de disco.
+      if (alvo !== RENDERER && !alvo.startsWith(RENDERER + path.sep)) {
+        return new Response('nao encontrado', { status: 404 })
+      }
       const corpo = await fs.readFile(alvo)
       return new Response(corpo, {
         headers: {
@@ -72,6 +84,8 @@ function registrarProtocolo(): void {
         },
       })
     } catch {
+      // URL malformada (`app://bundle/%` dispara URIError no decode) e arquivo ausente
+      // caem aqui, em vez de rejeitar a promise do handler.
       return new Response('nao encontrado', { status: 404 })
     }
   })
@@ -192,35 +206,41 @@ function registrarCanais(): void {
 
   ipcMain.handle('progresso:exportar', async (_evento, valor: unknown) => {
     const janela = BrowserWindow.getAllWindows()[0]
-    if (!janela) return { cancelado: true }
+    if (!janela) return { estado: 'cancelado' } as const
     const escolha = await dialog.showSaveDialog(janela, {
       title: 'Exportar progresso',
       defaultPath: 'roadmap-progresso.json',
       filters: [{ name: 'Progresso do Roadmap', extensions: ['json'] }],
     })
-    if (escolha.canceled || !escolha.filePath) return { cancelado: true }
-    await fs.writeFile(escolha.filePath, JSON.stringify(valor, null, 2), 'utf8')
-    return { salvo: true, caminho: escolha.filePath }
+    if (escolha.canceled || !escolha.filePath) return { estado: 'cancelado' } as const
+    try {
+      await fs.writeFile(escolha.filePath, JSON.stringify(valor, null, 2), 'utf8')
+      return { estado: 'ok', caminho: escolha.filePath } as const
+    } catch {
+      return { estado: 'erro', mensagem: 'Não consegui gravar nesse arquivo.' } as const
+    }
   })
 
   ipcMain.handle('progresso:importar', async () => {
     const janela = BrowserWindow.getAllWindows()[0]
-    if (!janela) return { cancelado: true }
+    if (!janela) return { estado: 'cancelado' } as const
     const escolha = await dialog.showOpenDialog(janela, {
       title: 'Importar progresso',
       filters: [{ name: 'Progresso do Roadmap', extensions: ['json'] }],
       properties: ['openFile'],
     })
-    if (escolha.canceled || !escolha.filePaths[0]) return { cancelado: true }
+    if (escolha.canceled || !escolha.filePaths[0]) return { estado: 'cancelado' } as const
     const caminho = escolha.filePaths[0]
     // Tamanho conferido antes de ler: o corte protege contra arquivo gigante escolhido
     // por engano ou por ma-fe.
     const informacao = await fs.stat(caminho)
-    if (informacao.size > TETO_BYTES) return { erro: 'O arquivo passa de 1 MB.' }
+    if (informacao.size > TETO_BYTES) {
+      return { estado: 'erro', mensagem: 'O arquivo passa de 1 MB.' } as const
+    }
     try {
-      return { dado: JSON.parse(await fs.readFile(caminho, 'utf8')) as unknown }
+      return { estado: 'ok', dado: JSON.parse(await fs.readFile(caminho, 'utf8')) as unknown } as const
     } catch {
-      return { erro: 'O arquivo não é um JSON válido.' }
+      return { estado: 'erro', mensagem: 'O arquivo não é um JSON válido.' } as const
     }
   })
 }
@@ -237,9 +257,11 @@ if (!app.requestSingleInstanceLock()) {
     }
   })
 
-  // O app nao usa camera, microfone, localizacao, notificacao nem clipboard.
+  // O app nao usa camera, microfone, localizacao, notificacao nem clipboard. As duas
+  // checagens: a assincrona pede permissao, a sincrona responde na hora.
   app.on('web-contents-created', (_evento, conteudo) => {
     conteudo.session.setPermissionRequestHandler((_c, _p, responder) => responder(false))
+    conteudo.session.setPermissionCheckHandler(() => false)
   })
 
   void app.whenReady().then(() => {

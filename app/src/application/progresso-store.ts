@@ -2,14 +2,21 @@
 // observa.
 //
 // A regra de transicao nao mora aqui — ela esta em src/domain/progresso.ts, como funcao
-// pura. Este modulo so encadeia: aplica o redutor, grava e notifica. A gravacao e
-// assincrona porque no aplicativo desktop ela atravessa o IPC ate o arquivo.
+// pura. Este modulo so encadeia: aplica o redutor, grava e notifica.
+//
+// A carga e assincrona (no desktop ela atravessa o IPC) e a gravacao e serializada. Duas
+// decisoes que nao sao obvias:
+//   - acao que chega antes da carga NAO grava e NAO e descartada: ela e reaplicada sobre
+//     o que veio do disco. Gravar antes de ler substituiria o arquivo inteiro pelo estado
+//     vazio mais um clique — perda de tudo, nao do ultimo clique;
+//   - uma gravacao por vez. Duas em voo disputariam o mesmo arquivo temporario.
 
 import { useSyncExternalStore } from 'react'
 import {
   abrirPassagem as aplicarAbertura,
   marcarLido as aplicarLido,
   normalizarProgresso,
+  pareceProgresso,
   progressoVazio,
   registrarCheckpoint as aplicarCheckpoint,
   registrarConfianca as aplicarConfianca,
@@ -26,9 +33,16 @@ function onde(): Persistencia {
   return provedor
 }
 
+type Redutor = (p: Progresso) => Progresso
+
 let estado: Progresso = progressoVazio()
-let mutado = false
+let carregado = false
+let erroDeCarga: string | null = null
 let falhaAoGravar = false
+/** Intencoes chegadas antes da carga, para reaplicar sobre o estado do disco. */
+const pendentes: Redutor[] = []
+let fila: Promise<void> = Promise.resolve()
+
 const ouvintes = new Set<() => void>()
 const ouvintesDeFalha = new Set<() => void>()
 
@@ -42,42 +56,54 @@ function marcarFalha(falhou: boolean): void {
   for (const ouvinte of ouvintesDeFalha) ouvinte()
 }
 
-/**
- * Carga inicial. A interface ja pode ser usada antes de terminar, e se alguma acao
- * acontecer nesse intervalo ela prevalece: a carga nao sobrescreve o que o usuario
- * acabou de registrar.
- */
-const carga: Promise<void> = onde()
-  .carregar()
-  .then((bruto) => {
-    if (mutado) return
-    estado = normalizarProgresso(bruto, new Date())
-    notificar()
-  })
-  .catch(() => {
-    // Sem estado guardado: comeca vazio, e a interface segue.
-  })
+/** Uma gravacao por vez: evita duas disputando o mesmo arquivo temporario. */
+function agendarGravacao(valor: Progresso): void {
+  fila = fila.then(() => onde().gravar(valor)).then(
+    () => marcarFalha(false),
+    (erro: unknown) => {
+      console.error('[progresso] falha ao gravar', erro)
+      marcarFalha(true)
+    },
+  )
+}
 
-/** Para os testes e para quem precisa esperar o estado da sessao anterior. */
+const carga: Promise<void> = onde().carregar().then(
+  (bruto) => {
+    const doDisco = normalizarProgresso(bruto, new Date())
+    estado = pendentes.reduce((p, redutor) => redutor(p), doDisco)
+    const houveIntencao = pendentes.length > 0
+    pendentes.length = 0
+    carregado = true
+    if (houveIntencao) agendarGravacao(estado)
+    notificar()
+  },
+  (erro: unknown) => {
+    // Falha de leitura nao pode virar "comeca vazio" em silencio: o proximo clique
+    // consolidaria a perda.
+    console.error('[progresso] falha ao carregar', erro)
+    erroDeCarga = 'Não consegui ler o progresso guardado neste computador.'
+    carregado = true
+    notificar()
+  },
+)
+
+/** Para os testes e para quem precisa do estado da sessao anterior antes de agir. */
 export function quandoCarregado(): Promise<void> {
   return carga
 }
 
-function publicar(novo: Progresso): void {
+function publicar(redutor: Redutor): void {
+  const novo = redutor(estado)
   // Os redutores devolvem a mesma referencia quando nada muda; sem esta guarda, cada
-  // clique gravava e re-renderizava os consumidores a toa.
+  // clique gravaria e re-renderizaria os consumidores a toa.
   if (Object.is(novo, estado)) return
   estado = novo
-  mutado = true
-  void onde()
-    .gravar(novo)
-    .then(
-      () => marcarFalha(false),
-      (erro: unknown) => {
-        console.error('[progresso] falha ao gravar', erro)
-        marcarFalha(true)
-      },
-    )
+  if (!carregado) {
+    pendentes.push(redutor)
+    notificar()
+    return
+  }
+  agendarGravacao(novo)
   notificar()
 }
 
@@ -89,14 +115,26 @@ export function useFalhaAoGravar(): boolean {
   return useSyncExternalStore(inscreverFalha, lerFalha)
 }
 
+export function useCarregado(): boolean {
+  return useSyncExternalStore(inscrever, lerCarregado)
+}
+
+export function useErroDeCarga(): string | null {
+  return useSyncExternalStore(inscrever, lerErroDeCarga)
+}
+
 function inscrever(ouvinte: () => void): () => void {
   ouvintes.add(ouvinte)
-  return () => ouvintes.delete(ouvinte)
+  return () => {
+    ouvintes.delete(ouvinte)
+  }
 }
 
 function inscreverFalha(ouvinte: () => void): () => void {
   ouvintesDeFalha.add(ouvinte)
-  return () => ouvintesDeFalha.delete(ouvinte)
+  return () => {
+    ouvintesDeFalha.delete(ouvinte)
+  }
 }
 
 function ler(): Progresso {
@@ -107,12 +145,20 @@ function lerFalha(): boolean {
   return falhaAoGravar
 }
 
+function lerCarregado(): boolean {
+  return carregado
+}
+
+function lerErroDeCarga(): string | null {
+  return erroDeCarga
+}
+
 export function ondeFicaOProgresso(): string {
   return onde().descricao
 }
 
 export function marcarLido(ref: string, agora: Date = new Date()): void {
-  publicar(aplicarLido(estado, ref, agora))
+  publicar((p) => aplicarLido(p, ref, agora))
 }
 
 export function registrarConfianca(
@@ -121,7 +167,7 @@ export function registrarConfianca(
   confianca: Confianca,
   agora: Date = new Date(),
 ): void {
-  publicar(aplicarConfianca(estado, ref, indice, confianca, agora))
+  publicar((p) => aplicarConfianca(p, ref, indice, confianca, agora))
 }
 
 export function registrarRecuperacao(
@@ -129,7 +175,7 @@ export function registrarRecuperacao(
   acertou: boolean,
   agora: Date = new Date(),
 ): void {
-  publicar(aplicarRecuperacao(estado, ref, acertou, agora))
+  publicar((p) => aplicarRecuperacao(p, ref, acertou, agora))
 }
 
 export function registrarCheckpoint(
@@ -138,12 +184,12 @@ export function registrarCheckpoint(
   total: number,
   agora: Date = new Date(),
 ): void {
-  publicar(aplicarCheckpoint(estado, areaId, acertos, total, agora))
+  publicar((p) => aplicarCheckpoint(p, areaId, acertos, total, agora))
 }
 
 /** Abre a proxima passagem de recuperacao de um tema. */
 export function abrirPassagem(ref: string, agora: Date = new Date()): void {
-  publicar(aplicarAbertura(estado, ref, agora))
+  publicar((p) => aplicarAbertura(p, ref, agora))
 }
 
 /**
@@ -151,14 +197,15 @@ export function abrirPassagem(ref: string, agora: Date = new Date()): void {
  * de confianca mesmo quando a origem e o proprio usuario.
  */
 export function definirProgresso(novo: unknown, agora: Date = new Date()): void {
-  publicar(normalizarProgresso(novo, agora))
+  publicar(() => normalizarProgresso(novo, agora))
 }
 
 /** Apaga o que esta guardado e volta ao zero. */
 export async function recomecar(): Promise<void> {
+  await carga
   await onde().apagar()
   estado = progressoVazio()
-  mutado = true
+  await fila
   notificar()
 }
 
@@ -169,19 +216,34 @@ export async function recomecarComConfirmacao(): Promise<void> {
   if (confirmado) await recomecar()
 }
 
-/** Devolve a mensagem de erro, ou null quando deu certo ou foi cancelado. */
-export async function exportar(): Promise<string | null> {
+/** Recado das acoes de progresso: sucesso se mostra neutro, falha se mostra como aviso. */
+export type Aviso = { tipo: 'ok' | 'erro'; texto: string } | null
+
+/** Devolve null quando foi cancelado. */
+export async function exportar(): Promise<Aviso> {
+  // Sem esperar a carga, o arquivo sairia com o estado vazio.
+  await carga
   const resultado = await onde().exportar(estado)
-  return resultado.estado === 'erro' ? (resultado.mensagem ?? 'Não consegui exportar.') : null
+  if (resultado.estado === 'erro') return { tipo: 'erro', texto: resultado.mensagem ?? 'Não consegui exportar.' }
+  if (resultado.estado === 'ok') {
+    return { tipo: 'ok', texto: resultado.caminho ? `Exportado para ${resultado.caminho}.` : 'Progresso exportado.' }
+  }
+  return null
 }
 
-/** Devolve a mensagem de erro, ou null quando deu certo ou foi cancelado. */
-export async function importar(): Promise<string | null> {
+/** Devolve null quando foi cancelado. */
+export async function importar(): Promise<Aviso> {
+  await carga
   const resultado = await onde().importar()
   if (resultado.estado === 'cancelado') return null
-  if (resultado.estado === 'erro') return resultado.mensagem
+  if (resultado.estado === 'erro') return { tipo: 'erro', texto: resultado.mensagem }
+  // Forma conferida antes de substituir: um JSON valido que nao e um progresso do app
+  // zeraria o estudo existente e ainda diria que deu certo.
+  if (!pareceProgresso(resultado.dado)) {
+    return { tipo: 'erro', texto: 'O arquivo não é um progresso do Roadmap CISO.' }
+  }
   definirProgresso(resultado.dado)
-  return null
+  return { tipo: 'ok', texto: 'Progresso importado.' }
 }
 
 /**
@@ -192,8 +254,14 @@ export function ligarMenuDoApp(): void {
   const api = ponte()
   if (!api) return
   api.aoEscolherNoMenu((acao) => {
-    if (acao === 'exportar') void exportar()
-    else if (acao === 'importar') void importar()
-    else if (acao === 'apagar') void recomecarComConfirmacao()
+    void (async () => {
+      try {
+        if (acao === 'exportar') await exportar()
+        else if (acao === 'importar') await importar()
+        else if (acao === 'apagar') await recomecarComConfirmacao()
+      } catch (erro) {
+        console.error('[progresso] falha na acao do menu', erro)
+      }
+    })()
   })
 }

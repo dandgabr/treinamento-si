@@ -24,12 +24,16 @@ HOSTS_ACEITOS = {f"127.0.0.1:{PORTA}", f"localhost:{PORTA}", f"[::1]:{PORTA}"}
 CSP = (
     "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
     "img-src data:; font-src data:; connect-src 'none'; object-src 'none'; "
-    "base-uri 'none'; form-action 'none'"
+    "base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
 )
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
     server_version = "RoadmapLocal/1"
+
+    def version_string(self) -> str:
+        # Sem a versao do Python no cabecalho Server: e fingerprint de graca.
+        return self.server_version
 
     def log_message(self, formato: str, *args: object) -> None:
         # Sem ruido na janela do usuario; o banner e impresso uma vez, no inicio.

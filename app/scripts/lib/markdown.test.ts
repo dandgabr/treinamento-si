@@ -219,8 +219,17 @@ describe('renderSeguro', () => {
 
   it('acusa quando removeria todo o conteúdo do bloco', () => {
     // O DOMPurify descarta um elemento proibido único no topo sem registrá-lo em
-    // `removed`; sem a comparação de texto o build passaria com o bloco vazio.
+    // `removed`; sem comparar o HTML o build passaria com o bloco vazio.
     expect(() => renderSeguro('<style>body{display:none}</style>')).toThrow(/removeu conteudo/)
+  })
+
+  it('acusa também quando o bloco é um elemento proibido sem texto', () => {
+    // Comparar o texto visível não bastava: `<meta>`, `<base>` e `<link>` não têm texto,
+    // então saíam vazios e o build passava em silêncio.
+    expect(() => renderSeguro('<meta http-equiv="refresh" content="0;url=https://exemplo/">')).toThrow(
+      /removeu conteudo/,
+    )
+    expect(() => renderSeguro('<base href="https://exemplo/">')).toThrow(/removeu conteudo/)
   })
 
   it('preserva details e summary', () => {

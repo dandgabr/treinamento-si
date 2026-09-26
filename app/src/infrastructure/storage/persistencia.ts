@@ -85,13 +85,11 @@ function criarNoApp(): Persistencia {
   if (!api) throw new Error('ponte ausente')
   return {
     descricao: 'num arquivo na pasta de dados do aplicativo',
-    async carregar() {
-      const doArquivo = await api.progresso.ler()
-      if (doArquivo !== null) return doArquivo
-      // Primeira execucao no desktop: aproveita o que ja foi estudado no navegador, na
-      // mesma maquina. A gravacao seguinte passa a ser no arquivo.
-      return analisar(lerTexto(CHAVE))
-    },
+    // Sem migracao automatica do navegador: o armazenamento local vive na origem em que
+    // o app esta rodando, e a do desktop e `app://bundle` — um balde proprio e vazio.
+    // Ler `localStorage` daqui nunca acharia o estudo feito em `file://` ou em
+    // `127.0.0.1`. O arquivo exportado e a ponte entre as duas vias.
+    carregar: () => api.progresso.ler(),
     gravar: (valor) => api.progresso.gravar(valor),
     apagar: () => api.progresso.apagar(),
     exportar: (valor) => api.progresso.exportar(valor),

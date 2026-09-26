@@ -240,6 +240,16 @@ describe('normalizarProgresso', () => {
     expect(p.diasAtivos).toEqual(['2026-03-10'])
   })
 
+  it('descarta data com forma válida e calendário impossível', () => {
+    // `2020-13-99` e `2021-02-30` casam com a expressão e não existem. `2024-02-29`
+    // existe, porque 2024 é bissexto — 2026 não é, e por isso não serve de exemplo.
+    const p = normalizarProgresso(
+      { versao: 1, temas: {}, checkpoints: {}, diasAtivos: ['2020-13-99', '2021-02-30', '2024-02-29'] },
+      HOJE,
+    )
+    expect(p.diasAtivos).toEqual(['2024-02-29'])
+  })
+
   it('recusa chaves perigosas sem tocar no protótipo', () => {
     // `out['__proto__'] = x` trocaria o prototipo do objeto em vez de criar propriedade.
     const entrada: unknown = JSON.parse(

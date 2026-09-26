@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { content } from '../infrastructure/content/repository'
+import { ponte } from '../infrastructure/storage/ponte'
 import { aprovouNoCriterio, interpretarCriterio } from '../domain/criterio'
 import { dominioDaArea } from '../domain/dominio'
 import { diasComEstudo, filaDoProgresso, resultadoDoCheckpoint } from '../domain/progresso'
@@ -13,8 +14,11 @@ import {
   recomecarComConfirmacao,
   registrarCheckpoint,
   registrarRecuperacao,
+  useCarregado,
+  useErroDeCarga,
   useFalhaAoGravar,
   useProgresso,
+  type Aviso,
 } from '../application/progresso-store'
 import { BlocoQA } from './Blocos'
 import { linkTema } from './useRota'
@@ -167,10 +171,21 @@ export function ResumoProgresso() {
 /** Exportar, importar e recomeçar — as mesmas ações do menu do aplicativo desktop. */
 export function AcoesDeProgresso() {
   const falhou = useFalhaAoGravar()
-  const [mensagem, setMensagem] = useState<string | null>(null)
+  const progresso = useProgresso()
+  const carregado = useCarregado()
+  const erroDeCarga = useErroDeCarga()
+  const [aviso, setAviso] = useState<Aviso>(null)
+  // O aviso de "primeira vez" so vale depois da carga: antes dela, vazio e "nao lido" sao
+  // indistinguiveis, e o painel diria "primeira vez aqui" a quem tem 100 temas.
+  const nadaEstudado = carregado && Object.keys(progresso.temas).length === 0
 
-  async function agir(acao: () => Promise<string | null>): Promise<void> {
-    setMensagem(await acao())
+  async function agir(acao: () => Promise<Aviso>): Promise<void> {
+    try {
+      setAviso(await acao())
+    } catch (erro) {
+      console.error('[progresso] falha na acao', erro)
+      setAviso({ tipo: 'erro', texto: 'Não consegui concluir a ação.' })
+    }
   }
 
   return (
@@ -178,14 +193,26 @@ export function AcoesDeProgresso() {
       <p className="resumo-detalhe">
         Progresso guardado {ondeFicaOProgresso()}. Leve o arquivo exportado se trocar de máquina.
       </p>
+      {!carregado ? <p className="resumo-detalhe">carregando o progresso…</p> : null}
+      {erroDeCarga ? (
+        <p className="aviso-erro" role="alert">
+          {erroDeCarga}
+        </p>
+      ) : null}
+      {nadaEstudado ? (
+        <p className="resumo-detalhe">
+          Primeira vez aqui? Se você já estudava pela versão de navegador, use{' '}
+          <strong>Importar progresso</strong> com o arquivo que exportou de lá.
+        </p>
+      ) : null}
       {falhou ? (
         <p className="aviso-erro" role="alert">
           Não consegui gravar o progresso nesta sessão. Exporte para não perder o que já estudou.
         </p>
       ) : null}
-      {mensagem ? (
-        <p className="aviso-erro" role="alert">
-          {mensagem}
+      {aviso ? (
+        <p className={aviso.tipo === 'erro' ? 'aviso-erro' : 'resumo-detalhe'} role="status">
+          {aviso.texto}
         </p>
       ) : null}
       <div className="veredito-botoes">
@@ -195,12 +222,33 @@ export function AcoesDeProgresso() {
         <button className="botao-secundario" onClick={() => void agir(importar)}>
           Importar progresso
         </button>
-        <button className="botao-secundario" onClick={() => void recomecarComConfirmacao()}>
+        <button
+          className="botao-secundario"
+          onClick={() =>
+            void agir(async () => {
+              await recomecarComConfirmacao()
+              return null
+            })
+          }
+        >
           Recomeçar
         </button>
       </div>
+      <Versao />
     </div>
   )
+}
+
+/** Versao do aplicativo, quando ele roda na casca desktop. */
+function Versao() {
+  const [versao, setVersao] = useState<string | null>(null)
+  useEffect(() => {
+    const api = ponte()
+    if (!api) return
+    void api.versao().then(setVersao, () => setVersao(null))
+  }, [])
+  if (!versao) return null
+  return <p className="resumo-detalhe">Aplicativo desktop, versão {versao}.</p>
 }
 
 /** Checkpoint da area: veredito por item, e o total e o que conta para o criterio. */

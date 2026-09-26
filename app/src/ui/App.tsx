@@ -137,7 +137,7 @@ export function App() {
 
       {rota.nome === 'home' ? <Home /> : null}
       {rota.nome === 'area' ? <AreaView areaId={rota.areaId} escuro={escuro} /> : null}
-      {rota.nome === 'tema' ? <ThemeView refTema={rota.ref} escuro={escuro} /> : null}
+      {rota.nome === 'tema' ? <ThemeView key={rota.ref} refTema={rota.ref} escuro={escuro} /> : null}
       {rota.nome === 'pagina' ? <PaginaView slug={rota.slug} escuro={escuro} /> : null}
       {rota.nome === 'desconhecida' ? (
         <main className="conteudo">

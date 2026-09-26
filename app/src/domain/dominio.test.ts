@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { dominio, dominioDaArea } from './dominio'
+import { dominioDaArea } from './dominio'
 import { areaFake, guiaFake, progressoFake, temaFake } from './testes/fixtures'
 
 const REF_A = 'x#TEMA-01'
@@ -15,14 +15,13 @@ describe('dominioDaArea', () => {
     const d = dominioDaArea(AREA, progressoFake({ temas: { [REF_A]: temaFake(REF_A) } }))
     expect(d.totalTemas).toBe(2)
     expect(d.firmes).toBe(0)
-    expect(d.percentual).toBe(0)
   })
 
   it('conta como firme o tema cuja última recuperação foi acertada', () => {
     const p = progressoFake({ temas: { [REF_A]: temaFake(REF_A, { recuperacaoOk: true }) } })
     const d = dominioDaArea(AREA, p)
     expect(d.firmes).toBe(1)
-    expect(d.percentual).toBe(0.5)
+    expect(d.totalTemas).toBe(2)
   })
 
   it('não conta tema cuja última passagem foi erro', () => {
@@ -45,25 +44,22 @@ describe('dominioDaArea', () => {
     expect(dominioDaArea(area, comCheckpoint('y', 3)).checkpointAprovado).toBe(false)
   })
 
-  it('não divide por zero em área sem temas', () => {
+  it('não quebra em área sem temas', () => {
     const area = areaFake({ temas: [] })
-    expect(dominioDaArea(area, progressoFake()).percentual).toBe(0)
+    expect(dominioDaArea(area, progressoFake()).totalTemas).toBe(0)
+  })
+
+  it('não mistura áreas diferentes', () => {
+    const a1 = areaFake({ areaId: 'a', temas: ['a#TEMA-01'] })
+    const a2 = areaFake({ areaId: 'b', temas: ['b#TEMA-01'] })
+    const p = progressoFake({
+      temas: { 'a#TEMA-01': temaFake('a#TEMA-01', { recuperacaoOk: true }) },
+    })
+    expect(dominioDaArea(a1, p).firmes).toBe(1)
+    expect(dominioDaArea(a2, p).firmes).toBe(0)
   })
 
   it('mantém o critério em prosa para exibição', () => {
     expect(dominioDaArea(AREA, progressoFake()).criterio).toBe(AREA.guia.criterio)
-  })
-})
-
-describe('dominio', () => {
-  it('áreas independentes não se contaminam', () => {
-    const a1 = areaFake({ areaId: 'a', areaNome: 'A', temas: ['a#TEMA-01'] })
-    const a2 = areaFake({ areaId: 'b', areaNome: 'B', temas: ['b#TEMA-01'] })
-    const p = progressoFake({
-      temas: { 'a#TEMA-01': temaFake('a#TEMA-01', { recuperacaoOk: true }) },
-    })
-    const [d1, d2] = dominio([a1, a2], p)
-    expect(d1?.percentual).toBe(1)
-    expect(d2?.percentual).toBe(0)
   })
 })

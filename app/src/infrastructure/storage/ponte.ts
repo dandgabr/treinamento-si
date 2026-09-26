@@ -5,6 +5,8 @@
 
 export interface ResultadoDeExportacao {
   estado: 'cancelado' | 'ok' | 'erro'
+  /** Caminho escolhido, quando deu certo. */
+  caminho?: string
   mensagem?: string
 }
 

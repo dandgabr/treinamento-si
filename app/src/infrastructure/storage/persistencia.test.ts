@@ -84,15 +84,17 @@ describe('com a ponte (aplicativo desktop)', () => {
     expect(await persistencia().carregar()).toEqual(ESTADO)
   })
 
-  it('migra o que já foi estudado no navegador na primeira execução', async () => {
-    // Arquivo ainda não existe; o armazenamento do navegador, sim.
+  it('não migra o navegador: a origem do desktop tem armazenamento próprio', async () => {
+    // O `localStorage` do renderer no desktop é o da origem `app://bundle`, sempre vazio.
+    // Ler dali nunca acharia o estudo feito em `file://` — por isso não há esse caminho, e
+    // o arquivo exportado é a ponte entre as duas vias.
     window.localStorage.setItem(CHAVE, JSON.stringify(ESTADO))
     const { ponte } = ponteFalsa({ ler: () => Promise.resolve(null) })
     window.roadmap = ponte
-    expect(await persistencia().carregar()).toEqual(ESTADO)
+    expect(await persistencia().carregar()).toBeNull()
   })
 
-  it('prefere o arquivo ao navegador quando os dois têm estado', async () => {
+  it('prefere o arquivo quando ele existe', async () => {
     const doArquivo = { versao: 1, temas: { 'a#TEMA-01': { lido: true } }, checkpoints: {}, diasAtivos: [] }
     window.localStorage.setItem(CHAVE, JSON.stringify(ESTADO))
     const { ponte } = ponteFalsa({ ler: () => Promise.resolve(doArquivo) })

@@ -77,7 +77,7 @@ async function primeiraSessao() {
   await janela.evaluate(() => {
     location.hash = '#/tema/01-fundamentos/TEMA-01'
   })
-  await janela.waitForSelector('.bloco-progresso, .bloco-qa')
+  await janela.waitForSelector('.bloco-qa')
   conferir('diagrama renderizado', (await janela.locator('.mermaid svg').count()) >= 1, true)
 
   await janela.locator('.bloco-pre-teste .nivel').first().click()
@@ -117,10 +117,10 @@ async function primeiraSessao() {
   conferir('navegacao para file: bloqueada', new URL(janela.url()).protocol, 'app:')
 
   await app.close()
-  return { pasta, arquivo }
+  return { pasta }
 }
 
-async function segundaSessao(arquivo) {
+async function segundaSessao() {
   // Fecha e reabre com o mesmo diretorio de dados: e o que prova a persistencia.
   const app = await abrir()
   const janela = await app.firstWindow()
@@ -128,13 +128,12 @@ async function segundaSessao(arquivo) {
   const painel = ((await janela.locator('.resumo').textContent()) ?? '').replace(/\s+/g, ' ')
   conferir('estado sobreviveu ao fechar e reabrir', /Temas firmes ?1 de 109/.test(painel), true)
   conferir('progresso lido do arquivo', /pasta de dados do aplicativo/.test(painel), true)
-  void arquivo
   await app.close()
 }
 
 async function main() {
-  const { arquivo } = await primeiraSessao()
-  await segundaSessao(arquivo)
+  await primeiraSessao()
+  await segundaSessao()
 
   fs.rmSync(dados, { recursive: true, force: true })
 

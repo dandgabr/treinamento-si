@@ -20,10 +20,14 @@ if (!fs.existsSync(CONTENT_FILE)) {
 const conteudo = JSON.parse(fs.readFileSync(CONTENT_FILE, 'utf-8')) as Conteudo
 const erros = validar(conteudo)
 
+// O veredito sai depois da conta: anunciar "verificado" antes de olhar os erros
+// fazia um build reprovado dizer que estava tudo bem e depois listar falhas.
+for (const e of erros) console.log(`ERRO  ${e}`)
+if (erros.length) {
+  console.log(`\n${erros.length} erro(s) — content.json reprovado`)
+  process.exit(1)
+}
 console.log(
   `verificado: ${conteudo.meta.totais.areas} areas, ${conteudo.meta.totais.temas} temas, ` +
-    `${conteudo.meta.totais.paginas} paginas`,
+    `${conteudo.meta.totais.paginas} paginas — 0 erro(s)`,
 )
-for (const e of erros) console.log(`ERRO  ${e}`)
-console.log(`\n${erros.length} erro(s)`)
-if (erros.length) process.exit(1)

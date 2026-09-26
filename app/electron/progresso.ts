@@ -5,6 +5,7 @@
 // dados de navegacao) e vira um arquivo que a pessoa pode copiar, restaurar e ler.
 
 import { app } from 'electron'
+import { renameSync, writeFileSync } from 'node:fs'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
@@ -32,11 +33,14 @@ export async function gravarProgresso(valor: unknown): Promise<void> {
   const texto = JSON.stringify(valor)
   if (texto.length > TETO_BYTES) throw new Error('progresso grande demais para gravar')
   const caminho = caminhoDoProgresso()
-  const temporario = `${caminho}.tmp`
   await fs.mkdir(path.dirname(caminho), { recursive: true })
-  await fs.writeFile(temporario, texto, 'utf8')
+  // Nome unico por processo: duas gravacoes sobrepostas nao disputam o mesmo temporario.
+  const temporario = `${caminho}.${process.pid}.tmp`
+  // A gravar e sincrona de proposito. O arquivo tem no maximo 1 MB, e a versao
+  // assincrona deixava a ultima acao em risco se a janela fechasse logo depois do clique.
+  writeFileSync(temporario, texto, 'utf8')
   // Renomear e atomico: nunca fica um arquivo pela metade se o app fechar no meio.
-  await fs.rename(temporario, caminho)
+  renameSync(temporario, caminho)
 }
 
 export async function apagarProgresso(): Promise<void> {

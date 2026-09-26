@@ -12,6 +12,7 @@
  */
 import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { JSDOM } from 'jsdom'
@@ -21,6 +22,16 @@ const APP = path.resolve(AQUI, '..')
 const ARTEFATO = path.join(APP, 'dist', 'index.html')
 const CHROME = process.env.CHROME_BIN ?? 'google-chrome-stable'
 const BASE = `file://${ARTEFATO}`
+
+// Perfil de navegador proprio e descartavel, para o teste nao encostar no do usuario.
+const perfil = fs.mkdtempSync(path.join(os.tmpdir(), 'roadmap-smoke-'))
+process.on('exit', () => {
+  try {
+    fs.rmSync(perfil, { recursive: true, force: true })
+  } catch {
+    // Sem permissao para limpar: nao vale falhar o teste por isso.
+  }
+})
 
 /** @typedef {{ nome: string, rota: string, url: string, checar: (d: Document) => Array<[string, unknown, unknown]> }} Cenario */
 
@@ -40,6 +51,8 @@ const cenarios = [
       ['sem sequencia de dias', /Sequência/.test(texto(d, '.resumo')), false],
       ['fila vazia no inicio', texto(d, '.resumo').includes('nada vencido'), true],
       ['temas firmes com a regua ao lado', texto(d, '.resumo').includes('firme é o tema'), true],
+      ['bloco de acoes de progresso', d.querySelectorAll('.acoes-progresso button').length, 3],
+      ['sem aviso de erro na abertura', d.querySelectorAll('.aviso-erro').length, 0],
       ['links internos resolvem (invalidos)', hrefsInvalidos(d).length, 0],
     ],
   },
@@ -220,6 +233,10 @@ function rodarChrome(url) {
       '--headless=new',
       '--disable-gpu',
       '--no-sandbox',
+      // Perfil proprio por execucao: sem isso o Chrome usa o perfil real do usuario, e o
+      // `localStorage` de file:// e compartilhado entre paginas locais — o progresso de
+      // quem estuda por file:// mudaria o estado inicial do teste.
+      `--user-data-dir=${perfil}`,
       // O Mermaid renderiza de forma assincrona; sem o orcamento de tempo virtual
       // o dump sai antes do SVG existir.
       '--virtual-time-budget=15000',

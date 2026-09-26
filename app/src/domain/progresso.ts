@@ -195,6 +195,20 @@ function numeroFinito(v: unknown, max = Number.MAX_SAFE_INTEGER): v is number {
   return typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= max
 }
 
+/**
+ * Data do calendario, nao so a forma: `2020-13-99` casa com a expressao e nao existe.
+ * Como `diasComEstudo` conta o tamanho da lista, data inventada inflaria a contagem.
+ */
+function ehDataIso(v: unknown): v is string {
+  if (typeof v !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return false
+  const [ano, mes, dia] = v.split('-').map(Number)
+  if (ano === undefined || mes === undefined || dia === undefined) return false
+  const data = new Date(Date.UTC(ano, mes - 1, dia))
+  return (
+    data.getUTCFullYear() === ano && data.getUTCMonth() === mes - 1 && data.getUTCDate() === dia
+  )
+}
+
 // `out['__proto__'] = x` nao cria propriedade: troca o prototipo do objeto. Como as
 // chaves vem de fora, elas sao recusadas antes de qualquer atribuicao.
 const CHAVES_RECUSADAS = new Set(['__proto__', 'constructor', 'prototype'])
@@ -270,6 +284,23 @@ function normalizarCheckpoints(valor: unknown): Record<string, ResultadoCheckpoi
   return out
 }
 
+/**
+ * Diz se o valor tem a forma de um progresso desta versao, sem normalizar. Serve para a
+ * importacao recusar um arquivo estranho ANTES de substituir o que existe: o
+ * normalizador descarta versao desconhecida, o que e certo para ler dado velho e errado
+ * como politica de substituicao.
+ */
+export function pareceProgresso(valor: unknown): boolean {
+  if (!valor || typeof valor !== 'object') return false
+  const bruto = valor as Record<string, unknown>
+  return (
+    bruto.versao === VERSAO_PROGRESSO &&
+    !!bruto.temas &&
+    typeof bruto.temas === 'object' &&
+    !Array.isArray(bruto.temas)
+  )
+}
+
 /** Versao desconhecida e descartada em vez de migrada as cegas. */
 export function normalizarProgresso(valor: unknown, agora: Date): Progresso {
   const vazio = progressoVazio()
@@ -281,13 +312,7 @@ export function normalizarProgresso(valor: unknown, agora: Date): Progresso {
     temas: normalizarTemas(bruto.temas, agora),
     checkpoints: normalizarCheckpoints(bruto.checkpoints),
     diasAtivos: Array.isArray(bruto.diasAtivos)
-      ? [
-          ...new Set(
-            bruto.diasAtivos.filter(
-              (d): d is string => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d),
-            ),
-          ),
-        ].sort()
+      ? [...new Set(bruto.diasAtivos.filter(ehDataIso))].sort()
       : [],
   }
 }

@@ -71,10 +71,6 @@ function descreverRemovidos(): string {
     .join(' | ')
 }
 
-function textoVisivel(html: string): string {
-  return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
-}
-
 /** Markdown -> HTML sanitizado. Lanca se a sanitizacao remover qualquer conteudo. */
 export function renderSeguro(markdown: string): string {
   const bruto = md.render(markdown)
@@ -84,11 +80,12 @@ export function renderSeguro(markdown: string): string {
     FORBID_ATTR: ATRIBUTOS_PROIBIDOS,
     ALLOW_DATA_ATTR: false,
   })
-  // Ponto cego conhecido: quando o bloco INTEIRO e um unico elemento proibido
-  // (por exemplo um <style> no topo), o DOMPurify o descarta sem registra-lo em
-  // `removed` — so o in-volucro body aparece. Sem comparar o texto, o build passaria
-  // com o bloco vazio. A sanitizacao precisa acusar, nao curar.
-  const perdeuTudo = textoVisivel(bruto).length > 0 && textoVisivel(limpo).length === 0
+  // Ponto cego conhecido: quando o bloco INTEIRO e um elemento proibido, o DOMPurify o
+  // descarta sem registra-lo em `removed` — so o in-volucro body aparece. Comparar o
+  // texto visivel nao bastava: um bloco que e so `<meta>`, `<base>` ou `<link>` nao tem
+  // texto nenhum, entao saia vazio E o build passava. A comparacao e do HTML: se havia
+  // markup e nao sobrou nada, o conteudo sumiu.
+  const perdeuTudo = bruto.trim() !== '' && limpo.trim() === ''
   if (removidosRelevantes().length || perdeuTudo) {
     const detalhe = descreverRemovidos() || 'todo o conteudo do bloco'
     throw new Error(`sanitizacao removeu conteudo; revise o Markdown antes de publicar: ${detalhe}`)

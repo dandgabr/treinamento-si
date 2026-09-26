@@ -229,8 +229,9 @@ passagem é a seção 10 do tema, respondida antes do gabarito.
 
 Duas condições, as duas verificáveis no sábado:
 
-1. Checkpoint da área no critério declarado pelo próprio guia: 4 acertos em 5 para 00, 01 e 02, e
-   80% para 17. Em 02, valem apenas os itens 1 e 2, que tratam dos temas em escopo.
+1. Checkpoint da área no critério declarado pelo próprio guia, que é o dono do critério. Nesta
+   trilha, em 02 apenas os itens 1 e 2 tratam dos temas em escopo: acertá-los é o que a fase cobra, e
+   os outros três ficam para quando a área entrar inteira, na trilha de 12 meses.
 2. Artefato da fase produzido, com dono nomeado.
 
 Reprovou o checkpoint: a remediação é refazer os temas da coluna "Temas que o sustentam" do guia
