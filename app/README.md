@@ -36,6 +36,7 @@ navegador atual, para abrir o resultado.
 | `npm run dev` | roda `build:content` e sobe o Vite com recarga automática |
 | `npm run build` | encadeia `build:content`, `check:content` e `vite build` |
 | `npm run smoke` | abre o artefato por `file://` num Chrome headless e confere o DOM renderizado |
+| `npm run empacotar` | monta a pasta que vai para quem estuda: `dist/Roadmap-CISO-Interativo/` |
 
 A ordem tem uma dependência real: `check:content` lê o JSON em disco, então sozinho ele não adianta
 nada. O `dev` também não vigia `conteudo/`. Editou um tema com o servidor no ar? Rode
@@ -54,6 +55,34 @@ partir de `file://`.
 
 `dist/` está no `.gitignore` da raiz, então o HTML pronto não vai para o controle de versão. Quem
 quiser o arquivo precisa gerá-lo.
+
+## Como o app chega a quem estuda
+
+`npm run empacotar` monta `dist/Roadmap-CISO-Interativo/`. A entrega é a pasta inteira; a pessoa
+clica em **Iniciar** e o navegador abre. Nada de terminal, nada de instalar.
+
+```
+Roadmap-CISO-Interativo/
+  Iniciar-Windows.bat     Iniciar-macOS.command     Iniciar-Linux.sh
+  servidor.py             index.html                LEIA-ME.txt
+```
+
+Os três atalhos fazem a mesma coisa em sistemas diferentes: procuram Python. Se houver, sobem
+`servidor.py`; se não houver, abrem o `index.html` direto, que também funciona.
+
+**Por que o servidor, se o arquivo sozinho já abre.** Dois motivos. O progresso fica no
+armazenamento do navegador, que separa por endereço — com um servidor em `127.0.0.1:4173` o
+endereço é sempre o mesmo, e o estudo de ontem continua hoje; aberto por `file://`, o Chrome deixa
+qualquer arquivo local ler a mesma chave, e o Firefox isola por arquivo, então o progresso muda de
+lugar conforme o navegador. E o `servidor.py` serve **um arquivo só**, recusa `Host` estranho com
+421 e nunca lista diretório: travessia e listagem ficam fechadas por construção.
+
+A porta é fixa de propósito. Porta aleatória mudaria o endereço a cada abertura e o progresso
+sumiria — o que é pior do que o risco de outro processo local disputar a porta. Se a 4173 estiver
+ocupada, o servidor avisa e o atalho cai no `file://`, que funciona, só não continua no mesmo lugar.
+
+Dois detalhes de sistema: no macOS, o `.command` precisa de duplo clique e, na primeira vez, do
+aceite no Gatekeeper; no Windows, o `.bat` está em CRLF, que é o que o `cmd.exe` espera.
 
 ## O motor pedagógico
 
@@ -155,9 +184,9 @@ locais compartilham o mesmo armazenamento — qualquer página local aberta no m
 mesma chave. No Firefox o balde é por arquivo. Não guarde nada sensível ali, e note que apagar o
 progresso também não tem caminho pela interface ainda.
 
-O launcher, que distribuiria o app para quem não tem Node nem terminal, também não existe: hoje o
-usuário final precisa de Node 22 e de dois comandos. A promessa de "abrir com um clique em qualquer
-sistema" depende dele, e é o próximo passo.
+O launcher existe e está descrito acima. O que falta do lado do dado é o **exportar e importar** o
+progresso: hoje ele vive só no navegador, sem backup e sem como apagar. Entram juntos, e o import
+passa pelo mesmo normalizador que a leitura do `localStorage` usa.
 
 ## Pendências conhecidas
 
@@ -183,5 +212,5 @@ em que entram.
 | O contrato de re-render do Mermaid mora na `key` do React, repetido em três arquivos, e o laço de seções também está triplicado | 3 |
 | O verificador do material dá verde quando um sincronizador falha, trata o léxico apenas como aviso e não valida `templates/` nem `CONTRIBUTING.md` | 2 ou depois |
 | Importação de progresso: esquema com versão, corte de tamanho antes do `JSON.parse` e cópia campo a campo (nunca merge). A leitura do `localStorage` já faz isso | 7 |
-| Launcher: bind em `127.0.0.1`, porta efêmera, servir um único arquivo, validar o header `Host` e usar token no caminho. É o próximo passo, e é o que falta para a promessa de um clique | próxima |
+| O launcher só foi exercitado no Linux. Falta abrir num Windows e num macOS de verdade, e assinar o artefato para o Gatekeeper não pedir aceite manual | 7 |
 | Commit do lockfile (feito), `npm ci` e versões exatas; SBOM e soma de verificação por release. Há um advisory `dev-only` no Vitest | 7 |

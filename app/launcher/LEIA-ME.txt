@@ -1,0 +1,6 @@
+Clique duas vezes em Iniciar. O app abre no seu navegador, e o que você responder fica guardado
+nele para a próxima vez.
+
+Para começar a estudar, clique em "Guia básico do CISO" na lista Ordem de estudo sugerida, no alto
+da tela. Se preferir, abra o arquivo index.html com duplo clique: funciona igual, só não guarda o
+progresso no mesmo lugar.
