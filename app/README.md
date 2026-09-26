@@ -34,7 +34,10 @@ navegador atual, para abrir o resultado.
 | `npm run check:content` | valida o JSON já gerado e falha o processo quando algo falta |
 | `npm test` | roda a suíte do Vitest: parser, gate e motor pedagógico |
 | `npm run dev` | roda `build:content` e sobe o Vite com recarga automática |
-| `npm run build` | encadeia `build:content`, `check:content`, `typecheck` e `vite build` |
+| `npm run build` | gera o conteúdo e produz o build do navegador, em arquivo único |
+| `npm run build:desktop` | produz o build do desktop em `dist-desktop/` (usa o conteúdo já gerado) |
+| `npm run preparar:conteudo` | lê `conteudo/` e valida o JSON gerado — roda uma vez por verificação |
+| `npm run medir` | mede O1, O2, O4, O5 e O6 no aplicativo empacotado |
 | `npm run typecheck` | roda o `tsc --noEmit`; o Vite apaga tipos sem conferi-los, então isto precisa existir separado |
 | `npm run verificar` | **o portão do dia a dia**: build, build do Electron, testes, os dois smokes do código e o verificador do material — **não empacota nem testa o pacote** |
 | `npm run verificar:pacote` | empacota e roda o smoke do pacote — o portão de quem vai distribuir |
@@ -111,6 +114,29 @@ processo principal, que é o único lugar de onde dá para conferir: `app://bund
 `bundle` também — do renderer não daria, porque a própria CSP tem `connect-src 'none'` e barraria o
 `fetch` antes de o handler ser chamado.
 
+## Os dois builds da interface
+
+Um renderer, dois artefatos, por uma restrição real: `file://` não carrega **nada** externo —
+nem chunk, nem `fetch`. Com o conteúdo e os diagramas em arquivos separados, o duplo clique
+quebraria. Então o desktop, que não tem essa restrição, ganha o build dividido:
+
+| | `npm run build` (navegador) | `npm run build:desktop` (desktop) |
+|---|---|---|
+| Saída | `dist/index.html`, um arquivo | `dist-desktop/`, uma pasta |
+| Conteúdo | inline no JavaScript (3,8 MB) | `conteudo.json` ao lado (3,79 MiB) |
+| Diagramas | todos inlinados (3,4 MB) | só o `flowchart`; 35 chunks de outros tipos são descartados |
+| Script no arranque | **7,6 MB** para o V8 analisar | **915 kB** |
+| CSP | `<meta>` no HTML, com `'unsafe-inline'` | cabeçalho, `script-src 'self'` |
+| Quem usa | launcher (`dist/Roadmap-CISO-Interativo/`) | empacotado pelo electron-builder |
+
+A diferença entre os dois está isolada em `@fonte` (`src/infrastructure/content/fonte-web.ts` e
+`fonte-desktop.ts`): o repositório de conteúdo é o mesmo, e o resto do app não sabe de onde o
+JSON veio. `carregar()` roda antes da primeira renderização, em `main.tsx`.
+
+O corte dos diagramas é por **tipo**, e não por nome de arquivo — os hashes mudam a cada build,
+o prefixo não. A rede de segurança é o `npm run smoke:desktop`, que desenha um diagrama de
+verdade: se o corte levar algo necessário, o teste falha em vez de o app aparecer sem o desenho.
+
 ## Empacotamento
 
 `npm run distribuir:linux` produz `instalador/Roadmap CISO-0.1.0.AppImage`. O alvo é o
@@ -118,16 +144,18 @@ processo principal, que é o único lugar de onde dá para conferir: `app://bund
 
 | O que | Medido em 2026-09-26, Linux x64, Electron 33.4.11 |
 |---|---|
-| AppImage | **104,6 MiB** (109.695.187 bytes) — O7 |
-| `app.asar` | 7,29 MiB (7.648.697 bytes), 6 entradas: 4 arquivos e 2 pastas |
-| `dist/index.html` | 7,28 MiB (7.636.903 bytes) |
-| Pasta desempacotada | 258 MiB — o binário do Electron sozinho tem 177,7 MiB |
+| AppImage | **104,0 MiB** (109.006.365 bytes) — O7 |
+| `app.asar` | 4,89 MiB (5.124.818 bytes): o `conteudo.json`, os 27 assets que sobraram e o `main`/`preload` |
+| `dist-desktop/index.html` + assets | 915 kB de JavaScript no arranque, contra 7,6 MB inlinados |
+| Pasta desempacotada | 267 MiB — o binário do Electron sozinho tem 177,7 MiB |
 
 As unidades são as mesmas em todas as linhas (MiB, com os bytes ao lado) porque misturar decimal
 com binário produz uma contradição visível: 7,6 MB contra 7,3 MB para o mesmo arquivo faz a asar
-parecer menor que o `index.html` que ela contém.
+parecer menor que o `index.html` que ela contém. O AppImage quase não mudou com a 4.4 — 104,6 para
+104,0 MiB — porque o que ele carrega é o Electron; o ganho está no `asar` (7,3 → 4,9 MiB) e, acima
+de tudo, no que o V8 precisa analisar antes da primeira tela.
 
-Os 104,6 MiB são quase todos o Electron. O que é nosso é 7,29 MiB, e o desenho do pacote é o que
+Os 104,0 MiB são quase todos o Electron. O que é nosso é 4,89 MiB, e o desenho do pacote é o que
 mantém isso: a lista de `files` é explícita e termina com `!node_modules/**`. Sem essa linha, o
 electron-builder arrasta a árvore de produção inteira — 7480 dos 7487 arquivos do pacote, 137 MB
 dos 139 MB do AppImage anterior — mesmo com o React e o Mermaid já dentro do bundle inline de
@@ -186,28 +214,33 @@ Esta é a tabela — e a coluna "medido" é a que diz o que ainda falta, não a 
 
 | Item | Implementado | Medido | Evidência |
 |---|---|---|---|
-| O1 arranque | não | **não** | — |
-| O2 sem tela branca (`show:false` + `ready-to-show`) | sim | **não** | `electron/main.ts` |
-| O3 bundle dividido | não | **não** | — |
-| O4 só o `flowchart` do Mermaid | não | **não** | — |
-| O5 memória após navegações | não | **não** | — |
-| O6 diagramas por tela | não | **não** | — |
-| O7 tamanho do instalador | — | **sim: 104,6 MiB** | acima |
+| O1 arranque | — | **sim: 1ª pintura 338 ms, DOMContentLoaded 296 ms** | `npm run medir` |
+| O2 sem tela branca (`show:false` + `ready-to-show`) | sim | sim: o aviso "Carregando o roadmap…" sai quando a carga termina | `medir`, `main.tsx` |
+| O3 bundle dividido | **sim** | sim: 915 kB de script no arranque, contra 7,6 MB inlinados | `vite.desktop.config.ts` |
+| O4 só o `flowchart` do Mermaid | **sim** | sim: 35 chunks de outros diagramas removidos; desenhar puxa 8 | `vite.desktop.config.ts`, `medir` |
+| O5 memória após navegações | — | sim: heap de 11 MB na primeira tela, 16 MB com o diagrama | `medir` |
+| O6 diagramas por tela | — | sim: 1 por tema | `medir` |
+| O7 tamanho do instalador | — | sim: AppImage 104,0 MiB (109.006.365 bytes) | acima |
 | O8 decisão sobre XP/nível/sequência | — | sim (removidos, com o motivo) | `progresso.test.ts` |
 | S1 prefs endurecidas | sim | parcial: `allowRunningInsecureContent` não é assertado | `smoke-desktop.mjs` |
 | S2 ponte por allowlist | sim | **não** | `electron/preload.ts` |
 | S3 link externo só `http(s)` | sim | sim | `smoke-desktop.mjs` |
 | S4 sem `webview`/janela nova | sim | **não** (sem asserção) | `electron/main.ts` |
-| S5 CSP como cabeçalho | sim | sim | `smoke-desktop.mjs` |
+| S5 CSP como cabeçalho | sim | sim — e o desktop passou a `script-src 'self'`, sem `unsafe-inline` | `smoke-desktop.mjs` |
 | S6 o que cruza a ponte passa pelo normalizador | sim | **não** | `main.ts` só recusa o que não é objeto; o normalizador roda no renderer |
 | S7 corte antes do `JSON.parse` | sim | **não** | `main.ts` e `electron/progresso.ts` |
 | S8 importação com esquema e cópia campo a campo | sim | sim | `progresso.test.ts`, `persistencia.test.ts` |
-| S9 nenhuma requisição de rede | sim (`connect-src 'none'`) | **não** (sem interceptor) | `main.ts` |
+| S9 nenhuma requisição de rede | sim (`connect-src 'self'`, que é `app://`) | **não** (sem interceptor) | `main.ts` |
 | S10 permissões negadas | sim | **não** (sem asserção) | `main.ts` |
 | S11 fuses e integridade do asar | sim | sim | `fuses.mjs`, `smoke-pacote.mjs` |
 | S12 travessia e host bloqueados | sim | sim | `smoke-desktop.mjs`, `smoke-pacote.mjs` |
 | S13 cadência de patch do Electron | decisão registrada | — | pendências, fase 7 |
 | S14 assinatura | decisão registrada | — | pendências, fase 7 |
+
+Os números saem de `npm run medir`, no aplicativo **empacotado**, e não de um build de
+desenvolvimento — é ele que a pessoa recebe. Faltam as medições que exigem uso prolongado
+(memória depois de 20 navegações, por exemplo) e as asserções de S2, S4, S6, S7, S9 e S10,
+todas implementadas no código mas não exercitadas por teste.
 
 A via da pasta com atalho (`npm run empacotar`) **não tem portão automático nenhum**: nem o
 `verificar` nem teste algum sobe o `servidor.py`. É a única via de entrega sem verificação, e está

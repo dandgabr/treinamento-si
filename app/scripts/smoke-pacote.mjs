@@ -15,7 +15,7 @@
  *
  * Uso: npm run distribuir && npm run smoke:pacote
  */
-import { execFile, spawn } from 'node:child_process'
+import { execFile } from 'node:child_process'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
@@ -23,8 +23,8 @@ import { fileURLToPath } from 'node:url'
 import { promisify } from 'node:util'
 import { FuseState, FuseV1Options, getCurrentFuseWire } from '@electron/fuses'
 import { listPackage } from '@electron/asar'
-import { chromium } from 'playwright'
 import { binarioEm } from './lib/binario.mjs'
+import { abrirApp } from './lib/app-empacotado.mjs'
 import { fontesMaisNovas } from './lib/frescor.mjs'
 
 const execFileAsync = promisify(execFile)
@@ -57,26 +57,9 @@ function pastaDesempacotada() {
   return candidatas[0].caminho
 }
 
-async function portaDeDepuracao(pastaDados, proc) {
-  const arquivo = path.join(pastaDados, 'DevToolsActivePort')
-  const limite = Date.now() + 20_000
-  while (Date.now() < limite) {
-    if (proc.exitCode !== null) throw new Error(`o aplicativo saiu com codigo ${proc.exitCode}`)
-    if (fs.existsSync(arquivo)) {
-      const porta = Number(fs.readFileSync(arquivo, 'utf8').split('\n')[0])
-      if (Number.isInteger(porta) && porta > 0) return porta
-    }
-    await new Promise((r) => setTimeout(r, 100))
-  }
-  throw new Error('o aplicativo nao abriu a porta de depuracao em 20 s')
-}
-
 const pasta = pastaDesempacotada()
 const binario = binarioEm(pasta, process.platform)
 const falhas = []
-/** Criado só depois das conferências: uma recusa por artefato velho não deixa lixo. */
-let dados = null
-let proc
 
 function conferir(nome, obtido, esperado) {
   const ok = JSON.stringify(obtido) === JSON.stringify(esperado)
@@ -106,7 +89,6 @@ async function main() {
     process.exit(1)
   }
 
-  dados = fs.mkdtempSync(path.join(os.tmpdir(), 'roadmap-pacote-'))
 
   // O asar substitui a arvore de arquivos: se o empacotamento errar o alvo, o app abre em
   // branco. Conferir existencia e tamanho e mais barato que descobrir na tela.
@@ -122,16 +104,25 @@ async function main() {
       arquivos.some((caminho) => caminho.startsWith('/node_modules')),
       false,
     )
-    // Conjunto exato, e nao um teto folgado: com `length < 100` cabiam mais 94 arquivos
-    // sem o teste reclamar. A ordem e a do `sort()` padrao, que e o que o outro lado usa.
-    conferir('app.asar com exatamente o previsto', arquivos.sort(), [
-      '/dist',
-      '/dist-electron',
-      '/dist-electron/main.cjs',
-      '/dist-electron/preload.cjs',
-      '/dist/index.html',
-      '/package.json',
-    ])
+    // A lista exata quebraria a cada atualizacao do mermaid (os hashes mudam). O que
+    // interessa e a forma: o chunk do flowchart presente, os de outros diagramas fora, e
+    // o conteudo como arquivo ao lado do HTML.
+    conferir(
+      'app.asar traz o chunk do flowchart',
+      arquivos.some((caminho) => /\/flowDiagram-/.test(caminho)),
+      true,
+    )
+    conferir(
+      'app.asar sem chunks de outros diagramas',
+      arquivos.filter((caminho) => /Diagram-|-definition-/.test(caminho) && !/flowDiagram-/.test(caminho))
+        .length,
+      0,
+    )
+    conferir(
+      'app.asar com o conteudo como arquivo',
+      arquivos.includes('/dist-desktop/conteudo.json'),
+      true,
+    )
   }
 
   // Os fuses sao o endurecimento prometido no README. `getCurrentFuseWire` devolve o
@@ -195,31 +186,8 @@ async function main() {
   }
 
   // Abre como qualquer usuario abriria, com a porta de depuracao para podermos olhar.
-  proc = spawn(
-    binario,
-    ['--no-sandbox', `--user-data-dir=${dados}`, '--remote-debugging-port=0'],
-    { stdio: ['ignore', 'pipe', 'pipe'] },
-  )
-  let saida = ''
-  proc.stderr.on('data', (d) => {
-    saida += String(d)
-  })
-
-  const porta = await portaDeDepuracao(dados, proc)
-  const navegador = await chromium.connectOverCDP(`http://127.0.0.1:${porta}`)
-
-  const procurarPagina = async () => {
-    for (let i = 0; i < 100; i++) {
-      for (const contexto of navegador.contexts()) {
-        for (const pagina of contexto.pages()) {
-          if (pagina.url().startsWith('app://')) return pagina
-        }
-      }
-      await new Promise((r) => setTimeout(r, 100))
-    }
-    throw new Error(`nenhuma pagina em app://\n${saida}`)
-  }
-  const janela = await procurarPagina()
+  const { janela, encerrar, dados } = await abrirApp(binario)
+  encerrarApp = encerrar
   await janela.waitForSelector('.lista-areas li')
 
   conferir('abriu pelo esquema proprio', new URL(janela.url()).protocol, 'app:')
@@ -264,36 +232,15 @@ async function main() {
   conferir('progresso gravado pelo pacote', gravou, true)
 }
 
-async function encerrar() {
-  const terminou = new Promise((resolver) => {
-    if (!proc || proc.exitCode !== null) resolver()
-    else proc.once('exit', resolver)
-  })
-  try {
-    proc?.kill('SIGTERM')
-  } catch {
-    // Ja morreu.
-  }
-  // Esperar a saida antes de apagar: os filhos do Electron (zygote, GPU) ainda escrevem no
-  // perfil por alguns milissegundos e recriam a pasta recem-removida. Sem isto sobra um
-  // `/tmp/roadmap-pacote-*` por execucao.
-  await Promise.race([terminou, new Promise((r) => setTimeout(r, 3000))])
-  if (proc && proc.exitCode === null) {
-    try {
-      proc.kill('SIGKILL')
-    } catch {
-      // Nada mais a fazer.
-    }
-  }
-  if (dados) fs.rmSync(dados, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 })
-}
+/** Fechado pelo `abrirApp`; guardado aqui para o `finally` la de baixo alcancar. */
+let encerrarApp = () => Promise.resolve()
 
 try {
   await main()
 } catch (erro) {
   falhas.push(String(erro).split('\n')[0])
 } finally {
-  await encerrar()
+  await encerrarApp()
 }
 
 if (falhas.length) {

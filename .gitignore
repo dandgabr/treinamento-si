@@ -1,6 +1,7 @@
 # Dependencias e build do app
 node_modules/
 app/dist/
+app/dist-desktop/
 app/dist-electron/
 # Instaladores: saem inteiros de dist/ e dist-electron/, e um .dmg passa de 100 MB.
 app/instalador/

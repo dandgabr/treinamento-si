@@ -17,31 +17,42 @@ import { fontesMaisNovas } from './lib/frescor.mjs'
 const AQUI = path.dirname(fileURLToPath(import.meta.url))
 const APP = path.resolve(AQUI, '..')
 
-const faltando = ['dist/index.html', 'dist-electron/main.cjs', 'dist-electron/preload.cjs'].filter(
-  (relativo) => !fs.existsSync(path.join(APP, relativo)),
-)
+const faltando = [
+  'dist-desktop/index.html',
+  'dist-desktop/conteudo.json',
+  'dist-electron/main.cjs',
+  'dist-electron/preload.cjs',
+].filter((relativo) => !fs.existsSync(path.join(APP, relativo)))
 if (faltando.length) {
-  console.error(`Falta: ${faltando.join(', ')}\nRode antes: npm run build && npm run build:electron`)
+  console.error(
+    `Falta: ${faltando.join(', ')}\nRode antes: npm run build:desktop && npm run build:electron`,
+  )
   process.exit(1)
 }
 
 // Existir nao basta, e isto ja aconteceu: o smoke do desktop deu verde contra um
 // `main.cjs` compilado antes das correcoes de seguranca da casca. Ele testava um codigo
 // que nao estava no binario.
+// O que entra no `main.cjs`: a casca e o contrato da ponte (import de tipo). `src/` inteiro
+// nao serve como raiz aqui — o `conteudo.json` gerado mora la e nao tem nada a ver com o
+// processo principal, o que fazia o teste recusar um binario perfeitamente atual.
 const fontes = [
   path.join(APP, 'electron'),
-  path.join(APP, 'src'),
-  path.join(APP, 'index.html'),
+  path.join(APP, 'src/infrastructure/storage/ponte.ts'),
   path.join(APP, 'vite.electron.config.ts'),
 ]
 const atrasados = [
   ...fontesMaisNovas(path.join(APP, 'dist-electron', 'main.cjs'), fontes),
-  ...fontesMaisNovas(path.join(APP, 'dist/index.html'), [path.join(APP, 'src'), path.join(APP, 'index.html')]),
+  ...fontesMaisNovas(path.join(APP, 'dist-desktop/index.html'), [
+    path.join(APP, 'src'),
+    path.join(APP, 'index.html'),
+    path.join(APP, 'vite.desktop.config.ts'),
+  ]),
 ]
 if (atrasados.length) {
   console.error(
     `Artefato desatualizado.\nMais novo que ele: ${[...new Set(atrasados)].join(', ')}\n` +
-      'Rode antes: npm run build && npm run build:electron',
+      'Rode antes: npm run build:desktop && npm run build:electron',
   )
   process.exit(1)
 }

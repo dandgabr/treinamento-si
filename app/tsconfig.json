@@ -18,7 +18,21 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
+    "types": ["node"],
+    // `@fonte` aponta para a fonte de conteudo de cada build (vite.config.ts e
+    // vite.desktop.config.ts trocam o alvo). Para o compilador de tipos basta uma delas:
+    // as duas expoem a mesma assinatura.
+    "paths": {
+      "@fonte": ["./src/infrastructure/content/fonte-web.ts"]
+    }
   },
-  "include": ["src", "scripts", "electron", "vite.config.ts", "vite.electron.config.ts", "vitest.config.ts"]
+  "include": [
+    "src",
+    "scripts",
+    "electron",
+    "vite.config.ts",
+    "vite.desktop.config.ts",
+    "vite.electron.config.ts",
+    "vitest.config.ts"
+  ]
 }

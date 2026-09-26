@@ -9,19 +9,24 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { apagarProgresso, gravarProgresso, lerProgresso, TETO_BYTES } from './progresso'
 
-const RENDERER = path.join(__dirname, '..', 'dist')
+// O desktop usa o build proprio (`vite.desktop.config.ts`), com arquivos separados: o
+// conteudo e um JSON ao lado do HTML e os diagramas sao chunks. O build do navegador
+// (`dist/`) continua em arquivo unico, para o duplo clique por `file://`.
+const RENDERER = path.join(__dirname, '..', 'dist-desktop')
 const ESQUEMA = 'app'
 const ORIGEM = `${ESQUEMA}://bundle`
 const DESENVOLVIMENTO = process.env.ROADMAP_DEV === '1'
 
-// Com bundle dividido da para trocar 'unsafe-inline' por 'self' e apertar mais.
+// O bundle dividido liberou o aperto que o arquivo unico impedia: sem script inline nao ha
+// por que aceitar 'unsafe-inline', e `connect-src 'self'` basta para o `conteudo.json` —
+// continua sem rede, porque 'self' aqui e o esquema `app://`.
 const CSP = [
   "default-src 'none'",
-  "script-src 'self' 'unsafe-inline'",
+  "script-src 'self'",
   "style-src 'self' 'unsafe-inline'",
   'img-src data:',
   'font-src data:',
-  "connect-src 'none'",
+  "connect-src 'self'",
   "object-src 'none'",
   "base-uri 'none'",
   "form-action 'none'",

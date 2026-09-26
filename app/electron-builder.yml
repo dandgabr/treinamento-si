@@ -21,7 +21,7 @@ directories:
 # arquivos do pacote, 137 MB dos 139 MB do AppImage, codigo que nunca e executado.
 files:
   - package.json
-  - dist/index.html
+  - dist-desktop/**/*
   - dist-electron/main.cjs
   - dist-electron/preload.cjs
   - '!node_modules/**'
