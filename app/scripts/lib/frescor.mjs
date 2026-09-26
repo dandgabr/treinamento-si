@@ -9,9 +9,17 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
-/** Extensoes que entram no bundle. Teste nao entra: editar teste nao muda o artefato. */
+/**
+ * Extensoes que entram no artefato. O filtro e largo de proposito: `.cjs` e `.json` sao o
+ * proprio conteudo de `dist-electron/` e do asar, e uma configuracao esquecida fora da
+ * lista (o `electron-builder.yml`, por exemplo) fazia o teste medir um pacote antigo sem
+ * avisar. Teste nao entra: editar teste nao muda o artefato.
+ */
 function ehFonte(nome) {
-  return /\.(ts|tsx|css|html)$/.test(nome) && !/\.test\.tsx?$/.test(nome)
+  return (
+    /\.(ts|tsx|js|jsx|cjs|mjs|json|css|html|png|ico|icns|svg)$/.test(nome) &&
+    !/\.test\.[cm]?[jt]sx?$/.test(nome)
+  )
 }
 
 function percorrer(raiz, encontrados) {
@@ -42,6 +50,9 @@ export function fontesMaisNovas(artefato, raizes) {
 
   const fontes = []
   for (const raiz of raizes) {
+    // Raiz que nao existe e problema de quem chamou, nao motivo para estourar: uma lista
+    // de caminhos fixa nao pode derrubar o teste por causa de um arquivo renomeado.
+    if (!fs.existsSync(raiz)) continue
     if (fs.statSync(raiz).isDirectory()) percorrer(raiz, fontes)
     else fontes.push(raiz)
   }

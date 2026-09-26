@@ -36,7 +36,8 @@ navegador atual, para abrir o resultado.
 | `npm run dev` | roda `build:content` e sobe o Vite com recarga automática |
 | `npm run build` | encadeia `build:content`, `check:content`, `typecheck` e `vite build` |
 | `npm run typecheck` | roda o `tsc --noEmit`; o Vite apaga tipos sem conferi-los, então isto precisa existir separado |
-| `npm run verificar` | **a porta única**: build, build do Electron, testes, os dois smokes e o verificador do material |
+| `npm run verificar` | **o portão do dia a dia**: build, build do Electron, testes, os dois smokes do código e o verificador do material — **não empacota nem testa o pacote** |
+| `npm run verificar:pacote` | empacota e roda o smoke do pacote — o portão de quem vai distribuir |
 | `npm run smoke` | abre o artefato por `file://` num Chrome headless e confere o DOM renderizado |
 | `npm run build:electron` | compila o processo principal e o preload para `dist-electron/` |
 | `npm run desktop` | build completo e abre o aplicativo desktop |
@@ -44,13 +45,15 @@ navegador atual, para abrir o resultado.
 | `npm run distribuir:<sistema>` | empacota com o `electron-builder`: AppImage, NSIS ou `.dmg`/`.zip` |
 | `npm run smoke:pacote` | abre o **app empacotado** por CDP e confere os fuses, o asar e o progresso |
 | `npm run verificar:pacote` | empacota e roda o smoke do pacote — o portão de quem vai distribuir |
-| `npm run empacotar` | monta a pasta que vai para quem estuda: `dist/Roadmap-CISO-Interativo/` |
+| `npm run empacotar` | monta a pasta que vai para quem estuda: `dist/Roadmap-CISO-Interativo/` (roda o `build` antes) |
+| `npm run test:watch` | a suíte em modo observador |
+| `npm run preview` | sobe o Vite servindo o `dist/` para inspeção |
 
 A ordem tem uma dependência real: `check:content` lê o JSON em disco, então sozinho ele não adianta
 nada. O `dev` também não vigia `conteudo/`. Editou um tema com o servidor no ar? Rode
 `npm run build:content` de novo e a página recarrega com o texto novo.
 
-**Os dois smokes conferem o frescor do artefato antes de rodar.** Eles comparam a data de
+**Os três smokes conferem o frescor do artefato antes de rodar.** Eles comparam a data de
 `dist/index.html` e de `dist-electron/main.cjs` com a da fonte mais nova; se o binário for anterior,
 o teste falha dizendo o que rodar, em vez de medir código que não está lá. Isso não é teoria: o smoke
 do desktop passou verde contra um `main.cjs` compilado antes das correções de segurança da casca, e
@@ -115,11 +118,16 @@ processo principal, que é o único lugar de onde dá para conferir: `app://bund
 
 | O que | Medido em 2026-09-26, Linux x64, Electron 33.4.11 |
 |---|---|
-| AppImage | **105 MB** (O7) |
-| `app.asar` | 7,3 MB, 5 arquivos |
-| Pasta desempacotada | 270 MB — o binário do Electron sozinho tem 186 MB |
+| AppImage | **104,6 MiB** (109.695.187 bytes) — O7 |
+| `app.asar` | 7,29 MiB (7.648.697 bytes), 6 entradas: 4 arquivos e 2 pastas |
+| `dist/index.html` | 7,28 MiB (7.636.903 bytes) |
+| Pasta desempacotada | 258 MiB — o binário do Electron sozinho tem 177,7 MiB |
 
-Os 105 MB são quase todos o Electron. O que é nosso é 7,3 MB, e o desenho do pacote é o que
+As unidades são as mesmas em todas as linhas (MiB, com os bytes ao lado) porque misturar decimal
+com binário produz uma contradição visível: 7,6 MB contra 7,3 MB para o mesmo arquivo faz a asar
+parecer menor que o `index.html` que ela contém.
+
+Os 104,6 MiB são quase todos o Electron. O que é nosso é 7,29 MiB, e o desenho do pacote é o que
 mantém isso: a lista de `files` é explícita e termina com `!node_modules/**`. Sem essa linha, o
 electron-builder arrasta a árvore de produção inteira — 7480 dos 7487 arquivos do pacote, 137 MB
 dos 139 MB do AppImage anterior — mesmo com o React e o Mermaid já dentro do bundle inline de
@@ -150,8 +158,60 @@ O **`.deb` saiu da configuração** por decisão. Ele depende do `fpm` do electr
 de `libcrypt.so.1` — ausente no Fedora 44 —, e resolver isso é instalar pacote de sistema para gerar
 um formato que o AppImage já cobre com duplo clique.
 
+**O sandbox do Chromium, no Linux — o que é verdade e o que não é.** Rodando o **arquivo do
+AppImage** com duplo clique, o sandbox está ativo: o processo do renderer ganha um user namespace
+próprio e um filtro seccomp-bpf instalado (medido: `Seccomp: 2, filters: 1`). Mas o `.desktop` que o
+AppImage distribui sai com **`Exec=AppRun --no-sandbox %U`**, porque esse é o padrão do
+electron-builder para AppImage — e quem integra o AppImage ao menu (AppImageLauncher, `appimaged`)
+passa a abrir **sem sandbox** (medido: todos no mesmo namespace, `Seccomp: 0, filters: 0`). O
+`npm run smoke:pacote` lê esse `.desktop` e reprova se ele pedir depurador, mas o `--no-sandbox` é
+conhecido e não está assertado.
+
+A troca é esta: o `chrome-sandbox` dentro de um AppImage não consegue ser setuid root (squashfs não
+sustenta o bit), e em distros que restringem user namespaces sem privilégio — Ubuntu 23.10+ com
+AppArmor — o Chromium **aborta** em vez de rodar sem sandbox. Ou seja, tirar o `--no-sandbox` troca
+"roda sem sandbox" por "não roda" para parte do público. Ficou como está, declarado, com a decisão
+registrada nas pendências; quem quiser o sandbox hoje roda o arquivo do AppImage direto, e um
+`.deb`/`.rpm` resolveria de vez porque a instalação pode aplicar `4755` no auxiliar.
+
 **Ícone.** `build/icon.png`, 1024×1024, versionado. O electron-builder deriva `.ico` e `.icns`
-dele. Sem esse arquivo ele usa o ícone do Electron — que é o que aparecia no instalador.
+dele. Sem esse arquivo ele usa o ícone do Electron — que é o que aparecia no instalador. A pasta se
+chama `build/` porque esse é o `buildResources` padrão da ferramenta; convive com `dist/`,
+`dist-electron/` e `instalador/`, que são saída, e ela não é.
+
+## Checagens do plano (O1–O8 e S1–S14)
+
+O §16.3 do plano diz que cada item vira linha aqui, com o número medido, ou não conta como feito.
+Esta é a tabela — e a coluna "medido" é a que diz o que ainda falta, não a "implementado".
+
+| Item | Implementado | Medido | Evidência |
+|---|---|---|---|
+| O1 arranque | não | **não** | — |
+| O2 sem tela branca (`show:false` + `ready-to-show`) | sim | **não** | `electron/main.ts` |
+| O3 bundle dividido | não | **não** | — |
+| O4 só o `flowchart` do Mermaid | não | **não** | — |
+| O5 memória após navegações | não | **não** | — |
+| O6 diagramas por tela | não | **não** | — |
+| O7 tamanho do instalador | — | **sim: 104,6 MiB** | acima |
+| O8 decisão sobre XP/nível/sequência | — | sim (removidos, com o motivo) | `progresso.test.ts` |
+| S1 prefs endurecidas | sim | parcial: `allowRunningInsecureContent` não é assertado | `smoke-desktop.mjs` |
+| S2 ponte por allowlist | sim | **não** | `electron/preload.ts` |
+| S3 link externo só `http(s)` | sim | sim | `smoke-desktop.mjs` |
+| S4 sem `webview`/janela nova | sim | **não** (sem asserção) | `electron/main.ts` |
+| S5 CSP como cabeçalho | sim | sim | `smoke-desktop.mjs` |
+| S6 o que cruza a ponte passa pelo normalizador | sim | **não** | `main.ts` só recusa o que não é objeto; o normalizador roda no renderer |
+| S7 corte antes do `JSON.parse` | sim | **não** | `main.ts` e `electron/progresso.ts` |
+| S8 importação com esquema e cópia campo a campo | sim | sim | `progresso.test.ts`, `persistencia.test.ts` |
+| S9 nenhuma requisição de rede | sim (`connect-src 'none'`) | **não** (sem interceptor) | `main.ts` |
+| S10 permissões negadas | sim | **não** (sem asserção) | `main.ts` |
+| S11 fuses e integridade do asar | sim | sim | `fuses.mjs`, `smoke-pacote.mjs` |
+| S12 travessia e host bloqueados | sim | sim | `smoke-desktop.mjs`, `smoke-pacote.mjs` |
+| S13 cadência de patch do Electron | decisão registrada | — | pendências, fase 7 |
+| S14 assinatura | decisão registrada | — | pendências, fase 7 |
+
+A via da pasta com atalho (`npm run empacotar`) **não tem portão automático nenhum**: nem o
+`verificar` nem teste algum sobe o `servidor.py`. É a única via de entrega sem verificação, e está
+registrada nas pendências.
 
 ## Como o app chega a quem estuda
 
@@ -305,14 +365,14 @@ em que entram.
 
 | Pendência | Fase |
 |---|---|
-| **4.3 — pronto no Linux.** O `electron-builder` está configurado, o AppImage sai com 105 MB (O7) e os sete fuses entram e são conferidos. Faltam os alvos que esta máquina não produz: `.dmg`/`.zip` (precisa de um Mac) e NSIS/portable (precisa de `wine` ou de um Windows). O `.deb` saiu da configuração por decisão | 4.3 |
+| **4.3 — pronto no Linux.** O `electron-builder` está configurado, o AppImage sai com 104,6 MiB (O7) e os sete fuses entram e são conferidos. Faltam os alvos que esta máquina não produz: `.dmg`/`.zip` (precisa de um Mac) e NSIS + portátil (precisa de `wine` ou de um Windows). O `.deb` saiu da configuração por decisão | 4.3 |
 | **4.4 — Otimizar** o que a casca liberou: registrar só o `flowchart` do Mermaid, ler o `content.json` do disco em vez de inlinado, dividir o bundle. É o que reduz peso, arranque e memória (O1, O4, O5, O6) | 4.4 |
-| Trocar `script-src 'unsafe-inline'` por `'self'` nas duas CSPs — só é possível depois do bundle dividido | 4.4 |
-| **Só o O7 está medido** (105 MB, acima). O §16.3 do plano diz que sem medição o item não conta como feito: faltam arranque até a primeira pintura, memória após 20 navegações e diagramas renderizados por tela, além de S6, S7, S9, S10 e S13 | 4.4 |
+| Trocar `script-src 'unsafe-inline'` por `'self'` nas **três** CSPs (o `<meta>` de `index.html`, o cabeçalho de `electron/main.ts` e o de `launcher/servidor.py`) — só é possível depois do bundle dividido | 4.4 |
+| **Só o O7 está medido.** Pelo §16.3 do plano, item sem número medido não conta como feito. A tabela de O1–O8 e S1–S14, com o que está implementado e o que está verificado, está na seção "Checagens do plano" abaixo | 4.4 |
 | **A Fase 5 inteira não existe**: banco de múltipla escolha, `check-questions.ts` e tela de Quiz. É decisão de autoria antes de ser código — exige template novo e auditoria de citação, pelas regras do `CONTRIBUTING` | 5 |
 | Os 1328 links relativos (`../README.md`, `TEMA-*.md`) ficam mortos no arquivo único: precisam ser reescritos para as rotas do app. Os 586 externos abrem normalmente | 6 |
 | Regras do material ainda não implementadas: "duas passagens falhas seguidas mandam para releitura completa" (`plano-12-meses.md`), revisão além de D+90, a tarefa concreta de cada intervalo, a coluna "Artefato produzido" do registro e o diagnóstico por item (hoje é um booleano por tema) | 6 |
-| O **critério de aprovação não tem dono declarado** no `CONTRIBUTING` §3, e a trilha de 90 dias restringe o escopo de 02 ("valem apenas os itens 1 e 2") enquanto o app aplica o critério do guia — a tela pode dizer "reprovado" por uma régua que aquela trilha não aplica | 6 |
+| O **escopo do critério na trilha de 90 dias** (`plano-90-dias.md` §7 recomenda que só os itens 1 e 2 de 02 contem) não é aplicado pelo app, que usa o critério do guia inteiro. O dono do critério já está declarado (`CONTRIBUTING` §3: o guia da área); falta decidir se a trilha é recomendação de escopo ou régua própria | 6 |
 | `glossario.md` e `mapa-relacoes.md` usam `## Título` sem número e caem inteiros no `intro`, sem seções; o glossário não é navegável por termo | 6 |
 | A fila de hoje é clicável, mas só lista os cinco primeiros: falta paginar ou abrir a lista inteira | 6 |
 | Os vereditos por item do checkpoint vivem em `useState`: o total persiste, mas após recarregar os botões voltam em branco, com o texto dizendo "último resultado registrado" | 6 |
@@ -325,11 +385,13 @@ em que entram.
 | Sobre o JSON: o HTML das seções 3 e 10 dos temas (~0,25 MB) e o campo `errosComuns` nunca chegam à tela; e há 3,4 MB de bundle do Mermaid para 69 diagramas que são todos `flowchart` | 6 |
 | O contrato de re-render do Mermaid mora na `key` do React, repetido em três arquivos, e o laço de seções também está triplicado | 6 |
 | O verificador do material dá verde quando um sincronizador falha, trata o léxico apenas como aviso e não valida `templates/` nem `CONTRIBUTING.md` | 6 |
-| O desktop carrega um **Chromium 130, fora de linha** (Electron 33), e o `npm audit` acusa 1 crítica (`tar`, via `electron-builder`) e 13 altas — quase tudo em ferramenta de build. Pinar, subir de versão e declarar a cadência de patch | 7 |
-| *Fuses* e integridade do `asar` deixam de ser opcionais quando houver empacotamento distribuído, junto da assinatura | 7 |
+| O desktop carrega um **Chromium 130, fora de linha** (Electron 33). O `npm audit` acusa 1 crítica e 13 altas, e a leitura correta é: as de `tar`, `node-gyp` e `app-builder-lib` são de ferramenta de build e não entram no pacote (o `asar list` prova: 4 arquivos, zero `node_modules`); mas o **`electron` é dependência direta e o runtime está embarcado**, com 33 advisories que tocam justamente o que a casca anuncia — *context isolation bypass* (`GHSA-h7rp-cf8h-j98x`), *sandboxed iframe allow-popups bypass* (`GHSA-9f4c-93c8-jc8g`) e *ASAR integrity bypass* (`GHSA-vmqv-hx8q-j7mg`), este último **não mitigado no Linux**, onde a integridade do asar não é verificada. Subir de major e declarar cadência de patch | 7 |
+| O `.desktop` do AppImage abre com `--no-sandbox` (padrão do electron-builder), então a via do menu de aplicativos roda sem o sandbox do Chromium. Decidido manter, para o app não abortar em distros que restringem user namespaces. **Testar em Ubuntu 24.04 antes de distribuir** e reabrir a decisão, ou trazer de volta um `.deb`/`.rpm`, onde o auxiliar pode ser 4755 | 7 |
 | O desktop só foi exercitado no Linux. Falta abrir num Windows e num macOS de verdade | 7 |
 | SBOM e soma de verificação por release; o `package-lock.json` já cobre electron, electron-builder e playwright | 7 |
 | A camada de interface não tem teste de componente (`@testing-library` não está instalado): exportar, importar e recomeçar só são exercitados pelo store e pelo smoke. Um `AcoesDeProgresso` com ponte que rejeita fecharia o aviso de falha de gravação | 6 |
 | O caminho de exportar/importar **do navegador** (Blob, `<input type=file>`, corte de 1 MB no arquivo escolhido) não tem teste; o cancelamento do diálogo deixa a promise pendente | 6 |
 | O gate é um subconjunto do `verificar-repo.py`: ainda não confere `<details>` do gabarito, links internos entre arquivos, formato de datas e coerência da tabela de tempos | 6 |
+| A **via da pasta com atalho não tem portão automático**: nada sobe o `servidor.py` num teste, então um `smoke:pasta` (200 em `/`, 421 com `Host` estranho, 404 em qualquer outro caminho, e o `index.html` respondendo) fecharia a única via de entrega sem verificação | 6 |
+| O `.gitattributes` promete CRLF para `*.bat`, mas o arquivo no repositório está em LF — a conversão de verdade é a do `empacotar.mjs`, e ela **não pode ser removida** achando que o git resolve | 6 |
 | Os smokes dependem de `google-chrome-stable` no PATH e de sessão gráfica para o Electron; nada disso está em CI, porque CI não existe | 7 |

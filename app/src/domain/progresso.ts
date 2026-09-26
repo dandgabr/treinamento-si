@@ -1,5 +1,5 @@
-// Estado do estudo: o formato que o app persiste (localStorage agora, arquivo na fase
-// de exportacao) e as operacoes puras sobre ele.
+// Estado do estudo: o formato que o app persiste — no armazenamento do navegador ou num
+// arquivo, conforme a via — e as operacoes puras sobre ele.
 
 import { criarEstado, filaDeHoje, registrarRevisao, type EstadoRevisao } from './srs'
 

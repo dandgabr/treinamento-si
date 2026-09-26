@@ -41,7 +41,15 @@ const FUSES = {
 
 export default async function afterPack(context) {
   const binario = binarioEm(context.appOutDir, context.electronPlatformName)
-  await flipFuses(binario, { version: FuseVersion.V1, ...FUSES })
+  await flipFuses(binario, {
+    version: FuseVersion.V1,
+    // No macOS arm64 o binario carrega assinatura ad-hoc, e alterar o executavel a
+    // invalida: sem re-assinar, o app se recusa a abrir com erro de validacao de
+    // assinatura. Nao ha assinatura configurada (mac.identity: null), entao a re-assinatura
+    // ad-hoc e o que mantem o .dmg abrindo.
+    resetAdHocDarwinSignature: context.electronPlatformName === 'darwin',
+    ...FUSES,
+  })
 
   // Confere o que foi gravado: uma lista de fuses que nao chegou ao binario e uma
   // promessa vazia no README. O `getCurrentFuseWire` devolve o estado como numero

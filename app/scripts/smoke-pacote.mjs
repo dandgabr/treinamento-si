@@ -15,16 +15,19 @@
  *
  * Uso: npm run distribuir && npm run smoke:pacote
  */
-import { spawn } from 'node:child_process'
+import { execFile, spawn } from 'node:child_process'
 import fs from 'node:fs'
-import net from 'node:net'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { promisify } from 'node:util'
 import { FuseState, FuseV1Options, getCurrentFuseWire } from '@electron/fuses'
 import { listPackage } from '@electron/asar'
 import { chromium } from 'playwright'
 import { binarioEm } from './lib/binario.mjs'
+import { fontesMaisNovas } from './lib/frescor.mjs'
+
+const execFileAsync = promisify(execFile)
 
 const AQUI = path.dirname(fileURLToPath(import.meta.url))
 const APP = path.resolve(AQUI, '..')
@@ -34,15 +37,24 @@ const SAIDA = path.join(APP, 'instalador')
 function pastaDesempacotada() {
   const porSistema =
     process.platform === 'darwin' ? 'mac' : process.platform === 'win32' ? 'win' : 'linux'
-  const candidatas = fs
-    .readdirSync(SAIDA, { withFileTypes: true })
-    .filter((e) => e.isDirectory() && e.name.startsWith(porSistema))
-    .map((e) => path.join(SAIDA, e.name))
-  if (!candidatas.length) {
+  // Conferido antes de listar: `readdirSync` numa pasta que nao existe sai com ENOENT e
+  // stack trace, engolindo a mensagem que explica o que rodar.
+  if (!fs.existsSync(SAIDA)) {
     console.error(`Nada empacotado em ${SAIDA}.\nRode antes: npm run distribuir`)
     process.exit(1)
   }
-  return candidatas[0]
+  const candidatas = fs
+    .readdirSync(SAIDA, { withFileTypes: true })
+    .filter((e) => e.isDirectory() && e.name.startsWith(porSistema))
+    .map((e) => ({ caminho: path.join(SAIDA, e.name), quando: fs.statSync(path.join(SAIDA, e.name)).mtimeMs }))
+    // `instalador/` acumula builds: pegar a primeira entrada da listagem podia medir uma
+    // pasta antiga so porque o nome vem antes no alfabeto.
+    .sort((a, b) => b.quando - a.quando)
+  if (!candidatas.length) {
+    console.error(`Nada empacotado para ${porSistema} em ${SAIDA}.\nRode antes: npm run distribuir`)
+    process.exit(1)
+  }
+  return candidatas[0].caminho
 }
 
 async function portaDeDepuracao(pastaDados, proc) {
@@ -61,8 +73,9 @@ async function portaDeDepuracao(pastaDados, proc) {
 
 const pasta = pastaDesempacotada()
 const binario = binarioEm(pasta, process.platform)
-const dados = fs.mkdtempSync(path.join(os.tmpdir(), 'roadmap-pacote-'))
 const falhas = []
+/** Criado só depois das conferências: uma recusa por artefato velho não deixa lixo. */
+let dados = null
 let proc
 
 function conferir(nome, obtido, esperado) {
@@ -74,9 +87,29 @@ function conferir(nome, obtido, esperado) {
 async function main() {
   console.log(`Pacote: ${path.relative(APP, binario)}\n`)
 
+  // Os outros dois smokes conferem frescor e este nao conferia: o asar ficou tres horas
+  // mais velho que o `dist/index.html` e o teste abriria, feliz, um build antigo. O
+  // `app.asar` tem data de empacotamento, entao a comparacao de data funciona.
+  const asar = path.join(pasta, 'resources', 'app.asar')
+  const atrasados = fontesMaisNovas(asar, [
+    path.join(APP, 'dist'),
+    path.join(APP, 'dist-electron'),
+    path.join(APP, 'build'),
+    path.join(APP, 'package.json'),
+    path.join(APP, 'electron-builder.yml'),
+  ])
+  if (atrasados.length) {
+    console.error(
+      `Artefato desatualizado.\nMais novo que ele: ${atrasados.join(', ')}\n` +
+        'Rode antes: npm run distribuir',
+    )
+    process.exit(1)
+  }
+
+  dados = fs.mkdtempSync(path.join(os.tmpdir(), 'roadmap-pacote-'))
+
   // O asar substitui a arvore de arquivos: se o empacotamento errar o alvo, o app abre em
   // branco. Conferir existencia e tamanho e mais barato que descobrir na tela.
-  const asar = path.join(pasta, 'resources', 'app.asar')
   conferir('app.asar existe', fs.existsSync(asar), true)
   if (fs.existsSync(asar)) {
     conferir('app.asar tem conteudo', fs.statSync(asar).size > 1_000_000, true)
@@ -89,7 +122,16 @@ async function main() {
       arquivos.some((caminho) => caminho.startsWith('/node_modules')),
       false,
     )
-    conferir('app.asar enxuto', arquivos.length < 100, true)
+    // Conjunto exato, e nao um teto folgado: com `length < 100` cabiam mais 94 arquivos
+    // sem o teste reclamar. A ordem e a do `sort()` padrao, que e o que o outro lado usa.
+    conferir('app.asar com exatamente o previsto', arquivos.sort(), [
+      '/dist',
+      '/dist-electron',
+      '/dist-electron/main.cjs',
+      '/dist-electron/preload.cjs',
+      '/dist/index.html',
+      '/package.json',
+    ])
   }
 
   // Os fuses sao o endurecimento prometido no README. `getCurrentFuseWire` devolve o
@@ -116,6 +158,41 @@ async function main() {
     fuses[FuseV1Options.GrantFileProtocolExtraPrivileges],
     FuseState.DISABLE,
   )
+  // Os dois que faltavam: a integridade do asar e o unico no-op no Linux (e o mais util de
+  // ver registrado) e o cofre do Chromium vem desligado de fabrica.
+  conferir(
+    'fuse integridade do asar ligado',
+    fuses[FuseV1Options.EnableEmbeddedAsarIntegrityValidation],
+    FuseState.ENABLE,
+  )
+  conferir(
+    'fuse cofre do Chromium ligado',
+    fuses[FuseV1Options.EnableCookieEncryption],
+    FuseState.ENABLE,
+  )
+
+  // O `.desktop` que o AppImage distribui é o que o menu de aplicativos usa depois de
+  // integrar. Ele não pode pedir depurador: o fuse bloqueia `--inspect`, mas
+  // `--remote-debugging-port` não tem fuse nenhum e passaria. (Sobre o `--no-sandbox` que
+  // o electron-builder põe por padrão e que o menu herda, veja o README.)
+  const appImage = fs.readdirSync(SAIDA).find((nome) => nome.endsWith('.AppImage'))
+  if (appImage) {
+    const extraido = fs.mkdtempSync(path.join(os.tmpdir(), 'roadmap-appimage-'))
+    try {
+      await execFileAsync(path.join(SAIDA, appImage), ['--appimage-extract', '*.desktop'], {
+        cwd: extraido,
+      })
+      const raiz = path.join(extraido, 'squashfs-root')
+      const nome = fs.existsSync(raiz) ? fs.readdirSync(raiz).find((n) => n.endsWith('.desktop')) : null
+      const linha = nome
+        ? (fs.readFileSync(path.join(raiz, nome), 'utf8').split('\n').find((l) => l.startsWith('Exec=')) ?? '')
+        : ''
+      conferir('.desktop traz Exec=AppRun', linha.startsWith('Exec=AppRun'), true)
+      conferir('.desktop sem flag de depurador', /--inspect|--remote-debugging-port/.test(linha), false)
+    } finally {
+      fs.rmSync(extraido, { recursive: true, force: true })
+    }
+  }
 
   // Abre como qualquer usuario abriria, com a porta de depuracao para podermos olhar.
   proc = spawn(
@@ -152,9 +229,14 @@ async function main() {
     await janela.evaluate(() => [typeof window.require, typeof window.process]),
     ['undefined', 'undefined'],
   )
-  // O `app.asar` responde pelo esquema proprio: se o caminho interno tivesse mudado, o
-  // conteudo nao chegaria e a lista acima estaria vazia.
-  conferir('rotulo da versao presente', await janela.locator('.acoes-progresso').count(), 1)
+  // O nome prometia conferir o rotulo da versao, e a asserção olhava so a existencia do
+  // container — que o `ResumoProgresso` renderiza sempre, com ou sem a ponte. Agora olha o
+  // texto, o que exercita o canal `app:versao` depois do empacotamento.
+  conferir(
+    'versao lida pela ponte',
+    /versão \d+\.\d+\.\d+/.test((await janela.locator('.acoes-progresso').textContent()) ?? ''),
+    true,
+  )
 
   // Escrever prova duas coisas de uma vez: o IPC atravessa o pacote e o arquivo vai para
   // a pasta de dados do usuario, fora da pasta de instalacao.
@@ -183,12 +265,27 @@ async function main() {
 }
 
 async function encerrar() {
+  const terminou = new Promise((resolver) => {
+    if (!proc || proc.exitCode !== null) resolver()
+    else proc.once('exit', resolver)
+  })
   try {
     proc?.kill('SIGTERM')
   } catch {
     // Ja morreu.
   }
-  fs.rmSync(dados, { recursive: true, force: true })
+  // Esperar a saida antes de apagar: os filhos do Electron (zygote, GPU) ainda escrevem no
+  // perfil por alguns milissegundos e recriam a pasta recem-removida. Sem isto sobra um
+  // `/tmp/roadmap-pacote-*` por execucao.
+  await Promise.race([terminou, new Promise((r) => setTimeout(r, 3000))])
+  if (proc && proc.exitCode === null) {
+    try {
+      proc.kill('SIGKILL')
+    } catch {
+      // Nada mais a fazer.
+    }
+  }
+  if (dados) fs.rmSync(dados, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 })
 }
 
 try {

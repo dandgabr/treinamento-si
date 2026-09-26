@@ -230,6 +230,69 @@ describe('progresso-store', () => {
     expect(store.instantaneo().estado).toMatchObject({ temas: {}, diasAtivos: [] })
   })
 
+  it('não finge importar quando a sessão não pode gravar', async () => {
+    // Com a leitura falhando, `podeGravar` fica falso. Substituir em memória e dizer
+    // "importado" daria a impressão de que o arquivo foi salvo — no dia seguinte não
+    // estaria lá.
+    const importado = {
+      versao: 1,
+      temas: { 'b#TEMA-01': { ref: 'b#TEMA-01', lido: true, preTeste: {} } },
+      checkpoints: {},
+      diasAtivos: [],
+    }
+    const { provedor, registro } = provedorDeTeste({
+      leitura: () => Promise.reject(new Error('EIO')),
+      importacao: () => Promise.resolve({ estado: 'ok', dado: importado }),
+    })
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    const aviso = await store.importar()
+
+    expect(aviso?.tipo).toBe('erro')
+    expect(aviso?.texto).toContain('não pode gravar')
+    expect(Object.keys(store.instantaneo().estado.temas)).toEqual([])
+    expect(registro.gravados).toHaveLength(0)
+  })
+
+  it('recomeçar não apaga o arquivo quando a leitura falhou', async () => {
+    // A ação mais destrutiva do app não pode rodar numa sessão que não conseguiu ler: ela
+    // apagaria justamente o que não conseguimos abrir.
+    const { provedor, registro } = provedorDeTeste({
+      leitura: () => Promise.reject(new Error('EIO')),
+    })
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    const aviso = await store.recomecar()
+
+    expect(aviso?.tipo).toBe('erro')
+    expect(registro.apagou).toBe(0)
+  })
+
+  it('recomeçar entra na fila das gravações', async () => {
+    // Fora de ordem, a sequência possível é gravar o temporário, apagar o alvo e só então
+    // renomear: o arquivo volta com o estado antigo enquanto a tela mostra zero.
+    const ordem: string[] = []
+    const { provedor } = provedorDeTeste({
+      leitura: () => Promise.resolve(estadoDoDisco()),
+      gravacao: () => {
+        ordem.push('gravacao')
+        return new Promise((r) => setTimeout(r, 5))
+      },
+    })
+    provedor.apagar = async () => {
+      ordem.push('apagar')
+    }
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    store.marcarLido('a#TEMA-02', AGORA)
+    await store.recomecar()
+
+    expect(ordem).toEqual(['gravacao', 'apagar'])
+  })
+
   it('não passa pela gravação quando o redutor não muda nada', async () => {
     const { provedor, registro } = provedorDeTeste({
       leitura: () => Promise.resolve(estadoDoDisco()),

@@ -86,6 +86,9 @@ const cenarios = [
         d.querySelectorAll('.bloco-pre-teste .lista-qa > li').length * 5,
         d.querySelectorAll('.bloco-pre-teste .confianca button').length,
       ],
+      // Guarda contra a asserção acima virar `0 === 0` caso o bloco suma: sem este par,
+      // ela passaria com o pré-teste inteiro ausente.
+      ['niveis de confianca presentes', d.querySelectorAll('.bloco-pre-teste .nivel').length >= 5, true],
       [
         'confianca comeca nao respondida',
         d.querySelectorAll('.bloco-pre-teste .nivel[aria-pressed="false"]').length,
@@ -140,6 +143,7 @@ const cenarios = [
         d.querySelectorAll('.bloco-qa .veredicto-item').length,
         d.querySelectorAll('.bloco-qa .lista-qa > li').length,
       ],
+      ['veredictos por item existem', d.querySelectorAll('.bloco-qa .veredicto-item').length > 0, true],
       ['criterio visivel', texto(d, 'main').includes('Critério para seguir adiante'), true],
       ['diagrama do guia', d.querySelectorAll('.mermaid svg').length >= 1, true],
       [
@@ -305,6 +309,10 @@ for (const { nome, rota } of rotasDaMatriz()) {
     rota,
     url: `${BASE}${rota}`,
     checar: (d) => [
+      // Um positivo generico por rota: sem ele, "sem erro de rota" e "sem aviso" sao
+      // verdadeiros por ausencia e uma pagina que nao renderizou nada passaria, desde que
+      // houvesse um h1.
+      ['conteudo renderizado', (d.querySelector('main')?.textContent ?? '').trim().length > 400, true],
       ['um unico h1', d.querySelectorAll('h1').length, 1],
       ['sem erro de rota', RE_ROTA_VAZIA.test(textoSemScripts(d)), false],
       ['sem aviso de erro', d.querySelectorAll('.aviso-erro').length, 0],
@@ -320,7 +328,11 @@ async function main() {
   }
   // Existir nao basta: um `dist` de antes da ultima alteracao faz o teste passar para
   // codigo que nao esta no artefato.
-  const desatualizadas = fontesMaisNovas(ARTEFATO, [path.join(APP, 'src'), path.join(APP, 'index.html')])
+  const desatualizadas = fontesMaisNovas(ARTEFATO, [
+    path.join(APP, 'src'),
+    path.join(APP, 'index.html'),
+    path.join(APP, 'vite.config.ts'),
+  ])
   if (desatualizadas.length) {
     console.error(
       `Artefato desatualizado: ${ARTEFATO}\n` +

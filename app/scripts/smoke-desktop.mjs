@@ -28,7 +28,12 @@ if (faltando.length) {
 // Existir nao basta, e isto ja aconteceu: o smoke do desktop deu verde contra um
 // `main.cjs` compilado antes das correcoes de seguranca da casca. Ele testava um codigo
 // que nao estava no binario.
-const fontes = [path.join(APP, 'electron'), path.join(APP, 'src'), path.join(APP, 'index.html')]
+const fontes = [
+  path.join(APP, 'electron'),
+  path.join(APP, 'src'),
+  path.join(APP, 'index.html'),
+  path.join(APP, 'vite.electron.config.ts'),
+]
 const atrasados = [
   ...fontesMaisNovas(path.join(APP, 'dist-electron', 'main.cjs'), fontes),
   ...fontesMaisNovas(path.join(APP, 'dist/index.html'), [path.join(APP, 'src'), path.join(APP, 'index.html')]),
@@ -211,11 +216,14 @@ async function segundaSessao() {
 }
 
 async function main() {
-  await primeiraSessao()
-  await segundaSessao()
-
-  fs.rmSync(dados, { recursive: true, force: true })
-
+  try {
+    await primeiraSessao()
+    await segundaSessao()
+  } finally {
+    // No `finally`: se um `waitForSelector` estourar no meio, o diretorio de dados ficaria
+    // para tras. O do pacote ja limpa assim.
+    fs.rmSync(dados, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 })
+  }
   if (falhas.length) {
     console.error(`\n${falhas.length} falha(s):`)
     for (const falha of falhas) console.error(`  - ${falha}`)

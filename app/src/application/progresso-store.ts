@@ -107,12 +107,17 @@ function publicar(redutor: Redutor): void {
   // clique gravaria e re-renderizaria os consumidores a toa.
   if (Object.is(novo, estado)) return
   estado = novo
-  if (!carregado || !podeGravar) {
-    // Duas razoes para segurar a gravacao: a carga ainda nao chegou (gravar agora
-    // substituiria o arquivo pelo estado vazio mais um clique) ou ela falhou (nao se
-    // escreve por cima do que nao se conseguiu ler). A intencao fica retida e, no
-    // primeiro caso, e reaplicada sobre o que veio do disco.
+  if (!carregado) {
+    // A carga ainda nao chegou: gravar agora substituiria o arquivo pelo estado vazio mais
+    // um clique. A intencao fica retida e e reaplicada sobre o que veio do disco.
     pendentes.push(redutor)
+    notificar()
+    return
+  }
+  if (!podeGravar) {
+    // A leitura falhou: a sessao segue em memoria e nao escreve por cima do que nao
+    // conseguimos ler. Nao entra em `pendentes` — depois da carga ninguem drenaria a fila,
+    // e a intencao ficaria retida para sempre, dando a impressao de estar guardada.
     notificar()
     return
   }
@@ -220,30 +225,43 @@ export function abrirPassagem(ref: string, agora: Date = new Date()): void {
 
 /**
  * Substitui o estado inteiro (recomecar, importar). Passa pelo normalizador: e fronteira
- * de confianca mesmo quando a origem e o proprio usuario.
+ * de confianca mesmo quando a origem e o proprio usuario. Devolve o aviso de falha, ou
+ * null quando aplicou — substituir em memoria numa sessao que nao grava daria a impressao
+ * de que o arquivo foi salvo.
  */
-export function definirProgresso(novo: unknown, agora: Date = new Date()): void {
+export function definirProgresso(novo: unknown, agora: Date = new Date()): Aviso {
+  if (!podeGravar) return { tipo: 'erro', texto: SEM_ESCRITA }
   publicar(() => normalizarProgresso(novo, agora))
+  return null
 }
 
 /** Apaga o que esta guardado e volta ao zero. */
-export async function recomecar(): Promise<void> {
+export async function recomecar(): Promise<Aviso> {
   await carga
-  await onde().apagar()
-  estado = progressoVazio()
+  if (!podeGravar) return { tipo: 'erro', texto: SEM_ESCRITA }
+  // A remocao entra na mesma fila das gravacoes. Fora de ordem, a sequencia possivel e
+  // gravar o temporario, apagar o alvo e so entao renomear — o arquivo volta com o estado
+  // antigo enquanto a tela mostra zero.
+  fila = fila.then(() => onde().apagar())
   await fila
+  estado = progressoVazio()
   notificar()
+  return null
 }
 
-export async function recomecarComConfirmacao(): Promise<void> {
+export async function recomecarComConfirmacao(): Promise<Aviso> {
   const confirmado = window.confirm(
     'Apagar todo o progresso de estudo? Esta ação não pode ser desfeita.',
   )
-  if (confirmado) await recomecar()
+  return confirmado ? await recomecar() : null
 }
 
 /** Recado das acoes de progresso: sucesso se mostra neutro, falha se mostra como aviso. */
 export type Aviso = { tipo: 'ok' | 'erro'; texto: string } | null
+
+/** O que dizer quando a sessao nao pode escrever porque a leitura do arquivo falhou. */
+const SEM_ESCRITA =
+  'Esta sessão não pode gravar: o progresso guardado não pôde ser lido. Exporte o que fez aqui e reimporte depois de reiniciar o aplicativo.'
 
 /** Devolve null quando foi cancelado. */
 export async function exportar(): Promise<Aviso> {
@@ -268,7 +286,8 @@ export async function importar(): Promise<Aviso> {
   if (!pareceProgresso(resultado.dado)) {
     return { tipo: 'erro', texto: 'O arquivo não é um progresso do Roadmap CISO.' }
   }
-  definirProgresso(resultado.dado)
+  const falha = definirProgresso(resultado.dado)
+  if (falha) return falha
   return { tipo: 'ok', texto: 'Progresso importado.' }
 }
 

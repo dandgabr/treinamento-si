@@ -107,19 +107,30 @@ export function BotaoLido({ refTema }: { refTema: string }) {
  */
 export function ResumoProgresso() {
   const progresso = useProgresso()
+  const carregado = useCarregado()
+  const erroDeCarga = useErroDeCarga()
   const agora = new Date()
-  const fila = filaDoProgresso(progresso, agora)
-  const dominios = content.areas.map((a) => dominioDaArea(a, progresso))
+  // Enquanto a leitura nao volta, "0 de 109" e "nada vencido" seriam afirmacoes falsas: o
+  // estado vazio e o nao lido sao indistinguiveis. Com a leitura falhando e pior — os zeros
+  // diriam que nao ha nada quando o que ha e um arquivo que nao conseguimos abrir.
+  const semDados = !carregado || erroDeCarga !== null
+  const fila = semDados ? [] : filaDoProgresso(progresso, agora)
+  const dominios = semDados ? [] : content.areas.map((a) => dominioDaArea(a, progresso))
   const totalTemas = content.meta.totais.temas
   const firmes = dominios.reduce((n, d) => n + d.firmes, 0)
   const aprovados = dominios.filter((d) => d.checkpointAprovado === true).length
   const respondidos = dominios.filter((d) => d.checkpointAprovado !== null).length
   return (
     <section className="resumo">
+      {semDados ? (
+        <p className="resumo-detalhe resumo-largo">
+          {carregado ? 'Não consegui ler o progresso guardado.' : 'carregando o progresso…'}
+        </p>
+      ) : null}
       <div className="resumo-item resumo-largo">
         <span className="resumo-rotulo">Fila de hoje</span>
-        <strong>{fila.length === 0 ? 'nada vencido' : `${fila.length} tema(s)`}</strong>
-        {fila.length ? (
+        <strong>{semDados ? '—' : fila.length === 0 ? 'nada vencido' : `${fila.length} tema(s)`}</strong>
+        {!semDados && fila.length ? (
           <ul className="resumo-fila">
             {fila.slice(0, 5).map((e) => (
               <li key={e.ref}>
@@ -128,16 +139,14 @@ export function ResumoProgresso() {
               </li>
             ))}
           </ul>
-        ) : (
+        ) : semDados ? null : (
           <span className="resumo-detalhe">nada vencido em D+1, D+7 ou D+30.</span>
         )}
       </div>
 
       <div className="resumo-item">
         <span className="resumo-rotulo">Temas firmes</span>
-        <strong>
-          {firmes} de {totalTemas}
-        </strong>
+        <strong>{semDados ? '—' : `${firmes} de ${totalTemas}`}</strong>
         <span className="resumo-detalhe">
           firme é o tema cuja última recuperação ativa foi acertada sem consulta.
         </span>
@@ -145,11 +154,9 @@ export function ResumoProgresso() {
 
       <div className="resumo-item">
         <span className="resumo-rotulo">Checkpoints</span>
-        <strong>
-          {aprovados} de {dominios.length}
-        </strong>
+        <strong>{semDados ? '—' : `${aprovados} de ${dominios.length}`}</strong>
         <span className="resumo-detalhe">
-          {respondidos === 0
+          {semDados || respondidos === 0
             ? 'nenhum checkpoint respondido ainda; o critério é o que cada guia declara.'
             : `${respondidos} respondido(s), no critério declarado em cada guia.`}
         </span>
@@ -157,7 +164,7 @@ export function ResumoProgresso() {
 
       <div className="resumo-item">
         <span className="resumo-rotulo">Dias com estudo</span>
-        <strong>{diasComEstudo(progresso)}</strong>
+        <strong>{semDados ? '—' : diasComEstudo(progresso)}</strong>
         <span className="resumo-detalhe">
           um dia conta quando há leitura, pré-teste, recuperação ou checkpoint.
         </span>
@@ -219,15 +226,22 @@ export function AcoesDeProgresso() {
         <button className="botao-secundario" onClick={() => void agir(exportar)}>
           Exportar progresso
         </button>
-        <button className="botao-secundario" onClick={() => void agir(importar)}>
+        {/* Importar e recomeçar escrevem. Numa sessão que não conseguiu ler o arquivo, as
+            duas seriam destrutivas: recomeçar apagaria um arquivo que não lemos, e importar
+            trocaria em memória sem gravar. */}
+        <button
+          className="botao-secundario"
+          disabled={!!erroDeCarga}
+          onClick={() => void agir(importar)}
+        >
           Importar progresso
         </button>
         <button
           className="botao-secundario"
+          disabled={!!erroDeCarga}
           onClick={() =>
             void agir(async () => {
-              await recomecarComConfirmacao()
-              return null
+              return await recomecarComConfirmacao()
             })
           }
         >

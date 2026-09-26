@@ -9,7 +9,7 @@ import { ponte, type ResultadoDeExportacao, type ResultadoDeImportacao } from '.
 
 export const CHAVE = 'roadmap:progresso'
 /** Mesmo teto do lado do processo principal, para o navegador recusar igual. */
-export const TETO_BYTES = 1024 * 1024
+const TETO_BYTES = 1024 * 1024
 
 export interface Persistencia {
   descricao: string

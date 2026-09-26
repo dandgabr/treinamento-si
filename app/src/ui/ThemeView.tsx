@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { Fragment, useEffect, useRef } from 'react'
 import { content } from '../infrastructure/content/repository'
 import type { Tema } from '../domain/types'
 import { BlocoQA, Html, PreTeste } from './Blocos'
@@ -81,10 +81,12 @@ export function ThemeView({ refTema, escuro }: { refTema: string; escuro: boolea
             return <PreTeste key={3} refTema={tema.ref} questoes={tema.preTeste} />
           if (s.numero === 10)
             return (
-              <>
-                <BlocoQA key={10} titulo="10. Recuperação ativa" pares={tema.recuperacao} />
-                <VereditoRecuperacao key="veredito" refTema={tema.ref} />
-              </>
+              // `Fragment` com key: as keys internas nao servem de identidade para o
+              // fragmento, e o React avisa em desenvolvimento.
+              <Fragment key={10}>
+                <BlocoQA titulo="10. Recuperação ativa" pares={tema.recuperacao} />
+                <VereditoRecuperacao refTema={tema.ref} />
+              </Fragment>
             )
           return (
             <section key={`${s.numero}-${escuro}`} className="secao">
