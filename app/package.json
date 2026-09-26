@@ -12,6 +12,8 @@
     "check:content": "tsx scripts/check-content.ts",
     "dev": "npm run build:content && vite",
     "build": "npm run build:content && npm run check:content && vite build",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "smoke": "node scripts/smoke.mjs",
     "preview": "vite preview"
   },
@@ -34,6 +36,7 @@
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vite": "^6.0.5",
-    "vite-plugin-singlefile": "^2.1.0"
+    "vite-plugin-singlefile": "^2.1.0",
+    "vitest": "^3.0.0"
   }
 }
