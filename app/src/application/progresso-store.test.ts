@@ -272,13 +272,16 @@ describe('progresso-store', () => {
 
   it('recomeçar entra na fila das gravações', async () => {
     // Fora de ordem, a sequência possível é gravar o temporário, apagar o alvo e só então
-    // renomear: o arquivo volta com o estado antigo enquanto a tela mostra zero.
+    // renomear: o arquivo volta com o estado antigo enquanto a tela mostra zero. O registro
+    // precisa do FIM da gravação, e não do começo: só "gravacao, apagar" também aconteceria
+    // com o `apagar` fora da fila, porque a primeira etapa da gravação já teria rodado.
     const ordem: string[] = []
     const { provedor } = provedorDeTeste({
       leitura: () => Promise.resolve(estadoDoDisco()),
-      gravacao: () => {
-        ordem.push('gravacao')
-        return new Promise((r) => setTimeout(r, 5))
+      gravacao: async () => {
+        ordem.push('gravacao-inicio')
+        await new Promise((r) => setTimeout(r, 5))
+        ordem.push('gravacao-fim')
       },
     })
     provedor.apagar = async () => {
@@ -290,7 +293,7 @@ describe('progresso-store', () => {
     store.marcarLido('a#TEMA-02', AGORA)
     await store.recomecar()
 
-    expect(ordem).toEqual(['gravacao', 'apagar'])
+    expect(ordem).toEqual(['gravacao-inicio', 'gravacao-fim', 'apagar'])
   })
 
   it('não passa pela gravação quando o redutor não muda nada', async () => {
