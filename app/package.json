@@ -1,0 +1,39 @@
+{
+  "name": "roadmap-ciso-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "description": "Aplicativo de estudo interativo para o roadmap CISO",
+  "scripts": {
+    "build:content": "tsx scripts/build-content.ts",
+    "check:content": "tsx scripts/check-content.ts",
+    "dev": "npm run build:content && vite",
+    "build": "npm run build:content && npm run check:content && vite build",
+    "smoke": "node scripts/smoke.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "mermaid": "^11.4.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.7",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "dompurify": "^3.2.3",
+    "gray-matter": "^4.0.3",
+    "jsdom": "^25.0.1",
+    "markdown-it": "^14.1.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vite-plugin-singlefile": "^2.1.0"
+  }
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      O app roda offline num arquivo unico, sem backend e sem credenciais. A CSP aqui
+      nao impede XSS (o script inline do singlefile exige 'unsafe-inline'); ela corta
+      rede e formularios, que e o que um XSS conseguiria usar para exfiltrar. Freio,
+      nao antidoto: a defesa de verdade e a sanitizacao no build.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Roadmap CISO — estudo interativo</title>
+  </head>
+  <body>
+    <!-- Placeholder: o bundle tem 7,6 MB e leva um instante para montar. Sem isto, quem
+         abre por duplo clique encara tela branca e pode achar que o arquivo quebrou. -->
+    <div id="root">
+      <p style="font: 16px system-ui; padding: 2rem">Carregando o roadmap…</p>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,407 @@
+:root {
+  color-scheme: light;
+  --fundo: #fbfaf7;
+  --fundo-alt: #ffffff;
+  --texto: #1d1c1a;
+  --texto-suave: #5c5852;
+  --borda: #e3ded6;
+  --acento: #0f6f5c;
+  --acento-suave: #e3f1ec;
+  --alerta: #8a4b00;
+  --raio: 10px;
+  --largura: 78ch;
+}
+
+html[data-theme='dark'] {
+  --fundo: #16181a;
+  --fundo-alt: #1e2124;
+  --texto: #e9e6e1;
+  --texto-suave: #a5a09a;
+  --borda: #2e3236;
+  --acento: #5fd0b2;
+  --acento-suave: #1c2f2a;
+  --alerta: #e0b070;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Foco visivel proprio: sem isto o usuario de teclado depende do anel do navegador,
+   que some sobre os botoes arredondados. */
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--acento);
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1.25rem;
+  background: color-mix(in srgb, var(--fundo) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--borda);
+}
+
+.marca {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--texto);
+  letter-spacing: 0.01em;
+}
+
+.conteudo {
+  width: min(100% - 2.5rem, var(--largura));
+  margin: 0 auto;
+  padding: 2rem 0 5rem;
+}
+
+/* ---------------------------------------------------------------- cabecalhos */
+
+h1 {
+  font-size: 1.9rem;
+  line-height: 1.2;
+  margin: 0 0 0.4rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin: 0 0 0.75rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.secao {
+  margin: 2.5rem 0;
+}
+
+.secao-num {
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero {
+  padding: 1.5rem 0 0.5rem;
+}
+
+.hero p {
+  color: var(--texto-suave);
+  margin: 0;
+}
+
+.cabecalho-tema {
+  border-bottom: 1px solid var(--borda);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  align-items: center;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.objetivo {
+  background: var(--acento-suave);
+  border-radius: var(--raio);
+  padding: 0.75rem 1rem;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.selo {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+.selo.nivel-base {
+  border-color: color-mix(in srgb, var(--acento) 45%, var(--borda));
+}
+.selo.nivel-avancado {
+  border-color: color-mix(in srgb, var(--alerta) 55%, var(--borda));
+}
+
+.migalhas {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin-bottom: 1rem;
+}
+
+.aviso-erro {
+  width: min(100% - 2.5rem, var(--largura));
+  margin: 1rem auto 0;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--alerta);
+  border-radius: var(--raio);
+  color: var(--alerta);
+  font-size: 0.9rem;
+}
+
+/* ------------------------------------------------------------------- listas */
+
+.lista-areas,
+.lista-temas,
+.lista-paginas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-areas a,
+.lista-temas a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid var(--borda);
+  text-decoration: none;
+  color: var(--texto);
+}
+
+.lista-areas a:hover,
+.lista-temas a:hover {
+  background: var(--fundo-alt);
+}
+
+.lista-areas .indice,
+.lista-temas .indice {
+  font-variant-numeric: tabular-nums;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  min-width: 1.6rem;
+}
+
+.lista-areas .nome,
+.lista-temas .nome {
+  flex: 1;
+}
+
+.lista-areas .contagem,
+.lista-temas .tempo {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.lista-paginas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+/* --------------------------------------------------------------- qa / test */
+
+.dica {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  margin-top: -0.35rem;
+}
+
+.lista-qa {
+  padding-left: 1.25rem;
+}
+
+.lista-qa > li {
+  margin-bottom: 1.5rem;
+}
+
+.pergunta {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.botao-secundario {
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--acento);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--acento) 40%, var(--borda));
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  cursor: pointer;
+}
+
+.botao-secundario:hover {
+  background: var(--acento-suave);
+}
+
+.gabarito {
+  background: var(--fundo-alt);
+  border-left: 3px solid var(--acento);
+  border-radius: 0 var(--raio) var(--raio) 0;
+  padding: 0.75rem 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.gabarito p {
+  margin-top: 0;
+}
+
+/* Explicito: se alguem der `display` a .gabarito, a regra de autor venceria o
+   `[hidden]` da UA e o gabarito vazaria com o JS achando que esta escondido. */
+.gabarito[hidden] {
+  display: none;
+}
+
+.criterio {
+  background: var(--acento-suave);
+  border-radius: var(--raio);
+  padding: 0.7rem 1rem;
+  font-size: 0.92rem;
+}
+
+.confianca {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.nivel {
+  font: inherit;
+  font-size: 0.8rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  border: 1px solid var(--borda);
+  background: transparent;
+  color: var(--texto-suave);
+  cursor: pointer;
+}
+
+.nivel.ativo {
+  background: var(--acento);
+  border-color: var(--acento);
+  color: var(--fundo);
+  font-weight: 700;
+}
+
+.vizinhos {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--borda);
+}
+
+/* ------------------------------------------------------------------ markdown */
+
+.secao p,
+.secao li {
+  overflow-wrap: anywhere;
+}
+
+.secao table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  display: block;
+  overflow-x: auto;
+}
+
+.secao th,
+.secao td {
+  border: 1px solid var(--borda);
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.secao th {
+  background: var(--fundo-alt);
+}
+
+.secao code {
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  padding: 0.05rem 0.3rem;
+  font-size: 0.88em;
+}
+
+.secao pre {
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.85rem;
+  overflow-x: auto;
+}
+
+.secao pre code {
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+.secao details {
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+}
+
+.secao summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem 0;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
