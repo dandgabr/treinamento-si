@@ -5,7 +5,7 @@
 
 import { interpretarCriterio } from '../../src/domain/criterio'
 import { SEQUENCIA_DIAS } from '../../src/domain/srs'
-import type { Area, Conteudo, Guia, Pagina, Secao, Tema } from '../../src/domain/types'
+import type { Area, Conteudo, Fonte, Guia, Pagina, Secao, Tema } from '../../src/domain/types'
 
 /** Sequencia que o escalonador do app implementa hoje. */
 const SEQUENCIA_PADRAO: readonly number[] = SEQUENCIA_DIAS
@@ -33,6 +33,16 @@ export const LEXICO = [
 
 const NIVEIS = new Set(['base', 'intermediario', 'avancado'])
 
+/** Grupos que hoje existem em `paginas`. Um grupo novo tem de entrar aqui de proposito. */
+const GRUPOS_DE_PAGINA = new Set(['home', 'referencia', '90-certificacoes', '91-trilhas', '99-fontes'])
+
+// Espelha `checa_mermaid` do verificador do material. `&` NAO entra: `ATT&CK` e rotulo
+// legitimo, e o proprio verificador do conteudo o aceita.
+const PROIBIDOS_NO_ROTULO = ['<', '>', '"', '(', ')', '#']
+
+/** Formato de data ISO com hora, o que `geradoEm` promete ser. */
+const RE_DATA_ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/
+
 const MARCA_ANCORAGEM = 'Por que isso importa'
 const MARCA_RECUPERACAO = 'Recuperação ativa'
 const MARCA_FONTES = 'Fontes verificadas'
@@ -57,8 +67,12 @@ function checarLexico(onde: string, alvo: string, erros: string[]): void {
 
 function checarSecoes(onde: string, secoes: Secao[], erros: string[], exigirUma: boolean): void {
   if (exigirUma && secoes.length < 1) erros.push(`${onde}: sem secoes`)
+  const vistos = new Set<number>()
   for (const s of secoes) {
     if (!Number.isFinite(s.numero)) erros.push(`${onde}: secao com numero invalido`)
+    // Dois documentos com a mesma numeracao quebram a ancora `#secao-N` e o sumario.
+    if (vistos.has(s.numero)) erros.push(`${onde}: numero de secao repetido (${s.numero})`)
+    vistos.add(s.numero)
     if (!s.titulo) erros.push(`${onde}: secao ${s.numero} sem titulo`)
     if (typeof s.html !== 'string' || !s.html.trim()) {
       erros.push(`${onde}: secao ${s.numero} sem html`)
@@ -66,8 +80,38 @@ function checarSecoes(onde: string, secoes: Secao[], erros: string[], exigirUma:
   }
 }
 
-function validarTema(t: Tema, refs: Set<string>, erros: string[]): void {
-  const onde = t.ref
+/**
+ * Espelha `checa_mermaid` do verificador do material. Um rotulo com `<` ou `#` faz o
+ * Mermaid interpretar HTML e comer pedaco do texto, e o defeito so aparece na tela.
+ */
+function checarMermaid(onde: string, diagramas: string[], erros: string[]): void {
+  for (const diagrama of diagramas ?? []) {
+    for (const rotulo of diagrama.match(/\[[^\]\n]*\]/g) ?? []) {
+      for (const proibido of PROIBIDOS_NO_ROTULO) {
+        if (rotulo.includes(proibido)) {
+          erros.push(`${onde}: rotulo Mermaid com caractere proibido (${proibido}) em ${rotulo}`)
+        }
+      }
+    }
+  }
+}
+
+/** Fonte sem titulo nao e rastreavel: o leitor ve a URL sem saber o que vai encontrar. */
+function checarFontes(onde: string, fontes: Fonte[], erros: string[]): void {
+  for (const f of fontes) {
+    if (!f.titulo) erros.push(`${onde}: fonte sem titulo (${f.url || 'sem url'})`)
+  }
+}
+
+function validarTema(chave: string, t: Tema, refs: Set<string>, erros: string[]): void {
+  const onde = chave
+  // O progresso e gravado sob `ref`, e a chave do mapa e o `ref`: divergir faz o usuario
+  // marcar "acertei" e o painel mostrar zero firmes, sem erro nenhum na tela.
+  if (t.ref !== chave) erros.push(`${onde}: ref divergente da chave do mapa (${t.ref})`)
+  if (!t.temaId || !chave.endsWith(`#${t.temaId}`)) {
+    erros.push(`${onde}: tema_id divergente do ref (${t.temaId})`)
+  }
+  if (!t.areaId) erros.push(`${onde}: tema sem area_id`)
   if (!t.titulo) erros.push(`${onde}: titulo vazio`)
   if (!NIVEIS.has(t.nivel)) erros.push(`${onde}: nivel invalido (${t.nivel})`)
   if (!t.tempoEstimado) erros.push(`${onde}: tempo_estimado vazio`)
@@ -97,6 +141,8 @@ function validarTema(t: Tema, refs: Set<string>, erros: string[]): void {
 
   if (!t.fontes.length) erros.push(`${onde}: frontmatter sem fontes`)
   else if (!t.fontes.some((f) => f.url && f.tipo)) erros.push(`${onde}: fontes sem url/tipo`)
+  checarFontes(onde, t.fontes, erros)
+  checarMermaid(onde, t.mermaid, erros)
 
   if (t.errosComuns.length < 1) erros.push(`${onde}: sem tabela de erros comuns`)
 
@@ -128,12 +174,21 @@ function validarArea(a: Area, refs: Set<string>, erros: string[]): void {
   if (!a.areaNome) erros.push(`${a.areaId}: area_nome vazio`)
   if (!Number.isFinite(a.ordemEstudo)) erros.push(`${a.areaId}: ordem_estudo invalida`)
   if (!NIVEIS.has(a.nivel)) erros.push(`${a.areaId}: nivel invalido (${a.nivel})`)
+  if (!a.ancoragem?.length) erros.push(`${a.areaId}: area sem ancoragem no cargo`)
   if (!a.temas.length) erros.push(`${a.areaId}: guia sem temas`)
   for (const ref of a.temas) {
     if (!refs.has(ref)) erros.push(`${a.areaId}: guia referencia tema inexistente (${ref})`)
+    // O guia so pode listar tema da propria area: o painel conta "firmes" por area, e um
+    // tema de fora entraria na conta de duas areas ao mesmo tempo.
+    else if (!ref.startsWith(`${a.areaId}#`)) {
+      erros.push(`${a.areaId}: guia lista tema de outra area (${ref})`)
+    }
   }
 
   const g: Guia = a.guia
+  if (g.areaId !== a.areaId) erros.push(`${a.areaId}: guia com area_id divergente (${g.areaId})`)
+  checarFontes(a.areaId, a.fontes, erros)
+  checarMermaid(a.areaId, g.mermaid, erros)
   checarSecoes(a.areaId, g.secoes, erros, true)
   // O guia tambem e prosa: ficava de fora da varredura de lexico que temas e paginas
   // recebiam, embora o README prometesse o contrario.
@@ -156,6 +211,9 @@ function validarPagina(p: Pagina, erros: string[]): void {
   // caem inteiros no intro.
   if (!p.slug) erros.push(`pagina sem slug`)
   if (!p.titulo) erros.push(`${p.slug}: titulo vazio`)
+  // O menu do aluno agrupa por `grupo`; um valor desconhecido some da navegacao.
+  if (!GRUPOS_DE_PAGINA.has(p.grupo)) erros.push(`${p.slug}: grupo desconhecido (${p.grupo})`)
+  checarMermaid(p.slug, p.mermaid, erros)
   checarSecoes(p.slug, p.secoes, erros, false)
 }
 
@@ -202,12 +260,35 @@ export function validar(
         `versus ${totalAreas}/${totalTemas}/${totalPaginas}`,
     )
   }
+  // `geradoEm` nao e decorativo: a data vai para a tela e para o rodape do material.
+  if (!RE_DATA_ISO.test(c.meta.geradoEm)) {
+    erros.push(`meta.geradoEm nao e data ISO (${JSON.stringify(c.meta.geradoEm)})`)
+  }
 
   const refs = new Set(Object.keys(c.temas))
 
+  // A ordem de estudo e a sequencia que a fila de hoje percorre. Ref a mais, a menos ou
+  // repetida faz a fila pular tema ou listar o mesmo duas vezes.
+  const vistos = new Set<string>()
+  for (const ref of c.ordemEstudo) {
+    if (!refs.has(ref)) erros.push(`ordem_estudo aponta para ref inexistente (${ref})`)
+    if (vistos.has(ref)) erros.push(`ordem_estudo com ref repetido (${ref})`)
+    vistos.add(ref)
+  }
+  for (const ref of refs) {
+    if (!vistos.has(ref)) erros.push(`ordem_estudo sem o tema (${ref})`)
+  }
+
   for (const [ref, t] of Object.entries(c.temas)) {
-    validarTema(t, refs, erros)
+    validarTema(ref, t, refs, erros)
     checarLexico(ref, texto([t.intro, ...t.secoes.map((s) => s.html)]), erros)
+  }
+
+  const areaIds = new Set(c.areas.map((a) => a.areaId))
+  for (const [ref, t] of Object.entries(c.temas)) {
+    if (t.areaId && !areaIds.has(t.areaId)) {
+      erros.push(`${ref}: area_id inexistente (${t.areaId})`)
+    }
   }
 
   for (const a of c.areas) validarArea(a, refs, erros)

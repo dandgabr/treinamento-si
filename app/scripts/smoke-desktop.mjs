@@ -12,6 +12,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { _electron as electron } from 'playwright'
+import { fontesMaisNovas } from './lib/frescor.mjs'
 
 const AQUI = path.dirname(fileURLToPath(import.meta.url))
 const APP = path.resolve(AQUI, '..')
@@ -21,6 +22,22 @@ const faltando = ['dist/index.html', 'dist-electron/main.cjs', 'dist-electron/pr
 )
 if (faltando.length) {
   console.error(`Falta: ${faltando.join(', ')}\nRode antes: npm run build && npm run build:electron`)
+  process.exit(1)
+}
+
+// Existir nao basta, e isto ja aconteceu: o smoke do desktop deu verde contra um
+// `main.cjs` compilado antes das correcoes de seguranca da casca. Ele testava um codigo
+// que nao estava no binario.
+const fontes = [path.join(APP, 'electron'), path.join(APP, 'src'), path.join(APP, 'index.html')]
+const atrasados = [
+  ...fontesMaisNovas(path.join(APP, 'dist-electron', 'main.cjs'), fontes),
+  ...fontesMaisNovas(path.join(APP, 'dist/index.html'), [path.join(APP, 'src'), path.join(APP, 'index.html')]),
+]
+if (atrasados.length) {
+  console.error(
+    `Artefato desatualizado.\nMais novo que ele: ${[...new Set(atrasados)].join(', ')}\n` +
+      'Rode antes: npm run build && npm run build:electron',
+  )
   process.exit(1)
 }
 
@@ -139,6 +156,39 @@ async function primeiraSessao() {
   // pagina teria saido e este seletor nao responderia. `.bloco-qa` e da rota do tema, que
   // e onde o teste esta.
   conferir('o documento continua o nosso', await janela.locator('.bloco-qa').count(), 1)
+
+  // A superficie do protocolo, exercitada de dentro do processo principal. Nada disso era
+  // testado: a travessia, o host unico e o cabecalho de CSP existiam so por inspecao do
+  // codigo. Do renderer nao da para conferir — a propria CSP tem `connect-src 'none'` e
+  // bloquearia o fetch antes de o handler ser chamado.
+  const protocolo = await app.evaluate(async ({ net }) => {
+    const ler = async (url) => {
+      try {
+        const resposta = await net.fetch(url)
+        return {
+          status: resposta.status,
+          csp: resposta.headers.get('content-security-policy') ?? '',
+        }
+      } catch (erro) {
+        return { status: 0, csp: '', erro: String(erro) }
+      }
+    }
+    return {
+      normal: await ler('app://bundle/index.html'),
+      // `%2e%2e` codificado: a URL `app://bundle/../../etc/passwd` seria normalizada pelo
+      // parser (o host viraria `etc`) e nao chegaria ao handler como travessia.
+      travessia: await ler('app://bundle/%2e%2e/%2e%2e/etc/passwd'),
+      host: await ler('app://outro/index.html'),
+    }
+  })
+  conferir('protocolo serve o app', protocolo.normal.status, 200)
+  conferir(
+    'CSP vem como cabecalho',
+    protocolo.normal.csp.includes("default-src 'none'"),
+    true,
+  )
+  conferir('protocolo recusa travessia', protocolo.travessia.status, 404)
+  conferir('protocolo recusa host estranho', protocolo.host.status, 404)
 
   await app.close()
   return { pasta }

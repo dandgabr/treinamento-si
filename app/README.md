@@ -34,19 +34,26 @@ navegador atual, para abrir o resultado.
 | `npm run check:content` | valida o JSON já gerado e falha o processo quando algo falta |
 | `npm test` | roda a suíte do Vitest: parser, gate e motor pedagógico |
 | `npm run dev` | roda `build:content` e sobe o Vite com recarga automática |
-| `npm run build` | encadeia `build:content`, `check:content` e `vite build` |
+| `npm run build` | encadeia `build:content`, `check:content`, `typecheck` e `vite build` |
+| `npm run typecheck` | roda o `tsc --noEmit`; o Vite apaga tipos sem conferi-los, então isto precisa existir separado |
+| `npm run verificar` | **a porta única**: build, build do Electron, testes, os dois smokes e o verificador do material |
 | `npm run smoke` | abre o artefato por `file://` num Chrome headless e confere o DOM renderizado |
 | `npm run build:electron` | compila o processo principal e o preload para `dist-electron/` |
 | `npm run desktop` | build completo e abre o aplicativo desktop |
-| `npm run smoke:desktop` | abre a janela de verdade e confere a casca, o progresso em arquivo e o bloqueio de navegação |
+| `npm run smoke:desktop` | abre a janela de verdade e confere a casca, o protocolo, o progresso em arquivo e o bloqueio de navegação |
 | `npm run empacotar` | monta a pasta que vai para quem estuda: `dist/Roadmap-CISO-Interativo/` |
 
 A ordem tem uma dependência real: `check:content` lê o JSON em disco, então sozinho ele não adianta
 nada. O `dev` também não vigia `conteudo/`. Editou um tema com o servidor no ar? Rode
 `npm run build:content` de novo e a página recarrega com o texto novo.
 
-O `smoke` exige o build feito antes e o Chrome instalado. Em outra máquina, aponte o binário pela
-variável `CHROME_BIN`.
+**Os dois smokes conferem o frescor do artefato antes de rodar.** Eles comparam a data de
+`dist/index.html` e de `dist-electron/main.cjs` com a da fonte mais nova; se o binário for anterior,
+o teste falha dizendo o que rodar, em vez de medir código que não está lá. Isso não é teoria: o smoke
+do desktop passou verde contra um `main.cjs` compilado antes das correções de segurança da casca, e
+as asserções de travessia, host e CSP — que existem hoje — só foram exercitadas de verdade depois de
+recompilar. Por isso o `smoke` exige o build feito antes e o Chrome instalado; em outra máquina,
+aponte o binário pela variável `CHROME_BIN`.
 
 ## O que sai do build
 
@@ -92,7 +99,11 @@ sistema — e só `http(s)`. O caminho que serve os arquivos tem trava explícit
 
 O `npm run smoke:desktop` prova isso numa janela de verdade: abre, confere as preferências
 endurecidas, navega até um tema, renderiza o diagrama, escreve o progresso no arquivo, tenta sair
-para `file://` e é bloqueado, fecha e **reabre** com o estado no lugar.
+para `file://` e é bloqueado, fecha e **reabre** com o estado no lugar. E exercita o protocolo pelo
+processo principal, que é o único lugar de onde dá para conferir: `app://bundle/index.html` responde
+200 com a CSP no cabeçalho, a travessia codificada (`%2e%2e`) responde 404 e um host diferente de
+`bundle` também — do renderer não daria, porque a própria CSP tem `connect-src 'none'` e barraria o
+`fetch` antes de o handler ser chamado.
 
 ## Como o app chega a quem estuda
 
@@ -200,7 +211,15 @@ totais do JSON gerado. Depois percorre cada tema e cada guia. Erra o build quem:
 - deixar guia de área sem checkpoint, ou com checkpoint sem gabarito ou sem critério declarado;
 - declarar um critério que o parser não entende (o limiar deixaria de ter régua);
 - declarar `revisao_inicial_dias` diferente da sequência que o escalonador implementa;
-- usar qualquer uma das 12 expressões do léxico proibido, em tema, guia ou página.
+- usar qualquer uma das 12 expressões do léxico proibido, em tema, guia ou página;
+- usar `ref` diferente da chave do mapa, `tema_id` que não fecha com o `ref`, ou `area_id` que não
+  existe — o progresso é gravado sob o `ref`, então divergir faz o usuário marcar "acertei" e o
+  painel mostrar zero firmes;
+- listar no guia um tema de outra área (o tema entraria na conta de "firmes" das duas);
+- repetir o número de uma seção, ou publicar página com `grupo` desconhecido (some da navegação);
+- deixar `meta.geradoEm` fora do formato ISO, ou `ordem_estudo` com ref a mais, a menos ou repetida;
+- publicar fonte sem título, área sem ancoragem, ou rótulo de Mermaid com `<`, `>`, `"`, `(`, `)` ou
+  `#` — os mesmos caracteres que o verificador do material recusa.
 
 O gate imprime `verificado: 18 areas, 109 temas, 22 paginas` quando passa. Quando falha, lista cada
 erro e sai com código 1, o que derruba o `npm run build` antes de o Vite entrar em ação.
@@ -256,3 +275,7 @@ em que entram.
 | *Fuses* e integridade do `asar` deixam de ser opcionais quando houver empacotamento distribuído, junto da assinatura | 7 |
 | O desktop só foi exercitado no Linux. Falta abrir num Windows e num macOS de verdade | 7 |
 | SBOM e soma de verificação por release; o `package-lock.json` já cobre electron, electron-builder e playwright | 7 |
+| A camada de interface não tem teste de componente (`@testing-library` não está instalado): exportar, importar e recomeçar só são exercitados pelo store e pelo smoke. Um `AcoesDeProgresso` com ponte que rejeita fecharia o aviso de falha de gravação | 6 |
+| O caminho de exportar/importar **do navegador** (Blob, `<input type=file>`, corte de 1 MB no arquivo escolhido) não tem teste; o cancelamento do diálogo deixa a promise pendente | 6 |
+| O gate é um subconjunto do `verificar-repo.py`: ainda não confere `<details>` do gabarito, links internos entre arquivos, formato de datas e coerência da tabela de tempos | 6 |
+| Os smokes dependem de `google-chrome-stable` no PATH e de sessão gráfica para o Electron; nada disso está em CI, porque CI não existe | 7 |

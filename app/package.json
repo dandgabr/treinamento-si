@@ -18,6 +18,7 @@
     "test:watch": "vitest",
     "smoke": "node scripts/smoke.mjs",
     "smoke:desktop": "node scripts/smoke-desktop.mjs",
+    "verificar": "npm run build && npm run build:electron && npm test && npm run smoke && npm run smoke:desktop && python3 ../conteudo/scripts/verificar-repo.py",
     "empacotar": "node scripts/empacotar.mjs",
     "build:electron": "vite build --config vite.electron.config.ts",
     "desktop": "npm run build && npm run build:electron && electron .",
@@ -25,7 +26,6 @@
   },
   "dependencies": {
     "mermaid": "^11.4.1",
-    "playwright": "^1.63.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Area, Conteudo, Guia, Nivel, Pagina, Tema } from '../../src/domain/types'
-import { LEXICO, TOTAL_AREAS, TOTAL_TEMAS, validar } from './validar-content'
+import { LEXICO, TOTAL_AREAS, TOTAL_PAGINAS, TOTAL_TEMAS, validar } from './validar-content'
 
 const REF = '01-fundamentos#TEMA-01'
 
@@ -58,7 +58,7 @@ function base(): Conteudo {
     areaNome: 'Fundamentos',
     ordemEstudo: 2,
     nivel: 'base',
-    ancoragem: [],
+    ancoragem: ['responder pelo programa de segurança da informação'],
     certificacoes: ['Security+'],
     preRequisitos: [],
     temas: [REF],
@@ -197,6 +197,71 @@ const casos: Array<[string, Mutacao, string]> = [
   ],
   ['acusa área sem nome', (a) => void (a.area.areaNome = ''), 'area_nome vazio'],
   ['acusa página sem título', (a) => void (a.pagina.titulo = ''), 'titulo vazio'],
+
+  // A partir daqui: as invariantes que o gate aparentava cobrir e não cobria. Todas foram
+  // verificadas por mutação contra o gate antigo, que passava verde em cada uma.
+  [
+    'acusa ref divergente da chave do mapa',
+    // O progresso é gravado sob o ref, e o ref é a chave: divergir faz o usuário marcar
+    // "acertei" e o painel mostrar zero firmes.
+    (a) => void (a.c.temas[REF]!.ref = 'outra#TEMA-99'),
+    'ref divergente da chave do mapa',
+  ],
+  [
+    'acusa tema_id divergente do ref',
+    (a) => void (a.tema.temaId = 'TEMA-99'),
+    'tema_id divergente do ref',
+  ],
+  ['acusa area_id inexistente', (a) => void (a.tema.areaId = 'nao-existe'), 'area_id inexistente'],
+  ['acusa guia com area_id divergente', (a) => void (a.guia.areaId = '02-outra'), 'area_id divergente'],
+  [
+    'acusa guia listando tema de outra área',
+    (a) => {
+      const outra: Area = {
+        ...a.area,
+        areaId: '02-outra',
+        temas: [],
+        guia: { ...a.guia, areaId: '02-outra' },
+      }
+      a.c.areas.push(outra)
+      a.c.temas['02-outra#TEMA-09'] = {
+        ...a.tema,
+        ref: '02-outra#TEMA-09',
+        areaId: '02-outra',
+        temaId: 'TEMA-09',
+      }
+      a.area.temas.push('02-outra#TEMA-09')
+    },
+    'guia lista tema de outra area',
+  ],
+  ['acusa geradoEm que não é data ISO', (a) => void (a.c.meta.geradoEm = 'ontem'), 'nao e data ISO'],
+  [
+    'acusa número de seção repetido',
+    (a) => void (a.tema.secoes[1]!.numero = 1),
+    'numero de secao repetido',
+  ],
+  [
+    'acusa grupo de página desconhecido',
+    (a) => void (a.pagina.grupo = 'inventado'),
+    'grupo desconhecido',
+  ],
+  [
+    'acusa rótulo Mermaid com caractere proibido',
+    (a) => void (a.tema.mermaid = ['flowchart TD\n  A[<script>]']),
+    'rotulo Mermaid com caractere proibido',
+  ],
+  ['acusa área sem ancoragem', (a) => void (a.area.ancoragem = []), 'sem ancoragem'],
+  [
+    'acusa fonte sem título',
+    (a) => void (a.tema.fontes[0]!.titulo = ''),
+    'fonte sem titulo',
+  ],
+  ['acusa ordem_estudo sem o tema', (a) => void (a.c.ordemEstudo = []), 'ordem_estudo sem o tema'],
+  [
+    'acusa ordem_estudo com ref repetido',
+    (a) => void (a.c.ordemEstudo = [REF, REF]),
+    'ordem_estudo com ref repetido',
+  ],
 ]
 
 describe('validar', () => {
@@ -207,6 +272,7 @@ describe('validar', () => {
   it('usa os totais do projeto como padrão', () => {
     expect(TOTAL_AREAS).toBe(18)
     expect(TOTAL_TEMAS).toBe(109)
+    expect(TOTAL_PAGINAS).toBe(22)
   })
 
   it.each(casos)('%s', (_nome, mutar, esperado) => {
