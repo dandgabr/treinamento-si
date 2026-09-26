@@ -207,6 +207,29 @@ dele. Sem esse arquivo ele usa o ícone do Electron — que é o que aparecia no
 chama `build/` porque esse é o `buildResources` padrão da ferramenta; convive com `dist/`,
 `dist-electron/` e `instalador/`, que são saída, e ela não é.
 
+## Banco de múltipla escolha
+
+`npm run build:questions` deriva o banco do material já verificado e grava um arquivo por área em
+`src/content/questions/`. São **904 itens em 18 áreas**, e nenhum deles é prosa nova:
+
+| Origem | Itens | De onde sai |
+|---|---|---|
+| `erro-comum` | 608 | Cada linha da tabela de erros comuns de um tema: o `correto` é o gabarito, a justificativa é o `porque`, e os `equivoco` das outras linhas do **mesmo tema** são os distratores |
+| `recuperacao` | 296 | Os pares de recuperação ativa cuja resposta cabe numa alternativa (até 220 caracteres) |
+
+A regra que sustenta isso está no §7 do plano: o repositório proíbe afirmação sem fonte
+(`CONTRIBUTING` §4), então o banco **não é inventado** — cada item aponta para o tema de origem
+(`ref`) e carrega a fonte herdada dele. O que o gerador faz é semear; quem promove um item de
+`rascunho` para `verificado` é uma pessoa, e o app marca na tela o que ainda não passou por isso.
+
+**O status de revisão sobrevive à regeração.** Os arquivos são versionados justamente por isso: o
+gerador reencontra os itens pelo `id` (estável enquanto o material não muda) e traz o status de
+volta, em vez de zerar a revisão a cada build. O gabarito também não fica sempre na mesma posição —
+há uma invariante no gate para isso, porque se a correta fosse sempre a primeira, acertar não
+mediria nada.
+
+Falta a **tela de Quiz**: o banco existe, é gated e tem teste, mas o app ainda não o exibe.
+
 ## Checagens do plano (O1–O8 e S1–S14)
 
 O §16.3 do plano diz que cada item vira linha aqui, com o número medido, ou não conta como feito.
