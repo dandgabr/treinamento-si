@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { content } from '../infrastructure/content/repository'
-import { BlocoQA, Html } from './Blocos'
+import { Html } from './Blocos'
 import { renderizarMermaid } from './mermaid'
+import { CheckpointArea, SituacaoDaArea } from './Progresso'
 import { linkTema } from './useRota'
 
 export function AreaView({ areaId, escuro }: { areaId: string; escuro: boolean }) {
@@ -36,6 +37,8 @@ export function AreaView({ areaId, escuro }: { areaId: string; escuro: boolean }
         </p>
       </header>
 
+      <SituacaoDaArea area={area} />
+
       {area.guia.intro ? (
         <Html key={`intro-${escuro}`} className="intro" html={area.guia.intro} />
       ) : null}
@@ -62,15 +65,11 @@ export function AreaView({ areaId, escuro }: { areaId: string; escuro: boolean }
         .slice()
         .sort((a, b) => a.numero - b.numero)
         .map((s) => {
+          // A key inclui a area: sem isso o React reaproveita o componente ao trocar de
+          // area e os vereditos da anterior passam a valer para a nova, gravando um
+          // checkpoint que ninguem respondeu.
           if (s.numero === 9)
-            return (
-              <BlocoQA
-                key={9}
-                titulo="9. Checkpoint da área"
-                pares={area.guia.checkpoint}
-                criterio={area.guia.criterio}
-              />
-            )
+            return <CheckpointArea key={area.areaId} areaId={area.areaId} area={area} />
           return (
             <section key={`${s.numero}-${escuro}`} className="secao">
               <h2>

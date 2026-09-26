@@ -7,5 +7,8 @@ export default defineConfig({
   test: {
     include: ['scripts/**/*.test.ts', 'src/**/*.test.ts'],
     environment: 'node',
+    // Fuso fixo: o "dia" do progresso e local, e sem isto o resultado do teste de data
+    // dependeria da maquina que roda a suite.
+    env: { TZ: 'America/Sao_Paulo' },
   },
 })

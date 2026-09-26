@@ -176,6 +176,16 @@ const casos: Array<[string, Mutacao, string]> = [
     'checkpoint sem gabarito',
   ],
   ['acusa guia sem critério', (a) => void (a.guia.criterio = ''), 'sem criterio declarado'],
+  [
+    'acusa critério que o parser não entende',
+    (a) => void (a.guia.criterio = 'reler o tema antes de avançar'),
+    'criterio declarado nao interpretavel',
+  ],
+  [
+    'acusa léxico proibido na prosa do guia',
+    (a) => void (a.guia.intro = '<p>um panorama bem abrangente</p>'),
+    'lexico proibido',
+  ],
   ['acusa guia sem temas', (a) => void (a.area.temas = []), 'guia sem temas'],
   [
     'acusa guia referenciando tema inexistente',

@@ -34,6 +34,12 @@ const cenarios = [
       ['titulo', d.querySelector('h1')?.textContent, 'Roadmap CISO'],
       ['areas listadas', d.querySelectorAll('.lista-areas li').length, 18],
       ['resumo no heroi', /18 áreas/.test(texto(d, 'main')), true],
+      ['resumo do progresso', d.querySelectorAll('.resumo-item').length, 4],
+      // O placar saiu por decisao: media cliques, nao aprendizagem.
+      ['sem nivel no painel', /Nível \d/.test(texto(d, '.resumo')), false],
+      ['sem sequencia de dias', /Sequência/.test(texto(d, '.resumo')), false],
+      ['fila vazia no inicio', texto(d, '.resumo').includes('nada vencido'), true],
+      ['temas firmes com a regua ao lado', texto(d, '.resumo').includes('firme é o tema'), true],
       ['links internos resolvem (invalidos)', hrefsInvalidos(d).length, 0],
     ],
   },
@@ -53,6 +59,20 @@ const cenarios = [
         d.querySelectorAll('.bloco-pre-teste .lista-qa > li').length * 5,
         d.querySelectorAll('.bloco-pre-teste .confianca button').length,
       ],
+      [
+        'confianca comeca nao respondida',
+        d.querySelectorAll('.bloco-pre-teste .nivel[aria-pressed="false"]').length,
+        d.querySelectorAll('.bloco-pre-teste .nivel').length,
+      ],
+      ['veredito da recuperacao', d.querySelectorAll('.veredito-botoes button').length, 2],
+      // Os botoes sao acao de uma passagem, nao toggle: sem `aria-pressed`, repetir o
+      // clique nao pode mais avancar a escada do SRS.
+      [
+        'veredito nao usa estado de toggle',
+        d.querySelectorAll('.veredito-botoes button[aria-pressed]').length,
+        0,
+      ],
+      ['botao de leitura', d.querySelectorAll('.acoes-tema button').length, 1],
       ['bloco de recuperacao ativa', d.querySelectorAll('.bloco-qa').length, 1],
       ['gabarito comecou escondido', d.querySelector('.bloco-qa .gabarito')?.hasAttribute('hidden'), true],
       [
@@ -88,8 +108,23 @@ const cenarios = [
       ['titulo da area', d.querySelector('h1')?.textContent, 'Fundamentos de segurança da informação'],
       ['temas listados', d.querySelectorAll('.lista-temas li').length, 8],
       ['checkpoint interativo', d.querySelectorAll('.bloco-qa').length, 1],
+      [
+        'checkpoint com veredito por item',
+        d.querySelectorAll('.bloco-qa .veredicto-item').length,
+        d.querySelectorAll('.bloco-qa .lista-qa > li').length,
+      ],
       ['criterio visivel', texto(d, 'main').includes('Critério para seguir adiante'), true],
       ['diagrama do guia', d.querySelectorAll('.mermaid svg').length >= 1, true],
+      [
+        'situacao da area com a regua',
+        texto(d, '.situacao').includes('firme é o tema cuja última recuperação'),
+        true,
+      ],
+      [
+        'criterio do guia visivel',
+        texto(d, '.situacao-criterio').includes('Critério do guia'),
+        true,
+      ],
       ['links internos resolvem (invalidos)', hrefsInvalidos(d).length, 0],
     ],
   },

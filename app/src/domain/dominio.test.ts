@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { dominio, dominioDaArea, dominioGeral } from './dominio'
+import { dominio, dominioDaArea } from './dominio'
 import { areaFake, guiaFake, progressoFake, temaFake } from './testes/fixtures'
 
 const REF_A = 'x#TEMA-01'
@@ -55,7 +55,7 @@ describe('dominioDaArea', () => {
   })
 })
 
-describe('dominio e dominioGeral', () => {
+describe('dominio', () => {
   it('áreas independentes não se contaminam', () => {
     const a1 = areaFake({ areaId: 'a', areaNome: 'A', temas: ['a#TEMA-01'] })
     const a2 = areaFake({ areaId: 'b', areaNome: 'B', temas: ['b#TEMA-01'] })
@@ -65,18 +65,5 @@ describe('dominio e dominioGeral', () => {
     const [d1, d2] = dominio([a1, a2], p)
     expect(d1?.percentual).toBe(1)
     expect(d2?.percentual).toBe(0)
-  })
-
-  it('faz a média simples entre as áreas', () => {
-    const a1 = areaFake({ areaId: 'a', temas: ['a#TEMA-01'] })
-    const a2 = areaFake({ areaId: 'b', temas: ['b#TEMA-01'] })
-    const p = progressoFake({
-      temas: { 'a#TEMA-01': temaFake('a#TEMA-01', { recuperacaoOk: true }) },
-    })
-    expect(dominioGeral([a1, a2], p)).toBe(0.5)
-  })
-
-  it('é zero sem áreas', () => {
-    expect(dominioGeral([], progressoFake())).toBe(0)
   })
 })

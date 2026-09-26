@@ -58,20 +58,38 @@ quiser o arquivo precisa gerá-lo.
 ## O motor pedagógico
 
 `app/src/domain/` não sabe nada de React nem de navegador: são funções puras sobre o estado do
-estudo, todas com teste. O que existe ali não foi inventado — cada regra veio do próprio material.
+estudo, todas com teste. Separei o que vem do material do que é decisão desta implementação,
+porque essa diferença importa para julgar o resultado.
 
-| Módulo | O que decide | De onde veio a regra |
+| Módulo | O que decide | Origem |
 |---|---|---|
-| `srs.ts` | intervalos D+1, D+7 e D+30; acerto avança, erro rebaixa | seção 11 de cada tema e o checkpoint do TEMA-05 de 00 |
-| `criterio.ts` | lê o critério de aprovação que o guia publica em prosa | campo `criterio` de cada guia (`4 dos 5`, `80%`) |
-| `progresso.ts` | estado do estudo: temas, respostas de pré-teste, dias ativos, streak | — |
-| `dominio.ts` | domínio por área, usando o critério do guia | — |
-| `gamificacao.ts` | XP derivado do estado e faixas de nível | — |
-| `calibracao.ts` | confiança declarada × acerto, com escore de Brier | seção 3 de cada tema |
+| `srs.ts` | intervalos D+1, D+7 e D+30; acerto avança, erro rebaixa (30→7, 7→3, 1→1) | **do material**: §11 de cada tema e §5.2 do TEMA-05 de 00 |
+| `criterio.ts` | lê o critério de aprovação que o guia publica em prosa | **do material**: campo `criterio` de cada guia (`4 dos 5`, `80%`) |
+| `progresso.ts` | estado do estudo, dias com estudo e a escala de confiança do pré-teste | **decisão daqui** — o material não descreve formato de estado |
+| `dominio.ts` | tema "firme" = última recuperação ativa acertada sem consulta | **decisão daqui** |
 
-O XP é **derivado**: a mesma função sobre o mesmo estado devolve sempre o mesmo número. Isso é o
-que permite recalcular tudo a partir de um progresso importado, sem confiar num contador que pode
-ter sido adulterado.
+**Não há XP, nível, faixa nem sequência de dias.** Houve, e saiu: a seção 8 do
+`conteudo/CONTRIBUTING.md` pede "marcos e autoavaliação; sem gamificação artificial", e todo insumo
+do placar era um clique do próprio usuário — não existe item objetivo no app, então ele media
+botões apertados, não aprendizagem. A faixa mais alta se chamava "CISO", que o material trata como
+designação formal (Resolução CMN 4.893/2021, art. 7º), não conquista. Ficaram as três coisas
+acionáveis ou verificáveis, cada uma exibida com a régua ao lado: a **fila de hoje** (com link para
+cada tema), os **temas firmes** e os **checkpoints aprovados** no critério que o guia declara.
+
+A **calibração** saiu pelo mesmo motivo: cruzar a confiança declarada com o desfecho do tema mede
+ruído, porque as perguntas do pré-teste não são as da recuperação ativa. Medir calibração de verdade
+exige desfecho por item, que o §11 de cada tema descreve e o app ainda não captura.
+
+**Posse do calendário.** O material declarava `conteudo/91-trilhas/` como dona do calendário e do
+estado. Resolvido nos dois lados: a trilha fica com a **definição** — cadência, regra de
+rebaixamento e formato do registro —, o app guarda o **estado em runtime**, e o
+`CONTRIBUTING.md` §3 registra a divisão. O gate reprova o build se algum tema declarar
+`revisao_inicial_dias` diferente da sequência implementada, para o app não mentir sobre o intervalo
+lido do material.
+
+O XP era **derivado**, o que continua valendo para o que ficou: a mesma função sobre o mesmo estado
+devolve sempre o mesmo resultado. O veredito da recuperação é registrado uma vez por passagem;
+repetir o clique não avança a escada — a passagem seguinte se abre de forma explícita.
 
 `app/scripts/lib/` guarda o parser e o gate como funções puras, para serem testados com fixtures
 pequenos. `gerar-conteudo.test.ts` fecha o contrato: parseia o material real e exige `validar()`
@@ -128,31 +146,42 @@ continuar existindo. Se desaparecer, o caminho alternativo é `npm install --inc
 
 ## O que ainda não existe
 
-Nenhum progresso de estudo é gravado. O motor pedagógico existe e tem teste, mas nenhuma tela o
-chama ainda: o `localStorage` guarda uma única coisa, a preferência de tema claro ou escuro, e o
-pré-teste e a recuperação ativa respondem só na sessão. Não há tema marcado como concluído, fila de
-revisão, contador de XP nem sequência de dias visível. O launcher, que distribuiria o app para quem
-não tem Node nem terminal, também não existe.
+O progresso é gravado no navegador (`localStorage`, chave `roadmap:progresso`): leitura, confiança
+do pré-teste, veredito da recuperação com a revisão reagendada e resultado do checkpoint. Não há
+botão para recomeçar nem para exportar; os dois entram com a exportação.
 
-O que a versão atual entrega é leitura, pré-teste e recuperação ativa num arquivo único, mais o
-motor que vai sustentar o acompanhamento ao longo do tempo. Nada além disso, e é melhor dizer isso
-do que deixar alguém procurando um placar que não está lá.
+Esse progresso é **local e não confidencial**. Em `file://`, no Chrome, todos os arquivos HTML
+locais compartilham o mesmo armazenamento — qualquer página local aberta no mesmo perfil enxerga a
+mesma chave. No Firefox o balde é por arquivo. Não guarde nada sensível ali, e note que apagar o
+progresso também não tem caminho pela interface ainda.
+
+O launcher, que distribuiria o app para quem não tem Node nem terminal, também não existe: hoje o
+usuário final precisa de Node 22 e de dois comandos. A promessa de "abrir com um clique em qualquer
+sistema" depende dele, e é o próximo passo.
 
 ## Pendências conhecidas
 
-Levantadas na revisão de segurança e na de testes, ainda em aberto, com a fase em que entram.
+Levantadas nas revisões de segurança, de testes, de frontend e de UI/UX, ainda em aberto, com a fase
+em que entram.
 
 | Pendência | Fase |
 |---|---|
+| Regras do material ainda não implementadas: "duas passagens falhas seguidas mandam para releitura completa" (`plano-12-meses.md`), revisão além de D+90, a tarefa concreta de cada intervalo, o artefato da fase e o diagnóstico por item (hoje é um booleano por tema) | 4 |
 | Os 1328 links relativos (`../README.md`, `TEMA-*.md`) ficam mortos no arquivo único: precisam ser reescritos para as rotas do app. Os 586 externos abrem normalmente | 3 |
-| `glossario.md` e `mapa-relacoes.md` usam `## Título` sem número, então caem inteiros no `intro` em vez de virar seções | 3 |
-| 3,4 MB dos 7,6 MB do artefato são o bundle inteiro do Mermaid, e os 69 diagramas são todos `flowchart`: dá para registrar só esse tipo, com um gate no `check-content.ts` para barrar outro | 3 |
-| Cerca de 1,05 MB do JSON é conteúdo morto ou duplicado: o HTML das seções 3, 9 e 10 (substituídas pelos blocos interativos) e as mesmas perguntas repetidas nos campos estruturados | 3 |
-| O contrato de re-render do Mermaid mora na `key` do React, repetida em três arquivos, e remonta as seções na troca de tema; centralizar em `renderizarMermaid` | 3 |
-| O laço que renderiza seções está duplicado em três arquivos, com os números das seções interativas escritos à mão | 3 |
-| Acessibilidade pendente: `document.title` por rota, foco no `main` na troca de rota, link "pular para o conteúdo" e alvos de toque de 44 px | 3 |
-| Ligar o motor pedagógico à interface: hoje o pré-teste e a recuperação ativa respondem só na sessão, e `src/domain/` ainda não é chamado por nenhuma tela | 3 |
-| O verificador do material (`conteudo/scripts/verificar-repo.py`) dá verde quando um sincronizador falha, trata o léxico apenas como aviso e não valida `templates/` nem `CONTRIBUTING.md` | 2 ou depois |
-| Commit do lockfile, `npm ci` e versões exatas das seis dependências que geram o artefato; SBOM e soma de verificação por release | 7 |
-| Launcher: bind em `127.0.0.1`, porta efêmera, servir um único arquivo, validar o header `Host` e usar token no caminho | 7 |
-| Importação de progresso: esquema com versão, corte de tamanho antes do `JSON.parse` e cópia campo a campo (nunca merge) | 7 |
+| A fila de hoje agora é clicável, mas só lista os cinco primeiros: falta paginar ou abrir a lista inteira | 3 |
+| Os vereditos por item do checkpoint vivem em `useState`: o total persiste, mas após recarregar os botões voltam em branco, com o texto dizendo "último resultado registrado" | 3 |
+| Não há como recomeçar nem exportar o progresso; em `file://` no Chrome ele é compartilhado por qualquer HTML local | 7 |
+| `npm run dev` não funciona: a CSP do `index.html` bloqueia o `<script src>` que o Vite injeta. O `<meta>` precisa ser injetado só no build | 3 |
+| Diagramas: falta um botão de ampliar (o fluxograma tem ~3000 px e rola na horizontal) e `aria-label` no SVG. Cabeçalho de tabela longa sem `position: sticky` | 3 |
+| Escala de confiança do pré-teste: alvos de 29 px, sem rótulo nas pontas (o que é 1 e o que é 5) e 25 paradas de tabulação no bloco | 3 |
+| Acessibilidade: `document.title` fixo em todas as rotas, foco não vai para o `main` na troca de rota, falta link "pular para o conteúdo" e alvos de 44 px no celular | 3 |
+| Tema escuro não segue `prefers-color-scheme` e a primeira tela pisca branca enquanto o bundle de 7,6 MB monta | 3 |
+| Páginas de 35 mil px (mapa de relações) sem sumário ou âncoras; as 6 páginas de `99-fontes/` aparecem no menu do aluno, mas são a trilha de QA do mantenedor | 3 |
+| Sobre o JSON: o HTML das seções 3 e 10 dos temas (~0,25 MB) e o campo `errosComuns` nunca chegam à tela; o §9 dos guias é renderizado, ao contrário do que esta tabela dizia antes | 3 |
+| `glossario.md` e `mapa-relacoes.md` usam `## Título` sem número e caem inteiros no `intro`, sem seções | 3 |
+| 3,4 MB dos 7,6 MB do artefato são o bundle inteiro do Mermaid, e os 69 diagramas são todos `flowchart`: dá para registrar só esse tipo | 3 |
+| O contrato de re-render do Mermaid mora na `key` do React, repetido em três arquivos, e o laço de seções também está triplicado | 3 |
+| O verificador do material dá verde quando um sincronizador falha, trata o léxico apenas como aviso e não valida `templates/` nem `CONTRIBUTING.md` | 2 ou depois |
+| Importação de progresso: esquema com versão, corte de tamanho antes do `JSON.parse` e cópia campo a campo (nunca merge). A leitura do `localStorage` já faz isso | 7 |
+| Launcher: bind em `127.0.0.1`, porta efêmera, servir um único arquivo, validar o header `Host` e usar token no caminho. É o próximo passo, e é o que falta para a promessa de um clique | próxima |
+| Commit do lockfile (feito), `npm ci` e versões exatas; SBOM e soma de verificação por release. Há um advisory `dev-only` no Vitest | 7 |

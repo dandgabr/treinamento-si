@@ -334,12 +334,15 @@ h3 {
 
 /* ------------------------------------------------------------------ markdown */
 
-.secao p,
-.secao li {
+/* O mesmo tratamento vale para `.secao` (temas e areas) e `.intro` (paginas de
+   referencia, cujo corpo inteiro cai ali). Sem o `:is`, as tabelas do glossario e do
+   mapa de relacoes saem sem estilo e estouram a largura da pagina no celular. */
+:is(.secao, .intro) p,
+:is(.secao, .intro) li {
   overflow-wrap: anywhere;
 }
 
-.secao table {
+:is(.secao, .intro) table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
@@ -348,27 +351,34 @@ h3 {
   overflow-x: auto;
 }
 
-.secao th,
-.secao td {
+:is(.secao, .intro) th,
+:is(.secao, .intro) td {
   border: 1px solid var(--borda);
   padding: 0.45rem 0.6rem;
   text-align: left;
   vertical-align: top;
 }
 
-.secao th {
+:is(.secao, .intro) th {
+  /* O fundo padrao dava 1,02:1 com a pagina — o cabecalho so se distinguia pelo
+     negrito, e o material e pesado em tabela. */
+  background: color-mix(in srgb, var(--acento) 12%, var(--fundo-alt));
+}
+
+:is(.secao, .intro) tbody tr:nth-child(odd) {
   background: var(--fundo-alt);
 }
 
-.secao code {
+:is(.secao, .intro) code {
   background: var(--fundo-alt);
   border: 1px solid var(--borda);
   border-radius: 4px;
   padding: 0.05rem 0.3rem;
   font-size: 0.88em;
+  overflow-wrap: anywhere;
 }
 
-.secao pre {
+:is(.secao, .intro) pre {
   background: var(--fundo-alt);
   border: 1px solid var(--borda);
   border-radius: var(--raio);
@@ -376,13 +386,13 @@ h3 {
   overflow-x: auto;
 }
 
-.secao pre code {
+:is(.secao, .intro) pre code {
   border: 0;
   background: none;
   padding: 0;
 }
 
-.secao details {
+:is(.secao, .intro) details {
   background: var(--fundo-alt);
   border: 1px solid var(--borda);
   border-radius: var(--raio);
@@ -390,18 +400,161 @@ h3 {
   margin: 1rem 0;
 }
 
-.secao summary {
+:is(.secao, .intro) summary {
   cursor: pointer;
   font-weight: 600;
 }
 
+/* Ressalvas de credibilidade do material ("arquivo gerado, nao edite a mao") saem
+   como citacao; sem estilo pareciam paragrafo com recuo acidental. */
+:is(.secao, .intro) blockquote {
+  margin: 1rem 0;
+  padding: 0.6rem 1rem;
+  border-left: 3px solid var(--acento);
+  background: var(--acento-suave);
+  border-radius: 0 var(--raio) var(--raio) 0;
+}
+
+:is(.secao, .intro) blockquote p {
+  margin: 0;
+}
+
+:is(.secao, .intro) hr {
+  border: 0;
+  border-top: 1px solid var(--borda);
+  margin: 1.5rem 0;
+}
+
 .mermaid {
-  display: flex;
-  justify-content: center;
+  /* Bloco, nao flex: como item flex o SVG encolhia para caber na coluna, e um viewBox
+     de ~3000 px virava texto de 2 px. Em bloco ele mantem a largura natural e o
+     conteiner rola. */
+  display: block;
   margin: 1.25rem 0;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
 }
 
 .mermaid svg {
-  max-width: 100%;
+  max-width: none;
   height: auto;
+}
+
+/* ---------------------------------------------------------------- progresso */
+
+.resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.resumo-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.75rem 0.9rem;
+}
+
+.resumo-rotulo {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texto-suave);
+}
+
+.resumo-item strong {
+  font-size: 1.15rem;
+}
+
+.resumo-detalhe,
+.resumo-rodape {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.resumo-rodape {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.acoes-tema {
+  margin: 0.5rem 0 0;
+}
+
+.veredito-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.veredicto-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.botao-secundario.ativo {
+  background: var(--acento);
+  border-color: var(--acento);
+  color: var(--fundo);
+}
+
+.proxima-revisao {
+  font-size: 0.88rem;
+  color: var(--texto-suave);
+  margin: 0.75rem 0 0;
+}
+
+/* A fila ocupa a linha inteira e e clicavel: e a informacao mais acionavel do painel. */
+.resumo-largo {
+  grid-column: 1 / -1;
+}
+
+.resumo-fila {
+  list-style: none;
+  margin: 0.4rem 0 0;
+  padding: 0;
+}
+
+.resumo-fila li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.resumo-fila li:last-child {
+  border-bottom: 0;
+}
+
+.resumo-data {
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.situacao {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+}
+
+.situacao p {
+  margin: 0 0 0.25rem;
+}
+
+.situacao-criterio {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
+
+.dominio-checkpoint {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin: 0.5rem 0 0;
 }

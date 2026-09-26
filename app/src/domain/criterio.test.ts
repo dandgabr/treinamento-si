@@ -32,8 +32,21 @@ describe('interpretarCriterio', () => {
     expect(interpretarCriterio('reler o tema antes de avançar')).toBeNull()
   })
 
+  it('lê o critério real da área 14, que cita "TEMA-04 de 11" no texto', () => {
+    // Texto real: "acertar 80% ou mais ... releia o TEMA-04 desta área e o
+    // [TEMA-04 de 11 Resposta e forense](...)". Sem ancorar a fração no verbo e sem
+    // tirar os links, isso virava "4 de 11" = 36% e o guia passava a exigir 2 acertos.
+    const alvo = interpretarCriterio(
+      'acertar 80% ou mais sem consultar os temas. Erro no item 2 significa que forense e ' +
+        'privacidade ainda estão fundidos; releia o TEMA-04 desta área e o ' +
+        '[TEMA-04 de 11 Resposta e forense](../11-resposta-forense/TEMA-04-x.md).',
+    )
+    expect(alvo).toEqual({ tipo: 'percentual', acertos: 0, total: 0, percentual: 80 })
+    expect(acertosMinimos(alvo!, 5)).toBe(4)
+  })
+
   it('não confunde a menção a um item com uma fração', () => {
-    // "Erro no item 2 ou no item 4 significa que..." não tem "N de M".
+    // "Erro no item 2 ou no item 4 significa que..." não tem "acertar N de M".
     expect(interpretarCriterio('Erro no item 2 ou no item 4 significa reler.')).toBeNull()
   })
 

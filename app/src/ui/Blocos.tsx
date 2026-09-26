@@ -1,5 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import type { ParQA, QuestaoPreTeste, Secao } from '../domain/types'
+import { registrarConfianca, useProgresso } from '../application/progresso-store'
+import { NIVEIS_CONFIANCA } from '../domain/progresso'
 import { renderizarMermaid } from './mermaid'
 
 /** Renderiza HTML ja processado em build (conteudo confiavel, local). */
@@ -48,10 +50,16 @@ export function BlocoQA({
   titulo,
   pares,
   criterio,
+  veredictoPorItem,
 }: {
   titulo: string
   pares: ParQA[]
   criterio?: string
+  /** Quando presente, cada item ganha "Acertei/Errei" — e o caso do checkpoint. */
+  veredictoPorItem?: {
+    obter: (indice: number) => boolean | null
+    definir: (indice: number, acertou: boolean) => void
+  }
 }) {
   const [abertos, setAbertos] = useState<Set<number>>(new Set())
   const base = useId()
@@ -90,6 +98,32 @@ export function BlocoQA({
               <div className="gabarito" id={idResposta} hidden={!aberto}>
                 <p>{par.resposta}</p>
               </div>
+              {veredictoPorItem ? (
+                <div
+                  className="veredicto-item"
+                  role="group"
+                  aria-label={`Resultado da questão ${i + 1}`}
+                >
+                  <button
+                    className={
+                      veredictoPorItem.obter(i) === true ? 'botao-secundario ativo' : 'botao-secundario'
+                    }
+                    aria-pressed={veredictoPorItem.obter(i) === true}
+                    onClick={() => veredictoPorItem.definir(i, true)}
+                  >
+                    Acertei
+                  </button>
+                  <button
+                    className={
+                      veredictoPorItem.obter(i) === false ? 'botao-secundario ativo' : 'botao-secundario'
+                    }
+                    aria-pressed={veredictoPorItem.obter(i) === false}
+                    onClick={() => veredictoPorItem.definir(i, false)}
+                  >
+                    Errei
+                  </button>
+                </div>
+              ) : null}
             </li>
           )
         })}
@@ -103,9 +137,12 @@ export function BlocoQA({
   )
 }
 
-/** Pre-teste com calibracao de confianca (1 a 5). Estado local por enquanto. */
-export function PreTeste({ questoes }: { questoes: QuestaoPreTeste[] }) {
-  const [confianca, setConfianca] = useState<Record<number, number>>({})
+/** Pre-teste com calibracao de confianca (1 a 5), gravada no progresso. */
+export function PreTeste({ refTema, questoes }: { refTema: string; questoes: QuestaoPreTeste[] }) {
+  const progresso = useProgresso()
+  const respondidas = new Map(
+    (progresso.temas[refTema]?.preTeste ?? []).map((r) => [r.indice, r.confianca]),
+  )
 
   return (
     <section className="secao bloco-pre-teste">
@@ -122,13 +159,13 @@ export function PreTeste({ questoes }: { questoes: QuestaoPreTeste[] }) {
             <p className="pergunta">{q.pergunta}</p>
             <div className="confianca" role="group" aria-label={`Confiança na questão ${i + 1}`}>
               <span aria-hidden="true">Confiança:</span>
-              {[1, 2, 3, 4, 5].map((n) => (
+              {NIVEIS_CONFIANCA.map((n) => (
                 <button
                   key={n}
-                  className={confianca[i] === n ? 'nivel ativo' : 'nivel'}
-                  aria-pressed={confianca[i] === n}
+                  className={respondidas.get(i) === n ? 'nivel ativo' : 'nivel'}
+                  aria-pressed={respondidas.get(i) === n}
                   aria-label={`Nível ${n} de 5`}
-                  onClick={() => setConfianca({ ...confianca, [i]: n })}
+                  onClick={() => registrarConfianca(refTema, i, n)}
                 >
                   {n}
                 </button>

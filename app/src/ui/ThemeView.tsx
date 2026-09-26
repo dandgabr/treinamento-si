@@ -3,6 +3,7 @@ import { content } from '../infrastructure/content/repository'
 import type { Tema } from '../domain/types'
 import { BlocoQA, Html, PreTeste } from './Blocos'
 import { renderizarMermaid } from './mermaid'
+import { BotaoLido, VereditoRecuperacao } from './Progresso'
 import { irPara, linkTema } from './useRota'
 
 function Vizinhos({ tema }: { tema: Tema }) {
@@ -65,6 +66,9 @@ export function ThemeView({ refTema, escuro }: { refTema: string; escuro: boolea
             <strong>Ao final:</strong> {tema.objetivo}
           </p>
         ) : null}
+        <p className="acoes-tema">
+          <BotaoLido refTema={tema.ref} />
+        </p>
       </header>
 
       {tema.intro ? <Html key={`intro-${escuro}`} className="intro" html={tema.intro} /> : null}
@@ -73,10 +77,14 @@ export function ThemeView({ refTema, escuro }: { refTema: string; escuro: boolea
         .slice()
         .sort((a, b) => a.numero - b.numero)
         .map((s) => {
-          if (s.numero === 3) return <PreTeste key={3} questoes={tema.preTeste} />
+          if (s.numero === 3)
+            return <PreTeste key={3} refTema={tema.ref} questoes={tema.preTeste} />
           if (s.numero === 10)
             return (
-              <BlocoQA key={10} titulo="10. Recuperação ativa" pares={tema.recuperacao} />
+              <>
+                <BlocoQA key={10} titulo="10. Recuperação ativa" pares={tema.recuperacao} />
+                <VereditoRecuperacao key="veredito" refTema={tema.ref} />
+              </>
             )
           return (
             <section key={`${s.numero}-${escuro}`} className="secao">

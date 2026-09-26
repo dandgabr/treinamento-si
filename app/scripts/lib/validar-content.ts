@@ -3,7 +3,12 @@
 // de forma dos campos que a interface de fato le — o gate antigo conferia `fontes` e
 // `relacoes` (que a UI nao usa) e deixava passar um titulo vazio.
 
+import { interpretarCriterio } from '../../src/domain/criterio'
+import { SEQUENCIA_DIAS } from '../../src/domain/srs'
 import type { Area, Conteudo, Guia, Pagina, Secao, Tema } from '../../src/domain/types'
+
+/** Sequencia que o escalonador do app implementa hoje. */
+const SEQUENCIA_PADRAO: readonly number[] = SEQUENCIA_DIAS
 
 export const TOTAL_AREAS = 18
 export const TOTAL_TEMAS = 109
@@ -93,6 +98,19 @@ function validarTema(t: Tema, refs: Set<string>, erros: string[]): void {
 
   if (t.errosComuns.length < 1) erros.push(`${onde}: sem tabela de erros comuns`)
 
+  // O SRS do app implementa a sequencia [1, 7, 30]. O campo do tema e o dono declarado
+  // desse dado; se um tema divergir, o build precisa acusar para alguem implementar a
+  // leitura do campo em vez de o app mentir sobre o intervalo.
+  if (
+    t.revisaoInicialDias.length &&
+    t.revisaoInicialDias.join(',') !== SEQUENCIA_PADRAO.join(',')
+  ) {
+    erros.push(
+      `${onde}: revisao_inicial_dias ${JSON.stringify(t.revisaoInicialDias)} difere da sequencia ` +
+        `implementada ${JSON.stringify(SEQUENCIA_PADRAO)}`,
+    )
+  }
+
   for (const [tipo, lista] of Object.entries(t.relacoes)) {
     for (const rel of lista) {
       if (!rel.alvo.includes('#')) erros.push(`${onde}: relacao ${tipo} com alvo invalido (${rel.alvo})`)
@@ -115,12 +133,20 @@ function validarArea(a: Area, refs: Set<string>, erros: string[]): void {
 
   const g: Guia = a.guia
   checarSecoes(a.areaId, g.secoes, erros, true)
+  // O guia tambem e prosa: ficava de fora da varredura de lexico que temas e paginas
+  // recebiam, embora o README prometesse o contrario.
+  checarLexico(a.areaId, texto([g.intro, ...g.secoes.map((s) => s.html)]), erros)
   if (g.checkpoint.length < 1) erros.push(`${a.areaId}: guia sem checkpoint`)
   for (const q of g.checkpoint) {
     if (!q.pergunta) erros.push(`${a.areaId}: checkpoint com item sem pergunta`)
     if (!q.resposta) erros.push(`${a.areaId}: checkpoint sem gabarito`)
   }
   if (!g.criterio) erros.push(`${a.areaId}: checkpoint sem criterio declarado`)
+  else if (!interpretarCriterio(g.criterio)) {
+    // Sem isto, um texto de criterio que o parser nao entende passava como valido e a
+    // area ficava com um limiar inventado.
+    erros.push(`${a.areaId}: criterio declarado nao interpretavel (${JSON.stringify(g.criterio)})`)
+  }
 }
 
 function validarPagina(p: Pagina, erros: string[]): void {

@@ -4,6 +4,7 @@ import { gravarTexto, lerTexto } from '../infrastructure/storage/local'
 import { AreaView } from './AreaView'
 import { Html, Secoes } from './Blocos'
 import { renderizarMermaid } from './mermaid'
+import { ResumoProgresso } from './Progresso'
 import { ThemeView } from './ThemeView'
 import { useRota } from './useRota'
 
@@ -22,6 +23,8 @@ function Home() {
           {content.areas.reduce((n, a) => n + a.guia.checkpoint.length, 0)} itens de checkpoint
         </p>
       </header>
+
+      <ResumoProgresso />
 
       <section className="secao">
         <h2>Ordem de estudo sugerida</h2>

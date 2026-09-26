@@ -47,10 +47,3 @@ export function dominioDaArea(area: Area, progresso: Progresso): DominioArea {
 export function dominio(areas: Area[], progresso: Progresso): DominioArea[] {
   return areas.map((a) => dominioDaArea(a, progresso))
 }
-
-/** Media simples do dominio das areas, 0 a 1. */
-export function dominioGeral(areas: Area[], progresso: Progresso): number {
-  if (!areas.length) return 0
-  const soma = areas.reduce((n, a) => n + dominioDaArea(a, progresso).percentual, 0)
-  return soma / areas.length
-}

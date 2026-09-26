@@ -13,11 +13,20 @@ export interface AlvoCheckpoint {
   percentual: number
 }
 
-const RE_FRACAO = /(\d+)\s*(?:dos|de|das)\s*(\d+)/i
+// A fracao so vale ancorada no verbo: sem isso, uma referencia cruzada no texto do
+// criterio ("releia o TEMA-04 de 11 Resposta e forense") era lida como "4 de 11" e a
+// area 14 passava a exigir 2 acertos em vez dos 80% declarados.
+const RE_FRACAO = /acertar\s+(\d+)\s*(?:dos|de|das)\s+(\d+)/i
 const RE_PERCENTUAL = /(\d+)\s*%/i
 
-export function interpretarCriterio(texto: string): AlvoCheckpoint | null {
-  if (!texto) return null
+/** Link em Markdown vira so o texto, para o destino nao entrar no casamento. */
+function semLinks(texto: string): string {
+  return texto.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+}
+
+export function interpretarCriterio(textoBruto: string): AlvoCheckpoint | null {
+  if (!textoBruto) return null
+  const texto = semLinks(textoBruto)
 
   const fracao = texto.match(RE_FRACAO)
   if (fracao) {

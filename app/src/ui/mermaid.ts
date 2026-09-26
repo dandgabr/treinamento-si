@@ -21,6 +21,12 @@ export async function renderizarMermaid(raiz: HTMLElement, escuro: boolean): Pro
     securityLevel: 'strict',
     theme: escuro ? 'dark' : 'default',
     fontFamily: 'inherit',
+    flowchart: {
+      // Com useMaxWidth (default), um viewBox de ~3000 px encolhe para a largura da
+      // coluna e o texto cai para ~4 px. Sem ele o SVG sai no tamanho natural e o
+      // container rola na horizontal: ilegivel vira legivel com scroll.
+      useMaxWidth: false,
+    },
   })
 
   try {
