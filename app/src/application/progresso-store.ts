@@ -37,6 +37,7 @@ type Redutor = (p: Progresso) => Progresso
 
 let estado: Progresso = progressoVazio()
 let carregado = false
+let podeGravar = true
 let erroDeCarga: string | null = null
 let falhaAoGravar = false
 /** Intencoes chegadas antes da carga, para reaplicar sobre o estado do disco. */
@@ -74,14 +75,17 @@ const carga: Promise<void> = onde().carregar().then(
     const houveIntencao = pendentes.length > 0
     pendentes.length = 0
     carregado = true
-    if (houveIntencao) agendarGravacao(estado)
+    if (houveIntencao && podeGravar) agendarGravacao(estado)
     notificar()
   },
   (erro: unknown) => {
-    // Falha de leitura nao pode virar "comeca vazio" em silencio: o proximo clique
-    // consolidaria a perda.
+    // Falha de leitura nao pode virar "comeca vazio" em silencio, e muito menos deixar o
+    // proximo clique gravar por cima de um arquivo que nao conseguimos ler. A sessao
+    // segue funcionando em memoria, exporta normalmente e nao escreve no disco.
     console.error('[progresso] falha ao carregar', erro)
-    erroDeCarga = 'Não consegui ler o progresso guardado neste computador.'
+    erroDeCarga =
+      'Não consegui ler o progresso guardado neste computador. Esta sessão não vai gravar por cima: exporte o que fizer aqui antes de fechar.'
+    podeGravar = false
     carregado = true
     notificar()
   },
@@ -92,19 +96,41 @@ export function quandoCarregado(): Promise<void> {
   return carga
 }
 
+/** Ultima gravacao enfileirada. Serve ao teste e ao desligamento do aplicativo. */
+export function aguardarGravacoes(): Promise<void> {
+  return fila
+}
+
 function publicar(redutor: Redutor): void {
   const novo = redutor(estado)
   // Os redutores devolvem a mesma referencia quando nada muda; sem esta guarda, cada
   // clique gravaria e re-renderizaria os consumidores a toa.
   if (Object.is(novo, estado)) return
   estado = novo
-  if (!carregado) {
+  if (!carregado || !podeGravar) {
+    // Duas razoes para segurar a gravacao: a carga ainda nao chegou (gravar agora
+    // substituiria o arquivo pelo estado vazio mais um clique) ou ela falhou (nao se
+    // escreve por cima do que nao se conseguiu ler). A intencao fica retida e, no
+    // primeiro caso, e reaplicada sobre o que veio do disco.
     pendentes.push(redutor)
     notificar()
     return
   }
   agendarGravacao(novo)
   notificar()
+}
+
+/**
+ * Fotografia do store, para teste e depuracao. Os hooks leem exatamente estes valores;
+ * fora do React nao ha como chamar hook.
+ */
+export function instantaneo(): {
+  estado: Progresso
+  carregado: boolean
+  erroDeCarga: string | null
+  falhaAoGravar: boolean
+} {
+  return { estado, carregado, erroDeCarga, falhaAoGravar }
 }
 
 export function useProgresso(): Progresso {

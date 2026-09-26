@@ -20,7 +20,7 @@ describe('gerarConteudo', () => {
       const c = gerarConteudo(tmp)
       expect(c.meta.totais).toEqual({ areas: 0, temas: 0, paginas: 0 })
       expect(c.areas).toEqual([])
-      expect(validar(c, { areas: 0, temas: 0 })).toEqual([])
+      expect(validar(c, { areas: 0, temas: 0, paginas: 0 })).toEqual([])
     } finally {
       fs.rmSync(tmp, { recursive: true, force: true })
     }

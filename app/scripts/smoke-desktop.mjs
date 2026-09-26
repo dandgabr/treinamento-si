@@ -41,6 +41,16 @@ async function abrir() {
   })
 }
 
+/** Espera uma condicao virar verdadeira, em vez de dormir um tempo fixo. */
+async function ate(condicao, timeoutMs = 5000) {
+  const limite = Date.now() + timeoutMs
+  while (Date.now() < limite) {
+    if (await condicao()) return true
+    await new Promise((resolver) => setTimeout(resolver, 50))
+  }
+  return false
+}
+
 async function primeiraSessao() {
   const app = await abrir()
   const janela = await app.firstWindow()
@@ -82,7 +92,21 @@ async function primeiraSessao() {
 
   await janela.locator('.bloco-pre-teste .nivel').first().click()
   await janela.locator('.veredito-botoes button').first().click()
-  await janela.waitForTimeout(300)
+
+  const pasta = await app.evaluate(({ app: aplicacao }) => aplicacao.getPath('userData'))
+  const arquivo = path.join(pasta, 'progresso.json')
+
+  // Espera a condicao, nao um tempo fixo: com o disco lento, 300 ms davam falso vermelho.
+  const gravou = await ate(() => {
+    if (!fs.existsSync(arquivo)) return false
+    try {
+      return JSON.parse(fs.readFileSync(arquivo, 'utf8'))?.temas?.['01-fundamentos#TEMA-01']
+        ?.recuperacaoOk === true
+    } catch {
+      return false
+    }
+  })
+  conferir('arquivo de progresso criado', gravou, true)
 
   // Se o estado mudou, os botoes do veredito dao lugar a "Registrar nova passagem".
   conferir(
@@ -103,9 +127,6 @@ async function primeiraSessao() {
 
   // A conferencia do arquivo vem antes da tentativa de navegacao, para isolar as duas
   // coisas: a navegacao bloqueada nao pode contaminar a leitura do progresso.
-  const pasta = await app.evaluate(({ app: aplicacao }) => aplicacao.getPath('userData'))
-  const arquivo = path.join(pasta, 'progresso.json')
-  conferir('arquivo de progresso criado', fs.existsSync(arquivo), true)
   const guardado = fs.existsSync(arquivo) ? JSON.parse(fs.readFileSync(arquivo, 'utf8')) : null
   conferir('tema com veredito no arquivo', guardado?.temas?.['01-fundamentos#TEMA-01']?.recuperacaoOk, true)
 
@@ -113,8 +134,11 @@ async function primeiraSessao() {
   await janela.evaluate(() => {
     location.href = 'file:///etc/passwd'
   })
-  await janela.waitForTimeout(300)
   conferir('navegacao para file: bloqueada', new URL(janela.url()).protocol, 'app:')
+  // Prova viva de que o documento nao foi substituido: se a navegacao tivesse passado, a
+  // pagina teria saido e este seletor nao responderia. `.bloco-qa` e da rota do tema, que
+  // e onde o teste esta.
+  conferir('o documento continua o nosso', await janela.locator('.bloco-qa').count(), 1)
 
   await app.close()
   return { pasta }
@@ -125,6 +149,11 @@ async function segundaSessao() {
   const app = await abrir()
   const janela = await app.firstWindow()
   await janela.waitForSelector('.lista-areas li')
+  // A leitura do arquivo e assincrona: ler o painel antes dela daria "0 de 109".
+  await janela.waitForFunction(() => {
+    const painel = document.querySelector('.acoes-progresso')
+    return !!painel && !painel.textContent.includes('carregando')
+  })
   const painel = ((await janela.locator('.resumo').textContent()) ?? '').replace(/\s+/g, ' ')
   conferir('estado sobreviveu ao fechar e reabrir', /Temas firmes ?1 de 109/.test(painel), true)
   conferir('progresso lido do arquivo', /pasta de dados do aplicativo/.test(painel), true)

@@ -12,6 +12,8 @@ const SEQUENCIA_PADRAO: readonly number[] = SEQUENCIA_DIAS
 
 export const TOTAL_AREAS = 18
 export const TOTAL_TEMAS = 109
+/** Paginas do curso: glossario, mapa de relacoes e os 20 arquivos de 99-fontes. */
+export const TOTAL_PAGINAS = 22
 
 // Mesmo lexico de "conteudo/scripts/verificar-repo.py" (secao 5 do CONTRIBUTING).
 export const LEXICO = [
@@ -160,6 +162,8 @@ function validarPagina(p: Pagina, erros: string[]): void {
 export interface TotaisEsperados {
   areas: number
   temas: number
+  /** Ausente, vale `TOTAL_PAGINAS`. */
+  paginas?: number
 }
 
 /** Devolve a lista de problemas. Vazia significa conteudo aprovado. */
@@ -180,6 +184,13 @@ export function validar(
   }
   if (totalTemas !== esperado.temas) {
     erros.push(`totais: ${totalTemas} temas, esperado ${esperado.temas}`)
+  }
+  // Sem numero esperado de paginas, apagar um arquivo de `99-fontes/` do diretorio de
+  // conteudo passava: o gate comparava `meta.totais.paginas` com a contagem que ele mesmo
+  // acabara de fazer, e as duas caiam juntas.
+  const paginasEsperadas = esperado.paginas ?? TOTAL_PAGINAS
+  if (totalPaginas !== paginasEsperadas) {
+    erros.push(`totais: ${totalPaginas} paginas, esperado ${paginasEsperadas}`)
   }
   if (
     c.meta.totais.areas !== totalAreas ||

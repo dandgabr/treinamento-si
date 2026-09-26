@@ -98,6 +98,8 @@ type Mutacao = (a: Alvo) => void
 /** Aplica a mutação e devolve os problemas, usando totais de fixture. */
 function problemas(mutar: Mutacao): string {
   const c = structuredClone(base())
+  // Contado antes da mutação: é o número que o gate deve esperar.
+  const paginas = c.paginas.length
   // A fixture garante estes elementos — a asserção de presença fica concentrada aqui.
   const area = c.areas[0]!
   const alvo: Alvo = {
@@ -108,12 +110,13 @@ function problemas(mutar: Mutacao): string {
     pagina: c.paginas[0]!,
   }
   mutar(alvo)
-  return validar(c, { areas: 1, temas: 1 }).join('\n')
+  return validar(c, { areas: 1, temas: 1, paginas }).join('\n')
 }
 
 const casos: Array<[string, Mutacao, string]> = [
   ['acusa total de áreas diferente', (a) => void (a.c.areas = []), 'totais: 0 areas'],
   ['acusa total de temas diferente', (a) => void (a.c.temas = {}), 'totais: 0 temas'],
+  ['acusa total de páginas diferente', (a) => void (a.c.paginas = []), 'totais: 0 paginas'],
   ['acusa meta divergente dos dados', (a) => void (a.c.meta.totais.temas = 99), 'meta.totais divergente'],
   ['acusa título vazio', (a) => void (a.tema.titulo = ''), 'titulo vazio'],
   ['acusa nível inválido', (a) => void (a.tema.nivel = 'expert' as unknown as Nivel), 'nivel invalido'],
