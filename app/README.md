@@ -398,7 +398,7 @@ em que entram.
 
 | Pendência | Fase |
 |---|---|
-| **4.3 — pronto no Linux.** O `electron-builder` está configurado, o AppImage sai com 104,6 MiB (O7) e os sete fuses entram e são conferidos. Faltam os alvos que esta máquina não produz: `.dmg`/`.zip` (precisa de um Mac) e NSIS + portátil (precisa de `wine` ou de um Windows). O `.deb` saiu da configuração por decisão | 4.3 |
+| **4.3 — pronto no Linux.** O `electron-builder` está configurado, o AppImage sai com 104,0 MiB (O7) e os sete fuses entram e são conferidos. Faltam os alvos que esta máquina não produz: `.dmg`/`.zip` (precisa de um Mac) e NSIS + portátil (precisa de `wine` ou de um Windows). O `.deb` saiu da configuração por decisão | 4.3 |
 | **4.4 — Otimizar** o que a casca liberou: registrar só o `flowchart` do Mermaid, ler o `content.json` do disco em vez de inlinado, dividir o bundle. É o que reduz peso, arranque e memória (O1, O4, O5, O6) | 4.4 |
 | Trocar `script-src 'unsafe-inline'` por `'self'` nas **três** CSPs (o `<meta>` de `index.html`, o cabeçalho de `electron/main.ts` e o de `launcher/servidor.py`) — só é possível depois do bundle dividido | 4.4 |
 | **Só o O7 está medido.** Pelo §16.3 do plano, item sem número medido não conta como feito. A tabela de O1–O8 e S1–S14, com o que está implementado e o que está verificado, está na seção "Checagens do plano" abaixo | 4.4 |
