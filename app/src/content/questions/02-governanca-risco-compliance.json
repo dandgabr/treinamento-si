@@ -11,9 +11,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Papel da governança de segurança e a estrutura decisória: um colega afirma que \"O comitê de segurança aprova risco\". Qual é a correção?",
     "alternativas": [
-      "O CISO é o dono do risco de segurança",
-      "O mandato do comitê é escrito, com faixa de valor e limite de alçada, e revisado anualmente",
       "Segurança da informação é a terceira linha",
+      "O mandato do comitê é escrito, com faixa de valor e limite de alçada, e revisado anualmente",
+      "O CISO é o dono do risco de segurança",
       "Governança é o mesmo que gestão"
     ],
     "correta": 1,
@@ -31,8 +31,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Papel da governança de segurança e a estrutura decisória: um colega afirma que \"O CISO é o dono do risco de segurança\". Qual é a correção?",
     "alternativas": [
-      "O comitê de segurança aprova risco",
       "Segurança da informação é a terceira linha",
+      "O comitê de segurança aprova risco",
       "Dono do risco é o dono do processo; o CISO mantém o método, o registro e o parecer",
       "Governança é o mesmo que gestão"
     ],
@@ -51,8 +51,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Papel da governança de segurança e a estrutura decisória: um colega afirma que \"Segurança da informação é a terceira linha\". Qual é a correção?",
     "alternativas": [
-      "O comitê de segurança aprova risco",
       "O CISO é o dono do risco de segurança",
+      "O comitê de segurança aprova risco",
       "Governança é o mesmo que gestão",
       "Segurança é segunda linha; auditoria interna é a terceira, com independência da gestão"
     ],
@@ -72,9 +72,9 @@
     "enunciado": "Sobre Papel da governança de segurança e a estrutura decisória: um colega afirma que \"Governança é o mesmo que gestão\". Qual é a correção?",
     "alternativas": [
       "O CSF 2.0 coloca os dois em categorias distintas, com supervisão em `GV.OV`",
-      "O comitê de segurança aprova risco",
+      "Segurança da informação é a terceira linha",
       "O CISO é o dono do risco de segurança",
-      "Segurança da informação é a terceira linha"
+      "O comitê de segurança aprova risco"
     ],
     "correta": 0,
     "justificativa": "Gestão executa o plano; governança define direção, alçada e supervisão"
@@ -91,10 +91,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Papel da governança de segurança e a estrutura decisória: um colega afirma que \"Aprovar política é o bastante\". Qual é a correção?",
     "alternativas": [
-      "O comitê de segurança aprova risco",
+      "Segurança da informação é a terceira linha",
       "Toda norma precisa do caminho de exceção, do prazo e de quem assina a exceção",
       "O CISO é o dono do risco de segurança",
-      "Segurança da informação é a terceira linha"
+      "O comitê de segurança aprova risco"
     ],
     "correta": 1,
     "justificativa": "Política sem alçada de exceção e sem rito de discordância não resolve o caso concreto"
@@ -111,13 +111,13 @@
     "status": "rascunho",
     "enunciado": "Cite as três perguntas que definem se a governança de segurança existe em uma empresa.",
     "alternativas": [
-      "A decisão registrada com o dono nomeado, o parecer técnico anexado, o valor de exposição estimado, a data de revisão e o fórum em que foi comunicada. Discordância registrada é o que separa decisão consciente de omissão.",
-      "Terceira linha, com independência da gestão e accountability perante o órgão de governança. Se o CISO audita o controle que desenhou, a asseguração perde objetividade e o conselho precisa buscar terceiro qualificado.",
+      "Segurança da informação é a terceira linha",
+      "O CISO é o dono do risco de segurança",
       "Quem pode decidir, com que informação decide, e o que acontece quando decide contra a recomendação técnica. Sem as três respostas por escrito, a empresa tem hierarquia e não governança.",
-      "`GV.RR-03`: recursos adequados alocados em proporção à estratégia de risco, aos papéis, às responsabilidades e às políticas."
+      "O comitê de segurança aprova risco"
     ],
     "correta": 2,
-    "justificativa": "O comitê de segurança aprova risco"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-01#R02",
@@ -131,13 +131,13 @@
     "status": "rascunho",
     "enunciado": "Um diretor estatutário decidiu manter um sistema sem suporte contra o parecer do CISO. O que precisa existir no registro para que a decisão seja considerada governada?",
     "alternativas": [
-      "Quem pode decidir, com que informação decide, e o que acontece quando decide contra a recomendação técnica. Sem as três respostas por escrito, a empresa tem hierarquia e não governança.",
-      "Terceira linha, com independência da gestão e accountability perante o órgão de governança. Se o CISO audita o controle que desenhou, a asseguração perde objetividade e o conselho precisa buscar terceiro qualificado.",
-      "`GV.RR-03`: recursos adequados alocados em proporção à estratégia de risco, aos papéis, às responsabilidades e às políticas.",
+      "Segurança da informação é a terceira linha",
+      "O CISO é o dono do risco de segurança",
+      "O comitê de segurança aprova risco",
       "A decisão registrada com o dono nomeado, o parecer técnico anexado, o valor de exposição estimado, a data de revisão e o fórum em que foi comunicada. Discordância registrada é o que separa decisão consciente de omissão."
     ],
     "correta": 3,
-    "justificativa": "O comitê de segurança aprova risco"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-01#R03",
@@ -152,12 +152,12 @@
     "enunciado": "Em qual linha do modelo da IIA fica a auditoria interna, e o que isso muda quando o CISO quer testar o próprio controle?",
     "alternativas": [
       "Terceira linha, com independência da gestão e accountability perante o órgão de governança. Se o CISO audita o controle que desenhou, a asseguração perde objetividade e o conselho precisa buscar terceiro qualificado.",
-      "Quem pode decidir, com que informação decide, e o que acontece quando decide contra a recomendação técnica. Sem as três respostas por escrito, a empresa tem hierarquia e não governança.",
-      "A decisão registrada com o dono nomeado, o parecer técnico anexado, o valor de exposição estimado, a data de revisão e o fórum em que foi comunicada. Discordância registrada é o que separa decisão consciente de omissão.",
-      "`GV.RR-03`: recursos adequados alocados em proporção à estratégia de risco, aos papéis, às responsabilidades e às políticas."
+      "Segurança da informação é a terceira linha",
+      "O CISO é o dono do risco de segurança",
+      "O comitê de segurança aprova risco"
     ],
     "correta": 0,
-    "justificativa": "O comitê de segurança aprova risco"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-01#R04",
@@ -171,13 +171,13 @@
     "status": "rascunho",
     "enunciado": "Qual resultado do CSF 2.0 trata da alocação de recursos para segurança?",
     "alternativas": [
-      "Quem pode decidir, com que informação decide, e o que acontece quando decide contra a recomendação técnica. Sem as três respostas por escrito, a empresa tem hierarquia e não governança.",
+      "Segurança da informação é a terceira linha",
       "`GV.RR-03`: recursos adequados alocados em proporção à estratégia de risco, aos papéis, às responsabilidades e às políticas.",
-      "A decisão registrada com o dono nomeado, o parecer técnico anexado, o valor de exposição estimado, a data de revisão e o fórum em que foi comunicada. Discordância registrada é o que separa decisão consciente de omissão.",
-      "Terceira linha, com independência da gestão e accountability perante o órgão de governança. Se o CISO audita o controle que desenhou, a asseguração perde objetividade e o conselho precisa buscar terceiro qualificado."
+      "O CISO é o dono do risco de segurança",
+      "O comitê de segurança aprova risco"
     ],
     "correta": 1,
-    "justificativa": "O comitê de segurança aprova risco"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-01#R05",
@@ -191,13 +191,13 @@
     "status": "rascunho",
     "enunciado": "Por que a alçada de aceitação de risco se escreve em valor financeiro e não em cor de risco?",
     "alternativas": [
-      "Quem pode decidir, com que informação decide, e o que acontece quando decide contra a recomendação técnica. Sem as três respostas por escrito, a empresa tem hierarquia e não governança.",
-      "A decisão registrada com o dono nomeado, o parecer técnico anexado, o valor de exposição estimado, a data de revisão e o fórum em que foi comunicada. Discordância registrada é o que separa decisão consciente de omissão.",
+      "Segurança da informação é a terceira linha",
+      "O CISO é o dono do risco de segurança",
       "Porque valor financeiro é comparável com o custo do controle e com o limite que o conselho aprovou. Cor de risco não ordena fila nem define até onde alguém pode decidir sozinho.",
-      "Terceira linha, com independência da gestão e accountability perante o órgão de governança. Se o CISO audita o controle que desenhou, a asseguração perde objetividade e o conselho precisa buscar terceiro qualificado."
+      "O comitê de segurança aprova risco"
     ],
     "correta": 2,
-    "justificativa": "O comitê de segurança aprova risco"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-02#E01",
@@ -211,10 +211,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Política, norma, procedimento e diretriz: um colega afirma que \"Política deve conter a regra técnica\". Qual é a correção?",
     "alternativas": [
-      "Diretriz é norma que não deu certo",
-      "Exceção é exceção para sempre",
+      "Documento publicado é documento aplicado",
+      "Norma precisa de linguagem jurídica",
       "Política traz princípios estáveis; o critério verificável fica na norma",
-      "Norma precisa de linguagem jurídica"
+      "Diretriz é norma que não deu certo"
     ],
     "correta": 2,
     "justificativa": "Política aprovada no topo e alterada a cada mudança de ferramenta acumula atraso e perde credibilidade"
@@ -231,8 +231,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Política, norma, procedimento e diretriz: um colega afirma que \"Diretriz é norma que não deu certo\". Qual é a correção?",
     "alternativas": [
+      "Documento publicado é documento aplicado",
       "Política deve conter a regra técnica",
-      "Exceção é exceção para sempre",
       "Norma precisa de linguagem jurídica",
       "Se o descumprimento precisa de plano de ação, o documento é norma"
     ],
@@ -252,8 +252,8 @@
     "enunciado": "Sobre Política, norma, procedimento e diretriz: um colega afirma que \"Exceção é exceção para sempre\". Qual é a correção?",
     "alternativas": [
       "Exceção tem aprovador, substituição declarada, prazo e revisão",
+      "Documento publicado é documento aplicado",
       "Política deve conter a regra técnica",
-      "Diretriz é norma que não deu certo",
       "Norma precisa de linguagem jurídica"
     ],
     "correta": 0,
@@ -271,10 +271,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Política, norma, procedimento e diretriz: um colega afirma que \"Norma precisa de linguagem jurídica\". Qual é a correção?",
     "alternativas": [
-      "Política deve conter a regra técnica",
+      "Documento publicado é documento aplicado",
       "Norma se escreve curta, com sujeito, número e evidência",
-      "Diretriz é norma que não deu certo",
-      "Exceção é exceção para sempre"
+      "Política deve conter a regra técnica",
+      "Diretriz é norma que não deu certo"
     ],
     "correta": 1,
     "justificativa": "Textos longos e abstratos reduzem aderência e aumentam interpretação divergente"
@@ -292,9 +292,9 @@
     "enunciado": "Sobre Política, norma, procedimento e diretriz: um colega afirma que \"Documento publicado é documento aplicado\". Qual é a correção?",
     "alternativas": [
       "Política deve conter a regra técnica",
-      "Diretriz é norma que não deu certo",
+      "Norma precisa de linguagem jurídica",
       "Comunicação, treinamento e consequência entram no desenho da norma",
-      "Exceção é exceção para sempre"
+      "Diretriz é norma que não deu certo"
     ],
     "correta": 2,
     "justificativa": "O CSF 2.0 pede política comunicada e aplicada, não apenas estabelecida"
@@ -311,12 +311,13 @@
     "status": "rascunho",
     "enunciado": "Quais quatro elementos tornam uma norma verificável em auditoria?",
     "alternativas": [
-      "Quem pediu, o que a norma exigiria, o que será feito em substituição, quem aprovou e a data de expiração.",
       "Verbo de obrigação, sujeito explícito, critério mensurável e evidência esperada.",
-      "Porque cada mudança de ferramenta exige nova aprovação no nível mais alto, e o tempo de aprovação executiva é maior que o tempo de mudança operacional. O procedimento real passa a divergir do aprovado."
+      "Documento publicado é documento aplicado",
+      "Política deve conter a regra técnica",
+      "Norma precisa de linguagem jurídica"
     ],
-    "correta": 1,
-    "justificativa": "Política deve conter a regra técnica"
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-02#R03",
@@ -330,12 +331,13 @@
     "status": "rascunho",
     "enunciado": "Quais cinco campos um registro de exceção precisa ter?",
     "alternativas": [
-      "Verbo de obrigação, sujeito explícito, critério mensurável e evidência esperada.",
-      "Porque cada mudança de ferramenta exige nova aprovação no nível mais alto, e o tempo de aprovação executiva é maior que o tempo de mudança operacional. O procedimento real passa a divergir do aprovado.",
-      "Quem pediu, o que a norma exigiria, o que será feito em substituição, quem aprovou e a data de expiração."
+      "Documento publicado é documento aplicado",
+      "Quem pediu, o que a norma exigiria, o que será feito em substituição, quem aprovou e a data de expiração.",
+      "Política deve conter a regra técnica",
+      "Norma precisa de linguagem jurídica"
     ],
-    "correta": 2,
-    "justificativa": "Política deve conter a regra técnica"
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-02#R05",
@@ -349,12 +351,13 @@
     "status": "rascunho",
     "enunciado": "Por que procedimento operacional aprovado no conselho gera desatualização?",
     "alternativas": [
-      "Verbo de obrigação, sujeito explícito, critério mensurável e evidência esperada.",
-      "Porque cada mudança de ferramenta exige nova aprovação no nível mais alto, e o tempo de aprovação executiva é maior que o tempo de mudança operacional. O procedimento real passa a divergir do aprovado.",
-      "Quem pediu, o que a norma exigiria, o que será feito em substituição, quem aprovou e a data de expiração."
+      "Documento publicado é documento aplicado",
+      "Política deve conter a regra técnica",
+      "Norma precisa de linguagem jurídica",
+      "Porque cada mudança de ferramenta exige nova aprovação no nível mais alto, e o tempo de aprovação executiva é maior que o tempo de mudança operacional. O procedimento real passa a divergir do aprovado."
     ],
-    "correta": 1,
-    "justificativa": "Política deve conter a regra técnica"
+    "correta": 3,
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-03#E01",
@@ -368,9 +371,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Apetite e tolerância ao risco: um colega afirma que \"Apetite se declara com adjetivos\". Qual é a correção?",
     "alternativas": [
+      "Declaração se revisa só quando muda a diretoria",
       "Tolerância é o risco que sobra depois do controle",
       "Tolerância alta resolve o problema",
-      "O CISO aprova o apetite",
       "Cada tolerância tem métrica, valor e janela"
     ],
     "correta": 3,
@@ -389,9 +392,9 @@
     "enunciado": "Sobre Apetite e tolerância ao risco: um colega afirma que \"Tolerância é o risco que sobra depois do controle\". Qual é a correção?",
     "alternativas": [
       "Primeiro se declara o limite, depois se mede o residual contra ele",
-      "Apetite se declara com adjetivos",
+      "Declaração se revisa só quando muda a diretoria",
       "Tolerância alta resolve o problema",
-      "O CISO aprova o apetite"
+      "Apetite se declara com adjetivos"
     ],
     "correta": 0,
     "justificativa": "Risco residual é resultado de tratamento; tolerância é critério de aceitação definido antes"
@@ -408,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Apetite e tolerância ao risco: um colega afirma que \"Tolerância alta resolve o problema\". Qual é a correção?",
     "alternativas": [
-      "Apetite se declara com adjetivos",
-      "O teto sai da capacidade financeira e operacional da empresa",
       "Tolerância é o risco que sobra depois do controle",
-      "O CISO aprova o apetite"
+      "O teto sai da capacidade financeira e operacional da empresa",
+      "Declaração se revisa só quando muda a diretoria",
+      "Apetite se declara com adjetivos"
     ],
     "correta": 1,
     "justificativa": "Limite acima da capacidade de suportar impacto não protege nada e desloca a decisão para o pior momento"
@@ -428,8 +431,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Apetite e tolerância ao risco: um colega afirma que \"O CISO aprova o apetite\". Qual é a correção?",
     "alternativas": [
-      "Apetite se declara com adjetivos",
       "Tolerância é o risco que sobra depois do controle",
+      "Declaração se revisa só quando muda a diretoria",
       "O CISO propõe, mede e mantém; a aprovação é de quem tem mandato",
       "Tolerância alta resolve o problema"
     ],
@@ -448,9 +451,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Apetite e tolerância ao risco: um colega afirma que \"Declaração se revisa só quando muda a diretoria\". Qual é a correção?",
     "alternativas": [
-      "Apetite se declara com adjetivos",
       "Tolerância é o risco que sobra depois do controle",
       "Tolerância alta resolve o problema",
+      "Apetite se declara com adjetivos",
       "A declaração tem data de revisão e gatilhos de revisão extraordinária"
     ],
     "correta": 3,
@@ -469,12 +472,12 @@
     "enunciado": "Qual definição de tolerância ao risco o glossário do CSRC atribui ao SP 800-137?",
     "alternativas": [
       "O nível de risco que uma entidade aceita assumir para alcançar um resultado desejado.",
-      "Declaração qualitativa, limites quantitativos por categoria com métrica e janela, lista de riscos inaceitáveis, alçada de aceitação e regra de escalonamento e revisão.",
-      "Registro em até 24 horas, análise de causa, plano com data e dono, e reporte obrigatório no próximo fórum de risco. O rompimento aconteceu; a recuperação rápida reduz o dano, não apaga o evento.",
-      "Porque exposição de dado pessoal aciona obrigação legal de notificação e perda de confiança que não têm valor compensatório, enquanto indisponibilidade tem custo por hora mensurável e absorvível dentro de um teto."
+      "Tolerância é o risco que sobra depois do controle",
+      "Declaração se revisa só quando muda a diretoria",
+      "Tolerância alta resolve o problema"
     ],
     "correta": 0,
-    "justificativa": "Apetite se declara com adjetivos"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-03#R03",
@@ -488,13 +491,13 @@
     "status": "rascunho",
     "enunciado": "Quais são as cinco partes de uma declaração de apetite utilizável?",
     "alternativas": [
-      "O nível de risco que uma entidade aceita assumir para alcançar um resultado desejado.",
-      "Registro em até 24 horas, análise de causa, plano com data e dono, e reporte obrigatório no próximo fórum de risco. O rompimento aconteceu; a recuperação rápida reduz o dano, não apaga o evento.",
+      "Tolerância é o risco que sobra depois do controle",
+      "Declaração se revisa só quando muda a diretoria",
       "Declaração qualitativa, limites quantitativos por categoria com métrica e janela, lista de riscos inaceitáveis, alçada de aceitação e regra de escalonamento e revisão.",
-      "Porque exposição de dado pessoal aciona obrigação legal de notificação e perda de confiança que não têm valor compensatório, enquanto indisponibilidade tem custo por hora mensurável e absorvível dentro de um teto."
+      "Tolerância alta resolve o problema"
     ],
     "correta": 2,
-    "justificativa": "Apetite se declara com adjetivos"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-03#R04",
@@ -508,13 +511,13 @@
     "status": "rascunho",
     "enunciado": "Um indicador de indisponibilidade rompe a tolerância e volta ao normal dois dias depois. O que deve acontecer mesmo assim?",
     "alternativas": [
-      "O nível de risco que uma entidade aceita assumir para alcançar um resultado desejado.",
-      "Declaração qualitativa, limites quantitativos por categoria com métrica e janela, lista de riscos inaceitáveis, alçada de aceitação e regra de escalonamento e revisão.",
-      "Porque exposição de dado pessoal aciona obrigação legal de notificação e perda de confiança que não têm valor compensatório, enquanto indisponibilidade tem custo por hora mensurável e absorvível dentro de um teto.",
+      "Tolerância é o risco que sobra depois do controle",
+      "Declaração se revisa só quando muda a diretoria",
+      "Tolerância alta resolve o problema",
       "Registro em até 24 horas, análise de causa, plano com data e dono, e reporte obrigatório no próximo fórum de risco. O rompimento aconteceu; a recuperação rápida reduz o dano, não apaga o evento."
     ],
     "correta": 3,
-    "justificativa": "Apetite se declara com adjetivos"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-03#R05",
@@ -529,12 +532,12 @@
     "enunciado": "Por que a tolerância de confidencialidade costuma ser zero enquanto a de disponibilidade é um número em horas?",
     "alternativas": [
       "Porque exposição de dado pessoal aciona obrigação legal de notificação e perda de confiança que não têm valor compensatório, enquanto indisponibilidade tem custo por hora mensurável e absorvível dentro de um teto.",
-      "O nível de risco que uma entidade aceita assumir para alcançar um resultado desejado.",
-      "Declaração qualitativa, limites quantitativos por categoria com métrica e janela, lista de riscos inaceitáveis, alçada de aceitação e regra de escalonamento e revisão.",
-      "Registro em até 24 horas, análise de causa, plano com data e dono, e reporte obrigatório no próximo fórum de risco. O rompimento aconteceu; a recuperação rápida reduz o dano, não apaga o evento."
+      "Tolerância é o risco que sobra depois do controle",
+      "Declaração se revisa só quando muda a diretoria",
+      "Tolerância alta resolve o problema"
     ],
     "correta": 0,
-    "justificativa": "Apetite se declara com adjetivos"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-04#E01",
@@ -549,9 +552,9 @@
     "enunciado": "Sobre ISMS e ISO/IEC 27001: um colega afirma que \"ISO/IEC 27001 é uma lista de controles\". Qual é a correção?",
     "alternativas": [
       "27001 define requisitos do sistema; 27002 orienta os controles que a declaração de aplicabilidade seleciona",
-      "Certificado ISO/IEC 27001 prova conformidade com a LGPD",
+      "Contratar auditoria antes de rodar o ciclo interno é mais rápido",
       "O escopo pode ser a empresa inteira quando só parte está pronta",
-      "Contratar auditoria antes de rodar o ciclo interno é mais rápido"
+      "Certificado ISO/IEC 27001 prova conformidade com a LGPD"
     ],
     "correta": 0,
     "justificativa": "O catálogo de controles com orientação de implementação está na ISO/IEC 27002:2022, que não é certificável"
@@ -568,10 +571,10 @@
     "status": "rascunho",
     "enunciado": "Sobre ISMS e ISO/IEC 27001: um colega afirma que \"Certificado ISO/IEC 27001 prova conformidade com a LGPD\". Qual é a correção?",
     "alternativas": [
-      "ISO/IEC 27001 é uma lista de controles",
+      "Contratar auditoria antes de rodar o ciclo interno é mais rápido",
       "São dois sistemas e dois conjuntos de evidência; a ABNT mantém formação específica sobre gestão de privacidade alinhada à LGPD",
       "O escopo pode ser a empresa inteira quando só parte está pronta",
-      "Contratar auditoria antes de rodar o ciclo interno é mais rápido"
+      "ISO/IEC 27001 é uma lista de controles"
     ],
     "correta": 1,
     "justificativa": "O objeto do sistema de gestão é risco de segurança da informação, não a legalidade do tratamento de dado pessoal"
@@ -588,10 +591,10 @@
     "status": "rascunho",
     "enunciado": "Sobre ISMS e ISO/IEC 27001: um colega afirma que \"O escopo pode ser a empresa inteira quando só parte está pronta\". Qual é a correção?",
     "alternativas": [
-      "ISO/IEC 27001 é uma lista de controles",
+      "Contratar auditoria antes de rodar o ciclo interno é mais rápido",
       "Certificado ISO/IEC 27001 prova conformidade com a LGPD",
       "O escopo é declarado com nome próprio; o que fica fora recebe justificativa, dono e data de reavaliação",
-      "Contratar auditoria antes de rodar o ciclo interno é mais rápido"
+      "ISO/IEC 27001 é uma lista de controles"
     ],
     "correta": 2,
     "justificativa": "A exclusão de qualquer requisito das seções 4 a 10 não é aceitável para quem busca conformidade"
@@ -608,9 +611,9 @@
     "status": "rascunho",
     "enunciado": "Sobre ISMS e ISO/IEC 27001: um colega afirma que \"Contratar auditoria antes de rodar o ciclo interno é mais rápido\". Qual é a correção?",
     "alternativas": [
-      "ISO/IEC 27001 é uma lista de controles",
-      "Certificado ISO/IEC 27001 prova conformidade com a LGPD",
       "O escopo pode ser a empresa inteira quando só parte está pronta",
+      "Certificado ISO/IEC 27001 prova conformidade com a LGPD",
+      "ISO/IEC 27001 é uma lista de controles",
       "Auditoria interna e análise crítica pela direção acontecem antes da auditoria de certificação"
     ],
     "correta": 3,
@@ -629,9 +632,9 @@
     "enunciado": "Sobre ISMS e ISO/IEC 27001: um colega afirma que \"Certificação encerra o projeto\". Qual é a correção?",
     "alternativas": [
       "O sistema vive por ciclos; a manutenção do certificado exige auditorias de acompanhamento",
-      "ISO/IEC 27001 é uma lista de controles",
-      "Certificado ISO/IEC 27001 prova conformidade com a LGPD",
-      "O escopo pode ser a empresa inteira quando só parte está pronta"
+      "Contratar auditoria antes de rodar o ciclo interno é mais rápido",
+      "O escopo pode ser a empresa inteira quando só parte está pronta",
+      "Certificado ISO/IEC 27001 prova conformidade com a LGPD"
     ],
     "correta": 0,
     "justificativa": "O certificado vale por um período e o acompanhamento é contínuo"
@@ -648,13 +651,13 @@
     "status": "rascunho",
     "enunciado": "Qual é a edição, a data de publicação e o número de páginas da ISO/IEC 27001:2022, e o que mudou na emenda de 2024?",
     "alternativas": [
-      "ISO/IEC 27002:2022, edição 3, publicada em 15 de fevereiro de 2022, 152 páginas, com orientação sobre controles genéricos e implementação. Ela não é certificável; a certificação se dá na 27001, que a referencia.",
+      "Contratar auditoria antes de rodar o ciclo interno é mais rápido",
       "Edição 3, publicada em 25 de outubro de 2022, 19 páginas; a `Amd 1:2024` trata de ação climática.",
-      "Que a exclusão de qualquer requisito das seções 4 a 10 não é aceitável quando a organização busca conformidade com o documento.",
-      "Mais de 70.000 certificados reportados em 150 países, conforme o ISO Survey 2022, segundo a página oficial do padrão."
+      "O escopo pode ser a empresa inteira quando só parte está pronta",
+      "Certificado ISO/IEC 27001 prova conformidade com a LGPD"
     ],
     "correta": 1,
-    "justificativa": "ISO/IEC 27001 é uma lista de controles"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-04#R02",
@@ -668,13 +671,13 @@
     "status": "rascunho",
     "enunciado": "Qual documento da família orienta os controles e por que ele não gera certificado?",
     "alternativas": [
-      "Edição 3, publicada em 25 de outubro de 2022, 19 páginas; a `Amd 1:2024` trata de ação climática.",
-      "Que a exclusão de qualquer requisito das seções 4 a 10 não é aceitável quando a organização busca conformidade com o documento.",
+      "Contratar auditoria antes de rodar o ciclo interno é mais rápido",
+      "O escopo pode ser a empresa inteira quando só parte está pronta",
       "ISO/IEC 27002:2022, edição 3, publicada em 15 de fevereiro de 2022, 152 páginas, com orientação sobre controles genéricos e implementação. Ela não é certificável; a certificação se dá na 27001, que a referencia.",
-      "Mais de 70.000 certificados reportados em 150 países, conforme o ISO Survey 2022, segundo a página oficial do padrão."
+      "Certificado ISO/IEC 27001 prova conformidade com a LGPD"
     ],
     "correta": 2,
-    "justificativa": "ISO/IEC 27001 é uma lista de controles"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-04#R03",
@@ -688,13 +691,13 @@
     "status": "rascunho",
     "enunciado": "O que o catálogo oficial da ABNT diz sobre excluir requisitos das seções 4 a 10?",
     "alternativas": [
-      "Edição 3, publicada em 25 de outubro de 2022, 19 páginas; a `Amd 1:2024` trata de ação climática.",
-      "ISO/IEC 27002:2022, edição 3, publicada em 15 de fevereiro de 2022, 152 páginas, com orientação sobre controles genéricos e implementação. Ela não é certificável; a certificação se dá na 27001, que a referencia.",
-      "Mais de 70.000 certificados reportados em 150 países, conforme o ISO Survey 2022, segundo a página oficial do padrão.",
+      "Contratar auditoria antes de rodar o ciclo interno é mais rápido",
+      "O escopo pode ser a empresa inteira quando só parte está pronta",
+      "Certificado ISO/IEC 27001 prova conformidade com a LGPD",
       "Que a exclusão de qualquer requisito das seções 4 a 10 não é aceitável quando a organização busca conformidade com o documento."
     ],
     "correta": 3,
-    "justificativa": "ISO/IEC 27001 é uma lista de controles"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-04#R04",
@@ -709,12 +712,12 @@
     "enunciado": "Segundo a página oficial da ISO, quantos certificados foram reportados e em quantos países, e com base em qual levantamento?",
     "alternativas": [
       "Mais de 70.000 certificados reportados em 150 países, conforme o ISO Survey 2022, segundo a página oficial do padrão.",
-      "Edição 3, publicada em 25 de outubro de 2022, 19 páginas; a `Amd 1:2024` trata de ação climática.",
-      "ISO/IEC 27002:2022, edição 3, publicada em 15 de fevereiro de 2022, 152 páginas, com orientação sobre controles genéricos e implementação. Ela não é certificável; a certificação se dá na 27001, que a referencia.",
-      "Que a exclusão de qualquer requisito das seções 4 a 10 não é aceitável quando a organização busca conformidade com o documento."
+      "Contratar auditoria antes de rodar o ciclo interno é mais rápido",
+      "O escopo pode ser a empresa inteira quando só parte está pronta",
+      "Certificado ISO/IEC 27001 prova conformidade com a LGPD"
     ],
     "correta": 0,
-    "justificativa": "ISO/IEC 27001 é uma lista de controles"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-05#E01",
@@ -728,10 +731,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Frameworks de controles: NIST CSF 2.0 e CIS Controls: um colega afirma que \"Govern é uma função que se implementa depois\". Qual é a correção?",
     "alternativas": [
-      "Tier do CSF é nota de maturidade",
+      "Cada framework precisa de evidência própria",
       "Govern produz contexto, estratégia, papéis, política e supervisão antes e durante os controles",
-      "Adotar o CSF 2.0 é obrigatório",
-      "CIS Controls substituem a ISO/IEC 27001"
+      "CIS Controls substituem a ISO/IEC 27001",
+      "Tier do CSF é nota de maturidade"
     ],
     "correta": 1,
     "justificativa": "O CSF 2.0 diz que as funções são tratadas ao mesmo tempo e que Govern informa as outras cinco"
@@ -749,7 +752,7 @@
     "enunciado": "Sobre Frameworks de controles: NIST CSF 2.0 e CIS Controls: um colega afirma que \"Tier do CSF é nota de maturidade\". Qual é a correção?",
     "alternativas": [
       "Govern é uma função que se implementa depois",
-      "Adotar o CSF 2.0 é obrigatório",
+      "Cada framework precisa de evidência própria",
       "Tier é rótulo de contexto, não pontuação; a nota não existe no CSF 2.0",
       "CIS Controls substituem a ISO/IEC 27001"
     ],
@@ -769,7 +772,7 @@
     "enunciado": "Sobre Frameworks de controles: NIST CSF 2.0 e CIS Controls: um colega afirma que \"Adotar o CSF 2.0 é obrigatório\". Qual é a correção?",
     "alternativas": [
       "Govern é uma função que se implementa depois",
-      "Tier do CSF é nota de maturidade",
+      "Cada framework precisa de evidência própria",
       "CIS Controls substituem a ISO/IEC 27001",
       "Verifique o que o seu cliente ou regulador exige: normalmente é resultado, não framework específico"
     ],
@@ -790,8 +793,8 @@
     "alternativas": [
       "A 27001 define o sistema, a 27002 orienta os controles, os CIS Controls ordenam a execução",
       "Govern é uma função que se implementa depois",
-      "Tier do CSF é nota de maturidade",
-      "Adotar o CSF 2.0 é obrigatório"
+      "Cada framework precisa de evidência própria",
+      "Tier do CSF é nota de maturidade"
     ],
     "correta": 0,
     "justificativa": "Os CIS Controls são catálogo prescritivo de controles e não definem requisitos de sistema de gestão"
@@ -810,8 +813,8 @@
     "alternativas": [
       "Govern é uma função que se implementa depois",
       "Uma evidência por controle, referenciada por todas as colunas da matriz",
-      "Tier do CSF é nota de maturidade",
-      "Adotar o CSF 2.0 é obrigatório"
+      "CIS Controls substituem a ISO/IEC 27001",
+      "Tier do CSF é nota de maturidade"
     ],
     "correta": 1,
     "justificativa": "Evidência duplicada diverge com o tempo, como no caso da seção 4"
@@ -828,13 +831,13 @@
     "status": "rascunho",
     "enunciado": "Liste as seis funções do CSF 2.0 e explique por que Govern fica no centro.",
     "alternativas": [
-      "São 22 categorias. Na função Govern: `GV.OC`, `GV.RM`, `GV.RR`, `GV.PO`, `GV.OV` e `GV.SC`.",
-      "Delimitar o escopo; reunir as informações necessárias; criar o perfil; analisar lacunas e produzir plano de ação; implementar e atualizar o perfil, repetindo o ciclo.",
+      "Govern é uma função que se implementa depois",
+      "Cada framework precisa de evidência própria",
       "Govern, Identify, Protect, Detect, Respond e Recover. Govern fica no centro porque estabelece contexto, estratégia, papéis e supervisão que informam como as outras cinco funções são implementadas.",
-      "18 controles, e a versão 8.1 acrescentou a função de segurança Governance."
+      "CIS Controls substituem a ISO/IEC 27001"
     ],
     "correta": 2,
-    "justificativa": "Govern é uma função que se implementa depois"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-05#R02",
@@ -848,13 +851,13 @@
     "status": "rascunho",
     "enunciado": "Quantas categorias tem o CSF 2.0, e quais pertencem à função Govern?",
     "alternativas": [
-      "Govern, Identify, Protect, Detect, Respond e Recover. Govern fica no centro porque estabelece contexto, estratégia, papéis e supervisão que informam como as outras cinco funções são implementadas.",
-      "Delimitar o escopo; reunir as informações necessárias; criar o perfil; analisar lacunas e produzir plano de ação; implementar e atualizar o perfil, repetindo o ciclo.",
-      "18 controles, e a versão 8.1 acrescentou a função de segurança Governance.",
+      "Govern é uma função que se implementa depois",
+      "Cada framework precisa de evidência própria",
+      "CIS Controls substituem a ISO/IEC 27001",
       "São 22 categorias. Na função Govern: `GV.OC`, `GV.RM`, `GV.RR`, `GV.PO`, `GV.OV` e `GV.SC`."
     ],
     "correta": 3,
-    "justificativa": "Govern é uma função que se implementa depois"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-05#R03",
@@ -869,12 +872,12 @@
     "enunciado": "Descreva os cinco passos do CSF 2.0 para criar e usar um perfil organizacional.",
     "alternativas": [
       "Delimitar o escopo; reunir as informações necessárias; criar o perfil; analisar lacunas e produzir plano de ação; implementar e atualizar o perfil, repetindo o ciclo.",
-      "Govern, Identify, Protect, Detect, Respond e Recover. Govern fica no centro porque estabelece contexto, estratégia, papéis e supervisão que informam como as outras cinco funções são implementadas.",
-      "São 22 categorias. Na função Govern: `GV.OC`, `GV.RM`, `GV.RR`, `GV.PO`, `GV.OV` e `GV.SC`.",
-      "18 controles, e a versão 8.1 acrescentou a função de segurança Governance."
+      "Govern é uma função que se implementa depois",
+      "Cada framework precisa de evidência própria",
+      "CIS Controls substituem a ISO/IEC 27001"
     ],
     "correta": 0,
-    "justificativa": "Govern é uma função que se implementa depois"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-05#R04",
@@ -888,13 +891,13 @@
     "status": "rascunho",
     "enunciado": "Quantos controles tem o CIS Controls v8.1 e qual função foi acrescentada nessa versão?",
     "alternativas": [
-      "Govern, Identify, Protect, Detect, Respond e Recover. Govern fica no centro porque estabelece contexto, estratégia, papéis e supervisão que informam como as outras cinco funções são implementadas.",
+      "Govern é uma função que se implementa depois",
       "18 controles, e a versão 8.1 acrescentou a função de segurança Governance.",
-      "São 22 categorias. Na função Govern: `GV.OC`, `GV.RM`, `GV.RR`, `GV.PO`, `GV.OV` e `GV.SC`.",
-      "Delimitar o escopo; reunir as informações necessárias; criar o perfil; analisar lacunas e produzir plano de ação; implementar e atualizar o perfil, repetindo o ciclo."
+      "Cada framework precisa de evidência própria",
+      "CIS Controls substituem a ISO/IEC 27001"
     ],
     "correta": 1,
-    "justificativa": "Govern é uma função que se implementa depois"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-05#R05",
@@ -908,13 +911,13 @@
     "status": "rascunho",
     "enunciado": "Qual das duas ferramentas você escolhe para montar um plano de 90 dias com equipe pequena e por quê?",
     "alternativas": [
-      "Govern, Identify, Protect, Detect, Respond e Recover. Govern fica no centro porque estabelece contexto, estratégia, papéis e supervisão que informam como as outras cinco funções são implementadas.",
-      "São 22 categorias. Na função Govern: `GV.OC`, `GV.RM`, `GV.RR`, `GV.PO`, `GV.OV` e `GV.SC`.",
+      "Govern é uma função que se implementa depois",
+      "Cada framework precisa de evidência própria",
       "CIS Controls, porque entrega lista prescritiva e priorizada, adequada a equipe pequena, enquanto o CSF 2.0 entrega taxonomia de resultados e perfis, mais útil para comunicação e análise de lacunas com o executivo.",
-      "Delimitar o escopo; reunir as informações necessárias; criar o perfil; analisar lacunas e produzir plano de ação; implementar e atualizar o perfil, repetindo o ciclo."
+      "CIS Controls substituem a ISO/IEC 27001"
     ],
     "correta": 2,
-    "justificativa": "Govern é uma função que se implementa depois"
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-06#E01",
@@ -928,10 +931,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas, reporte ao board e auditoria: um colega afirma que \"Mais indicadores significam mais controle\". Qual é a correção?",
     "alternativas": [
-      "Número de alertas mede detecção",
-      "Relatório é prestação de contas",
+      "Auditoria interna pode ficar subordinada ao CISO",
+      "Achado sem causa vira ação corretiva",
       "No máximo 8 indicadores com dono, limiar e ação; o resto é painel operacional",
-      "Auditoria interna pode ficar subordinada ao CISO"
+      "Número de alertas mede detecção"
     ],
     "correta": 2,
     "justificativa": "Painel grande dilui a atenção e não muda decisão"
@@ -948,9 +951,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas, reporte ao board e auditoria: um colega afirma que \"Número de alertas mede detecção\". Qual é a correção?",
     "alternativas": [
-      "Mais indicadores significam mais controle",
-      "Relatório é prestação de contas",
       "Auditoria interna pode ficar subordinada ao CISO",
+      "Mais indicadores significam mais controle",
+      "Achado sem causa vira ação corretiva",
       "Meça tempo de exposição, cobertura e tempo de contenção"
     ],
     "correta": 3,
@@ -969,9 +972,9 @@
     "enunciado": "Sobre Métricas, reporte ao board e auditoria: um colega afirma que \"Relatório é prestação de contas\". Qual é a correção?",
     "alternativas": [
       "Cada reporte traz ao menos uma decisão pedida, com valor e consequência",
+      "Auditoria interna pode ficar subordinada ao CISO",
       "Mais indicadores significam mais controle",
-      "Número de alertas mede detecção",
-      "Auditoria interna pode ficar subordinada ao CISO"
+      "Achado sem causa vira ação corretiva"
     ],
     "correta": 0,
     "justificativa": "Relatório sem decisão pedida não fecha o ciclo de supervisão do `GV.OV`"
@@ -990,8 +993,8 @@
     "alternativas": [
       "Mais indicadores significam mais controle",
       "Auditoria interna responde ao órgão de governança, com plano aprovado por ele",
-      "Número de alertas mede detecção",
-      "Relatório é prestação de contas"
+      "Achado sem causa vira ação corretiva",
+      "Número de alertas mede detecção"
     ],
     "correta": 1,
     "justificativa": "Quem desenha o controle não dá asseguração independente sobre ele"
@@ -1008,10 +1011,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas, reporte ao board e auditoria: um colega afirma que \"Achado sem causa vira ação corretiva\". Qual é a correção?",
     "alternativas": [
+      "Auditoria interna pode ficar subordinada ao CISO",
       "Mais indicadores significam mais controle",
-      "Número de alertas mede detecção",
       "Registro com descrição, causa, dono e data, e idade média reportada",
-      "Relatório é prestação de contas"
+      "Número de alertas mede detecção"
     ],
     "correta": 2,
     "justificativa": "Plano que trata sintoma reabre o mesmo achado no ciclo seguinte"
@@ -1028,12 +1031,13 @@
     "status": "rascunho",
     "enunciado": "Cite as quatro perguntas do teste de mérito de um indicador.",
     "alternativas": [
-      "Nome, tipo, fórmula, fonte do dado, dono, frequência, limiar em três faixas e ação pré-acordada para a faixa vermelha.",
       "Muda alguma decisão possível? Tem dono nomeado? Tem limiar e ação pré-acordada? A série histórica é comparável?",
-      "Exposição contra apetite; riscos materiais com movimento; incidentes materiais; auditoria e remediação; decisão pedida. O bloco obrigatório é a decisão pedida: sem ele o reporte não fecha o ciclo de supervisão."
+      "Auditoria interna pode ficar subordinada ao CISO",
+      "Mais indicadores significam mais controle",
+      "Achado sem causa vira ação corretiva"
     ],
-    "correta": 1,
-    "justificativa": "Mais indicadores significam mais controle"
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-06#R03",
@@ -1047,12 +1051,13 @@
     "status": "rascunho",
     "enunciado": "Quais oito campos compõem a ficha de definição de um indicador?",
     "alternativas": [
-      "Muda alguma decisão possível? Tem dono nomeado? Tem limiar e ação pré-acordada? A série histórica é comparável?",
-      "Exposição contra apetite; riscos materiais com movimento; incidentes materiais; auditoria e remediação; decisão pedida. O bloco obrigatório é a decisão pedida: sem ele o reporte não fecha o ciclo de supervisão.",
-      "Nome, tipo, fórmula, fonte do dado, dono, frequência, limiar em três faixas e ação pré-acordada para a faixa vermelha."
+      "Auditoria interna pode ficar subordinada ao CISO",
+      "Nome, tipo, fórmula, fonte do dado, dono, frequência, limiar em três faixas e ação pré-acordada para a faixa vermelha.",
+      "Mais indicadores significam mais controle",
+      "Achado sem causa vira ação corretiva"
     ],
-    "correta": 2,
-    "justificativa": "Mais indicadores significam mais controle"
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "02-governanca-risco-compliance#TEMA-06#R05",
@@ -1066,11 +1071,12 @@
     "status": "rascunho",
     "enunciado": "Quais cinco blocos aparecem na página de reporte ao conselho, e qual deles é obrigatório em qualquer versão do relatório?",
     "alternativas": [
-      "Muda alguma decisão possível? Tem dono nomeado? Tem limiar e ação pré-acordada? A série histórica é comparável?",
-      "Exposição contra apetite; riscos materiais com movimento; incidentes materiais; auditoria e remediação; decisão pedida. O bloco obrigatório é a decisão pedida: sem ele o reporte não fecha o ciclo de supervisão.",
-      "Nome, tipo, fórmula, fonte do dado, dono, frequência, limiar em três faixas e ação pré-acordada para a faixa vermelha."
+      "Auditoria interna pode ficar subordinada ao CISO",
+      "Mais indicadores significam mais controle",
+      "Achado sem causa vira ação corretiva",
+      "Exposição contra apetite; riscos materiais com movimento; incidentes materiais; auditoria e remediação; decisão pedida. O bloco obrigatório é a decisão pedida: sem ele o reporte não fecha o ciclo de supervisão."
     ],
-    "correta": 1,
-    "justificativa": "Mais indicadores significam mais controle"
+    "correta": 3,
+    "justificativa": ""
   }
 ]

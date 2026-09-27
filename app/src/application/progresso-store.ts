@@ -20,6 +20,7 @@ import {
   progressoVazio,
   registrarCheckpoint as aplicarCheckpoint,
   registrarConfianca as aplicarConfianca,
+  registrarQuestao as aplicarQuestao,
   registrarRecuperacao as aplicarRecuperacao,
   type Confianca,
   type Progresso,
@@ -216,6 +217,11 @@ export function registrarCheckpoint(
   agora: Date = new Date(),
 ): void {
   publicar((p) => aplicarCheckpoint(p, areaId, acertos, total, agora))
+}
+
+/** Resposta de um item do quiz: acumula o placar do item e marca o dia do estudo. */
+export function registrarQuestao(id: string, acertou: boolean, agora: Date = new Date()): void {
+  publicar((p) => aplicarQuestao(p, id, acertou, agora))
 }
 
 /** Abre a proxima passagem de recuperacao de um tema. */

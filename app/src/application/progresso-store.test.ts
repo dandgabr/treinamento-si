@@ -308,4 +308,40 @@ describe('progresso-store', () => {
     await store.aguardarGravacoes()
     expect(registro.gravados).toHaveLength(0)
   })
+
+  it('grava o placar do item do quiz e o dia em que ele foi respondido', async () => {
+    const { provedor, registro } = provedorDeTeste({
+      leitura: () => Promise.resolve(estadoDoDisco()),
+    })
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    store.registrarQuestao('a#TEMA-01#E01', false, AGORA)
+    store.registrarQuestao('a#TEMA-01#E01', true, AGORA)
+    await store.aguardarGravacoes()
+
+    const { estado } = store.instantaneo()
+    expect(estado.questoes['a#TEMA-01#E01']).toMatchObject({ acertos: 1, erros: 1 })
+    expect(estado.diasAtivos).toContain('2026-03-10')
+    // Cada resposta é uma gravação, com o acumulado até ali: no disco o placar não fica
+    // esperando o fim do quiz.
+    expect(registro.gravados).toHaveLength(2)
+    expect(registro.gravados[1]).toMatchObject({
+      questoes: { 'a#TEMA-01#E01': { acertos: 1, erros: 1 } },
+    })
+  })
+
+  it('não grava a resposta sem id, porque o redutor devolve a mesma referência', async () => {
+    const { provedor, registro } = provedorDeTeste({
+      leitura: () => Promise.resolve(estadoDoDisco()),
+    })
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    store.registrarQuestao('', true, AGORA)
+    await store.aguardarGravacoes()
+
+    expect(registro.gravados).toHaveLength(0)
+    expect(Object.keys(store.instantaneo().estado.questoes)).toEqual([])
+  })
 })

@@ -567,3 +567,183 @@ h3 {
   color: var(--texto-suave);
   margin: 0.5rem 0 0;
 }
+
+/* ---------------------------------------------------------------------- quiz */
+
+.escopo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.escopo select {
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--texto);
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.5rem 0.6rem;
+  max-width: 100%;
+  /* O seletor troca o escopo da rodada: tambem e alvo de toque, e nao so um rotulo. */
+  min-height: 44px;
+}
+
+.alternativas {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  /* `fieldset` tem largura minima intrinseca propria e estoura a coluna no celular. */
+  min-inline-size: 0;
+}
+
+.lista-alternativas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* 44 px no celular era pendencia registrada: o alvo aqui e a alternativa inteira, e nao o
+   radio de 13 px, entao a pendencia nao se repete nesta tela. */
+.alternativa {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--fundo-alt);
+  cursor: pointer;
+}
+
+.alternativas:not([disabled]) .alternativa:hover {
+  border-color: color-mix(in srgb, var(--acento) 45%, var(--borda));
+}
+
+/* Depois de responder o grupo fica `disabled`: o ponteiro perde a promessa de clique, mas o
+   texto continua legivel — a pessoa precisa reler as alternativas com a justificativa. */
+.alternativas[disabled] .alternativa {
+  cursor: default;
+}
+
+.alternativa input {
+  flex: none;
+  margin: 0.35rem 0 0;
+  accent-color: var(--acento);
+}
+
+.alternativa-texto {
+  flex: 1;
+}
+
+.alternativa-marca {
+  flex: none;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+/* A cor diz o desfecho sem depender do radio: ele e pequeno no meio de uma linha de texto. */
+.alternativa.certa {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+}
+
+.alternativa.certa .alternativa-marca {
+  color: var(--acento);
+}
+
+.alternativa.errada {
+  border-color: var(--alerta);
+}
+
+.alternativa.errada .alternativa-marca {
+  color: var(--alerta);
+}
+
+.gabarito.erro {
+  border-left-color: var(--alerta);
+}
+
+.veredito-questao {
+  margin: 0 0 0.35rem;
+}
+
+.fonte-questao,
+.volta-ao-tema {
+  font-size: 0.88rem;
+  color: var(--texto-suave);
+  margin: 0.35rem 0 0;
+}
+
+.acoes-questao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+}
+
+/* A dica acompanha o botao na mesma linha: a margem negativa dela e para texto corrido. */
+.acoes-questao .dica {
+  margin: 0;
+}
+
+/* Alvos de 44 px tambem nos botoes desta tela. O `.botao-secundario` do app tem 34 px de
+   altura, e o alvo de toque no celular e pendencia registrada (fase 6); ela nao se repete
+   aqui. Fica escopado em `.tela-quiz` para nao mudar, de tabela, as outras telas. */
+.tela-quiz .botao-secundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.45rem 1rem;
+}
+
+/* Selo de estado, nao de alarme: mesma linguagem do selo de nivel, em amarelo de aviso. */
+.selo-revisao {
+  border-color: color-mix(in srgb, var(--alerta) 45%, var(--borda));
+  color: var(--alerta);
+}
+
+/* Os links de saida do fim da rodada usam a forma dos botoes secundarios; sem isto o
+   sublinhado do link brigaria com a borda arredondada. */
+a.botao-secundario {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Dentro do painel de resumo o aviso ocupa a linha inteira e nao traz margem propria. */
+.resumo .aviso-erro {
+  width: auto;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .alternativa {
+    min-height: 48px;
+  }
+
+  .tela-quiz .botao-secundario {
+    min-height: 48px;
+  }
+
+  .escopo {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .escopo select {
+    width: 100%;
+  }
+}

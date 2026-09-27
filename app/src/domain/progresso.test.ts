@@ -6,10 +6,12 @@ import {
   filaDoProgresso,
   marcarLido,
   normalizarProgresso,
+  pareceProgresso,
   progressoVazio,
   registrarCheckpoint,
   registrarConfianca,
   registrarDiaAtivo,
+  registrarQuestao,
   registrarRecuperacao,
   resultadoDoCheckpoint,
   temaVazio,
@@ -17,6 +19,7 @@ import {
 
 const HOJE = new Date('2026-03-10T12:00:00.000Z')
 const REF = 'a#TEMA-01'
+const ITEM = 'a#TEMA-01#E01'
 
 function comDias(dias: string[]) {
   return { ...progressoVazio(), diasAtivos: dias }
@@ -116,6 +119,39 @@ describe('redutores', () => {
     expect(p.checkpoints['01-fundamentos']).toEqual({ acertos: 5, total: 5 })
   })
 
+  it('registrarQuestao acumula o placar do item e marca o dia', () => {
+    let p = registrarQuestao(progressoVazio(), ITEM, true, HOJE)
+    p = registrarQuestao(p, ITEM, false, HOJE)
+    p = registrarQuestao(p, ITEM, true, new Date('2026-03-11T09:00:00.000Z'))
+    expect(p.questoes[ITEM]).toEqual({
+      acertos: 2,
+      erros: 1,
+      ultima: '2026-03-11T09:00:00.000Z',
+    })
+    // Sem o dia registrado, responder o quiz não contaria no registro de progresso das trilhas.
+    expect(p.diasAtivos).toEqual(['2026-03-10', '2026-03-11'])
+  })
+
+  it('registrarQuestao não mexe no placar dos outros itens', () => {
+    let p = registrarQuestao(progressoVazio(), ITEM, true, HOJE)
+    const doPrimeiro = p.questoes[ITEM]
+    p = registrarQuestao(p, 'a#TEMA-02#E01', false, HOJE)
+    expect(p.questoes[ITEM]).toBe(doPrimeiro)
+    expect(Object.keys(p.questoes).sort()).toEqual(['a#TEMA-01#E01', 'a#TEMA-02#E01'])
+  })
+
+  it('registrarQuestao recusa id vazio e chave perigosa, sem criar estado novo', () => {
+    // `out['__proto__'] = x` trocaria o protótipo em vez de criar propriedade; o
+    // normalizador recusa as duas chaves, então registrá-las seria gravar dado que o
+    // próximo carregamento joga fora.
+    const base = progressoVazio()
+    expect(registrarQuestao(base, '', true, HOJE)).toBe(base)
+    expect(registrarQuestao(base, '__proto__', true, HOJE)).toBe(base)
+    expect(registrarQuestao(base, 'constructor', true, HOJE)).toBe(base)
+    expect(registrarQuestao(base, 'prototype', true, HOJE)).toBe(base)
+    expect(Object.keys(base.questoes)).toEqual([])
+  })
+
   it('filaDoProgresso devolve só os vencidos', () => {
     const p = registrarRecuperacao(progressoVazio(), REF, false, HOJE)
     // Rebaixado para D+1, vence em 11/03.
@@ -153,6 +189,8 @@ describe('redutores', () => {
     expect(registrarConfianca(comConfianca, REF, 0, 3, HOJE)).toBe(comConfianca)
     const comCheckpoint = registrarCheckpoint(base, 'a', 4, 5, HOJE)
     expect(registrarCheckpoint(comCheckpoint, 'a', 4, 5, HOJE)).toBe(comCheckpoint)
+    // Registrar é sempre mudança (o placar anda); o mesmo-referência vale para o id recusado.
+    expect(registrarQuestao(base, '', true, HOJE)).toBe(base)
   })
 })
 
@@ -202,8 +240,44 @@ describe('normalizarProgresso', () => {
     let p = registrarConfianca(progressoVazio(), REF, 0, 4, HOJE)
     p = registrarRecuperacao(p, REF, true, HOJE)
     p = registrarCheckpoint(p, '01-fundamentos', 4, 5, HOJE)
+    p = registrarQuestao(p, ITEM, false, HOJE)
     const volta = normalizarProgresso(JSON.parse(JSON.stringify(p)), HOJE)
     expect(volta).toEqual(p)
+  })
+
+  it('aceita arquivo da versão 1 gravado antes do quiz, sem o campo de questões', () => {
+    // O campo entrou na v1, então o backup de ontem continua sendo um progresso válido — e a
+    // importação não pode recusá-lo por causa de um campo que ainda não existia.
+    const antigo: unknown = { versao: 1, temas: { [REF]: { lido: true } }, checkpoints: {}, diasAtivos: [] }
+    expect(pareceProgresso(antigo)).toBe(true)
+    const p = normalizarProgresso(antigo, HOJE)
+    expect(p.questoes).toEqual({})
+    expect(p.temas[REF]?.lido).toBe(true)
+  })
+
+  it('saneia o registro de questões, descartando o que não descreve resposta', () => {
+    // `1e999` vira Infinity no JSON; contador fracionário ou negativo não existe; um registro
+    // sem nenhuma resposta é sobra de arquivo, não dado de estudo.
+    const entrada: unknown = JSON.parse(
+      '{"versao":1,"temas":{},"checkpoints":{},"diasAtivos":[],"questoes":{' +
+        '"infinidade":{"acertos":1e999,"erros":2},' +
+        '"fracionario":{"acertos":1.5,"erros":-1},' +
+        '"":"sem id",' +
+        '"__proto__":{"acertos":9,"erros":9},' +
+        '"zerado":{"acertos":0,"erros":0},' +
+        '"semdata":{"acertos":3,"erros":1,"ultima":"ontem"},' +
+        '"inteiro":{"acertos":0,"erros":4,"ultima":"2026-03-10T12:00:00.000Z"}}}',
+    )
+    const p = normalizarProgresso(entrada, HOJE)
+    expect(Object.keys(p.questoes).sort()).toEqual(['infinidade', 'inteiro', 'semdata'])
+    expect(p.questoes['infinidade']).toEqual({ acertos: 0, erros: 2, ultima: '' })
+    expect(p.questoes['semdata']).toEqual({ acertos: 3, erros: 1, ultima: '' })
+    expect(p.questoes['inteiro']).toEqual({
+      acertos: 0,
+      erros: 4,
+      ultima: '2026-03-10T12:00:00.000Z',
+    })
+    expect(Object.getPrototypeOf(p.questoes)).toBe(Object.prototype)
   })
 
   it('descarta item de pré-teste com confiança fora de 1..5', () => {

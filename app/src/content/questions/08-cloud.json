@@ -51,9 +51,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelo de responsabilidade compartilhada: um colega afirma que \"Serviço gerenciado elimina a responsabilidade do cliente\". Qual é a correção?",
     "alternativas": [
-      "O provedor é certificado, então o controle está atendido",
-      "Responsabilidade compartilhada significa dividir pela metade",
       "Em máquina virtual, o firewall é do provedor",
+      "O provedor é certificado, então o controle está atendido",
+      "O modelo é igual em todos os provedores",
       "A responsabilidade muda de objeto, não desaparece"
     ],
     "correta": 3,
@@ -73,8 +73,8 @@
     "alternativas": [
       "Trate regra de rede como item exclusivo do cliente",
       "O provedor é certificado, então o controle está atendido",
-      "Responsabilidade compartilhada significa dividir pela metade",
-      "Serviço gerenciado elimina a responsabilidade do cliente"
+      "Serviço gerenciado elimina a responsabilidade do cliente",
+      "Responsabilidade compartilhada significa dividir pela metade"
     ],
     "correta": 0,
     "justificativa": "A matriz atribui ao cliente a configuração do grupo de segurança da instância"
@@ -93,8 +93,8 @@
     "alternativas": [
       "O provedor é certificado, então o controle está atendido",
       "Escreva uma matriz por provedor e por serviço crítico",
-      "Responsabilidade compartilhada significa dividir pela metade",
-      "Serviço gerenciado elimina a responsabilidade do cliente"
+      "Serviço gerenciado elimina a responsabilidade do cliente",
+      "Responsabilidade compartilhada significa dividir pela metade"
     ],
     "correta": 1,
     "justificativa": "As matrizes públicas divergem em detalhe e em granularidade por serviço"
@@ -111,13 +111,13 @@
     "status": "rascunho",
     "enunciado": "Quais três famílias de controle a AWS nomeia e qual exemplo cada uma recebe?",
     "alternativas": [
-      "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as",
-      "Porque o mesmo recurso físico atende vários clientes: o controle físico e o hipervisor ficam com",
+      "Responsabilidade compartilhada significa dividir pela metade",
+      "O provedor é certificado, então o controle está atendido",
       "Herdado, com exemplo no controle físico e ambiental; compartilhado, com exemplos em gestão de",
-      "A decisão sobre cifrar e sobre quem detém a chave é do cliente; a evidência pode vir em parte do"
+      "Serviço gerenciado elimina a responsabilidade do cliente"
     ],
     "correta": 2,
-    "justificativa": "O provedor é certificado, então o controle está atendido"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-01#R02",
@@ -131,13 +131,13 @@
     "status": "rascunho",
     "enunciado": "Em serviço de banco de dados gerenciado, qual linha da matriz muda de coluna em relação à",
     "alternativas": [
-      "Herdado, com exemplo no controle físico e ambiental; compartilhado, com exemplos em gestão de",
-      "Porque o mesmo recurso físico atende vários clientes: o controle físico e o hipervisor ficam com",
-      "A decisão sobre cifrar e sobre quem detém a chave é do cliente; a evidência pode vir em parte do",
+      "Responsabilidade compartilhada significa dividir pela metade",
+      "O provedor é certificado, então o controle está atendido",
+      "Serviço gerenciado elimina a responsabilidade do cliente",
       "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as"
     ],
     "correta": 3,
-    "justificativa": "O provedor é certificado, então o controle está atendido"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-01#R03",
@@ -152,12 +152,12 @@
     "enunciado": "Por que o pool de recursos compartilhados, descrito no NIST SP 800-145, é a causa da",
     "alternativas": [
       "Porque o mesmo recurso físico atende vários clientes: o controle físico e o hipervisor ficam com",
-      "Herdado, com exemplo no controle físico e ambiental; compartilhado, com exemplos em gestão de",
-      "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as",
-      "A decisão sobre cifrar e sobre quem detém a chave é do cliente; a evidência pode vir em parte do"
+      "Responsabilidade compartilhada significa dividir pela metade",
+      "O provedor é certificado, então o controle está atendido",
+      "Serviço gerenciado elimina a responsabilidade do cliente"
     ],
     "correta": 0,
-    "justificativa": "O provedor é certificado, então o controle está atendido"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-01#R04",
@@ -171,13 +171,13 @@
     "status": "rascunho",
     "enunciado": "A empresa quer provar ao regulador que o dado está criptografado. Qual parte da matriz produz a",
     "alternativas": [
-      "Herdado, com exemplo no controle físico e ambiental; compartilhado, com exemplos em gestão de",
+      "Responsabilidade compartilhada significa dividir pela metade",
       "A decisão sobre cifrar e sobre quem detém a chave é do cliente; a evidência pode vir em parte do",
-      "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as",
-      "Porque o mesmo recurso físico atende vários clientes: o controle físico e o hipervisor ficam com"
+      "O provedor é certificado, então o controle está atendido",
+      "Serviço gerenciado elimina a responsabilidade do cliente"
     ],
     "correta": 1,
-    "justificativa": "O provedor é certificado, então o controle está atendido"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-02#E01",
@@ -191,8 +191,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Identidade e acesso em nuvem: um colega afirma que \"Federação resolve o problema de credencial de carga de trabalho\". Qual é a correção?",
     "alternativas": [
-      "Papel sem senha é seguro por natureza",
       "Permissão ampla é aceitável no começo e some depois",
+      "Cofre de segredo de aplicação substitui a federação",
       "Trate as duas como trilhas separadas, com dono distinto",
       "Guardrail de organização já concede acesso"
     ],
@@ -213,7 +213,7 @@
     "alternativas": [
       "Federação resolve o problema de credencial de carga de trabalho",
       "Permissão ampla é aceitável no começo e some depois",
-      "Guardrail de organização já concede acesso",
+      "Cofre de segredo de aplicação substitui a federação",
       "Restrinja o documento de confiança ao emissor, à audiência e ao projeto"
     ],
     "correta": 3,
@@ -233,7 +233,7 @@
     "alternativas": [
       "Nomeie dono e prazo desde a criação, e reduza com base na atividade registrada",
       "Federação resolve o problema de credencial de carga de trabalho",
-      "Papel sem senha é seguro por natureza",
+      "Cofre de segredo de aplicação substitui a federação",
       "Guardrail de organização já concede acesso"
     ],
     "correta": 0,
@@ -253,8 +253,8 @@
     "alternativas": [
       "Federação resolve o problema de credencial de carga de trabalho",
       "A concessão vem da política ligada à identidade ou ao recurso",
-      "Papel sem senha é seguro por natureza",
-      "Permissão ampla é aceitável no começo e some depois"
+      "Permissão ampla é aceitável no começo e some depois",
+      "Cofre de segredo de aplicação substitui a federação"
     ],
     "correta": 1,
     "justificativa": "Guardrail limita o teto e não concede nada"
@@ -272,9 +272,9 @@
     "enunciado": "Sobre Identidade e acesso em nuvem: um colega afirma que \"Cofre de segredo de aplicação substitui a federação\". Qual é a correção?",
     "alternativas": [
       "Federação resolve o problema de credencial de carga de trabalho",
-      "Papel sem senha é seguro por natureza",
+      "Permissão ampla é aceitável no começo e some depois",
       "Prefira credencial temporária; use cofre para o que não tem federação",
-      "Permissão ampla é aceitável no começo e some depois"
+      "Guardrail de organização já concede acesso"
     ],
     "correta": 2,
     "justificativa": "Cofre guarda segredo, e o segredo continua sendo credencial de longa duração"
@@ -291,13 +291,13 @@
     "status": "rascunho",
     "enunciado": "Quais dois grupos a página de boas práticas da AWS coloca sob credencial temporária obrigatória, e",
     "alternativas": [
-      "Certificado X.509 da sua própria infraestrutura de chave pública usando o serviço de acesso para",
-      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto",
-      "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à",
+      "Federação resolve o problema de credencial de carga de trabalho",
+      "Permissão ampla é aceitável no começo e some depois",
+      "Cofre de segredo de aplicação substitui a federação",
       "Usuário humano, que deve usar federação com provedor de identidade e assumir papel, e carga de"
     ],
     "correta": 3,
-    "justificativa": "Federação resolve o problema de credencial de carga de trabalho"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-02#R02",
@@ -312,12 +312,12 @@
     "enunciado": "Cite três formas listadas pelo provedor para entregar credencial temporária a carga que executa",
     "alternativas": [
       "Certificado X.509 da sua própria infraestrutura de chave pública usando o serviço de acesso para",
-      "Usuário humano, que deve usar federação com provedor de identidade e assumir papel, e carga de",
-      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto",
-      "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à"
+      "Federação resolve o problema de credencial de carga de trabalho",
+      "Permissão ampla é aceitável no começo e some depois",
+      "Cofre de segredo de aplicação substitui a federação"
     ],
     "correta": 0,
-    "justificativa": "Federação resolve o problema de credencial de carga de trabalho"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-02#R03",
@@ -331,13 +331,13 @@
     "status": "rascunho",
     "enunciado": "O que uma permissão efetiva combina, além da política de identidade?",
     "alternativas": [
-      "Usuário humano, que deve usar federação com provedor de identidade e assumir papel, e carga de",
+      "Federação resolve o problema de credencial de carga de trabalho",
       "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto",
-      "Certificado X.509 da sua própria infraestrutura de chave pública usando o serviço de acesso para",
-      "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à"
+      "Permissão ampla é aceitável no começo e some depois",
+      "Cofre de segredo de aplicação substitui a federação"
     ],
     "correta": 1,
-    "justificativa": "Federação resolve o problema de credencial de carga de trabalho"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-02#R04",
@@ -351,13 +351,13 @@
     "status": "rascunho",
     "enunciado": "Por que o guardrail de organização, sozinho, não garante que ninguém tenha acesso indevido?",
     "alternativas": [
-      "Usuário humano, que deve usar federação com provedor de identidade e assumir papel, e carga de",
-      "Certificado X.509 da sua própria infraestrutura de chave pública usando o serviço de acesso para",
+      "Federação resolve o problema de credencial de carga de trabalho",
+      "Permissão ampla é aceitável no começo e some depois",
       "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à",
-      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto"
+      "Cofre de segredo de aplicação substitui a federação"
     ],
     "correta": 2,
-    "justificativa": "Federação resolve o problema de credencial de carga de trabalho"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-03#E01",
@@ -372,7 +372,7 @@
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Reduzir a contagem de achados é o objetivo\". Qual é a correção?",
     "alternativas": [
       "Achado crítico da ferramenta é prioridade automática",
-      "Aceitar o achado sem registro resolve",
+      "Corrigir tudo de uma vez é o caminho mais rápido",
       "Configuração é tarefa só do time de plataforma",
       "Meça desvio aceito, prazo vencido e reincidência por item de benchmark"
     ],
@@ -392,9 +392,9 @@
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Achado crítico da ferramenta é prioridade automática\". Qual é a correção?",
     "alternativas": [
       "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério",
-      "Reduzir a contagem de achados é o objetivo",
-      "Aceitar o achado sem registro resolve",
-      "Configuração é tarefa só do time de plataforma"
+      "Corrigir tudo de uma vez é o caminho mais rápido",
+      "Configuração é tarefa só do time de plataforma",
+      "Reduzir a contagem de achados é o objetivo"
     ],
     "correta": 0,
     "justificativa": "A severidade da ferramenta não conhece a crítica do seu negócio nem a exposição real"
@@ -411,9 +411,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Aceitar o achado sem registro resolve\". Qual é a correção?",
     "alternativas": [
-      "Reduzir a contagem de achados é o objetivo",
-      "Regra de desvio aceito exige motivo, aprovador, prazo e data de revisão",
       "Achado crítico da ferramenta é prioridade automática",
+      "Regra de desvio aceito exige motivo, aprovador, prazo e data de revisão",
+      "Corrigir tudo de uma vez é o caminho mais rápido",
       "Configuração é tarefa só do time de plataforma"
     ],
     "correta": 1,
@@ -431,10 +431,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Configuração é tarefa só do time de plataforma\". Qual é a correção?",
     "alternativas": [
-      "Reduzir a contagem de achados é o objetivo",
       "Achado crítico da ferramenta é prioridade automática",
+      "Corrigir tudo de uma vez é o caminho mais rápido",
       "Atribua dono por recurso, com a plataforma como executor",
-      "Aceitar o achado sem registro resolve"
+      "Reduzir a contagem de achados é o objetivo"
     ],
     "correta": 2,
     "justificativa": "O dono do recurso é quem decide a mudança funcional"
@@ -451,9 +451,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Corrigir tudo de uma vez é o caminho mais rápido\". Qual é a correção?",
     "alternativas": [
-      "Reduzir a contagem de achados é o objetivo",
       "Achado crítico da ferramenta é prioridade automática",
-      "Aceitar o achado sem registro resolve",
+      "Configuração é tarefa só do time de plataforma",
+      "Reduzir a contagem de achados é o objetivo",
       "Priorize por exposição e proteja a correção com verificação antes do deploy"
     ],
     "correta": 3,
@@ -472,12 +472,12 @@
     "enunciado": "Cite três versões atuais de benchmarks de fundação de provedor de nuvem publicados pela CIS.",
     "alternativas": [
       "Amazon Web Services Foundations 7.0.0, Microsoft Azure Foundations 6.0.0 e Google Cloud",
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com",
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado",
-      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série"
+      "Achado crítico da ferramenta é prioridade automática",
+      "Corrigir tudo de uma vez é o caminho mais rápido",
+      "Configuração é tarefa só do time de plataforma"
     ],
     "correta": 0,
-    "justificativa": "Reduzir a contagem de achados é o objetivo"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-03#R02",
@@ -491,13 +491,13 @@
     "status": "rascunho",
     "enunciado": "Quais são as cinco etapas do ciclo de gestão de postura, na ordem em que você as usaria?",
     "alternativas": [
-      "Amazon Web Services Foundations 7.0.0, Microsoft Azure Foundations 6.0.0 e Google Cloud",
+      "Achado crítico da ferramenta é prioridade automática",
       "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com",
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado",
-      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série"
+      "Corrigir tudo de uma vez é o caminho mais rápido",
+      "Configuração é tarefa só do time de plataforma"
     ],
     "correta": 1,
-    "justificativa": "Reduzir a contagem de achados é o objetivo"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-03#R03",
@@ -511,13 +511,13 @@
     "status": "rascunho",
     "enunciado": "O que a documentação da AWS oferece para identificar recurso com acesso público e recurso com",
     "alternativas": [
-      "Amazon Web Services Foundations 7.0.0, Microsoft Azure Foundations 6.0.0 e Google Cloud",
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com",
+      "Achado crítico da ferramenta é prioridade automática",
+      "Corrigir tudo de uma vez é o caminho mais rápido",
       "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado",
-      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série"
+      "Configuração é tarefa só do time de plataforma"
     ],
     "correta": 2,
-    "justificativa": "Reduzir a contagem de achados é o objetivo"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-03#R04",
@@ -531,13 +531,13 @@
     "status": "rascunho",
     "enunciado": "Por que fixar a versão do benchmark antes de medir?",
     "alternativas": [
-      "Amazon Web Services Foundations 7.0.0, Microsoft Azure Foundations 6.0.0 e Google Cloud",
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com",
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado",
+      "Achado crítico da ferramenta é prioridade automática",
+      "Corrigir tudo de uma vez é o caminho mais rápido",
+      "Configuração é tarefa só do time de plataforma",
       "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série"
     ],
     "correta": 3,
-    "justificativa": "Reduzir a contagem de achados é o objetivo"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-04#E01",
@@ -554,7 +554,7 @@
       "Escreva a matriz de camadas por serviço, como no TEMA-01",
       "Etiqueta de versão é suficiente para identificar a imagem",
       "Segredo embutido na imagem é aceitável se a imagem é privada",
-      "Corrigir o nó resolve a segurança do contêiner"
+      "Política de rede do cluster é detalhe de operação"
     ],
     "correta": 0,
     "justificativa": "O provedor opera o plano de controle; imagem, identidade e política de rede seguem com o cliente"
@@ -571,10 +571,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Etiqueta de versão é suficiente para identificar a imagem\". Qual é a correção?",
     "alternativas": [
-      "Cluster gerenciado transfere toda a segurança da carga ao provedor",
+      "Política de rede do cluster é detalhe de operação",
       "Registre o digest implantado e mantenha o histórico",
-      "Segredo embutido na imagem é aceitável se a imagem é privada",
-      "Corrigir o nó resolve a segurança do contêiner"
+      "Corrigir o nó resolve a segurança do contêiner",
+      "Segredo embutido na imagem é aceitável se a imagem é privada"
     ],
     "correta": 1,
     "justificativa": "Etiqueta pode ser reatribuída e deixa de apontar para o mesmo conteúdo"
@@ -591,10 +591,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Segredo embutido na imagem é aceitável se a imagem é privada\". Qual é a correção?",
     "alternativas": [
-      "Cluster gerenciado transfere toda a segurança da carga ao provedor",
-      "Etiqueta de versão é suficiente para identificar a imagem",
+      "Política de rede do cluster é detalhe de operação",
+      "Corrigir o nó resolve a segurança do contêiner",
       "Use identidade de carga com credencial temporária",
-      "Corrigir o nó resolve a segurança do contêiner"
+      "Etiqueta de versão é suficiente para identificar a imagem"
     ],
     "correta": 2,
     "justificativa": "A imagem se replica em cópias, registros e ambientes de teste"
@@ -611,8 +611,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Corrigir o nó resolve a segurança do contêiner\". Qual é a correção?",
     "alternativas": [
-      "Cluster gerenciado transfere toda a segurança da carga ao provedor",
       "Etiqueta de versão é suficiente para identificar a imagem",
+      "Política de rede do cluster é detalhe de operação",
       "Segredo embutido na imagem é aceitável se a imagem é privada",
       "Trate nó, imagem e runtime como três frentes distintas"
     ],
@@ -632,9 +632,9 @@
     "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Política de rede do cluster é detalhe de operação\". Qual é a correção?",
     "alternativas": [
       "Trate a política como item de benchmark, com dono e versão",
-      "Cluster gerenciado transfere toda a segurança da carga ao provedor",
       "Etiqueta de versão é suficiente para identificar a imagem",
-      "Segredo embutido na imagem é aceitável se a imagem é privada"
+      "Segredo embutido na imagem é aceitável se a imagem é privada",
+      "Cluster gerenciado transfere toda a segurança da carga ao provedor"
     ],
     "correta": 0,
     "justificativa": "A política define o alcance de um contêiner comprometido"
@@ -651,13 +651,13 @@
     "status": "rascunho",
     "enunciado": "Como o NIST SP 800-190 define contêiner e qual é a consequência de isolamento dessa definição?",
     "alternativas": [
-      "Kubernetes 2.0.1, Amazon Elastic Kubernetes Service 2.0.0, Azure Kubernetes Service 2.0.0,",
+      "Cluster gerenciado transfere toda a segurança da carga ao provedor",
       "Forma de virtualização do sistema operacional combinada com empacotamento de software de",
-      "Imagem base e versão, identificação por digest, usuário dentro do contêiner, política de rede,",
-      "Por papel associado à identidade da carga: o serviço de computação entrega credencial temporária"
+      "Segredo embutido na imagem é aceitável se a imagem é privada",
+      "Etiqueta de versão é suficiente para identificar a imagem"
     ],
     "correta": 1,
-    "justificativa": "Cluster gerenciado transfere toda a segurança da carga ao provedor"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-04#R02",
@@ -671,13 +671,13 @@
     "status": "rascunho",
     "enunciado": "Cite cinco benchmarks publicados pela CIS que se aplicam a ambiente de contêiner.",
     "alternativas": [
-      "Forma de virtualização do sistema operacional combinada com empacotamento de software de",
-      "Imagem base e versão, identificação por digest, usuário dentro do contêiner, política de rede,",
+      "Cluster gerenciado transfere toda a segurança da carga ao provedor",
+      "Segredo embutido na imagem é aceitável se a imagem é privada",
       "Kubernetes 2.0.1, Amazon Elastic Kubernetes Service 2.0.0, Azure Kubernetes Service 2.0.0,",
-      "Por papel associado à identidade da carga: o serviço de computação entrega credencial temporária"
+      "Etiqueta de versão é suficiente para identificar a imagem"
     ],
     "correta": 2,
-    "justificativa": "Cluster gerenciado transfere toda a segurança da carga ao provedor"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-04#R03",
@@ -691,13 +691,13 @@
     "status": "rascunho",
     "enunciado": "Quais decisões continuam com o cliente quando o cluster é gerenciado?",
     "alternativas": [
-      "Forma de virtualização do sistema operacional combinada com empacotamento de software de",
-      "Kubernetes 2.0.1, Amazon Elastic Kubernetes Service 2.0.0, Azure Kubernetes Service 2.0.0,",
-      "Por papel associado à identidade da carga: o serviço de computação entrega credencial temporária",
+      "Cluster gerenciado transfere toda a segurança da carga ao provedor",
+      "Segredo embutido na imagem é aceitável se a imagem é privada",
+      "Etiqueta de versão é suficiente para identificar a imagem",
       "Imagem base e versão, identificação por digest, usuário dentro do contêiner, política de rede,"
     ],
     "correta": 3,
-    "justificativa": "Cluster gerenciado transfere toda a segurança da carga ao provedor"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-04#R04",
@@ -712,12 +712,12 @@
     "enunciado": "Como a carga de trabalho obtém credencial para serviço de nuvem sem guardar chave na imagem?",
     "alternativas": [
       "Por papel associado à identidade da carga: o serviço de computação entrega credencial temporária",
-      "Forma de virtualização do sistema operacional combinada com empacotamento de software de",
-      "Kubernetes 2.0.1, Amazon Elastic Kubernetes Service 2.0.0, Azure Kubernetes Service 2.0.0,",
-      "Imagem base e versão, identificação por digest, usuário dentro do contêiner, política de rede,"
+      "Cluster gerenciado transfere toda a segurança da carga ao provedor",
+      "Segredo embutido na imagem é aceitável se a imagem é privada",
+      "Etiqueta de versão é suficiente para identificar a imagem"
     ],
     "correta": 0,
-    "justificativa": "Cluster gerenciado transfere toda a segurança da carga ao provedor"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-05#E01",
@@ -731,9 +731,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"Cifra em repouso ligada significa dado protegido\". Qual é a correção?",
     "alternativas": [
-      "Chave gerenciada pelo cliente é sempre melhor",
+      "Perder a chave é risco aceitável em troca de segurança",
       "Escreva quem pode usar a chave, não só que a cifra existe",
-      "Segregação por pasta resolve o isolamento",
+      "Chave gerenciada pelo cliente é sempre melhor",
       "A cifra padrão do provedor pode ser apresentada como controle próprio"
     ],
     "correta": 1,
@@ -751,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"Chave gerenciada pelo cliente é sempre melhor\". Qual é a correção?",
     "alternativas": [
-      "Cifra em repouso ligada significa dado protegido",
-      "Segregação por pasta resolve o isolamento",
+      "Perder a chave é risco aceitável em troca de segurança",
+      "A cifra padrão do provedor pode ser apresentada como controle próprio",
       "Escolha por classe de dado, com base em requisito e impacto",
-      "A cifra padrão do provedor pode ser apresentada como controle próprio"
+      "Cifra em repouso ligada significa dado protegido"
     ],
     "correta": 2,
     "justificativa": "Aumenta a responsabilidade operacional e o risco de indisponibilidade"
@@ -771,9 +771,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"Segregação por pasta resolve o isolamento\". Qual é a correção?",
     "alternativas": [
-      "Cifra em repouso ligada significa dado protegido",
-      "Chave gerenciada pelo cliente é sempre melhor",
       "A cifra padrão do provedor pode ser apresentada como controle próprio",
+      "Perder a chave é risco aceitável em troca de segurança",
+      "Cifra em repouso ligada significa dado protegido",
       "Use limite de conta ou projeto para o que precisa de isolamento forte"
     ],
     "correta": 3,
@@ -792,9 +792,9 @@
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"A cifra padrão do provedor pode ser apresentada como controle próprio\". Qual é a correção?",
     "alternativas": [
       "Registre-a como herdada e não como controle implementado por você",
+      "Perder a chave é risco aceitável em troca de segurança",
       "Cifra em repouso ligada significa dado protegido",
-      "Chave gerenciada pelo cliente é sempre melhor",
-      "Segregação por pasta resolve o isolamento"
+      "Chave gerenciada pelo cliente é sempre melhor"
     ],
     "correta": 0,
     "justificativa": "A cifra padrão é controle herdado, com dono no provedor"
@@ -811,10 +811,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"Perder a chave é risco aceitável em troca de segurança\". Qual é a correção?",
     "alternativas": [
-      "Cifra em repouso ligada significa dado protegido",
+      "A cifra padrão do provedor pode ser apresentada como controle próprio",
       "Tenha procedimento de emergência com dono e teste registrado",
-      "Chave gerenciada pelo cliente é sempre melhor",
-      "Segregação por pasta resolve o isolamento"
+      "Cifra em repouso ligada significa dado protegido",
+      "Chave gerenciada pelo cliente é sempre melhor"
     ],
     "correta": 1,
     "justificativa": "Indisponibilidade de chave é interrupção de operação"
@@ -831,13 +831,13 @@
     "status": "rascunho",
     "enunciado": "Descreva a hierarquia de chave usada na cifra em envelope e onde a chave raiz fica.",
     "alternativas": [
-      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões",
-      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e",
+      "A cifra padrão do provedor pode ser apresentada como controle próprio",
+      "Perder a chave é risco aceitável em troca de segurança",
       "A chave raiz protege as chaves de dado, e estas protegem o conteúdo. A chave raiz é criada,",
-      "A ISO/IEC 27018:2019, edição 2, com 23 páginas, alinhada a princípios de privacidade e voltada a"
+      "Cifra em repouso ligada significa dado protegido"
     ],
     "correta": 2,
-    "justificativa": "Cifra em repouso ligada significa dado protegido"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-05#R02",
@@ -851,13 +851,13 @@
     "status": "rascunho",
     "enunciado": "O que a AWS atribui ao cliente em serviço de armazenamento de objetos abstrato?",
     "alternativas": [
-      "A chave raiz protege as chaves de dado, e estas protegem o conteúdo. A chave raiz é criada,",
-      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e",
-      "A ISO/IEC 27018:2019, edição 2, com 23 páginas, alinhada a princípios de privacidade e voltada a",
+      "A cifra padrão do provedor pode ser apresentada como controle próprio",
+      "Perder a chave é risco aceitável em troca de segurança",
+      "Cifra em repouso ligada significa dado protegido",
       "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões"
     ],
     "correta": 3,
-    "justificativa": "Cifra em repouso ligada significa dado protegido"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-05#R03",
@@ -872,12 +872,12 @@
     "enunciado": "Cite os três níveis em que a segregação de dado se escreve, do mais forte ao mais dependente de",
     "alternativas": [
       "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e",
-      "A chave raiz protege as chaves de dado, e estas protegem o conteúdo. A chave raiz é criada,",
-      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões",
-      "A ISO/IEC 27018:2019, edição 2, com 23 páginas, alinhada a princípios de privacidade e voltada a"
+      "A cifra padrão do provedor pode ser apresentada como controle próprio",
+      "Perder a chave é risco aceitável em troca de segurança",
+      "Cifra em repouso ligada significa dado protegido"
     ],
     "correta": 0,
-    "justificativa": "Cifra em repouso ligada significa dado protegido"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-05#R04",
@@ -891,13 +891,13 @@
     "status": "rascunho",
     "enunciado": "Qual documento trata da proteção de informação pessoal identificável em nuvem pública por quem",
     "alternativas": [
-      "A chave raiz protege as chaves de dado, e estas protegem o conteúdo. A chave raiz é criada,",
+      "A cifra padrão do provedor pode ser apresentada como controle próprio",
       "A ISO/IEC 27018:2019, edição 2, com 23 páginas, alinhada a princípios de privacidade e voltada a",
-      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões",
-      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e"
+      "Perder a chave é risco aceitável em troca de segurança",
+      "Cifra em repouso ligada significa dado protegido"
     ],
     "correta": 1,
-    "justificativa": "Cifra em repouso ligada significa dado protegido"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-06#E01",
@@ -912,9 +912,9 @@
     "enunciado": "Sobre Governança multi-cloud e contrato: um colega afirma que \"Certificado do provedor substitui o anexo\". Qual é a correção?",
     "alternativas": [
       "Auditoria direta é o padrão de mercado",
-      "Portabilidade é problema do futuro",
+      "Multi-cloud é só multiplicar contratos",
       "Escreva obrigação verificável por cláusula",
-      "Multi-cloud é só multiplicar contratos"
+      "Dado pessoal em nuvem é assunto só de privacidade"
     ],
     "correta": 2,
     "justificativa": "Certificado atesta o ambiente dele e não obriga aviso, prazo ou verificação"
@@ -931,8 +931,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Governança multi-cloud e contrato: um colega afirma que \"Auditoria direta é o padrão de mercado\". Qual é a correção?",
     "alternativas": [
+      "Dado pessoal em nuvem é assunto só de privacidade",
       "Certificado do provedor substitui o anexo",
-      "Portabilidade é problema do futuro",
       "Multi-cloud é só multiplicar contratos",
       "Negocie direito de verificação documental com prazo e escopo"
     ],
@@ -952,9 +952,9 @@
     "enunciado": "Sobre Governança multi-cloud e contrato: um colega afirma que \"Portabilidade é problema do futuro\". Qual é a correção?",
     "alternativas": [
       "Teste a exportação e escreva o prazo de apoio antes de renovar",
+      "Dado pessoal em nuvem é assunto só de privacidade",
       "Certificado do provedor substitui o anexo",
-      "Auditoria direta é o padrão de mercado",
-      "Multi-cloud é só multiplicar contratos"
+      "Auditoria direta é o padrão de mercado"
     ],
     "correta": 0,
     "justificativa": "Cláusula de saída só tem valor antes da assinatura"
@@ -971,10 +971,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Governança multi-cloud e contrato: um colega afirma que \"Multi-cloud é só multiplicar contratos\". Qual é a correção?",
     "alternativas": [
-      "Certificado do provedor substitui o anexo",
+      "Dado pessoal em nuvem é assunto só de privacidade",
       "Mantenha um mapa único de controle e um catálogo aprovado",
-      "Auditoria direta é o padrão de mercado",
-      "Portabilidade é problema do futuro"
+      "Certificado do provedor substitui o anexo",
+      "Auditoria direta é o padrão de mercado"
     ],
     "correta": 1,
     "justificativa": "Cada provedor nomeia o mesmo controle de forma diferente"
@@ -994,7 +994,7 @@
       "Certificado do provedor substitui o anexo",
       "Auditoria direta é o padrão de mercado",
       "Trate custódia de chave, região e transferência no mesmo documento",
-      "Portabilidade é problema do futuro"
+      "Multi-cloud é só multiplicar contratos"
     ],
     "correta": 2,
     "justificativa": "A garantia técnica e a contratual precisam estar no mesmo anexo"
@@ -1011,13 +1011,13 @@
     "status": "rascunho",
     "enunciado": "Quantos control objectives e quantos domínios tem o CCM na versão 4.1, e qual é o propósito",
     "alternativas": [
-      "Escopo e papéis, com governança, risco e conformidade; controle de acesso e privilégio do",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de",
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a",
+      "Dado pessoal em nuvem é assunto só de privacidade",
+      "Certificado do provedor substitui o anexo",
+      "Auditoria direta é o padrão de mercado",
       "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia"
     ],
     "correta": 3,
-    "justificativa": "Certificado do provedor substitui o anexo"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-06#R02",
@@ -1032,12 +1032,12 @@
     "enunciado": "Cite quatro dos blocos do anexo de segurança e um controle de referência para cada um.",
     "alternativas": [
       "Escopo e papéis, com governança, risco e conformidade; controle de acesso e privilégio do",
-      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de",
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a"
+      "Dado pessoal em nuvem é assunto só de privacidade",
+      "Certificado do provedor substitui o anexo",
+      "Auditoria direta é o padrão de mercado"
     ],
     "correta": 0,
-    "justificativa": "Certificado do provedor substitui o anexo"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-06#R03",
@@ -1051,13 +1051,13 @@
     "status": "rascunho",
     "enunciado": "Quais são as duas cláusulas que mais mudam a situação da empresa em incidente e em mudança de",
     "alternativas": [
-      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia",
+      "Dado pessoal em nuvem é assunto só de privacidade",
       "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de",
-      "Escopo e papéis, com governança, risco e conformidade; controle de acesso e privilégio do",
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a"
+      "Certificado do provedor substitui o anexo",
+      "Auditoria direta é o padrão de mercado"
     ],
     "correta": 1,
-    "justificativa": "Certificado do provedor substitui o anexo"
+    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-06#R04",
@@ -1071,12 +1071,12 @@
     "status": "rascunho",
     "enunciado": "Qual é a situação das edições ISO/IEC 27017 e ISO/IEC 27018 confirmadas nesta execução?",
     "alternativas": [
-      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia",
-      "Escopo e papéis, com governança, risco e conformidade; controle de acesso e privilégio do",
+      "Dado pessoal em nuvem é assunto só de privacidade",
+      "Certificado do provedor substitui o anexo",
       "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de"
+      "Auditoria direta é o padrão de mercado"
     ],
     "correta": 2,
-    "justificativa": "Certificado do provedor substitui o anexo"
+    "justificativa": ""
   }
 ]

@@ -33,6 +33,34 @@ function copiarConteudo(): Plugin {
 }
 
 /**
+ * Emite o banco de questoes como UM arquivo: os 18 `src/content/questions/<areaId>.json`
+ * viram um objeto `{areaId: itens[]}`, que e o que `fonte-desktop.ts` busca por `app://`.
+ *
+ * A juncao acontece aqui, e nao num arquivo gerado em disco, porque o banco versionado e a
+ * revisao humana que mora nele: um artefato intermediario seria mais uma copia para manter
+ * em dia. As areas saem ordenadas, para o mesmo material gerar sempre o mesmo arquivo.
+ */
+function copiarQuestoes(): Plugin {
+  return {
+    name: 'copiar-questoes',
+    generateBundle() {
+      const pasta = path.join(AQUI, 'src/content/questions')
+      const banco: Record<string, unknown> = {}
+      for (const arquivo of fs.readdirSync(pasta).sort()) {
+        if (!arquivo.endsWith('.json')) continue
+        const areaId = arquivo.replace(/\.json$/, '')
+        banco[areaId] = JSON.parse(fs.readFileSync(path.join(pasta, arquivo), 'utf-8')) as unknown
+      }
+      this.emitFile({
+        type: 'asset',
+        fileName: 'questoes.json',
+        source: JSON.stringify(banco),
+      })
+    },
+  }
+}
+
+/**
  * Tira a CSP que o build do navegador precisa carregar no HTML.
  *
  * Duas razoes, e a segunda e obrigatoria: o desktop manda a CSP como cabecalho, que e mais
@@ -89,7 +117,7 @@ function soFlowchart(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), semMetaCsp(), copiarConteudo(), soFlowchart()],
+  plugins: [react(), semMetaCsp(), copiarConteudo(), copiarQuestoes(), soFlowchart()],
   resolve: {
     alias: { '@fonte': path.join(AQUI, 'src/infrastructure/content/fonte-desktop.ts') },
   },

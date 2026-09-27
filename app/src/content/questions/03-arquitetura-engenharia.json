@@ -31,10 +31,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Arquitetura é o desenho grande, configuração é o detalhe\". Qual é a correção?",
     "alternativas": [
-      "Princípio é discurso de arquiteto, configuração é trabalho real",
-      "Duas camadas iguais formam defesa em profundidade",
+      "Mediação completa significa ter autenticação",
+      "Exceção aprovada é falha de governança",
       "Classifique pela reversão, não pelo tamanho",
-      "Mediação completa significa ter autenticação"
+      "Duas camadas iguais formam defesa em profundidade"
     ],
     "correta": 2,
     "justificativa": "O critério é custo de reversão, e existem decisões pequenas irreversíveis"
@@ -111,10 +111,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Exceção aprovada é falha de governança\". Qual é a correção?",
     "alternativas": [
-      "Princípio é discurso de arquiteto, configuração é trabalho real",
+      "Duas camadas iguais formam defesa em profundidade",
       "Arquitetura é o desenho grande, configuração é o detalhe",
       "Padronize o formato da exceção em vez de proibi-la",
-      "Duas camadas iguais formam defesa em profundidade"
+      "Mediação completa significa ter autenticação"
     ],
     "correta": 2,
     "justificativa": "Exceção é parte normal da operação; o problema é exceção sem dono e sem prazo"
@@ -131,12 +131,13 @@
     "status": "rascunho",
     "enunciado": "Qual é o critério prático que separa decisão de arquitetura de ajuste de configuração?",
     "alternativas": [
-      "Porque barreiras de mesma natureza são derrubadas pela mesma técnica. Variedade, e não quantidade, é o que obriga o adversário a usar caminhos e capacidades diferentes.",
-      "A decisão tomada, o princípio que a sustenta, a proteção que se aceitou sacrificar e o nome de quem aprovou. Sem a terceira e a quarta colunas, o registro não permite reconstruir a troca nem cobrar autoria.",
-      "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é."
+      "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é.",
+      "Princípio é discurso de arquiteto, configuração é trabalho real",
+      "Arquitetura é o desenho grande, configuração é o detalhe",
+      "Duas camadas iguais formam defesa em profundidade"
     ],
-    "correta": 2,
-    "justificativa": "Princípio é discurso de arquiteto, configuração é trabalho real"
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-01#R04",
@@ -150,12 +151,13 @@
     "status": "rascunho",
     "enunciado": "Por que o vocabulário da definição de defesa em profundidade usa \"barreiras variáveis\"?",
     "alternativas": [
+      "Princípio é discurso de arquiteto, configuração é trabalho real",
       "Porque barreiras de mesma natureza são derrubadas pela mesma técnica. Variedade, e não quantidade, é o que obriga o adversário a usar caminhos e capacidades diferentes.",
-      "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é.",
-      "A decisão tomada, o princípio que a sustenta, a proteção que se aceitou sacrificar e o nome de quem aprovou. Sem a terceira e a quarta colunas, o registro não permite reconstruir a troca nem cobrar autoria."
+      "Arquitetura é o desenho grande, configuração é o detalhe",
+      "Duas camadas iguais formam defesa em profundidade"
     ],
-    "correta": 0,
-    "justificativa": "Princípio é discurso de arquiteto, configuração é trabalho real"
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-01#R05",
@@ -169,12 +171,13 @@
     "status": "rascunho",
     "enunciado": "O que um registro de decisão de arquitetura precisa conter para sobreviver à troca de gestor?",
     "alternativas": [
-      "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é.",
+      "Princípio é discurso de arquiteto, configuração é trabalho real",
+      "Arquitetura é o desenho grande, configuração é o detalhe",
       "A decisão tomada, o princípio que a sustenta, a proteção que se aceitou sacrificar e o nome de quem aprovou. Sem a terceira e a quarta colunas, o registro não permite reconstruir a troca nem cobrar autoria.",
-      "Porque barreiras de mesma natureza são derrubadas pela mesma técnica. Variedade, e não quantidade, é o que obriga o adversário a usar caminhos e capacidades diferentes."
+      "Duas camadas iguais formam defesa em profundidade"
     ],
-    "correta": 1,
-    "justificativa": "Princípio é discurso de arquiteto, configuração é trabalho real"
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-02#E01",
@@ -188,8 +191,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelagem de ameaças é uma reunião\". Qual é a correção?",
     "alternativas": [
-      "Sem atacante identificado não há ameaça relevante",
       "A matriz de probabilidade e impacto resolve a prioridade",
+      "Sem atacante identificado não há ameaça relevante",
       "Produza diagrama, lista de ameaças, respostas e data de revisão",
       "Mitigação anotada é mitigação feita"
     ],
@@ -208,9 +211,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Sem atacante identificado não há ameaça relevante\". Qual é a correção?",
     "alternativas": [
-      "Modelagem de ameaças é uma reunião",
       "A matriz de probabilidade e impacto resolve a prioridade",
       "Mitigação anotada é mitigação feita",
+      "Modelagem de ameaças é uma reunião",
       "Percorra as categorias por elemento e por limite de confiança"
     ],
     "correta": 3,
@@ -229,9 +232,9 @@
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"A matriz de probabilidade e impacto resolve a prioridade\". Qual é a correção?",
     "alternativas": [
       "Ordene por exposição, alcance e esforço de correção",
-      "Modelagem de ameaças é uma reunião",
       "Sem atacante identificado não há ameaça relevante",
-      "Mitigação anotada é mitigação feita"
+      "Mitigação anotada é mitigação feita",
+      "Modelagem de ameaças é uma reunião"
     ],
     "correta": 0,
     "justificativa": "Os dois fatores são difíceis de calcular e ignoram o custo de corrigir"
@@ -248,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Mitigação anotada é mitigação feita\". Qual é a correção?",
     "alternativas": [
-      "Modelagem de ameaças é uma reunião",
+      "A matriz de probabilidade e impacto resolve a prioridade",
       "Escreva o requisito e o critério de teste que o verifica",
       "Sem atacante identificado não há ameaça relevante",
-      "A matriz de probabilidade e impacto resolve a prioridade"
+      "Modelagem de ameaças é uma reunião"
     ],
     "correta": 1,
     "justificativa": "Mitigação precisa virar requisito testável, anexado à especificação"
@@ -268,10 +271,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelar uma vez e arquivar\". Qual é a correção?",
     "alternativas": [
-      "Modelagem de ameaças é uma reunião",
+      "A matriz de probabilidade e impacto resolve a prioridade",
       "Sem atacante identificado não há ameaça relevante",
       "Revisite na mudança de arquitetura, na entrada de novo dado e no incidente",
-      "A matriz de probabilidade e impacto resolve a prioridade"
+      "Mitigação anotada é mitigação feita"
     ],
     "correta": 2,
     "justificativa": "O sistema muda e o modelo desatualizado dá falsa segurança"
@@ -288,13 +291,53 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelar só no fim do projeto\". Qual é a correção?",
     "alternativas": [
-      "Modelagem de ameaças é uma reunião",
       "Sem atacante identificado não há ameaça relevante",
       "A matriz de probabilidade e impacto resolve a prioridade",
+      "Mitigação anotada é mitigação feita",
       "Modele no desenho e refaça a cada mudança relevante"
     ],
     "correta": 3,
     "justificativa": "Sobra pouco espaço de projeto para responder às ameaças encontradas"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-02#R02",
+    "ref": "03-arquitetura-engenharia#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais cinco elementos o diagrama de fluxo de dados precisa mostrar para sustentar a etapa de identificação?",
+    "alternativas": [
+      "Fluxos de dado, depósitos de dado, processos, entidades externas e limites de confiança.",
+      "A matriz de probabilidade e impacto resolve a prioridade",
+      "Sem atacante identificado não há ameaça relevante",
+      "Mitigação anotada é mitigação feita"
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-02#R04",
+    "ref": "03-arquitetura-engenharia#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "OWASP Threat Modeling Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são as quatro respostas possíveis a uma ameaça identificada, e o que falta para uma mitigação existir de fato?",
+    "alternativas": [
+      "A matriz de probabilidade e impacto resolve a prioridade",
+      "Sem atacante identificado não há ameaça relevante",
+      "Mitigar, eliminar, transferir e aceitar. Para a mitigação existir, ela precisa ser formulada como requisito acionável e anexada à especificação do sistema, com forma de testar.",
+      "Mitigação anotada é mitigação feita"
+    ],
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-03#E01",
@@ -308,9 +351,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Ter VLAN é ter segmentação\". Qual é a correção?",
     "alternativas": [
-      "Rede interna é zona de confiança",
-      "Segmentar por identidade dispensa segmentar por rede",
       "Exceção de acesso remoto de fornecedor é inevitável e permanente",
+      "Segmentar por identidade dispensa segmentar por rede",
+      "Microssegmentação exige trocar toda a rede",
       "Escreva a matriz de fluxo e configure nela a negação por padrão"
     ],
     "correta": 3,
@@ -329,9 +372,9 @@
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Rede interna é zona de confiança\". Qual é a correção?",
     "alternativas": [
       "Trate a localização como contenção, não como autorização",
-      "Ter VLAN é ter segmentação",
       "Segmentar por identidade dispensa segmentar por rede",
-      "Exceção de acesso remoto de fornecedor é inevitável e permanente"
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente",
+      "Microssegmentação exige trocar toda a rede"
     ],
     "correta": 0,
     "justificativa": "O SP 800-207 afirma que a localização não concede confiança implícita"
@@ -348,10 +391,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Segmentar por identidade dispensa segmentar por rede\". Qual é a correção?",
     "alternativas": [
-      "Ter VLAN é ter segmentação",
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente",
       "Combine as duas: caminho negado é melhor que ator verificado",
-      "Rede interna é zona de confiança",
-      "Exceção de acesso remoto de fornecedor é inevitável e permanente"
+      "Microssegmentação exige trocar toda a rede",
+      "Matriz de fluxo é documento de rede"
     ],
     "correta": 1,
     "justificativa": "Rede restringe caminho; identidade restringe ator, e as duas atuam em camadas diferentes"
@@ -368,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Exceção de acesso remoto de fornecedor é inevitável e permanente\". Qual é a correção?",
     "alternativas": [
-      "Ter VLAN é ter segmentação",
-      "Rede interna é zona de confiança",
+      "Microssegmentação exige trocar toda a rede",
+      "Matriz de fluxo é documento de rede",
       "Dê prazo, dono e a regra que a substitui",
-      "Segmentar por identidade dispensa segmentar por rede"
+      "Rede interna é zona de confiança"
     ],
     "correta": 2,
     "justificativa": "Exceção permanente reintroduz o caminho que a zona fechou"
@@ -388,9 +431,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Matriz de fluxo é documento de rede\". Qual é a correção?",
     "alternativas": [
-      "Ter VLAN é ter segmentação",
-      "Rede interna é zona de confiança",
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente",
       "Segmentar por identidade dispensa segmentar por rede",
+      "Microssegmentação exige trocar toda a rede",
       "Revise a matriz a cada mudança relevante e registre quem aprovou"
     ],
     "correta": 3,
@@ -409,9 +452,9 @@
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Microssegmentação exige trocar toda a rede\". Qual é a correção?",
     "alternativas": [
       "Comece pelas cargas de trabalho que mais contêm dado sensível",
-      "Ter VLAN é ter segmentação",
-      "Rede interna é zona de confiança",
-      "Segmentar por identidade dispensa segmentar por rede"
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente",
+      "Segmentar por identidade dispensa segmentar por rede",
+      "Matriz de fluxo é documento de rede"
     ],
     "correta": 0,
     "justificativa": "Microssegmentação é granularidade de regra, não substituição de infraestrutura"
@@ -428,13 +471,13 @@
     "status": "rascunho",
     "enunciado": "Qual é o critério para agrupar ativos em uma zona de confiança?",
     "alternativas": [
-      "Listar zonas a partir de dados e funções, montar a matriz de fluxo com negação por padrão, declarar o que cada zona não permite e tratar as exceções com prazo e dono.",
-      "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos.",
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente",
+      "Segmentar por identidade dispensa segmentar por rede",
       "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
-      "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo."
+      "Microssegmentação exige trocar toda a rede"
     ],
     "correta": 2,
-    "justificativa": "Ter VLAN é ter segmentação"
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-03#R04",
@@ -448,13 +491,13 @@
     "status": "rascunho",
     "enunciado": "Quais são os quatro passos do desenho de zonas apresentados no tema, na ordem?",
     "alternativas": [
-      "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
-      "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos.",
-      "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo.",
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente",
+      "Segmentar por identidade dispensa segmentar por rede",
+      "Microssegmentação exige trocar toda a rede",
       "Listar zonas a partir de dados e funções, montar a matriz de fluxo com negação por padrão, declarar o que cada zona não permite e tratar as exceções com prazo e dono."
     ],
     "correta": 3,
-    "justificativa": "Ter VLAN é ter segmentação"
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-03#R05",
@@ -469,12 +512,12 @@
     "enunciado": "Por que a zona de gestão é a que mais rende quando é separada?",
     "alternativas": [
       "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos.",
-      "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
-      "Listar zonas a partir de dados e funções, montar a matriz de fluxo com negação por padrão, declarar o que cada zona não permite e tratar as exceções com prazo e dono.",
-      "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo."
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente",
+      "Segmentar por identidade dispensa segmentar por rede",
+      "Microssegmentação exige trocar toda a rede"
     ],
     "correta": 0,
-    "justificativa": "Ter VLAN é ter segmentação"
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-03#R06",
@@ -488,13 +531,13 @@
     "status": "rascunho",
     "enunciado": "Que campos mínimos uma exceção precisa ter para não virar arquitetura permanente?",
     "alternativas": [
-      "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
+      "Exceção de acesso remoto de fornecedor é inevitável e permanente",
       "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo.",
-      "Listar zonas a partir de dados e funções, montar a matriz de fluxo com negação por padrão, declarar o que cada zona não permite e tratar as exceções com prazo e dono.",
-      "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos."
+      "Segmentar por identidade dispensa segmentar por rede",
+      "Microssegmentação exige trocar toda a rede"
     ],
     "correta": 1,
-    "justificativa": "Ter VLAN é ter segmentação"
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-04#E01",
@@ -509,9 +552,9 @@
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Zero trust é produto\". Qual é a correção?",
     "alternativas": [
       "Verifique se a proposta descreve decisão por sessão e por recurso",
+      "Defesa em profundidade é ter dois produtos de segurança",
       "Ter VPN e segundo fator é ser zero trust",
-      "Zero trust dispensa segmentação",
-      "Defesa em profundidade é ter dois produtos de segurança"
+      "Detecção é acessório depois da prevenção"
     ],
     "correta": 0,
     "justificativa": "É um conjunto de princípios de desenho, e o resumo do SP 800-207 fala de paradigmas, não de tecnologia"
@@ -528,10 +571,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Ter VPN e segundo fator é ser zero trust\". Qual é a correção?",
     "alternativas": [
-      "Zero trust é produto",
+      "Defesa em profundidade é ter dois produtos de segurança",
       "Avalie cada recurso, não apenas a entrada na rede",
-      "Zero trust dispensa segmentação",
-      "Defesa em profundidade é ter dois produtos de segurança"
+      "Detecção é acessório depois da prevenção",
+      "Menor privilégio vale só para pessoas"
     ],
     "correta": 1,
     "justificativa": "Se depois da entrada o acesso continua autorizado por localização, a confiança implícita permaneceu"
@@ -548,10 +591,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Zero trust dispensa segmentação\". Qual é a correção?",
     "alternativas": [
-      "Zero trust é produto",
+      "Defesa em profundidade é ter dois produtos de segurança",
       "Ter VPN e segundo fator é ser zero trust",
       "Combine decisão por identidade com caminho restrito",
-      "Defesa em profundidade é ter dois produtos de segurança"
+      "Detecção é acessório depois da prevenção"
     ],
     "correta": 2,
     "justificativa": "O próprio SP 800-207 fala de proteger recursos e não segmentos, e contenção continua sendo camada separada"
@@ -568,9 +611,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Defesa em profundidade é ter dois produtos de segurança\". Qual é a correção?",
     "alternativas": [
-      "Zero trust é produto",
       "Ter VPN e segundo fator é ser zero trust",
-      "Zero trust dispensa segmentação",
+      "Detecção é acessório depois da prevenção",
+      "Menor privilégio vale só para pessoas",
       "Cada barreira precisa exigir do atacante algo diferente"
     ],
     "correta": 3,
@@ -589,9 +632,9 @@
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Detecção é acessório depois da prevenção\". Qual é a correção?",
     "alternativas": [
       "Trate prevenção e detecção como camadas de naturezas distintas",
-      "Zero trust é produto",
+      "Defesa em profundidade é ter dois produtos de segurança",
       "Ter VPN e segundo fator é ser zero trust",
-      "Zero trust dispensa segmentação"
+      "Menor privilégio vale só para pessoas"
     ],
     "correta": 0,
     "justificativa": "Detecção reduz o tempo de convivência com a falha e cobre o que a prevenção não pega"
@@ -608,13 +651,33 @@
     "status": "rascunho",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Menor privilégio vale só para pessoas\". Qual é a correção?",
     "alternativas": [
-      "Zero trust é produto",
+      "Defesa em profundidade é ter dois produtos de segurança",
       "Aplique às contas de serviço e às identidades de carga de trabalho",
       "Ter VPN e segundo fator é ser zero trust",
-      "Zero trust dispensa segmentação"
+      "Detecção é acessório depois da prevenção"
     ],
     "correta": 1,
     "justificativa": "A definição do NIST alcança entidades, incluindo processos que agem em nome de usuários"
+  },
+  {
+    "id": "03-arquitetura-engenharia#TEMA-04#R02",
+    "ref": "03-arquitetura-engenharia#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-207 — Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais duas funções o resumo do SP 800-207 declara serem distintas e executadas antes de estabelecer a sessão com um recurso?",
+    "alternativas": [
+      "Defesa em profundidade é ter dois produtos de segurança",
+      "Ter VPN e segundo fator é ser zero trust",
+      "Autenticação e autorização, tanto de sujeito quanto de dispositivo, como funções distintas executadas antes de estabelecer a sessão com o recurso corporativo.",
+      "Detecção é acessório depois da prevenção"
+    ],
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-05#E01",
@@ -628,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Requisito não funcional é detalhe técnico do time\". Qual é a correção?",
     "alternativas": [
-      "\"Aderente às melhores práticas\" é requisito",
+      "Todo requisito de segurança custa disponibilidade",
       "Escreva objeto, condição, limite e evidência, com dono nomeado",
       "Segurança por design é revisar no fim do projeto",
-      "Todo requisito de segurança custa disponibilidade"
+      "\"Aderente às melhores práticas\" é requisito"
     ],
     "correta": 1,
     "justificativa": "É a obrigação verificável que liga risco a entrega, e o dono é quem responde pelo risco"
@@ -649,9 +712,9 @@
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"\"Aderente às melhores práticas\" é requisito\". Qual é a correção?",
     "alternativas": [
       "Requisito não funcional é detalhe técnico do time",
-      "Segurança por design é revisar no fim do projeto",
+      "Todo requisito de segurança custa disponibilidade",
       "Nomeie a referência, a versão e o critério observável",
-      "Todo requisito de segurança custa disponibilidade"
+      "Segurança por design é revisar no fim do projeto"
     ],
     "correta": 2,
     "justificativa": "Não define objeto, limite nem forma de verificação"
@@ -669,8 +732,8 @@
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Segurança por design é revisar no fim do projeto\". Qual é a correção?",
     "alternativas": [
       "Requisito não funcional é detalhe técnico do time",
-      "\"Aderente às melhores práticas\" é requisito",
       "Todo requisito de segurança custa disponibilidade",
+      "\"Aderente às melhores práticas\" é requisito",
       "Decida na etapa de desenho, com modelo de ameaças como insumo"
     ],
     "correta": 3,
@@ -689,9 +752,9 @@
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Todo requisito de segurança custa disponibilidade\". Qual é a correção?",
     "alternativas": [
       "Declare o trade-off e registre quem o aprovou",
-      "Requisito não funcional é detalhe técnico do time",
       "\"Aderente às melhores práticas\" é requisito",
-      "Segurança por design é revisar no fim do projeto"
+      "Métrica de segurança é assunto de dashboard",
+      "Requisito verificável exige ferramenta cara"
     ],
     "correta": 0,
     "justificativa": "O custo depende da escolha, e a escolha é de negócio"
@@ -708,10 +771,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Métrica de segurança é assunto de dashboard\". Qual é a correção?",
     "alternativas": [
-      "Requisito não funcional é detalhe técnico do time",
+      "Segurança por design é revisar no fim do projeto",
       "Amarre o limite ao critério de aceite da entrega",
-      "\"Aderente às melhores práticas\" é requisito",
-      "Segurança por design é revisar no fim do projeto"
+      "Requisito não funcional é detalhe técnico do time",
+      "Todo requisito de segurança custa disponibilidade"
     ],
     "correta": 1,
     "justificativa": "Métrica sem limite acordado não gera obrigação nem bloqueio de entrega"
@@ -729,7 +792,7 @@
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Requisito verificável exige ferramenta cara\". Qual é a correção?",
     "alternativas": [
       "Requisito não funcional é detalhe técnico do time",
-      "\"Aderente às melhores práticas\" é requisito",
+      "Todo requisito de segurança custa disponibilidade",
       "Comece pelo critério testável e depois automatize",
       "Segurança por design é revisar no fim do projeto"
     ],
@@ -748,13 +811,13 @@
     "status": "rascunho",
     "enunciado": "Descreva a diferença entre segurança construída no desenho e segurança aplicada por cima, usando o argumento de custo registrado pela OWASP.",
     "alternativas": [
-      "Objeto, condição, limite observável e evidência com quem verifica.",
-      "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação.",
+      "Requisito não funcional é detalhe técnico do time",
+      "Todo requisito de segurança custa disponibilidade",
       "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
-      "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção."
+      "Segurança por design é revisar no fim do projeto"
     ],
     "correta": 2,
-    "justificativa": "Requisito não funcional é detalhe técnico do time"
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-05#R02",
@@ -768,13 +831,13 @@
     "status": "rascunho",
     "enunciado": "Quais são as quatro partes de um requisito verificável?",
     "alternativas": [
-      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
-      "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação.",
-      "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção.",
+      "Requisito não funcional é detalhe técnico do time",
+      "Todo requisito de segurança custa disponibilidade",
+      "Segurança por design é revisar no fim do projeto",
       "Objeto, condição, limite observável e evidência com quem verifica."
     ],
     "correta": 3,
-    "justificativa": "Requisito não funcional é detalhe técnico do time"
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-05#R03",
@@ -789,12 +852,12 @@
     "enunciado": "Liste as quatro famílias de requisito não funcional de segurança apresentadas no tema.",
     "alternativas": [
       "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação.",
-      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
-      "Objeto, condição, limite observável e evidência com quem verifica.",
-      "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção."
+      "Requisito não funcional é detalhe técnico do time",
+      "Todo requisito de segurança custa disponibilidade",
+      "Segurança por design é revisar no fim do projeto"
     ],
     "correta": 0,
-    "justificativa": "Requisito não funcional é detalhe técnico do time"
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-05#R05",
@@ -808,13 +871,13 @@
     "status": "rascunho",
     "enunciado": "Qual é a diferença entre \"protection needs\" e \"engineering trades\" no vocabulário do SP 800-160 Rev. 1?",
     "alternativas": [
-      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
-      "Objeto, condição, limite observável e evidência com quem verifica.",
+      "Requisito não funcional é detalhe técnico do time",
+      "Todo requisito de segurança custa disponibilidade",
       "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção.",
-      "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação."
+      "Segurança por design é revisar no fim do projeto"
     ],
     "correta": 2,
-    "justificativa": "Requisito não funcional é detalhe técnico do time"
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-05#R06",
@@ -828,13 +891,13 @@
     "status": "rascunho",
     "enunciado": "Por que um requisito sem evidência definida é negociado a cada reunião?",
     "alternativas": [
-      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
-      "Objeto, condição, limite observável e evidência com quem verifica.",
-      "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação.",
+      "Requisito não funcional é detalhe técnico do time",
+      "Todo requisito de segurança custa disponibilidade",
+      "Segurança por design é revisar no fim do projeto",
       "Porque sem evidência não há aceite nem recusa formalmente registrada, e a decisão sobre cumprir ou não volta a depender de quem argumenta melhor na reunião."
     ],
     "correta": 3,
-    "justificativa": "Requisito não funcional é detalhe técnico do time"
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-06#E01",
@@ -849,9 +912,9 @@
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Revisão anual é suficiente\". Qual é a correção?",
     "alternativas": [
       "Dívida de segurança é vulnerabilidade não corrigida",
-      "Revisão serve para achar culpa",
+      "Dívida técnica e dívida de segurança são a mesma coisa",
       "Defina gatilhos de convocação além do calendário",
-      "Achado sem dono continua vivo"
+      "Contar itens basta como métrica"
     ],
     "correta": 2,
     "justificativa": "O desenho muda entre revisões, e um ano é tempo suficiente para a exceção virar arquitetura"
@@ -868,9 +931,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Dívida de segurança é vulnerabilidade não corrigida\". Qual é a correção?",
     "alternativas": [
-      "Revisão anual é suficiente",
+      "Dívida técnica e dívida de segurança são a mesma coisa",
+      "Contar itens basta como métrica",
       "Revisão serve para achar culpa",
-      "Achado sem dono continua vivo",
       "Separe as filas e os instrumentos de medição"
     ],
     "correta": 3,
@@ -889,9 +952,9 @@
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Revisão serve para achar culpa\". Qual é a correção?",
     "alternativas": [
       "Publique o critério antes e avalie o desenho, não as pessoas",
-      "Revisão anual é suficiente",
+      "Dívida técnica e dívida de segurança são a mesma coisa",
       "Dívida de segurança é vulnerabilidade não corrigida",
-      "Achado sem dono continua vivo"
+      "Contar itens basta como métrica"
     ],
     "correta": 0,
     "justificativa": "Sem critério publicado, a reunião vira disputa de memória"
@@ -908,10 +971,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Achado sem dono continua vivo\". Qual é a correção?",
     "alternativas": [
-      "Revisão anual é suficiente",
+      "Dívida técnica e dívida de segurança são a mesma coisa",
       "Nomeie dono, prazo e evidência de encerramento em cada linha",
       "Dívida de segurança é vulnerabilidade não corrigida",
-      "Revisão serve para achar culpa"
+      "Contar itens basta como métrica"
     ],
     "correta": 1,
     "justificativa": "Sem dono, o item não tem quem o apresente no comitê nem quem decida o prazo"
@@ -928,8 +991,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Dívida técnica e dívida de segurança são a mesma coisa\". Qual é a correção?",
     "alternativas": [
-      "Revisão anual é suficiente",
       "Dívida de segurança é vulnerabilidade não corrigida",
+      "Contar itens basta como métrica",
       "Trate a dívida de segurança como item de risco, com reporte próprio",
       "Revisão serve para achar culpa"
     ],
@@ -948,8 +1011,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Contar itens basta como métrica\". Qual é a correção?",
     "alternativas": [
-      "Revisão anual é suficiente",
       "Dívida de segurança é vulnerabilidade não corrigida",
+      "Dívida técnica e dívida de segurança são a mesma coisa",
       "Revisão serve para achar culpa",
       "Meça também idade do item e concentração por serviço"
     ],
@@ -968,12 +1031,13 @@
     "status": "rascunho",
     "enunciado": "Quais são os quatro gatilhos de convocação de revisão apresentados no tema?",
     "alternativas": [
-      "O que está diferente do aprovado, o risco criado, o dono, o prazo e o custo estimado. Os três primeiros campos separam dívida de opinião; os dois últimos separam dívida de intenção.",
       "Mudança de arquitetura, entrada de novo tipo de dado ou novo fluxo, incidente com causa ligada a desenho e renovação de contrato de fornecedor relevante.",
-      "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente."
+      "Dívida técnica e dívida de segurança são a mesma coisa",
+      "Dívida de segurança é vulnerabilidade não corrigida",
+      "Contar itens basta como métrica"
     ],
-    "correta": 1,
-    "justificativa": "Revisão anual é suficiente"
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-06#R04",
@@ -987,12 +1051,13 @@
     "status": "rascunho",
     "enunciado": "Descreva os cinco campos do registro de achado e o que cada par de campos separa.",
     "alternativas": [
+      "Dívida técnica e dívida de segurança são a mesma coisa",
+      "Dívida de segurança é vulnerabilidade não corrigida",
       "O que está diferente do aprovado, o risco criado, o dono, o prazo e o custo estimado. Os três primeiros campos separam dívida de opinião; os dois últimos separam dívida de intenção.",
-      "Mudança de arquitetura, entrada de novo tipo de dado ou novo fluxo, incidente com causa ligada a desenho e renovação de contrato de fornecedor relevante.",
-      "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente."
+      "Contar itens basta como métrica"
     ],
-    "correta": 0,
-    "justificativa": "Revisão anual é suficiente"
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "03-arquitetura-engenharia#TEMA-06#R06",
@@ -1006,11 +1071,12 @@
     "status": "rascunho",
     "enunciado": "Cite um indicador de dívida de segurança que sobrevive ao comitê e explique por que ele funciona melhor que a contagem simples.",
     "alternativas": [
-      "Mudança de arquitetura, entrada de novo tipo de dado ou novo fluxo, incidente com causa ligada a desenho e renovação de contrato de fornecedor relevante.",
-      "O que está diferente do aprovado, o risco criado, o dono, o prazo e o custo estimado. Os três primeiros campos separam dívida de opinião; os dois últimos separam dívida de intenção.",
-      "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente."
+      "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente.",
+      "Dívida técnica e dívida de segurança são a mesma coisa",
+      "Dívida de segurança é vulnerabilidade não corrigida",
+      "Contar itens basta como métrica"
     ],
-    "correta": 2,
-    "justificativa": "Revisão anual é suficiente"
+    "correta": 0,
+    "justificativa": ""
   }
 ]

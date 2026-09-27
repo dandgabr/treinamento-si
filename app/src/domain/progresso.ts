@@ -32,10 +32,23 @@ export interface ResultadoCheckpoint {
   total: number
 }
 
+/**
+ * Respostas dadas em um item do quiz de multipla escolha. `ultima` e a data ISO da resposta
+ * mais recente — fica guardada para a tela poder dizer quando o item foi visto, e nao entra
+ * no calculo de prioridade, que olha so o placar.
+ */
+export interface RegistroDeQuestao {
+  acertos: number
+  erros: number
+  ultima: string
+}
+
 export interface Progresso {
   versao: typeof VERSAO_PROGRESSO
   temas: Record<string, TemaProgresso>
   checkpoints: Record<string, ResultadoCheckpoint>
+  /** Id do item do banco de questoes -> respostas dadas nele. */
+  questoes: Record<string, RegistroDeQuestao>
   /** Dias (AAAA-MM-DD) com ao menos uma atividade. Base do streak. */
   diasAtivos: string[]
 }
@@ -43,7 +56,7 @@ export interface Progresso {
 export const VERSAO_PROGRESSO = 1
 
 export function progressoVazio(): Progresso {
-  return { versao: VERSAO_PROGRESSO, temas: {}, checkpoints: {}, diasAtivos: [] }
+  return { versao: VERSAO_PROGRESSO, temas: {}, checkpoints: {}, questoes: {}, diasAtivos: [] }
 }
 
 export function temaVazio(ref: string, agora: Date): TemaProgresso {
@@ -161,6 +174,31 @@ export function registrarCheckpoint(
     { ...p, checkpoints: { ...p.checkpoints, [areaId]: { acertos, total } } },
     agora,
   )
+}
+
+/**
+ * Registra a resposta de um item do quiz: um acerto ou um erro, e o dia do estudo.
+ *
+ * Id vazio e chave perigosa nao viram campo do estado. Nao e so cuidado com o objeto: o
+ * normalizador recusa as duas ao carregar, entao registra-las criaria dado que o proximo
+ * carregamento joga fora — a tela mostraria uma contagem que some ao reabrir o app. E o
+ * mesmo caminho em que o redutor devolve a MESMA referencia, de que o store depende para
+ * nao gravar e nao re-renderizar a toa.
+ */
+export function registrarQuestao(
+  p: Progresso,
+  id: string,
+  acertou: boolean,
+  agora: Date,
+): Progresso {
+  if (!id || CHAVES_RECUSADAS.has(id)) return p
+  const atual = p.questoes[id]
+  const proximo: RegistroDeQuestao = {
+    acertos: (atual?.acertos ?? 0) + (acertou ? 1 : 0),
+    erros: (atual?.erros ?? 0) + (acertou ? 0 : 1),
+    ultima: agora.toISOString(),
+  }
+  return registrarDiaAtivo({ ...p, questoes: { ...p.questoes, [id]: proximo } }, agora)
 }
 
 /** Decisao pura do checkpoint: so ha resultado quando todos os itens foram julgados. */
@@ -284,6 +322,28 @@ function normalizarCheckpoints(valor: unknown): Record<string, ResultadoCheckpoi
   return out
 }
 
+function normalizarQuestoes(valor: unknown): Record<string, RegistroDeQuestao> {
+  const out: Record<string, RegistroDeQuestao> = {}
+  if (!valor || typeof valor !== 'object') return out
+  for (const [id, bruto] of Object.entries(valor as Record<string, unknown>)) {
+    if (!id || CHAVES_RECUSADAS.has(id) || !bruto || typeof bruto !== 'object') continue
+    const r = bruto as Record<string, unknown>
+    // Contador nao finito (`1e999` vira Infinity no JSON), fracionario ou negativo nao
+    // descreve resposta nenhuma: vale zero, e o registro so fica se o outro contador tiver
+    // alguma coisa — entrada com dois zeros nao carrega informacao, e um arquivo que
+    // acumulou sobras nao pode virar dado de estudo.
+    const acertos = numeroFinito(r.acertos) && Number.isInteger(r.acertos) ? r.acertos : 0
+    const erros = numeroFinito(r.erros) && Number.isInteger(r.erros) ? r.erros : 0
+    if (acertos === 0 && erros === 0) continue
+    // Sem data legivel, fica vazio: a tela mostra "sem registro" em vez de uma data que o
+    // `Date` nao consegue nem interpretar.
+    const ultima =
+      typeof r.ultima === 'string' && !Number.isNaN(Date.parse(r.ultima)) ? r.ultima : ''
+    out[id] = { acertos, erros, ultima }
+  }
+  return out
+}
+
 /**
  * Diz se o valor tem a forma de um progresso desta versao, sem normalizar. Serve para a
  * importacao recusar um arquivo estranho ANTES de substituir o que existe: o
@@ -293,6 +353,9 @@ function normalizarCheckpoints(valor: unknown): Record<string, ResultadoCheckpoi
 export function pareceProgresso(valor: unknown): boolean {
   if (!valor || typeof valor !== 'object') return false
   const bruto = valor as Record<string, unknown>
+  // `questoes` nao entra na conferencia de proposito: um arquivo exportado antes do quiz nao
+  // tem o campo e continua sendo um progresso desta versao — o normalizador o preenche vazio.
+  // Exigir o campo recusaria o backup de quem estudou ate ontem.
   return (
     bruto.versao === VERSAO_PROGRESSO &&
     !!bruto.temas &&
@@ -311,6 +374,7 @@ export function normalizarProgresso(valor: unknown, agora: Date): Progresso {
     versao: VERSAO_PROGRESSO,
     temas: normalizarTemas(bruto.temas, agora),
     checkpoints: normalizarCheckpoints(bruto.checkpoints),
+    questoes: normalizarQuestoes(bruto.questoes),
     diasAtivos: Array.isArray(bruto.diasAtivos)
       ? [...new Set(bruto.diasAtivos.filter(ehDataIso))].sort()
       : [],

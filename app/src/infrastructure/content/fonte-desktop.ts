@@ -11,3 +11,17 @@ export async function lerConteudoBruto(): Promise<unknown> {
   if (!resposta.ok) throw new Error(`conteúdo indisponível (${resposta.status})`)
   return await resposta.json()
 }
+
+/**
+ * O banco de multipla escolha, num arquivo so.
+ *
+ * O navegador escreve os 18 `import` a mao porque `file://` nao carrega nada externo; aqui
+ * nao existe essa restricao, e o `vite.desktop.config.ts` junta os 18 arquivos num objeto
+ * `{areaId: itens[]}`. Uma leitura em vez de dezoito: o banco e aberto quando a tela do quiz
+ * e montada, e nao vale dezoito idas ao `app://` para montar uma coisa so.
+ */
+export async function lerBancoBruto(): Promise<unknown> {
+  const resposta = await fetch(new URL('questoes.json', location.href).href)
+  if (!resposta.ok) throw new Error(`banco de questões indisponível (${resposta.status})`)
+  return await resposta.json()
+}

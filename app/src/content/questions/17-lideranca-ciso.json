@@ -12,9 +12,9 @@
     "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"O CISO é dono de todo o risco de tecnologia\"\". Qual é a correção?",
     "alternativas": [
       "Declare a fronteira por escrito e trate o resto como risco de terceiro",
-      "\"Quem tem o cargo tem o mandato\"",
-      "\"Ser accountable significa que executo\"",
-      "\"O encarregado de dados está dentro da segurança\""
+      "\"O encarregado de dados está dentro da segurança\"",
+      "\"Pedir mais verba é sinal de falha de gestão\"",
+      "\"Ser accountable significa que executo\""
     ],
     "correta": 0,
     "justificativa": "Risco operacional e de capacidade pertence ao dono do serviço"
@@ -31,10 +31,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"Quem tem o cargo tem o mandato\"\". Qual é a correção?",
     "alternativas": [
-      "\"O CISO é dono de todo o risco de tecnologia\"",
+      "\"O encarregado de dados está dentro da segurança\"",
       "Documente as decisões que você autoriza, com base em `GV.RR-02`",
-      "\"Ser accountable significa que executo\"",
-      "\"O encarregado de dados está dentro da segurança\""
+      "\"O CISO é dono de todo o risco de tecnologia\"",
+      "\"Pedir mais verba é sinal de falha de gestão\""
     ],
     "correta": 1,
     "justificativa": "Cargo dá assento; mandato dá autoridade sobre decisões específicas"
@@ -51,10 +51,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"Ser accountable significa que executo\"\". Qual é a correção?",
     "alternativas": [
+      "\"O encarregado de dados está dentro da segurança\"",
       "\"O CISO é dono de todo o risco de tecnologia\"",
-      "\"Quem tem o cargo tem o mandato\"",
       "Defina quem executa o controle e quem assina o aceite do risco",
-      "\"O encarregado de dados está dentro da segurança\""
+      "\"Pedir mais verba é sinal de falha de gestão\""
     ],
     "correta": 2,
     "justificativa": "Executar e responder são camadas distintas"
@@ -72,7 +72,7 @@
     "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"O encarregado de dados está dentro da segurança\"\". Qual é a correção?",
     "alternativas": [
       "\"O CISO é dono de todo o risco de tecnologia\"",
-      "\"Quem tem o cargo tem o mandato\"",
+      "\"Pedir mais verba é sinal de falha de gestão\"",
       "\"Ser accountable significa que executo\"",
       "Marque a fronteira e chame o encarregado nas decisões que tratam dado pessoal"
     ],
@@ -93,11 +93,51 @@
     "alternativas": [
       "Peça com risco documentado, não com urgência",
       "\"O CISO é dono de todo o risco de tecnologia\"",
-      "\"Quem tem o cargo tem o mandato\"",
-      "\"Ser accountable significa que executo\""
+      "\"Ser accountable significa que executo\"",
+      "\"O encarregado de dados está dentro da segurança\""
     ],
     "correta": 0,
     "justificativa": "`GV.RR-03` vincula recursos à estratégia de risco declarada"
+  },
+  {
+    "id": "17-lideranca-ciso#TEMA-01#R01",
+    "ref": "17-lideranca-ciso#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
+      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual subcategoria do CSF 2.0 declara a liderança responsável e accountable pelo risco cibernético?",
+    "alternativas": [
+      "\"O encarregado de dados está dentro da segurança\"",
+      "`GV.RR-01`, na categoria Roles, Responsibilities, and Authorities da função Govern.",
+      "\"O CISO é dono de todo o risco de tecnologia\"",
+      "\"Pedir mais verba é sinal de falha de gestão\""
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "17-lideranca-ciso#TEMA-01#R02",
+    "ref": "17-lideranca-ciso#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
+      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são os três componentes verificáveis do mandato, e em quais subcategorias do CSF 2.0 eles aparecem?",
+    "alternativas": [
+      "\"O encarregado de dados está dentro da segurança\"",
+      "\"O CISO é dono de todo o risco de tecnologia\"",
+      "Responsabilidade (`GV.RR-01`), autoridade (`GV.RR-02`) e recursos (`GV.RR-03`).",
+      "\"Pedir mais verba é sinal de falha de gestão\""
+    ],
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "17-lideranca-ciso#TEMA-02#E01",
@@ -111,10 +151,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Ter 15 minutos na reunião do conselho é reporte\"\". Qual é a correção?",
     "alternativas": [
-      "\"Reportar ao CIO inviabiliza o cargo\"",
+      "\"Painel de 40 métricas demonstra rigor\"",
       "Leve um item de decisão e registre em ata",
-      "\"Avaliação de risco é assunto do comitê de risco\"",
-      "\"Painel de 40 métricas demonstra rigor\""
+      "\"Reportar ao CIO inviabiliza o cargo\"",
+      "\"Compliance é assunto do jurídico\""
     ],
     "correta": 1,
     "justificativa": "Acesso sem produto não produz decisão nem evidência"
@@ -152,8 +192,8 @@
     "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Avaliação de risco é assunto do comitê de risco\"\". Qual é a correção?",
     "alternativas": [
       "\"Ter 15 minutos na reunião do conselho é reporte\"",
-      "\"Reportar ao CIO inviabiliza o cargo\"",
       "\"Painel de 40 métricas demonstra rigor\"",
+      "\"Reportar ao CIO inviabiliza o cargo\"",
       "Separe indicador de risco de indicador de desempenho do programa"
     ],
     "correta": 3,
@@ -173,8 +213,8 @@
     "alternativas": [
       "Três a cinco indicadores ligados a decisões pendentes",
       "\"Ter 15 minutos na reunião do conselho é reporte\"",
-      "\"Reportar ao CIO inviabiliza o cargo\"",
-      "\"Avaliação de risco é assunto do comitê de risco\""
+      "\"Avaliação de risco é assunto do comitê de risco\"",
+      "\"Reportar ao CIO inviabiliza o cargo\""
     ],
     "correta": 0,
     "justificativa": "Volume esconde o sinal e consome a única janela que você tem"
@@ -193,11 +233,51 @@
     "alternativas": [
       "\"Ter 15 minutos na reunião do conselho é reporte\"",
       "Nomeie um dono do calendário regulatório com data e responsável",
-      "\"Reportar ao CIO inviabiliza o cargo\"",
-      "\"Avaliação de risco é assunto do comitê de risco\""
+      "\"Avaliação de risco é assunto do comitê de risco\"",
+      "\"Painel de 40 métricas demonstra rigor\""
     ],
     "correta": 1,
     "justificativa": "Prazo de notificação é decisão técnica e regulatória ao mesmo tempo"
+  },
+  {
+    "id": "17-lideranca-ciso#TEMA-02#R01",
+    "ref": "17-lideranca-ciso#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "SEC Release 33-11216 — Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure",
+      "url": "https://www.sec.gov/files/rules/final/2023/33-11216.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que a Regulation S-K, Item 106(c), exige que a companhia descreva sobre o conselho?",
+    "alternativas": [
+      "\"Ter 15 minutos na reunião do conselho é reporte\"",
+      "\"Avaliação de risco é assunto do comitê de risco\"",
+      "A supervisão do conselho sobre os riscos de ameaças cibernéticas e o papel da administração na avaliação e gestão de riscos materiais dessa natureza.",
+      "\"Painel de 40 métricas demonstra rigor\""
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "17-lideranca-ciso#TEMA-02#R03",
+    "ref": "17-lideranca-ciso#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "SEC Release 33-11216 — Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure",
+      "url": "https://www.sec.gov/files/rules/final/2023/33-11216.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é a diferença entre acesso ao conselho, obrigação de reporte e supervisão?",
+    "alternativas": [
+      "Acesso é ser ouvido; reporte é a obrigação formal de levar a informação a quem decide; supervisão é quem responde pelo resultado e deixa registro. As três podem existir em separado.",
+      "\"Ter 15 minutos na reunião do conselho é reporte\"",
+      "\"Avaliação de risco é assunto do comitê de risco\"",
+      "\"Painel de 40 métricas demonstra rigor\""
+    ],
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "17-lideranca-ciso#TEMA-03#E01",
@@ -212,9 +292,9 @@
     "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"Basta alinhar o gasto a um percentual de referência do mercado\"\". Qual é a correção?",
     "alternativas": [
       "\"Apetite de risco e orçamento tratam da mesma coisa\"",
-      "\"Conformidade e redução de risco são o mesmo gasto\"",
+      "\"ROI de segurança se mede pelo número de incidentes\"",
       "Use exposição, opções e custo total; trate percentuais de mercado como não confirmados",
-      "\"ROI de segurança se mede pelo número de incidentes\""
+      "\"Conformidade e redução de risco são o mesmo gasto\""
     ],
     "correta": 2,
     "justificativa": "Não existe percentual fixado em fonte primária de norma ou framework"
@@ -232,8 +312,8 @@
     "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"Apetite de risco e orçamento tratam da mesma coisa\"\". Qual é a correção?",
     "alternativas": [
       "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
-      "\"Conformidade e redução de risco são o mesmo gasto\"",
       "\"ROI de segurança se mede pelo número de incidentes\"",
+      "\"Conformidade e redução de risco são o mesmo gasto\"",
       "Peça verba vinculada a uma declaração de apetite já existente"
     ],
     "correta": 3,
@@ -291,10 +371,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"Comprar a licença resolve\"\". Qual é a correção?",
     "alternativas": [
-      "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
+      "\"Conformidade e redução de risco são o mesmo gasto\"",
       "\"Apetite de risco e orçamento tratam da mesma coisa\"",
       "Inclua pessoas e manutenção no custo total da opção",
-      "\"Conformidade e redução de risco são o mesmo gasto\""
+      "\"ROI de segurança se mede pelo número de incidentes\""
     ],
     "correta": 2,
     "justificativa": "Sem quem opere, a licença amplia a superfície de trabalho e não reduz exposição"
@@ -311,12 +391,13 @@
     "status": "rascunho",
     "enunciado": "Como o NIST IR 8286 define exposição, e quais elementos do registro de riscos tornam o orçamento auditável?",
     "alternativas": [
-      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado.",
-      "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável.",
-      "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora."
+      "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
+      "\"Apetite de risco e orçamento tratam da mesma coisa\"",
+      "\"ROI de segurança se mede pelo número de incidentes\"",
+      "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável."
     ],
-    "correta": 1,
-    "justificativa": "\"Basta alinhar o gasto a um percentual de referência do mercado\""
+    "correta": 3,
+    "justificativa": ""
   },
   {
     "id": "17-lideranca-ciso#TEMA-03#R02",
@@ -330,12 +411,13 @@
     "status": "rascunho",
     "enunciado": "Qual é a diferença entre apetite de risco e tolerância ao risco?",
     "alternativas": [
-      "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável.",
-      "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora.",
-      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado."
+      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado.",
+      "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
+      "\"Apetite de risco e orçamento tratam da mesma coisa\"",
+      "\"ROI de segurança se mede pelo número de incidentes\""
     ],
-    "correta": 2,
-    "justificativa": "\"Basta alinhar o gasto a um percentual de referência do mercado\""
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "17-lideranca-ciso#TEMA-03#R03",
@@ -349,12 +431,13 @@
     "status": "rascunho",
     "enunciado": "Por que uma métrica de contagem de vulnerabilidades abertas não serve como medida de retorno de um investimento?",
     "alternativas": [
+      "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
       "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora.",
-      "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável.",
-      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado."
+      "\"Apetite de risco e orçamento tratam da mesma coisa\"",
+      "\"ROI de segurança se mede pelo número de incidentes\""
     ],
-    "correta": 0,
-    "justificativa": "\"Basta alinhar o gasto a um percentual de referência do mercado\""
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "17-lideranca-ciso#TEMA-04#E01",
@@ -368,9 +451,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Quanto mais dados, mais credibilidade\"\". Qual é a correção?",
     "alternativas": [
-      "\"Simplificar para o executivo é omitir risco\"",
+      "\"Comunicar incidente para o board exige detalhe técnico\"",
       "\"O técnico já sabe o que fazer com o relatório executivo\"",
-      "\"Informe e decisão são o mesmo documento\"",
+      "\"Simplificar para o executivo é omitir risco\"",
       "Entregue poucos indicadores ligados a decisões pendentes"
     ],
     "correta": 3,
@@ -389,8 +472,8 @@
     "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Simplificar para o executivo é omitir risco\"\". Qual é a correção?",
     "alternativas": [
       "Mantenha o número e a conclusão, reduza o detalhe operacional",
-      "\"Quanto mais dados, mais credibilidade\"",
       "\"O técnico já sabe o que fazer com o relatório executivo\"",
+      "\"Comunicar incidente para o board exige detalhe técnico\"",
       "\"Informe e decisão são o mesmo documento\""
     ],
     "correta": 0,
@@ -408,7 +491,7 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"O técnico já sabe o que fazer com o relatório executivo\"\". Qual é a correção?",
     "alternativas": [
-      "\"Quanto mais dados, mais credibilidade\"",
+      "\"Comunicar incidente para o board exige detalhe técnico\"",
       "Escreva a segunda versão com o mesmo fato e a ação verificável",
       "\"Simplificar para o executivo é omitir risco\"",
       "\"Informe e decisão são o mesmo documento\""
@@ -428,10 +511,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Informe e decisão são o mesmo documento\"\". Qual é a correção?",
     "alternativas": [
-      "\"Quanto mais dados, mais credibilidade\"",
-      "\"Simplificar para o executivo é omitir risco\"",
+      "\"O técnico já sabe o que fazer com o relatório executivo\"",
+      "\"Comunicar incidente para o board exige detalhe técnico\"",
       "Declare o que você está pedindo antes de escrever o resto",
-      "\"O técnico já sabe o que fazer com o relatório executivo\""
+      "\"Simplificar para o executivo é omitir risco\""
     ],
     "correta": 2,
     "justificativa": "Informe sem decisão não gera registro e não move a organização"
@@ -448,13 +531,53 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Comunicar incidente para o board exige detalhe técnico\"\". Qual é a correção?",
     "alternativas": [
-      "\"Quanto mais dados, mais credibilidade\"",
-      "\"Simplificar para o executivo é omitir risco\"",
       "\"O técnico já sabe o que fazer com o relatório executivo\"",
+      "\"Simplificar para o executivo é omitir risco\"",
+      "\"Informe e decisão são o mesmo documento\"",
       "Descreva impacto material, opções e o que você precisa aprovar"
     ],
     "correta": 3,
     "justificativa": "Detalhe técnico expõe vetor e estado de remediação sem contribuir para a decisão"
+  },
+  {
+    "id": "17-lideranca-ciso#TEMA-04#R02",
+    "ref": "17-lideranca-ciso#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
+      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Que tipo de conteúdo os praticantes fornecem para apoiar a decisão de gestores e executivos?",
+    "alternativas": [
+      "\"O técnico já sabe o que fazer com o relatório executivo\"",
+      "Indicadores-chave de desempenho e indicadores-chave de risco.",
+      "\"Comunicar incidente para o board exige detalhe técnico\"",
+      "\"Simplificar para o executivo é omitir risco\""
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "17-lideranca-ciso#TEMA-04#R03",
+    "ref": "17-lideranca-ciso#TEMA-04",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
+      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual falha de comunicação o NIST IR 8286 identifica no material de risco que chega ao nível corporativo?",
+    "alternativas": [
+      "\"O técnico já sabe o que fazer com o relatório executivo\"",
+      "\"Comunicar incidente para o board exige detalhe técnico\"",
+      "Volume excessivo e priorização ausente: o material chega como mapa de calor perpetuamente vermelho ou em quantidade impraticável de analisar.",
+      "\"Simplificar para o executivo é omitir risco\""
+    ],
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "17-lideranca-ciso#TEMA-05#E01",
@@ -469,8 +592,8 @@
     "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Contratar mais gente resolve capacidade\"\". Qual é a correção?",
     "alternativas": [
       "Descreva o papel e o resultado esperado antes de abrir a vaga",
-      "\"Terceirizar SOC terceiriza a responsabilidade\"",
       "\"Descrição de vaga copiada do framework é suficiente\"",
+      "\"Terceirizar SOC terceiriza a responsabilidade\"",
       "\"Treinamento é evento anual de conscientização\""
     ],
     "correta": 0,
@@ -488,10 +611,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Terceirizar SOC terceiriza a responsabilidade\"\". Qual é a correção?",
     "alternativas": [
-      "\"Contratar mais gente resolve capacidade\"",
-      "Mantenha interno o escalonamento e a decisão de materialidade",
       "\"Descrição de vaga copiada do framework é suficiente\"",
-      "\"Treinamento é evento anual de conscientização\""
+      "Mantenha interno o escalonamento e a decisão de materialidade",
+      "\"Treinamento é evento anual de conscientização\"",
+      "\"Sem plano de sucessão, o time segue igual\""
     ],
     "correta": 1,
     "justificativa": "`GV.RR-01` mantém a responsabilidade na liderança da organização"
@@ -508,10 +631,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Descrição de vaga copiada do framework é suficiente\"\". Qual é a correção?",
     "alternativas": [
-      "\"Contratar mais gente resolve capacidade\"",
       "\"Terceirizar SOC terceiriza a responsabilidade\"",
+      "\"Treinamento é evento anual de conscientização\"",
       "Aponte a referência, a versão e a data de consulta",
-      "\"Treinamento é evento anual de conscientização\""
+      "\"Sem plano de sucessão, o time segue igual\""
     ],
     "correta": 2,
     "justificativa": "Componentes de framework são atualizados e a cópia envelhece"
@@ -528,9 +651,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Treinamento é evento anual de conscientização\"\". Qual é a correção?",
     "alternativas": [
-      "\"Contratar mais gente resolve capacidade\"",
-      "\"Terceirizar SOC terceiriza a responsabilidade\"",
       "\"Descrição de vaga copiada do framework é suficiente\"",
+      "\"Terceirizar SOC terceiriza a responsabilidade\"",
+      "\"Sem plano de sucessão, o time segue igual\"",
       "Separe conscientização geral de formação por função"
     ],
     "correta": 3,
@@ -549,12 +672,32 @@
     "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Sem plano de sucessão, o time segue igual\"\". Qual é a correção?",
     "alternativas": [
       "Nomeie substituto em treinamento para cada papel crítico",
-      "\"Contratar mais gente resolve capacidade\"",
+      "\"Descrição de vaga copiada do framework é suficiente\"",
       "\"Terceirizar SOC terceiriza a responsabilidade\"",
-      "\"Descrição de vaga copiada do framework é suficiente\""
+      "\"Treinamento é evento anual de conscientização\""
     ],
     "correta": 0,
     "justificativa": "Papel crítico concentrado em uma pessoa é risco de disponibilidade do programa"
+  },
+  {
+    "id": "17-lideranca-ciso#TEMA-05#R02",
+    "ref": "17-lideranca-ciso#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-181 Rev. 1 — Workforce Framework for Cybersecurity (NICE Framework)",
+      "url": "https://csrc.nist.gov/pubs/sp/800/181/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que o CSF 2.0 exige na subcategoria que trata de práticas de recursos humanos?",
+    "alternativas": [
+      "\"Descrição de vaga copiada do framework é suficiente\"",
+      "\"Terceirizar SOC terceiriza a responsabilidade\"",
+      "`GV.RR-04`: a segurança cibernética deve ser incluída nas práticas de recursos humanos.",
+      "\"Treinamento é evento anual de conscientização\""
+    ],
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "17-lideranca-ciso#TEMA-06#E01",
@@ -568,10 +711,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Maturidade alta significa organização segura\"\". Qual é a correção?",
     "alternativas": [
-      "\"Autoavaliação sem evidência economiza tempo\"",
-      "Use o Tier como contexto de governança e mantenha o risco medido separado",
       "\"Plano de maturidade é lista de projetos de TI\"",
-      "\"Medir tudo demonstra rigor\""
+      "Use o Tier como contexto de governança e mantenha o risco medido separado",
+      "\"Autoavaliação sem evidência economiza tempo\"",
+      "\"Uma vez por ano é suficiente\""
     ],
     "correta": 1,
     "justificativa": "Tier caracteriza rigor de processo, não ausência de risco"
@@ -588,10 +731,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Autoavaliação sem evidência economiza tempo\"\". Qual é a correção?",
     "alternativas": [
-      "\"Maturidade alta significa organização segura\"",
       "\"Plano de maturidade é lista de projetos de TI\"",
+      "\"Maturidade alta significa organização segura\"",
       "Exija uma evidência abrível para cada resultado declarado",
-      "\"Medir tudo demonstra rigor\""
+      "\"Uma vez por ano é suficiente\""
     ],
     "correta": 2,
     "justificativa": "Sem evidência o resultado é opinião e não sustenta decisão de verba"
@@ -610,7 +753,7 @@
     "alternativas": [
       "\"Maturidade alta significa organização segura\"",
       "\"Autoavaliação sem evidência economiza tempo\"",
-      "\"Medir tudo demonstra rigor\"",
+      "\"Uma vez por ano é suficiente\"",
       "Escreva cada linha com dono, custo, métrica e data"
     ],
     "correta": 3,
@@ -629,9 +772,9 @@
     "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Medir tudo demonstra rigor\"\". Qual é a correção?",
     "alternativas": [
       "Meça o que alimenta decisão de verba, reporte ou correção de rota",
+      "\"Plano de maturidade é lista de projetos de TI\"",
       "\"Maturidade alta significa organização segura\"",
-      "\"Autoavaliação sem evidência economiza tempo\"",
-      "\"Plano de maturidade é lista de projetos de TI\""
+      "\"Autoavaliação sem evidência economiza tempo\""
     ],
     "correta": 0,
     "justificativa": "Medição excessiva consome a capacidade do time e não muda decisão"
@@ -648,12 +791,32 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Uma vez por ano é suficiente\"\". Qual é a correção?",
     "alternativas": [
-      "\"Maturidade alta significa organização segura\"",
+      "\"Plano de maturidade é lista de projetos de TI\"",
       "Revise o perfil atual e os planos em ciclo trimestral",
-      "\"Autoavaliação sem evidência economiza tempo\"",
-      "\"Plano de maturidade é lista de projetos de TI\""
+      "\"Maturidade alta significa organização segura\"",
+      "\"Autoavaliação sem evidência economiza tempo\""
     ],
     "correta": 1,
     "justificativa": "`GV.OV-01` a `GV.OV-03` e `ID.IM-01` a `ID.IM-04` tratam de revisão e melhoria contínuas"
+  },
+  {
+    "id": "17-lideranca-ciso#TEMA-06#R02",
+    "ref": "17-lideranca-ciso#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
+      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são os três níveis indicadores de maturidade do C2M2 versão 2.1, e quantos domínios o modelo tem?",
+    "alternativas": [
+      "\"Plano de maturidade é lista de projetos de TI\"",
+      "\"Maturidade alta significa organização segura\"",
+      "\"Autoavaliação sem evidência economiza tempo\"",
+      "MIL 1 Initiated, MIL 2 Performed e MIL 3 Managed, em 10 domínios, com mais de 350 práticas."
+    ],
+    "correta": 3,
+    "justificativa": ""
   }
 ]

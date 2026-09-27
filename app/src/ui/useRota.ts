@@ -5,6 +5,9 @@ export type Rota =
   | { nome: 'area'; areaId: string }
   | { nome: 'tema'; ref: string }
   | { nome: 'pagina'; slug: string }
+  // `areaId` nulo e o quiz de todas as areas: as duas telas sao a mesma, e o escopo vazio
+  // nao precisa de uma rota propria.
+  | { nome: 'quiz'; areaId: string | null }
   | { nome: 'desconhecida' }
 
 function analisar(hash: string): Rota {
@@ -26,6 +29,9 @@ function analisar(hash: string): Rota {
   if (partes[0] === 'area' && partes[1]) return { nome: 'area', areaId: partes[1] }
   if (partes[0] === 'tema' && partes[1] && partes[2]) return { nome: 'tema', ref: `${partes[1]}#${partes[2]}` }
   if (partes[0] === 'pagina' && partes[1]) return { nome: 'pagina', slug: partes.slice(1).join('/') }
+  // Sem area, `#/quiz` e o quiz geral; `#/quiz/<areaId>` e o da area. Nada mais e lido da
+  // rota: o escopo inexistente e resolvido na tela, que sabe dizer "area nao encontrada".
+  if (partes[0] === 'quiz') return { nome: 'quiz', areaId: partes[1] ?? null }
   return { nome: 'desconhecida' }
 }
 
@@ -54,4 +60,9 @@ export function irPara(hash: string): void {
 export function linkTema(ref: string): string {
   const [areaId, temaId] = ref.split('#')
   return `#/tema/${areaId}/${temaId}`
+}
+
+/** Monta o href do quiz: com area, o da area; sem, o de todas. */
+export function linkQuiz(areaId?: string): string {
+  return areaId ? `#/quiz/${areaId}` : '#/quiz'
 }

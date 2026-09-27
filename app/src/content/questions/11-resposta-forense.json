@@ -11,10 +11,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"O ciclo começa no alerta\". Qual é a correção?",
     "alternativas": [
+      "Contratar resposta gerenciada transfere a responsabilidade",
       "O prazo regulatório conta da conclusão da apuração",
-      "Encerrar é parar de receber alertas do caso",
       "Trate t0 e t1 como marcas separadas, com dono diferente",
-      "Investir em ferramenta reduz o tempo total"
+      "O incidente mais grave é o que gera mais alertas"
     ],
     "correta": 2,
     "justificativa": "O regulamento exige evento adverso confirmado; alerta é sinal"
@@ -31,9 +31,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"O prazo regulatório conta da conclusão da apuração\". Qual é a correção?",
     "alternativas": [
-      "O ciclo começa no alerta",
+      "Contratar resposta gerenciada transfere a responsabilidade",
+      "O incidente mais grave é o que gera mais alertas",
       "Encerrar é parar de receber alertas do caso",
-      "Investir em ferramenta reduz o tempo total",
       "Comunique com o que sabe, registre os motivos da demora e complemente em vinte dias úteis"
     ],
     "correta": 3,
@@ -52,9 +52,9 @@
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"Encerrar é parar de receber alertas do caso\". Qual é a correção?",
     "alternativas": [
       "Encerramento exige item de plano, dono e data, e a ISO/IEC 27035-1:2023 nomeia a aplicação de lições aprendidas entre as atividades-chave",
-      "O ciclo começa no alerta",
+      "Contratar resposta gerenciada transfere a responsabilidade",
       "O prazo regulatório conta da conclusão da apuração",
-      "Investir em ferramenta reduz o tempo total"
+      "O incidente mais grave é o que gera mais alertas"
     ],
     "correta": 0,
     "justificativa": "Sem lição aprendida com dono e prazo, o mesmo incidente volta"
@@ -71,9 +71,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"Investir em ferramenta reduz o tempo total\". Qual é a correção?",
     "alternativas": [
-      "O ciclo começa no alerta",
-      "Meça cada transição antes de escolher onde gastar",
       "O prazo regulatório conta da conclusão da apuração",
+      "Meça cada transição antes de escolher onde gastar",
+      "O incidente mais grave é o que gera mais alertas",
       "Encerrar é parar de receber alertas do caso"
     ],
     "correta": 1,
@@ -91,8 +91,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"Contratar resposta gerenciada transfere a responsabilidade\". Qual é a correção?",
     "alternativas": [
-      "O ciclo começa no alerta",
       "O prazo regulatório conta da conclusão da apuração",
+      "O incidente mais grave é o que gera mais alertas",
       "Escreva o contrato com as marcas de tempo exigidas do fornecedor",
       "Encerrar é parar de receber alertas do caso"
     ],
@@ -111,13 +111,53 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"O incidente mais grave é o que gera mais alertas\". Qual é a correção?",
     "alternativas": [
-      "O ciclo começa no alerta",
+      "Contratar resposta gerenciada transfere a responsabilidade",
       "O prazo regulatório conta da conclusão da apuração",
       "Encerrar é parar de receber alertas do caso",
       "Severidade sai de matriz acordada com o negócio, não da contagem de alertas"
     ],
     "correta": 3,
     "justificativa": "Volume de alerta mede ruído de detecção, não impacto"
+  },
+  {
+    "id": "11-resposta-forense#TEMA-01#R01",
+    "ref": "11-resposta-forense#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são as atividades-chave do processo de gestão de incidentes segundo o resumo da ISO/IEC 27035-1:2023, e qual delas vem antes da detecção?",
+    "alternativas": [
+      "Contratar resposta gerenciada transfere a responsabilidade",
+      "O prazo regulatório conta da conclusão da apuração",
+      "O incidente mais grave é o que gera mais alertas",
+      "Preparar-se para incidentes, detectar, reportar, avaliar, responder e aplicar as lições aprendidas. Preparar vem antes da detecção."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "11-resposta-forense#TEMA-01#R03",
+    "ref": "11-resposta-forense#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "De que evento o prazo de três dias úteis para comunicar à ANPD começa a contar, e o que o regulamento prevê para informação incompleta?",
+    "alternativas": [
+      "Contratar resposta gerenciada transfere a responsabilidade",
+      "Do conhecimento pelo controlador de que o incidente afetou dados pessoais, não da conclusão da apuração. O regulamento permite complementação fundamentada em vinte dias úteis a contar da comunicação.",
+      "O prazo regulatório conta da conclusão da apuração",
+      "O incidente mais grave é o que gera mais alertas"
+    ],
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-02#E01",
@@ -131,7 +171,7 @@
     "status": "rascunho",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Playbook longo é playbook completo\". Qual é a correção?",
     "alternativas": [
-      "Playbook cita nomes de pessoas",
+      "O contrato de resposta cobre o que a empresa precisa",
       "O plano de resposta já cobre todos os casos",
       "Exercício serve para treinar o time técnico",
       "Duas páginas com gatilho, alçada e primeiras ações"
@@ -152,7 +192,7 @@
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Playbook cita nomes de pessoas\". Qual é a correção?",
     "alternativas": [
       "Papéis com nome de função, e lista nominal só na rota de escalonamento, com data de revisão",
-      "Playbook longo é playbook completo",
+      "O contrato de resposta cobre o que a empresa precisa",
       "O plano de resposta já cobre todos os casos",
       "Exercício serve para treinar o time técnico"
     ],
@@ -171,10 +211,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"O plano de resposta já cobre todos os casos\". Qual é a correção?",
     "alternativas": [
-      "Playbook longo é playbook completo",
+      "O contrato de resposta cobre o que a empresa precisa",
       "Um plano e vários playbooks, um por tipo relevante no seu ambiente",
-      "Playbook cita nomes de pessoas",
-      "Exercício serve para treinar o time técnico"
+      "Exercício serve para treinar o time técnico",
+      "Preparação é documento, não atividade"
     ],
     "correta": 1,
     "justificativa": "Plano define governança; o playbook define o que fazer por tipo de incidente"
@@ -191,10 +231,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Exercício serve para treinar o time técnico\". Qual é a correção?",
     "alternativas": [
-      "Playbook longo é playbook completo",
-      "Playbook cita nomes de pessoas",
+      "O plano de resposta já cobre todos os casos",
+      "Preparação é documento, não atividade",
       "Inclua as outras áreas no exercício de mesa",
-      "O plano de resposta já cobre todos os casos"
+      "Playbook longo é playbook completo"
     ],
     "correta": 2,
     "justificativa": "O time técnico é a parte que menos hesita; a lacuna mora na interface com jurídico, comunicação e dono do serviço"
@@ -211,9 +251,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Exercício sem lacuna está bom\". Qual é a correção?",
     "alternativas": [
-      "Playbook longo é playbook completo",
-      "Playbook cita nomes de pessoas",
+      "O contrato de resposta cobre o que a empresa precisa",
       "O plano de resposta já cobre todos os casos",
+      "Exercício serve para treinar o time técnico",
       "Suba a dificuldade e inclua indisponibilidade de ferramenta"
     ],
     "correta": 3,
@@ -232,9 +272,9 @@
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"O contrato de resposta cobre o que a empresa precisa\". Qual é a correção?",
     "alternativas": [
       "Teste o acionamento real no exercício e ajuste a cláusula",
-      "Playbook longo é playbook completo",
-      "Playbook cita nomes de pessoas",
-      "O plano de resposta já cobre todos os casos"
+      "O plano de resposta já cobre todos os casos",
+      "Exercício serve para treinar o time técnico",
+      "Preparação é documento, não atividade"
     ],
     "correta": 0,
     "justificativa": "Contrato não exercitado tem prazo, escopo e limite de aprovação desconhecidos"
@@ -251,10 +291,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Preparação é documento, não atividade\". Qual é a correção?",
     "alternativas": [
-      "Playbook longo é playbook completo",
+      "O contrato de resposta cobre o que a empresa precisa",
       "Trate preparação como programa com calendário e métrica",
-      "Playbook cita nomes de pessoas",
-      "O plano de resposta já cobre todos os casos"
+      "O plano de resposta já cobre todos os casos",
+      "Exercício serve para treinar o time técnico"
     ],
     "correta": 1,
     "justificativa": "O ciclo de desenho, condução e avaliação do SP 800-84 existe para medir a capacidade"
@@ -271,12 +311,13 @@
     "status": "rascunho",
     "enunciado": "Por que a ação pré-autorizada é o item mais importante da alçada em um playbook de contenção?",
     "alternativas": [
+      "O contrato de resposta cobre o que a empresa precisa",
+      "O plano de resposta já cobre todos os casos",
       "Porque sem uma lista de ações que dispensam aprovação, toda contenção fora do horário comercial espera alguém com alçada responder, e o intervalo é tempo de operação do adversário.",
-      "Preparar-se para incidentes, antes de detectar e de responder.",
-      "O acionamento real: telefone que atende fora do horário, prazo de chegada, quem assina o aceite e o limite de escopo sem nova aprovação. Sem testar, a empresa não sabe qual serviço comprou de fato."
+      "Exercício serve para treinar o time técnico"
     ],
-    "correta": 0,
-    "justificativa": "Playbook longo é playbook completo"
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-02#R04",
@@ -290,12 +331,13 @@
     "status": "rascunho",
     "enunciado": "O que a ISO/IEC 27035-1:2023 coloca antes da detecção no processo de gestão de incidentes?",
     "alternativas": [
-      "Porque sem uma lista de ações que dispensam aprovação, toda contenção fora do horário comercial espera alguém com alçada responder, e o intervalo é tempo de operação do adversário.",
-      "Preparar-se para incidentes, antes de detectar e de responder.",
-      "O acionamento real: telefone que atende fora do horário, prazo de chegada, quem assina o aceite e o limite de escopo sem nova aprovação. Sem testar, a empresa não sabe qual serviço comprou de fato."
+      "O contrato de resposta cobre o que a empresa precisa",
+      "O plano de resposta já cobre todos os casos",
+      "Exercício serve para treinar o time técnico",
+      "Preparar-se para incidentes, antes de detectar e de responder."
     ],
-    "correta": 1,
-    "justificativa": "Playbook longo é playbook completo"
+    "correta": 3,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-02#R05",
@@ -309,12 +351,13 @@
     "status": "rascunho",
     "enunciado": "Que parte do contrato com fornecedor de resposta precisa ser testada em exercício, e por quê?",
     "alternativas": [
-      "Porque sem uma lista de ações que dispensam aprovação, toda contenção fora do horário comercial espera alguém com alçada responder, e o intervalo é tempo de operação do adversário.",
-      "Preparar-se para incidentes, antes de detectar e de responder.",
-      "O acionamento real: telefone que atende fora do horário, prazo de chegada, quem assina o aceite e o limite de escopo sem nova aprovação. Sem testar, a empresa não sabe qual serviço comprou de fato."
+      "O acionamento real: telefone que atende fora do horário, prazo de chegada, quem assina o aceite e o limite de escopo sem nova aprovação. Sem testar, a empresa não sabe qual serviço comprou de fato.",
+      "O contrato de resposta cobre o que a empresa precisa",
+      "O plano de resposta já cobre todos os casos",
+      "Exercício serve para treinar o time técnico"
     ],
-    "correta": 2,
-    "justificativa": "Playbook longo é playbook completo"
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-03#E01",
@@ -329,9 +372,9 @@
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Conter é isolar a máquina\". Qual é a correção?",
     "alternativas": [
       "Contenha identidade e máquina na mesma ação, com a ordem definida",
-      "Desligar o servidor preserva a evidência",
+      "Limpar o host comprometido em nível administrativo resolve",
       "Remover o arquivo malicioso encerra a erradicação",
-      "Voltar ao ar rápido reduz o impacto"
+      "Reabilitar a conta é problema do dono do serviço"
     ],
     "correta": 0,
     "justificativa": "Enquanto a credencial vale, o adversário entra por outro host"
@@ -348,10 +391,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Desligar o servidor preserva a evidência\". Qual é a correção?",
     "alternativas": [
-      "Conter é isolar a máquina",
+      "Limpar o host comprometido em nível administrativo resolve",
       "Preserve o volátil antes de desligar, e decida o desligamento com base no que se perde",
       "Remover o arquivo malicioso encerra a erradicação",
-      "Voltar ao ar rápido reduz o impacto"
+      "Reabilitar a conta é problema do dono do serviço"
     ],
     "correta": 1,
     "justificativa": "Desligar apaga memória, processos e conexões abertas"
@@ -368,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Remover o arquivo malicioso encerra a erradicação\". Qual é a correção?",
     "alternativas": [
-      "Conter é isolar a máquina",
-      "Desligar o servidor preserva a evidência",
+      "Limpar o host comprometido em nível administrativo resolve",
+      "Reabilitar a conta é problema do dono do serviço",
       "Percorra o inventário de saída da seção 5.2 com evidência por item",
-      "Voltar ao ar rápido reduz o impacto"
+      "Desligar o servidor preserva a evidência"
     ],
     "correta": 2,
     "justificativa": "Sobram conta criada, chave de nuvem, token e certificado"
@@ -388,9 +431,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Voltar ao ar rápido reduz o impacto\". Qual é a correção?",
     "alternativas": [
-      "Conter é isolar a máquina",
-      "Desligar o servidor preserva a evidência",
+      "Limpar o host comprometido em nível administrativo resolve",
       "Remover o arquivo malicioso encerra a erradicação",
+      "Reabilitar a conta é problema do dono do serviço",
       "Cumpra os critérios de saída antes de restabelecer o serviço"
     ],
     "correta": 3,
@@ -409,9 +452,9 @@
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Reabilitar a conta é problema do dono do serviço\". Qual é a correção?",
     "alternativas": [
       "Avise o dono do serviço antes de conter, com hora e prazo de retorno",
-      "Conter é isolar a máquina",
-      "Desligar o servidor preserva a evidência",
-      "Remover o arquivo malicioso encerra a erradicação"
+      "Limpar o host comprometido em nível administrativo resolve",
+      "Remover o arquivo malicioso encerra a erradicação",
+      "Desligar o servidor preserva a evidência"
     ],
     "correta": 0,
     "justificativa": "Sem acordo escrito, a contenção é revertida por quem sente o impacto"
@@ -428,10 +471,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Limpar o host comprometido em nível administrativo resolve\". Qual é a correção?",
     "alternativas": [
-      "Conter é isolar a máquina",
+      "Remover o arquivo malicioso encerra a erradicação",
       "Reconstrua a partir de origem verificada e rotacione o que a conta podia ler",
-      "Desligar o servidor preserva a evidência",
-      "Remover o arquivo malicioso encerra a erradicação"
+      "Reabilitar a conta é problema do dono do serviço",
+      "Desligar o servidor preserva a evidência"
     ],
     "correta": 1,
     "justificativa": "Persistência em nível de administração sobrevive à limpeza"
@@ -448,13 +491,53 @@
     "status": "rascunho",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"A contenção é decisão do time técnico\". Qual é a correção?",
     "alternativas": [
-      "Conter é isolar a máquina",
-      "Desligar o servidor preserva a evidência",
+      "Limpar o host comprometido em nível administrativo resolve",
+      "Remover o arquivo malicioso encerra a erradicação",
       "Decida com a tabela de custo e com quem responde pela indisponibilidade",
-      "Remover o arquivo malicioso encerra a erradicação"
+      "Reabilitar a conta é problema do dono do serviço"
     ],
     "correta": 2,
     "justificativa": "O custo da contenção é operacional e a alçada é do negócio"
+  },
+  {
+    "id": "11-resposta-forense#TEMA-03#R02",
+    "ref": "11-resposta-forense#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que revogar chave ou certificado é a opção mais difícil de reverter?",
+    "alternativas": [
+      "Limpar o host comprometido em nível administrativo resolve",
+      "Remover o arquivo malicioso encerra a erradicação",
+      "Porque tudo que depende da chave ou do certificado deixa de funcionar até que a substituição seja distribuída, o que exige janela de mudança e coordenação com todos os donos de sistema.",
+      "Reabilitar a conta é problema do dono do serviço"
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "11-resposta-forense#TEMA-03#R04",
+    "ref": "11-resposta-forense#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são os critérios de saída que autorizam declarar a operação restabelecida?",
+    "alternativas": [
+      "Adversário sem caminho conhecido de retorno, inventário de erradicação fechado com evidência, credenciais expostas rotacionadas, detecção elevada por janela declarada e restauração a partir de cópia verificada.",
+      "Limpar o host comprometido em nível administrativo resolve",
+      "Remover o arquivo malicioso encerra a erradicação",
+      "Reabilitar a conta é problema do dono do serviço"
+    ],
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-04#E01",
@@ -468,10 +551,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Desligar o host é a forma segura de preservar\". Qual é a correção?",
     "alternativas": [
-      "Copiar arquivos pela rede é suficiente",
+      "A evidência pode ficar na pasta compartilhada do time",
       "Preserve o volátil antes de decidir o desligamento",
       "Hash comprovado é toda a custódia necessária",
-      "A evidência pode ficar na pasta compartilhada do time"
+      "Caso encerrado, material pode ser descartado"
     ],
     "correta": 1,
     "justificativa": "Desligar apaga memória, processos e conexões"
@@ -488,10 +571,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Copiar arquivos pela rede é suficiente\". Qual é a correção?",
     "alternativas": [
+      "A evidência pode ficar na pasta compartilhada do time",
       "Desligar o host é a forma segura de preservar",
-      "Hash comprovado é toda a custódia necessária",
       "Adquira o item com método documentado e hash do conjunto",
-      "A evidência pode ficar na pasta compartilhada do time"
+      "Hash comprovado é toda a custódia necessária"
     ],
     "correta": 2,
     "justificativa": "A cópia seletiva perde metadados e não é reprodutível"
@@ -508,9 +591,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Hash comprovado é toda a custódia necessária\". Qual é a correção?",
     "alternativas": [
-      "Desligar o host é a forma segura de preservar",
-      "Copiar arquivos pela rede é suficiente",
       "A evidência pode ficar na pasta compartilhada do time",
+      "Desligar o host é a forma segura de preservar",
+      "Caso encerrado, material pode ser descartado",
       "Registre cada transferência, com quem, quando, para quê"
     ],
     "correta": 3,
@@ -530,8 +613,8 @@
     "alternativas": [
       "Guarde em cofre com acesso nominal e registro de acesso",
       "Desligar o host é a forma segura de preservar",
-      "Copiar arquivos pela rede é suficiente",
-      "Hash comprovado é toda a custódia necessária"
+      "Hash comprovado é toda a custódia necessária",
+      "Caso encerrado, material pode ser descartado"
     ],
     "correta": 0,
     "justificativa": "Acesso amplo cria cadeia obscura e aumenta a exposição de dado pessoal"
@@ -550,8 +633,8 @@
     "alternativas": [
       "Desligar o host é a forma segura de preservar",
       "Analise sempre a cópia, com o original lacrado",
-      "Copiar arquivos pela rede é suficiente",
-      "Hash comprovado é toda a custódia necessária"
+      "Hash comprovado é toda a custódia necessária",
+      "Caso encerrado, material pode ser descartado"
     ],
     "correta": 1,
     "justificativa": "Alterar o original destrói a base de comparação"
@@ -568,8 +651,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Coletar é decisão técnica\". Qual é a correção?",
     "alternativas": [
+      "A evidência pode ficar na pasta compartilhada do time",
       "Desligar o host é a forma segura de preservar",
-      "Copiar arquivos pela rede é suficiente",
       "Decida com o jurídico e registre o fundamento da coleta",
       "Hash comprovado é toda a custódia necessária"
     ],
@@ -588,8 +671,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Caso encerrado, material pode ser descartado\". Qual é a correção?",
     "alternativas": [
+      "A evidência pode ficar na pasta compartilhada do time",
       "Desligar o host é a forma segura de preservar",
-      "Copiar arquivos pela rede é suficiente",
       "Hash comprovado é toda a custódia necessária",
       "Defina prazo de retenção e eliminação programada desde a coleta"
     ],
@@ -608,12 +691,13 @@
     "status": "rascunho",
     "enunciado": "Quais são as quatro atividades de manuseio de evidência digital descritas pela ISO/IEC 27037:2012?",
     "alternativas": [
+      "A evidência pode ficar na pasta compartilhada do time",
+      "Desligar o host é a forma segura de preservar",
       "Identificação, coleta, aquisição e preservação de evidência digital em potencial com valor probatório.",
-      "Identificação do item, origem com host e caminho, quem coletou e com que ferramenta, data e hora com fuso, método de aquisição, hash, local de guarda e cada transferência com assinatura e motivo.",
-      "Porque a cópia é operação de tratamento com finalidade nova, que exige base legal e prazo de eliminação. O uso fica restrito à finalidade declarada da investigação, com acesso nominalmente controlado."
+      "Hash comprovado é toda a custódia necessária"
     ],
-    "correta": 0,
-    "justificativa": "Desligar o host é a forma segura de preservar"
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-04#R03",
@@ -627,12 +711,13 @@
     "status": "rascunho",
     "enunciado": "Cite os campos mínimos de um registro de custódia.",
     "alternativas": [
-      "Identificação, coleta, aquisição e preservação de evidência digital em potencial com valor probatório.",
-      "Porque a cópia é operação de tratamento com finalidade nova, que exige base legal e prazo de eliminação. O uso fica restrito à finalidade declarada da investigação, com acesso nominalmente controlado.",
-      "Identificação do item, origem com host e caminho, quem coletou e com que ferramenta, data e hora com fuso, método de aquisição, hash, local de guarda e cada transferência com assinatura e motivo."
+      "Identificação do item, origem com host e caminho, quem coletou e com que ferramenta, data e hora com fuso, método de aquisição, hash, local de guarda e cada transferência com assinatura e motivo.",
+      "A evidência pode ficar na pasta compartilhada do time",
+      "Desligar o host é a forma segura de preservar",
+      "Hash comprovado é toda a custódia necessária"
     ],
-    "correta": 2,
-    "justificativa": "Desligar o host é a forma segura de preservar"
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-04#R04",
@@ -646,12 +731,13 @@
     "status": "rascunho",
     "enunciado": "Por que a cópia de um disco com 800 mil registros de clientes cria obrigação de privacidade, e qual é o limite de uso?",
     "alternativas": [
+      "A evidência pode ficar na pasta compartilhada do time",
       "Porque a cópia é operação de tratamento com finalidade nova, que exige base legal e prazo de eliminação. O uso fica restrito à finalidade declarada da investigação, com acesso nominalmente controlado.",
-      "Identificação, coleta, aquisição e preservação de evidência digital em potencial com valor probatório.",
-      "Identificação do item, origem com host e caminho, quem coletou e com que ferramenta, data e hora com fuso, método de aquisição, hash, local de guarda e cada transferência com assinatura e motivo."
+      "Desligar o host é a forma segura de preservar",
+      "Hash comprovado é toda a custódia necessária"
     ],
-    "correta": 0,
-    "justificativa": "Desligar o host é a forma segura de preservar"
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-05#E01",
@@ -665,8 +751,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Backup feito é backup disponível\". Qual é a correção?",
     "alternativas": [
-      "O RTO declarado é o RTO praticado",
       "Plano de continuidade é o plano de recuperação de desastre",
+      "Procedimento de contingência pode ficar no sistema",
       "Cópia imutável e credencial separada do diretório principal",
       "Restaurar o banco é recuperar o serviço"
     ],
@@ -685,8 +771,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"O RTO declarado é o RTO praticado\". Qual é a correção?",
     "alternativas": [
-      "Backup feito é backup disponível",
       "Plano de continuidade é o plano de recuperação de desastre",
+      "Procedimento de contingência pode ficar no sistema",
       "Restaurar o banco é recuperar o serviço",
       "Meça a cadeia completa em exercício e publique o número medido"
     ],
@@ -706,9 +792,9 @@
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Plano de continuidade é o plano de recuperação de desastre\". Qual é a correção?",
     "alternativas": [
       "Mantenha os dois, com donos diferentes e interface declarada",
-      "Backup feito é backup disponível",
-      "O RTO declarado é o RTO praticado",
-      "Restaurar o banco é recuperar o serviço"
+      "Procedimento de contingência pode ficar no sistema",
+      "Restaurar o banco é recuperar o serviço",
+      "Continuidade é responsabilidade da TI"
     ],
     "correta": 0,
     "justificativa": "Um trata do processo de negócio, outro trata da infraestrutura e das aplicações"
@@ -725,10 +811,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Restaurar o banco é recuperar o serviço\". Qual é a correção?",
     "alternativas": [
-      "Backup feito é backup disponível",
+      "Plano de continuidade é o plano de recuperação de desastre",
       "Restaure e valide a cadeia inteira, com teste funcional ponta a ponta",
-      "O RTO declarado é o RTO praticado",
-      "Plano de continuidade é o plano de recuperação de desastre"
+      "Procedimento de contingência pode ficar no sistema",
+      "Continuidade é responsabilidade da TI"
     ],
     "correta": 1,
     "justificativa": "Falta aplicação, identidade, chave e integração com terceiro"
@@ -745,10 +831,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Continuidade é responsabilidade da TI\". Qual é a correção?",
     "alternativas": [
-      "Backup feito é backup disponível",
-      "O RTO declarado é o RTO praticado",
+      "Plano de continuidade é o plano de recuperação de desastre",
+      "Procedimento de contingência pode ficar no sistema",
       "Peça assinatura do dono do processo no limite e no resultado do exercício",
-      "Plano de continuidade é o plano de recuperação de desastre"
+      "Restaurar o banco é recuperar o serviço"
     ],
     "correta": 2,
     "justificativa": "O limite aceitável de interrupção é decisão do dono do processo e do negócio"
@@ -765,9 +851,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Cláusula de prazo no contrato resolve\". Qual é a correção?",
     "alternativas": [
-      "Backup feito é backup disponível",
-      "O RTO declarado é o RTO praticado",
       "Plano de continuidade é o plano de recuperação de desastre",
+      "Procedimento de contingência pode ficar no sistema",
+      "Restaurar o banco é recuperar o serviço",
       "Negocie prazo com crédito ou com obrigação de reporte de recuperação"
     ],
     "correta": 3,
@@ -786,12 +872,52 @@
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Procedimento de contingência pode ficar no sistema\". Qual é a correção?",
     "alternativas": [
       "Mantenha o procedimento crítico em papel, com cópia física acessível",
-      "Backup feito é backup disponível",
-      "O RTO declarado é o RTO praticado",
-      "Plano de continuidade é o plano de recuperação de desastre"
+      "Plano de continuidade é o plano de recuperação de desastre",
+      "Restaurar o banco é recuperar o serviço",
+      "Continuidade é responsabilidade da TI"
     ],
     "correta": 0,
     "justificativa": "Se o sistema está fora, o procedimento está fora junto"
+  },
+  {
+    "id": "11-resposta-forense#TEMA-05#R02",
+    "ref": "11-resposta-forense#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "ISO 22301:2019 — Business continuity management systems",
+      "url": "https://www.iso.org/standard/75106.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual é a identificação da norma brasileira de continuidade, segundo o catálogo oficial da ABNT, e quantas páginas ela tem?",
+    "alternativas": [
+      "ABNT NBR ISO 22301:2020, do comitê ABNT/CEE-063 Gestão de Riscos, com 24 páginas.",
+      "Plano de continuidade é o plano de recuperação de desastre",
+      "Procedimento de contingência pode ficar no sistema",
+      "Restaurar o banco é recuperar o serviço"
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "11-resposta-forense#TEMA-05#R04",
+    "ref": "11-resposta-forense#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "ISO 22301:2019 — Business continuity management systems",
+      "url": "https://www.iso.org/standard/75106.html",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que o tempo real de recuperação de um processo é o maior tempo da cadeia de dependências?",
+    "alternativas": [
+      "Plano de continuidade é o plano de recuperação de desastre",
+      "Procedimento de contingência pode ficar no sistema",
+      "Porque o processo só opera quando todas as dependências estão disponíveis, e a última a voltar determina o tempo total.",
+      "Restaurar o banco é recuperar o serviço"
+    ],
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-06#E01",
@@ -805,9 +931,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Sem dado pessoal confirmado, não há prazo\". Qual é a correção?",
     "alternativas": [
-      "Comunicar cedo demais expõe a empresa",
-      "O comunicado ao cliente substitui a notificação",
+      "O número de titulares pode ser estimado no comunicado",
       "Incidente não comunicado não precisa de registro",
+      "O comunicado ao cliente substitui a notificação",
       "Registre quando soube e trate a classificação do dado como etapa do ciclo"
     ],
     "correta": 3,
@@ -826,9 +952,9 @@
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Comunicar cedo demais expõe a empresa\". Qual é a correção?",
     "alternativas": [
       "Comunique o que sabe, explique a demora e complemente",
-      "Sem dado pessoal confirmado, não há prazo",
-      "O comunicado ao cliente substitui a notificação",
-      "Incidente não comunicado não precisa de registro"
+      "O número de titulares pode ser estimado no comunicado",
+      "Incidente não comunicado não precisa de registro",
+      "O comunicado ao cliente substitui a notificação"
     ],
     "correta": 0,
     "justificativa": "O regulamento prevê complementação fundamentada em vinte dias úteis"
@@ -845,10 +971,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"O comunicado ao cliente substitui a notificação\". Qual é a correção?",
     "alternativas": [
-      "Sem dado pessoal confirmado, não há prazo",
+      "O número de titulares pode ser estimado no comunicado",
       "Faça as duas comunicações, com textos e aprovações separados",
-      "Comunicar cedo demais expõe a empresa",
-      "Incidente não comunicado não precisa de registro"
+      "Incidente não comunicado não precisa de registro",
+      "Sem dado pessoal confirmado, não há prazo"
     ],
     "correta": 1,
     "justificativa": "São destinatários distintos, com conteúdo e prazos próprios"
@@ -865,10 +991,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Incidente não comunicado não precisa de registro\". Qual é a correção?",
     "alternativas": [
-      "Sem dado pessoal confirmado, não há prazo",
-      "Comunicar cedo demais expõe a empresa",
+      "O número de titulares pode ser estimado no comunicado",
+      "O comunicado ao cliente substitui a notificação",
       "Registre a decisão e os motivos da ausência de comunicação",
-      "O comunicado ao cliente substitui a notificação"
+      "Sem dado pessoal confirmado, não há prazo"
     ],
     "correta": 2,
     "justificativa": "O art. 10 exige registro do incidente, inclusive do não comunicado, por no mínimo cinco anos"
@@ -885,9 +1011,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"O número de titulares pode ser estimado no comunicado\". Qual é a correção?",
     "alternativas": [
-      "Sem dado pessoal confirmado, não há prazo",
-      "Comunicar cedo demais expõe a empresa",
+      "Incidente não comunicado não precisa de registro",
       "O comunicado ao cliente substitui a notificação",
+      "Sem dado pessoal confirmado, não há prazo",
       "Informe o número com o escopo conhecido e complemente com o número final"
     ],
     "correta": 3,
@@ -906,8 +1032,8 @@
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Texto tranquilizador reduz o dano\". Qual é a correção?",
     "alternativas": [
       "Descreva o que sabe, sem prometer ausência de impacto",
-      "Sem dado pessoal confirmado, não há prazo",
-      "Comunicar cedo demais expõe a empresa",
+      "O número de titulares pode ser estimado no comunicado",
+      "Incidente não comunicado não precisa de registro",
       "O comunicado ao cliente substitui a notificação"
     ],
     "correta": 0,
@@ -925,9 +1051,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Comunicação é assunto do jurídico\". Qual é a correção?",
     "alternativas": [
-      "Sem dado pessoal confirmado, não há prazo",
+      "O número de titulares pode ser estimado no comunicado",
       "Junte jurídico, comunicação, encarregado e segurança na mesma decisão",
-      "Comunicar cedo demais expõe a empresa",
+      "Incidente não comunicado não precisa de registro",
       "O comunicado ao cliente substitui a notificação"
     ],
     "correta": 1,
@@ -945,12 +1071,13 @@
     "status": "rascunho",
     "enunciado": "Quais são os prazos de comunicação à ANPD e ao titular, e de que evento cada um conta?",
     "alternativas": [
-      "Pelos meios de divulgação disponíveis, como sítio eletrônico, aplicativos, mídias sociais e canais de atendimento, com conhecimento amplo e fácil visualização, pelo período de no mínimo três meses.",
-      "Determinar ampla divulgação do incidente em meios de comunicação, às expensas do controlador, compatível com a abrangência da empresa e com a localização dos titulares afetados.",
-      "Três dias úteis à ANPD e três dias úteis ao titular, ambos contados do conhecimento pelo controlador de que o incidente afetou dados pessoais."
+      "O número de titulares pode ser estimado no comunicado",
+      "Três dias úteis à ANPD e três dias úteis ao titular, ambos contados do conhecimento pelo controlador de que o incidente afetou dados pessoais.",
+      "Incidente não comunicado não precisa de registro",
+      "O comunicado ao cliente substitui a notificação"
     ],
-    "correta": 2,
-    "justificativa": "Sem dado pessoal confirmado, não há prazo"
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-06#R04",
@@ -964,12 +1091,13 @@
     "status": "rascunho",
     "enunciado": "Como a empresa comunica quando não consegue identificar todos os titulares afetados?",
     "alternativas": [
-      "Três dias úteis à ANPD e três dias úteis ao titular, ambos contados do conhecimento pelo controlador de que o incidente afetou dados pessoais.",
-      "Pelos meios de divulgação disponíveis, como sítio eletrônico, aplicativos, mídias sociais e canais de atendimento, com conhecimento amplo e fácil visualização, pelo período de no mínimo três meses.",
-      "Determinar ampla divulgação do incidente em meios de comunicação, às expensas do controlador, compatível com a abrangência da empresa e com a localização dos titulares afetados."
+      "O número de titulares pode ser estimado no comunicado",
+      "Incidente não comunicado não precisa de registro",
+      "O comunicado ao cliente substitui a notificação",
+      "Pelos meios de divulgação disponíveis, como sítio eletrônico, aplicativos, mídias sociais e canais de atendimento, com conhecimento amplo e fácil visualização, pelo período de no mínimo três meses."
     ],
-    "correta": 1,
-    "justificativa": "Sem dado pessoal confirmado, não há prazo"
+    "correta": 3,
+    "justificativa": ""
   },
   {
     "id": "11-resposta-forense#TEMA-06#R06",
@@ -983,11 +1111,12 @@
     "status": "rascunho",
     "enunciado": "O que a autoridade pode fazer se considerar a comunicação da empresa insuficiente para alcançar parcela significativa dos titulares?",
     "alternativas": [
+      "O número de titulares pode ser estimado no comunicado",
       "Determinar ampla divulgação do incidente em meios de comunicação, às expensas do controlador, compatível com a abrangência da empresa e com a localização dos titulares afetados.",
-      "Três dias úteis à ANPD e três dias úteis ao titular, ambos contados do conhecimento pelo controlador de que o incidente afetou dados pessoais.",
-      "Pelos meios de divulgação disponíveis, como sítio eletrônico, aplicativos, mídias sociais e canais de atendimento, com conhecimento amplo e fácil visualização, pelo período de no mínimo três meses."
+      "Incidente não comunicado não precisa de registro",
+      "O comunicado ao cliente substitui a notificação"
     ],
-    "correta": 0,
-    "justificativa": "Sem dado pessoal confirmado, não há prazo"
+    "correta": 1,
+    "justificativa": ""
   }
 ]

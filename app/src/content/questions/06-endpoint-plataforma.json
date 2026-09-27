@@ -11,10 +11,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Endpoint é sinônimo de estação de trabalho\". Qual é a correção?",
     "alternativas": [
-      "Antivírus com assinatura atualizada resolve execução",
+      "Privilégio administrativo local é questão de conforto do usuário",
       "Trate servidor e carga de trabalho como endpoint, com regime próprio",
-      "Agente instalado significa agente funcionando",
-      "Inventário de dispositivo é inventário de software"
+      "Bloquear tudo que não está na lista é o objetivo final",
+      "Antivírus com assinatura atualizada resolve execução"
     ],
     "correta": 1,
     "justificativa": "O servidor, a instância em nuvem e o contêiner executam código e têm identidade própria"
@@ -31,8 +31,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Antivírus com assinatura atualizada resolve execução\". Qual é a correção?",
     "alternativas": [
-      "Endpoint é sinônimo de estação de trabalho",
-      "Agente instalado significa agente funcionando",
+      "Privilégio administrativo local é questão de conforto do usuário",
+      "Bloquear tudo que não está na lista é o objetivo final",
       "Controle o que pode executar por autorização, e mantenha o antivírus ao lado disso",
       "Inventário de dispositivo é inventário de software"
     ],
@@ -51,7 +51,7 @@
     "status": "rascunho",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Agente instalado significa agente funcionando\". Qual é a correção?",
     "alternativas": [
-      "Endpoint é sinônimo de estação de trabalho",
+      "Bloquear tudo que não está na lista é o objetivo final",
       "Antivírus com assinatura atualizada resolve execução",
       "Inventário de dispositivo é inventário de software",
       "Meça cobertura por tipo de evento e por janela de tempo"
@@ -72,9 +72,9 @@
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Inventário de dispositivo é inventário de software\". Qual é a correção?",
     "alternativas": [
       "Mantenha as duas listas e cruze uma com a outra",
+      "Agente instalado significa agente funcionando",
       "Endpoint é sinônimo de estação de trabalho",
-      "Antivírus com assinatura atualizada resolve execução",
-      "Agente instalado significa agente funcionando"
+      "Antivírus com assinatura atualizada resolve execução"
     ],
     "correta": 0,
     "justificativa": "O mesmo equipamento pode ter centenas de executáveis distintos em um dia"
@@ -91,10 +91,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Privilégio administrativo local é questão de conforto do usuário\". Qual é a correção?",
     "alternativas": [
-      "Endpoint é sinônimo de estação de trabalho",
+      "Bloquear tudo que não está na lista é o objetivo final",
       "Trate privilégio local como decisão de segurança, com prazo e justificativa",
       "Antivírus com assinatura atualizada resolve execução",
-      "Agente instalado significa agente funcionando"
+      "Inventário de dispositivo é inventário de software"
     ],
     "correta": 1,
     "justificativa": "A conta administrativa altera o próprio sensor e o próprio controle de execução"
@@ -111,13 +111,53 @@
     "status": "rascunho",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Bloquear tudo que não está na lista é o objetivo final\". Qual é a correção?",
     "alternativas": [
-      "Endpoint é sinônimo de estação de trabalho",
+      "Privilégio administrativo local é questão de conforto do usuário",
       "Antivírus com assinatura atualizada resolve execução",
       "Passe primeiro por auditoria, publique o catálogo e só então aplique a política",
-      "Agente instalado significa agente funcionando"
+      "Inventário de dispositivo é inventário de software"
     ],
     "correta": 2,
     "justificativa": "Bloqueio sem catálogo consolidado para a operação no primeiro dia útil"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-01#R02",
+    "ref": "06-endpoint-plataforma#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
+      "url": "https://attack.mitre.org/tactics/TA0002/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que a definição de lista de permitidos do NIST SP 800-167 muda na pergunta que o defensor faz sobre um programa?",
+    "alternativas": [
+      "Privilégio administrativo local é questão de conforto do usuário",
+      "Bloquear tudo que não está na lista é o objetivo final",
+      "Antivírus com assinatura atualizada resolve execução",
+      "Troca a pergunta \"este programa é malicioso?\" por \"este programa está autorizado?\". A segunda tem resposta verificável contra uma lista publicada e não depende de julgamento sobre intenção."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-01#R04",
+    "ref": "06-endpoint-plataforma#TEMA-01",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
+      "url": "https://attack.mitre.org/tactics/TA0002/",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Qual métrica substitui a contagem de agentes instalados, e por quê?",
+    "alternativas": [
+      "Privilégio administrativo local é questão de conforto do usuário",
+      "A contagem de máquinas que enviaram evento recente, por tipo de evento. Instalação é estado de inventário; envio de evento é comportamento observado, e é o comportamento que sustenta a detecção.",
+      "Bloquear tudo que não está na lista é o objetivo final",
+      "Antivírus com assinatura atualizada resolve execução"
+    ],
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "06-endpoint-plataforma#TEMA-02#E01",
@@ -131,10 +171,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Aplicar o benchmark inteiro é o objetivo\". Qual é a correção?",
     "alternativas": [
-      "Endurecer de uma vez, sem medir antes",
-      "Linha de base é assunto de servidor",
+      "Imagem de instalação resolve a linha de base",
+      "Controle de execução é ligar e esquecer",
       "Classifique em aplicar agora, aplicar com teste e não aplicar, e registre o terceiro grupo",
-      "Imagem de instalação resolve a linha de base"
+      "Endurecer de uma vez, sem medir antes"
     ],
     "correta": 2,
     "justificativa": "Item que quebra sistema de negócio gera exceção informal, e exceção informal não é medida"
@@ -151,9 +191,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Endurecer de uma vez, sem medir antes\". Qual é a correção?",
     "alternativas": [
-      "Aplicar o benchmark inteiro é o objetivo",
-      "Linha de base é assunto de servidor",
       "Imagem de instalação resolve a linha de base",
+      "Aplicar o benchmark inteiro é o objetivo",
+      "Controle de execução é ligar e esquecer",
       "Rode a primeira varredura antes de mudar qualquer coisa"
     ],
     "correta": 3,
@@ -172,9 +212,9 @@
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Linha de base é assunto de servidor\". Qual é a correção?",
     "alternativas": [
       "Cubra também o parque de estações, com benchmark próprio",
+      "Imagem de instalação resolve a linha de base",
       "Aplicar o benchmark inteiro é o objetivo",
-      "Endurecer de uma vez, sem medir antes",
-      "Imagem de instalação resolve a linha de base"
+      "Controle de execução é ligar e esquecer"
     ],
     "correta": 0,
     "justificativa": "Estação de trabalho é a maior parte do parque e a porta de entrada mais comum"
@@ -193,8 +233,8 @@
     "alternativas": [
       "Aplicar o benchmark inteiro é o objetivo",
       "Combine imagem, política contínua e varredura",
-      "Endurecer de uma vez, sem medir antes",
-      "Linha de base é assunto de servidor"
+      "Controle de execução é ligar e esquecer",
+      "Endurecer de uma vez, sem medir antes"
     ],
     "correta": 1,
     "justificativa": "Ela corrige o estado inicial e não toca nas máquinas já instaladas"
@@ -211,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Desvio aceito é falha de conformidade\". Qual é a correção?",
     "alternativas": [
+      "Imagem de instalação resolve a linha de base",
       "Aplicar o benchmark inteiro é o objetivo",
-      "Endurecer de uma vez, sem medir antes",
       "Trate o registro de desvio como parte do artefato, não como exceção a esconder",
-      "Linha de base é assunto de servidor"
+      "Controle de execução é ligar e esquecer"
     ],
     "correta": 2,
     "justificativa": "Desvio com dono, prazo e motivo é decisão de risco documentada"
@@ -231,13 +271,53 @@
     "status": "rascunho",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Controle de execução é ligar e esquecer\". Qual é a correção?",
     "alternativas": [
+      "Imagem de instalação resolve a linha de base",
       "Aplicar o benchmark inteiro é o objetivo",
       "Endurecer de uma vez, sem medir antes",
-      "Linha de base é assunto de servidor",
       "Passe por auditoria e modo de avaliação antes do bloqueio"
     ],
     "correta": 3,
     "justificativa": "Política de execução mal calibrada bloqueia processo de negócio em produção"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-02#R01",
+    "ref": "06-endpoint-plataforma#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são as quatro propriedades que distinguem um artefato de linha de base de um documento de boas práticas?",
+    "alternativas": [
+      "Imagem de instalação resolve a linha de base",
+      "Aplicar o benchmark inteiro é o objetivo",
+      "Controle de execução é ligar e esquecer",
+      "Identifica a família e a versão do sistema alvo, tem número de versão próprio, é aplicado automaticamente a grupos de máquinas e é medido por varredura periódica que separa itens conformes de não conformes."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-02#R05",
+    "ref": "06-endpoint-plataforma#TEMA-02",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais quatro campos bastam no registro de desvio, e o que acontece quando o dono nominal está ausente?",
+    "alternativas": [
+      "Imagem de instalação resolve a linha de base",
+      "Aplicar o benchmark inteiro é o objetivo",
+      "Controle de execução é ligar e esquecer",
+      "Identificador do item com a versão do benchmark, motivo de negócio, dono nominal e data de reavaliação. Sem dono nominal o desvio é anônimo, e ninguém tem motivo para revê-lo."
+    ],
+    "correta": 3,
+    "justificativa": ""
   },
   {
     "id": "06-endpoint-plataforma#TEMA-03#E01",
@@ -251,9 +331,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"A ferramenta reportou sucesso, logo o item está corrigido\". Qual é a correção?",
     "alternativas": [
-      "Severidade alta é prioridade alta",
-      "Patch é projeto com data de término",
       "Software descontinuado sai da conta quando sai do suporte",
+      "Instalar em todas as máquinas ao mesmo tempo é eficiência",
+      "O inventário de software instalado é suficiente",
       "Verifique a versão do componente no próprio dispositivo"
     ],
     "correta": 3,
@@ -273,8 +353,8 @@
     "alternativas": [
       "Combine exploração confirmada, probabilidade estimada e exposição do dispositivo",
       "A ferramenta reportou sucesso, logo o item está corrigido",
-      "Patch é projeto com data de término",
-      "Software descontinuado sai da conta quando sai do suporte"
+      "Software descontinuado sai da conta quando sai do suporte",
+      "Instalar em todas as máquinas ao mesmo tempo é eficiência"
     ],
     "correta": 0,
     "justificativa": "A nota descreve pior caso técnico e ignora a probabilidade de alguém explorar aquilo"
@@ -293,8 +373,8 @@
     "alternativas": [
       "A ferramenta reportou sucesso, logo o item está corrigido",
       "Coloque janela recorrente no calendário e orçamento de base",
-      "Severidade alta é prioridade alta",
-      "Software descontinuado sai da conta quando sai do suporte"
+      "Software descontinuado sai da conta quando sai do suporte",
+      "Instalar em todas as máquinas ao mesmo tempo é eficiência"
     ],
     "correta": 1,
     "justificativa": "Manutenção preventiva é recorrente, como revisão de elevador"
@@ -312,9 +392,9 @@
     "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Software descontinuado sai da conta quando sai do suporte\". Qual é a correção?",
     "alternativas": [
       "A ferramenta reportou sucesso, logo o item está corrigido",
-      "Severidade alta é prioridade alta",
+      "Instalar em todas as máquinas ao mesmo tempo é eficiência",
       "Decida entre substituição, isolamento e aceite formal do risco",
-      "Patch é projeto com data de término"
+      "O inventário de software instalado é suficiente"
     ],
     "correta": 2,
     "justificativa": "Sem correção publicada, o item nunca fecha por patch"
@@ -331,9 +411,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Instalar em todas as máquinas ao mesmo tempo é eficiência\". Qual é a correção?",
     "alternativas": [
-      "A ferramenta reportou sucesso, logo o item está corrigido",
-      "Severidade alta é prioridade alta",
       "Patch é projeto com data de término",
+      "Severidade alta é prioridade alta",
+      "O inventário de software instalado é suficiente",
       "Use anéis com intervalo entre ondas"
     ],
     "correta": 3,
@@ -353,11 +433,51 @@
     "alternativas": [
       "Amplie o inventário por varredura de componentes no dispositivo",
       "A ferramenta reportou sucesso, logo o item está corrigido",
-      "Severidade alta é prioridade alta",
-      "Patch é projeto com data de término"
+      "Software descontinuado sai da conta quando sai do suporte",
+      "Instalar em todas as máquinas ao mesmo tempo é eficiência"
     ],
     "correta": 0,
     "justificativa": "Componente embarcado e biblioteca de terceiro não aparecem nessa lista"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-03#R01",
+    "ref": "06-endpoint-plataforma#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são as cinco etapas do processo de gestão de patch descritas pelo NIST SP 800-40 Rev. 4, e qual delas exige instrumentação no dispositivo?",
+    "alternativas": [
+      "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o próprio host pode reportar o estado da versão corrigida.",
+      "A ferramenta reportou sucesso, logo o item está corrigido",
+      "Software descontinuado sai da conta quando sai do suporte",
+      "Instalar em todas as máquinas ao mesmo tempo é eficiência"
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-03#R03",
+    "ref": "06-endpoint-plataforma#TEMA-03",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que o catálogo de vulnerabilidades exploradas em campo mantido pela CISA representa, e por qual instrumento foi estabelecido?",
+    "alternativas": [
+      "A ferramenta reportou sucesso, logo o item está corrigido",
+      "Software descontinuado sai da conta quando sai do suporte",
+      "A relação de vulnerabilidades que foram efetivamente exploradas em campo, mantida como fonte autoritativa pela CISA e estabelecida pela Binding Operational Directive 22-01.",
+      "Instalar em todas as máquinas ao mesmo tempo é eficiência"
+    ],
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "06-endpoint-plataforma#TEMA-04#E01",
@@ -373,8 +493,8 @@
     "alternativas": [
       "Trate como ponto de decisão com escopo definido, não como assinatura de arquivo",
       "Ligar todas as ações automáticas é o estado desejado",
-      "Isolar a máquina é sempre a primeira ação",
-      "Remover o artefato resolve o caso"
+      "XDR elimina a necessidade de integrar fontes",
+      "Isolar a máquina é sempre a primeira ação"
     ],
     "correta": 0,
     "justificativa": "A diferença está na coleta contínua de evento e na capacidade de agir sobre o dispositivo"
@@ -391,7 +511,7 @@
     "status": "rascunho",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Ligar todas as ações automáticas é o estado desejado\". Qual é a correção?",
     "alternativas": [
-      "EDR é antivírus com nome novo",
+      "XDR elimina a necessidade de integrar fontes",
       "Defina escopo por grupo de máquinas e por criticidade do serviço",
       "Isolar a máquina é sempre a primeira ação",
       "Remover o artefato resolve o caso"
@@ -411,8 +531,8 @@
     "status": "rascunho",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Isolar a máquina é sempre a primeira ação\". Qual é a correção?",
     "alternativas": [
-      "EDR é antivírus com nome novo",
       "Ligar todas as ações automáticas é o estado desejado",
+      "XDR elimina a necessidade de integrar fontes",
       "Decida por tipo de dispositivo, com caminho de reversão declarado",
       "Remover o artefato resolve o caso"
     ],
@@ -431,8 +551,8 @@
     "status": "rascunho",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Remover o artefato resolve o caso\". Qual é a correção?",
     "alternativas": [
-      "EDR é antivírus com nome novo",
       "Ligar todas as ações automáticas é o estado desejado",
+      "XDR elimina a necessidade de integrar fontes",
       "Isolar a máquina é sempre a primeira ação",
       "Colete antes de remover, e trate remoção como decisão humana"
     ],
@@ -452,9 +572,9 @@
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"XDR elimina a necessidade de integrar fontes\". Qual é a correção?",
     "alternativas": [
       "Meça a cobertura por fonte e por tipo de evento",
-      "EDR é antivírus com nome novo",
       "Ligar todas as ações automáticas é o estado desejado",
-      "Isolar a máquina é sempre a primeira ação"
+      "Isolar a máquina é sempre a primeira ação",
+      "Remover o artefato resolve o caso"
     ],
     "correta": 0,
     "justificativa": "A correlação depende das fontes; fonte ausente produz ponto cego silencioso"
@@ -471,9 +591,9 @@
     "status": "rascunho",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Ação automática dispensa registro\". Qual é a correção?",
     "alternativas": [
-      "EDR é antivírus com nome novo",
-      "Registre horário, máquina, regra, ação e alerta de cada ação automática",
       "Ligar todas as ações automáticas é o estado desejado",
+      "Registre horário, máquina, regra, ação e alerta de cada ação automática",
+      "XDR elimina a necessidade de integrar fontes",
       "Isolar a máquina é sempre a primeira ação"
     ],
     "correta": 1,
@@ -491,12 +611,13 @@
     "status": "rascunho",
     "enunciado": "Quais são as três características que definem a categoria de detecção e resposta em endpoint, e qual delas a distingue do antivírus tradicional?",
     "alternativas": [
-      "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência.",
-      "Horário, identificação da máquina, regra ou modelo que decidiu, ação executada e identificador do alerta correspondente.",
-      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos."
+      "Ligar todas as ações automáticas é o estado desejado",
+      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
+      "XDR elimina a necessidade de integrar fontes",
+      "Isolar a máquina é sempre a primeira ação"
     ],
-    "correta": 2,
-    "justificativa": "EDR é antivírus com nome novo"
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "06-endpoint-plataforma#TEMA-04#R03",
@@ -510,12 +631,13 @@
     "status": "rascunho",
     "enunciado": "Liste as quatro ações de resposta no host em ordem crescente de impacto e diga qual delas destrói evidência.",
     "alternativas": [
-      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
-      "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência.",
-      "Horário, identificação da máquina, regra ou modelo que decidiu, ação executada e identificador do alerta correspondente."
+      "Ligar todas as ações automáticas é o estado desejado",
+      "XDR elimina a necessidade de integrar fontes",
+      "Isolar a máquina é sempre a primeira ação",
+      "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência."
     ],
-    "correta": 1,
-    "justificativa": "EDR é antivírus com nome novo"
+    "correta": 3,
+    "justificativa": ""
   },
   {
     "id": "06-endpoint-plataforma#TEMA-04#R05",
@@ -529,12 +651,13 @@
     "status": "rascunho",
     "enunciado": "Quais cinco campos o registro de ação automática precisa conter?",
     "alternativas": [
+      "Ligar todas as ações automáticas é o estado desejado",
       "Horário, identificação da máquina, regra ou modelo que decidiu, ação executada e identificador do alerta correspondente.",
-      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
-      "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência."
+      "XDR elimina a necessidade de integrar fontes",
+      "Isolar a máquina é sempre a primeira ação"
     ],
-    "correta": 0,
-    "justificativa": "EDR é antivírus com nome novo"
+    "correta": 1,
+    "justificativa": ""
   },
   {
     "id": "06-endpoint-plataforma#TEMA-05#E01",
@@ -550,8 +673,8 @@
     "alternativas": [
       "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
       "Trate criptografia como controle contra perda e roubo de equipamento",
-      "Bloquear tudo desde o primeiro dia é firmeza",
-      "Política de saída resolve o dado que sai por canal fora do dispositivo"
+      "Política de saída resolve o dado que sai por canal fora do dispositivo",
+      "Registro de auditoria é consequência automática da ferramenta"
     ],
     "correta": 1,
     "justificativa": "Com a sessão aberta o sistema decifra para o usuário; a proteção vale para o equipamento desligado ou bloqueado"
@@ -568,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Classificação é etapa dispensável se a ferramenta detecta conteúdo\". Qual é a correção?",
     "alternativas": [
-      "Criptografia de disco protege o dado em uso",
-      "Bloquear tudo desde o primeiro dia é firmeza",
+      "Política de saída resolve o dado que sai por canal fora do dispositivo",
+      "Registro de auditoria é consequência automática da ferramenta",
       "Use rótulo e detecção por conteúdo em conjunto, com a segunda como rede de segurança",
-      "Política de saída resolve o dado que sai por canal fora do dispositivo"
+      "Apagar o disco é procedimento óbvio e sem risco"
     ],
     "correta": 2,
     "justificativa": "Detecção por conteúdo tem falso positivo e falso negativo e não cobre dado sem padrão reconhecível"
@@ -588,9 +711,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Bloquear tudo desde o primeiro dia é firmeza\". Qual é a correção?",
     "alternativas": [
+      "Apagar o disco é procedimento óbvio e sem risco",
+      "Registro de auditoria é consequência automática da ferramenta",
       "Criptografia de disco protege o dado em uso",
-      "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
-      "Política de saída resolve o dado que sai por canal fora do dispositivo",
       "Comece em modo de simulação e avance uma regra por vez"
     ],
     "correta": 3,
@@ -609,9 +732,9 @@
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Política de saída resolve o dado que sai por canal fora do dispositivo\". Qual é a correção?",
     "alternativas": [
       "Cubra por canal e revise a lista de canais periodicamente",
-      "Criptografia de disco protege o dado em uso",
+      "Registro de auditoria é consequência automática da ferramenta",
       "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
-      "Bloquear tudo desde o primeiro dia é firmeza"
+      "Apagar o disco é procedimento óbvio e sem risco"
     ],
     "correta": 0,
     "justificativa": "Canal não coberto pela ferramenta permanece invisível"
@@ -628,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Apagar o disco é procedimento óbvio e sem risco\". Qual é a correção?",
     "alternativas": [
-      "Criptografia de disco protege o dado em uso",
+      "Bloquear tudo desde o primeiro dia é firmeza",
       "Defina método, responsável e evidência do descarte",
-      "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
-      "Bloquear tudo desde o primeiro dia é firmeza"
+      "Criptografia de disco protege o dado em uso",
+      "Registro de auditoria é consequência automática da ferramenta"
     ],
     "correta": 1,
     "justificativa": "Sem método declarado e sem registro, o apagamento não é verificável"
@@ -648,13 +771,53 @@
     "status": "rascunho",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Registro de auditoria é consequência automática da ferramenta\". Qual é a correção?",
     "alternativas": [
-      "Criptografia de disco protege o dado em uso",
+      "Política de saída resolve o dado que sai por canal fora do dispositivo",
       "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
       "Coloque a leitura do registro na rotina semanal com critério definido",
-      "Bloquear tudo desde o primeiro dia é firmeza"
+      "Apagar o disco é procedimento óbvio e sem risco"
     ],
     "correta": 2,
     "justificativa": "O registro existe, mas ninguém o lê nem o correlaciona com resposta"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-05#R04",
+    "ref": "06-endpoint-plataforma#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
+      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "O que caracteriza o modo de simulação e por que ele precede qualquer modo restritivo?",
+    "alternativas": [
+      "Política de saída resolve o dado que sai por canal fora do dispositivo",
+      "As ações definidas na política não são aplicadas; o objeto de medição é o volume e o destino do que sairia do dispositivo. Ele precede o modo restritivo porque o volume observado define o que a equipe consegue tratar.",
+      "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
+      "Registro de auditoria é consequência automática da ferramenta"
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-05#R05",
+    "ref": "06-endpoint-plataforma#TEMA-05",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
+      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que a classificação por rótulo e a classificação por conteúdo se complementam?",
+    "alternativas": [
+      "Política de saída resolve o dado que sai por canal fora do dispositivo",
+      "Classificação é etapa dispensável se a ferramenta detecta conteúdo",
+      "Porque o rótulo é mais preciso e depende de disciplina na aplicação, enquanto a detecção por conteúdo funciona sem depender de comportamento humano e cobre o que ficou sem rótulo. A segunda cobre a falha da primeira.",
+      "Registro de auditoria é consequência automática da ferramenta"
+    ],
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "06-endpoint-plataforma#TEMA-06#E01",
@@ -669,7 +832,7 @@
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Servidor é estação com mais memória\". Qual é a correção?",
     "alternativas": [
       "Aplicar o benchmark do sistema operacional cobre a carga",
-      "Corrigir o processo em execução resolve",
+      "Telemetria do nó cobre o que acontece na carga",
       "Trate como regime próprio, com decisão codificada antes do evento",
       "Configurar servidor à mão e depois documentar"
     ],
@@ -688,9 +851,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Aplicar o benchmark do sistema operacional cobre a carga\". Qual é a correção?",
     "alternativas": [
-      "Servidor é estação com mais memória",
-      "Corrigir o processo em execução resolve",
+      "Telemetria do nó cobre o que acontece na carga",
       "Configurar servidor à mão e depois documentar",
+      "Corrigir o processo em execução resolve",
       "Escolha um benchmark por camada e declare as versões"
     ],
     "correta": 3,
@@ -709,9 +872,9 @@
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Corrigir o processo em execução resolve\". Qual é a correção?",
     "alternativas": [
       "Corrija a imagem e substitua as instâncias",
-      "Servidor é estação com mais memória",
-      "Aplicar o benchmark do sistema operacional cobre a carga",
-      "Configurar servidor à mão e depois documentar"
+      "Configurar servidor à mão e depois documentar",
+      "Carga sem dono é assunto administrativo",
+      "Telemetria do nó cobre o que acontece na carga"
     ],
     "correta": 0,
     "justificativa": "A instância é recriada a partir da imagem antiga no próximo ciclo"
@@ -728,9 +891,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Configurar servidor à mão e depois documentar\". Qual é a correção?",
     "alternativas": [
-      "Servidor é estação com mais memória",
-      "Automatize o provisionamento e recrie a máquina divergente",
       "Aplicar o benchmark do sistema operacional cobre a carga",
+      "Automatize o provisionamento e recrie a máquina divergente",
+      "Telemetria do nó cobre o que acontece na carga",
       "Corrigir o processo em execução resolve"
     ],
     "correta": 1,
@@ -748,8 +911,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Telemetria do nó cobre o que acontece na carga\". Qual é a correção?",
     "alternativas": [
-      "Servidor é estação com mais memória",
       "Aplicar o benchmark do sistema operacional cobre a carga",
+      "Configurar servidor à mão e depois documentar",
       "Combine agente no nó com registro de auditoria do orquestrador",
       "Corrigir o processo em execução resolve"
     ],
@@ -768,12 +931,52 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Carga sem dono é assunto administrativo\". Qual é a correção?",
     "alternativas": [
-      "Servidor é estação com mais memória",
       "Aplicar o benchmark do sistema operacional cobre a carga",
-      "Corrigir o processo em execução resolve",
+      "Telemetria do nó cobre o que acontece na carga",
+      "Configurar servidor à mão e depois documentar",
       "Nomeie dono por carga antes de prometer prazo de correção"
     ],
     "correta": 3,
     "justificativa": "Sem dono não existe negociação de janela, escalonamento de alerta nem decisão de desligamento"
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-06#R04",
+    "ref": "06-endpoint-plataforma#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Quais são as duas fontes de telemetria de uma carga em contêiner e o que cada uma responde?",
+    "alternativas": [
+      "Aplicar o benchmark do sistema operacional cobre a carga",
+      "Telemetria do nó cobre o que acontece na carga",
+      "O agente no nó, que enxerga o motor de contêiner e o comportamento do processo, e o registro de auditoria do orquestrador, que responde quem criou a carga, quando e com qual identidade.",
+      "Configurar servidor à mão e depois documentar"
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "06-endpoint-plataforma#TEMA-06#R05",
+    "ref": "06-endpoint-plataforma#TEMA-06",
+    "origem": "recuperacao",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "rascunho",
+    "enunciado": "Por que carga de trabalho sem dono nomeado inviabiliza o ciclo de correção?",
+    "alternativas": [
+      "Aplicar o benchmark do sistema operacional cobre a carga",
+      "Telemetria do nó cobre o que acontece na carga",
+      "Configurar servidor à mão e depois documentar",
+      "Porque a janela de correção precisa ser negociada com quem responde pelo serviço, o alerta precisa de destinatário e o desligamento de carga órfã precisa de decisão. Sem dono, o item entra na fila e nunca sai dela."
+    ],
+    "correta": 3,
+    "justificativa": ""
   }
 ]

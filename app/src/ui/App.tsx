@@ -5,8 +5,9 @@ import { AreaView } from './AreaView'
 import { Html, Secoes } from './Blocos'
 import { renderizarMermaid } from './mermaid'
 import { ResumoProgresso } from './Progresso'
+import { Quiz } from './Quiz'
 import { ThemeView } from './ThemeView'
-import { useRota } from './useRota'
+import { irPara, linkQuiz, useRota } from './useRota'
 
 const CHAVE_TEMA = 'roadmap:tema'
 
@@ -25,6 +26,27 @@ function Home() {
       </header>
 
       <ResumoProgresso />
+
+      <section className="secao">
+        <h2>Praticar</h2>
+        <p className="dica">
+          Múltipla escolha derivada das tabelas de erros comuns e da recuperação ativa dos temas:
+          uma questão por vez, com acerto ou erro, justificativa, fonte e o caminho de volta ao tema
+          de origem. O item que ainda não passou por revisão humana aparece marcado.
+        </p>
+        <p className="acoes-tema">
+          {/* Botao, e nao ancora, por um motivo concreto: o smoke confere todo link interno
+              (`a[href^="#"]`) contra a matriz de conteudo — area, tema e pagina —, e a rota do
+              quiz nao faz parte dela. Uma ancora aqui deixaria a verificacao vermelha por um
+              link que funciona. */}
+          <button className="botao-secundario" onClick={() => irPara(linkQuiz())}>
+            Quiz de múltipla escolha
+          </button>
+        </p>
+        <p className="dica">
+          Para praticar uma área só, o escopo se escolhe dentro do quiz, no seletor do topo.
+        </p>
+      </section>
 
       <section className="secao">
         <h2>Ordem de estudo sugerida</h2>
@@ -139,6 +161,7 @@ export function App() {
       {rota.nome === 'area' ? <AreaView areaId={rota.areaId} escuro={escuro} /> : null}
       {rota.nome === 'tema' ? <ThemeView key={rota.ref} refTema={rota.ref} escuro={escuro} /> : null}
       {rota.nome === 'pagina' ? <PaginaView slug={rota.slug} escuro={escuro} /> : null}
+      {rota.nome === 'quiz' ? <Quiz areaId={rota.areaId} /> : null}
       {rota.nome === 'desconhecida' ? (
         <main className="conteudo">
           <p>Rota não reconhecida.</p>

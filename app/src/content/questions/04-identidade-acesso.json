@@ -11,10 +11,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"MFA significa dois aplicativos ou dois códigos\". Qual é a correção?",
     "alternativas": [
-      "Biometria resolve autenticação forte",
-      "Pergunta de segurança ajuda como segundo fator",
+      "Aumentar a frequência de troca de senha aumenta a segurança",
+      "Passkey sincronizada serve para qualquer acesso",
       "O fator é a categoria do segredo; um autenticador de múltiplos fatores executa dois fatores em um ato",
-      "Aumentar a frequência de troca de senha aumenta a segurança"
+      "Pergunta de segurança ajuda como segundo fator"
     ],
     "correta": 2,
     "justificativa": "Contar códigos não conta fatores; dois códigos de conhecimento são o mesmo fator"
@@ -31,9 +31,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Biometria resolve autenticação forte\". Qual é a correção?",
     "alternativas": [
-      "MFA significa dois aplicativos ou dois códigos",
-      "Pergunta de segurança ajuda como segundo fator",
       "Aumentar a frequência de troca de senha aumenta a segurança",
+      "Passkey sincronizada serve para qualquer acesso",
+      "MFA significa dois aplicativos ou dois códigos",
       "A comparação biométrica precisa acompanhar um autenticador físico, e a verificação local é preferível"
     ],
     "correta": 3,
@@ -52,9 +52,9 @@
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Pergunta de segurança ajuda como segundo fator\". Qual é a correção?",
     "alternativas": [
       "Substituir por autenticador de posse ou por verificação local no dispositivo",
-      "MFA significa dois aplicativos ou dois códigos",
-      "Biometria resolve autenticação forte",
-      "Aumentar a frequência de troca de senha aumenta a segurança"
+      "Aumentar a frequência de troca de senha aumenta a segurança",
+      "Passkey sincronizada serve para qualquer acesso",
+      "MFA significa dois aplicativos ou dois códigos"
     ],
     "correta": 0,
     "justificativa": "São dois elementos de conhecimento, o que viola a exigência de dois fatores distintos"
@@ -71,9 +71,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Aumentar a frequência de troca de senha aumenta a segurança\". Qual é a correção?",
     "alternativas": [
-      "MFA significa dois aplicativos ou dois códigos",
+      "Passkey sincronizada serve para qualquer acesso",
       "Bloquear senhas vazadas e conhecidas, exigir comprimento e oferecer MFA",
-      "Biometria resolve autenticação forte",
+      "MFA significa dois aplicativos ou dois códigos",
       "Pergunta de segurança ajuda como segundo fator"
     ],
     "correta": 1,
@@ -91,8 +91,8 @@
     "status": "rascunho",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Passkey sincronizada serve para qualquer acesso\". Qual é a correção?",
     "alternativas": [
+      "Aumentar a frequência de troca de senha aumenta a segurança",
       "MFA significa dois aplicativos ou dois códigos",
-      "Biometria resolve autenticação forte",
       "Reservar passkey sincronizada para acesso comum e usar chave vinculada ao dispositivo onde o nível 3 se aplica",
       "Pergunta de segurança ajuda como segundo fator"
     ],
@@ -111,9 +111,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Indicador de risco de login substitui o fator\". Qual é a correção?",
     "alternativas": [
+      "Aumentar a frequência de troca de senha aumenta a segurança",
+      "Passkey sincronizada serve para qualquer acesso",
       "MFA significa dois aplicativos ou dois códigos",
-      "Biometria resolve autenticação forte",
-      "Pergunta de segurança ajuda como segundo fator",
       "Tratar risco de contexto como controle adicional, nunca como substituto"
     ],
     "correta": 3,
@@ -131,13 +131,13 @@
     "status": "rascunho",
     "enunciado": "Quantos níveis de garantia de autenticação existem no SP 800-63B-4 e qual é a data do documento final?",
     "alternativas": [
-      "Tempo limite geral de reautenticação recomendado em até 24 horas e de inatividade em 1 hora. O verificador deve oferecer pelo menos uma opção resistente a phishing, que é recomendada nesse nível.",
-      "Porque o nível 3 exige chave privada não exportável, e um autenticador sincronizável precisa que a chave seja exportável para viajar entre dispositivos.",
-      "É o requisito de que o usuário pratique uma ação deliberada, como tocar a chave, em vez de o autenticador responder sozinho. É recomendada no nível 2 e obrigatória no nível 3.",
+      "Aumentar a frequência de troca de senha aumenta a segurança",
+      "Passkey sincronizada serve para qualquer acesso",
+      "MFA significa dois aplicativos ou dois códigos",
       "Três níveis. O documento final é de 31 de julho de 2025 e substitui a edição de 02 de março de 2020."
     ],
     "correta": 3,
-    "justificativa": "MFA significa dois aplicativos ou dois códigos"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-01#R02",
@@ -152,12 +152,12 @@
     "enunciado": "O que o nível 2 exige de tempo limite de reautenticação e de inatividade, e o que ele exige sobre resistência a phishing?",
     "alternativas": [
       "Tempo limite geral de reautenticação recomendado em até 24 horas e de inatividade em 1 hora. O verificador deve oferecer pelo menos uma opção resistente a phishing, que é recomendada nesse nível.",
-      "Três níveis. O documento final é de 31 de julho de 2025 e substitui a edição de 02 de março de 2020.",
-      "Porque o nível 3 exige chave privada não exportável, e um autenticador sincronizável precisa que a chave seja exportável para viajar entre dispositivos.",
-      "É o requisito de que o usuário pratique uma ação deliberada, como tocar a chave, em vez de o autenticador responder sozinho. É recomendada no nível 2 e obrigatória no nível 3."
+      "Aumentar a frequência de troca de senha aumenta a segurança",
+      "Passkey sincronizada serve para qualquer acesso",
+      "MFA significa dois aplicativos ou dois códigos"
     ],
     "correta": 0,
-    "justificativa": "MFA significa dois aplicativos ou dois códigos"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-01#R03",
@@ -171,13 +171,13 @@
     "status": "rascunho",
     "enunciado": "Por que a norma proíbe autenticadores sincronizáveis no nível 3?",
     "alternativas": [
-      "Três níveis. O documento final é de 31 de julho de 2025 e substitui a edição de 02 de março de 2020.",
+      "Aumentar a frequência de troca de senha aumenta a segurança",
       "Porque o nível 3 exige chave privada não exportável, e um autenticador sincronizável precisa que a chave seja exportável para viajar entre dispositivos.",
-      "Tempo limite geral de reautenticação recomendado em até 24 horas e de inatividade em 1 hora. O verificador deve oferecer pelo menos uma opção resistente a phishing, que é recomendada nesse nível.",
-      "É o requisito de que o usuário pratique uma ação deliberada, como tocar a chave, em vez de o autenticador responder sozinho. É recomendada no nível 2 e obrigatória no nível 3."
+      "Passkey sincronizada serve para qualquer acesso",
+      "MFA significa dois aplicativos ou dois códigos"
     ],
     "correta": 1,
-    "justificativa": "MFA significa dois aplicativos ou dois códigos"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-01#R04",
@@ -191,13 +191,13 @@
     "status": "rascunho",
     "enunciado": "O que é intenção de autenticação e em qual nível ela é obrigatória?",
     "alternativas": [
-      "Três níveis. O documento final é de 31 de julho de 2025 e substitui a edição de 02 de março de 2020.",
-      "Tempo limite geral de reautenticação recomendado em até 24 horas e de inatividade em 1 hora. O verificador deve oferecer pelo menos uma opção resistente a phishing, que é recomendada nesse nível.",
+      "Aumentar a frequência de troca de senha aumenta a segurança",
+      "Passkey sincronizada serve para qualquer acesso",
       "É o requisito de que o usuário pratique uma ação deliberada, como tocar a chave, em vez de o autenticador responder sozinho. É recomendada no nível 2 e obrigatória no nível 3.",
-      "Porque o nível 3 exige chave privada não exportável, e um autenticador sincronizável precisa que a chave seja exportável para viajar entre dispositivos."
+      "MFA significa dois aplicativos ou dois códigos"
     ],
     "correta": 2,
-    "justificativa": "MFA significa dois aplicativos ou dois códigos"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-02#E01",
@@ -211,9 +211,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"ABAC substitui RBAC\". Qual é a correção?",
     "alternativas": [
-      "Criar um papel por pedido especial",
       "Excluir o usuário do grupo equivale a retirar o acesso",
       "O ponto de execução é o único ponto relevante",
+      "Escopo de papel é detalhe de produto",
       "Usar papel para o que é estável e atributo para o que muda por contexto"
     ],
     "correta": 3,
@@ -232,9 +232,9 @@
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Criar um papel por pedido especial\". Qual é a correção?",
     "alternativas": [
       "Usar atributo ou exceção com prazo, dono e revisão",
-      "ABAC substitui RBAC",
       "Excluir o usuário do grupo equivale a retirar o acesso",
-      "O ponto de execução é o único ponto relevante"
+      "O ponto de execução é o único ponto relevante",
+      "Escopo de papel é detalhe de produto"
     ],
     "correta": 0,
     "justificativa": "Gera explosão de papéis e perde a capacidade de revisar quem tem o quê"
@@ -251,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Excluir o usuário do grupo equivale a retirar o acesso\". Qual é a correção?",
     "alternativas": [
-      "ABAC substitui RBAC",
+      "O ponto de execução é o único ponto relevante",
       "Verificar o direito efetivo no ponto de decisão, não a associação",
-      "Criar um papel por pedido especial",
-      "O ponto de execução é o único ponto relevante"
+      "Escopo de papel é detalhe de produto",
+      "Autorização em API é só token válido"
     ],
     "correta": 1,
     "justificativa": "A concessão pode vir por aninhamento, por outro grupo ou por atributo do diretório"
@@ -271,10 +271,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"O ponto de execução é o único ponto relevante\". Qual é a correção?",
     "alternativas": [
-      "ABAC substitui RBAC",
-      "Criar um papel por pedido especial",
+      "Excluir o usuário do grupo equivale a retirar o acesso",
+      "Escopo de papel é detalhe de produto",
       "Nomear quem decide e quem aplica, e documentar a precedência",
-      "Excluir o usuário do grupo equivale a retirar o acesso"
+      "Autorização em API é só token válido"
     ],
     "correta": 2,
     "justificativa": "Sem ponto de decisão identificável não existe política única, apenas regras espalhadas"
@@ -291,9 +291,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Escopo de papel é detalhe de produto\". Qual é a correção?",
     "alternativas": [
-      "ABAC substitui RBAC",
-      "Criar um papel por pedido especial",
       "Excluir o usuário do grupo equivale a retirar o acesso",
+      "O ponto de execução é o único ponto relevante",
+      "Autorização em API é só token válido",
       "Declarar o escopo de cada atribuição, como o PIM faz ao limitar o papel a um conjunto de recursos"
     ],
     "correta": 3,
@@ -312,9 +312,9 @@
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Autorização em API é só token válido\". Qual é a correção?",
     "alternativas": [
       "Validar assinatura, emissor e público, e checar a política do recurso",
-      "ABAC substitui RBAC",
-      "Criar um papel por pedido especial",
-      "Excluir o usuário do grupo equivale a retirar o acesso"
+      "Excluir o usuário do grupo equivale a retirar o acesso",
+      "O ponto de execução é o único ponto relevante",
+      "Escopo de papel é detalhe de produto"
     ],
     "correta": 0,
     "justificativa": "Token válido prova autenticação na origem, não que a operação é permitida naquele recurso"
@@ -331,13 +331,13 @@
     "status": "rascunho",
     "enunciado": "Qual é a diferença entre ponto de decisão de política e ponto de execução de política?",
     "alternativas": [
-      "Cada entidade recebe o mínimo de recursos e autorizações de sistema necessários para cumprir sua função. A entrada do glossário traz três definições, com origem em CNSSI 4009-2022, SP 800-12 Rev. 1 e SP 800-53 Rev. 5.",
+      "Excluir o usuário do grupo equivale a retirar o acesso",
       "O ponto de decisão responde se a operação é permitida; o ponto de execução aplica a resposta no caminho do pedido, liberando ou bloqueando.",
-      "Papel descreve o que é estável na função e serve para revisão e recertificação; atributo descreve contexto, como unidade, carteira, classificação e horário, e permite negar por padrão sem multiplicar papéis.",
-      "OAuth é estrutura de autorização para acesso delegado a APIs; OpenID Connect é camada de identidade sobre OAuth, usada para autenticar o usuário final e obter declarações de forma interoperável."
+      "O ponto de execução é o único ponto relevante",
+      "Escopo de papel é detalhe de produto"
     ],
     "correta": 1,
-    "justificativa": "ABAC substitui RBAC"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-02#R03",
@@ -351,13 +351,13 @@
     "status": "rascunho",
     "enunciado": "Como o glossário do NIST define menor privilégio e quantas definições aparecem na mesma entrada?",
     "alternativas": [
-      "O ponto de decisão responde se a operação é permitida; o ponto de execução aplica a resposta no caminho do pedido, liberando ou bloqueando.",
-      "Papel descreve o que é estável na função e serve para revisão e recertificação; atributo descreve contexto, como unidade, carteira, classificação e horário, e permite negar por padrão sem multiplicar papéis.",
+      "Excluir o usuário do grupo equivale a retirar o acesso",
+      "O ponto de execução é o único ponto relevante",
       "Cada entidade recebe o mínimo de recursos e autorizações de sistema necessários para cumprir sua função. A entrada do glossário traz três definições, com origem em CNSSI 4009-2022, SP 800-12 Rev. 1 e SP 800-53 Rev. 5.",
-      "OAuth é estrutura de autorização para acesso delegado a APIs; OpenID Connect é camada de identidade sobre OAuth, usada para autenticar o usuário final e obter declarações de forma interoperável."
+      "Escopo de papel é detalhe de produto"
     ],
     "correta": 2,
-    "justificativa": "ABAC substitui RBAC"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-02#R04",
@@ -371,13 +371,13 @@
     "status": "rascunho",
     "enunciado": "Por que papel e atributo resolvem partes diferentes do problema de autorização?",
     "alternativas": [
-      "O ponto de decisão responde se a operação é permitida; o ponto de execução aplica a resposta no caminho do pedido, liberando ou bloqueando.",
-      "Cada entidade recebe o mínimo de recursos e autorizações de sistema necessários para cumprir sua função. A entrada do glossário traz três definições, com origem em CNSSI 4009-2022, SP 800-12 Rev. 1 e SP 800-53 Rev. 5.",
-      "OAuth é estrutura de autorização para acesso delegado a APIs; OpenID Connect é camada de identidade sobre OAuth, usada para autenticar o usuário final e obter declarações de forma interoperável.",
+      "Excluir o usuário do grupo equivale a retirar o acesso",
+      "O ponto de execução é o único ponto relevante",
+      "Escopo de papel é detalhe de produto",
       "Papel descreve o que é estável na função e serve para revisão e recertificação; atributo descreve contexto, como unidade, carteira, classificação e horário, e permite negar por padrão sem multiplicar papéis."
     ],
     "correta": 3,
-    "justificativa": "ABAC substitui RBAC"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-02#R05",
@@ -392,12 +392,12 @@
     "enunciado": "O que o OWASP diz sobre a diferença entre OAuth e OpenID Connect?",
     "alternativas": [
       "OAuth é estrutura de autorização para acesso delegado a APIs; OpenID Connect é camada de identidade sobre OAuth, usada para autenticar o usuário final e obter declarações de forma interoperável.",
-      "O ponto de decisão responde se a operação é permitida; o ponto de execução aplica a resposta no caminho do pedido, liberando ou bloqueando.",
-      "Cada entidade recebe o mínimo de recursos e autorizações de sistema necessários para cumprir sua função. A entrada do glossário traz três definições, com origem em CNSSI 4009-2022, SP 800-12 Rev. 1 e SP 800-53 Rev. 5.",
-      "Papel descreve o que é estável na função e serve para revisão e recertificação; atributo descreve contexto, como unidade, carteira, classificação e horário, e permite negar por padrão sem multiplicar papéis."
+      "Excluir o usuário do grupo equivale a retirar o acesso",
+      "O ponto de execução é o único ponto relevante",
+      "Escopo de papel é detalhe de produto"
     ],
     "correta": 0,
-    "justificativa": "ABAC substitui RBAC"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-02#R06",
@@ -411,13 +411,13 @@
     "status": "rascunho",
     "enunciado": "Que precaução um modelo de autorização precisa tomar quando o atributo usado na regra não está preenchido?",
     "alternativas": [
-      "O ponto de decisão responde se a operação é permitida; o ponto de execução aplica a resposta no caminho do pedido, liberando ou bloqueando.",
+      "Excluir o usuário do grupo equivale a retirar o acesso",
       "Tratar atributo ausente como negação. Atributo não preenchido não pode ser interpretado como permissão, sob pena de a política liberar acesso justamente para a população sem cadastro completo.",
-      "Cada entidade recebe o mínimo de recursos e autorizações de sistema necessários para cumprir sua função. A entrada do glossário traz três definições, com origem em CNSSI 4009-2022, SP 800-12 Rev. 1 e SP 800-53 Rev. 5.",
-      "Papel descreve o que é estável na função e serve para revisão e recertificação; atributo descreve contexto, como unidade, carteira, classificação e horário, e permite negar por padrão sem multiplicar papéis."
+      "O ponto de execução é o único ponto relevante",
+      "Escopo de papel é detalhe de produto"
     ],
     "correta": 1,
-    "justificativa": "ABAC substitui RBAC"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-03#E01",
@@ -432,9 +432,9 @@
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Desativar a conta encerra o acesso\". Qual é a correção?",
     "alternativas": [
       "Desativar a conta, encerrar sessões e invalidar tokens no mesmo evento",
-      "Excluir a conta é o passo mais seguro da saída",
-      "Cadastro inicial cobre o ciclo de vida",
-      "Terceiro é caso especial demais para automatizar"
+      "Rotação periódica de senha de usuário melhora a postura",
+      "Terceiro é caso especial demais para automatizar",
+      "Excluir a conta é o passo mais seguro da saída"
     ],
     "correta": 0,
     "justificativa": "Sessão e token já emitidos continuam válidos até expirar"
@@ -451,10 +451,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Excluir a conta é o passo mais seguro da saída\". Qual é a correção?",
     "alternativas": [
-      "Desativar a conta encerra o acesso",
+      "Rotação periódica de senha de usuário melhora a postura",
       "Retirar concessões na saída e excluir a conta após o prazo de retenção",
-      "Cadastro inicial cobre o ciclo de vida",
-      "Terceiro é caso especial demais para automatizar"
+      "Terceiro é caso especial demais para automatizar",
+      "Revisão de acesso é conferência de lista"
     ],
     "correta": 1,
     "justificativa": "A exclusão destrói a trilha necessária para auditoria e para investigação"
@@ -471,10 +471,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Cadastro inicial cobre o ciclo de vida\". Qual é a correção?",
     "alternativas": [
-      "Desativar a conta encerra o acesso",
-      "Excluir a conta é o passo mais seguro da saída",
+      "Rotação periódica de senha de usuário melhora a postura",
+      "Terceiro é caso especial demais para automatizar",
       "Retirar a concessão do papel anterior na mesma mudança que concede a nova",
-      "Terceiro é caso especial demais para automatizar"
+      "Excluir a conta é o passo mais seguro da saída"
     ],
     "correta": 2,
     "justificativa": "A concessão feita na entrada raramente corresponde à função após dois anos"
@@ -491,9 +491,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Terceiro é caso especial demais para automatizar\". Qual é a correção?",
     "alternativas": [
-      "Desativar a conta encerra o acesso",
+      "Rotação periódica de senha de usuário melhora a postura",
       "Excluir a conta é o passo mais seguro da saída",
-      "Cadastro inicial cobre o ciclo de vida",
+      "Revisão de acesso é conferência de lista",
       "Exigir prazo declarado, aprovação registrada e rotina de expiração"
     ],
     "correta": 3,
@@ -512,9 +512,9 @@
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Rotação periódica de senha de usuário melhora a postura\". Qual é a correção?",
     "alternativas": [
       "Reservar rotação periódica para segredos de aplicação e de serviço",
-      "Desativar a conta encerra o acesso",
+      "Terceiro é caso especial demais para automatizar",
       "Excluir a conta é o passo mais seguro da saída",
-      "Cadastro inicial cobre o ciclo de vida"
+      "Revisão de acesso é conferência de lista"
     ],
     "correta": 0,
     "justificativa": "O guia de segredos orienta trocar credencial de usuário apenas com indício de comprometimento"
@@ -531,10 +531,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Revisão de acesso é conferência de lista\". Qual é a correção?",
     "alternativas": [
-      "Desativar a conta encerra o acesso",
+      "Rotação periódica de senha de usuário melhora a postura",
       "Vincular a revisão a prazo e à remoção do que não foi reafirmado",
-      "Excluir a conta é o passo mais seguro da saída",
-      "Cadastro inicial cobre o ciclo de vida"
+      "Terceiro é caso especial demais para automatizar",
+      "Excluir a conta é o passo mais seguro da saída"
     ],
     "correta": 1,
     "justificativa": "Sem remoção automática do que não foi confirmado, a revisão não muda o estado"
@@ -551,13 +551,13 @@
     "status": "rascunho",
     "enunciado": "Quais são as quatro perguntas que a governança de identidade responde, segundo a documentação do Entra ID Governance?",
     "alternativas": [
-      "Identidade é a representação do sujeito; conta é o objeto autenticável ligado a ela, e pode haver mais de uma por identidade; concessão é o direito concreto sobre recurso, grupo ou papel.",
+      "Rotação periódica de senha de usuário melhora a postura",
       "Quais identidades devem ter acesso a quais recursos, o que essas identidades fazem com o acesso, se existem controles organizacionais para gerir o acesso e se o auditor consegue verificar que os controles funcionam.",
-      "O SCIM, protocolo HTTP de provisão e gestão de identidade em cenários multi-domínio, com esquema comum de usuário. Depende de TLS e de esquemas padrão de autenticação HTTP, e desaconselha autenticação básica.",
-      "Porque conceder é imediato e retirar depende de evento explícito. A admissão tem gatilho contratual; a mudança de área costuma ser acompanhada apenas da nova concessão."
+      "Terceiro é caso especial demais para automatizar",
+      "Excluir a conta é o passo mais seguro da saída"
     ],
     "correta": 1,
-    "justificativa": "Desativar a conta encerra o acesso"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-03#R02",
@@ -571,13 +571,13 @@
     "status": "rascunho",
     "enunciado": "Qual é a diferença entre identidade, conta e concessão?",
     "alternativas": [
-      "Quais identidades devem ter acesso a quais recursos, o que essas identidades fazem com o acesso, se existem controles organizacionais para gerir o acesso e se o auditor consegue verificar que os controles funcionam.",
-      "O SCIM, protocolo HTTP de provisão e gestão de identidade em cenários multi-domínio, com esquema comum de usuário. Depende de TLS e de esquemas padrão de autenticação HTTP, e desaconselha autenticação básica.",
+      "Rotação periódica de senha de usuário melhora a postura",
+      "Terceiro é caso especial demais para automatizar",
       "Identidade é a representação do sujeito; conta é o objeto autenticável ligado a ela, e pode haver mais de uma por identidade; concessão é o direito concreto sobre recurso, grupo ou papel.",
-      "Porque conceder é imediato e retirar depende de evento explícito. A admissão tem gatilho contratual; a mudança de área costuma ser acompanhada apenas da nova concessão."
+      "Excluir a conta é o passo mais seguro da saída"
     ],
     "correta": 2,
-    "justificativa": "Desativar a conta encerra o acesso"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-03#R03",
@@ -591,13 +591,13 @@
     "status": "rascunho",
     "enunciado": "O que o RFC 7644 define e de que autenticação o protocolo depende?",
     "alternativas": [
-      "Quais identidades devem ter acesso a quais recursos, o que essas identidades fazem com o acesso, se existem controles organizacionais para gerir o acesso e se o auditor consegue verificar que os controles funcionam.",
-      "Identidade é a representação do sujeito; conta é o objeto autenticável ligado a ela, e pode haver mais de uma por identidade; concessão é o direito concreto sobre recurso, grupo ou papel.",
-      "Porque conceder é imediato e retirar depende de evento explícito. A admissão tem gatilho contratual; a mudança de área costuma ser acompanhada apenas da nova concessão.",
+      "Rotação periódica de senha de usuário melhora a postura",
+      "Terceiro é caso especial demais para automatizar",
+      "Excluir a conta é o passo mais seguro da saída",
       "O SCIM, protocolo HTTP de provisão e gestão de identidade em cenários multi-domínio, com esquema comum de usuário. Depende de TLS e de esquemas padrão de autenticação HTTP, e desaconselha autenticação básica."
     ],
     "correta": 3,
-    "justificativa": "Desativar a conta encerra o acesso"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-03#R04",
@@ -612,12 +612,12 @@
     "enunciado": "Por que a mudança de função concentra mais risco do que a admissão?",
     "alternativas": [
       "Porque conceder é imediato e retirar depende de evento explícito. A admissão tem gatilho contratual; a mudança de área costuma ser acompanhada apenas da nova concessão.",
-      "Quais identidades devem ter acesso a quais recursos, o que essas identidades fazem com o acesso, se existem controles organizacionais para gerir o acesso e se o auditor consegue verificar que os controles funcionam.",
-      "Identidade é a representação do sujeito; conta é o objeto autenticável ligado a ela, e pode haver mais de uma por identidade; concessão é o direito concreto sobre recurso, grupo ou papel.",
-      "O SCIM, protocolo HTTP de provisão e gestão de identidade em cenários multi-domínio, com esquema comum de usuário. Depende de TLS e de esquemas padrão de autenticação HTTP, e desaconselha autenticação básica."
+      "Rotação periódica de senha de usuário melhora a postura",
+      "Terceiro é caso especial demais para automatizar",
+      "Excluir a conta é o passo mais seguro da saída"
     ],
     "correta": 0,
-    "justificativa": "Desativar a conta encerra o acesso"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-03#R05",
@@ -631,13 +631,13 @@
     "status": "rascunho",
     "enunciado": "Quais registros mínimos a auditoria precisa para provar a retirada de acesso?",
     "alternativas": [
-      "Quais identidades devem ter acesso a quais recursos, o que essas identidades fazem com o acesso, se existem controles organizacionais para gerir o acesso e se o auditor consegue verificar que os controles funcionam.",
+      "Rotação periódica de senha de usuário melhora a postura",
       "Data e hora da ação, quem autorizou, qual evento disparou, quais concessões foram removidas e qual foi a origem do dado. Sem essas cinco informações não há como reconstruir o caminho.",
-      "Identidade é a representação do sujeito; conta é o objeto autenticável ligado a ela, e pode haver mais de uma por identidade; concessão é o direito concreto sobre recurso, grupo ou papel.",
-      "O SCIM, protocolo HTTP de provisão e gestão de identidade em cenários multi-domínio, com esquema comum de usuário. Depende de TLS e de esquemas padrão de autenticação HTTP, e desaconselha autenticação básica."
+      "Terceiro é caso especial demais para automatizar",
+      "Excluir a conta é o passo mais seguro da saída"
     ],
     "correta": 1,
-    "justificativa": "Desativar a conta encerra o acesso"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-03#R06",
@@ -651,13 +651,13 @@
     "status": "rascunho",
     "enunciado": "O que fazer com a conta local de uma aplicação que não tem correspondência no diretório?",
     "alternativas": [
-      "Quais identidades devem ter acesso a quais recursos, o que essas identidades fazem com o acesso, se existem controles organizacionais para gerir o acesso e se o auditor consegue verificar que os controles funcionam.",
-      "Identidade é a representação do sujeito; conta é o objeto autenticável ligado a ela, e pode haver mais de uma por identidade; concessão é o direito concreto sobre recurso, grupo ou papel.",
+      "Rotação periódica de senha de usuário melhora a postura",
+      "Terceiro é caso especial demais para automatizar",
       "Incluir no inventário de descoberta, nomear dono, descrever finalidade e decidir entre migrar para a identidade central ou desativar. Manter sem dono é a opção que não se sustenta em auditoria.",
-      "O SCIM, protocolo HTTP de provisão e gestão de identidade em cenários multi-domínio, com esquema comum de usuário. Depende de TLS e de esquemas padrão de autenticação HTTP, e desaconselha autenticação básica."
+      "Excluir a conta é o passo mais seguro da saída"
     ],
     "correta": 2,
-    "justificativa": "Desativar a conta encerra o acesso"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-04#E01",
@@ -671,10 +671,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Acesso just-in-time é apenas configurar prazo curto\". Qual é a correção?",
     "alternativas": [
-      "Quem ativa o papel deve ser quem aprova",
+      "Retirar o privilégio de todos os administradores é o objetivo",
       "Combinar prazo, prova na ativação, justificativa e aprovação conforme o impacto",
-      "Revisão de acesso que aprova tudo está funcionando",
-      "Retirar o privilégio de todos os administradores é o objetivo"
+      "Converter para elegível resolve o excesso de escopo",
+      "Revisão de acesso que aprova tudo está funcionando"
     ],
     "correta": 1,
     "justificativa": "Prazo curto sem aprovação e sem fator adicional só adiciona atrito"
@@ -691,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Quem ativa o papel deve ser quem aprova\". Qual é a correção?",
     "alternativas": [
+      "Retirar o privilégio de todos os administradores é o objetivo",
       "Acesso just-in-time é apenas configurar prazo curto",
-      "Revisão de acesso que aprova tudo está funcionando",
       "Separar quem pede de quem aprova, com regra explícita para o plantão",
-      "Retirar o privilégio de todos os administradores é o objetivo"
+      "Converter para elegível resolve o excesso de escopo"
     ],
     "correta": 2,
     "justificativa": "Elimina a segregação de função e cria caminho de autoaprovação silenciosa"
@@ -711,9 +711,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Revisão de acesso que aprova tudo está funcionando\". Qual é a correção?",
     "alternativas": [
-      "Acesso just-in-time é apenas configurar prazo curto",
-      "Quem ativa o papel deve ser quem aprova",
       "Retirar o privilégio de todos os administradores é o objetivo",
+      "Acesso just-in-time é apenas configurar prazo curto",
+      "Converter para elegível resolve o excesso de escopo",
       "Remover o que não for reafirmado e medir taxa e prazo de resposta"
     ],
     "correta": 3,
@@ -733,7 +733,7 @@
     "alternativas": [
       "Manter poucas contas de emergência com acesso aprovado por duas pessoas e testadas",
       "Acesso just-in-time é apenas configurar prazo curto",
-      "Quem ativa o papel deve ser quem aprova",
+      "Converter para elegível resolve o excesso de escopo",
       "Revisão de acesso que aprova tudo está funcionando"
     ],
     "correta": 0,
@@ -751,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Menor privilégio é assunto só de acesso humano\". Qual é a correção?",
     "alternativas": [
-      "Acesso just-in-time é apenas configurar prazo curto",
+      "Retirar o privilégio de todos os administradores é o objetivo",
       "A definição do NIST cobre usuários e processos agindo em nome de usuários",
-      "Quem ativa o papel deve ser quem aprova",
-      "Revisão de acesso que aprova tudo está funcionando"
+      "Acesso just-in-time é apenas configurar prazo curto",
+      "Converter para elegível resolve o excesso de escopo"
     ],
     "correta": 1,
     "justificativa": "Processos e contas de serviço também recebem privilégio"
@@ -771,10 +771,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Converter para elegível resolve o excesso de escopo\". Qual é a correção?",
     "alternativas": [
-      "Acesso just-in-time é apenas configurar prazo curto",
-      "Quem ativa o papel deve ser quem aprova",
+      "Menor privilégio é assunto só de acesso humano",
+      "Revisão de acesso que aprova tudo está funcionando",
       "Reduzir escopo antes de reduzir temporalidade",
-      "Revisão de acesso que aprova tudo está funcionando"
+      "Acesso just-in-time é apenas configurar prazo curto"
     ],
     "correta": 2,
     "justificativa": "Papel elegível com escopo amplo continua concedendo demais na ativação"
@@ -791,13 +791,13 @@
     "status": "rascunho",
     "enunciado": "O que o modelo just-in-time impede, segundo a definição do PIM?",
     "alternativas": [
-      "Verificação por múltiplos fatores, justificativa de negócio, aprovação de aprovador designado e escolha da duração dentro do máximo configurado.",
-      "Porque a ausência de confirmação é, por si, informação: se ninguém reafirmou, não há dono atento ao acesso. Sem remoção, a revisão deixa de ser controle e vira registro.",
-      "O nível 3 da escala do NIST: autenticador criptográfico com chave privada não exportável e resistência a phishing, com intenção de autenticação. O papel de alto impacto não pode depender de segredo phishável na ativação.",
+      "Retirar o privilégio de todos os administradores é o objetivo",
+      "Acesso just-in-time é apenas configurar prazo curto",
+      "Converter para elegível resolve o excesso de escopo",
       "Que usuário mal-intencionado ou não autorizado mantenha o acesso depois que a permissão expira. O acesso é concedido por necessidade e deixa de existir em seguida."
     ],
     "correta": 3,
-    "justificativa": "Acesso just-in-time é apenas configurar prazo curto"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-04#R03",
@@ -812,12 +812,12 @@
     "enunciado": "Quais ações podem ser exigidas na ativação de um papel elegível?",
     "alternativas": [
       "Verificação por múltiplos fatores, justificativa de negócio, aprovação de aprovador designado e escolha da duração dentro do máximo configurado.",
-      "Que usuário mal-intencionado ou não autorizado mantenha o acesso depois que a permissão expira. O acesso é concedido por necessidade e deixa de existir em seguida.",
-      "Porque a ausência de confirmação é, por si, informação: se ninguém reafirmou, não há dono atento ao acesso. Sem remoção, a revisão deixa de ser controle e vira registro.",
-      "O nível 3 da escala do NIST: autenticador criptográfico com chave privada não exportável e resistência a phishing, com intenção de autenticação. O papel de alto impacto não pode depender de segredo phishável na ativação."
+      "Retirar o privilégio de todos os administradores é o objetivo",
+      "Acesso just-in-time é apenas configurar prazo curto",
+      "Converter para elegível resolve o excesso de escopo"
     ],
     "correta": 0,
-    "justificativa": "Acesso just-in-time é apenas configurar prazo curto"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-04#R04",
@@ -831,13 +831,13 @@
     "status": "rascunho",
     "enunciado": "Por que a revisão de acesso precisa remover automaticamente o que não foi reafirmado?",
     "alternativas": [
-      "Que usuário mal-intencionado ou não autorizado mantenha o acesso depois que a permissão expira. O acesso é concedido por necessidade e deixa de existir em seguida.",
+      "Retirar o privilégio de todos os administradores é o objetivo",
       "Porque a ausência de confirmação é, por si, informação: se ninguém reafirmou, não há dono atento ao acesso. Sem remoção, a revisão deixa de ser controle e vira registro.",
-      "Verificação por múltiplos fatores, justificativa de negócio, aprovação de aprovador designado e escolha da duração dentro do máximo configurado.",
-      "O nível 3 da escala do NIST: autenticador criptográfico com chave privada não exportável e resistência a phishing, com intenção de autenticação. O papel de alto impacto não pode depender de segredo phishável na ativação."
+      "Acesso just-in-time é apenas configurar prazo curto",
+      "Converter para elegível resolve o excesso de escopo"
     ],
     "correta": 1,
-    "justificativa": "Acesso just-in-time é apenas configurar prazo curto"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-04#R05",
@@ -851,13 +851,13 @@
     "status": "rascunho",
     "enunciado": "Qual requisito de autenticação faz sentido para ativação de papel de alto impacto e por quê?",
     "alternativas": [
-      "Que usuário mal-intencionado ou não autorizado mantenha o acesso depois que a permissão expira. O acesso é concedido por necessidade e deixa de existir em seguida.",
-      "Verificação por múltiplos fatores, justificativa de negócio, aprovação de aprovador designado e escolha da duração dentro do máximo configurado.",
+      "Retirar o privilégio de todos os administradores é o objetivo",
+      "Acesso just-in-time é apenas configurar prazo curto",
       "O nível 3 da escala do NIST: autenticador criptográfico com chave privada não exportável e resistência a phishing, com intenção de autenticação. O papel de alto impacto não pode depender de segredo phishável na ativação.",
-      "Porque a ausência de confirmação é, por si, informação: se ninguém reafirmou, não há dono atento ao acesso. Sem remoção, a revisão deixa de ser controle e vira registro."
+      "Converter para elegível resolve o excesso de escopo"
     ],
     "correta": 2,
-    "justificativa": "Acesso just-in-time é apenas configurar prazo curto"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-04#R06",
@@ -871,13 +871,13 @@
     "status": "rascunho",
     "enunciado": "Se a auditoria pedir o tempo máximo em que uma conta administrativa comprometida manteria poder, quais números você usa para responder?",
     "alternativas": [
-      "Que usuário mal-intencionado ou não autorizado mantenha o acesso depois que a permissão expira. O acesso é concedido por necessidade e deixa de existir em seguida.",
-      "Verificação por múltiplos fatores, justificativa de negócio, aprovação de aprovador designado e escolha da duração dentro do máximo configurado.",
-      "Porque a ausência de confirmação é, por si, informação: se ninguém reafirmou, não há dono atento ao acesso. Sem remoção, a revisão deixa de ser controle e vira registro.",
+      "Retirar o privilégio de todos os administradores é o objetivo",
+      "Acesso just-in-time é apenas configurar prazo curto",
+      "Converter para elegível resolve o excesso de escopo",
       "Número de atribuições ativas permanentes e duração máxima configurada de ativação. A resposta é a maior entre o tempo até a troca de credencial e a duração máxima de ativação vigente."
     ],
     "correta": 3,
-    "justificativa": "Acesso just-in-time é apenas configurar prazo curto"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-05#E01",
@@ -892,9 +892,9 @@
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Cofre resolve o problema de senha compartilhada por si\". Qual é a correção?",
     "alternativas": [
       "Colocar todas as contas no cofre é o objetivo do projeto",
-      "Variável de ambiente é lugar seguro para segredo",
+      "Conta de emergência pode ficar guardada sem teste",
       "Combinar empréstimo com rotação automática após o uso",
-      "Rotacionar senha de usuário a cada 90 dias fortalece a postura"
+      "Variável de ambiente é lugar seguro para segredo"
     ],
     "correta": 2,
     "justificativa": "Sem troca de senha ao final do empréstimo, quem viu a credencial continua com ela"
@@ -911,9 +911,9 @@
     "status": "rascunho",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Colocar todas as contas no cofre é o objetivo do projeto\". Qual é a correção?",
     "alternativas": [
-      "Cofre resolve o problema de senha compartilhada por si",
-      "Variável de ambiente é lugar seguro para segredo",
       "Rotacionar senha de usuário a cada 90 dias fortalece a postura",
+      "Cofre resolve o problema de senha compartilhada por si",
+      "Conta de emergência pode ficar guardada sem teste",
       "Reservar cofre para conta compartilhada, conta de serviço e emergência"
     ],
     "correta": 3,
@@ -932,9 +932,9 @@
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Variável de ambiente é lugar seguro para segredo\". Qual é a correção?",
     "alternativas": [
       "Buscar no cofre com identidade da carga de trabalho ou injetar por contêiner lateral",
-      "Cofre resolve o problema de senha compartilhada por si",
+      "Rotacionar senha de usuário a cada 90 dias fortalece a postura",
       "Colocar todas as contas no cofre é o objetivo do projeto",
-      "Rotacionar senha de usuário a cada 90 dias fortalece a postura"
+      "Cofre resolve o problema de senha compartilhada por si"
     ],
     "correta": 0,
     "justificativa": "O guia observa que variáveis são acessíveis a todos os processos e podem vazar em log e despejo de memória"
@@ -951,10 +951,10 @@
     "status": "rascunho",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Rotacionar senha de usuário a cada 90 dias fortalece a postura\". Qual é a correção?",
     "alternativas": [
-      "Cofre resolve o problema de senha compartilhada por si",
-      "Destinar rotação automática a segredo de aplicação e de serviço",
       "Colocar todas as contas no cofre é o objetivo do projeto",
-      "Variável de ambiente é lugar seguro para segredo"
+      "Destinar rotação automática a segredo de aplicação e de serviço",
+      "Cofre resolve o problema de senha compartilhada por si",
+      "Conta de emergência pode ficar guardada sem teste"
     ],
     "correta": 1,
     "justificativa": "A recomendação citada pelo guia é trocar credencial de usuário só sob suspeita ou evidência de comprometimento"
@@ -971,10 +971,10 @@
     "status": "rascunho",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Conta de emergência pode ficar guardada sem teste\". Qual é a correção?",
     "alternativas": [
-      "Cofre resolve o problema de senha compartilhada por si",
+      "Rotacionar senha de usuário a cada 90 dias fortalece a postura",
       "Colocar todas as contas no cofre é o objetivo do projeto",
       "Guardar em cofre secundário, com duplo controle, e testar em rotina",
-      "Variável de ambiente é lugar seguro para segredo"
+      "Cofre resolve o problema de senha compartilhada por si"
     ],
     "correta": 2,
     "justificativa": "Credencial nunca testada pode não funcionar quando for necessária"
@@ -991,9 +991,9 @@
     "status": "rascunho",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Auditoria do cofre é log de acesso\". Qual é a correção?",
     "alternativas": [
-      "Cofre resolve o problema de senha compartilhada por si",
+      "Rotacionar senha de usuário a cada 90 dias fortalece a postura",
       "Colocar todas as contas no cofre é o objetivo do projeto",
-      "Variável de ambiente é lugar seguro para segredo",
+      "Cofre resolve o problema de senha compartilhada por si",
       "Registrar pedido, aprovação, uso com origem, expiração e tentativa de reuso"
     ],
     "correta": 3,
@@ -1011,12 +1011,13 @@
     "status": "rascunho",
     "enunciado": "Qual é a diferença entre rotação automática de segredo estático e emissão dinâmica, e qual reduz a superfície de reuso?",
     "alternativas": [
-      "Credencial de usuário fica fora da rotação periódica e é trocada só sob suspeita ou evidência de comprometimento. Credencial de emergência vai para cofre secundário, com backup regular, e é testada em rotina.",
-      "Variáveis de ambiente ficam acessíveis a todos os processos do ambiente e podem aparecer em log e em despejo de memória.",
-      "A rotação automática troca o valor do segredo estático em intervalo definido. A emissão dinâmica entrega credencial nova a cada início de sessão, que morre no fim. A emissão dinâmica reduz a superfície de reuso."
+      "A rotação automática troca o valor do segredo estático em intervalo definido. A emissão dinâmica entrega credencial nova a cada início de sessão, que morre no fim. A emissão dinâmica reduz a superfície de reuso.",
+      "Rotacionar senha de usuário a cada 90 dias fortalece a postura",
+      "Colocar todas as contas no cofre é o objetivo do projeto",
+      "Cofre resolve o problema de senha compartilhada por si"
     ],
-    "correta": 2,
-    "justificativa": "Cofre resolve o problema de senha compartilhada por si"
+    "correta": 0,
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-05#R04",
@@ -1030,12 +1031,13 @@
     "status": "rascunho",
     "enunciado": "O que o guia recomenda para credencial de usuário quanto à rotação, e para credencial de emergência quanto à guarda?",
     "alternativas": [
-      "A rotação automática troca o valor do segredo estático em intervalo definido. A emissão dinâmica entrega credencial nova a cada início de sessão, que morre no fim. A emissão dinâmica reduz a superfície de reuso.",
+      "Rotacionar senha de usuário a cada 90 dias fortalece a postura",
+      "Colocar todas as contas no cofre é o objetivo do projeto",
       "Credencial de usuário fica fora da rotação periódica e é trocada só sob suspeita ou evidência de comprometimento. Credencial de emergência vai para cofre secundário, com backup regular, e é testada em rotina.",
-      "Variáveis de ambiente ficam acessíveis a todos os processos do ambiente e podem aparecer em log e em despejo de memória."
+      "Cofre resolve o problema de senha compartilhada por si"
     ],
-    "correta": 1,
-    "justificativa": "Cofre resolve o problema de senha compartilhada por si"
+    "correta": 2,
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-05#R05",
@@ -1049,12 +1051,13 @@
     "status": "rascunho",
     "enunciado": "Cite dois motivos técnicos para não colocar segredo em variável de ambiente.",
     "alternativas": [
-      "A rotação automática troca o valor do segredo estático em intervalo definido. A emissão dinâmica entrega credencial nova a cada início de sessão, que morre no fim. A emissão dinâmica reduz a superfície de reuso.",
-      "Credencial de usuário fica fora da rotação periódica e é trocada só sob suspeita ou evidência de comprometimento. Credencial de emergência vai para cofre secundário, com backup regular, e é testada em rotina.",
+      "Rotacionar senha de usuário a cada 90 dias fortalece a postura",
+      "Colocar todas as contas no cofre é o objetivo do projeto",
+      "Cofre resolve o problema de senha compartilhada por si",
       "Variáveis de ambiente ficam acessíveis a todos os processos do ambiente e podem aparecer em log e em despejo de memória."
     ],
-    "correta": 2,
-    "justificativa": "Cofre resolve o problema de senha compartilhada por si"
+    "correta": 3,
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-06#E01",
@@ -1068,9 +1071,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Zero trust é produto que se compra\". Qual é a correção?",
     "alternativas": [
-      "Usar VPN com segundo fator é zero trust",
+      "Confiar no dispositivo porque está inscrito é suficiente",
       "Zero trust significa eliminar a rede interna",
-      "Só identidade de usuário interessa",
+      "Zero trust é projeto com data de término",
       "Definir quais decisões passam a usar identidade e estado de dispositivo, com medida de progresso"
     ],
     "correta": 3,
@@ -1089,9 +1092,9 @@
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Usar VPN com segundo fator é zero trust\". Qual é a correção?",
     "alternativas": [
       "Decidir por recurso e por operação, com avaliação também do dispositivo",
-      "Zero trust é produto que se compra",
+      "Confiar no dispositivo porque está inscrito é suficiente",
       "Zero trust significa eliminar a rede interna",
-      "Só identidade de usuário interessa"
+      "Zero trust é projeto com data de término"
     ],
     "correta": 0,
     "justificativa": "O segundo fator melhora a autenticação, mas a rede continua concedendo alcance depois do login"
@@ -1108,10 +1111,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Zero trust significa eliminar a rede interna\". Qual é a correção?",
     "alternativas": [
-      "Zero trust é produto que se compra",
+      "Confiar no dispositivo porque está inscrito é suficiente",
       "Combinar identidade forte com segmentação, conforme o TEMA-04 da área 03",
-      "Usar VPN com segundo fator é zero trust",
-      "Só identidade de usuário interessa"
+      "Zero trust é projeto com data de término",
+      "Usar VPN com segundo fator é zero trust"
     ],
     "correta": 1,
     "justificativa": "Segmentação continua necessária para conter dano depois da falha de uma barreira"
@@ -1128,10 +1131,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Só identidade de usuário interessa\". Qual é a correção?",
     "alternativas": [
-      "Zero trust é produto que se compra",
-      "Usar VPN com segundo fator é zero trust",
+      "Confiar no dispositivo porque está inscrito é suficiente",
+      "Zero trust significa eliminar a rede interna",
       "Tratar identidade de dispositivo e de carga de trabalho com o mesmo rigor",
-      "Zero trust significa eliminar a rede interna"
+      "Zero trust é projeto com data de término"
     ],
     "correta": 2,
     "justificativa": "O resumo do SP 800-207 exige autenticação e autorização tanto de sujeito quanto de dispositivo"
@@ -1148,9 +1151,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Confiar no dispositivo porque está inscrito é suficiente\". Qual é a correção?",
     "alternativas": [
-      "Zero trust é produto que se compra",
-      "Usar VPN com segundo fator é zero trust",
       "Zero trust significa eliminar a rede interna",
+      "Zero trust é projeto com data de término",
+      "Usar VPN com segundo fator é zero trust",
       "Avaliar estado no momento da decisão, não apenas existência do cadastro"
     ],
     "correta": 3,
@@ -1169,9 +1172,9 @@
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Zero trust é projeto com data de término\". Qual é a correção?",
     "alternativas": [
       "Tratar como direção com marcos verificáveis e financiamento por etapa",
-      "Zero trust é produto que se compra",
-      "Usar VPN com segundo fator é zero trust",
-      "Zero trust significa eliminar a rede interna"
+      "Confiar no dispositivo porque está inscrito é suficiente",
+      "Zero trust significa eliminar a rede interna",
+      "Usar VPN com segundo fator é zero trust"
     ],
     "correta": 0,
     "justificativa": "O documento descreve paradigmas em evolução e modelos de implantação, não certificado final"
@@ -1188,13 +1191,13 @@
     "status": "rascunho",
     "enunciado": "O que o documento diz sobre autenticação e autorização de sujeito e de dispositivo em relação ao início da sessão?",
     "alternativas": [
-      "Porque a localização de rede deixou de ser o componente principal da postura de segurança do recurso.",
+      "Confiar no dispositivo porque está inscrito é suficiente",
       "São funções discretas executadas antes de estabelecer a sessão com o recurso da empresa.",
-      "Identidade do sujeito, identidade e estado do dispositivo ou da carga de trabalho, o recurso com sua classificação, e a operação pedida com a política que a governa.",
-      "Perguntar qual confiança implícita será removida primeiro e como a remoção será medida."
+      "Zero trust significa eliminar a rede interna",
+      "Zero trust é projeto com data de término"
     ],
     "correta": 1,
-    "justificativa": "Zero trust é produto que se compra"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-06#R03",
@@ -1208,13 +1211,13 @@
     "status": "rascunho",
     "enunciado": "Por que o documento afirma que o foco é proteger recursos e não segmentos de rede?",
     "alternativas": [
-      "São funções discretas executadas antes de estabelecer a sessão com o recurso da empresa.",
-      "Identidade do sujeito, identidade e estado do dispositivo ou da carga de trabalho, o recurso com sua classificação, e a operação pedida com a política que a governa.",
+      "Confiar no dispositivo porque está inscrito é suficiente",
+      "Zero trust significa eliminar a rede interna",
       "Porque a localização de rede deixou de ser o componente principal da postura de segurança do recurso.",
-      "Perguntar qual confiança implícita será removida primeiro e como a remoção será medida."
+      "Zero trust é projeto com data de término"
     ],
     "correta": 2,
-    "justificativa": "Zero trust é produto que se compra"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-06#R04",
@@ -1228,13 +1231,13 @@
     "status": "rascunho",
     "enunciado": "Quais quatro elementos compõem uma decisão de acesso no modelo por recurso?",
     "alternativas": [
-      "São funções discretas executadas antes de estabelecer a sessão com o recurso da empresa.",
-      "Porque a localização de rede deixou de ser o componente principal da postura de segurança do recurso.",
-      "Perguntar qual confiança implícita será removida primeiro e como a remoção será medida.",
+      "Confiar no dispositivo porque está inscrito é suficiente",
+      "Zero trust significa eliminar a rede interna",
+      "Zero trust é projeto com data de término",
       "Identidade do sujeito, identidade e estado do dispositivo ou da carga de trabalho, o recurso com sua classificação, e a operação pedida com a política que a governa."
     ],
     "correta": 3,
-    "justificativa": "Zero trust é produto que se compra"
+    "justificativa": ""
   },
   {
     "id": "04-identidade-acesso#TEMA-06#R06",
@@ -1248,12 +1251,12 @@
     "status": "rascunho",
     "enunciado": "Qual é a pergunta que revela se um plano de zero trust é concreto ou apenas discurso?",
     "alternativas": [
-      "São funções discretas executadas antes de estabelecer a sessão com o recurso da empresa.",
+      "Confiar no dispositivo porque está inscrito é suficiente",
       "Perguntar qual confiança implícita será removida primeiro e como a remoção será medida.",
-      "Porque a localização de rede deixou de ser o componente principal da postura de segurança do recurso.",
-      "Identidade do sujeito, identidade e estado do dispositivo ou da carga de trabalho, o recurso com sua classificação, e a operação pedida com a política que a governa."
+      "Zero trust significa eliminar a rede interna",
+      "Zero trust é projeto com data de término"
     ],
     "correta": 1,
-    "justificativa": "Zero trust é produto que se compra"
+    "justificativa": ""
   }
 ]
