@@ -327,6 +327,18 @@ de 33.4.11 para 44.4.5, e o Chromium que ele embarca é maior. Não é o conteú
 `content.json` e o bundle do renderer são os mesmos. Como o pacote é saída, o que vale como prova de
 origem é a soma conferida contra o arquivo que se baixou, não o número decorado.
 
+### A release publicada (v0.1.0)
+
+A versão **0.1.0 está publicada** em <https://github.com/dandgabr/treinamento-si/releases/tag/v0.1.0>,
+com a tag `v0.1.0` no commit final e **sete anexos**: os três artefatos, o SBOM e um `.sha256` de cada
+coisa que se baixa. Publicar exigiu um cuidado que não é óbvio: **o GitHub troca espaços por pontos no
+nome do anexo**, então `Roadmap CISO 0.1.0.exe` chega como `Roadmap.CISO.0.1.0.exe`. Os `.sha256`
+publicados usam os nomes **como o GitHub os entrega** — os primeiros que subi apontavam para o nome com
+espaço e dariam falha em quem baixasse, que é o pior defeito possível num arquivo de conferência.
+
+A verificação foi feita **baixando de volta**: o AppImage da release (126.075.036 bytes) com o `.sha256`
+ao lado dá `sha256sum -c` → `SUCESSO`. Não é o arquivo local conferido contra si mesmo.
+
 ### O portátil do Windows (o alvo que esta máquina produz sem Windows)
 
 | | Valor |
@@ -1066,3 +1078,4 @@ que já fechou continua aqui, com a razão registrada, para o estado não se per
 | **O instalador foi exercitado sob wine/Proton, não num Windows.** Instalou (374 MB, 74 arquivos), criou os dois atalhos (`.lnk` válidos, com o alvo lido nos bytes) e as chaves de registro, o app **instalado** rodou com prova por CDP e gravou o progresso, e desinstalou. Num Windows real não foi aberto: SmartScreen, indexação do Menu Iniciar e o clique no atalho seguem não medidos | 7 |
 | **O `proton run` não propaga o código de saída do filho** (`proton run cmd /C "exit 7"` → 0), então todo `EXIT=0` por essa via atesta só que o Proton saiu — uma desinstalação falhou **em silêncio** por isso. O que vale como prova na validação do desktop é o CDP e o arquivo em disco, não o código de retorno | 7 |
 | **Ubuntu 24.04/AppArmor segue não medido.** O AppImage passou a subir sem `--no-sandbox` (o sandbox do renderer entra nesta máquina, `Seccomp: 2`) e o *fail-safe* do AppRun cobre quem não tiver user namespaces — mas a restrição real é do AppArmor do Ubuntu, e medir exige a outra distro | 7 |
+| **O nome local dos artefatos tem espaço, e o GitHub pontua.** O `productName` é "Roadmap CISO", então o `electron-builder` gera `Roadmap CISO-0.1.0.AppImage` e `Roadmap CISO 0.1.0.exe`; no anexo da release eles viram `Roadmap.CISO-0.1.0.AppImage` e `Roadmap.CISO.0.1.0.exe`. Na v0.1.0 os `.sha256` publicados foram refeitos com os nomes do GitHub e conferidos baixando de volta, mas o certo é o nome local já nascer sem espaço: declarar `artifactName` (com hífen) no `linux`, no `win` e no `nsis` do `electron-builder.yml`. Uma linha por alvo, e vale para a próxima versão | 7 |
