@@ -26,7 +26,7 @@
 //      (a `key` das seções incluía o tema) — o `activeElement` caía para o `body` a cada anoitecer.
 //      O `matchMedia` abaixo é controlado pelo teste justamente para medir esse caminho.
 
-import { act, cleanup, render, waitFor } from '@testing-library/react'
+import { act, cleanup, render, waitFor, within } from '@testing-library/react'
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { Conteudo } from '../domain/types'
 import type { Persistencia } from '../infrastructure/storage/persistencia'
@@ -516,9 +516,10 @@ describe('as rotas do app', () => {
  *
  * O que se mede aqui não é o rastro (a lógica dele tem prova própria, `navegacao.test.tsx`), e sim
  * a BARRA: os três botões existem, estão onde o pedido diz, e cada um está inerte exatamente
- * quando não há para onde ir. O `disabled` é a resposta que o estado do app dá — e é o que o
- * navegador e o leitor de tela leem; um `aria-disabled` que deixasse o botão clicável seria o
- * estado anunciado sem ser o estado.
+ * quando não há para onde ir. Cada um mostra o DESENHO (as duas setas e a casa) no lugar da
+ * palavra; o nome acessível e o `title` seguem dizendo a ação. O `disabled` é a resposta que o
+ * estado do app dá — e é o que o navegador e o leitor de tela leem; um `aria-disabled` que deixasse
+ * o botão clicável seria o estado anunciado sem ser o estado.
  *
  * Quem anda de verdade é o HISTÓRICO do navegador: o teste faz a volta completa (Menu -> Voltar ->
  * Avançar) e confere o endereço a cada passo. É essa volta que separa `history.back()` de
@@ -550,27 +551,53 @@ describe('botões de navegação do topo', () => {
   const MENU = 'Ir para o menu principal'
   const ROTA_DO_TEMA = rotaDoTema(TEMA)
 
-  it('os três estão na barra, antes do tema, com o rótulo visível dentro do nome acessível', async () => {
+  it('os três estão na barra, antes do tema, com o nome acessível no lugar do texto', async () => {
     await abrir('#/')
 
     // A ordem da barra: os três de navegação primeiro, o tema por último (ele troca a aparência da
-    // tela, e não a tela). Os quatro são os únicos controles do `topo-acoes`.
+    // tela, e não a tela). Os quatro são os únicos controles do `topo-acoes`. Onde antes se lia a
+    // palavra de cada um, agora se lê o nome acessível: o `textContent` dos três é vazio.
     const acoes = document.querySelector('.topo-acoes')
     expect(acoes).toBeTruthy()
-    const naBarra = [...(acoes?.querySelectorAll<HTMLButtonElement>('button') ?? [])].map(
-      (b) => b.textContent,
+    const naBarra = [...(acoes?.querySelectorAll<HTMLButtonElement>('button') ?? [])].map((b) =>
+      b.getAttribute('aria-label'),
     )
-    expect(naBarra).toEqual(['Voltar', 'Avançar', 'Menu', 'Tema: sistema'])
+    expect(naBarra).toHaveLength(4)
+    expect(naBarra.slice(0, 3)).toEqual([VOLTAR, AVANCAR, MENU])
+    // O quarto é o do tema, e ele NÃO virou ícone neste pedido: segue com o rótulo em texto.
+    expect(naBarra[3] ?? '').toMatch(/^Tema: /)
     expect([...barra().querySelectorAll('button')]).toHaveLength(3)
 
     for (const b of [...barra().querySelectorAll<HTMLButtonElement>('button')]) {
       expect(b.getAttribute('type')).toBe('button')
       expect(b.classList.contains('botao-secundario')).toBe(true)
-      // WCAG 2.5.3: quem usa comando de voz diz o que lê na tela, e o controle responde. O nome
-      // acessível CONTÉM o rótulo visível (e não o substitui).
-      expect((b.getAttribute('aria-label') ?? '').toLowerCase()).toContain(
-        (b.textContent ?? '').toLowerCase(),
-      )
+      // A forma redonda, o tamanho e o estado desabilitado são da folha de estilo (que este arquivo
+      // não mede): o que se confere aqui é que a classe que os liga foi posta no botão.
+      expect(b.classList.contains('botao-redondo')).toBe(true)
+      // O texto visível saiu — sobra o desenho. É a asserção que falha se alguém "voltar" a palavra.
+      expect(b.textContent).toBe('')
+
+      // A regra do "rótulo no nome" (WCAG 2.5.3) NÃO se aplica mais — não há rótulo em texto visível
+      // para o nome conter. O que continua obrigatório é o nome acessível: ele existe, não é vazio, e
+      // o `title` diz o mesmo para quem usa o ponteiro.
+      const nome = b.getAttribute('aria-label')
+      expect(nome).toBeTruthy()
+      expect(b.getAttribute('title')).toBe(nome)
+
+      // E o nome não vem do desenho: o ícone está fora da árvore de acessibilidade. Sem o
+      // `aria-hidden`, o `svg` entra no nome do controle e "Voltar para a tela anterior" vira
+      // "gráfico" para quem usa leitor de tela.
+      const icone = b.querySelector('svg')
+      expect(icone).toBeTruthy()
+      expect(icone?.getAttribute('aria-hidden')).toBe('true')
+      expect(icone?.getAttribute('focusable')).toBe('false')
+    }
+
+    // E o nome COMPUTADO é a ação: a busca por papel + nome encontra cada um pelo que o leitor de
+    // tela anuncia. É a asserção que separa "o atributo está lá" de "o controle se chama assim" —
+    // sem o `aria-label`, o botão de ícone não teria nome nenhum para oferecer.
+    for (const nome of [VOLTAR, AVANCAR, MENU]) {
+      expect(within(barra()).getByRole('button', { name: nome })).toBe(botao(nome))
     }
 
     // No menu, e ainda sem ter ido a lugar nenhum: os três estão inertes. O "Menu" também — já
@@ -582,6 +609,40 @@ describe('botões de navegação do topo', () => {
     // O estado é o `disabled` de verdade: um `aria-disabled` aqui anunciaria o estado sem o aplicar.
     expect(botao(VOLTAR).getAttribute('aria-disabled')).toBeNull()
     expect(botao(AVANCAR).getAttribute('aria-disabled')).toBeNull()
+  })
+
+  it('cada botão traz o próprio desenho: as duas setas e a casa', async () => {
+    await abrir('#/')
+
+    /** Os `d` dos traços de um botão, na ordem em que o desenho os traz. */
+    function tracos(nomeAcessivel: string): string[] {
+      return [...botao(nomeAcessivel).querySelectorAll('svg path')].map(
+        (traco) => traco.getAttribute('d') ?? '',
+      )
+    }
+
+    // A família "seta + casa", o desenho exato de cada um. Conferir só que "há um `path`" não
+    // provaria nada sobre QUAL ícone está ali: trocar o desenho do Menu pela seta do Voltar — o
+    // defeito que quem usa o app veria na hora — passaria. É o `d` que identifica o desenho.
+    expect(tracos(VOLTAR)).toEqual(['M19 12H5M12 19l-7-7 7-7'])
+    expect(tracos(AVANCAR)).toEqual(['M5 12h14M12 5l7 7-7 7'])
+    // A casa são DOIS traços: o telhado e o corpo. Um só deixaria de ser o desenho pedido.
+    expect(tracos(MENU)).toEqual([
+      'M3 10.5 12 3l9 7.5',
+      'M5 9.8V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.8',
+    ])
+
+    // E a convenção do traço (e não do preenchimento): `currentColor` é o que faz o ícone seguir a
+    // cor do botão — e o tema — sem uma segunda folha de estilo.
+    const icone = botao(MENU).querySelector('svg')
+    expect(icone?.getAttribute('viewBox')).toBe('0 0 24 24')
+    expect(icone?.getAttribute('width')).toBe('1.15rem')
+    expect(icone?.getAttribute('height')).toBe('1.15rem')
+    expect(icone?.getAttribute('fill')).toBe('none')
+    expect(icone?.getAttribute('stroke')).toBe('currentColor')
+    expect(icone?.getAttribute('stroke-width')).toBe('2')
+    expect(icone?.getAttribute('stroke-linecap')).toBe('round')
+    expect(icone?.getAttribute('stroke-linejoin')).toBe('round')
   })
 
   it('na abertura por link compartilhado, não há para onde voltar dentro do app', async () => {

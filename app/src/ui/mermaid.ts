@@ -388,15 +388,80 @@ function aoRedimensionar(): void {
   encaixar(quadro)
 }
 
-/** Um controle do zoom: botao secundario, com o texto visivel e nome proprio para quem nao o ve. */
-function botaoDeZoom(texto: string, rotulo: string, aoClicar: () => void): HTMLButtonElement {
+/**
+ * O DESENHO de cada controle do zoom, literal deste modulo: a lupa com o cabo para os dois passos
+ * (o "menos" e o "mais" sao a mesma lente, com o traco que falta no "mais") e os quatro cantos para
+ * o "Caber", que devolve a figura inteira a janela.
+ *
+ * Sao estas tres strings — e mais nenhuma — que entram no `innerHTML` dos botoes (ver
+ * `botaoDeZoom`). Escritas aqui por extenso justamente para que se veja, na leitura, que nao ha
+ * interpolacao nenhuma: o desenho nao depende do material, do `content.json` nem de entrada
+ * alguma.
+ */
+const DESENHO_DIMINUIR = '<circle cx="11" cy="11" r="7" /><path d="M8 11h6M20 20l-4.6-4.6" />'
+const DESENHO_AUMENTAR =
+  '<circle cx="11" cy="11" r="7" /><path d="M8 11h6M11 8v6M20 20l-4.6-4.6" />'
+const DESENHO_CABER =
+  '<path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4" />'
+
+/**
+ * Monta o icone: o `svg` com a convencao de icone do app, e o desenho dentro.
+ *
+ * A convencao fica num lugar so porque e daqui que saem os unicos icones de interface do app:
+ * `viewBox` de 24 (o desenho e escrito nessa caixa), traco e nao preenchimento (`fill="none"`),
+ * `currentColor` (o icone herda cor e estado do botao sem regra propria na folha), 1,15 rem de
+ * lado — o mesmo tamanho do texto que saiu — e ponta e junta arredondadas, que e o que faz o
+ * desenho parecer desenhado em vez de cortado.
+ *
+ * `aria-hidden="true"` e `focusable="false"` sao o par que tira o desenho do nome acessivel e da
+ * tabulacao: o nome do botao e a ACAO (no `aria-label`), e o desenho e decoracao. O `focusable`
+ * nao e enfeite ao lado do `aria-hidden`: ha navegador que leva o `<svg>` a tabulacao por padrao,
+ * e o controle ganharia uma parada de foco muda colada nele.
+ *
+ * `desenho` so recebe uma das tres constantes acima — o parametro existe para o `svg` da convencao
+ * nao ser repetido tres vezes, e nao para aceitar conteudo.
+ */
+function svgDoIcone(desenho: string): string {
+  const convencao = [
+    'viewBox="0 0 24 24"',
+    'width="1.15rem"',
+    'height="1.15rem"',
+    'fill="none"',
+    'stroke="currentColor"',
+    'stroke-width="2"',
+    'stroke-linecap="round"',
+    'stroke-linejoin="round"',
+    'aria-hidden="true"',
+    'focusable="false"',
+  ].join(' ')
+  return `<svg ${convencao}>${desenho}</svg>`
+}
+
+/**
+ * Um controle do zoom: botao redondo com o desenho como UNICO conteudo — o texto visivel saiu, e o
+ * significado passou a viver no nome acessivel.
+ *
+ * O nome e o MESMO texto do `title`, e nao uma segunda versao dele: quem chega pelo ponteiro tem a
+ * dica nativa, e quem chega pelo leitor de tela ouve a acao inteira ("Diminuir o zoom", e nao
+ * "menos"; "Caber na janela", e nao "Caber"). O `−`/`+`/`Caber` continuam no nome de proposito:
+ * e por eles que quem usa controle por voz diz o que quer, e um glifo sozinho nao e dito por
+ * ninguem.
+ */
+function botaoDeZoom(desenho: string, rotulo: string, aoClicar: () => void): HTMLButtonElement {
   const botao = document.createElement('button')
   botao.type = 'button'
-  botao.className = 'botao-secundario'
-  botao.textContent = texto
-  // O nome contem o texto visivel (WCAG 2.5.3, "rotulo no nome"): "−" e "+" sao glifos, e o nome
-  // que so trouxesse a acao deixaria quem usa controle por voz sem o que dizer.
+  // `botao-redondo` (a forma, o tamanho e o estado redondos, na folha) EM CIMA da forma base dos
+  // botoes secundarios: o redondo e a forma destes tres controles de icone, e nao um quarto tipo
+  // de botao paralelo ao `.botao-secundario`.
+  botao.className = 'botao-secundario botao-redondo'
   botao.setAttribute('aria-label', rotulo)
+  botao.title = rotulo
+  // `innerHTML` aqui e seguro, e so aqui: o markup e LITERAL deste modulo (`svgDoIcone` com uma das
+  // tres constantes de desenho) — nada do material, do `content.json` ou de qualquer entrada passa
+  // por esta string, e nao ha interpolacao de dado nenhum. Alem disso, o SVG nao executa script: o
+  // analisador cria os elementos no namespace de SVG. Um texto de diagrama que chegasse ate aqui
+  // seria outro problema, e nao existe caminho para isso.
+  botao.innerHTML = svgDoIcone(desenho)
   botao.addEventListener('click', aoClicar)
   return botao
 }
@@ -427,9 +492,9 @@ function montarControlesDeZoom(quadro: HTMLElement): void {
   nivel.setAttribute('aria-atomic', 'true')
 
   grupo.append(
-    botaoDeZoom('−', '− Diminuir o zoom', () => ajustarZoom(quadro, 1 / PASSO_DE_ZOOM)),
-    botaoDeZoom('+', '+ Aumentar o zoom', () => ajustarZoom(quadro, PASSO_DE_ZOOM)),
-    botaoDeZoom('Caber', 'Caber na janela', () => encaixar(quadro)),
+    botaoDeZoom(DESENHO_DIMINUIR, '− Diminuir o zoom', () => ajustarZoom(quadro, 1 / PASSO_DE_ZOOM)),
+    botaoDeZoom(DESENHO_AUMENTAR, '+ Aumentar o zoom', () => ajustarZoom(quadro, PASSO_DE_ZOOM)),
+    botaoDeZoom(DESENHO_CABER, 'Caber na janela', () => encaixar(quadro)),
     nivel,
   )
   // ANTES do botao de ampliar/fechar que ja estava em `.diagrama-acoes`: o quadro e que fecha, o

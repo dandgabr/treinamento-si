@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { content, erroConteudo } from '../infrastructure/content/repository'
 import { gravarTexto, lerTexto } from '../infrastructure/storage/local'
 import type { Pagina } from '../domain/types'
@@ -245,6 +245,76 @@ function PaginaConteudo({ pagina, escuro }: { pagina: Pagina; escuro: boolean })
   )
 }
 
+/**
+ * O envelope comum dos icones de interface do app: o mesmo `svg` para os tres desenhos do topo.
+ *
+ * O desenho e de TRACO, e nao de preenchimento: `fill="none"` com `stroke="currentColor"` faz o
+ * icone seguir a cor do texto do botao — trocar de tema nao pede uma segunda folha de estilo.
+ * O `viewBox` e a grade 24x24 de onde saem os `d` de cada `path`; o tamanho fica no atributo (em
+ * `rem`, que acompanha o tamanho da fonte) e o resto da caixa e do CSS do botao.
+ *
+ * `aria-hidden="true"` e `focusable="false"` sao o ponto delicado: o nome do controle e a ACAO
+ * ("Voltar para a tela anterior"), publicada pelo `aria-label` do BOTAO. Um `svg` sem isso entra na
+ * arvore de acessibilidade e passa a nomear o controle — quem usa leitor de tela ouviria "grafico"
+ * em vez do que o botao faz. `focusable="false"` cobre o mesmo defeito no IE/Edge legado, onde o
+ * `svg` entrava na tabulacao.
+ */
+function Icone({ children }: { children: ReactNode }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="1.15rem"
+      height="1.15rem"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {children}
+    </svg>
+  )
+}
+
+/**
+ * A familia "seta + casa": as duas setas do rastro e a casa do menu — o par de desenhos que se
+ * reconhece sem legenda, que e o que substitui a palavra no botao.
+ */
+function IconeVoltar() {
+  return (
+    <Icone>
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </Icone>
+  )
+}
+
+/** A seta da direita: o espelho exato da do Voltar, para as duas se lerem como um par. */
+function IconeAvancar() {
+  return (
+    <Icone>
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </Icone>
+  )
+}
+
+/**
+ * A casa, em dois tracos: o telhado e o corpo.
+ *
+ * Sao dois `path` porque o vao entre eles e o desenho — o telhado nao encosta nas paredes. Num
+ * traco unico, a quina de dentro viraria uma linha continua e a casa viraria um quadrado com uma
+ * dobra.
+ */
+function IconeMenu() {
+  return (
+    <Icone>
+      <path d="M3 10.5 12 3l9 7.5" />
+      <path d="M5 9.8V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.8" />
+    </Icone>
+  )
+}
+
 export function App() {
   const rota = useRota()
   // Voltar/avancar/menu: o rastro de onde o app ja passou (`navegacao.ts`). Os botoes vivem no
@@ -314,37 +384,42 @@ export function App() {
         </a>
         <div className="topo-acoes">
           {/* Os tres controles de navegacao, antes do tema (que troca de aparencia, nao de tela).
-              O rotulo visivel esta CONTIDO no nome acessivel ("Voltar" em "Voltar para a tela
-              anterior"): quem usa comando de voz diz o que le (WCAG 2.5.3). Quem anuncia que nao
-              ha para onde ir e o `disabled` de verdade — com o botao inerte, e nao um
-              `aria-disabled` que o deixaria clicavel dizendo o contrario. */}
+              Cada um e o DESENHO, e nao a palavra: o `aria-label` segue sendo o nome acessivel e o
+              `title` repete o mesmo texto para quem usa o ponteiro. Sem rotulo em texto visivel, a
+              regra do "rotulo no nome" (WCAG 2.5.3) deixa de se aplicar — mas o nome acessivel
+              continua obrigatorio, e quem o carrega e o botao, nunca o `svg` (que vai escondido).
+              Quem anuncia que nao ha para onde ir e o `disabled` de verdade — com o botao inerte, e
+              nao um `aria-disabled` que o deixaria clicavel dizendo o contrario. */}
           <div className="topo-navegacao">
             <button
               type="button"
-              className="botao-secundario"
+              className="botao-secundario botao-redondo"
               onClick={navegacao.voltar}
               disabled={!navegacao.podeVoltar}
               aria-label="Voltar para a tela anterior"
+              title="Voltar para a tela anterior"
             >
-              Voltar
+              <IconeVoltar />
             </button>
             <button
               type="button"
-              className="botao-secundario"
+              className="botao-secundario botao-redondo"
               onClick={navegacao.avancar}
               disabled={!navegacao.podeAvancar}
               aria-label="Avançar para a próxima tela"
+              title="Avançar para a próxima tela"
             >
-              Avançar
+              <IconeAvancar />
             </button>
             <button
               type="button"
-              className="botao-secundario"
+              className="botao-secundario botao-redondo"
               onClick={navegacao.irParaMenu}
               disabled={!navegacao.podeIrParaMenu}
               aria-label="Ir para o menu principal"
+              title="Ir para o menu principal"
             >
-              Menu
+              <IconeMenu />
             </button>
           </div>
           <button

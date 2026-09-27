@@ -145,8 +145,8 @@ a {
 /* Com os tres botoes novos, a barra passa a quebrar em duas linhas nas telas estreitas — e
    `--altura-topo` e quem desloca o cabecalho de tabela e o alvo do `scroll-margin-top`. Se ela
    ficasse em 3.25rem, um titulo alcancado por rolagem ficaria escondido atras da barra.
-   Medido no navegador (`medir-topo.cjs`, largura por largura): duas linhas ate 500 px, uma linha
-   a partir de 520 px; e a altura das duas linhas e 95,39 px aqui e 103,39 px ate 480 px, porque a
+   Medido no navegador (`medir-topo.cjs`, largura por largura, ja com os botoes de icone): duas
+   linhas ate 519 px, uma linha a partir de 520 px; e a altura das duas linhas e 95,39 px aqui e 103,39 px ate 480 px, porque a
    media query daquela faixa aumenta o alvo de toque dos botoes. Se um rotulo mudar de tamanho,
    remeca — e o unico jeito de estes numeros nao virarem mentira. */
 @media (max-width: 519px) {
@@ -378,6 +378,37 @@ h3 {
 
 .botao-secundario:hover {
   background: var(--acento-suave);
+}
+
+/* Botao redondo de icone: a mesma pilula do `.botao-secundario`, com forma de circulo e o desenho
+   centrado. O alvo de toque continua sendo o minimo de 44 px (48 px no dedo, na media query que ja
+   existe), entao a caixa e quadrada — e com largura e altura iguais a pilula de `999px` fecha um
+   circulo sozinha, sem precisar de `border-radius: 50%`. O `flex: none` impede que o circulo vire
+   elipse quando um vizinho da linha for mais alto, e o `padding` da pilula sai porque quem define
+   o tamanho agora e a caixa, nao o rotulo. */
+.botao-redondo {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  flex: none;
+  padding: 0;
+}
+
+.botao-redondo svg {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+/* Inerte: o ponteiro perde a promessa de clique — o `:hover` da pilula nao pode reagir a um botao
+   que nao faz nada — e o desenho perde contraste. */
+.botao-redondo:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.botao-redondo:disabled:hover {
+  background: transparent;
 }
 
 .gabarito {
@@ -1388,6 +1419,14 @@ a.botao-secundario {
   .nivel,
   .pular {
     min-height: 48px;
+  }
+
+  /* O quadrado do botao de icone cresce junto: so o `min-height` da lista acima deixaria 44 px de
+     largura por 48 de altura, que e uma elipse e nao um circulo. */
+  .botao-redondo {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
   }
 
   .nivel {

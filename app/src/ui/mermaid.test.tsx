@@ -119,21 +119,87 @@ function desenhoDe(quadro: HTMLElement): HTMLElement {
   return desenho
 }
 
-/** Os textos visíveis dos controles do zoom — a ordem é a da tela. */
-const MENOS = '−'
-const MAIS = '+'
-const CABER = 'Caber'
+/**
+ * Os nomes dos controles do zoom, na ordem da tela — e não os textos visíveis, que saíram: cada
+ * controle é um ícone agora, e o rótulo inteiro vive no `aria-label` (e no `title`, que é o mesmo
+ * texto). Os glifos `−`, `+` e a palavra "Caber" continuam DENTRO do nome: é por eles que quem usa
+ * controle por voz diz o que quer.
+ */
+const MENOS = '− Diminuir o zoom'
+const MAIS = '+ Aumentar o zoom'
+const CABER = 'Caber na janela'
 
 /** Os três controles do zoom, na ordem em que estão na faixa de ações. */
 function controlesDeZoom(quadro: HTMLElement): HTMLButtonElement[] {
   return [...quadro.querySelectorAll<HTMLButtonElement>('.diagrama-zoom button')]
 }
 
-/** Um controle do zoom pelo texto visível. */
-function zoomDe(quadro: HTMLElement, texto: string): HTMLButtonElement {
-  const botao = controlesDeZoom(quadro).find((candidato) => candidato.textContent === texto)
-  if (!botao) throw new Error(`o quadro ampliado ficou sem o controle de zoom "${texto}"`)
+/** Um controle do zoom pelo nome acessível, que agora carrega a ação inteira. */
+function zoomDe(quadro: HTMLElement, rotulo: string): HTMLButtonElement {
+  const botao = controlesDeZoom(quadro).find(
+    (candidato) => candidato.getAttribute('aria-label') === rotulo,
+  )
+  if (!botao) throw new Error(`o quadro ampliado ficou sem o controle de zoom "${rotulo}"`)
   return botao
+}
+
+/** O ícone de um controle: o SVG é o único conteúdo do botão, e é por isso que ele não tem texto. */
+function iconeDe(botao: HTMLButtonElement): SVGSVGElement {
+  const icone = botao.querySelector('svg')
+  if (!icone) throw new Error('o controle do zoom ficou sem ícone')
+  return icone
+}
+
+/**
+ * O desenho de um ícone, forma por forma: o `circle` com o centro e o raio, e o `path` com o `d`.
+ *
+ * Lê as coordenadas dos atributos em vez de comparar o `innerHTML`: a serialização do fragmento é
+ * detalhe do ambiente (o jsdom, por exemplo, fecha cada forma com `</circle>` em vez de `/>`), e o
+ * que importa aqui é QUAL desenho está no botão — é ele que separa a lupa do "menos" da do "mais"
+ * e dos cantos do encaixe.
+ */
+function desenhoDoIcone(icone: SVGSVGElement): string[] {
+  return Array.from(icone.children).map((forma) =>
+    forma.tagName === 'circle'
+      ? `circle: ${forma.getAttribute('cx')} ${forma.getAttribute('cy')} ${forma.getAttribute('r')}`
+      : `path: ${forma.getAttribute('d')}`,
+  )
+}
+
+/**
+ * Confere um controle do zoom inteiro: o nome (e a dica do ponteiro, que é o MESMO texto), o
+ * desenho que ele mostra e o que garante que esse desenho não entre no nome acessível.
+ */
+function conferirControle(botao: HTMLButtonElement, rotulo: string, desenho: string[]): void {
+  // O texto visível saiu: o botão não tem mais conteúdo de texto nenhum, e o nome que sobra é a
+  // ação. Sem o `aria-label` ele seria um botão redondo e mudo.
+  expect(botao.getAttribute('aria-label')).toBe(rotulo)
+  expect(botao.title).toBe(rotulo)
+  expect(botao.textContent).toBe('')
+  // A forma redonda é da folha; o que é nosso é ligá-la nos três controles de ícone, em cima da
+  // forma base dos botões secundários.
+  expect(botao.classList.contains('botao-redondo')).toBe(true)
+  expect(botao.classList.contains('botao-secundario')).toBe(true)
+
+  const icone = iconeDe(botao)
+  // O ícone é decoração: `aria-hidden` o tira do nome acessível, e `focusable="false"` o tira da
+  // tabulação nos navegadores que tabulam SVG por padrão.
+  expect(icone.getAttribute('aria-hidden')).toBe('true')
+  expect(icone.getAttribute('focusable')).toBe('false')
+  // A convenção do ícone, no próprio desenho: caixa de 24, traço (e não preenchimento) na cor do
+  // texto, ponta e junta arredondadas, 1,15 rem de lado.
+  expect(icone.getAttribute('viewBox')).toBe('0 0 24 24')
+  expect(icone.getAttribute('fill')).toBe('none')
+  expect(icone.getAttribute('stroke')).toBe('currentColor')
+  expect(icone.getAttribute('stroke-width')).toBe('2')
+  expect(icone.getAttribute('stroke-linecap')).toBe('round')
+  expect(icone.getAttribute('stroke-linejoin')).toBe('round')
+  expect(icone.getAttribute('width')).toBe('1.15rem')
+  expect(icone.getAttribute('height')).toBe('1.15rem')
+  // E é SVG de verdade: um `<svg>` que o analisador criasse no namespace de HTML não desenharia
+  // nada, por mais certos que os atributos estivessem.
+  expect(icone.namespaceURI).toBe('http://www.w3.org/2000/svg')
+  expect(desenhoDoIcone(icone)).toEqual(desenho)
 }
 
 /** O nível do zoom como texto. Um quadro ampliado SEM nível é defeito, e não ausência a tolerar. */
@@ -143,12 +209,20 @@ function nivelDe(quadro: HTMLElement): HTMLElement {
   return nivel
 }
 
-/** O tamanho que o quadro deu ao SVG, em pixels — é por ele que o zoom é aplicado. */
+/**
+ * O tamanho que o quadro deu ao DESENHO, em pixels — é por ele que o zoom é aplicado.
+ *
+ * O seletor é `.mermaid svg`, e não `svg` nenhum do quadro: ampliado, o quadro tem mais SVG dentro
+ * dele (o ícone de cada controle do zoom, com `width="1.15rem"`), e o primeiro `svg` da árvore
+ * passou a ser um deles. Ler o atributo do ícone devolveria `NaN` — e um `NaN` que, num teste
+ * menos explícito, passaria por acerto.
+ */
 function tamanhoAplicado(quadro: HTMLElement): { largura: number; altura: number } {
-  const svg = quadro.querySelector('svg')
+  const svg = quadro.querySelector('.mermaid svg')
+  if (!svg) throw new Error('o quadro ampliado ficou sem o desenho')
   return {
-    largura: Number(svg?.getAttribute('width')),
-    altura: Number(svg?.getAttribute('height')),
+    largura: Number(svg.getAttribute('width')),
+    altura: Number(svg.getAttribute('height')),
   }
 }
 
@@ -172,9 +246,11 @@ function arrastar(desenho: HTMLElement, de: { x: number; y: number }, ate: { x: 
   desenho.dispatchEvent(new MouseEvent('pointerup', { bubbles: true }))
 }
 
-/** O nome acessível do desenho. */
+/**
+ * O nome acessível do DESENHO (e não o de um ícone de controle, que é decorativo e não tem nome).
+ */
 function rotuloDoSvg(quadro: HTMLElement): string {
-  return quadro.querySelector('svg')?.getAttribute('aria-label') ?? ''
+  return quadro.querySelector('.mermaid svg')?.getAttribute('aria-label') ?? ''
 }
 
 /** Aperta uma tecla como o navegador faria: no elemento focado, subindo para o documento. */
@@ -208,7 +284,7 @@ describe('prepararDiagramas — nome de cada diagrama', () => {
     // de mesmo nome na mesma página, e nenhum jeito de saber qual é qual.
     expect(rotuloDoSvg(primeiro!)).toBe('Diagrama: Mapa geral')
     expect(rotuloDoSvg(segundo!)).toBe('Diagrama: Sequência sugerida')
-    expect(primeiro!.querySelector('svg')?.getAttribute('role')).toBe('img')
+    expect(primeiro!.querySelector('.mermaid svg')?.getAttribute('role')).toBe('img')
     // O botão também: dois "Ampliar" iguais não dizem o que cada um amplia.
     expect(botaoDe(primeiro!).textContent).toBe('Ampliar')
     expect(botaoDe(primeiro!).getAttribute('aria-label')).toBe('Ampliar o diagrama Mapa geral')
@@ -358,8 +434,15 @@ describe('prepararDiagramas — o quadro ampliado', () => {
 
     const botao = botaoDe(primeiro!)
     const desenho = desenhoDe(primeiro!)
+    // Os três controles do zoom, na ordem da tela — conferidos pelo NOME, que é o rótulo inteiro
+    // desde que o texto visível saiu em favor do ícone. A ordem importa: é o primeiro deles que o
+    // laço de foco toma como entrada.
     const controles = controlesDeZoom(primeiro!)
-    expect(controles.map((controle) => controle.textContent)).toEqual([MENOS, MAIS, CABER])
+    expect(controles.map((controle) => controle.getAttribute('aria-label'))).toEqual([
+      MENOS,
+      MAIS,
+      CABER,
+    ])
 
     // O estado medido: com o foco fora do quadro (o "Ampliar" do diagrama seguinte), o TAB levava
     // o leitor para um controle que a tela nem mostra, e o Esc deixava de fechar o quadro aberto.
@@ -571,17 +654,46 @@ describe('prepararDiagramas — zoom e deslocamento do quadro ampliado', () => {
     expect(tamanhoAplicado(quadro)).toEqual({ largura: 750, altura: 300 })
     expect(nivelDe(quadro).textContent).toBe('25%')
 
-    // Os três controles com nome próprio e ação no nome (o texto visível está DENTRO dele, WCAG
-    // 2.5.3, "rótulo no nome"): dois botões de glifo sem nome seriam dois botões mudos.
+    // Os três controles com nome próprio: o texto visível saiu (um glifo não é lido por ninguém),
+    // e o nome que sobra é a AÇÃO inteira — três botões de ícone sem nome seriam três botões mudos.
     const controles = controlesDeZoom(quadro)
     expect(controles.map((controle) => controle.getAttribute('aria-label'))).toEqual([
       '− Diminuir o zoom',
       '+ Aumentar o zoom',
       'Caber na janela',
     ])
-    for (const controle of controles) {
-      expect(controle.getAttribute('aria-label')).toContain(controle.textContent ?? '')
-    }
+  })
+
+  it('mostra ícone no lugar do texto: o nome acessível é a ação, e o desenho é decorativo', () => {
+    const { quadro, desenho } = telaDoFluxograma()
+    medir(desenho, 750, 800)
+    botaoDe(quadro).click()
+
+    const [menos, mais, caber] = controlesDeZoom(quadro)
+    expect(menos).toBeTruthy()
+    expect(mais).toBeTruthy()
+    expect(caber).toBeTruthy()
+
+    // Cada controle com o SEU desenho: a lupa com o cabo (o "menos"), a lupa com o `+` a mais no
+    // cabo (o "mais") e os quatro cantos do encaixe (o "Caber"). Ícone trocado é controle que mente
+    // sobre o que faz — a forma de conferir é o desenho, e não a presença de um `<svg>` qualquer.
+    conferirControle(menos!, MENOS, ['circle: 11 11 7', 'path: M8 11h6M20 20l-4.6-4.6'])
+    conferirControle(mais!, MAIS, ['circle: 11 11 7', 'path: M8 11h6M11 8v6M20 20l-4.6-4.6'])
+    conferirControle(caber!, CABER, [
+      'path: M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4',
+    ])
+
+    // E os três desenhos são distintos entre si: dois controles com o MESMO ícone voltariam a ser
+    // dois botões indistinguíveis na tela — o que o nome próprio por diagrama já corrigiu uma vez.
+    const desenhos = [menos!, mais!, caber!].map((controle) =>
+      JSON.stringify(desenhoDoIcone(iconeDe(controle))),
+    )
+    expect(new Set(desenhos).size).toBe(3)
+
+    // O nível continua sendo INFORMAÇÃO, e não botão: ele ficou como estava, com o texto visível e
+    // o `role=status`, e é o único conteúdo de texto da faixa além do rótulo do botão de fechar.
+    expect(nivelDe(quadro).textContent).toBe('25%')
+    expect(quadro.querySelectorAll('.diagrama-zoom svg')).toHaveLength(3)
   })
 
   it('o zoom para no teto de 4 e no piso de 0,2', () => {
@@ -689,7 +801,7 @@ describe('prepararDiagramas — zoom e deslocamento do quadro ampliado', () => {
     expect(desenho.scrollLeft).toBe(0)
     expect(desenho.classList.contains('diagrama-pan')).toBe(false)
     expect(quadro.querySelector('.diagrama-zoom')).toBeNull()
-    expect(quadro.querySelector('svg')?.hasAttribute('width')).toBe(false)
+    expect(quadro.querySelector('.mermaid svg')?.hasAttribute('width')).toBe(false)
     // O único controle do bloco segue sendo o de ampliar.
     expect([...quadro.querySelectorAll('button')].map((botao) => botao.textContent)).toEqual([
       'Ampliar',
@@ -738,7 +850,7 @@ describe('prepararDiagramas — zoom e deslocamento do quadro ampliado', () => {
     teclar('Escape')
     medir(desenho, 375, 400)
     window.dispatchEvent(new Event('resize'))
-    expect(quadro.querySelector('svg')?.hasAttribute('width')).toBe(false)
+    expect(quadro.querySelector('.mermaid svg')?.hasAttribute('width')).toBe(false)
   })
 
   it('não escala um desenho SEM tamanho natural: abriria com `width="0"`', () => {
@@ -784,8 +896,8 @@ describe('prepararDiagramas — zoom e deslocamento do quadro ampliado', () => {
     // A visão inline depende do tamanho NATURAL (é a legibilidade da coluna de texto que dita o
     // `useMaxWidth: false`): o `width`/`height` que o zoom escreveu sai, e o SVG volta a não ter
     // atributo nenhum — exatamente como o Mermaid o deixou.
-    expect(primeiro!.querySelector('svg')?.hasAttribute('width')).toBe(false)
-    expect(primeiro!.querySelector('svg')?.hasAttribute('height')).toBe(false)
+    expect(primeiro!.querySelector('.mermaid svg')?.hasAttribute('width')).toBe(false)
+    expect(primeiro!.querySelector('.mermaid svg')?.hasAttribute('height')).toBe(false)
     expect(desenhoDoPrimeiro.classList.contains('diagrama-pan')).toBe(false)
     expect(desenhoDoPrimeiro.classList.contains('arrastando')).toBe(false)
     expect(desenhoDoPrimeiro.scrollLeft).toBe(0)

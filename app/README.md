@@ -1020,15 +1020,18 @@ aplicação (`src/ui/navegacao.ts`, com a parte pura separada para poder ser tes
 hash, então `history.back()`/`forward()` voltam e avançam de verdade, e o rastro — atualizado a cada
 `hashchange`, reconhecendo quando o hash novo é o vizinho do rastro — é quem sabe se há para onde ir.
 Os três botões nascem inertes e só habilitam quando há destino; navegar depois de voltar **descarta o
-futuro**, como o próprio histórico faz. O rótulo visível está contido no nome acessível (WCAG 2.5.3),
-para quem navega por comando de voz dizer o que lê.
+futuro**, como o próprio histórico faz. Eles são **redondos, de ícone** (seta para a esquerda, seta para
+a direita e casa), com o desenho em SVG de traço que segue `currentColor`; o significado vive no
+`aria-label`, repetido no `title` para o ponteiro. Como não há mais rótulo em texto visível, a regra
+"rótulo no nome" (WCAG 2.5.3) deixou de se aplicar — o que passa a valer é o nome acessível existir e o
+ícone **não** entrar nele (`aria-hidden`), para o leitor de tela anunciar a ação e não o desenho.
 
 **O diagrama ampliado cabe na janela.** Antes ele abria no tamanho natural (~3000 px de largura, o
 `useMaxWidth: false` que a coluna de texto exige para o texto não virar 2 px) e o resultado era abrir
 num canto da figura, com barra de rolagem. Agora o encaixe é calculado na abertura —
-`min(largura/largura natural, altura/altura natural, 1)`, sem ampliar acima de 100% — e o quadro traz
-`−`, `+`, `Caber` e o nível em texto, com o nível anunciado (`role="status"`, `aria-live`), porque o
-tamanho é estado. A escala entra pela **largura e altura do SVG em pixels**, e não por `transform`: a
+`min(largura/largura natural, altura/altura natural, 1)`, sem ampliar acima de 100% — e o quadro traz três
+botões redondos de ícone (diminuir, aumentar e caber) mais o nível em texto, anunciado (`role="status"`,
+`aria-live`), porque o tamanho é estado. A escala entra pela **largura e altura do SVG em pixels**, e não por `transform`: a
 área rolável cresce de verdade, e por isso o deslocamento continua sendo rolagem — que é o que o
 arrasto do ponteiro e as setas do teclado movem. Limites de 20% a 400%; `Caber` volta ao encaixe;
 redimensionar a janela reencaixa **só enquanto o nível ainda é o do encaixe**, para não apagar o zoom
