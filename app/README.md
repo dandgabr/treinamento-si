@@ -290,16 +290,16 @@ instalador/Roadmap CISO-<versão>.AppImage.sha256
 O arquivo de soma é o do `sha256sum`, e as linhas de comentário existem porque o formato não tem
 onde guardar a versão e o tamanho — nele, tudo o que vem depois dos dois espaços é o nome do
 arquivo, e uma coluna a mais faria a conferência procurar um arquivo chamado
-`Roadmap CISO-0.1.0.AppImage  109100531`. Com `#`, o `sha256sum -c` ignora o comentário e confere a
+`Roadmap CISO-0.1.0.AppImage  126075040`. Com `#`, o `sha256sum -c` ignora o comentário e confere a
 soma:
 
 ```
 # release 0.1.0 — Roadmap CISO
 # arquivo: Roadmap CISO-0.1.0.AppImage
-# tamanho: 109100531 bytes
-# gerado em: 2026-09-27
+# tamanho: 126075040 bytes
+# gerado em: 2026-09-27T21:37:24.491Z
 # confira com: sha256sum -c "Roadmap CISO-0.1.0.AppImage.sha256"
-d33ac80153bd33d5f74849bb601b427776230c9614b0f05f6703eef3de3e88ee  Roadmap CISO-0.1.0.AppImage
+3e878e45e4e61910a0e7d3254240ac283d2bb988727ea993719cb82cbfbf59a3  Roadmap CISO-0.1.0.AppImage
 ```
 
 Quem baixa roda `sha256sum -c "Roadmap CISO-0.1.0.AppImage.sha256"` com o artefato ao lado e recebe
@@ -314,16 +314,18 @@ como commit — refazer o pacote muda o hash, e um hash versionado seria mentira
 | | Valor |
 |---|---|
 | arquivo | `instalador/Roadmap CISO-0.1.0.AppImage` |
-| origem | reconstruído do commit `1136c52` (HEAD), com a árvore limpa |
-| tamanho | **109.100.531 bytes** (104,0 MiB) |
-| SHA-256 | `d33ac80153bd33d5f74849bb601b427776230c9614b0f05f6703eef3de3e88ee` |
+| origem | reconstruído do commit `131faea` (HEAD), com a árvore limpa |
+| tamanho | **126.075.040 bytes** (120,2 MiB) |
+| SHA-256 | `3e878e45e4e61910a0e7d3254240ac283d2bb988727ea993719cb82cbfbf59a3` |
 | conferido com | `sha256sum -c` → `SUCESSO` |
-| SBOM ao lado | `instalador/sbom.cdx.json` (CycloneDX 1.6, 572 componentes) |
+| SBOM ao lado | `instalador/sbom.cdx.json` (CycloneDX 1.6, 504 componentes, 1.000.966 bytes) |
 | medido em | 2026-09-27 |
 
 Refazer o pacote muda o hash, e é por isso que ele não é versionado: publica-se o par como anexo.
-A diferença de tamanho para o pacote de 26/09 é compressão entre builds, não conteúdo — o que vale
-como prova de origem é a soma conferida contra o arquivo que se baixou.
+O pacote **cresceu** de 104,0 MiB para 120,2 MiB nesta rodada, e a causa está medida: o `electron` subiu
+de 33.4.11 para 44.4.5, e o Chromium que ele embarca é maior. Não é o conteúdo do app — o
+`content.json` e o bundle do renderer são os mesmos. Como o pacote é saída, o que vale como prova de
+origem é a soma conferida contra o arquivo que se baixou, não o número decorado.
 
 ### O AppImage que estava no disco antes (medido, e depois sobrescrito)
 
@@ -1030,3 +1032,4 @@ que já fechou continua aqui, com a razão registrada, para o estado não se per
 | **`npm audit --omit=dev` não omite neste repositório**: o `.npmrc` tem `include=dev`, que vence a flag, então o comando reporta os advisories de desenvolvimento como se fossem de produção. O número de hoje é **2 moderate** (um advisory, em `vitest`/`@vitest/mocker`), não os 16 que o comando sugere | 7 |
 | **Um link para `app://bundle/conteudo.json` consegue trocar a janela do desktop**: `canal()` e `will-navigate` liberam o prefixo `app://bundle/` inteiro, e o resolvedor classifica esse link como externo e o mantém. Sem execução — `nosniff` e a CSP seguram —, mas a janela deixa de ser o app. Pré-existente | 7 |
 | **O portão copia o material para o diretório temporário do sistema** em `scripts/gates.test.ts`. Com o `/tmp` cheio (é tmpfs com cota de usuário nesta máquina), os casos falham com `EDQUOT` **antes de qualquer asserção** — não é defeito do portão, mas é o primeiro lugar a olhar quando ele ficar vermelho sem motivo. Foi o que aconteceu nesta rodada, e a limpeza das cópias de trabalho dos agentes devolveu 8,4 GB | 7 |
+| **A janela do desktop pode não se associar ao atalho.** O `electron-builder` avisa no empacotamento que o `productName` é usado como `app_id`/`WM_CLASS` sem `desktopName` declarado, e ambientes gráficos podem não ligar a janela em execução à entrada `.desktop`. O conserto é declarar `desktopName` no `package.json` e `linux.syncDesktopName: true` — dois campos, e falta decidir se o público desta via sente (a janela aparece igual; o que muda é o agrupamento na barra de tarefas) | 7 |
