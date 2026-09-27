@@ -131,6 +131,23 @@ describe('questoesDe', () => {
     expect(questoesDe(banco(), '99-inexistente')).toEqual([])
   })
 
+  it('não lê chave herdada do protótipo', () => {
+    // `banco[areaId]` também acha o que vem do protótipo: `'__proto__'` devolvia o próprio
+    // `Object.prototype` e o espalhamento estourava `TypeError: ... is not iterable`. A tela
+    // valida a área antes, mas o próximo chamador não tem como saber disso.
+    for (const nome of ['__proto__', 'constructor', 'toString', 'hasOwnProperty']) {
+      expect(() => questoesDe(banco(), nome)).not.toThrow()
+      expect(questoesDe(banco(), nome)).toEqual([])
+    }
+  })
+
+  it('devolve os itens quando o nome do protótipo é uma área de verdade', () => {
+    // A recusa é por chave própria, e não por uma lista de nomes proibidos: um banco que
+    // tem `constructor` como área continua funcionando.
+    const b = { constructor: [questao()] } as unknown as Banco
+    expect(ids(questoesDe(b, 'constructor'))).toEqual([ITEM])
+  })
+
   it('devolve todas as áreas na ordem alfabética, e não na de leitura', () => {
     // A chave de `02-grc` está declarada primeiro no banco de propósito: sem ordenar, o
     // resultado do desktop (JSON montado pelo build) divergiria do navegador.

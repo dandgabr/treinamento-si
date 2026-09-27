@@ -95,9 +95,16 @@ export function pareceBanco(valor: unknown): valor is Banco {
  * número justamente para a ordem alfabética ser a ordem de estudo.
  *
  * A lista devolvida é nova: quem chama não mexe por engano no banco carregado.
+ *
+ * A chave tem de ser própria do banco: `banco[areaId]` também acha o que vem do protótipo, e
+ * `'__proto__'` devolvia o próprio `Object.prototype` — o espalhamento estourava
+ * `TypeError: ... is not iterable`. Hoje nenhum chamador passa um desses nomes, mas o banco
+ * vem de JSON externo e o próximo chamador não tem como saber disso.
  */
 export function questoesDe(banco: Banco, areaId?: string): Questao[] {
-  if (areaId !== undefined) return [...(banco[areaId] ?? [])]
+  if (areaId !== undefined) {
+    return Object.hasOwn(banco, areaId) ? [...(banco[areaId] ?? [])] : []
+  }
   return Object.keys(banco)
     .sort()
     .flatMap((id) => banco[id] ?? [])

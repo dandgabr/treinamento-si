@@ -11,10 +11,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"O usuário é o elo mais fraco\"\". Qual é a correção?",
     "alternativas": [
-      "\"Um percentual conhecido de incidentes vem de erro humano\"",
-      "\"Trabalho híbrido não muda a exposição\"",
+      "Cubra no programa os canais que a organização efetivamente usa",
+      "Ajuste canal e conteúdo do programa ao modelo de trabalho real",
       "Descreva a decisão atacada e o controle que faltou no caminho",
-      "\"*Phishing* é um problema de e-mail\""
+      "\"Um percentual conhecido de incidentes vem de erro humano\""
     ],
     "correta": 2,
     "justificativa": "A frase atribui culpa a quem operou dentro da autorização que recebeu, e encerra a análise antes de chegar ao controle ausente"
@@ -31,9 +31,9 @@
     "status": "rascunho",
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Treinamento resolve *phishing*\"\". Qual é a correção?",
     "alternativas": [
-      "\"Um percentual conhecido de incidentes vem de erro humano\"",
-      "\"Trabalho híbrido não muda a exposição\"",
-      "\"*Phishing* é um problema de e-mail\"",
+      "Use a lista de decisões atacadas no seu ambiente, que você consegue levantar",
+      "Cubra no programa os canais que a organização efetivamente usa",
+      "Ajuste canal e conteúdo do programa ao modelo de trabalho real",
       "Trate treinamento e MFA resistente a *phishing* como metas distintas e obrigatórias"
     ],
     "correta": 3,
@@ -52,9 +52,9 @@
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Um percentual conhecido de incidentes vem de erro humano\"\". Qual é a correção?",
     "alternativas": [
       "Use a lista de decisões atacadas no seu ambiente, que você consegue levantar",
-      "\"Trabalho híbrido não muda a exposição\"",
-      "\"*Phishing* é um problema de e-mail\"",
-      "\"Treinamento resolve *phishing*\""
+      "Trate treinamento e MFA resistente a *phishing* como metas distintas e obrigatórias",
+      "Cubra no programa os canais que a organização efetivamente usa",
+      "Ajuste canal e conteúdo do programa ao modelo de trabalho real"
     ],
     "correta": 0,
     "justificativa": "Não há estatística desse tipo confirmada em fonte primária nesta execução"
@@ -71,10 +71,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"*Phishing* é um problema de e-mail\"\". Qual é a correção?",
     "alternativas": [
-      "\"Um percentual conhecido de incidentes vem de erro humano\"",
+      "Ajuste canal e conteúdo do programa ao modelo de trabalho real",
       "Cubra no programa os canais que a organização efetivamente usa",
-      "\"Trabalho híbrido não muda a exposição\"",
-      "\"Treinamento resolve *phishing*\""
+      "Descreva a decisão atacada e o controle que faltou no caminho",
+      "\"Um percentual conhecido de incidentes vem de erro humano\""
     ],
     "correta": 1,
     "justificativa": "O guia descreve SMS, chats em plataformas colaborativas e falsificação de chamada por VoIP"
@@ -91,10 +91,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Trabalho híbrido não muda a exposição\"\". Qual é a correção?",
     "alternativas": [
-      "\"Um percentual conhecido de incidentes vem de erro humano\"",
-      "\"*Phishing* é um problema de e-mail\"",
+      "Cubra no programa os canais que a organização efetivamente usa",
+      "Descreva a decisão atacada e o controle que faltou no caminho",
       "Ajuste canal e conteúdo do programa ao modelo de trabalho real",
-      "\"Treinamento resolve *phishing*\""
+      "\"Um percentual conhecido de incidentes vem de erro humano\""
     ],
     "correta": 2,
     "justificativa": "O guia registra que menos interação presencial aumenta a chance de a vítima ser enganada por abordagem ajustada às plataformas que ela usa"
@@ -111,9 +111,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"*Phishing* é problema de e-mail\"\". Qual é a correção?",
     "alternativas": [
-      "\"Bloquear domínio malicioso encerra o problema\"",
-      "\"Treinar uma vez por ano basta\"",
-      "\"O filtro de e-mail resolve\"",
+      "Defina o que se mede antes de escolher se a simulação é anunciada",
+      "Priorize padrão de comportamento e restrinja o que pode executar",
+      "Some a filtragem a monitoração de correio e mensagens internas",
       "Cubra no programa e na coleta de log os canais que a organização usa"
     ],
     "correta": 3,
@@ -132,9 +132,9 @@
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"O filtro de e-mail resolve\"\". Qual é a correção?",
     "alternativas": [
       "Some a filtragem a monitoração de correio e mensagens internas",
-      "\"Bloquear domínio malicioso encerra o problema\"",
-      "\"*Phishing* é problema de e-mail\"",
-      "\"Treinar uma vez por ano basta\""
+      "Priorize padrão de comportamento e restrinja o que pode executar",
+      "Defina o que se mede antes de escolher se a simulação é anunciada",
+      "Cubra no programa e na coleta de log os canais que a organização usa"
     ],
     "correta": 0,
     "justificativa": "Ele não vê mensagem originada dentro da organização nem tráfego em aplicativo de mensagem"
@@ -153,8 +153,8 @@
     "alternativas": [
       "\"Bloquear domínio malicioso encerra o problema\"",
       "Trate tipo de MFA como decisão por classe de conta",
-      "\"*Phishing* é problema de e-mail\"",
-      "\"Treinar uma vez por ano basta\""
+      "Some a filtragem a monitoração de correio e mensagens internas",
+      "Priorize padrão de comportamento e restrinja o que pode executar"
     ],
     "correta": 1,
     "justificativa": "Sem FIDO ou PKI o atacante com credencial autentica no portal verdadeiro; sem *number matching* ele insiste no *push*"
@@ -171,10 +171,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Bloquear domínio malicioso encerra o problema\"\". Qual é a correção?",
     "alternativas": [
-      "\"*Phishing* é problema de e-mail\"",
-      "\"Treinar uma vez por ano basta\"",
+      "Defina o que se mede antes de escolher se a simulação é anunciada",
+      "Some a filtragem a monitoração de correio e mensagens internas",
       "Priorize padrão de comportamento e restrinja o que pode executar",
-      "\"O filtro de e-mail resolve\""
+      "Cubra no programa e na coleta de log os canais que a organização usa"
     ],
     "correta": 2,
     "justificativa": "Listas de bloqueio são úteis e não conhecem o domínio criado hoje"
@@ -191,9 +191,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Anunciar a simulação educa\"\". Qual é a correção?",
     "alternativas": [
-      "\"Bloquear domínio malicioso encerra o problema\"",
-      "\"*Phishing* é problema de e-mail\"",
-      "\"Treinar uma vez por ano basta\"",
+      "Priorize padrão de comportamento e restrinja o que pode executar",
+      "Cubra no programa e na coleta de log os canais que a organização usa",
+      "Some a filtragem a monitoração de correio e mensagens internas",
       "Defina o que se mede antes de escolher se a simulação é anunciada"
     ],
     "correta": 3,
@@ -212,9 +212,9 @@
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Treinar uma vez por ano basta\"\". Qual é a correção?",
     "alternativas": [
       "Combine revisão anual com verificação de retenção e canal de reporte ativo",
-      "\"Bloquear domínio malicioso encerra o problema\"",
-      "\"*Phishing* é problema de e-mail\"",
-      "\"O filtro de e-mail resolve\""
+      "Cubra no programa e na coleta de log os canais que a organização usa",
+      "Defina o que se mede antes de escolher se a simulação é anunciada",
+      "Priorize padrão de comportamento e restrinja o que pode executar"
     ],
     "correta": 0,
     "justificativa": "A recomendação do guia para pequenas e médias empresas é revisão anual do material e verificação de retenção ao final do programa"
@@ -231,10 +231,10 @@
     "status": "rascunho",
     "enunciado": "Por que o guia considera a monitoração de correio e mensagens internas essencial?",
     "alternativas": [
-      "\"Bloquear domínio malicioso encerra o problema\"",
+      "O canal de reporte com resposta registrada. Sem ele nenhuma camada fica sabendo que a tentativa existiu, e não há dado para decidir o próximo investimento.",
       "Porque a pessoa pode ser enganada por origem interna ou sem que o time de segurança saiba, e o equilíbrio de tráfego interno permite notar desvio em relação à linha de base.",
-      "\"*Phishing* é problema de e-mail\"",
-      "\"Treinar uma vez por ano basta\""
+      "Concentra o acesso e reduz a chance de a pessoa ser convencida a entregar credencial, além de produzir trilha de auditoria que pode ser examinada de forma proativa ou retroativa após suspeita ou confirmação de incidente.",
+      "Combine revisão anual com verificação de retenção e canal de reporte ativo"
     ],
     "correta": 1,
     "justificativa": ""
@@ -252,9 +252,9 @@
     "enunciado": "Como a autenticação única participa da defesa contra engenharia social, segundo o guia?",
     "alternativas": [
       "Concentra o acesso e reduz a chance de a pessoa ser convencida a entregar credencial, além de produzir trilha de auditoria que pode ser examinada de forma proativa ou retroativa após suspeita ou confirmação de incidente.",
-      "\"Bloquear domínio malicioso encerra o problema\"",
-      "\"*Phishing* é problema de e-mail\"",
-      "\"Treinar uma vez por ano basta\""
+      "Porque a pessoa pode ser enganada por origem interna ou sem que o time de segurança saiba, e o equilíbrio de tráfego interno permite notar desvio em relação à linha de base.",
+      "O canal de reporte com resposta registrada. Sem ele nenhuma camada fica sabendo que a tentativa existiu, e não há dado para decidir o próximo investimento.",
+      "Combine revisão anual com verificação de retenção e canal de reporte ativo"
     ],
     "correta": 0,
     "justificativa": ""
@@ -271,10 +271,10 @@
     "status": "rascunho",
     "enunciado": "Qual é o primeiro controle a implantar quando não há orçamento novo, e por que ele é o primeiro?",
     "alternativas": [
-      "\"Bloquear domínio malicioso encerra o problema\"",
+      "Porque a pessoa pode ser enganada por origem interna ou sem que o time de segurança saiba, e o equilíbrio de tráfego interno permite notar desvio em relação à linha de base.",
       "O canal de reporte com resposta registrada. Sem ele nenhuma camada fica sabendo que a tentativa existiu, e não há dado para decidir o próximo investimento.",
-      "\"*Phishing* é problema de e-mail\"",
-      "\"Treinar uma vez por ano basta\""
+      "Concentra o acesso e reduz a chance de a pessoa ser convencida a entregar credencial, além de produzir trilha de auditoria que pode ser examinada de forma proativa ou retroativa após suspeita ou confirmação de incidente.",
+      "Combine revisão anual com verificação de retenção e canal de reporte ativo"
     ],
     "correta": 1,
     "justificativa": ""
@@ -292,9 +292,9 @@
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Programa é o curso anual obrigatório\"\". Qual é a correção?",
     "alternativas": [
       "Declare as quatro etapas do ciclo e o retorno da avaliação para o desenho",
-      "\"Depois de um incidente, basta reforçar o mesmo material\"",
-      "\"Segurança e privacidade são campanhas separadas\"",
-      "\"100% de conclusão prova eficácia\""
+      "Registre com o meio disponível e não prometa certificação automática",
+      "Gere material novo a partir do caso real, com prazo declarado",
+      "Verifique retenção e observe a decisão no dado operacional"
     ],
     "correta": 0,
     "justificativa": "A NIST descreve ciclo de vida com pós-implementação e avaliação, e não um evento"
@@ -313,8 +313,8 @@
     "alternativas": [
       "\"Depois de um incidente, basta reforçar o mesmo material\"",
       "Segmente pelo menos em conscientização, papel e educação",
-      "\"Segurança e privacidade são campanhas separadas\"",
-      "\"Programa é o curso anual obrigatório\""
+      "Verifique retenção e observe a decisão no dado operacional",
+      "Gere material novo a partir do caso real, com prazo declarado"
     ],
     "correta": 1,
     "justificativa": "A origem legal das diretrizes é o treinamento baseado em papéis organizacionais"
@@ -332,9 +332,9 @@
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"100% de conclusão prova eficácia\"\". Qual é a correção?",
     "alternativas": [
       "\"Depois de um incidente, basta reforçar o mesmo material\"",
-      "\"Segurança e privacidade são campanhas separadas\"",
+      "Segmente pelo menos em conscientização, papel e educação",
       "Verifique retenção e observe a decisão no dado operacional",
-      "\"Programa é o curso anual obrigatório\""
+      "Gere material novo a partir do caso real, com prazo declarado"
     ],
     "correta": 2,
     "justificativa": "Conclusão mede presença"
@@ -372,9 +372,9 @@
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Depois de um incidente, basta reforçar o mesmo material\"\". Qual é a correção?",
     "alternativas": [
       "Gere material novo a partir do caso real, com prazo declarado",
-      "\"Segurança e privacidade são campanhas separadas\"",
-      "\"Programa é o curso anual obrigatório\"",
-      "\"100% de conclusão prova eficácia\""
+      "Verifique retenção e observe a decisão no dado operacional",
+      "Segmente pelo menos em conscientização, papel e educação",
+      "Registre com o meio disponível e não prometa certificação automática"
     ],
     "correta": 0,
     "justificativa": "O incidente aponta uma decisão específica que o material não cobriu"
@@ -391,10 +391,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Sem plataforma não há programa\"\". Qual é a correção?",
     "alternativas": [
-      "\"Depois de um incidente, basta reforçar o mesmo material\"",
+      "Declare as quatro etapas do ciclo e o retorno da avaliação para o desenho",
       "Registre com o meio disponível e não prometa certificação automática",
-      "\"Segurança e privacidade são campanhas separadas\"",
-      "\"Programa é o curso anual obrigatório\""
+      "Gere material novo a partir do caso real, com prazo declarado",
+      "Verifique retenção e observe a decisão no dado operacional"
     ],
     "correta": 1,
     "justificativa": "A publicação trata de organizações de portes diferentes e de quem está começando do zero"
@@ -411,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "Quais são as quatro etapas do ciclo de vida descritas na edição de 2003 da NIST SP 800-50, e qual seção cobre cada uma?",
     "alternativas": [
-      "\"Depois de um incidente, basta reforçar o mesmo material\"",
+      "Conclusão registra que a pessoa passou pelo conteúdo. Retenção verifica o que permaneceu depois, e é a única das duas que pode ser ligada a uma decisão futura.",
       "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
-      "\"Segurança e privacidade são campanhas separadas\"",
-      "\"Programa é o curso anual obrigatório\""
+      "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
+      "A SP 800-50 de outubro de 2003, que trabalhava o nível estratégico de construção do programa, e a SP 800-16 de abril de 1998, que descrevia o treinamento baseado em papel, no nível tático."
     ],
     "correta": 1,
     "justificativa": ""
@@ -431,9 +431,9 @@
     "status": "rascunho",
     "enunciado": "Quais publicações a SP 800-50 Rev. 1 substitui, e o que cada uma cobria?",
     "alternativas": [
-      "\"Depois de um incidente, basta reforçar o mesmo material\"",
-      "\"Segurança e privacidade são campanhas separadas\"",
-      "\"Programa é o curso anual obrigatório\"",
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
+      "Conclusão registra que a pessoa passou pelo conteúdo. Retenção verifica o que permaneceu depois, e é a única das duas que pode ser ligada a uma decisão futura.",
+      "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
       "A SP 800-50 de outubro de 2003, que trabalhava o nível estratégico de construção do programa, e a SP 800-16 de abril de 1998, que descrevia o treinamento baseado em papel, no nível tático."
     ],
     "correta": 3,
@@ -452,9 +452,9 @@
     "enunciado": "Qual obrigação legal de 1987 está na origem das diretrizes de conscientização e treinamento, e qual característica ela impôs?",
     "alternativas": [
       "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
-      "\"Depois de um incidente, basta reforçar o mesmo material\"",
-      "\"Segurança e privacidade são campanhas separadas\"",
-      "\"Programa é o curso anual obrigatório\""
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material.",
+      "Conclusão registra que a pessoa passou pelo conteúdo. Retenção verifica o que permaneceu depois, e é a única das duas que pode ser ligada a uma decisão futura.",
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6."
     ],
     "correta": 0,
     "justificativa": ""
@@ -471,10 +471,10 @@
     "status": "rascunho",
     "enunciado": "O que o guia do CISA recomenda como verificação ao final de um programa de treinamento antiphishing?",
     "alternativas": [
-      "\"Depois de um incidente, basta reforçar o mesmo material\"",
+      "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
       "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material.",
-      "\"Segurança e privacidade são campanhas separadas\"",
-      "\"Programa é o curso anual obrigatório\""
+      "Conclusão registra que a pessoa passou pelo conteúdo. Retenção verifica o que permaneceu depois, e é a única das duas que pode ser ligada a uma decisão futura.",
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6."
     ],
     "correta": 1,
     "justificativa": ""
@@ -491,10 +491,10 @@
     "status": "rascunho",
     "enunciado": "Qual é a diferença entre medir conclusão e verificar retenção?",
     "alternativas": [
-      "\"Depois de um incidente, basta reforçar o mesmo material\"",
-      "\"Segurança e privacidade são campanhas separadas\"",
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
+      "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
       "Conclusão registra que a pessoa passou pelo conteúdo. Retenção verifica o que permaneceu depois, e é a única das duas que pode ser ligada a uma decisão futura.",
-      "\"Programa é o curso anual obrigatório\""
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material."
     ],
     "correta": 2,
     "justificativa": ""
@@ -511,10 +511,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Cultura se resolve com comunicação interna\"\". Qual é a correção?",
     "alternativas": [
-      "\"O exemplo da liderança tem efeito mensurável conhecido\"",
+      "Trate como hipótese operacional e teste na sua própria organização",
       "Ataque as decisões que contradizem a mensagem, e não o alcance da mensagem",
-      "\"Cultura é responsabilidade do time de segurança\"",
-      "\"Uma campanha forte muda o comportamento\""
+      "Nomeie o dono de cada decisão de conflito e o critério dele",
+      "Observe exceção concedida, reporte feito e desvio tratado"
     ],
     "correta": 1,
     "justificativa": "A NIST trata cultura como desfecho de programa dentro de processo de toda a organização, com mudança de comportamento como parte da gestão de risco"
@@ -531,10 +531,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Cultura é responsabilidade do time de segurança\"\". Qual é a correção?",
     "alternativas": [
-      "\"O exemplo da liderança tem efeito mensurável conhecido\"",
-      "\"Cultura se resolve com comunicação interna\"",
+      "Observe exceção concedida, reporte feito e desvio tratado",
+      "Faça o critério ser escrito antes do material de campanha",
       "Nomeie o dono de cada decisão de conflito e o critério dele",
-      "\"Uma campanha forte muda o comportamento\""
+      "\"O exemplo da liderança tem efeito mensurável conhecido\""
     ],
     "correta": 2,
     "justificativa": "O critério de exceção e o precedente de quem tem autoridade ficam fora da alçada do time"
@@ -551,9 +551,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Pesquisa de clima mede cultura\"\". Qual é a correção?",
     "alternativas": [
+      "Faça o critério ser escrito antes do material de campanha",
       "\"O exemplo da liderança tem efeito mensurável conhecido\"",
-      "\"Cultura é responsabilidade do time de segurança\"",
-      "\"Cultura se resolve com comunicação interna\"",
+      "Nomeie o dono de cada decisão de conflito e o critério dele",
       "Observe exceção concedida, reporte feito e desvio tratado"
     ],
     "correta": 3,
@@ -573,8 +573,8 @@
     "alternativas": [
       "Trate como problema a exceção sem critério e sem prazo",
       "\"O exemplo da liderança tem efeito mensurável conhecido\"",
-      "\"Cultura é responsabilidade do time de segurança\"",
-      "\"Cultura se resolve com comunicação interna\""
+      "Observe exceção concedida, reporte feito e desvio tratado",
+      "Faça o critério ser escrito antes do material de campanha"
     ],
     "correta": 0,
     "justificativa": "Exceção com critério, prazo e dono é decisão de risco legítima"
@@ -591,10 +591,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Uma campanha forte muda o comportamento\"\". Qual é a correção?",
     "alternativas": [
-      "\"O exemplo da liderança tem efeito mensurável conhecido\"",
+      "Observe exceção concedida, reporte feito e desvio tratado",
       "Faça o critério ser escrito antes do material de campanha",
-      "\"Cultura é responsabilidade do time de segurança\"",
-      "\"Cultura se resolve com comunicação interna\""
+      "\"O exemplo da liderança tem efeito mensurável conhecido\"",
+      "Nomeie o dono de cada decisão de conflito e o critério dele"
     ],
     "correta": 1,
     "justificativa": "O comportamento contradito pela prática diária volta ao padrão anterior"
@@ -611,10 +611,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"O exemplo da liderança tem efeito mensurável conhecido\"\". Qual é a correção?",
     "alternativas": [
-      "\"Cultura é responsabilidade do time de segurança\"",
-      "\"Cultura se resolve com comunicação interna\"",
+      "Nomeie o dono de cada decisão de conflito e o critério dele",
+      "Ataque as decisões que contradizem a mensagem, e não o alcance da mensagem",
       "Trate como hipótese operacional e teste na sua própria organização",
-      "\"Uma campanha forte muda o comportamento\""
+      "Observe exceção concedida, reporte feito e desvio tratado"
     ],
     "correta": 2,
     "justificativa": "Nenhuma medição desse efeito foi confirmada em fonte primária nesta execução"
@@ -631,10 +631,10 @@
     "status": "rascunho",
     "enunciado": "Quais são os três canais pelos quais a cultura em segurança opera na prática?",
     "alternativas": [
-      "\"O exemplo da liderança tem efeito mensurável conhecido\"",
+      "Ataque as decisões que contradizem a mensagem, e não o alcance da mensagem",
       "Critério e registro de exceção; custo de reportar; e resposta ao desvio, incluindo se o caso gerou mudança de processo ou exceção permanente.",
-      "\"Cultura é responsabilidade do time de segurança\"",
-      "\"Cultura se resolve com comunicação interna\""
+      "Trate como hipótese operacional e teste na sua própria organização",
+      "Nomeie o dono de cada decisão de conflito e o critério dele"
     ],
     "correta": 1,
     "justificativa": ""
@@ -651,10 +651,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Risco interno é assunto do time de segurança\"\". Qual é a correção?",
     "alternativas": [
-      "\"Exportação em massa é motivo para desligar alguém\"",
-      "\"Todo acesso fora de horário indica risco interno\"",
+      "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
+      "Comece por privilégio, revisão de acesso e critério de escalonamento",
       "Envolva gestão, Recursos Humanos, Jurídico, segurança física e donos de dado",
-      "\"O programa começa pela ferramenta\""
+      "Escreva o critério com Jurídico e Recursos Humanos antes de coletar"
     ],
     "correta": 2,
     "justificativa": "O SEI descreve esforço de toda a organização e nomeia oito partes interessadas, sendo cinco externas à segurança"
@@ -671,9 +671,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Instalar monitoração resolve\"\". Qual é a correção?",
     "alternativas": [
-      "\"Exportação em massa é motivo para desligar alguém\"",
-      "\"Todo acesso fora de horário indica risco interno\"",
-      "\"Risco interno é assunto do time de segurança\"",
+      "Comece por privilégio, revisão de acesso e critério de escalonamento",
+      "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
+      "Envolva gestão, Recursos Humanos, Jurídico, segurança física e donos de dado",
       "Escreva o critério com Jurídico e Recursos Humanos antes de coletar"
     ],
     "correta": 3,
@@ -694,7 +694,7 @@
       "Trate os dois como camadas distintas e complementares",
       "\"Exportação em massa é motivo para desligar alguém\"",
       "\"Todo acesso fora de horário indica risco interno\"",
-      "\"Risco interno é assunto do time de segurança\""
+      "Separe contenção, correção do acesso e decisão disciplinar"
     ],
     "correta": 0,
     "justificativa": "O cofre controla a credencial e o registro do empréstimo; o risco interno trata a decisão de quem tem acesso legítimo"
@@ -711,10 +711,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Todo acesso fora de horário indica risco interno\"\". Qual é a correção?",
     "alternativas": [
-      "\"Exportação em massa é motivo para desligar alguém\"",
+      "Comece por privilégio, revisão de acesso e critério de escalonamento",
       "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
-      "\"Risco interno é assunto do time de segurança\"",
-      "\"O programa começa pela ferramenta\""
+      "Escreva o critério com Jurídico e Recursos Humanos antes de coletar",
+      "Envolva gestão, Recursos Humanos, Jurídico, segurança física e donos de dado"
     ],
     "correta": 1,
     "justificativa": "Produção, plantão e rotina agendada explicam a maior parte desses acessos"
@@ -731,10 +731,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Exportação em massa é motivo para desligar alguém\"\". Qual é a correção?",
     "alternativas": [
+      "Trate os dois como camadas distintas e complementares",
       "\"Todo acesso fora de horário indica risco interno\"",
-      "\"Risco interno é assunto do time de segurança\"",
       "Separe contenção, correção do acesso e decisão disciplinar",
-      "\"O programa começa pela ferramenta\""
+      "Escreva o critério com Jurídico e Recursos Humanos antes de coletar"
     ],
     "correta": 2,
     "justificativa": "A correção do controle independe da conclusão sobre intenção, e a decisão sobre a pessoa tem rito próprio"
@@ -751,9 +751,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"O programa começa pela ferramenta\"\". Qual é a correção?",
     "alternativas": [
-      "\"Exportação em massa é motivo para desligar alguém\"",
-      "\"Todo acesso fora de horário indica risco interno\"",
-      "\"Risco interno é assunto do time de segurança\"",
+      "Escreva o critério com Jurídico e Recursos Humanos antes de coletar",
+      "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
+      "Envolva gestão, Recursos Humanos, Jurídico, segurança física e donos de dado",
       "Comece por privilégio, revisão de acesso e critério de escalonamento"
     ],
     "correta": 3,
@@ -772,9 +772,9 @@
     "enunciado": "Quantas práticas a sétima edição do guia do SEI apresenta, e sobre quantos casos a pesquisa se baseia?",
     "alternativas": [
       "Vinte e duas práticas, baseadas na análise de 3.000 casos de risco interno.",
-      "\"Exportação em massa é motivo para desligar alguém\"",
-      "\"Todo acesso fora de horário indica risco interno\"",
-      "\"Risco interno é assunto do time de segurança\""
+      "Envolva gestão, Recursos Humanos, Jurídico, segurança física e donos de dado",
+      "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
+      "Comece por privilégio, revisão de acesso e critério de escalonamento"
     ],
     "correta": 0,
     "justificativa": ""
@@ -791,10 +791,10 @@
     "status": "rascunho",
     "enunciado": "Quais partes interessadas o SEI nomeia como destinatárias dos recursos de cada prática?",
     "alternativas": [
-      "\"Exportação em massa é motivo para desligar alguém\"",
+      "Porque o controle que permitiu o alcance do ativo está errado independentemente da conclusão sobre a intenção, e misturar as duas coisas adia a correção até o fim de uma apuração que pode levar meses.",
       "Gestão, Recursos Humanos, Jurídico, segurança física, Tecnologia da Informação, segurança da informação, donos de dado e engenheiros de software.",
-      "\"Todo acesso fora de horário indica risco interno\"",
-      "\"Risco interno é assunto do time de segurança\""
+      "Envolva gestão, Recursos Humanos, Jurídico, segurança física e donos de dado",
+      "Vinte e duas práticas, baseadas na análise de 3.000 casos de risco interno."
     ],
     "correta": 1,
     "justificativa": ""
@@ -812,9 +812,9 @@
     "enunciado": "Por que a correção do acesso deve ser tratada separadamente da decisão sobre a pessoa?",
     "alternativas": [
       "Porque o controle que permitiu o alcance do ativo está errado independentemente da conclusão sobre a intenção, e misturar as duas coisas adia a correção até o fim de uma apuração que pode levar meses.",
-      "\"Exportação em massa é motivo para desligar alguém\"",
-      "\"Todo acesso fora de horário indica risco interno\"",
-      "\"Risco interno é assunto do time de segurança\""
+      "Gestão, Recursos Humanos, Jurídico, segurança física, Tecnologia da Informação, segurança da informação, donos de dado e engenheiros de software.",
+      "Envolva gestão, Recursos Humanos, Jurídico, segurança física e donos de dado",
+      "Vinte e duas práticas, baseadas na análise de 3.000 casos de risco interno."
     ],
     "correta": 0,
     "justificativa": ""
@@ -833,7 +833,7 @@
     "alternativas": [
       "\"Anunciar a simulação melhora o indicador\"",
       "\"Métrica boa é métrica que sempre melhora\"",
-      "\"Conclusão de 100% é a meta do programa\"",
+      "Se anunciar, não use o resultado como medida de risco",
       "Meça tempo e volume de reporte em mensagem real"
     ],
     "correta": 3,
@@ -852,9 +852,9 @@
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Anunciar a simulação melhora o indicador\"\". Qual é a correção?",
     "alternativas": [
       "Se anunciar, não use o resultado como medida de risco",
-      "\"Relatório individual de quem falhou aumenta a accountability\"",
-      "\"Métrica boa é métrica que sempre melhora\"",
-      "\"Conclusão de 100% é a meta do programa\""
+      "Use o registro disponível e declare o que não é medido",
+      "Defina o limiar que muda canal, conteúdo ou dono do risco",
+      "Meça tempo e volume de reporte em mensagem real"
     ],
     "correta": 0,
     "justificativa": "A melhora vem da expectativa, não do comportamento"
@@ -871,10 +871,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Relatório individual de quem falhou aumenta a accountability\"\". Qual é a correção?",
     "alternativas": [
-      "\"Anunciar a simulação melhora o indicador\"",
+      "Declare o comportamento esperado e a verificação de retenção",
       "Trate reporte como comportamento a ser reforçado, sem exposição individual",
-      "\"Métrica boa é métrica que sempre melhora\"",
-      "\"Conclusão de 100% é a meta do programa\""
+      "Defina o limiar que muda canal, conteúdo ou dono do risco",
+      "Use o registro disponível e declare o que não é medido"
     ],
     "correta": 1,
     "justificativa": "Cria incentivo contra o reporte e destrói a única fonte que vê tentativa sem log"
@@ -892,9 +892,9 @@
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Conclusão de 100% é a meta do programa\"\". Qual é a correção?",
     "alternativas": [
       "\"Relatório individual de quem falhou aumenta a accountability\"",
-      "\"Anunciar a simulação melhora o indicador\"",
+      "Defina o limiar que muda canal, conteúdo ou dono do risco",
       "Declare o comportamento esperado e a verificação de retenção",
-      "\"Métrica boa é métrica que sempre melhora\""
+      "Use o registro disponível e declare o que não é medido"
     ],
     "correta": 2,
     "justificativa": "A NIST liga o programa a mudança de comportamento como parte da gestão de risco"
@@ -911,9 +911,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Sem plataforma é impossível medir\"\". Qual é a correção?",
     "alternativas": [
-      "\"Relatório individual de quem falhou aumenta a accountability\"",
-      "\"Anunciar a simulação melhora o indicador\"",
-      "\"Métrica boa é métrica que sempre melhora\"",
+      "Se anunciar, não use o resultado como medida de risco",
+      "Defina o limiar que muda canal, conteúdo ou dono do risco",
+      "Declare o comportamento esperado e a verificação de retenção",
       "Use o registro disponível e declare o que não é medido"
     ],
     "correta": 3,
@@ -932,9 +932,9 @@
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Métrica boa é métrica que sempre melhora\"\". Qual é a correção?",
     "alternativas": [
       "Defina o limiar que muda canal, conteúdo ou dono do risco",
-      "\"Relatório individual de quem falhou aumenta a accountability\"",
-      "\"Anunciar a simulação melhora o indicador\"",
-      "\"Conclusão de 100% é a meta do programa\""
+      "Declare o comportamento esperado e a verificação de retenção",
+      "Use o registro disponível e declare o que não é medido",
+      "Se anunciar, não use o resultado como medida de risco"
     ],
     "correta": 0,
     "justificativa": "Indicador que só melhora não dispara decisão nenhuma"
@@ -952,9 +952,9 @@
     "enunciado": "Quais são os cinco elementos que um indicador precisa ter para ser levado a um comitê?",
     "alternativas": [
       "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara.",
+      "Trate reporte como comportamento a ser reforçado, sem exposição individual",
       "\"Relatório individual de quem falhou aumenta a accountability\"",
-      "\"Anunciar a simulação melhora o indicador\"",
-      "\"Métrica boa é métrica que sempre melhora\""
+      "Declare o comportamento esperado e a verificação de retenção"
     ],
     "correta": 0,
     "justificativa": ""
@@ -971,10 +971,10 @@
     "status": "rascunho",
     "enunciado": "Qual verificação o guia do CISA recomenda ao final de um programa de treinamento, e o que ela mede?",
     "alternativas": [
-      "\"Relatório individual de quem falhou aumenta a accountability\"",
-      "\"Anunciar a simulação melhora o indicador\"",
+      "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência.",
+      "Que a orientação inclui métricas sugeridas e métodos de avaliação, para melhorar e atualizar o programa conforme as necessidades mudam.",
       "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material. Ela mede retenção, e não a decisão de clicar.",
-      "\"Métrica boa é métrica que sempre melhora\""
+      "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara."
     ],
     "correta": 2,
     "justificativa": ""
@@ -991,9 +991,9 @@
     "status": "rascunho",
     "enunciado": "O que o guia do CISA diz sobre o valor de reportar atividade suspeita?",
     "alternativas": [
-      "\"Relatório individual de quem falhou aumenta a accountability\"",
-      "\"Anunciar a simulação melhora o indicador\"",
-      "\"Métrica boa é métrica que sempre melhora\"",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material. Ela mede retenção, e não a decisão de clicar.",
+      "Que a orientação inclui métricas sugeridas e métodos de avaliação, para melhorar e atualizar o programa conforme as necessidades mudam.",
+      "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara.",
       "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência."
     ],
     "correta": 3,
@@ -1012,9 +1012,9 @@
     "enunciado": "O que a NIST SP 800-50 Rev. 1 declara sobre o uso de métricas no programa?",
     "alternativas": [
       "Que a orientação inclui métricas sugeridas e métodos de avaliação, para melhorar e atualizar o programa conforme as necessidades mudam.",
-      "\"Relatório individual de quem falhou aumenta a accountability\"",
-      "\"Anunciar a simulação melhora o indicador\"",
-      "\"Métrica boa é métrica que sempre melhora\""
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material. Ela mede retenção, e não a decisão de clicar.",
+      "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara.",
+      "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência."
     ],
     "correta": 0,
     "justificativa": ""

@@ -17,6 +17,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { promisify } from 'node:util'
 import { JSDOM } from 'jsdom'
+import { chromium } from 'playwright'
 import { fontesMaisNovas } from './lib/frescor.mjs'
 
 const execFileAsync = promisify(execFile)
@@ -200,8 +201,13 @@ const cenarios = [
 function rotasDaMatriz() {
   const c = conteudo()
   const rotas = []
+  // A rota do quiz entra na matriz: era a unica tela do app que cenario nenhum visitava, e
+  // por isso o defeito de foco ao avancar questao (o foco caia no `body`) so apareceu numa
+  // revisao manual. `#/quiz` e o quiz de todas as areas; `#/quiz/<areaId>`, o da area.
+  rotas.push({ nome: 'quiz', rota: '#/quiz' })
   for (const a of c.areas) {
     rotas.push({ nome: `area ${a.areaId}`, rota: `#/area/${a.areaId}` })
+    rotas.push({ nome: `quiz ${a.areaId}`, rota: `#/quiz/${a.areaId}` })
     const primeiro = (a.temas ?? [])[0]
     if (primeiro) {
       const [areaId, temaId] = primeiro.split('#')
@@ -262,7 +268,12 @@ function hrefsInvalidos(d) {
     const ok =
       (partes[0] === 'area' && areas.has(partes[1])) ||
       (partes[0] === 'tema' && temas.has(`${partes[1]}#${partes[2]}`)) ||
-      (partes[0] === 'pagina' && slugs.has(partes.slice(1).join('/')))
+      (partes[0] === 'pagina' && slugs.has(partes.slice(1).join('/'))) ||
+      // O quiz tem duas rotas — `#/quiz`, de todas as areas, e `#/quiz/<areaId>` — e as duas
+      // sao visitadas pela matriz. Sem esta linha, o link do painel para o quiz seria
+      // reprovado por apontar para uma rota que existe.
+      (partes[0] === 'quiz' &&
+        (partes.length === 1 || (partes.length === 2 && areas.has(partes[1]))))
     if (!ok) invalidos.push(href)
   }
   return invalidos
@@ -299,6 +310,183 @@ async function rodarChrome(url, slot = 0) {
     { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] },
   )
   return stdout
+}
+
+/**
+ * O contrato da tela do quiz que o `--dump-dom` nao alcanca.
+ *
+ * O dump fotografa a pagina PARADA: o gabarito, a marca de "correta" e o "Por quê" so existem
+ * depois de um clique, e o foco depois de avancar so se observa com a pagina viva. Aqui o
+ * Chrome e aberto pelo Playwright e uma rodada e respondida de verdade, pelo caminho do
+ * usuario: clicar a alternativa, confirmar, avancar.
+ *
+ * Os dois tipos de item sao distinguidos pelo proprio aviso de revisao da tela, que diz de
+ * onde o item saiu ("tabela de erros comuns" ou "recuperação ativa") — e o que permite exigir
+ * o "Por quê" de um e a ausencia dele no outro.
+ */
+async function cenarioDoQuizRespondido() {
+  const nome = 'quiz (respondido)'
+  const falhas = []
+  /** Mesma forma dos cenarios da matriz, para o relatorio final nao ter dois formatos. */
+  const conferir = (rotulo, obtido, esperado) => {
+    const ok = obtido === esperado
+    console.log(`${ok ? 'OK   ' : 'FALHA'} ${nome} :: ${rotulo} = ${JSON.stringify(obtido)}`)
+    if (!ok) falhas.push([nome, rotulo, `esperado ${JSON.stringify(esperado)}`])
+  }
+
+  const navegador = await chromium.launch({
+    // `channel` acha o Chrome instalado quando `CHROME` e so o nome do programa, como no
+    // default; `executablePath` honra um `CHROME_BIN` com caminho.
+    ...(CHROME.includes('/') ? { executablePath: CHROME } : { channel: 'chrome' }),
+    headless: true,
+    args: ['--no-sandbox', '--disable-gpu'],
+  })
+
+  try {
+    const pagina = await navegador.newPage()
+    await pagina.goto(`${BASE}#/quiz`)
+    await pagina.waitForSelector('.bloco-questao .alternativas input[type=radio]')
+
+    // 4 rodadas de 10 itens no maximo: a rodada e um sorteio e o que se quer ver sao os dois
+    // tipos de item. Com ~36% do banco em recuperacao, passar 40 itens sem um deles seria
+    // azar de 1e-8 — e o laco para assim que ambos aparecem, o que acontece na primeira
+    // rodada na quase totalidade das execucoes.
+    const MAX_ITENS = 40
+    let erroComum = 0
+    let recuperacao = 0
+    let respondidas = 0
+
+    // O piso de 10 percorre uma rodada inteira mesmo quando os dois tipos saem logo nos
+    // primeiros itens: e o que exercita dez trocas de questao com o foco.
+    for (let n = 0; n < MAX_ITENS && (respondidas < 10 || !erroComum || !recuperacao); n++) {
+      if (!(await pagina.locator('.bloco-questao').count())) {
+        // Fim da rodada: o titulo recebeu o foco na montagem e o botao abre outra.
+        await pagina.getByRole('button', { name: 'Outra rodada' }).click()
+        await pagina.waitForSelector('.bloco-questao .alternativas input[type=radio]')
+      }
+
+      const aviso = pagina.locator('.bloco-questao > .dica')
+      const rotulo = (await aviso.count()) ? ((await aviso.textContent()) ?? '') : ''
+      const origem = rotulo.includes('recuperação ativa')
+        ? 'recuperação ativa'
+        : rotulo.includes('tabela de erros comuns')
+          ? 'tabela de erros comuns'
+          : null
+
+      const antes = await pagina.evaluate(() => {
+        const radios = [...document.querySelectorAll('.alternativas input[type=radio]')]
+        return {
+          alternativas: document.querySelectorAll('.lista-alternativas > li').length,
+          radios: radios.length,
+          nomes: [...new Set(radios.map((r) => r.getAttribute('name')))],
+          gabaritos: document.querySelectorAll('.bloco-questao .gabarito').length,
+        }
+      })
+      conferir('um radio por alternativa', antes.radios, antes.alternativas)
+      conferir('mesmo name nos radios do grupo', antes.nomes.length, 1)
+      conferir('o grupo tem name', !!antes.nomes[0], true)
+      conferir('gabarito so depois de responder', antes.gabaritos, 0)
+
+      await pagina.locator('.bloco-questao .alternativa').first().click()
+      conferir(
+        'alternativa marcada',
+        await pagina.locator('.bloco-questao .alternativas input:checked').count(),
+        1,
+      )
+      await pagina.locator('.acoes-questao button').click()
+      await pagina.waitForSelector('.bloco-questao .gabarito')
+
+      const depois = await pagina.evaluate(() => ({
+        gabaritos: document.querySelectorAll('.bloco-questao .gabarito').length,
+        certas: document.querySelectorAll('.bloco-questao .alternativa.certa').length,
+        travados: document.querySelectorAll('.alternativas input[type=radio]:disabled').length,
+        texto: document.querySelector('.bloco-questao .gabarito')?.textContent ?? '',
+      }))
+      conferir('gabarito existe depois de responder', depois.gabaritos, 1)
+      conferir('a alternativa correta fica marcada', depois.certas, 1)
+      conferir('o grupo trava depois de responder', depois.travados, antes.radios)
+
+      const temPorque = depois.texto.includes('Por quê')
+      if (origem === 'recuperação ativa') {
+        recuperacao += 1
+        // Item de recuperacao nao tem justificativa derivada: o rotulo nao pode aparecer
+        // sozinho, sem texto.
+        conferir('item de recuperacao sem "Por quê"', temPorque, false)
+      } else if (origem === 'tabela de erros comuns') {
+        erroComum += 1
+        conferir('item de erro comum com "Por quê"', temPorque, true)
+      }
+
+      await pagina.locator('.acoes-questao button').click()
+      respondidas += 1
+
+      // Avancar e o outro momento em que o foco se perderia: o botao clicado vira
+      // `disabled` e o Chrome o manda para o `body`. O foco tem de estar no titulo — da
+      // questao nova, ou do fim da rodada na ultima.
+      await pagina
+        .waitForFunction(
+          () => /^(Questão \d+ de \d+|Fim da rodada)$/.test((document.activeElement?.textContent ?? '').trim()),
+          null,
+          { timeout: 5000 },
+        )
+        .catch(() => {})
+      const foco = await pagina.evaluate(() => ({
+        tag: document.activeElement?.tagName ?? null,
+        texto: (document.activeElement?.textContent ?? '').trim().slice(0, 60),
+      }))
+      conferir(
+        'depois de avancar o foco esta no titulo, nao no body',
+        foco.tag === 'H2' && /^(Questão \d+ de \d+|Fim da rodada)$/.test(foco.texto),
+        true,
+      )
+    }
+
+    conferir('a rodada inteira foi respondida', respondidas >= 10, true)
+    conferir('o sorteio trouxe item de erro comum', erroComum > 0, true)
+    conferir('o sorteio trouxe item de recuperacao', recuperacao > 0, true)
+
+    // O outro estado da tela: a sessao que NAO pode gravar porque a LEITURA do progresso
+    // falhou. Nele `falhaAoGravar` continua `false` (nada foi gravado, e nao houve falha de
+    // gravacao) e, sem aviso, a tela contaria acertos e prometeria o registro que nao
+    // acontece. Nenhum provedor do app rejeita hoje — a ponte e falsa de proposito, injetada
+    // antes do bundle rodar, e e o unico jeito de chegar nesse estado.
+    const semLeitura = await navegador.newPage()
+    await semLeitura.addInitScript(() => {
+      window.roadmap = {
+        versao: () => Promise.resolve('0.0.0-smoke'),
+        progresso: {
+          ler: () => Promise.reject(new Error('EIO')),
+          gravar: () => Promise.resolve(),
+          apagar: () => Promise.resolve(),
+          exportar: () => Promise.resolve({ estado: 'cancelado' }),
+          importar: () => Promise.resolve({ estado: 'cancelado' }),
+        },
+        aoEscolherNoMenu: () => {},
+      }
+    })
+    await semLeitura.goto(`${BASE}#/quiz`)
+    await semLeitura.waitForSelector('.bloco-questao .alternativas input[type=radio]')
+    const avisos = () =>
+      semLeitura.evaluate(() =>
+        [...document.querySelectorAll('.aviso-erro')].map((e) => e.getAttribute('role') ?? ''),
+      )
+    conferir('sessao sem leitura avisa no topo da tela', (await avisos()).join(','), 'alert')
+    for (let i = 0; i < 10; i++) {
+      await semLeitura.locator('.bloco-questao .alternativa').first().click()
+      await semLeitura.locator('.acoes-questao button').click()
+      await semLeitura.waitForSelector('.bloco-questao .gabarito')
+      await semLeitura.locator('.acoes-questao button').click()
+    }
+    await semLeitura.waitForSelector('.veredito-botoes')
+    // Dois avisos: o do topo e o do fim da rodada, cada um colado na frase que afirma o
+    // registro. Na tela real eles sao o mesmo recado do store.
+    conferir('sessao sem leitura avisa tambem no fim da rodada', (await avisos()).join(','), 'alert,alert')
+  } catch (erro) {
+    falhas.push([nome, 'interacao falhou', String(erro).slice(0, 200)])
+  } finally {
+    await navegador.close()
+  }
+  return falhas
 }
 
 // A matriz entra depois das declaracoes: `conteudo()` le `conteudoCache`, declarado
@@ -371,13 +559,17 @@ async function main() {
     }
   }
 
+  // Depois dos dumps: a rodada respondida precisa do navegador vivo e de um Chrome so, entao
+  // ela roda sozinha, no fim, sem disputar os slots do lote.
+  falhas.push(...(await cenarioDoQuizRespondido()))
+
   if (falhas.length) {
     console.error(`\n${falhas.length} falha(s):`)
     for (const [nome, rotulo, detalhe] of falhas) console.error(`  - ${nome} :: ${rotulo} (${detalhe})`)
     console.error(`\nReproduza uma rota com:\n  ${CHROME} --headless=new --virtual-time-budget=15000 --dump-dom "${BASE}#/..."`)
     process.exit(1)
   }
-  console.log(`\n${cenarios.length} cenarios, 0 falhas`)
+  console.log(`\n${cenarios.length} cenarios + rodadas respondidas no navegador, 0 falhas`)
 }
 
 await main()

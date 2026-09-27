@@ -11,10 +11,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"\"Não treinamos modelo, então não temos risco de IA\"\". Qual é a correção?",
     "alternativas": [
-      "Tratar o OWASP Top 10 for LLM como catálogo de controles",
+      "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
       "A empresa que consome API é deployer e responde por supervisão, monitoramento e uso conforme a finalidade",
-      "\"O fornecedor é responsável por tudo\"",
-      "Classificar pelo tipo de modelo"
+      "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04",
+      "Uso não aprovado entra na lista com situação própria e decisão registrada"
     ],
     "correta": 1,
     "justificativa": "O risco de aplicação nasce do uso, do dado que entra e da saída que circula; o OWASP Top 10 for LLM Applications 2025 é escrito para quem constrói e para quem integra aplicação"
@@ -31,10 +31,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"\"O fornecedor é responsável por tudo\"\". Qual é a correção?",
     "alternativas": [
-      "Tratar o OWASP Top 10 for LLM como catálogo de controles",
-      "\"Não treinamos modelo, então não temos risco de IA\"",
+      "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04",
+      "Uso não aprovado entra na lista com situação própria e decisão registrada",
       "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
-      "Classificar pelo tipo de modelo"
+      "A empresa que consome API é deployer e responde por supervisão, monitoramento e uso conforme a finalidade"
     ],
     "correta": 2,
     "justificativa": "O papel na cadeia define obrigações próprias para quem coloca o sistema em uso"
@@ -52,8 +52,8 @@
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Classificar pelo tipo de modelo\". Qual é a correção?",
     "alternativas": [
       "Tratar o OWASP Top 10 for LLM como catálogo de controles",
+      "Uso não aprovado entra na lista com situação própria e decisão registrada",
       "\"Não treinamos modelo, então não temos risco de IA\"",
-      "\"O fornecedor é responsável por tudo\"",
       "Classifique pela finalidade declarada e pelo efeito sobre pessoa"
     ],
     "correta": 3,
@@ -72,9 +72,9 @@
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Inventário só com uso aprovado\". Qual é a correção?",
     "alternativas": [
       "Uso não aprovado entra na lista com situação própria e decisão registrada",
-      "Tratar o OWASP Top 10 for LLM como catálogo de controles",
-      "\"Não treinamos modelo, então não temos risco de IA\"",
-      "\"O fornecedor é responsável por tudo\""
+      "Classifique pela finalidade declarada e pelo efeito sobre pessoa",
+      "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04",
+      "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa"
     ],
     "correta": 0,
     "justificativa": "O risco mora justamente no que não passou pelo processo"
@@ -91,10 +91,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Tratar o OWASP Top 10 for LLM como catálogo de controles\". Qual é a correção?",
     "alternativas": [
-      "\"Não treinamos modelo, então não temos risco de IA\"",
+      "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
       "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04",
-      "\"O fornecedor é responsável por tudo\"",
-      "Classificar pelo tipo de modelo"
+      "Uso não aprovado entra na lista com situação própria e decisão registrada",
+      "A empresa que consome API é deployer e responde por supervisão, monitoramento e uso conforme a finalidade"
     ],
     "correta": 1,
     "justificativa": "É uma lista de riscos e mitigações de aplicação, sem o fechamento de um catálogo de controles de gestão"
@@ -111,10 +111,10 @@
     "status": "rascunho",
     "enunciado": "A ISO descreve a ISO/IEC 42001 como aplicável a quais organizações?",
     "alternativas": [
-      "Tratar o OWASP Top 10 for LLM como catálogo de controles",
+      "A empresa que consome API é deployer e responde por supervisão, monitoramento e uso conforme a finalidade",
       "Organizações de qualquer tamanho envolvidas em desenvolver, fornecer ou usar produtos e serviços baseados em IA, em qualquer setor, incluindo agências do setor público, empresas e organizações sem fins lucrativos.",
-      "\"Não treinamos modelo, então não temos risco de IA\"",
-      "\"O fornecedor é responsável por tudo\""
+      "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
+      "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04"
     ],
     "correta": 1,
     "justificativa": ""
@@ -131,10 +131,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Prompt injection é jailbreak\"\". Qual é a correção?",
     "alternativas": [
-      "\"O assistente herda a permissão do usuário, então é mais seguro\"",
-      "\"Só leio documento interno, então estou protegido\"",
+      "A garantia que se pede ao fornecedor é contratual e de configuração, não de comportamento do modelo",
+      "Credencial própria do assistente, com menor privilégio e ação irreversível sob confirmação",
       "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo",
-      "\"O fornecedor do modelo garante que não acontece\""
+      "Toda fonte que o assistente lê é entrada não confiável, inclusive a intranet"
     ],
     "correta": 2,
     "justificativa": "Jailbreak desvia a política do modelo; injection faz o sistema executar instrução de terceiro"
@@ -153,7 +153,7 @@
     "alternativas": [
       "\"O assistente herda a permissão do usuário, então é mais seguro\"",
       "\"Só leio documento interno, então estou protegido\"",
-      "\"O fornecedor do modelo garante que não acontece\"",
+      "Toda fonte que o assistente lê é entrada não confiável, inclusive a intranet",
       "Reduza agência e confirme ação humana; filtro é camada auxiliar"
     ],
     "correta": 3,
@@ -173,8 +173,8 @@
     "alternativas": [
       "Toda fonte que o assistente lê é entrada não confiável, inclusive a intranet",
       "\"O assistente herda a permissão do usuário, então é mais seguro\"",
-      "\"O fornecedor do modelo garante que não acontece\"",
-      "\"Filtro de palavras proibidas resolve\""
+      "Reduza agência e confirme ação humana; filtro é camada auxiliar",
+      "Credencial própria do assistente, com menor privilégio e ação irreversível sob confirmação"
     ],
     "correta": 0,
     "justificativa": "Documento interno é escrito por gente e recebe anexo de terceiro; a base de conhecimento é entrada"
@@ -191,10 +191,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"O assistente herda a permissão do usuário, então é mais seguro\"\". Qual é a correção?",
     "alternativas": [
-      "\"Só leio documento interno, então estou protegido\"",
+      "A garantia que se pede ao fornecedor é contratual e de configuração, não de comportamento do modelo",
       "Credencial própria do assistente, com menor privilégio e ação irreversível sob confirmação",
-      "\"O fornecedor do modelo garante que não acontece\"",
-      "\"Filtro de palavras proibidas resolve\""
+      "Toda fonte que o assistente lê é entrada não confiável, inclusive a intranet",
+      "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo"
     ],
     "correta": 1,
     "justificativa": "A permissão do usuário é o que transforma uma resposta errada em ação com alcance real"
@@ -211,10 +211,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"O fornecedor do modelo garante que não acontece\"\". Qual é a correção?",
     "alternativas": [
-      "\"O assistente herda a permissão do usuário, então é mais seguro\"",
-      "\"Só leio documento interno, então estou protegido\"",
+      "Credencial própria do assistente, com menor privilégio e ação irreversível sob confirmação",
+      "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo",
       "A garantia que se pede ao fornecedor é contratual e de configuração, não de comportamento do modelo",
-      "\"Filtro de palavras proibidas resolve\""
+      "Toda fonte que o assistente lê é entrada não confiável, inclusive a intranet"
     ],
     "correta": 2,
     "justificativa": "O desenho da aplicação, o contexto montado e as ferramentas expostas são escolha de quem integra"
@@ -232,9 +232,9 @@
     "enunciado": "Qual é a diferença prática entre injection direta e indireta, com um exemplo de cada?",
     "alternativas": [
       "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
-      "\"O assistente herda a permissão do usuário, então é mais seguro\"",
-      "\"Só leio documento interno, então estou protegido\"",
-      "\"O fornecedor do modelo garante que não acontece\""
+      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura.",
+      "Retirar agência: credencial própria com menor privilégio, ferramenta restrita, confirmação humana em ação irreversível e validação da saída antes do uso.",
+      "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo"
     ],
     "correta": 0,
     "justificativa": ""
@@ -251,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "Qual controle reduz o impacto quando a injeção tem sucesso mesmo assim?",
     "alternativas": [
-      "\"O assistente herda a permissão do usuário, então é mais seguro\"",
-      "\"Só leio documento interno, então estou protegido\"",
+      "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo",
+      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
       "Retirar agência: credencial própria com menor privilégio, ferramenta restrita, confirmação humana em ação irreversível e validação da saída antes do uso.",
-      "\"O fornecedor do modelo garante que não acontece\""
+      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura."
     ],
     "correta": 2,
     "justificativa": ""
@@ -271,9 +271,9 @@
     "status": "rascunho",
     "enunciado": "Por que a tentativa de injeção deve ser registrada como evento de segurança?",
     "alternativas": [
-      "\"O assistente herda a permissão do usuário, então é mais seguro\"",
-      "\"Só leio documento interno, então estou protegido\"",
-      "\"O fornecedor do modelo garante que não acontece\"",
+      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
+      "Retirar agência: credencial própria com menor privilégio, ferramenta restrita, confirmação humana em ação irreversível e validação da saída antes do uso.",
+      "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo",
       "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura."
     ],
     "correta": 3,
@@ -291,9 +291,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"O controle de acesso da pasta é suficiente\"\". Qual é a correção?",
     "alternativas": [
+      "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta",
+      "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
       "\"Não treino modelo, então não há envenenamento\"",
-      "\"Removi da origem, então saiu do assistente\"",
-      "\"Classificar depois é mais rápido\"",
       "Verifique permissão na recuperação, com a identidade do solicitante"
     ],
     "correta": 3,
@@ -312,9 +312,9 @@
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Removi da origem, então saiu do assistente\"\". Qual é a correção?",
     "alternativas": [
       "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta",
-      "\"Não treino modelo, então não há envenenamento\"",
-      "\"O controle de acesso da pasta é suficiente\"",
-      "\"Classificar depois é mais rápido\""
+      "Verifique permissão na recuperação, com a identidade do solicitante",
+      "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
+      "\"Não treino modelo, então não há envenenamento\""
     ],
     "correta": 0,
     "justificativa": "Índice, cache e histórico mantêm cópia até que alguém reconstrua ou expire"
@@ -331,10 +331,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Não treino modelo, então não há envenenamento\"\". Qual é a correção?",
     "alternativas": [
-      "\"O controle de acesso da pasta é suficiente\"",
+      "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
       "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa",
-      "\"Removi da origem, então saiu do assistente\"",
-      "\"Classificar depois é mais rápido\""
+      "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento",
+      "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta"
     ],
     "correta": 1,
     "justificativa": "Base de conhecimento e embedding continuam sob controle da empresa e alteram a resposta"
@@ -351,10 +351,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"O fornecedor já apaga tudo\"\". Qual é a correção?",
     "alternativas": [
-      "\"Não treino modelo, então não há envenenamento\"",
-      "\"O controle de acesso da pasta é suficiente\"",
+      "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa",
+      "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento",
       "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
-      "\"Removi da origem, então saiu do assistente\""
+      "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta"
     ],
     "correta": 2,
     "justificativa": "Prazo de retenção e uso para treino próprio variam por contrato e por configuração"
@@ -371,9 +371,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Classificar depois é mais rápido\"\". Qual é a correção?",
     "alternativas": [
-      "\"Não treino modelo, então não há envenenamento\"",
-      "\"O controle de acesso da pasta é suficiente\"",
-      "\"Removi da origem, então saiu do assistente\"",
+      "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa",
+      "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
+      "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta",
       "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento"
     ],
     "correta": 3,
@@ -391,10 +391,10 @@
     "status": "rascunho",
     "enunciado": "Qual é o controle que impede um assistente de responder sobre documento que o solicitante não pode acessar?",
     "alternativas": [
-      "\"Não treino modelo, então não há envenenamento\"",
+      "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento",
       "Verificação de permissão no momento da recuperação, com a identidade do solicitante, aplicada ao trecho e não à interface.",
-      "\"O controle de acesso da pasta é suficiente\"",
-      "\"Removi da origem, então saiu do assistente\""
+      "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito.",
+      "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa"
     ],
     "correta": 1,
     "justificativa": ""
@@ -411,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "O que muda no pipeline quando o dado é eliminado na origem?",
     "alternativas": [
-      "\"Não treino modelo, então não há envenenamento\"",
-      "\"O controle de acesso da pasta é suficiente\"",
+      "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito.",
+      "Verificação de permissão no momento da recuperação, com a identidade do solicitante, aplicada ao trecho e não à interface.",
       "A cópia no índice, no cache e no histórico permanece até expirar por prazo declarado ou até a reconstrução do índice. Sem prazo e sem dono, a eliminação na origem não chega ao pipeline.",
-      "\"Removi da origem, então saiu do assistente\""
+      "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento"
     ],
     "correta": 2,
     "justificativa": ""
@@ -432,9 +432,9 @@
     "enunciado": "Por que marcar por trecho, e não apenas por documento?",
     "alternativas": [
       "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito.",
-      "\"Não treino modelo, então não há envenenamento\"",
-      "\"O controle de acesso da pasta é suficiente\"",
-      "\"Removi da origem, então saiu do assistente\""
+      "Verificação de permissão no momento da recuperação, com a identidade do solicitante, aplicada ao trecho e não à interface.",
+      "A cópia no índice, no cache e no histórico permanece até expirar por prazo declarado ou até a reconstrução do índice. Sem prazo e sem dono, a eliminação na origem não chega ao pipeline.",
+      "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento"
     ],
     "correta": 0,
     "justificativa": ""
@@ -452,9 +452,9 @@
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"\"Declarar em ata que IA fica dentro do ISMS basta\"\". Qual é a correção?",
     "alternativas": [
       "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias",
-      "\"Como só consumimos API, não precisamos de nada disso\"",
-      "Tratar governança de IA como projeto de ferramenta",
-      "Contratar auditoria antes de rodar um ciclo"
+      "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
+      "Inventário, avaliação de impacto e análise crítica antes da auditoria",
+      "Escopo próprio, com nome dos sistemas de IA e papel na cadeia"
     ],
     "correta": 0,
     "justificativa": "O ISMS não obriga inventário de IA nem avaliação de impacto sobre pessoas"
@@ -471,10 +471,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"\"Como só consumimos API, não precisamos de nada disso\"\". Qual é a correção?",
     "alternativas": [
-      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
+      "Escopo próprio, com nome dos sistemas de IA e papel na cadeia",
       "O papel de deployer tem obrigação própria e exige evidência",
-      "Tratar governança de IA como projeto de ferramenta",
-      "Contratar auditoria antes de rodar um ciclo"
+      "Escreva `NAO CONFIRMADO` até conferir no texto adquirido",
+      "\"Declarar em ata que IA fica dentro do ISMS basta\""
     ],
     "correta": 1,
     "justificativa": "A ISO descreve o padrão para quem fornece ou usa IA, e o AI Act trata o deployer como responsável por supervisão e monitoramento"
@@ -491,10 +491,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Copiar o escopo do ISMS\". Qual é a correção?",
     "alternativas": [
-      "\"Como só consumimos API, não precisamos de nada disso\"",
-      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
+      "O papel de deployer tem obrigação própria e exige evidência",
+      "Escreva `NAO CONFIRMADO` até conferir no texto adquirido",
       "Escopo próprio, com nome dos sistemas de IA e papel na cadeia",
-      "Tratar governança de IA como projeto de ferramenta"
+      "\"Como só consumimos API, não precisamos de nada disso\""
     ],
     "correta": 2,
     "justificativa": "Os objetos são diferentes e as dependências também"
@@ -511,9 +511,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Contratar auditoria antes de rodar um ciclo\". Qual é a correção?",
     "alternativas": [
-      "\"Como só consumimos API, não precisamos de nada disso\"",
-      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
-      "Tratar governança de IA como projeto de ferramenta",
+      "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
+      "Escopo próprio, com nome dos sistemas de IA e papel na cadeia",
+      "O papel de deployer tem obrigação própria e exige evidência",
       "Inventário, avaliação de impacto e análise crítica antes da auditoria"
     ],
     "correta": 3,
@@ -533,8 +533,8 @@
     "alternativas": [
       "Escreva `NAO CONFIRMADO` até conferir no texto adquirido",
       "\"Como só consumimos API, não precisamos de nada disso\"",
-      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
-      "Tratar governança de IA como projeto de ferramenta"
+      "O papel de deployer tem obrigação própria e exige evidência",
+      "Escopo próprio, com nome dos sistemas de IA e papel na cadeia"
     ],
     "correta": 0,
     "justificativa": "O texto da norma é pago e a lista não foi confirmada nesta execução"
@@ -551,10 +551,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Tratar governança de IA como projeto de ferramenta\". Qual é a correção?",
     "alternativas": [
-      "\"Como só consumimos API, não precisamos de nada disso\"",
+      "Inventário, avaliação de impacto e análise crítica antes da auditoria",
       "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
-      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
-      "Contratar auditoria antes de rodar um ciclo"
+      "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias",
+      "Escopo próprio, com nome dos sistemas de IA e papel na cadeia"
     ],
     "correta": 1,
     "justificativa": "Ferramenta ajuda a operar o sistema, e não define escopo, papel e alçada"
@@ -571,10 +571,10 @@
     "status": "rascunho",
     "enunciado": "Qual lógica de gestão o padrão usa, segundo a própria ISO?",
     "alternativas": [
-      "\"Como só consumimos API, não precisamos de nada disso\"",
-      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
+      "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
+      "Inventário, avaliação de impacto e análise crítica antes da auditoria",
       "A lógica Plan-Do-Check-Act, a mesma dos demais management system standards.",
-      "Tratar governança de IA como projeto de ferramenta"
+      "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias"
     ],
     "correta": 2,
     "justificativa": ""
@@ -591,10 +591,10 @@
     "status": "rascunho",
     "enunciado": "Quais são as cinco entregas do primeiro ano de um sistema de gestão de IA?",
     "alternativas": [
-      "\"Como só consumimos API, não precisamos de nada disso\"",
+      "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias",
       "Escopo com nome próprio e exclusões justificadas; inventário e critério de aprovação; avaliação de risco e de impacto; evidência de operação com dono e frequência; papéis e alçada de decisão.",
-      "\"Declarar em ata que IA fica dentro do ISMS basta\"",
-      "Tratar governança de IA como projeto de ferramenta"
+      "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
+      "A lógica Plan-Do-Check-Act, a mesma dos demais management system standards."
     ],
     "correta": 1,
     "justificativa": ""
@@ -611,10 +611,10 @@
     "status": "rascunho",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"A demonstração do fornecedor acertou, então funciona\"\". Qual é a correção?",
     "alternativas": [
-      "\"A ferramenta só lê, não executa nada\"",
+      "Meça precisão e cobertura junto do tempo",
       "Piloto às cegas com amostra rotulada pelo próprio time",
-      "Medir adoção pelo tempo economizado só",
-      "\"Dado agregado não é dado pessoal\""
+      "\"A ferramenta só lê, não executa nada\"",
+      "Aplique retenção, região e base contratual como em qualquer tratamento"
     ],
     "correta": 1,
     "justificativa": "A demonstração usa dado escolhido pelo fornecedor"
@@ -631,10 +631,10 @@
     "status": "rascunho",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"O modelo reduz falso positivo\"\". Qual é a correção?",
     "alternativas": [
-      "\"A demonstração do fornecedor acertou, então funciona\"",
-      "\"A ferramenta só lê, não executa nada\"",
+      "Aplique retenção, região e base contratual como em qualquer tratamento",
+      "Meça se a evidência completa está no resumo e exija o original a um clique",
       "Peça precisão e cobertura medidas, com o processo de rotulagem descrito",
-      "Medir adoção pelo tempo economizado só"
+      "Trate a telemetria como entrada não confiável e limite a agência da ferramenta"
     ],
     "correta": 2,
     "justificativa": "Sem número, base de teste e tamanho de amostra, é afirmação comercial"
@@ -651,9 +651,9 @@
     "status": "rascunho",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"A ferramenta só lê, não executa nada\"\". Qual é a correção?",
     "alternativas": [
-      "\"A demonstração do fornecedor acertou, então funciona\"",
-      "Medir adoção pelo tempo economizado só",
-      "\"Dado agregado não é dado pessoal\"",
+      "Meça se a evidência completa está no resumo e exija o original a um clique",
+      "Peça precisão e cobertura medidas, com o processo de rotulagem descrito",
+      "Aplique retenção, região e base contratual como em qualquer tratamento",
       "Trate a telemetria como entrada não confiável e limite a agência da ferramenta"
     ],
     "correta": 3,
@@ -672,9 +672,9 @@
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"O analista confere tudo depois\"\". Qual é a correção?",
     "alternativas": [
       "Meça se a evidência completa está no resumo e exija o original a um clique",
-      "\"A demonstração do fornecedor acertou, então funciona\"",
-      "\"A ferramenta só lê, não executa nada\"",
-      "Medir adoção pelo tempo economizado só"
+      "Peça precisão e cobertura medidas, com o processo de rotulagem descrito",
+      "Trate a telemetria como entrada não confiável e limite a agência da ferramenta",
+      "Aplique retenção, região e base contratual como em qualquer tratamento"
     ],
     "correta": 0,
     "justificativa": "Sob volume, o resumo passa a ser a fonte de decisão na prática"
@@ -691,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"Dado agregado não é dado pessoal\"\". Qual é a correção?",
     "alternativas": [
-      "\"A demonstração do fornecedor acertou, então funciona\"",
+      "Peça precisão e cobertura medidas, com o processo de rotulagem descrito",
       "Aplique retenção, região e base contratual como em qualquer tratamento",
-      "\"A ferramenta só lê, não executa nada\"",
-      "Medir adoção pelo tempo economizado só"
+      "Meça se a evidência completa está no resumo e exija o original a um clique",
+      "Trate a telemetria como entrada não confiável e limite a agência da ferramenta"
     ],
     "correta": 1,
     "justificativa": "Telemetria de rede e de endpoint carrega identidade, URL e conteúdo"
@@ -732,9 +732,9 @@
     "enunciado": "Quais quatro números o piloto precisa produzir?",
     "alternativas": [
       "Precisão, cobertura, tempo do analista por alerta com e sem a ferramenta, e completude de evidência no resultado apresentado.",
-      "\"A demonstração do fornecedor acertou, então funciona\"",
-      "\"A ferramenta só lê, não executa nada\"",
-      "Medir adoção pelo tempo economizado só"
+      "O analista humano no circuito para ação irreversível, o critério de medição escrito antes da compra e a cláusula de saída com exportação de configuração e dados.",
+      "Trate a telemetria como entrada não confiável e limite a agência da ferramenta",
+      "Meça se a evidência completa está no resumo e exija o original a um clique"
     ],
     "correta": 0,
     "justificativa": ""
@@ -751,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "O que o CISO precisa manter sob controle próprio ao adotar triagem assistida por modelo?",
     "alternativas": [
-      "\"A demonstração do fornecedor acertou, então funciona\"",
-      "\"A ferramenta só lê, não executa nada\"",
+      "Precisão, cobertura, tempo do analista por alerta com e sem a ferramenta, e completude de evidência no resultado apresentado.",
+      "Trate a telemetria como entrada não confiável e limite a agência da ferramenta",
       "O analista humano no circuito para ação irreversível, o critério de medição escrito antes da compra e a cláusula de saída com exportação de configuração e dados.",
-      "Medir adoção pelo tempo economizado só"
+      "Meça se a evidência completa está no resumo e exija o original a um clique"
     ],
     "correta": 2,
     "justificativa": ""
@@ -771,10 +771,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"Bloquear o domínio resolve\"\". Qual é a correção?",
     "alternativas": [
+      "Some fontes de identidade, despesa, extensão e relato",
       "\"A ferramenta diz que não guarda dado\"",
-      "Treinar uma vez e considerar cumprido",
       "Descubra, decida e ofereça alternativa aprovada",
-      "\"Isso é shadow IT, já sei tratar\""
+      "Registre com situação e dono, como qualquer sistema de IA"
     ],
     "correta": 2,
     "justificativa": "Empurra para rede pessoal e celular, e o uso sai do alcance de qualquer log"
@@ -791,9 +791,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"Isso é shadow IT, já sei tratar\"\". Qual é a correção?",
     "alternativas": [
+      "Registre com situação e dono, como qualquer sistema de IA",
+      "Descubra, decida e ofereça alternativa aprovada",
       "Deixar o caso fora do registro quando a ferramenta é gratuita",
-      "\"A ferramenta diz que não guarda dado\"",
-      "Treinar uma vez e considerar cumprido",
       "Some fontes de identidade, despesa, extensão e relato"
     ],
     "correta": 3,
@@ -812,9 +812,9 @@
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"O funcionário agiu de má-fé\"\". Qual é a correção?",
     "alternativas": [
       "Trate como falha de política e de caminho aprovado, e mantenha o relato sem punição",
-      "Deixar o caso fora do registro quando a ferramenta é gratuita",
-      "\"A ferramenta diz que não guarda dado\"",
-      "Treinar uma vez e considerar cumprido"
+      "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
+      "Registre treinamento por pessoa e mantenha no calendário de evidência",
+      "Deixar o caso fora do registro quando a ferramenta é gratuita"
     ],
     "correta": 0,
     "justificativa": "Na maior parte dos casos a ferramenta resolve um problema real sem alternativa interna"
@@ -831,10 +831,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"A ferramenta diz que não guarda dado\"\". Qual é a correção?",
     "alternativas": [
-      "Deixar o caso fora do registro quando a ferramenta é gratuita",
+      "Registre treinamento por pessoa e mantenha no calendário de evidência",
       "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
-      "Treinar uma vez e considerar cumprido",
-      "\"Isso é shadow IT, já sei tratar\""
+      "Trate como falha de política e de caminho aprovado, e mantenha o relato sem punição",
+      "Deixar o caso fora do registro quando a ferramenta é gratuita"
     ],
     "correta": 1,
     "justificativa": "A frase pode estar na tela e o contrato dizer outra coisa, ou não existir contrato"
@@ -851,10 +851,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"Deixar o caso fora do registro quando a ferramenta é gratuita\". Qual é a correção?",
     "alternativas": [
-      "\"A ferramenta diz que não guarda dado\"",
-      "Treinar uma vez e considerar cumprido",
+      "Some fontes de identidade, despesa, extensão e relato",
+      "Descubra, decida e ofereça alternativa aprovada",
       "Registre com situação e dono, como qualquer sistema de IA",
-      "\"Isso é shadow IT, já sei tratar\""
+      "Registre treinamento por pessoa e mantenha no calendário de evidência"
     ],
     "correta": 2,
     "justificativa": "Risco não depende de haver custo, e o dado enviado sai do controle do mesmo modo"
@@ -871,9 +871,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"Treinar uma vez e considerar cumprido\". Qual é a correção?",
     "alternativas": [
+      "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
       "Deixar o caso fora do registro quando a ferramenta é gratuita",
-      "\"A ferramenta diz que não guarda dado\"",
-      "\"Isso é shadow IT, já sei tratar\"",
+      "Registre com situação e dono, como qualquer sistema de IA",
       "Registre treinamento por pessoa e mantenha no calendário de evidência"
     ],
     "correta": 3,
@@ -891,10 +891,10 @@
     "status": "rascunho",
     "enunciado": "O que a Comissão Europeia registra sobre alfabetização em IA e sobre o papel do deployer?",
     "alternativas": [
-      "Deixar o caso fora do registro quando a ferramenta é gratuita",
-      "\"A ferramenta diz que não guarda dado\"",
+      "Porque o dado pessoal enviado passa a ser tratamento sem base legal declarada, com deveres próprios de comunicação e de atendimento a direitos, que pertencem ao encarregado e ao programa de privacidade.",
+      "Trate como falha de política e de caminho aprovado, e mantenha o relato sem punição",
       "Que as obrigações de alfabetização em IA passaram a valer em 2 de fevereiro de 2025 e que o deployer responde por supervisão humana e monitoramento.",
-      "Treinar uma vez e considerar cumprido"
+      "Peça retenção, uso para treino e prazo por escrito, e registre a resposta"
     ],
     "correta": 2,
     "justificativa": ""
@@ -911,9 +911,9 @@
     "status": "rascunho",
     "enunciado": "Por que o episódio de dado pessoal colado em ferramenta pública deixa de ser tema de segurança e passa a ser de privacidade?",
     "alternativas": [
-      "Deixar o caso fora do registro quando a ferramenta é gratuita",
-      "\"A ferramenta diz que não guarda dado\"",
-      "Treinar uma vez e considerar cumprido",
+      "Que as obrigações de alfabetização em IA passaram a valer em 2 de fevereiro de 2025 e que o deployer responde por supervisão humana e monitoramento.",
+      "Trate como falha de política e de caminho aprovado, e mantenha o relato sem punição",
+      "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
       "Porque o dado pessoal enviado passa a ser tratamento sem base legal declarada, com deveres próprios de comunicação e de atendimento a direitos, que pertencem ao encarregado e ao programa de privacidade."
     ],
     "correta": 3,

@@ -5,17 +5,26 @@
 // fonte e link do tema de origem. Quase tudo ainda esta `rascunho`, e o item nao revisado
 // aparece marcado, sem alarme: o selo diz o que aconteceu, nao que o material errou.
 //
-// Duas decisoes de mecanica que valem o comentario:
+// Tres decisoes de mecanica que valem o comentario:
 //   - a rodada e montada UMA vez, na montagem (`useState`), e nao a cada render: o
 //     progresso muda quando uma resposta e gravada, e reordenar as questoes no meio da
 //     rodada trocaria a pergunta debaixo de quem esta respondendo;
 //   - a escolha e um `input type=radio` dentro de `fieldset`, e nao botoes com
 //     `aria-pressed`: escolha unica em grupo, "1 de 4" e navegacao por seta vem prontos do
 //     navegador. Um `role="radiogroup"` feito a mao exigiria roving tabindex e teclado
-//     reimplementados — mais codigo e mais jeito de errar.
+//     reimplementados — mais codigo e mais jeito de errar;
+//   - a troca de questao (e o fim da rodada) move o foco para um titulo com `tabIndex={-1}`.
+//     O pai da escolha e um `button` que vira `disabled` ao avancar; sem mover o foco, o
+//     Chrome o joga no `body` e os primeiros TABs vao para a navegacao, nao para as
+//     alternativas.
 
 import { useEffect, useId, useRef, useState } from 'react'
-import { registrarQuestao, useFalhaAoGravar, useProgresso } from '../application/progresso-store'
+import {
+  registrarQuestao,
+  useErroDeCarga,
+  useFalhaAoGravar,
+  useProgresso,
+} from '../application/progresso-store'
 import type { Progresso } from '../domain/progresso'
 import {
   acertou,
@@ -75,6 +84,11 @@ function montarRodada(
 
 export function Quiz({ areaId }: { areaId: string | null }) {
   const { banco, erro, carregando } = useBanco()
+  // Sessao cuja leitura do progresso falhou: o store a marca como "nao pode gravar", mas
+  // `falhaAoGravar` continua `false` — nao houve falha de gravacao, nada foi gravado. Quem
+  // diz que a escrita esta desligada e o erro de carga. Sem ler este valor, a tela promete
+  // abaixo que "cada resposta entra no seu progresso" enquanto nada sai da memoria.
+  const erroDeCarga = useErroDeCarga()
   // O relogio entra so na abertura da tela e no "outra rodada": dentro da rodada a ordem
   // tem de ficar parada.
   const [semente, setSemente] = useState(() => Date.now())
@@ -120,6 +134,14 @@ export function Quiz({ areaId }: { areaId: string | null }) {
           escrito. Cada resposta entra no seu progresso por item.
         </p>
       </header>
+
+      {/* O aviso fica colado na frase que ele desmente: e o paragrafo acima que promete o
+          registro, e numa sessao que perdeu a leitura do arquivo tudo fica so em memoria. */}
+      {erroDeCarga ? (
+        <p className="aviso-erro" role="alert">
+          {erroDeCarga}
+        </p>
+      ) : null}
 
       <Escopo areaId={areaId} />
 
@@ -185,6 +207,7 @@ function Rodada({
 }) {
   const progresso = useProgresso()
   const falhouAoGravar = useFalhaAoGravar()
+  const erroDeCarga = useErroDeCarga()
   // `useState` e nao `useMemo`: a lista tem de nascer uma vez e ficar — o progresso muda a
   // cada resposta gravada e um `useMemo` dependente dele remexeria a rodada no meio.
   const [itens] = useState<Questao[]>(() => montarRodada(banco, areaId, progresso, semente))
@@ -198,6 +221,12 @@ function Rodada({
   const [placar, setPlacar] = useState({ acertos: 0, erros: 0 })
   const base = useId()
   const resultadoRef = useRef<HTMLDivElement>(null)
+  const perguntaRef = useRef<HTMLHeadingElement>(null)
+  // O indice do render anterior e o que diz ao efeito abaixo se houve TROCA de questao: no
+  // primeiro render ele ja e o indice atual, entao o foco nao se move (quem abriu a tela
+  // escolheu onde estava) — e o duplo disparo do StrictMode reexecuta o efeito com o MESMO
+  // indice, sem focar de novo.
+  const indiceAnterior = useRef(indice)
 
   const respondidas = placar.acertos + placar.erros
   const questao = itens[indice]
@@ -209,6 +238,16 @@ function Rodada({
     // o veredito uma vez, e por isso ele nao leva `role="status"` — seriam dois anúncios.
     if (resposta !== null) resultadoRef.current?.focus()
   }, [resposta])
+
+  useEffect(() => {
+    if (indiceAnterior.current === indice) return
+    indiceAnterior.current = indice
+    // Ao avancar, o botao que estava focado vira `disabled` (nao ha resposta marcada na
+    // questao nova) e o Chrome manda o foco para o `body`: os primeiros TABs iriam para a
+    // navegacao, nao para as alternativas. O foco vem para o titulo da questao nova — que o
+    // leitor de tela anuncia — e o proximo TAB cai no primeiro radio.
+    perguntaRef.current?.focus()
+  }, [indice])
 
   const resumo = (
     <ResumoDaRodada
@@ -245,6 +284,7 @@ function Rodada({
           acertos={placar.acertos}
           respondidas={respondidas}
           areaId={areaId}
+          erroDeCarga={erroDeCarga}
           aoTrocarRodada={aoTrocarRodada}
         />
       </>
@@ -283,7 +323,7 @@ function Rodada({
     <>
       {resumo}
       <section className="secao bloco-questao">
-        <h2>
+        <h2 tabIndex={-1} ref={perguntaRef}>
           Questão {indice + 1} de {itens.length}
         </h2>
         {rotulo ? (
@@ -440,16 +480,29 @@ function FimDaRodada({
   acertos,
   respondidas,
   areaId,
+  erroDeCarga,
   aoTrocarRodada,
 }: {
   acertos: number
   respondidas: number
   areaId: string | null
+  erroDeCarga: string | null
   aoTrocarRodada: () => void
 }) {
+  const tituloRef = useRef<HTMLHeadingElement>(null)
+
+  useEffect(() => {
+    // O botao que trouxe ate aqui ("Ver o resultado") sai de cena com a ultima questao e o
+    // foco cairia no `body`. O titulo recebe o foco na montagem: o leitor de tela anuncia o
+    // fim da rodada e o proximo TAB ja cai no "Outra rodada".
+    tituloRef.current?.focus()
+  }, [])
+
   return (
     <section className="secao">
-      <h2>Fim da rodada</h2>
+      <h2 tabIndex={-1} ref={tituloRef}>
+        Fim da rodada
+      </h2>
       <p className="criterio" role="status">
         {respondidas === 0
           ? 'Nenhuma questão respondida nesta rodada.'
@@ -459,6 +512,13 @@ function FimDaRodada({
         O resultado de cada item entrou no progresso pelo identificador dele. A fila de revisão
         continua sendo a dos temas: quem reagenda é a recuperação ativa de cada um.
       </p>
+      {/* Mesmo aviso do topo da tela, aqui colado na frase que ele desmente: numa sessao que
+          perdeu a leitura do arquivo, "entrou no progresso" e so memoria, nao registro. */}
+      {erroDeCarga ? (
+        <p className="aviso-erro" role="alert">
+          {erroDeCarga}
+        </p>
+      ) : null}
       <div className="veredito-botoes">
         <button className="botao-secundario" onClick={aoTrocarRodada}>
           Outra rodada

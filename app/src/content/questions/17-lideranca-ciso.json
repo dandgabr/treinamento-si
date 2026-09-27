@@ -12,9 +12,9 @@
     "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"O CISO é dono de todo o risco de tecnologia\"\". Qual é a correção?",
     "alternativas": [
       "Declare a fronteira por escrito e trate o resto como risco de terceiro",
-      "\"O encarregado de dados está dentro da segurança\"",
-      "\"Pedir mais verba é sinal de falha de gestão\"",
-      "\"Ser accountable significa que executo\""
+      "Documente as decisões que você autoriza, com base em `GV.RR-02`",
+      "Marque a fronteira e chame o encarregado nas decisões que tratam dado pessoal",
+      "Defina quem executa o controle e quem assina o aceite do risco"
     ],
     "correta": 0,
     "justificativa": "Risco operacional e de capacidade pertence ao dono do serviço"
@@ -31,10 +31,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"Quem tem o cargo tem o mandato\"\". Qual é a correção?",
     "alternativas": [
-      "\"O encarregado de dados está dentro da segurança\"",
+      "Defina quem executa o controle e quem assina o aceite do risco",
       "Documente as decisões que você autoriza, com base em `GV.RR-02`",
-      "\"O CISO é dono de todo o risco de tecnologia\"",
-      "\"Pedir mais verba é sinal de falha de gestão\""
+      "Declare a fronteira por escrito e trate o resto como risco de terceiro",
+      "\"O encarregado de dados está dentro da segurança\""
     ],
     "correta": 1,
     "justificativa": "Cargo dá assento; mandato dá autoridade sobre decisões específicas"
@@ -51,10 +51,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"Ser accountable significa que executo\"\". Qual é a correção?",
     "alternativas": [
-      "\"O encarregado de dados está dentro da segurança\"",
-      "\"O CISO é dono de todo o risco de tecnologia\"",
+      "Documente as decisões que você autoriza, com base em `GV.RR-02`",
+      "Declare a fronteira por escrito e trate o resto como risco de terceiro",
       "Defina quem executa o controle e quem assina o aceite do risco",
-      "\"Pedir mais verba é sinal de falha de gestão\""
+      "\"O encarregado de dados está dentro da segurança\""
     ],
     "correta": 2,
     "justificativa": "Executar e responder são camadas distintas"
@@ -71,9 +71,9 @@
     "status": "rascunho",
     "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"O encarregado de dados está dentro da segurança\"\". Qual é a correção?",
     "alternativas": [
-      "\"O CISO é dono de todo o risco de tecnologia\"",
-      "\"Pedir mais verba é sinal de falha de gestão\"",
-      "\"Ser accountable significa que executo\"",
+      "Declare a fronteira por escrito e trate o resto como risco de terceiro",
+      "Documente as decisões que você autoriza, com base em `GV.RR-02`",
+      "Defina quem executa o controle e quem assina o aceite do risco",
       "Marque a fronteira e chame o encarregado nas decisões que tratam dado pessoal"
     ],
     "correta": 3,
@@ -111,10 +111,10 @@
     "status": "rascunho",
     "enunciado": "Qual subcategoria do CSF 2.0 declara a liderança responsável e accountable pelo risco cibernético?",
     "alternativas": [
-      "\"O encarregado de dados está dentro da segurança\"",
+      "Responsabilidade (`GV.RR-01`), autoridade (`GV.RR-02`) e recursos (`GV.RR-03`).",
       "`GV.RR-01`, na categoria Roles, Responsibilities, and Authorities da função Govern.",
-      "\"O CISO é dono de todo o risco de tecnologia\"",
-      "\"Pedir mais verba é sinal de falha de gestão\""
+      "Marque a fronteira e chame o encarregado nas decisões que tratam dado pessoal",
+      "Declare a fronteira por escrito e trate o resto como risco de terceiro"
     ],
     "correta": 1,
     "justificativa": ""
@@ -131,10 +131,10 @@
     "status": "rascunho",
     "enunciado": "Quais são os três componentes verificáveis do mandato, e em quais subcategorias do CSF 2.0 eles aparecem?",
     "alternativas": [
-      "\"O encarregado de dados está dentro da segurança\"",
-      "\"O CISO é dono de todo o risco de tecnologia\"",
+      "Marque a fronteira e chame o encarregado nas decisões que tratam dado pessoal",
+      "`GV.RR-01`, na categoria Roles, Responsibilities, and Authorities da função Govern.",
       "Responsabilidade (`GV.RR-01`), autoridade (`GV.RR-02`) e recursos (`GV.RR-03`).",
-      "\"Pedir mais verba é sinal de falha de gestão\""
+      "Declare a fronteira por escrito e trate o resto como risco de terceiro"
     ],
     "correta": 2,
     "justificativa": ""
@@ -171,10 +171,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Reportar ao CIO inviabiliza o cargo\"\". Qual é a correção?",
     "alternativas": [
-      "\"Ter 15 minutos na reunião do conselho é reporte\"",
-      "\"Avaliação de risco é assunto do comitê de risco\"",
+      "Separe indicador de risco de indicador de desempenho do programa",
+      "Nomeie um dono do calendário regulatório com data e responsável",
       "Confira o que a norma aplicável exige e documente o desenho escolhido",
-      "\"Painel de 40 métricas demonstra rigor\""
+      "Três a cinco indicadores ligados a decisões pendentes"
     ],
     "correta": 2,
     "justificativa": "Depende do regime regulatório e da concentração de decisão"
@@ -191,9 +191,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Avaliação de risco é assunto do comitê de risco\"\". Qual é a correção?",
     "alternativas": [
-      "\"Ter 15 minutos na reunião do conselho é reporte\"",
-      "\"Painel de 40 métricas demonstra rigor\"",
-      "\"Reportar ao CIO inviabiliza o cargo\"",
+      "Nomeie um dono do calendário regulatório com data e responsável",
+      "Confira o que a norma aplicável exige e documente o desenho escolhido",
+      "Três a cinco indicadores ligados a decisões pendentes",
       "Separe indicador de risco de indicador de desempenho do programa"
     ],
     "correta": 3,
@@ -214,7 +214,7 @@
       "Três a cinco indicadores ligados a decisões pendentes",
       "\"Ter 15 minutos na reunião do conselho é reporte\"",
       "\"Avaliação de risco é assunto do comitê de risco\"",
-      "\"Reportar ao CIO inviabiliza o cargo\""
+      "Nomeie um dono do calendário regulatório com data e responsável"
     ],
     "correta": 0,
     "justificativa": "Volume esconde o sinal e consome a única janela que você tem"
@@ -231,10 +231,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Compliance é assunto do jurídico\"\". Qual é a correção?",
     "alternativas": [
-      "\"Ter 15 minutos na reunião do conselho é reporte\"",
+      "Separe indicador de risco de indicador de desempenho do programa",
       "Nomeie um dono do calendário regulatório com data e responsável",
-      "\"Avaliação de risco é assunto do comitê de risco\"",
-      "\"Painel de 40 métricas demonstra rigor\""
+      "Confira o que a norma aplicável exige e documente o desenho escolhido",
+      "Três a cinco indicadores ligados a decisões pendentes"
     ],
     "correta": 1,
     "justificativa": "Prazo de notificação é decisão técnica e regulatória ao mesmo tempo"
@@ -251,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "O que a Regulation S-K, Item 106(c), exige que a companhia descreva sobre o conselho?",
     "alternativas": [
-      "\"Ter 15 minutos na reunião do conselho é reporte\"",
-      "\"Avaliação de risco é assunto do comitê de risco\"",
+      "Acesso é ser ouvido; reporte é a obrigação formal de levar a informação a quem decide; supervisão é quem responde pelo resultado e deixa registro. As três podem existir em separado.",
+      "Confira o que a norma aplicável exige e documente o desenho escolhido",
       "A supervisão do conselho sobre os riscos de ameaças cibernéticas e o papel da administração na avaliação e gestão de riscos materiais dessa natureza.",
-      "\"Painel de 40 métricas demonstra rigor\""
+      "Separe indicador de risco de indicador de desempenho do programa"
     ],
     "correta": 2,
     "justificativa": ""
@@ -272,9 +272,9 @@
     "enunciado": "Qual é a diferença entre acesso ao conselho, obrigação de reporte e supervisão?",
     "alternativas": [
       "Acesso é ser ouvido; reporte é a obrigação formal de levar a informação a quem decide; supervisão é quem responde pelo resultado e deixa registro. As três podem existir em separado.",
-      "\"Ter 15 minutos na reunião do conselho é reporte\"",
-      "\"Avaliação de risco é assunto do comitê de risco\"",
-      "\"Painel de 40 métricas demonstra rigor\""
+      "A supervisão do conselho sobre os riscos de ameaças cibernéticas e o papel da administração na avaliação e gestão de riscos materiais dessa natureza.",
+      "Confira o que a norma aplicável exige e documente o desenho escolhido",
+      "Separe indicador de risco de indicador de desempenho do programa"
     ],
     "correta": 0,
     "justificativa": ""
@@ -291,10 +291,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"Basta alinhar o gasto a um percentual de referência do mercado\"\". Qual é a correção?",
     "alternativas": [
-      "\"Apetite de risco e orçamento tratam da mesma coisa\"",
-      "\"ROI de segurança se mede pelo número de incidentes\"",
+      "Separe as duas linhas no orçamento para não perder a discussão de retorno",
+      "Peça verba vinculada a uma declaração de apetite já existente",
       "Use exposição, opções e custo total; trate percentuais de mercado como não confirmados",
-      "\"Conformidade e redução de risco são o mesmo gasto\""
+      "Use exposição estimada mais uma métrica de tempo ou cobertura"
     ],
     "correta": 2,
     "justificativa": "Não existe percentual fixado em fonte primária de norma ou framework"
@@ -311,9 +311,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"Apetite de risco e orçamento tratam da mesma coisa\"\". Qual é a correção?",
     "alternativas": [
+      "Use exposição estimada mais uma métrica de tempo ou cobertura",
       "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
       "\"ROI de segurança se mede pelo número de incidentes\"",
-      "\"Conformidade e redução de risco são o mesmo gasto\"",
       "Peça verba vinculada a uma declaração de apetite já existente"
     ],
     "correta": 3,
@@ -333,8 +333,8 @@
     "alternativas": [
       "Separe as duas linhas no orçamento para não perder a discussão de retorno",
       "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
-      "\"Apetite de risco e orçamento tratam da mesma coisa\"",
-      "\"ROI de segurança se mede pelo número de incidentes\""
+      "Peça verba vinculada a uma declaração de apetite já existente",
+      "Use exposição estimada mais uma métrica de tempo ou cobertura"
     ],
     "correta": 0,
     "justificativa": "Uma exige evidência documental; a outra muda a probabilidade do evento"
@@ -351,10 +351,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"ROI de segurança se mede pelo número de incidentes\"\". Qual é a correção?",
     "alternativas": [
-      "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
+      "Peça verba vinculada a uma declaração de apetite já existente",
       "Use exposição estimada mais uma métrica de tempo ou cobertura",
-      "\"Apetite de risco e orçamento tratam da mesma coisa\"",
-      "\"Conformidade e redução de risco são o mesmo gasto\""
+      "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
+      "\"Apetite de risco e orçamento tratam da mesma coisa\""
     ],
     "correta": 1,
     "justificativa": "Contagem pode cair por sorte ou por subnotificação e subir por melhor detecção"
@@ -391,9 +391,9 @@
     "status": "rascunho",
     "enunciado": "Como o NIST IR 8286 define exposição, e quais elementos do registro de riscos tornam o orçamento auditável?",
     "alternativas": [
-      "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
-      "\"Apetite de risco e orçamento tratam da mesma coisa\"",
-      "\"ROI de segurança se mede pelo número de incidentes\"",
+      "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora.",
+      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado.",
+      "Use exposição, opções e custo total; trate percentuais de mercado como não confirmados",
       "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável."
     ],
     "correta": 3,
@@ -412,9 +412,9 @@
     "enunciado": "Qual é a diferença entre apetite de risco e tolerância ao risco?",
     "alternativas": [
       "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado.",
-      "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
-      "\"Apetite de risco e orçamento tratam da mesma coisa\"",
-      "\"ROI de segurança se mede pelo número de incidentes\""
+      "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável.",
+      "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora.",
+      "Use exposição, opções e custo total; trate percentuais de mercado como não confirmados"
     ],
     "correta": 0,
     "justificativa": ""
@@ -431,10 +431,10 @@
     "status": "rascunho",
     "enunciado": "Por que uma métrica de contagem de vulnerabilidades abertas não serve como medida de retorno de um investimento?",
     "alternativas": [
-      "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
+      "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável.",
       "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora.",
-      "\"Apetite de risco e orçamento tratam da mesma coisa\"",
-      "\"ROI de segurança se mede pelo número de incidentes\""
+      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado.",
+      "Use exposição, opções e custo total; trate percentuais de mercado como não confirmados"
     ],
     "correta": 1,
     "justificativa": ""
@@ -453,7 +453,7 @@
     "alternativas": [
       "\"Comunicar incidente para o board exige detalhe técnico\"",
       "\"O técnico já sabe o que fazer com o relatório executivo\"",
-      "\"Simplificar para o executivo é omitir risco\"",
+      "Declare o que você está pedindo antes de escrever o resto",
       "Entregue poucos indicadores ligados a decisões pendentes"
     ],
     "correta": 3,
@@ -472,9 +472,9 @@
     "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Simplificar para o executivo é omitir risco\"\". Qual é a correção?",
     "alternativas": [
       "Mantenha o número e a conclusão, reduza o detalhe operacional",
-      "\"O técnico já sabe o que fazer com o relatório executivo\"",
-      "\"Comunicar incidente para o board exige detalhe técnico\"",
-      "\"Informe e decisão são o mesmo documento\""
+      "Escreva a segunda versão com o mesmo fato e a ação verificável",
+      "Descreva impacto material, opções e o que você precisa aprovar",
+      "\"O técnico já sabe o que fazer com o relatório executivo\""
     ],
     "correta": 0,
     "justificativa": "O nível de detalhe muda; o valor e a conclusão não"
@@ -491,10 +491,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"O técnico já sabe o que fazer com o relatório executivo\"\". Qual é a correção?",
     "alternativas": [
-      "\"Comunicar incidente para o board exige detalhe técnico\"",
+      "Descreva impacto material, opções e o que você precisa aprovar",
       "Escreva a segunda versão com o mesmo fato e a ação verificável",
-      "\"Simplificar para o executivo é omitir risco\"",
-      "\"Informe e decisão são o mesmo documento\""
+      "Mantenha o número e a conclusão, reduza o detalhe operacional",
+      "Declare o que você está pedindo antes de escrever o resto"
     ],
     "correta": 1,
     "justificativa": "A versão executiva não contém escopo, janela nem critério de aceite"
@@ -512,9 +512,9 @@
     "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Informe e decisão são o mesmo documento\"\". Qual é a correção?",
     "alternativas": [
       "\"O técnico já sabe o que fazer com o relatório executivo\"",
-      "\"Comunicar incidente para o board exige detalhe técnico\"",
+      "Entregue poucos indicadores ligados a decisões pendentes",
       "Declare o que você está pedindo antes de escrever o resto",
-      "\"Simplificar para o executivo é omitir risco\""
+      "\"Comunicar incidente para o board exige detalhe técnico\""
     ],
     "correta": 2,
     "justificativa": "Informe sem decisão não gera registro e não move a organização"
@@ -531,9 +531,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Comunicar incidente para o board exige detalhe técnico\"\". Qual é a correção?",
     "alternativas": [
+      "Escreva a segunda versão com o mesmo fato e a ação verificável",
+      "Mantenha o número e a conclusão, reduza o detalhe operacional",
       "\"O técnico já sabe o que fazer com o relatório executivo\"",
-      "\"Simplificar para o executivo é omitir risco\"",
-      "\"Informe e decisão são o mesmo documento\"",
       "Descreva impacto material, opções e o que você precisa aprovar"
     ],
     "correta": 3,
@@ -551,10 +551,10 @@
     "status": "rascunho",
     "enunciado": "Que tipo de conteúdo os praticantes fornecem para apoiar a decisão de gestores e executivos?",
     "alternativas": [
-      "\"O técnico já sabe o que fazer com o relatório executivo\"",
+      "Mantenha o número e a conclusão, reduza o detalhe operacional",
       "Indicadores-chave de desempenho e indicadores-chave de risco.",
-      "\"Comunicar incidente para o board exige detalhe técnico\"",
-      "\"Simplificar para o executivo é omitir risco\""
+      "Escreva a segunda versão com o mesmo fato e a ação verificável",
+      "Descreva impacto material, opções e o que você precisa aprovar"
     ],
     "correta": 1,
     "justificativa": ""
@@ -571,10 +571,10 @@
     "status": "rascunho",
     "enunciado": "Qual falha de comunicação o NIST IR 8286 identifica no material de risco que chega ao nível corporativo?",
     "alternativas": [
-      "\"O técnico já sabe o que fazer com o relatório executivo\"",
-      "\"Comunicar incidente para o board exige detalhe técnico\"",
+      "Escreva a segunda versão com o mesmo fato e a ação verificável",
+      "Descreva impacto material, opções e o que você precisa aprovar",
       "Volume excessivo e priorização ausente: o material chega como mapa de calor perpetuamente vermelho ou em quantidade impraticável de analisar.",
-      "\"Simplificar para o executivo é omitir risco\""
+      "Mantenha o número e a conclusão, reduza o detalhe operacional"
     ],
     "correta": 2,
     "justificativa": ""
@@ -592,9 +592,9 @@
     "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Contratar mais gente resolve capacidade\"\". Qual é a correção?",
     "alternativas": [
       "Descreva o papel e o resultado esperado antes de abrir a vaga",
-      "\"Descrição de vaga copiada do framework é suficiente\"",
-      "\"Terceirizar SOC terceiriza a responsabilidade\"",
-      "\"Treinamento é evento anual de conscientização\""
+      "Mantenha interno o escalonamento e a decisão de materialidade",
+      "Nomeie substituto em treinamento para cada papel crítico",
+      "\"Descrição de vaga copiada do framework é suficiente\""
     ],
     "correta": 0,
     "justificativa": "Capacidade depende de papel definido, treinamento e processo"
@@ -611,10 +611,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Terceirizar SOC terceiriza a responsabilidade\"\". Qual é a correção?",
     "alternativas": [
-      "\"Descrição de vaga copiada do framework é suficiente\"",
+      "Descreva o papel e o resultado esperado antes de abrir a vaga",
       "Mantenha interno o escalonamento e a decisão de materialidade",
-      "\"Treinamento é evento anual de conscientização\"",
-      "\"Sem plano de sucessão, o time segue igual\""
+      "Nomeie substituto em treinamento para cada papel crítico",
+      "\"Descrição de vaga copiada do framework é suficiente\""
     ],
     "correta": 1,
     "justificativa": "`GV.RR-01` mantém a responsabilidade na liderança da organização"
@@ -631,10 +631,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Descrição de vaga copiada do framework é suficiente\"\". Qual é a correção?",
     "alternativas": [
+      "Separe conscientização geral de formação por função",
       "\"Terceirizar SOC terceiriza a responsabilidade\"",
-      "\"Treinamento é evento anual de conscientização\"",
       "Aponte a referência, a versão e a data de consulta",
-      "\"Sem plano de sucessão, o time segue igual\""
+      "\"Treinamento é evento anual de conscientização\""
     ],
     "correta": 2,
     "justificativa": "Componentes de framework são atualizados e a cópia envelhece"
@@ -651,9 +651,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Treinamento é evento anual de conscientização\"\". Qual é a correção?",
     "alternativas": [
+      "Aponte a referência, a versão e a data de consulta",
       "\"Descrição de vaga copiada do framework é suficiente\"",
       "\"Terceirizar SOC terceiriza a responsabilidade\"",
-      "\"Sem plano de sucessão, o time segue igual\"",
       "Separe conscientização geral de formação por função"
     ],
     "correta": 3,
@@ -673,8 +673,8 @@
     "alternativas": [
       "Nomeie substituto em treinamento para cada papel crítico",
       "\"Descrição de vaga copiada do framework é suficiente\"",
-      "\"Terceirizar SOC terceiriza a responsabilidade\"",
-      "\"Treinamento é evento anual de conscientização\""
+      "Descreva o papel e o resultado esperado antes de abrir a vaga",
+      "Mantenha interno o escalonamento e a decisão de materialidade"
     ],
     "correta": 0,
     "justificativa": "Papel crítico concentrado em uma pessoa é risco de disponibilidade do programa"
@@ -691,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "O que o CSF 2.0 exige na subcategoria que trata de práticas de recursos humanos?",
     "alternativas": [
-      "\"Descrição de vaga copiada do framework é suficiente\"",
-      "\"Terceirizar SOC terceiriza a responsabilidade\"",
+      "Descreva o papel e o resultado esperado antes de abrir a vaga",
+      "Mantenha interno o escalonamento e a decisão de materialidade",
       "`GV.RR-04`: a segurança cibernética deve ser incluída nas práticas de recursos humanos.",
-      "\"Treinamento é evento anual de conscientização\""
+      "Nomeie substituto em treinamento para cada papel crítico"
     ],
     "correta": 2,
     "justificativa": ""
@@ -711,10 +711,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Maturidade alta significa organização segura\"\". Qual é a correção?",
     "alternativas": [
-      "\"Plano de maturidade é lista de projetos de TI\"",
+      "Meça o que alimenta decisão de verba, reporte ou correção de rota",
       "Use o Tier como contexto de governança e mantenha o risco medido separado",
-      "\"Autoavaliação sem evidência economiza tempo\"",
-      "\"Uma vez por ano é suficiente\""
+      "Exija uma evidência abrível para cada resultado declarado",
+      "Revise o perfil atual e os planos em ciclo trimestral"
     ],
     "correta": 1,
     "justificativa": "Tier caracteriza rigor de processo, não ausência de risco"
@@ -731,10 +731,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Autoavaliação sem evidência economiza tempo\"\". Qual é a correção?",
     "alternativas": [
-      "\"Plano de maturidade é lista de projetos de TI\"",
-      "\"Maturidade alta significa organização segura\"",
+      "Revise o perfil atual e os planos em ciclo trimestral",
+      "Escreva cada linha com dono, custo, métrica e data",
       "Exija uma evidência abrível para cada resultado declarado",
-      "\"Uma vez por ano é suficiente\""
+      "Meça o que alimenta decisão de verba, reporte ou correção de rota"
     ],
     "correta": 2,
     "justificativa": "Sem evidência o resultado é opinião e não sustenta decisão de verba"
@@ -751,9 +751,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Plano de maturidade é lista de projetos de TI\"\". Qual é a correção?",
     "alternativas": [
+      "Revise o perfil atual e os planos em ciclo trimestral",
       "\"Maturidade alta significa organização segura\"",
       "\"Autoavaliação sem evidência economiza tempo\"",
-      "\"Uma vez por ano é suficiente\"",
       "Escreva cada linha com dono, custo, métrica e data"
     ],
     "correta": 3,
@@ -772,9 +772,9 @@
     "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Medir tudo demonstra rigor\"\". Qual é a correção?",
     "alternativas": [
       "Meça o que alimenta decisão de verba, reporte ou correção de rota",
-      "\"Plano de maturidade é lista de projetos de TI\"",
-      "\"Maturidade alta significa organização segura\"",
-      "\"Autoavaliação sem evidência economiza tempo\""
+      "Use o Tier como contexto de governança e mantenha o risco medido separado",
+      "Exija uma evidência abrível para cada resultado declarado",
+      "Revise o perfil atual e os planos em ciclo trimestral"
     ],
     "correta": 0,
     "justificativa": "Medição excessiva consome a capacidade do time e não muda decisão"
@@ -791,10 +791,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Uma vez por ano é suficiente\"\". Qual é a correção?",
     "alternativas": [
-      "\"Plano de maturidade é lista de projetos de TI\"",
+      "Escreva cada linha com dono, custo, métrica e data",
       "Revise o perfil atual e os planos em ciclo trimestral",
-      "\"Maturidade alta significa organização segura\"",
-      "\"Autoavaliação sem evidência economiza tempo\""
+      "Exija uma evidência abrível para cada resultado declarado",
+      "\"Plano de maturidade é lista de projetos de TI\""
     ],
     "correta": 1,
     "justificativa": "`GV.OV-01` a `GV.OV-03` e `ID.IM-01` a `ID.IM-04` tratam de revisão e melhoria contínuas"
@@ -811,9 +811,9 @@
     "status": "rascunho",
     "enunciado": "Quais são os três níveis indicadores de maturidade do C2M2 versão 2.1, e quantos domínios o modelo tem?",
     "alternativas": [
-      "\"Plano de maturidade é lista de projetos de TI\"",
-      "\"Maturidade alta significa organização segura\"",
-      "\"Autoavaliação sem evidência economiza tempo\"",
+      "Use o Tier como contexto de governança e mantenha o risco medido separado",
+      "Meça o que alimenta decisão de verba, reporte ou correção de rota",
+      "Exija uma evidência abrível para cada resultado declarado",
       "MIL 1 Initiated, MIL 2 Performed e MIL 3 Managed, em 10 domínios, com mais de 350 práticas."
     ],
     "correta": 3,

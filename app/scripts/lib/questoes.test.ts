@@ -129,15 +129,44 @@ describe('derivarBanco', () => {
     expect(primeiro.status).toBe('rascunho')
     expect(primeiro.alternativas[primeiro.correta]).toBe('O escopo é a informação, não o meio')
     expect(primeiro.justificativa).toBe('o escopo é a informação')
-    // Os distratores saem do proprio material: sao os equivocos das outras linhas.
-    expect(primeiro.alternativas).toContain('Confundir com privacidade')
+    // Os distratores saem do proprio material: as DUAS colunas das linhas do tema — o
+    // equivoco e o correto. Antes so o equivoco entrava, e o gabarito ficava sendo a
+    // alternativa mais longa na maioria dos itens.
+    const doMaterial = new Set((tema().errosComuns ?? []).flatMap((l) => [l.equivoco, l.correto]))
+    for (const alternativa of primeiro.alternativas) expect(doMaterial.has(alternativa)).toBe(true)
+  })
+
+  it('aproxima o tamanho dos distratores do gabarito', () => {
+    // A coluna "o que e correto" e mais longa que a do equivoco no material inteiro, entao
+    // so com equivocos no conjunto dava para acertar contando letras: o gabarito era a
+    // alternativa mais longa em 79% dos itens de erro comum e em 100% dos de recuperacao.
+    const c = conteudo({
+      errosComuns: ['A', 'B', 'C', 'D'].map((letra) => ({
+        equivoco: `eq${letra}`,
+        porque: 'p',
+        correto: `Correção ${letra}, com o detalhe que a explica`,
+      })),
+    })
+    const itens = derivarBanco(c).porArea['01-fundamentos']!
+    const gabarito = itens[0]!.alternativas[itens[0]!.correta]!
+    for (const [i, alternativa] of itens[0]!.alternativas.entries()) {
+      if (i === itens[0]!.correta) continue
+      // Veio da coluna do correto (comprida), nao do equivoco curto, e do tamanho do
+      // gabarito — nao da para escolher pelo comprimento.
+      expect(alternativa.length).toBeGreaterThan(20)
+      expect(Math.abs(alternativa.length - gabarito.length)).toBeLessThanOrEqual(8)
+    }
   })
 
   it('nao usa o proprio equivoco como distrator', () => {
+    const linhas = tema().errosComuns ?? []
     const itens = derivarBanco(conteudo()).porArea['01-fundamentos']!
     for (const q of itens) {
-      const gabarito = q.alternativas[q.correta]
-      expect(gabarito).not.toBe(q.enunciado)
+      if (q.origem !== 'erro-comum') continue
+      const linha = linhas[Number(q.id.slice(-2)) - 1]!
+      // A alternativa nao pode carregar a afirmacao que o proprio enunciado pede para
+      // corrigir: responder com ela seria dizer que o equivoco e o equivoco.
+      expect(q.alternativas).not.toContain(linha.equivoco)
       // Cada alternativa aparece uma vez so.
       expect(new Set(q.alternativas).size).toBe(q.alternativas.length)
     }
@@ -246,5 +275,55 @@ describe('validarBanco', () => {
     const c = conteudo()
     const itens = Array.from({ length: 30 }, (_, i) => item({ id: `${REF}#E${i}`, correta: 0 }))
     expect(validarBanco(bancoCom(itens), c).join('\n')).toContain('gabarito concentrado')
+  })
+
+  // A revisao humana escreve o `status`; todo o resto tem de vir do material. Sem esta
+  // conferencia, um item com o gabarito trocado a mao passava por todas as checagens acima
+  // (forma, fonte, indice valido) e o `build:desktop` o embarcava.
+  describe('fidelidade ao material', () => {
+    it('aceita o banco derivado com o status trocado a mao', () => {
+      const c = conteudo()
+      const banco = derivarBanco(c)
+      banco.porArea['01-fundamentos']![0]!.status = 'verificado'
+      expect(validarBanco(banco, c)).toEqual([])
+    })
+
+    it('acusa item com o gabarito trocado a mao', () => {
+      const c = conteudo()
+      const banco = derivarBanco(c)
+      const alvo = banco.porArea['01-fundamentos']![0]!
+      alvo.correta = (alvo.correta + 1) % alvo.alternativas.length
+
+      const problemas = validarBanco(banco, c)
+      // Um erro so: o item continua com a forma valida, e a troca do gabarito nao aparece
+      // em nenhuma outra checagem.
+      expect(problemas).toHaveLength(1)
+      expect(problemas[0]).toContain('banco adulterado: 1 item')
+      expect(problemas[0]).toContain('conteudo diferente do que o material deriva')
+      expect(problemas[0]).toContain(alvo.id)
+    })
+
+    it('acusa item que nao vem do material', () => {
+      const c = conteudo()
+      const banco = derivarBanco(c)
+      const intruso = item({ id: `${REF}#E99`, justificativa: 'texto escrito a mao' })
+      banco.porArea['01-fundamentos']!.push(intruso)
+
+      const problemas = validarBanco(banco, c).join('\n')
+      expect(problemas).toContain('banco adulterado')
+      expect(problemas).toContain(`${REF}#E99: nao vem do material`)
+    })
+
+    it('acusa item derivado que sumiu do banco', () => {
+      const c = conteudo()
+      const banco = derivarBanco(c)
+      const area = banco.porArea['01-fundamentos']!
+      const removido = area[area.length - 1]!
+      banco.porArea['01-fundamentos'] = area.filter((q) => q.id !== removido.id)
+
+      const problemas = validarBanco(banco, c).join('\n')
+      expect(problemas).toContain('banco adulterado')
+      expect(problemas).toContain(`${removido.id}: o material deriva este item e o banco nao o tem`)
+    })
   })
 })

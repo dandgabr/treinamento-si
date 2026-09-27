@@ -77,12 +77,13 @@ function fonteDoTema(tema: Tema): Questao['fonte'] {
 /**
  * Escolhe os distratores mais proximos do gabarito em comprimento.
  *
- * Sem isto, a correta era a mais longa em 81% dos itens (media de +24 caracteres): dava para
- * acertar sem saber, so contando letras. Aproximar o tamanho nao resolve o item, mas tira o
- * tell mais barato — e o gate vigia o resto.
+ * Sem isto, a correta era a mais longa em 4 de 5 itens de erro comum e em TODOS os de
+ * recuperacao: dava para acertar sem saber, so contando letras. Aproximar o tamanho nao
+ * resolve o item, mas tira o tell mais barato — e o gate vigia o resto.
  */
 function distratoresMaisProximos(correta: string, candidatos: string[], quantos: number): string[] {
-  const vistos = new Set([correta.trim()])
+  const alvo = correta.trim()
+  const vistos = new Set([alvo])
   return candidatos
     .filter((texto) => {
       const limpo = texto.trim()
@@ -90,8 +91,24 @@ function distratoresMaisProximos(correta: string, candidatos: string[], quantos:
       vistos.add(limpo)
       return true
     })
-    .sort((a, b) => Math.abs(a.trim().length - correta.length) - Math.abs(b.trim().length - correta.length))
+    .sort((a, b) => Math.abs(a.trim().length - alvo.length) - Math.abs(b.trim().length - alvo.length))
     .slice(0, quantos)
+}
+
+/**
+ * As duas colunas de uma tabela de erros comuns, menos a linha `exceto`: o `equivoco` que o
+ * material documenta e o `correto` que o corrige.
+ *
+ * As duas entram na escolha do distrator de proposito. So o equivoco entrava, e como a coluna
+ * "o que e correto" e sempre mais longa que a do equivoco, o gabarito — que e um `correto` —
+ * acabava sendo a alternativa mais longa na maioria dos itens: dava para acertar contando
+ * letras. Com o `correto` das outras linhas no conjunto, os tres mais proximos passam a ter
+ * tamanho comparavel ao do gabarito.
+ */
+function textosDaTabela(tema: Tema, exceto = -1): string[] {
+  return (tema.errosComuns ?? [])
+    .filter((_, i) => i !== exceto)
+    .flatMap((linha) => [linha.equivoco, linha.correto])
 }
 
 /** Itens vindos da tabela de erros comuns: um por linha, com o gabarito sendo o `correto`. */
@@ -100,9 +117,9 @@ function daTabelaDeErros(tema: Tema): Questao[] {
   const fonte = fonteDoTema(tema)
   const itens: Questao[] = []
   linhas.forEach((linha, indice) => {
-    // Distratores: os equivocos das OUTRAS linhas do mesmo tema — erros que o proprio
-    // material documenta.
-    const candidatos = linhas.filter((_, i) => i !== indice).map((outra) => outra.equivoco)
+    // Distratores: as duas colunas das OUTRAS linhas do mesmo tema — erros que o proprio
+    // material documenta, e as correcoes deles.
+    const candidatos = textosDaTabela(tema, indice)
     const gabarito = linha.correto.trim()
     if (!gabarito || gabarito.length > TETO_DA_ALTERNATIVA) return
     const distratores = distratoresMaisProximos(gabarito, candidatos, 3)
@@ -134,19 +151,27 @@ function daTabelaDeErros(tema: Tema): Questao[] {
  *    "porque", o que punha um enunciado FALSO sob "Por quê" em 296 itens — o app ensinando
  *    errado. A resposta correta ja e a propria resposta do material; o que a tela mostra e o
  *    link para o tema, que e a conferencia de verdade;
- *  - **nao usa a resposta de outra pergunta como distrator**, porque nenhuma delas e falsa
- *    pelo tema e a correta ficava reconhecivel por ser a unica que trata do que foi
- *    perguntado — item que mede eliminacao, nao memoria. Os distratores sao os equivocos da
- *    tabela do tema, como pede a secao 7 do plano.
+ *  - **nao usa texto de fora do material** como distrator: a secao 7 do plano pede que o
+ *    distrator seja texto do proprio tema, e e o que os candidatos sao — as duas colunas da
+ *    tabela de erros comuns e as respostas dos outros pares.
+ *
+ * A resposta de recuperacao e uma frase inteira, e so com os equivocos da tabela (curtos) o
+ * gabarito era a alternativa mais longa em 100% dos itens: acertar nao media nada, bastava
+ * contar letras. Por isso as respostas dos OUTROS pares tambem entram no conjunto: entre
+ * frases do mesmo tipo, os tres distratores mais proximos ficam com tamanho comparavel ao do
+ * gabarito.
  */
 function daRecuperacao(tema: Tema): Questao[] {
   const pares = tema.recuperacao ?? []
-  const candidatos = (tema.errosComuns ?? []).map((e) => e.equivoco)
   const fonte = fonteDoTema(tema)
   const itens: Questao[] = []
   pares.forEach((par, indice) => {
     const gabarito = par.resposta.trim()
     if (!gabarito || gabarito.length > TETO_DA_ALTERNATIVA) return
+    const candidatos = [
+      ...textosDaTabela(tema),
+      ...pares.filter((_, i) => i !== indice).map((outro) => outro.resposta),
+    ]
     const distratores = distratoresMaisProximos(gabarito, candidatos, 3)
     if (distratores.length + 1 < MINIMO_DE_ALTERNATIVAS) return
 
@@ -261,6 +286,57 @@ export function validarBanco(banco: Banco, conteudo: Conteudo): string[] {
         `gabarito concentrado na primeira alternativa (${(fracao * 100).toFixed(0)}% dos ${itens.length} itens)`,
       )
     }
+  }
+
+  // O banco tem de ser o que o material deriva AGORA, e nao uma versao editada dele.
+  //
+  // As conferencias acima sao de forma: um gabarito trocado a mao continua com quatro
+  // alternativas, indice valido e fonte boa, e passava por todas elas — quem roda o gate
+  // sobre o arquivo em disco (`check-questions`) embarcava a troca. Aqui o banco recebido e
+  // comparado com a derivacao do mesmo conteudo, item por item, MENOS o `status`: o status e
+  // a unica coisa que a revisao humana escreve, e todo o resto sai do material.
+  //
+  // A derivacao extra e barata (e a mesma que o `build-questions` acabou de rodar) e a
+  // assinatura nao muda: o `check-questions`, que le o arquivo em disco, ganha a conferencia
+  // sem uma linha a mais la.
+  const derivado = derivarBanco(conteudo)
+  const assinatura = (q: Questao): string =>
+    JSON.stringify([
+      q.id,
+      q.ref,
+      q.origem,
+      q.fonte?.titulo ?? null,
+      q.fonte?.url ?? null,
+      q.fonte?.tipo ?? null,
+      q.enunciado,
+      q.alternativas ?? null,
+      q.correta,
+      q.justificativa,
+    ])
+  const adulterados: string[] = []
+  for (const [areaId, esperados] of Object.entries(derivado.porArea)) {
+    // `Object.hasOwn` e nao `banco.porArea[areaId]`: chave herdada do prototipo nao e arquivo
+    // de area nenhum, e um `constructor` cairia numa funcao em vez de numa lista.
+    const doArquivo = Object.hasOwn(banco.porArea, areaId) ? (banco.porArea[areaId] ?? []) : []
+    const emDisco = new Map(doArquivo.map((q) => [q.id, q]))
+    for (const esperado of esperados) {
+      const achado = emDisco.get(esperado.id)
+      if (!achado) {
+        adulterados.push(`${esperado.id}: o material deriva este item e o banco nao o tem`)
+        continue
+      }
+      emDisco.delete(esperado.id)
+      if (assinatura(esperado) !== assinatura(achado)) {
+        adulterados.push(`${esperado.id}: conteudo diferente do que o material deriva`)
+      }
+    }
+    for (const id of emDisco.keys()) adulterados.push(`${id}: nao vem do material`)
+  }
+  if (adulterados.length) {
+    erros.push(
+      `banco adulterado: ${adulterados.length} item(ns) fora do derivado do material ` +
+        `(${adulterados.slice(0, 5).join('; ')}${adulterados.length > 5 ? '; ...' : ''})`,
+    )
   }
 
   return erros

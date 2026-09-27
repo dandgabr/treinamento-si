@@ -11,10 +11,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Segurança é a fase de teste antes do lançamento\". Qual é a correção?",
     "alternativas": [
-      "Ter política de desenvolvimento seguro equivale a praticá-lo",
-      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
+      "Exceção com dono, justificativa, prazo e reavaliação registrados",
+      "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5",
       "Distribuir verificação por etapa, com o teste final como confirmação",
-      "Todos os gates devem bloquear para ter efeito"
+      "Ter política de desenvolvimento seguro equivale a praticá-lo"
     ],
     "correta": 2,
     "justificativa": "O custo de correção cresce a cada etapa e o teste final não vê decisão de desenho"
@@ -31,9 +31,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Ter política de desenvolvimento seguro equivale a praticá-lo\". Qual é a correção?",
     "alternativas": [
-      "Segurança é a fase de teste antes do lançamento",
-      "Todos os gates devem bloquear para ter efeito",
-      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
+      "Definir o que bloqueia onde, e registrar o que apenas alerta",
+      "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5",
+      "Exceção com dono, justificativa, prazo e reavaliação registrados",
       "Exigir o registro da revisão e da varredura de cada versão"
     ],
     "correta": 3,
@@ -52,9 +52,9 @@
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"O SSDF é um framework a ser implantado por completo antes de produzir efeito\". Qual é a correção?",
     "alternativas": [
       "Escolher as práticas que atacam as causas raiz dos seus achados e instrumentá-las",
-      "Ter política de desenvolvimento seguro equivale a praticá-lo",
-      "Segurança é a fase de teste antes do lançamento",
-      "Todos os gates devem bloquear para ter efeito"
+      "Distribuir verificação por etapa, com o teste final como confirmação",
+      "Exceção com dono, justificativa, prazo e reavaliação registrados",
+      "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5"
     ],
     "correta": 0,
     "justificativa": "Ele é um núcleo de práticas de alto nível que se integra ao modelo de ciclo de vida existente"
@@ -71,10 +71,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Citar requisito sem versão é suficiente\". Qual é a correção?",
     "alternativas": [
-      "Ter política de desenvolvimento seguro equivale a praticá-lo",
+      "Exceção com dono, justificativa, prazo e reavaliação registrados",
       "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5",
-      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
-      "Segurança é a fase de teste antes do lançamento"
+      "Ter política de desenvolvimento seguro equivale a praticá-lo",
+      "Definir o que bloqueia onde, e registrar o que apenas alerta"
     ],
     "correta": 1,
     "justificativa": "Os identificadores mudam entre versões do padrão e a citação fica impossível de auditar"
@@ -92,9 +92,9 @@
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Todos os gates devem bloquear para ter efeito\". Qual é a correção?",
     "alternativas": [
       "Ter política de desenvolvimento seguro equivale a praticá-lo",
-      "Segurança é a fase de teste antes do lançamento",
+      "Exigir o registro da revisão e da varredura de cada versão",
       "Definir o que bloqueia onde, e registrar o que apenas alerta",
-      "O SSDF é um framework a ser implantado por completo antes de produzir efeito"
+      "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5"
     ],
     "correta": 2,
     "justificativa": "Gate que bloqueia tudo atrasa a entrega, gera pedido de exceção e acaba desativado"
@@ -111,9 +111,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Exceção aceita é decisão técnica\". Qual é a correção?",
     "alternativas": [
+      "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5",
+      "Distribuir verificação por etapa, com o teste final como confirmação",
       "Ter política de desenvolvimento seguro equivale a praticá-lo",
-      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
-      "Segurança é a fase de teste antes do lançamento",
       "Exceção com dono, justificativa, prazo e reavaliação registrados"
     ],
     "correta": 3,
@@ -131,9 +131,9 @@
     "status": "rascunho",
     "enunciado": "Quais três resultados o SSDF declara perseguir, segundo o resumo do NIST?",
     "alternativas": [
-      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
-      "Ter política de desenvolvimento seguro equivale a praticá-lo",
-      "Segurança é a fase de teste antes do lançamento",
+      "No build. Fora dele, a informação sobre o que foi compilado, com quais entradas e por qual processo, já não está disponível de forma confiável, e reconstruí-la exige investigar histórico e máquina.",
+      "Porque cria fila, atrasa entrega e transforma o pedido de exceção em rotina; o processo perde autoridade e o controle é removido por decisão informal.",
+      "Escolher as práticas que atacam as causas raiz dos seus achados e instrumentá-las",
       "Reduzir o número de vulnerabilidades na versão publicada; mitigar o impacto potencial da exploração de vulnerabilidades não detectadas ou não tratadas; endereçar as causas raiz para evitar recorrência."
     ],
     "correta": 3,
@@ -151,10 +151,10 @@
     "status": "rascunho",
     "enunciado": "Em que etapa do fluxo a proveniência do build é produzida e por que ela não pode ser reconstruída depois sem custo?",
     "alternativas": [
-      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
-      "Ter política de desenvolvimento seguro equivale a praticá-lo",
+      "Reduzir o número de vulnerabilidades na versão publicada; mitigar o impacto potencial da exploração de vulnerabilidades não detectadas ou não tratadas; endereçar as causas raiz para evitar recorrência.",
+      "Porque cria fila, atrasa entrega e transforma o pedido de exceção em rotina; o processo perde autoridade e o controle é removido por decisão informal.",
       "No build. Fora dele, a informação sobre o que foi compilado, com quais entradas e por qual processo, já não está disponível de forma confiável, e reconstruí-la exige investigar histórico e máquina.",
-      "Segurança é a fase de teste antes do lançamento"
+      "Escolher as práticas que atacam as causas raiz dos seus achados e instrumentá-las"
     ],
     "correta": 2,
     "justificativa": ""
@@ -171,9 +171,9 @@
     "status": "rascunho",
     "enunciado": "Por que um gate que bloqueia toda mudança pequena tende a ser desativado em poucos meses?",
     "alternativas": [
-      "O SSDF é um framework a ser implantado por completo antes de produzir efeito",
-      "Ter política de desenvolvimento seguro equivale a praticá-lo",
-      "Segurança é a fase de teste antes do lançamento",
+      "No build. Fora dele, a informação sobre o que foi compilado, com quais entradas e por qual processo, já não está disponível de forma confiável, e reconstruí-la exige investigar histórico e máquina.",
+      "Reduzir o número de vulnerabilidades na versão publicada; mitigar o impacto potencial da exploração de vulnerabilidades não detectadas ou não tratadas; endereçar as causas raiz para evitar recorrência.",
+      "Escolher as práticas que atacam as causas raiz dos seus achados e instrumentá-las",
       "Porque cria fila, atrasa entrega e transforma o pedido de exceção em rotina; o processo perde autoridade e o controle é removido por decisão informal."
     ],
     "correta": 3,
@@ -192,8 +192,8 @@
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"O Top 10 é uma lista de verificação de conformidade\". Qual é a correção?",
     "alternativas": [
       "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
-      "A posição na lista é o grau de risco da minha aplicação",
-      "As categorias de 2021 servem para relatório de 2026",
+      "Declarar a versão da taxonomia em todo relatório e remapear o histórico",
+      "Tratar zero achado como hipótese a investigar, não como resultado",
       "Usar para comunicar e priorizar; usar o ASVS para verificar requisito por requisito"
     ],
     "correta": 3,
@@ -212,9 +212,9 @@
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação\". Qual é a correção?",
     "alternativas": [
       "Tratar zero achado como hipótese a investigar, não como resultado",
-      "A posição na lista é o grau de risco da minha aplicação",
-      "O Top 10 é uma lista de verificação de conformidade",
-      "As categorias de 2021 servem para relatório de 2026"
+      "Medir o risco na sua aplicação e usar a posição como contexto",
+      "Declarar a versão da taxonomia em todo relatório e remapear o histórico",
+      "Ler o que a categoria cobre antes de tratar como novidade"
     ],
     "correta": 0,
     "justificativa": "Os dados e os testes cobrem o que é testável de forma automatizada, e há defasagem de anos entre a descoberta da classe de falha e o teste em escala"
@@ -231,10 +231,10 @@
     "status": "rascunho",
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"A posição na lista é o grau de risco da minha aplicação\". Qual é a correção?",
     "alternativas": [
-      "O Top 10 é uma lista de verificação de conformidade",
+      "Tratar zero achado como hipótese a investigar, não como resultado",
       "Medir o risco na sua aplicação e usar a posição como contexto",
-      "As categorias de 2021 servem para relatório de 2026",
-      "Monitoramento registrado é suficiente"
+      "Ler o que a categoria cobre antes de tratar como novidade",
+      "O Top 10 é uma lista de verificação de conformidade"
     ],
     "correta": 1,
     "justificativa": "A posição é prevalência no setor"
@@ -251,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"As categorias de 2021 servem para relatório de 2026\". Qual é a correção?",
     "alternativas": [
-      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
-      "A posição na lista é o grau de risco da minha aplicação",
+      "Tratar zero achado como hipótese a investigar, não como resultado",
+      "Medir o risco na sua aplicação e usar a posição como contexto",
       "Declarar a versão da taxonomia em todo relatório e remapear o histórico",
-      "O Top 10 é uma lista de verificação de conformidade"
+      "Usar para comunicar e priorizar; usar o ASVS para verificar requisito por requisito"
     ],
     "correta": 2,
     "justificativa": "A taxonomia mudou, com duas categorias novas e duas renomeadas"
@@ -272,8 +272,8 @@
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"Categoria nova significa risco novo\". Qual é a correção?",
     "alternativas": [
       "A posição na lista é o grau de risco da minha aplicação",
+      "Medir o risco na sua aplicação e usar a posição como contexto",
       "O Top 10 é uma lista de verificação de conformidade",
-      "As categorias de 2021 servem para relatório de 2026",
       "Ler o que a categoria cobre antes de tratar como novidade"
     ],
     "correta": 3,
@@ -312,9 +312,9 @@
     "enunciado": "Quantas categorias foram ranqueadas na edição 2025 e quantas delas vieram do levantamento com a comunidade?",
     "alternativas": [
       "Doze categorias foram ranqueadas; oito entraram por dado e duas foram promovidas pela votação da comunidade, totalizando as dez publicadas.",
-      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
-      "A posição na lista é o grau de risco da minha aplicação",
-      "O Top 10 é uma lista de verificação de conformidade"
+      "A02:2025 Security Misconfiguration, com 3,00% das aplicações testadas apresentando ao menos uma das 16 CWEs da categoria.",
+      "248 CWEs dentro das dez categorias, contra 968 CWEs no dicionário MITRE disponível na data do lançamento.",
+      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação"
     ],
     "correta": 0,
     "justificativa": ""
@@ -331,10 +331,10 @@
     "status": "rascunho",
     "enunciado": "Quantas CWEs existem dentro das dez categorias e quantas existiam no dicionário MITRE na data do lançamento?",
     "alternativas": [
-      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
+      "A02:2025 Security Misconfiguration, com 3,00% das aplicações testadas apresentando ao menos uma das 16 CWEs da categoria.",
       "248 CWEs dentro das dez categorias, contra 968 CWEs no dicionário MITRE disponível na data do lançamento.",
-      "A posição na lista é o grau de risco da minha aplicação",
-      "O Top 10 é uma lista de verificação de conformidade"
+      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
+      "Usar para comunicar e priorizar; usar o ASVS para verificar requisito por requisito"
     ],
     "correta": 1,
     "justificativa": ""
@@ -351,10 +351,10 @@
     "status": "rascunho",
     "enunciado": "Qual categoria subiu da posição 5 em 2021 para a posição 2 em 2025, e que percentual de aplicações testadas apresentou ao menos uma das 16 CWEs dela?",
     "alternativas": [
-      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
-      "A posição na lista é o grau de risco da minha aplicação",
+      "248 CWEs dentro das dez categorias, contra 968 CWEs no dicionário MITRE disponível na data do lançamento.",
+      "Doze categorias foram ranqueadas; oito entraram por dado e duas foram promovidas pela votação da comunidade, totalizando as dez publicadas.",
       "A02:2025 Security Misconfiguration, com 3,00% das aplicações testadas apresentando ao menos uma das 16 CWEs da categoria.",
-      "O Top 10 é uma lista de verificação de conformidade"
+      "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação"
     ],
     "correta": 2,
     "justificativa": ""
@@ -372,9 +372,9 @@
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Modelar o sistema inteiro antes de modelar a função\". Qual é a correção?",
     "alternativas": [
       "Modelar a função que está em especificação, com o detalhe que gera teste",
-      "Caminhos automáticos não precisam de modelo",
-      "A resposta mitigar encerra o assunto",
-      "Aceitar é decidir não fazer nada"
+      "Marcar esses caminhos no diagrama e tratá-los como limite de confiança",
+      "Manter diagrama, lista, respostas, requisitos e data de revisão",
+      "Registrar dono de risco, justificativa e data de reavaliação"
     ],
     "correta": 0,
     "justificativa": "O escopo largo produz frases genéricas e nenhum requisito testável"
@@ -391,10 +391,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Modelo de ameaças é uma reunião\". Qual é a correção?",
     "alternativas": [
-      "Modelar o sistema inteiro antes de modelar a função",
+      "Registrar dono de risco, justificativa e data de reavaliação",
       "Manter diagrama, lista, respostas, requisitos e data de revisão",
-      "Caminhos automáticos não precisam de modelo",
-      "A resposta mitigar encerra o assunto"
+      "Marcar esses caminhos no diagrama e tratá-los como limite de confiança",
+      "Modelar a função que está em especificação, com o detalhe que gera teste"
     ],
     "correta": 1,
     "justificativa": "Sem artefato mantido, a decisão de 2023 não responde à pergunta de 2026"
@@ -411,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"A resposta mitigar encerra o assunto\". Qual é a correção?",
     "alternativas": [
+      "Definir gatilhos de revisão ligados à mudança",
       "Caminhos automáticos não precisam de modelo",
-      "Modelar o sistema inteiro antes de modelar a função",
       "Escrever o requisito e o teste na mesma sessão",
-      "Aceitar é decidir não fazer nada"
+      "Modelar o sistema inteiro antes de modelar a função"
     ],
     "correta": 2,
     "justificativa": "Sem requisito com identificador e teste, a mitigação não existe em produção"
@@ -431,9 +431,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Aceitar é decidir não fazer nada\". Qual é a correção?",
     "alternativas": [
+      "Manter diagrama, lista, respostas, requisitos e data de revisão",
       "Modelar o sistema inteiro antes de modelar a função",
-      "Caminhos automáticos não precisam de modelo",
-      "A resposta mitigar encerra o assunto",
+      "Marcar esses caminhos no diagrama e tratá-los como limite de confiança",
       "Registrar dono de risco, justificativa e data de reavaliação"
     ],
     "correta": 3,
@@ -452,9 +452,9 @@
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Caminhos automáticos não precisam de modelo\". Qual é a correção?",
     "alternativas": [
       "Marcar esses caminhos no diagrama e tratá-los como limite de confiança",
-      "Modelar o sistema inteiro antes de modelar a função",
-      "A resposta mitigar encerra o assunto",
-      "Aceitar é decidir não fazer nada"
+      "Modelar a função que está em especificação, com o detalhe que gera teste",
+      "Manter diagrama, lista, respostas, requisitos e data de revisão",
+      "Registrar dono de risco, justificativa e data de reavaliação"
     ],
     "correta": 0,
     "justificativa": "Webhook, fila e tarefa agendada entram sem usuário na frente e concentram falha de autorização"
@@ -471,10 +471,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Revisar por calendário resolve\". Qual é a correção?",
     "alternativas": [
-      "Caminhos automáticos não precisam de modelo",
+      "Escrever o requisito e o teste na mesma sessão",
       "Definir gatilhos de revisão ligados à mudança",
-      "Modelar o sistema inteiro antes de modelar a função",
-      "A resposta mitigar encerra o assunto"
+      "Caminhos automáticos não precisam de modelo",
+      "Modelar o sistema inteiro antes de modelar a função"
     ],
     "correta": 1,
     "justificativa": "A aplicação muda por integração e por dado novo, não por aniversário"
@@ -491,10 +491,10 @@
     "status": "rascunho",
     "enunciado": "Quais cinco elementos o diagrama de fluxo de dados precisa mostrar para sustentar a etapa de enumeração?",
     "alternativas": [
-      "Modelar o sistema inteiro antes de modelar a função",
+      "Modelar a função que está em especificação, com o detalhe que gera teste",
       "Entidades externas, processos, depósitos de dado, fluxos de dado e limites de confiança.",
-      "Caminhos automáticos não precisam de modelo",
-      "A resposta mitigar encerra o assunto"
+      "Marcar esses caminhos no diagrama e tratá-los como limite de confiança",
+      "Manter diagrama, lista, respostas, requisitos e data de revisão"
     ],
     "correta": 1,
     "justificativa": ""
@@ -512,9 +512,9 @@
     "enunciado": "Por que webhook, fila e tarefa agendada merecem tratamento próprio no desenho?",
     "alternativas": [
       "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
-      "Modelar o sistema inteiro antes de modelar a função",
-      "Caminhos automáticos não precisam de modelo",
-      "A resposta mitigar encerra o assunto"
+      "Aceitar é decisão registrada, com dono de risco, justificativa, prazo e reavaliação; ignorar é ausência de decisão, e a ameaça continua aberta sem que ninguém saiba.",
+      "Troca de fornecedor ou de versão da interface, entrada de tipo de dado novo, mudança no formato da chamada de retorno, mudança relevante de arquitetura e incidente que explore caminho previsto ou não previsto no modelo.",
+      "Entidades externas, processos, depósitos de dado, fluxos de dado e limites de confiança."
     ],
     "correta": 0,
     "justificativa": ""
@@ -531,10 +531,10 @@
     "status": "rascunho",
     "enunciado": "Qual a diferença entre aceitar uma ameaça e ignorá-la?",
     "alternativas": [
-      "Modelar o sistema inteiro antes de modelar a função",
+      "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
       "Aceitar é decisão registrada, com dono de risco, justificativa, prazo e reavaliação; ignorar é ausência de decisão, e a ameaça continua aberta sem que ninguém saiba.",
-      "Caminhos automáticos não precisam de modelo",
-      "A resposta mitigar encerra o assunto"
+      "Troca de fornecedor ou de versão da interface, entrada de tipo de dado novo, mudança no formato da chamada de retorno, mudança relevante de arquitetura e incidente que explore caminho previsto ou não previsto no modelo.",
+      "Entidades externas, processos, depósitos de dado, fluxos de dado e limites de confiança."
     ],
     "correta": 1,
     "justificativa": ""
@@ -551,10 +551,10 @@
     "status": "rascunho",
     "enunciado": "Que gatilhos de revisão você definiria para uma aplicação que integra dois fornecedores externos?",
     "alternativas": [
-      "Modelar o sistema inteiro antes de modelar a função",
-      "Caminhos automáticos não precisam de modelo",
+      "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
+      "Aceitar é decisão registrada, com dono de risco, justificativa, prazo e reavaliação; ignorar é ausência de decisão, e a ameaça continua aberta sem que ninguém saiba.",
       "Troca de fornecedor ou de versão da interface, entrada de tipo de dado novo, mudança no formato da chamada de retorno, mudança relevante de arquitetura e incidente que explore caminho previsto ou não previsto no modelo.",
-      "A resposta mitigar encerra o assunto"
+      "Entidades externas, processos, depósitos de dado, fluxos de dado e limites de confiança."
     ],
     "correta": 2,
     "justificativa": ""
@@ -571,10 +571,10 @@
     "status": "rascunho",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Instalar ferramenta é implementar controle\". Qual é a correção?",
     "alternativas": [
-      "Bloquear a ramificação de trabalho acelera a correção",
+      "Separar por natureza e por classe de ferramenta ao priorizar",
       "Escrever a política de gate, os prazos e o caminho de exceção",
-      "O relatório de varredura prova o que foi publicado",
-      "Todos os críticos têm o mesmo esforço de correção"
+      "Bloquear achado novo e severo na linha principal; registrar o resto",
+      "Ligar o achado ao artefato exato e ao registro de build"
     ],
     "correta": 1,
     "justificativa": "Ferramenta produz achado; controle é o que garante correção com dono e prazo"
@@ -591,10 +591,10 @@
     "status": "rascunho",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Gate que bloqueia tudo é mais rigoroso\". Qual é a correção?",
     "alternativas": [
-      "Bloquear a ramificação de trabalho acelera a correção",
-      "O relatório de varredura prova o que foi publicado",
+      "Registrar a análise que concluiu pelo falso positivo, com autor e data",
+      "Escrever a política de gate, os prazos e o caminho de exceção",
       "Bloquear achado novo e severo na linha principal; registrar o resto",
-      "Todos os críticos têm o mesmo esforço de correção"
+      "Bloquear na promoção do artefato, com data de corte para o estoque antigo"
     ],
     "correta": 2,
     "justificativa": "Bloqueio amplo empurra a correção para o fim da fila e ensina o time a contornar"
@@ -611,9 +611,9 @@
     "status": "rascunho",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Bloquear a ramificação de trabalho acelera a correção\". Qual é a correção?",
     "alternativas": [
-      "O relatório de varredura prova o que foi publicado",
-      "Todos os críticos têm o mesmo esforço de correção",
-      "Instalar ferramenta é implementar controle",
+      "Registrar a análise que concluiu pelo falso positivo, com autor e data",
+      "Bloquear achado novo e severo na linha principal; registrar o resto",
+      "Escrever a política de gate, os prazos e o caminho de exceção",
       "Bloquear na promoção do artefato, com data de corte para o estoque antigo"
     ],
     "correta": 3,
@@ -632,9 +632,9 @@
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Todos os críticos têm o mesmo esforço de correção\". Qual é a correção?",
     "alternativas": [
       "Separar por natureza e por classe de ferramenta ao priorizar",
-      "Bloquear a ramificação de trabalho acelera a correção",
-      "O relatório de varredura prova o que foi publicado",
-      "Instalar ferramenta é implementar controle"
+      "Escrever a política de gate, os prazos e o caminho de exceção",
+      "Ligar o achado ao artefato exato e ao registro de build",
+      "Bloquear achado novo e severo na linha principal; registrar o resto"
     ],
     "correta": 0,
     "justificativa": "Achado em dependência com correção disponível se resolve com atualização; achado em código próprio exige teste e revisão"
@@ -651,10 +651,10 @@
     "status": "rascunho",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Falso positivo não precisa de registro\". Qual é a correção?",
     "alternativas": [
-      "Bloquear a ramificação de trabalho acelera a correção",
+      "Bloquear achado novo e severo na linha principal; registrar o resto",
       "Registrar a análise que concluiu pelo falso positivo, com autor e data",
-      "O relatório de varredura prova o que foi publicado",
-      "Todos os críticos têm o mesmo esforço de correção"
+      "Bloquear na promoção do artefato, com data de corte para o estoque antigo",
+      "Escrever a política de gate, os prazos e o caminho de exceção"
     ],
     "correta": 1,
     "justificativa": "Sem justificativa documentada, o mesmo alerta volta todo mês e consome tempo"
@@ -672,9 +672,9 @@
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"O relatório de varredura prova o que foi publicado\". Qual é a correção?",
     "alternativas": [
       "Bloquear a ramificação de trabalho acelera a correção",
-      "Todos os críticos têm o mesmo esforço de correção",
+      "Separar por natureza e por classe de ferramenta ao priorizar",
       "Ligar o achado ao artefato exato e ao registro de build",
-      "Instalar ferramenta é implementar controle"
+      "Escrever a política de gate, os prazos e o caminho de exceção"
     ],
     "correta": 2,
     "justificativa": "Sem identificador do artefato e sem proveniência, não se sabe qual versão foi analisada"
@@ -691,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "Que pergunta o SAST responde e que pergunta ele não responde?",
     "alternativas": [
-      "Bloquear a ramificação de trabalho acelera a correção",
-      "O relatório de varredura prova o que foi publicado",
+      "Identificador do artefato exato analisado e versão do conjunto de regras. Sem os dois, não há como provar que a versão publicada foi a versão verificada, nem comparar resultado entre execuções.",
+      "Porque dependência transitiva não aparece na lista declarada: o pacote que você usa traz outros que você não escolheu, e é no inventário gerado no build que eles aparecem.",
       "Responde se o código escrito contém padrão conhecido de falha e se dado não confiável chega a ponto sensível. Não responde como o sistema se comporta em execução, nem se a configuração do ambiente está segura.",
-      "Todos os críticos têm o mesmo esforço de correção"
+      "Bloquear na promoção do artefato, com data de corte para o estoque antigo"
     ],
     "correta": 2,
     "justificativa": ""
@@ -711,9 +711,9 @@
     "status": "rascunho",
     "enunciado": "Por que a análise de dependência precisa de um inventário do que foi construído, e não apenas da lista de dependências declaradas?",
     "alternativas": [
-      "Bloquear a ramificação de trabalho acelera a correção",
-      "O relatório de varredura prova o que foi publicado",
-      "Todos os críticos têm o mesmo esforço de correção",
+      "Identificador do artefato exato analisado e versão do conjunto de regras. Sem os dois, não há como provar que a versão publicada foi a versão verificada, nem comparar resultado entre execuções.",
+      "Responde se o código escrito contém padrão conhecido de falha e se dado não confiável chega a ponto sensível. Não responde como o sistema se comporta em execução, nem se a configuração do ambiente está segura.",
+      "Bloquear na promoção do artefato, com data de corte para o estoque antigo",
       "Porque dependência transitiva não aparece na lista declarada: o pacote que você usa traz outros que você não escolheu, e é no inventário gerado no build que eles aparecem."
     ],
     "correta": 3,
@@ -731,9 +731,9 @@
     "status": "rascunho",
     "enunciado": "Que dois elementos o relatório de varredura precisa carregar para ser rastreável, e por quê?",
     "alternativas": [
-      "Bloquear a ramificação de trabalho acelera a correção",
-      "O relatório de varredura prova o que foi publicado",
-      "Todos os críticos têm o mesmo esforço de correção",
+      "Responde se o código escrito contém padrão conhecido de falha e se dado não confiável chega a ponto sensível. Não responde como o sistema se comporta em execução, nem se a configuração do ambiente está segura.",
+      "Porque dependência transitiva não aparece na lista declarada: o pacote que você usa traz outros que você não escolheu, e é no inventário gerado no build que eles aparecem.",
+      "Bloquear na promoção do artefato, com data de corte para o estoque antigo",
       "Identificador do artefato exato analisado e versão do conjunto de regras. Sem os dois, não há como provar que a versão publicada foi a versão verificada, nem comparar resultado entre execuções."
     ],
     "correta": 3,
@@ -751,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Inventário de componentes é documento de conformidade\". Qual é a correção?",
     "alternativas": [
-      "Dependência transitiva é responsabilidade de quem a escreveu",
-      "Varredura de vulnerabilidade substitui o inventário",
+      "Definir o nível de build como decisão de risco, com o dono do risco",
+      "Registrar a análise que sustenta o não afetado, com autor e data",
       "Gerar no build, amarrar ao artefato e usar na resposta a incidente",
-      "Declarar não afetado é sempre resposta aceitável"
+      "Medir a contagem no artefato construído, não na lista declarada"
     ],
     "correta": 2,
     "justificativa": "O valor está em responder à falha divulgada e à diligência de cliente"
@@ -771,9 +771,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Gerar o inventário uma vez por ano resolve\". Qual é a correção?",
     "alternativas": [
+      "Manter os dois, com o inventário como base",
       "Proveniência é assunto de time de plataforma",
       "Declarar não afetado é sempre resposta aceitável",
-      "Varredura de vulnerabilidade substitui o inventário",
       "Gerar a cada build e guardar por versão"
     ],
     "correta": 3,
@@ -794,7 +794,7 @@
       "Manter os dois, com o inventário como base",
       "Gerar o inventário uma vez por ano resolve",
       "Proveniência é assunto de time de plataforma",
-      "Declarar não afetado é sempre resposta aceitável"
+      "Gerar a cada build e guardar por versão"
     ],
     "correta": 0,
     "justificativa": "A varredura responde o que tem falha conhecida; sem inventário ela não sabe o que existe"
@@ -811,10 +811,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Dependência transitiva é responsabilidade de quem a escreveu\". Qual é a correção?",
     "alternativas": [
-      "Inventário de componentes é documento de conformidade",
+      "Registrar a análise que sustenta o não afetado, com autor e data",
       "Medir a contagem no artefato construído, não na lista declarada",
-      "Varredura de vulnerabilidade substitui o inventário",
-      "Declarar não afetado é sempre resposta aceitável"
+      "Gerar no build, amarrar ao artefato e usar na resposta a incidente",
+      "Definir o nível de build como decisão de risco, com o dono do risco"
     ],
     "correta": 1,
     "justificativa": "Ela entra no seu artefato e é você que responde ao cliente"
@@ -831,10 +831,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Proveniência é assunto de time de plataforma\". Qual é a correção?",
     "alternativas": [
-      "Dependência transitiva é responsabilidade de quem a escreveu",
-      "Inventário de componentes é documento de conformidade",
+      "Gerar no build, amarrar ao artefato e usar na resposta a incidente",
+      "Registrar a análise que sustenta o não afetado, com autor e data",
       "Definir o nível de build como decisão de risco, com o dono do risco",
-      "Varredura de vulnerabilidade substitui o inventário"
+      "Medir a contagem no artefato construído, não na lista declarada"
     ],
     "correta": 2,
     "justificativa": "Ela é o que permite provar que a versão publicada é a versão verificada"
@@ -851,9 +851,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Declarar não afetado é sempre resposta aceitável\". Qual é a correção?",
     "alternativas": [
-      "Dependência transitiva é responsabilidade de quem a escreveu",
-      "Inventário de componentes é documento de conformidade",
-      "Varredura de vulnerabilidade substitui o inventário",
+      "Medir a contagem no artefato construído, não na lista declarada",
+      "Gerar no build, amarrar ao artefato e usar na resposta a incidente",
+      "Definir o nível de build como decisão de risco, com o dono do risco",
       "Registrar a análise que sustenta o não afetado, com autor e data"
     ],
     "correta": 3,
@@ -872,9 +872,9 @@
     "enunciado": "Qual a diferença entre inventário de componentes, varredura de vulnerabilidade e proveniência de build?",
     "alternativas": [
       "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
-      "Dependência transitiva é responsabilidade de quem a escreveu",
-      "Inventário de componentes é documento de conformidade",
-      "Varredura de vulnerabilidade substitui o inventário"
+      "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído.",
+      "O VEX declara, para cada falha, se o produto é afetado, não afetado ou afetado sob condição. Sem ele, cada cliente repete a análise e o fornecedor responde a mesma pergunta várias vezes.",
+      "Versão 1.7, publicada em 21 de outubro de 2025, registrada como norma ECMA-424, com comitê técnico na TC54 e manutenção da OWASP Foundation com a Ecma International."
     ],
     "correta": 0,
     "justificativa": ""
@@ -891,10 +891,10 @@
     "status": "rascunho",
     "enunciado": "Para que serve o VEX, e o que acontece quando ele não existe?",
     "alternativas": [
-      "Dependência transitiva é responsabilidade de quem a escreveu",
+      "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
       "O VEX declara, para cada falha, se o produto é afetado, não afetado ou afetado sob condição. Sem ele, cada cliente repete a análise e o fornecedor responde a mesma pergunta várias vezes.",
-      "Inventário de componentes é documento de conformidade",
-      "Varredura de vulnerabilidade substitui o inventário"
+      "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído.",
+      "Versão 1.7, publicada em 21 de outubro de 2025, registrada como norma ECMA-424, com comitê técnico na TC54 e manutenção da OWASP Foundation com a Ecma International."
     ],
     "correta": 1,
     "justificativa": ""
@@ -911,10 +911,10 @@
     "status": "rascunho",
     "enunciado": "Qual é a versão corrente do CycloneDX, quando foi publicada e sob qual norma ela é registrada?",
     "alternativas": [
-      "Dependência transitiva é responsabilidade de quem a escreveu",
-      "Inventário de componentes é documento de conformidade",
+      "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído.",
+      "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
       "Versão 1.7, publicada em 21 de outubro de 2025, registrada como norma ECMA-424, com comitê técnico na TC54 e manutenção da OWASP Foundation com a Ecma International.",
-      "Varredura de vulnerabilidade substitui o inventário"
+      "O VEX declara, para cada falha, se o produto é afetado, não afetado ou afetado sob condição. Sem ele, cada cliente repete a análise e o fornecedor responde a mesma pergunta várias vezes."
     ],
     "correta": 2,
     "justificativa": ""
@@ -932,9 +932,9 @@
     "enunciado": "Por que a contagem de componentes do artefato construído é maior que a contagem do arquivo de dependências declaradas?",
     "alternativas": [
       "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído.",
-      "Dependência transitiva é responsabilidade de quem a escreveu",
-      "Inventário de componentes é documento de conformidade",
-      "Varredura de vulnerabilidade substitui o inventário"
+      "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
+      "O VEX declara, para cada falha, se o produto é afetado, não afetado ou afetado sob condição. Sem ele, cada cliente repete a análise e o fornecedor responde a mesma pergunta várias vezes.",
+      "Versão 1.7, publicada em 21 de outubro de 2025, registrada como norma ECMA-424, com comitê técnico na TC54 e manutenção da OWASP Foundation com a Ecma International."
     ],
     "correta": 0,
     "justificativa": ""
@@ -951,9 +951,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Token válido no gateway resolve acesso\". Qual é a correção?",
     "alternativas": [
+      "Verificar exposição externa como parte da publicação da versão",
+      "Definir lista de campos permitidos na resposta e na entrada",
       "Endpoint de depuração é assunto de time de desenvolvimento",
-      "Limite de frequência protege contra quebra de autorização",
-      "Dado de API de terceiro é confiável por vir do parceiro",
       "Verificar titularidade no serviço que acessa o dado, por objeto"
     ],
     "correta": 3,
@@ -972,9 +972,9 @@
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Limite de frequência protege contra quebra de autorização\". Qual é a correção?",
     "alternativas": [
       "Tratar limite como controle de consumo e autorização como controle separado",
-      "Endpoint de depuração é assunto de time de desenvolvimento",
-      "Dado de API de terceiro é confiável por vir do parceiro",
-      "Filtrar a resposta é o mesmo que não devolver o dado"
+      "Inventariar hosts e versões em uso, com consumidor e prazo de encerramento",
+      "Validar esquema, verificar origem e assinatura, limitar tamanho e tempo de espera",
+      "Verificar titularidade no serviço que acessa o dado, por objeto"
     ],
     "correta": 0,
     "justificativa": "Limite reduz abuso de volume e não decide quem pode ler o quê"
@@ -994,7 +994,7 @@
       "Endpoint de depuração é assunto de time de desenvolvimento",
       "Definir lista de campos permitidos na resposta e na entrada",
       "Limite de frequência protege contra quebra de autorização",
-      "Dado de API de terceiro é confiável por vir do parceiro"
+      "Verificar exposição externa como parte da publicação da versão"
     ],
     "correta": 1,
     "justificativa": "Exposição excessiva de propriedade e atribuição em massa são o mesmo problema visto de dois lados"
@@ -1011,10 +1011,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Documentar a API resolve o inventário\". Qual é a correção?",
     "alternativas": [
-      "Endpoint de depuração é assunto de time de desenvolvimento",
-      "Limite de frequência protege contra quebra de autorização",
+      "Tratar limite como controle de consumo e autorização como controle separado",
+      "Validar esquema, verificar origem e assinatura, limitar tamanho e tempo de espera",
       "Inventariar hosts e versões em uso, com consumidor e prazo de encerramento",
-      "Dado de API de terceiro é confiável por vir do parceiro"
+      "Verificar titularidade no serviço que acessa o dado, por objeto"
     ],
     "correta": 2,
     "justificativa": "Documento desatualizado é pior que documento ausente, porque cria confiança falsa"
@@ -1031,9 +1031,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Dado de API de terceiro é confiável por vir do parceiro\". Qual é a correção?",
     "alternativas": [
-      "Endpoint de depuração é assunto de time de desenvolvimento",
-      "Limite de frequência protege contra quebra de autorização",
-      "Filtrar a resposta é o mesmo que não devolver o dado",
+      "Tratar limite como controle de consumo e autorização como controle separado",
+      "Inventariar hosts e versões em uso, com consumidor e prazo de encerramento",
+      "Verificar titularidade no serviço que acessa o dado, por objeto",
       "Validar esquema, verificar origem e assinatura, limitar tamanho e tempo de espera"
     ],
     "correta": 3,
@@ -1052,9 +1052,9 @@
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Endpoint de depuração é assunto de time de desenvolvimento\". Qual é a correção?",
     "alternativas": [
       "Verificar exposição externa como parte da publicação da versão",
-      "Limite de frequência protege contra quebra de autorização",
-      "Dado de API de terceiro é confiável por vir do parceiro",
-      "Filtrar a resposta é o mesmo que não devolver o dado"
+      "Verificar titularidade no serviço que acessa o dado, por objeto",
+      "Definir lista de campos permitidos na resposta e na entrada",
+      "Limite de frequência protege contra quebra de autorização"
     ],
     "correta": 0,
     "justificativa": "Endpoint de depuração exposto é item nomeado do risco de inventário"
@@ -1071,10 +1071,10 @@
     "status": "rascunho",
     "enunciado": "O que o risco API3:2023 unificou em relação à edição de 2019?",
     "alternativas": [
-      "Endpoint de depuração é assunto de time de desenvolvimento",
+      "A01:2025 Broken Access Control absorveu Server-Side Request Forgery, e a prevalência medida foi de 3,73% das aplicações testadas com ao menos uma das 40 CWEs da categoria.",
       "Unificou Excessive Data Exposure e Mass Assignment da edição de 2019, apontando a causa raiz comum: ausência ou falha de verificação de autorização no nível da propriedade do objeto.",
-      "Limite de frequência protege contra quebra de autorização",
-      "Dado de API de terceiro é confiável por vir do parceiro"
+      "Porque APIs expõem mais endpoints que aplicações web tradicionais, e inventário incompleto mantém versões obsoletas e endpoints de depuração acessíveis, sem dono.",
+      "Validar esquema, verificar origem e assinatura, limitar tamanho e tempo de espera"
     ],
     "correta": 1,
     "justificativa": ""
@@ -1091,10 +1091,10 @@
     "status": "rascunho",
     "enunciado": "Por que inventário de hosts e versões aparece como risco próprio na lista?",
     "alternativas": [
-      "Endpoint de depuração é assunto de time de desenvolvimento",
-      "Limite de frequência protege contra quebra de autorização",
+      "A01:2025 Broken Access Control absorveu Server-Side Request Forgery, e a prevalência medida foi de 3,73% das aplicações testadas com ao menos uma das 40 CWEs da categoria.",
+      "Unificou Excessive Data Exposure e Mass Assignment da edição de 2019, apontando a causa raiz comum: ausência ou falha de verificação de autorização no nível da propriedade do objeto.",
       "Porque APIs expõem mais endpoints que aplicações web tradicionais, e inventário incompleto mantém versões obsoletas e endpoints de depuração acessíveis, sem dono.",
-      "Dado de API de terceiro é confiável por vir do parceiro"
+      "Validar esquema, verificar origem e assinatura, limitar tamanho e tempo de espera"
     ],
     "correta": 2,
     "justificativa": ""
@@ -1111,10 +1111,10 @@
     "status": "rascunho",
     "enunciado": "Que categoria da edição 2025 do Top 10 de aplicação web absorveu Server-Side Request Forgery, e qual a prevalência medida dessa categoria?",
     "alternativas": [
-      "Endpoint de depuração é assunto de time de desenvolvimento",
+      "Porque APIs expõem mais endpoints que aplicações web tradicionais, e inventário incompleto mantém versões obsoletas e endpoints de depuração acessíveis, sem dono.",
       "A01:2025 Broken Access Control absorveu Server-Side Request Forgery, e a prevalência medida foi de 3,73% das aplicações testadas com ao menos uma das 40 CWEs da categoria.",
-      "Limite de frequência protege contra quebra de autorização",
-      "Dado de API de terceiro é confiável por vir do parceiro"
+      "Unificou Excessive Data Exposure e Mass Assignment da edição de 2019, apontando a causa raiz comum: ausência ou falha de verificação de autorização no nível da propriedade do objeto.",
+      "Validar esquema, verificar origem e assinatura, limitar tamanho e tempo de espera"
     ],
     "correta": 1,
     "justificativa": ""

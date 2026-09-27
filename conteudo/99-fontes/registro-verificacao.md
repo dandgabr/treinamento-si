@@ -17,7 +17,7 @@ Formato: `data | afirmação confirmada | fonte | tipo | resultado`
 | 4 | CSEC2017 define **8 Knowledge Areas**: Data, Software, Component, Connection, System, Human, Organizational, Societal Security | https://www.acm.org/media-center/2018/february/cybersecurity-curricula-2017 · https://www.acm.org/binaries/content/assets/education/curricula-recommendations/csec2017.pdf | primária | CONFIRMADO |
 | 5 | O ENISA ECSF publica **12 role profiles**, documento publicado em 19/09/2022 | https://www.enisa.europa.eu/publications/european-cybersecurity-skills-framework-role-profiles | primária | CONFIRMADO |
 | 6 | CompTIA SecurityX substitui o CASP+ (exame CAS-005), rebranding anunciado em dez/2024 | https://www.comptia.org/en-us/blog/introducing-comptia-securityx/ | primária | CONFIRMADO |
-| 7 | CompTIA Security+ SY0-701 tem **5 domínios**, com pesos 12% / 22% / 18% / 28% / 20% | https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf | primária | CONFIRMADO |
+| 7 | CompTIA Security+ SY0-701 tem **5 domínios**, com pesos 12% / 22% / 18% / 28% / 20% | https://www.comptia.org/en-us/certifications/security/ | primária | CONFIRMADO |
 | 8 | EC-Council CCISO tem **5 domínios**, exame de 150 questões em 2h30 | https://cert.eccouncil.org/images/doc/CCISO-New-Blueprint-v3.pdf · https://cert.eccouncil.org/images/doc/CCISO-Handbook-v6.2.pdf | primária | CONFIRMADO |
 | 9 | ISC2 CISSP tem **8 domínios**; outline vigente desde 15/04/2024 | https://www.isc2.org/certifications/cissp/cissp-certification-exam-outline | primária | CONFIRMADO |
 | 10 | ISACA CISM tem **4 domínios** | https://www.isaca.org/credentialing/cism/cism-exam-content-outline | primária | CONFIRMADO |

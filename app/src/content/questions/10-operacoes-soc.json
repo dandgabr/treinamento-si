@@ -11,10 +11,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Comprar SIEM para \"ter um SOC\"\". Qual é a correção?",
     "alternativas": [
-      "Contratar monitoramento esperando transferir responsabilidade",
-      "Supor que nível de analista é padrão normativo",
+      "escrever o que o provedor pode fazer sozinho e o que volta para o cadastro interno de decisão",
+      "horário de cobertura é decisão de risco, com consequência contratual e regulatória",
       "escolher o modelo primeiro e dimensionar a ferramenta pela cobertura e pelo volume que ele exige",
-      "Tratar plantão como detalhe operacional"
+      "o que as fontes verificadas exigem é coordenador de incidente designado e caminho de escalonamento documentado"
     ],
     "correta": 2,
     "justificativa": "a ferramenta não define dono, horário nem autoridade; o alerta sem decisão apenas acumula"
@@ -31,9 +31,9 @@
     "status": "rascunho",
     "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Tratar plantão como detalhe operacional\". Qual é a correção?",
     "alternativas": [
+      "escrever o que o provedor pode fazer sozinho e o que volta para o cadastro interno de decisão",
+      "escolher o modelo primeiro e dimensionar a ferramenta pela cobertura e pelo volume que ele exige",
       "Contratar monitoramento esperando transferir responsabilidade",
-      "Supor que nível de analista é padrão normativo",
-      "Comprar SIEM para \"ter um SOC\"",
       "horário de cobertura é decisão de risco, com consequência contratual e regulatória"
     ],
     "correta": 3,
@@ -52,9 +52,9 @@
     "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Supor que nível de analista é padrão normativo\". Qual é a correção?",
     "alternativas": [
       "o que as fontes verificadas exigem é coordenador de incidente designado e caminho de escalonamento documentado",
-      "Contratar monitoramento esperando transferir responsabilidade",
-      "Tratar plantão como detalhe operacional",
-      "Comprar SIEM para \"ter um SOC\""
+      "escolher o modelo primeiro e dimensionar a ferramenta pela cobertura e pelo volume que ele exige",
+      "escrever o que o provedor pode fazer sozinho e o que volta para o cadastro interno de decisão",
+      "horário de cobertura é decisão de risco, com consequência contratual e regulatória"
     ],
     "correta": 0,
     "justificativa": "a escada de níveis de analista é convenção de mercado; NAO CONFIRMADO em fonte oficial uma definição normativa desses níveis nas fontes verificadas nesta execução"
@@ -71,10 +71,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Contratar monitoramento esperando transferir responsabilidade\". Qual é a correção?",
     "alternativas": [
-      "Supor que nível de analista é padrão normativo",
+      "escolher o modelo primeiro e dimensionar a ferramenta pela cobertura e pelo volume que ele exige",
       "escrever o que o provedor pode fazer sozinho e o que volta para o cadastro interno de decisão",
-      "Tratar plantão como detalhe operacional",
-      "Comprar SIEM para \"ter um SOC\""
+      "horário de cobertura é decisão de risco, com consequência contratual e regulatória",
+      "o que as fontes verificadas exigem é coordenador de incidente designado e caminho de escalonamento documentado"
     ],
     "correta": 1,
     "justificativa": "o provedor complementa a capacidade e não assume a decisão sobre o próprio ativo"
@@ -91,9 +91,9 @@
     "status": "rascunho",
     "enunciado": "Quais são as três variáveis que definem um modelo de SOC?",
     "alternativas": [
-      "Contratar monitoramento esperando transferir responsabilidade",
-      "Supor que nível de analista é padrão normativo",
-      "Tratar plantão como detalhe operacional",
+      "o que as fontes verificadas exigem é coordenador de incidente designado e caminho de escalonamento documentado",
+      "escolher o modelo primeiro e dimensionar a ferramenta pela cobertura e pelo volume que ele exige",
+      "escrever o que o provedor pode fazer sozinho e o que volta para o cadastro interno de decisão",
       "Operação — própria, terceira ou mista —, horário de cobertura e escopo de ativos. A autoridade de decisão é a quarta variável de governança que precisa estar escrita."
     ],
     "correta": 3,
@@ -111,9 +111,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Confundir \"registrar\" com \"ter log\"\". Qual é a correção?",
     "alternativas": [
+      "cada fonte entra com a pergunta de investigação que ela responde",
+      "centralizar a coleta e gerenciar o sensor por caminho fora de banda",
       "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão",
-      "Coletar tudo para \"não perder nada\"",
-      "Guardar o log apenas na origem",
       "o inventário precisa da coluna de retenção e da coluna de destino"
     ],
     "correta": 3,
@@ -132,9 +132,9 @@
     "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão\". Qual é a correção?",
     "alternativas": [
       "conferir quais categorias de log existem no plano de controle e habilitar explicitamente",
-      "Confundir \"registrar\" com \"ter log\"",
-      "Coletar tudo para \"não perder nada\"",
-      "Guardar o log apenas na origem"
+      "centralizar a coleta e gerenciar o sensor por caminho fora de banda",
+      "o inventário precisa da coluna de retenção e da coluna de destino",
+      "cada fonte entra com a pergunta de investigação que ela responde"
     ],
     "correta": 0,
     "justificativa": "o modelo de responsabilidade compartilhada deixa parte da visibilidade com o cliente"
@@ -151,10 +151,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Coletar tudo para \"não perder nada\"\". Qual é a correção?",
     "alternativas": [
-      "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão",
+      "o inventário precisa da coluna de retenção e da coluna de destino",
       "cada fonte entra com a pergunta de investigação que ela responde",
-      "Confundir \"registrar\" com \"ter log\"",
-      "Guardar o log apenas na origem"
+      "centralizar a coleta e gerenciar o sensor por caminho fora de banda",
+      "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão"
     ],
     "correta": 1,
     "justificativa": "volume sem pergunta associada encarece a plataforma e piora o tempo de consulta"
@@ -171,10 +171,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Guardar o log apenas na origem\". Qual é a correção?",
     "alternativas": [
-      "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão",
-      "Confundir \"registrar\" com \"ter log\"",
+      "o inventário precisa da coluna de retenção e da coluna de destino",
+      "cada fonte entra com a pergunta de investigação que ela responde",
       "centralizar a coleta e gerenciar o sensor por caminho fora de banda",
-      "Coletar tudo para \"não perder nada\""
+      "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão"
     ],
     "correta": 2,
     "justificativa": "no host comprometido o adversário pode alterar ou apagar o registro"
@@ -191,10 +191,10 @@
     "status": "rascunho",
     "enunciado": "Por que o mesmo playbook manda gerenciar sensores por caminho fora de banda?",
     "alternativas": [
-      "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão",
-      "Confundir \"registrar\" com \"ter log\"",
+      "Conteúdo útil, destino de armazenamento, prazo de retenção, dono da fonte e a pergunta de investigação que ela responde.",
+      "conferir quais categorias de log existem no plano de controle e habilitar explicitamente",
       "Para que o adversário que já opera na rede corporativa não alcance o gerenciamento do sensor, não leia o tráfego de administração e não possa desativá-lo antes de ser contido.",
-      "Coletar tudo para \"não perder nada\""
+      "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão"
     ],
     "correta": 2,
     "justificativa": ""
@@ -211,9 +211,9 @@
     "status": "rascunho",
     "enunciado": "O que precisa estar escrito no inventário de fontes, além do nome da fonte?",
     "alternativas": [
+      "conferir quais categorias de log existem no plano de controle e habilitar explicitamente",
       "Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão",
-      "Confundir \"registrar\" com \"ter log\"",
-      "Coletar tudo para \"não perder nada\"",
+      "centralizar a coleta e gerenciar o sensor por caminho fora de banda",
       "Conteúdo útil, destino de armazenamento, prazo de retenção, dono da fonte e a pergunta de investigação que ela responde."
     ],
     "correta": 3,
@@ -232,9 +232,9 @@
     "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Medir cobertura pela quantidade de regras\". Qual é a correção?",
     "alternativas": [
       "medir cobertura por tática com regra em produção, ativa e revisada",
-      "Tratar a lista de indicadores como detecção",
-      "Não registrar a versão do framework usada",
-      "Deixar a exceção na cabeça do analista"
+      "usar padrão de comportamento como base e indicador como reforço temporário",
+      "gravar a versão do ATT&CK em cada avaliação de cobertura",
+      "declarar a exceção na regra ou no filtro compartilhado"
     ],
     "correta": 0,
     "justificativa": "regra duplicada, desligada ou sem dono infla o número sem cobrir tática nenhuma"
@@ -251,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Tratar a lista de indicadores como detecção\". Qual é a correção?",
     "alternativas": [
-      "Medir cobertura pela quantidade de regras",
+      "medir cobertura por tática com regra em produção, ativa e revisada",
       "usar padrão de comportamento como base e indicador como reforço temporário",
-      "Não registrar a versão do framework usada",
-      "Deixar a exceção na cabeça do analista"
+      "gravar a versão do ATT&CK em cada avaliação de cobertura",
+      "declarar a exceção na regra ou no filtro compartilhado"
     ],
     "correta": 1,
     "justificativa": "o prazo de validade do indicador é curto e o adversário troca de infraestrutura entre campanhas"
@@ -271,10 +271,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Deixar a exceção na cabeça do analista\". Qual é a correção?",
     "alternativas": [
+      "gravar a versão do ATT&CK em cada avaliação de cobertura",
       "Tratar a lista de indicadores como detecção",
-      "Medir cobertura pela quantidade de regras",
       "declarar a exceção na regra ou no filtro compartilhado",
-      "Não registrar a versão do framework usada"
+      "medir cobertura por tática com regra em produção, ativa e revisada"
     ],
     "correta": 2,
     "justificativa": "o conhecimento não sobrevive à troca de turno e some das métricas"
@@ -291,9 +291,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Não registrar a versão do framework usada\". Qual é a correção?",
     "alternativas": [
+      "declarar a exceção na regra ou no filtro compartilhado",
+      "medir cobertura por tática com regra em produção, ativa e revisada",
       "Tratar a lista de indicadores como detecção",
-      "Medir cobertura pela quantidade de regras",
-      "Deixar a exceção na cabeça do analista",
       "gravar a versão do ATT&CK em cada avaliação de cobertura"
     ],
     "correta": 3,
@@ -311,10 +311,10 @@
     "status": "rascunho",
     "enunciado": "Quais campos da especificação Sigma são obrigatórios e quais são opcionais?",
     "alternativas": [
-      "Tratar a lista de indicadores como detecção",
+      "O campo `logsource`, que descreve o dado por categoria, produto e serviço e permite apontar a mesma regra para fontes equivalentes, em vez de replicar a lógica por produto.",
       "Obrigatórios: título, `logsource`, `detection` e `condition`. Opcionais, entre outros: `id`, `status`, `level`, `falsepositives`, `tags` e `scope`.",
-      "Medir cobertura pela quantidade de regras",
-      "Não registrar a versão do framework usada"
+      "Qual versão do ATT&CK foi usada, o que conta como coberta — regra em produção, ativa, com nível alto e dono — e se a contagem inclui técnica sem fonte de telemetria disponível no ambiente.",
+      "usar padrão de comportamento como base e indicador como reforço temporário"
     ],
     "correta": 1,
     "justificativa": ""
@@ -331,9 +331,9 @@
     "status": "rascunho",
     "enunciado": "Um analista propõe criar três regras separadas para o mesmo padrão, uma por produto de origem do log. Qual recurso da especificação evita essa triplicação e por quê?",
     "alternativas": [
-      "Tratar a lista de indicadores como detecção",
-      "Medir cobertura pela quantidade de regras",
-      "Não registrar a versão do framework usada",
+      "Qual versão do ATT&CK foi usada, o que conta como coberta — regra em produção, ativa, com nível alto e dono — e se a contagem inclui técnica sem fonte de telemetria disponível no ambiente.",
+      "Obrigatórios: título, `logsource`, `detection` e `condition`. Opcionais, entre outros: `id`, `status`, `level`, `falsepositives`, `tags` e `scope`.",
+      "usar padrão de comportamento como base e indicador como reforço temporário",
       "O campo `logsource`, que descreve o dado por categoria, produto e serviço e permite apontar a mesma regra para fontes equivalentes, em vez de replicar a lógica por produto."
     ],
     "correta": 3,
@@ -352,9 +352,9 @@
     "enunciado": "Um relatório de cobertura diz que a organização cobre 70% das técnicas de ATT&CK. Qual pergunta você faz antes de aceitar o número?",
     "alternativas": [
       "Qual versão do ATT&CK foi usada, o que conta como coberta — regra em produção, ativa, com nível alto e dono — e se a contagem inclui técnica sem fonte de telemetria disponível no ambiente.",
-      "Tratar a lista de indicadores como detecção",
-      "Medir cobertura pela quantidade de regras",
-      "Não registrar a versão do framework usada"
+      "O campo `logsource`, que descreve o dado por categoria, produto e serviço e permite apontar a mesma regra para fontes equivalentes, em vez de replicar a lógica por produto.",
+      "Obrigatórios: título, `logsource`, `detection` e `condition`. Opcionais, entre outros: `id`, `status`, `level`, `falsepositives`, `tags` e `scope`.",
+      "usar padrão de comportamento como base e indicador como reforço temporário"
     ],
     "correta": 0,
     "justificativa": ""
@@ -371,10 +371,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Usar notícia de vulnerabilidade para definir severidade de incidente\". Qual é a correção?",
     "alternativas": [
-      "Contar a hora da notificação a partir da descoberta do time de segurança",
+      "preservar memória e imagem antes da ação destrutiva, com registro de quem coletou",
       "usar critério de incidente, como categoria, extensão, privilégio obtido e impacto",
-      "Deixar o critério de severidade na cabeça do analista sênior",
-      "Automatizar contenção antes de preservar evidência"
+      "Contar a hora da notificação a partir da descoberta do time de segurança",
+      "registrar explicitamente o momento da determinação e quem a fez"
     ],
     "correta": 1,
     "justificativa": "a nota descreve o potencial da falha, não o que ocorreu no seu ambiente"
@@ -392,9 +392,9 @@
     "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Deixar o critério de severidade na cabeça do analista sênior\". Qual é a correção?",
     "alternativas": [
       "Automatizar contenção antes de preservar evidência",
-      "Usar notícia de vulnerabilidade para definir severidade de incidente",
+      "registrar explicitamente o momento da determinação e quem a fez",
       "matriz escrita, datada e assinada por dono de sistema",
-      "Contar a hora da notificação a partir da descoberta do time de segurança"
+      "Usar notícia de vulnerabilidade para definir severidade de incidente"
     ],
     "correta": 2,
     "justificativa": "o critério não sobrevive à folga, à troca de turno nem à auditoria"
@@ -413,7 +413,7 @@
     "alternativas": [
       "Deixar o critério de severidade na cabeça do analista sênior",
       "Usar notícia de vulnerabilidade para definir severidade de incidente",
-      "Automatizar contenção antes de preservar evidência",
+      "matriz escrita, datada e assinada por dono de sistema",
       "registrar explicitamente o momento da determinação e quem a fez"
     ],
     "correta": 3,
@@ -432,9 +432,9 @@
     "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Automatizar contenção antes de preservar evidência\". Qual é a correção?",
     "alternativas": [
       "preservar memória e imagem antes da ação destrutiva, com registro de quem coletou",
+      "usar critério de incidente, como categoria, extensão, privilégio obtido e impacto",
       "Contar a hora da notificação a partir da descoberta do time de segurança",
-      "Usar notícia de vulnerabilidade para definir severidade de incidente",
-      "Deixar o critério de severidade na cabeça do analista sênior"
+      "Usar notícia de vulnerabilidade para definir severidade de incidente"
     ],
     "correta": 0,
     "justificativa": "destrói a prova do que aconteceu e prejudica notificação e apuração"
@@ -452,9 +452,9 @@
     "enunciado": "Quais são os quatro produtos obrigatórios de uma triagem?",
     "alternativas": [
       "Contar a hora da notificação a partir da descoberta do time de segurança",
-      "Usar notícia de vulnerabilidade para definir severidade de incidente",
+      "usar critério de incidente, como categoria, extensão, privilégio obtido e impacto",
       "Categoria, extensão, impacto e severidade com destinatário do escalonamento.",
-      "Deixar o critério de severidade na cabeça do analista sênior"
+      "preservar memória e imagem antes da ação destrutiva, com registro de quem coletou"
     ],
     "correta": 2,
     "justificativa": ""
@@ -472,9 +472,9 @@
     "enunciado": "O playbook do CISA exige procedimento para descartar conflito com atividade autorizada. Dê um exemplo concreto do que essa verificação evita.",
     "alternativas": [
       "Evita tratar como ataque a atualização remota aplicada pelo administrador de rede à noite, que é o exemplo dado pelo próprio documento. Sem a verificação, o plantão isola produção ou descarta o alerta errado.",
-      "Contar a hora da notificação a partir da descoberta do time de segurança",
-      "Usar notícia de vulnerabilidade para definir severidade de incidente",
-      "Deixar o critério de severidade na cabeça do analista sênior"
+      "A autoridade central, junto com a polícia federal no caso dos Estados Unidos, conforme o playbook, e não a organização afetada.",
+      "usar critério de incidente, como categoria, extensão, privilégio obtido e impacto",
+      "preservar memória e imagem antes da ação destrutiva, com registro de quem coletou"
     ],
     "correta": 0,
     "justificativa": ""
@@ -491,10 +491,10 @@
     "status": "rascunho",
     "enunciado": "Quem decide escalar o incidente para instância superior de coordenação, segundo o material verificado?",
     "alternativas": [
-      "Contar a hora da notificação a partir da descoberta do time de segurança",
+      "usar critério de incidente, como categoria, extensão, privilégio obtido e impacto",
       "A autoridade central, junto com a polícia federal no caso dos Estados Unidos, conforme o playbook, e não a organização afetada.",
-      "Usar notícia de vulnerabilidade para definir severidade de incidente",
-      "Deixar o critério de severidade na cabeça do analista sênior"
+      "preservar memória e imagem antes da ação destrutiva, com registro de quem coletou",
+      "Categoria, extensão, impacto e severidade com destinatário do escalonamento."
     ],
     "correta": 1,
     "justificativa": ""
@@ -511,10 +511,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Apresentar volume de alertas como resultado\". Qual é a correção?",
     "alternativas": [
-      "Tratar falso positivo como problema de postura do analista",
-      "Comparar tempo médio sem definição de início e de fim",
+      "congelar a definição por escrito, com o evento de início e o de fim",
+      "acompanhar em par a hora por caso real e a origem da descoberta",
       "apresentar cobertura, custo de atenção por caso e origem da descoberta",
-      "Avaliar cobertura sem registrar a versão do framework"
+      "Tratar falso positivo como problema de postura do analista"
     ],
     "correta": 2,
     "justificativa": "volume não informa capacidade nem cegueira"
@@ -531,9 +531,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Comparar tempo médio sem definição de início e de fim\". Qual é a correção?",
     "alternativas": [
+      "apresentar cobertura, custo de atenção por caso e origem da descoberta",
+      "acompanhar em par a hora por caso real e a origem da descoberta",
       "Tratar falso positivo como problema de postura do analista",
-      "Avaliar cobertura sem registrar a versão do framework",
-      "Apresentar volume de alertas como resultado",
       "congelar a definição por escrito, com o evento de início e o de fim"
     ],
     "correta": 3,
@@ -552,9 +552,9 @@
     "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Tratar falso positivo como problema de postura do analista\". Qual é a correção?",
     "alternativas": [
       "ajustar regra e nível, e declarar o falso positivo esperado no próprio arquivo da regra",
-      "Comparar tempo médio sem definição de início e de fim",
-      "Avaliar cobertura sem registrar a versão do framework",
-      "Apresentar volume de alertas como resultado"
+      "apresentar cobertura, custo de atenção por caso e origem da descoberta",
+      "congelar a definição por escrito, com o evento de início e o de fim",
+      "acompanhar em par a hora por caso real e a origem da descoberta"
     ],
     "correta": 0,
     "justificativa": "o volume de evento benigno e a especificidade da regra determinam o resultado"
@@ -571,10 +571,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Otimizar eficiência e ignorar efetividade\". Qual é a correção?",
     "alternativas": [
-      "Tratar falso positivo como problema de postura do analista",
+      "congelar a definição por escrito, com o evento de início e o de fim",
       "acompanhar em par a hora por caso real e a origem da descoberta",
-      "Comparar tempo médio sem definição de início e de fim",
-      "Avaliar cobertura sem registrar a versão do framework"
+      "Tratar falso positivo como problema de postura do analista",
+      "apresentar cobertura, custo de atenção por caso e origem da descoberta"
     ],
     "correta": 1,
     "justificativa": "uma operação pode ficar rápida fechando caso sem investigar"
@@ -611,9 +611,9 @@
     "status": "rascunho",
     "enunciado": "Por que a hora de triagem por caso real muda mais comportamento que a contagem de alertas?",
     "alternativas": [
-      "Tratar falso positivo como problema de postura do analista",
-      "Comparar tempo médio sem definição de início e de fim",
-      "Avaliar cobertura sem registrar a versão do framework",
+      "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida.",
+      "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando.",
+      "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada.",
       "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente."
     ],
     "correta": 3,
@@ -632,9 +632,9 @@
     "enunciado": "A operação cortou pela metade o número de alertas semanais depois de desligar dez regras. Que outro número você consulta antes de aceitar isso como melhoria?",
     "alternativas": [
       "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida.",
-      "Tratar falso positivo como problema de postura do analista",
-      "Comparar tempo médio sem definição de início e de fim",
-      "Avaliar cobertura sem registrar a versão do framework"
+      "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente.",
+      "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando.",
+      "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada."
     ],
     "correta": 0,
     "justificativa": ""
@@ -651,10 +651,10 @@
     "status": "rascunho",
     "enunciado": "Um analista diz que \"o tempo médio para detectar caiu 40 por cento\". Qual é a primeira pergunta?",
     "alternativas": [
-      "Tratar falso positivo como problema de postura do analista",
+      "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando.",
       "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada.",
-      "Comparar tempo médio sem definição de início e de fim",
-      "Avaliar cobertura sem registrar a versão do framework"
+      "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente.",
+      "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida."
     ],
     "correta": 1,
     "justificativa": ""
@@ -671,10 +671,10 @@
     "status": "rascunho",
     "enunciado": "O que o valor informativo do campo de nível de uma regra diz sobre abrir caso?",
     "alternativas": [
-      "Tratar falso positivo como problema de postura do analista",
-      "Comparar tempo médio sem definição de início e de fim",
+      "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente.",
+      "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida.",
       "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando.",
-      "Avaliar cobertura sem registrar a versão do framework"
+      "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada."
     ],
     "correta": 2,
     "justificativa": ""
@@ -691,9 +691,9 @@
     "status": "rascunho",
     "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Automatizar primeiro a ação mais visível, como isolar máquina\". Qual é a correção?",
     "alternativas": [
-      "Manter regras e playbooks sem controle de versão",
-      "Tratar automação como projeto de ferramenta",
-      "Automatizar antes de preservar evidência",
+      "repositório versionado, com migração acompanhando a versão da especificação",
+      "coleta antes da ação destrutiva, com registro do que, quando e por quem",
+      "gatilho de revisão declarado ligado à publicação de versão do catálogo",
       "começar por enriquecimento, abertura de chamado e ação reversível com expiração"
     ],
     "correta": 3,
@@ -713,8 +713,8 @@
     "alternativas": [
       "padronizar o processo antes e usar a ferramenta como executor",
       "Automatizar primeiro a ação mais visível, como isolar máquina",
-      "Manter regras e playbooks sem controle de versão",
-      "Automatizar antes de preservar evidência"
+      "gatilho de revisão declarado ligado à publicação de versão do catálogo",
+      "coleta antes da ação destrutiva, com registro do que, quando e por quem"
     ],
     "correta": 0,
     "justificativa": "sem campo de chamado, papel nomeado e condição de encerramento, não há o que orquestrar"
@@ -731,10 +731,10 @@
     "status": "rascunho",
     "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Automatizar antes de preservar evidência\". Qual é a correção?",
     "alternativas": [
-      "Automatizar primeiro a ação mais visível, como isolar máquina",
+      "gatilho de revisão declarado ligado à publicação de versão do catálogo",
       "coleta antes da ação destrutiva, com registro do que, quando e por quem",
-      "Manter regras e playbooks sem controle de versão",
-      "Tratar automação como projeto de ferramenta"
+      "repositório versionado, com migração acompanhando a versão da especificação",
+      "começar por enriquecimento, abertura de chamado e ação reversível com expiração"
     ],
     "correta": 1,
     "justificativa": "a rotina apaga exatamente o dado que a apuração e a notificação exigem"
@@ -751,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Manter regras e playbooks sem controle de versão\". Qual é a correção?",
     "alternativas": [
-      "Automatizar primeiro a ação mais visível, como isolar máquina",
-      "Tratar automação como projeto de ferramenta",
+      "começar por enriquecimento, abertura de chamado e ação reversível com expiração",
+      "coleta antes da ação destrutiva, com registro do que, quando e por quem",
       "repositório versionado, com migração acompanhando a versão da especificação",
-      "Automatizar antes de preservar evidência"
+      "gatilho de revisão declarado ligado à publicação de versão do catálogo"
     ],
     "correta": 2,
     "justificativa": "a plataforma muda de formato e a regra quebra sem aviso"
@@ -771,9 +771,9 @@
     "status": "rascunho",
     "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Revisar cobertura uma vez por ano\". Qual é a correção?",
     "alternativas": [
+      "coleta antes da ação destrutiva, com registro do que, quando e por quem",
+      "repositório versionado, com migração acompanhando a versão da especificação",
       "Automatizar primeiro a ação mais visível, como isolar máquina",
-      "Manter regras e playbooks sem controle de versão",
-      "Tratar automação como projeto de ferramenta",
       "gatilho de revisão declarado ligado à publicação de versão do catálogo"
     ],
     "correta": 3,
@@ -792,9 +792,9 @@
     "enunciado": "Quais são as três condições que uma ação deve cumprir para entrar em execução automática?",
     "alternativas": [
       "Ação reversível ou de efeito desprezível; insumo de disparo confiável, com falso positivo medido; e registro suficiente para reconstruir o que aconteceu.",
-      "Automatizar primeiro a ação mais visível, como isolar máquina",
-      "Manter regras e playbooks sem controle de versão",
-      "Tratar automação como projeto de ferramenta"
+      "Entre as verificadas: isolamento de rede, bloqueio de conta, revogação de credencial, encerramento de sessão, suspensão de processo e remoção de processo.",
+      "começar por enriquecimento, abertura de chamado e ação reversível com expiração",
+      "repositório versionado, com migração acompanhando a versão da especificação"
     ],
     "correta": 0,
     "justificativa": ""
@@ -811,9 +811,9 @@
     "status": "rascunho",
     "enunciado": "Cite duas classes de contramedida do D3FEND que correspondem a ações típicas de contenção.",
     "alternativas": [
-      "Automatizar primeiro a ação mais visível, como isolar máquina",
-      "Manter regras e playbooks sem controle de versão",
-      "Tratar automação como projeto de ferramenta",
+      "Ação reversível ou de efeito desprezível; insumo de disparo confiável, com falso positivo medido; e registro suficiente para reconstruir o que aconteceu.",
+      "começar por enriquecimento, abertura de chamado e ação reversível com expiração",
+      "repositório versionado, com migração acompanhando a versão da especificação",
       "Entre as verificadas: isolamento de rede, bloqueio de conta, revogação de credencial, encerramento de sessão, suspensão de processo e remoção de processo."
     ],
     "correta": 3,

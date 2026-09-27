@@ -49,6 +49,16 @@ As regras de relação entre temas, inclusive entre áreas diferentes, estão em
 Nenhum arquivo novo nasce fora desses cinco formatos. Se um conteúdo não couber em nenhum,
 proponha um template novo antes de escrever.
 
+**Artefato derivado não é arquivo do material**, e por isso não usa template nenhum. São dois:
+`app/src/content/generated/content.json`, que é o material lido pelo aplicativo, e o banco de
+questões em `app/src/content/questions/`, que é o material transformado em item de múltipla escolha.
+Os dois saem de script, a partir do Markdown, e não têm frontmatter, seção nem prosa própria. Quem
+faz o papel do template neles é o gate do aplicativo — `npm run check:content` e
+`npm run check:questions` —, descrito no `README.md` de `app/`. Escrever à mão não adianta: o gerador
+regrava o arquivo inteiro, e a única coisa que sobrevive de uma edição manual é o campo `status` do
+item de questão — o texto editado à mão nem passa pelo gate, que confere item a item contra o que o
+material deriva.
+
 ## 3. Dono único de cada informação
 
 Duplicar informação garante divergência. Cada dado tem um só lugar:
@@ -62,6 +72,15 @@ Duplicar informação garante divergência. Cada dado tem um só lugar:
 | Critério de aprovação do checkpoint | o guia da área, seção 9 | a trilha, que pode recomendar escopo menor para o seu horizonte; o aplicativo, que lê o critério do guia |
 | Fontes verificadas | cada documento, para as próprias afirmações | `99-fontes/`, que indexa |
 | Relações entre temas | o `relacoes` do frontmatter do tema | o guia da área e `mapa-relacoes.md`, que são visões derivadas |
+| Item de múltipla escolha | o banco em `app/src/content/questions/`: o item sai do tema pela `origem` declarada (tabela de erros comuns ou par de recuperação ativa), e o `status` de revisão pertence a quem audita o item | o aplicativo, que exibe o item com o selo de revisão; o tema de origem (`ref`), que é a linha de onde o texto saiu |
+
+O item de múltipla escolha entra nesta tabela com uma consequência que os outros donos não têm.
+`status: "verificado"` não quer dizer que alguém escreveu o texto: quer dizer que uma pessoa
+conferiu a **fonte herdada do tema contra a linha de origem**, que é a auditoria de citação do §4
+aplicada a um texto que ninguém redigiu aqui. Se a linha de origem mudar, o item é outro e volta para
+`rascunho` — o gerador compara o texto derivado com o que estava marcado e derruba o `verificado`
+sozinho, porque perder a revisão é o lado certo do erro. O passo a passo da promoção está no
+`README.md` de `app/`.
 
 ## 4. Protocolo de verificação de fontes
 

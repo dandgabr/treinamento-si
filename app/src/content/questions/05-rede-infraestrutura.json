@@ -11,9 +11,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Rede interna com faixa privada é rede protegida\". Qual é a correção?",
     "alternativas": [
-      "Aumentar a faixa de endereços privados dá mais segurança",
-      "Estar na rede interna equivale a estar autenticado",
-      "Regra de firewall pode citar nome de serviço",
+      "Autenticação e autorização são funções executadas antes de estabelecer a sessão com o recurso",
+      "Nome entra na conversa de negócio; a regra precisa do endereço e da porta correspondentes",
+      "Trate plano de endereçamento como decisão de arquitetura, não como medida de proteção",
       "A faixa privada contém alcance externo; o controle do que é alcançado dentro vem da regra e da identidade"
     ],
     "correta": 3,
@@ -32,9 +32,9 @@
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Regra de firewall pode citar nome de serviço\". Qual é a correção?",
     "alternativas": [
       "Nome entra na conversa de negócio; a regra precisa do endereço e da porta correspondentes",
-      "Aumentar a faixa de endereços privados dá mais segurança",
-      "Estar na rede interna equivale a estar autenticado",
-      "Rede interna com faixa privada é rede protegida"
+      "Autenticação e autorização são funções executadas antes de estabelecer a sessão com o recurso",
+      "Trate plano de endereçamento como decisão de arquitetura, não como medida de proteção",
+      "A faixa privada contém alcance externo; o controle do que é alcançado dentro vem da regra e da identidade"
     ],
     "correta": 0,
     "justificativa": "Dispositivo de rede aplica política sobre endereço, porta e protocolo"
@@ -51,10 +51,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Estar na rede interna equivale a estar autenticado\". Qual é a correção?",
     "alternativas": [
-      "Aumentar a faixa de endereços privados dá mais segurança",
+      "Nome entra na conversa de negócio; a regra precisa do endereço e da porta correspondentes",
       "Autenticação e autorização são funções executadas antes de estabelecer a sessão com o recurso",
-      "Rede interna com faixa privada é rede protegida",
-      "Regra de firewall pode citar nome de serviço"
+      "Trate plano de endereçamento como decisão de arquitetura, não como medida de proteção",
+      "A faixa privada contém alcance externo; o controle do que é alcançado dentro vem da regra e da identidade"
     ],
     "correta": 1,
     "justificativa": "O SP 800-207 afirma que não se concede confiança implícita por localização física ou de rede"
@@ -71,10 +71,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Todo acesso começa no firewall\". Qual é a correção?",
     "alternativas": [
+      "Combine proteção de transporte com registro de fluxo e de resolução",
       "Aumentar a faixa de endereços privados dá mais segurança",
-      "Estar na rede interna equivale a estar autenticado",
       "Desenhe o caminho leste-oeste, que é onde falta ponto de decisão",
-      "Rede interna com faixa privada é rede protegida"
+      "Estar na rede interna equivale a estar autenticado"
     ],
     "correta": 2,
     "justificativa": "Acesso entre dois sistemas do mesmo segmento pode não cruzar nenhum dispositivo de inspeção"
@@ -91,9 +91,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"HTTPS resolve o problema de visibilidade\". Qual é a correção?",
     "alternativas": [
+      "Desenhe o caminho leste-oeste, que é onde falta ponto de decisão",
       "Aumentar a faixa de endereços privados dá mais segurança",
       "Estar na rede interna equivale a estar autenticado",
-      "Rede interna com faixa privada é rede protegida",
       "Combine proteção de transporte com registro de fluxo e de resolução"
     ],
     "correta": 3,
@@ -112,9 +112,9 @@
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Aumentar a faixa de endereços privados dá mais segurança\". Qual é a correção?",
     "alternativas": [
       "Trate plano de endereçamento como decisão de arquitetura, não como medida de proteção",
-      "Estar na rede interna equivale a estar autenticado",
-      "Rede interna com faixa privada é rede protegida",
-      "Regra de firewall pode citar nome de serviço"
+      "Nome entra na conversa de negócio; a regra precisa do endereço e da porta correspondentes",
+      "Autenticação e autorização são funções executadas antes de estabelecer a sessão com o recurso",
+      "Combine proteção de transporte com registro de fluxo e de resolução"
     ],
     "correta": 0,
     "justificativa": "A escolha da faixa é decisão de plano de endereçamento e de operação"
@@ -132,9 +132,9 @@
     "enunciado": "Quais são os cinco elementos que identificam um fluxo, e por que o nome do sistema não é um deles?",
     "alternativas": [
       "Endereço de origem, porta de origem, endereço de destino, porta de destino e protocolo de transporte. O nome é resolvido antes, para um endereço; a política de rede é escrita sobre a quíntupla.",
-      "Aumentar a faixa de endereços privados dá mais segurança",
-      "Estar na rede interna equivale a estar autenticado",
-      "Rede interna com faixa privada é rede protegida"
+      "Nenhum ou um, quando o comutador aplica alguma política. Sem ponto de inspeção, o que sobra é o registro do próprio host e o fluxo do roteador, e a detecção depende de telemetria do endpoint.",
+      "Afirma que problemas de segurança não são tratados no documento. Endereço privado contém alcance externo e não diz nada sobre o que é alcançado dentro da empresa, o que exige regra explícita e identidade.",
+      "Porque a operação de rede da empresa depende de resolução de nomes: quem controla a resposta escolhe para onde o tráfego vai, e a indisponibilidade do serviço interrompe o resto."
     ],
     "correta": 0,
     "justificativa": ""
@@ -151,10 +151,10 @@
     "status": "rascunho",
     "enunciado": "O que o RFC 1918 afirma no capítulo de considerações de segurança, e como esse texto é usado para responder ao argumento \"a rede interna é protegida\"?",
     "alternativas": [
-      "Aumentar a faixa de endereços privados dá mais segurança",
+      "Endereço de origem, porta de origem, endereço de destino, porta de destino e protocolo de transporte. O nome é resolvido antes, para um endereço; a política de rede é escrita sobre a quíntupla.",
       "Afirma que problemas de segurança não são tratados no documento. Endereço privado contém alcance externo e não diz nada sobre o que é alcançado dentro da empresa, o que exige regra explícita e identidade.",
-      "Estar na rede interna equivale a estar autenticado",
-      "Rede interna com faixa privada é rede protegida"
+      "Nenhum ou um, quando o comutador aplica alguma política. Sem ponto de inspeção, o que sobra é o registro do próprio host e o fluxo do roteador, e a detecção depende de telemetria do endpoint.",
+      "Porque a operação de rede da empresa depende de resolução de nomes: quem controla a resposta escolhe para onde o tráfego vai, e a indisponibilidade do serviço interrompe o resto."
     ],
     "correta": 1,
     "justificativa": ""
@@ -171,10 +171,10 @@
     "status": "rascunho",
     "enunciado": "Quais são os três blocos de endereço reservados para uso privado pelo RFC 1918?",
     "alternativas": [
-      "Aumentar a faixa de endereços privados dá mais segurança",
-      "Estar na rede interna equivale a estar autenticado",
+      "A faixa privada contém alcance externo; o controle do que é alcançado dentro vem da regra e da identidade",
+      "Porque a operação de rede da empresa depende de resolução de nomes: quem controla a resposta escolhe para onde o tráfego vai, e a indisponibilidade do serviço interrompe o resto.",
       "10.0.0.0 a 10.255.255.255, prefixo 10/8; 172.16.0.0 a 172.31.255.255, prefixo 172.16/12; 192.168.0.0 a 192.168.255.255, prefixo 192.168/16.",
-      "Rede interna com faixa privada é rede protegida"
+      "Autenticação e autorização são funções executadas antes de estabelecer a sessão com o recurso"
     ],
     "correta": 2,
     "justificativa": ""
@@ -192,9 +192,9 @@
     "enunciado": "Por que o NIST SP 800-81 Rev. 3 afirma que um ataque ao DNS ameaça toda a operação de rede da empresa?",
     "alternativas": [
       "Porque a operação de rede da empresa depende de resolução de nomes: quem controla a resposta escolhe para onde o tráfego vai, e a indisponibilidade do serviço interrompe o resto.",
-      "Aumentar a faixa de endereços privados dá mais segurança",
-      "Estar na rede interna equivale a estar autenticado",
-      "Rede interna com faixa privada é rede protegida"
+      "Nenhum ou um, quando o comutador aplica alguma política. Sem ponto de inspeção, o que sobra é o registro do próprio host e o fluxo do roteador, e a detecção depende de telemetria do endpoint.",
+      "Endereço de origem, porta de origem, endereço de destino, porta de destino e protocolo de transporte. O nome é resolvido antes, para um endereço; a política de rede é escrita sobre a quíntupla.",
+      "Afirma que problemas de segurança não são tratados no documento. Endereço privado contém alcance externo e não diz nada sobre o que é alcançado dentro da empresa, o que exige regra explícita e identidade."
     ],
     "correta": 0,
     "justificativa": ""
@@ -211,10 +211,10 @@
     "status": "rascunho",
     "enunciado": "Em um caminho entre dois servidores do mesmo segmento, quantos pontos de decisão costumam existir, e o que isso implica para a detecção?",
     "alternativas": [
-      "Aumentar a faixa de endereços privados dá mais segurança",
+      "Endereço de origem, porta de origem, endereço de destino, porta de destino e protocolo de transporte. O nome é resolvido antes, para um endereço; a política de rede é escrita sobre a quíntupla.",
       "Nenhum ou um, quando o comutador aplica alguma política. Sem ponto de inspeção, o que sobra é o registro do próprio host e o fluxo do roteador, e a detecção depende de telemetria do endpoint.",
-      "Estar na rede interna equivale a estar autenticado",
-      "Rede interna com faixa privada é rede protegida"
+      "Afirma que problemas de segurança não são tratados no documento. Endereço privado contém alcance externo e não diz nada sobre o que é alcançado dentro da empresa, o que exige regra explícita e identidade.",
+      "Porque a operação de rede da empresa depende de resolução de nomes: quem controla a resposta escolhe para onde o tráfego vai, e a indisponibilidade do serviço interrompe o resto."
     ],
     "correta": 1,
     "justificativa": ""
@@ -232,9 +232,9 @@
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Firewall e sistema de detecção de intrusão são a mesma função\". Qual é a correção?",
     "alternativas": [
       "Se o dispositivo só alerta, ele não cumpre a função de controle, e vice-versa",
-      "Bloquear porta administrativa resolve acesso remoto indevido",
-      "Revisar a política anualmente é suficiente",
-      "Regra permissiva herdada é dívida técnica"
+      "Revise por gatilho, com data e autor, e mantenha fila de exceções vencidas",
+      "Enumere as superfícies de fronteira que existem hoje e dê dono a cada uma",
+      "Decida o que inspecionar por classe de dado e registre a justificativa e a retenção"
     ],
     "correta": 0,
     "justificativa": "Um decide e registra o que passa; o outro observa e alerta, e a definição do NIST separa controle de detecção em dois verbos"
@@ -272,9 +272,9 @@
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Bloquear porta administrativa resolve acesso remoto indevido\". Qual é a correção?",
     "alternativas": [
       "Firewall e sistema de detecção de intrusão são a mesma função",
-      "Revisar a política anualmente é suficiente",
+      "Enumere as superfícies de fronteira que existem hoje e dê dono a cada uma",
       "Decida por identidade de usuário e de dispositivo, não só por porta",
-      "Regra permissiva herdada é dívida técnica"
+      "Revise por gatilho, com data e autor, e mantenha fila de exceções vencidas"
     ],
     "correta": 2,
     "justificativa": "Acesso remoto migra de porta e de protocolo, e a política precisa decidir por identidade"
@@ -291,9 +291,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Fronteira é um equipamento\". Qual é a correção?",
     "alternativas": [
-      "Firewall e sistema de detecção de intrusão são a mesma função",
-      "Bloquear porta administrativa resolve acesso remoto indevido",
-      "Revisar a política anualmente é suficiente",
+      "Revise por gatilho, com data e autor, e mantenha fila de exceções vencidas",
+      "Se o dispositivo só alerta, ele não cumpre a função de controle, e vice-versa",
+      "Decida por identidade de usuário e de dispositivo, não só por porta",
       "Enumere as superfícies de fronteira que existem hoje e dê dono a cada uma"
     ],
     "correta": 3,
@@ -312,9 +312,9 @@
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Inspecionar tudo é sempre melhor\". Qual é a correção?",
     "alternativas": [
       "Decida o que inspecionar por classe de dado e registre a justificativa e a retenção",
-      "Firewall e sistema de detecção de intrusão são a mesma função",
-      "Bloquear porta administrativa resolve acesso remoto indevido",
-      "Revisar a política anualmente é suficiente"
+      "Se o dispositivo só alerta, ele não cumpre a função de controle, e vice-versa",
+      "Revise por gatilho, com data e autor, e mantenha fila de exceções vencidas",
+      "Enumere as superfícies de fronteira que existem hoje e dê dono a cada uma"
     ],
     "correta": 0,
     "justificativa": "Aumenta superfície de falha, custo e criação de dado pessoal em log"
@@ -331,10 +331,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Revisar a política anualmente é suficiente\". Qual é a correção?",
     "alternativas": [
-      "Firewall e sistema de detecção de intrusão são a mesma função",
+      "Enumere as superfícies de fronteira que existem hoje e dê dono a cada uma",
       "Revise por gatilho, com data e autor, e mantenha fila de exceções vencidas",
-      "Bloquear porta administrativa resolve acesso remoto indevido",
-      "Regra permissiva herdada é dívida técnica"
+      "Se o dispositivo só alerta, ele não cumpre a função de controle, e vice-versa",
+      "Decida por identidade de usuário e de dispositivo, não só por porta"
     ],
     "correta": 1,
     "justificativa": "Mudança de negócio altera a regra em semanas"
@@ -351,10 +351,10 @@
     "status": "rascunho",
     "enunciado": "Quais são as cinco ações que o mesmo documento recomenda na sequência, e por que a ordem importa?",
     "alternativas": [
-      "Firewall e sistema de detecção de intrusão são a mesma função",
-      "Bloquear porta administrativa resolve acesso remoto indevido",
+      "Porque a regra específica nunca é avaliada. Detecta-se por revisão da ordem, por ferramenta de análise de política e por teste que tenta o acesso que a regra específica deveria permitir e não permite.",
+      "Negação por padrão; regra com origem, destino, porta, protocolo, ação e registro; dono e data por regra; verificação de ordem e de regra inalcançável; processo de exceção com prazo e verificação de vencimento.",
       "Estabelecer políticas de firewall e selecionar, configurar, testar, implantar e gerenciar soluções. A política define o critério; sem ela, o teste e a configuração não têm contra o que ser comparados.",
-      "Revisar a política anualmente é suficiente"
+      "Recomenda que os roteadores que conectam a empresa a redes externas sejam configurados com filtros de pacote e de roteamento nas duas pontas do link, para impedir vazamento de pacote e de informação de roteamento."
     ],
     "correta": 2,
     "justificativa": ""
@@ -372,9 +372,9 @@
     "enunciado": "Quais são os cinco itens de disciplina de política apresentados no tema?",
     "alternativas": [
       "Negação por padrão; regra com origem, destino, porta, protocolo, ação e registro; dono e data por regra; verificação de ordem e de regra inalcançável; processo de exceção com prazo e verificação de vencimento.",
-      "Firewall e sistema de detecção de intrusão são a mesma função",
-      "Bloquear porta administrativa resolve acesso remoto indevido",
-      "Revisar a política anualmente é suficiente"
+      "Recomenda que os roteadores que conectam a empresa a redes externas sejam configurados com filtros de pacote e de roteamento nas duas pontas do link, para impedir vazamento de pacote e de informação de roteamento.",
+      "Estabelecer políticas de firewall e selecionar, configurar, testar, implantar e gerenciar soluções. A política define o critério; sem ela, o teste e a configuração não têm contra o que ser comparados.",
+      "Porque a regra específica nunca é avaliada. Detecta-se por revisão da ordem, por ferramenta de análise de política e por teste que tenta o acesso que a regra específica deveria permitir e não permite."
     ],
     "correta": 0,
     "justificativa": ""
@@ -391,10 +391,10 @@
     "status": "rascunho",
     "enunciado": "Por que uma regra ampla colocada antes de uma regra específica é problema, e como se detecta isso?",
     "alternativas": [
-      "Firewall e sistema de detecção de intrusão são a mesma função",
+      "Estabelecer políticas de firewall e selecionar, configurar, testar, implantar e gerenciar soluções. A política define o critério; sem ela, o teste e a configuração não têm contra o que ser comparados.",
       "Porque a regra específica nunca é avaliada. Detecta-se por revisão da ordem, por ferramenta de análise de política e por teste que tenta o acesso que a regra específica deveria permitir e não permite.",
-      "Bloquear porta administrativa resolve acesso remoto indevido",
-      "Revisar a política anualmente é suficiente"
+      "Negação por padrão; regra com origem, destino, porta, protocolo, ação e registro; dono e data por regra; verificação de ordem e de regra inalcançável; processo de exceção com prazo e verificação de vencimento.",
+      "Recomenda que os roteadores que conectam a empresa a redes externas sejam configurados com filtros de pacote e de roteamento nas duas pontas do link, para impedir vazamento de pacote e de informação de roteamento."
     ],
     "correta": 1,
     "justificativa": ""
@@ -411,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "Que recomendação o RFC 1918 faz para o link entre a empresa e redes externas, e qual é a finalidade declarada?",
     "alternativas": [
-      "Firewall e sistema de detecção de intrusão são a mesma função",
-      "Bloquear porta administrativa resolve acesso remoto indevido",
+      "Negação por padrão; regra com origem, destino, porta, protocolo, ação e registro; dono e data por regra; verificação de ordem e de regra inalcançável; processo de exceção com prazo e verificação de vencimento.",
+      "Estabelecer políticas de firewall e selecionar, configurar, testar, implantar e gerenciar soluções. A política define o critério; sem ela, o teste e a configuração não têm contra o que ser comparados.",
       "Recomenda que os roteadores que conectam a empresa a redes externas sejam configurados com filtros de pacote e de roteamento nas duas pontas do link, para impedir vazamento de pacote e de informação de roteamento.",
-      "Revisar a política anualmente é suficiente"
+      "Porque a regra específica nunca é avaliada. Detecta-se por revisão da ordem, por ferramenta de análise de política e por teste que tenta o acesso que a regra específica deveria permitir e não permite."
     ],
     "correta": 2,
     "justificativa": ""
@@ -431,10 +431,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Ter VLAN é ter segmentação\". Qual é a correção?",
     "alternativas": [
-      "Segmentar por identidade dispensa segmentar por endereço",
+      "Use a localização como contenção e decida acesso por identidade",
       "Escreva a matriz de fluxo e configure a negação por padrão nela",
-      "Microssegmentação exige trocar toda a infraestrutura",
-      "Matriz de fluxo é documento da equipe de rede"
+      "Combine os dois: caminho negado é melhor que ator verificado",
+      "Comece pelas cargas que tratam dado mais sensível e cresça por risco"
     ],
     "correta": 1,
     "justificativa": "VLAN separa tráfego e não restringe fluxo entre grupos sem regra explícita"
@@ -451,10 +451,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Rede interna é zona de confiança\". Qual é a correção?",
     "alternativas": [
-      "Segmentar por identidade dispensa segmentar por endereço",
-      "Microssegmentação exige trocar toda a infraestrutura",
+      "Escreva a matriz de fluxo e configure a negação por padrão nela",
+      "Combine os dois: caminho negado é melhor que ator verificado",
       "Use a localização como contenção e decida acesso por identidade",
-      "Matriz de fluxo é documento da equipe de rede"
+      "Comece pelas cargas que tratam dado mais sensível e cresça por risco"
     ],
     "correta": 2,
     "justificativa": "O SP 800-207 afirma que a localização não concede confiança implícita"
@@ -471,9 +471,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Segmentar por identidade dispensa segmentar por endereço\". Qual é a correção?",
     "alternativas": [
+      "Escreva a matriz de fluxo e configure a negação por padrão nela",
+      "Use a localização como contenção e decida acesso por identidade",
       "Microssegmentação exige trocar toda a infraestrutura",
-      "Matriz de fluxo é documento da equipe de rede",
-      "Exceção de fornecedor é permanente",
       "Combine os dois: caminho negado é melhor que ator verificado"
     ],
     "correta": 3,
@@ -511,10 +511,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Microssegmentação exige trocar toda a infraestrutura\". Qual é a correção?",
     "alternativas": [
-      "Segmentar por identidade dispensa segmentar por endereço",
+      "Revise a matriz com o dono do risco e registre quem aprovou cada exceção",
       "Comece pelas cargas que tratam dado mais sensível e cresça por risco",
-      "Matriz de fluxo é documento da equipe de rede",
-      "Exceção de fornecedor é permanente"
+      "Escreva a matriz de fluxo e configure a negação por padrão nela",
+      "Use a localização como contenção e decida acesso por identidade"
     ],
     "correta": 1,
     "justificativa": "É granularidade de regra, não substituição de equipamento"
@@ -531,10 +531,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Matriz de fluxo é documento da equipe de rede\". Qual é a correção?",
     "alternativas": [
-      "Segmentar por identidade dispensa segmentar por endereço",
-      "Microssegmentação exige trocar toda a infraestrutura",
+      "Comece pelas cargas que tratam dado mais sensível e cresça por risco",
+      "Escreva a matriz de fluxo e configure a negação por padrão nela",
       "Revise a matriz com o dono do risco e registre quem aprovou cada exceção",
-      "Exceção de fornecedor é permanente"
+      "Use a localização como contenção e decida acesso por identidade"
     ],
     "correta": 2,
     "justificativa": "É documento de decisão de risco, e o dono responde pelo impacto"
@@ -551,10 +551,10 @@
     "status": "rascunho",
     "enunciado": "Qual é o critério correto para agrupar ativos em um segmento?",
     "alternativas": [
-      "Segmentar por identidade dispensa segmentar por endereço",
-      "Microssegmentação exige trocar toda a infraestrutura",
+      "Listar os grupos a partir de dados e funções; montar a matriz de fluxo com negação por padrão; declarar o que cada grupo não permite; tratar as exceções com dono, prazo e regra substituta.",
+      "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo.",
       "O dano que uma credencial comprometida dentro do grupo pode causar e o conjunto de destinos de que o grupo precisa para operar. Nem organograma, nem tipo de equipamento.",
-      "Matriz de fluxo é documento da equipe de rede"
+      "Revise a matriz com o dono do risco e registre quem aprovou cada exceção"
     ],
     "correta": 2,
     "justificativa": ""
@@ -571,10 +571,10 @@
     "status": "rascunho",
     "enunciado": "Quais são os quatro passos do desenho apresentados no tema, na ordem?",
     "alternativas": [
-      "Segmentar por identidade dispensa segmentar por endereço",
+      "O dano que uma credencial comprometida dentro do grupo pode causar e o conjunto de destinos de que o grupo precisa para operar. Nem organograma, nem tipo de equipamento.",
       "Listar os grupos a partir de dados e funções; montar a matriz de fluxo com negação por padrão; declarar o que cada grupo não permite; tratar as exceções com dono, prazo e regra substituta.",
-      "Microssegmentação exige trocar toda a infraestrutura",
-      "Matriz de fluxo é documento da equipe de rede"
+      "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo.",
+      "Revise a matriz com o dono do risco e registre quem aprovou cada exceção"
     ],
     "correta": 1,
     "justificativa": ""
@@ -591,10 +591,10 @@
     "status": "rascunho",
     "enunciado": "Que campos mínimos uma exceção precisa ter para não virar arquitetura invisível?",
     "alternativas": [
-      "Segmentar por identidade dispensa segmentar por endereço",
-      "Microssegmentação exige trocar toda a infraestrutura",
+      "Revise a matriz com o dono do risco e registre quem aprovou cada exceção",
+      "Comece pelas cargas que tratam dado mais sensível e cresça por risco",
       "Origem, destino, porta, identidade, dono, prazo e a regra ou arquitetura que substitui a exceção ao final do prazo.",
-      "Matriz de fluxo é documento da equipe de rede"
+      "Escreva a matriz de fluxo e configure a negação por padrão nela"
     ],
     "correta": 2,
     "justificativa": ""
@@ -611,10 +611,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Usar VPN significa estar protegido\". Qual é a correção?",
     "alternativas": [
-      "Certificado vencido é falha de segurança de dados",
-      "Citar RFC 8446 é suficiente para política de TLS",
+      "Inventarie antes, agrupe por exposição e desative por onda com plano de reversão",
+      "Trate como item de continuidade, com dono, calendário e alerta antecipado",
       "Separe autenticação do túnel de autorização do recurso e verifique o dispositivo",
-      "Interceptar TLS aumenta a segurança e nada mais"
+      "Decida com finalidade, retenção, controle de acesso e dono declarados"
     ],
     "correta": 2,
     "justificativa": "O túnel protege o transporte entre dois pontos e não decide o que o usuário alcança depois"
@@ -631,9 +631,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Certificado vencido é falha de segurança de dados\". Qual é a correção?",
     "alternativas": [
-      "Citar RFC 8446 é suficiente para política de TLS",
-      "Interceptar TLS aumenta a segurança e nada mais",
-      "Captura de pacote resolve a investigação futura",
+      "Decida com finalidade, retenção, controle de acesso e dono declarados",
+      "Separe autenticação do túnel de autorização do recurso e verifique o dispositivo",
+      "Inventarie antes, agrupe por exposição e desative por onda com plano de reversão",
       "Trate como item de continuidade, com dono, calendário e alerta antecipado"
     ],
     "correta": 3,
@@ -652,9 +652,9 @@
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"TLS 1.2 pode ser desativado sem inventário\". Qual é a correção?",
     "alternativas": [
       "Inventarie antes, agrupe por exposição e desative por onda com plano de reversão",
-      "Certificado vencido é falha de segurança de dados",
-      "Citar RFC 8446 é suficiente para política de TLS",
-      "Interceptar TLS aumenta a segurança e nada mais"
+      "Separe autenticação do túnel de autorização do recurso e verifique o dispositivo",
+      "Trate como item de continuidade, com dono, calendário e alerta antecipado",
+      "Decida com finalidade, retenção, controle de acesso e dono declarados"
     ],
     "correta": 0,
     "justificativa": "Cliente antigo, integração de parceiro e equipamento de rede dependem de versões específicas"
@@ -671,10 +671,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Interceptar TLS aumenta a segurança e nada mais\". Qual é a correção?",
     "alternativas": [
-      "Certificado vencido é falha de segurança de dados",
+      "Trate como item de continuidade, com dono, calendário e alerta antecipado",
       "Decida com finalidade, retenção, controle de acesso e dono declarados",
-      "Citar RFC 8446 é suficiente para política de TLS",
-      "Captura de pacote resolve a investigação futura"
+      "Cite o documento vigente e registre a data da revisão da política",
+      "Priorize metadado, registro de sessão e registro de resolução"
     ],
     "correta": 1,
     "justificativa": "Cria ponto onde o conteúdo é legível e um alvo de alto valor, além de acervo com dado pessoal"
@@ -691,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Captura de pacote resolve a investigação futura\". Qual é a correção?",
     "alternativas": [
-      "Certificado vencido é falha de segurança de dados",
-      "Citar RFC 8446 é suficiente para política de TLS",
+      "Cite o documento vigente e registre a data da revisão da política",
+      "Decida com finalidade, retenção, controle de acesso e dono declarados",
       "Priorize metadado, registro de sessão e registro de resolução",
-      "Interceptar TLS aumenta a segurança e nada mais"
+      "Certificado vencido é falha de segurança de dados"
     ],
     "correta": 2,
     "justificativa": "Com sigilo direto, a chave da sessão capturada não existe mais"
@@ -711,9 +711,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Citar RFC 8446 é suficiente para política de TLS\". Qual é a correção?",
     "alternativas": [
-      "Certificado vencido é falha de segurança de dados",
-      "Interceptar TLS aumenta a segurança e nada mais",
-      "Captura de pacote resolve a investigação futura",
+      "Decida com finalidade, retenção, controle de acesso e dono declarados",
+      "Priorize metadado, registro de sessão e registro de resolução",
+      "Trate como item de continuidade, com dono, calendário e alerta antecipado",
       "Cite o documento vigente e registre a data da revisão da política"
     ],
     "correta": 3,
@@ -732,9 +732,9 @@
     "enunciado": "O que o RFC 9846 obsoleta, além do RFC 8446?",
     "alternativas": [
       "O RFC 5246, que especificava o TLS 1.2, e também os RFCs 5077, 6961, 7627 e 8422, além de atualizar os RFCs 5705 e 6066.",
-      "Certificado vencido é falha de segurança de dados",
-      "Citar RFC 8446 é suficiente para política de TLS",
-      "Interceptar TLS aumenta a segurança e nada mais"
+      "Separe autenticação do túnel de autorização do recurso e verifique o dispositivo",
+      "Inventarie antes, agrupe por exposição e desative por onda com plano de reversão",
+      "Trate como item de continuidade, com dono, calendário e alerta antecipado"
     ],
     "correta": 0,
     "justificativa": ""
@@ -751,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "O que o NIST SP 800-52 Rev. 2 exige de TLS 1.2 e de TLS 1.3, e qual é a data limite citada no resumo?",
     "alternativas": [
-      "Certificado vencido é falha de segurança de dados",
+      "Um controle de segurança de camada de rede amplamente usado, framework de padrões abertos para comunicações privadas sobre redes IP, com configuração em geral feita pelo protocolo de troca de chaves IKE.",
       "Exige que TLS 1.2 configurado com suítes de cifra baseadas em FIPS seja suportado por todos os servidores e clientes TLS do governo, e exige suporte a TLS 1.3 até 1º de janeiro de 2024.",
-      "Citar RFC 8446 é suficiente para política de TLS",
-      "Interceptar TLS aumenta a segurança e nada mais"
+      "O RFC 5246, que especificava o TLS 1.2, e também os RFCs 5077, 6961, 7627 e 8422, além de atualizar os RFCs 5705 e 6066.",
+      "Separe autenticação do túnel de autorização do recurso e verifique o dispositivo"
     ],
     "correta": 1,
     "justificativa": ""
@@ -771,10 +771,10 @@
     "status": "rascunho",
     "enunciado": "O que o NIST SP 800-77 Rev. 1 descreve como IPsec, e por qual protocolo a configuração costuma ser feita?",
     "alternativas": [
-      "Certificado vencido é falha de segurança de dados",
-      "Citar RFC 8446 é suficiente para política de TLS",
+      "Exige que TLS 1.2 configurado com suítes de cifra baseadas em FIPS seja suportado por todos os servidores e clientes TLS do governo, e exige suporte a TLS 1.3 até 1º de janeiro de 2024.",
+      "O RFC 5246, que especificava o TLS 1.2, e também os RFCs 5077, 6961, 7627 e 8422, além de atualizar os RFCs 5705 e 6066.",
       "Um controle de segurança de camada de rede amplamente usado, framework de padrões abertos para comunicações privadas sobre redes IP, com configuração em geral feita pelo protocolo de troca de chaves IKE.",
-      "Interceptar TLS aumenta a segurança e nada mais"
+      "Separe autenticação do túnel de autorização do recurso e verifique o dispositivo"
     ],
     "correta": 2,
     "justificativa": ""
@@ -791,9 +791,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"DNSSEC cobre a segurança do DNS inteiro\". Qual é a correção?",
     "alternativas": [
-      "Resolver público melhora a experiência e não custa nada",
-      "Citar o SP 800-81-2 em política interna é aceitável",
-      "Política de e-mail em observação protege o domínio",
+      "Combine autorização de envio, assinatura de mensagem e política publicada",
+      "Atualize a política para a revisão vigente e registre a data da revisão",
+      "Verifique o certificado, o domínio exato e o que o site faz com o dado",
       "Trate DNSSEC, registro de consulta e redundância como controles distintos"
     ],
     "correta": 3,
@@ -813,8 +813,8 @@
     "alternativas": [
       "Defina prazo de transição, leia o relatório e avance de modo",
       "Resolver público melhora a experiência e não custa nada",
-      "Citar o SP 800-81-2 em política interna é aceitável",
-      "Cadeado no navegador significa site confiável"
+      "Decida o resolver como controle, com registro e dono",
+      "Citar o SP 800-81-2 em política interna é aceitável"
     ],
     "correta": 0,
     "justificativa": "Observação registra e não bloqueia mensagem em nome do domínio"
@@ -831,10 +831,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Filtro de spam resolve fraude de identidade\". Qual é a correção?",
     "alternativas": [
-      "Resolver público melhora a experiência e não custa nada",
+      "Trate DNSSEC, registro de consulta e redundância como controles distintos",
       "Combine autorização de envio, assinatura de mensagem e política publicada",
-      "Citar o SP 800-81-2 em política interna é aceitável",
-      "Política de e-mail em observação protege o domínio"
+      "Atualize a política para a revisão vigente e registre a data da revisão",
+      "Verifique o certificado, o domínio exato e o que o site faz com o dado"
     ],
     "correta": 1,
     "justificativa": "Filtro de conteúdo não verifica se o remetente tinha autorização para usar o domínio"
@@ -851,10 +851,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Cadeado no navegador significa site confiável\". Qual é a correção?",
     "alternativas": [
-      "Resolver público melhora a experiência e não custa nada",
-      "Citar o SP 800-81-2 em política interna é aceitável",
+      "Atualize a política para a revisão vigente e registre a data da revisão",
+      "Trate DNSSEC, registro de consulta e redundância como controles distintos",
       "Verifique o certificado, o domínio exato e o que o site faz com o dado",
-      "Política de e-mail em observação protege o domínio"
+      "Combine autorização de envio, assinatura de mensagem e política publicada"
     ],
     "correta": 2,
     "justificativa": "O cadeado indica transporte protegido com certificado válido, não a intenção de quem opera o site"
@@ -871,9 +871,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Citar o SP 800-81-2 em política interna é aceitável\". Qual é a correção?",
     "alternativas": [
-      "Resolver público melhora a experiência e não custa nada",
-      "Política de e-mail em observação protege o domínio",
-      "Cadeado no navegador significa site confiável",
+      "Verifique o certificado, o domínio exato e o que o site faz com o dado",
+      "Trate DNSSEC, registro de consulta e redundância como controles distintos",
+      "Combine autorização de envio, assinatura de mensagem e política publicada",
       "Atualize a política para a revisão vigente e registre a data da revisão"
     ],
     "correta": 3,
@@ -912,9 +912,9 @@
     "enunciado": "Quais são as quatro palavras-chave da revisão 3 do guia de DNS do NIST relacionadas a segurança do serviço, e quando essa revisão foi publicada?",
     "alternativas": [
       "DNSSEC, registro de DNS, DNS cifrado e DNS protetivo. Publicada em março de 2026, com final em 19/03/2026, substituindo o SP 800-81-2.",
-      "Resolver público melhora a experiência e não custa nada",
-      "Citar o SP 800-81-2 em política interna é aceitável",
-      "Política de e-mail em observação protege o domínio"
+      "Integridade de dado e autenticação de origem, considerando que o dado de DNS é público por natureza. O documento foi retirado em 19 de março de 2026.",
+      "Que um ataque contra a infraestrutura de DNS de uma empresa ameaça toda operação de rede dessa empresa.",
+      "Associar identificadores de domínio confiáveis e autenticados às mensagens, comunicar políticas sobre mensagens que usam esses identificadores e reportar sobre o uso deles."
     ],
     "correta": 0,
     "justificativa": ""
@@ -931,10 +931,10 @@
     "status": "rascunho",
     "enunciado": "O que o resumo da revisão 3 afirma sobre o efeito de um ataque contra a infraestrutura de DNS de uma empresa?",
     "alternativas": [
-      "Resolver público melhora a experiência e não custa nada",
+      "Trate DNSSEC, registro de consulta e redundância como controles distintos",
       "Que um ataque contra a infraestrutura de DNS de uma empresa ameaça toda operação de rede dessa empresa.",
-      "Citar o SP 800-81-2 em política interna é aceitável",
-      "Política de e-mail em observação protege o domínio"
+      "Combine autorização de envio, assinatura de mensagem e política publicada",
+      "DNSSEC, registro de DNS, DNS cifrado e DNS protetivo. Publicada em março de 2026, com final em 19/03/2026, substituindo o SP 800-81-2."
     ],
     "correta": 1,
     "justificativa": ""
@@ -951,10 +951,10 @@
     "status": "rascunho",
     "enunciado": "O que o SP 800-81-2 descrevia como objetivos primários de segurança do DNS, e em que data ele foi retirado?",
     "alternativas": [
-      "Resolver público melhora a experiência e não custa nada",
-      "Citar o SP 800-81-2 em política interna é aceitável",
+      "DNSSEC, registro de DNS, DNS cifrado e DNS protetivo. Publicada em março de 2026, com final em 19/03/2026, substituindo o SP 800-81-2.",
+      "Associar identificadores de domínio confiáveis e autenticados às mensagens, comunicar políticas sobre mensagens que usam esses identificadores e reportar sobre o uso deles.",
       "Integridade de dado e autenticação de origem, considerando que o dado de DNS é público por natureza. O documento foi retirado em 19 de março de 2026.",
-      "Política de e-mail em observação protege o domínio"
+      "Porque a cifra protege o trecho entre o cliente e o resolver; o resolver que recebe a consulta continua vendo o nome consultado, e é ele que a organização opera e registra."
     ],
     "correta": 2,
     "justificativa": ""
@@ -971,9 +971,9 @@
     "status": "rascunho",
     "enunciado": "O que o RFC 7489 permite aos originadores de correio fazer, segundo o resumo do documento?",
     "alternativas": [
-      "Resolver público melhora a experiência e não custa nada",
-      "Citar o SP 800-81-2 em política interna é aceitável",
-      "Política de e-mail em observação protege o domínio",
+      "Porque a cifra protege o trecho entre o cliente e o resolver; o resolver que recebe a consulta continua vendo o nome consultado, e é ele que a organização opera e registra.",
+      "Integridade de dado e autenticação de origem, considerando que o dado de DNS é público por natureza. O documento foi retirado em 19 de março de 2026.",
+      "Quem responde pela zona, se a resposta é assinada e validada, quem opera o resolver e o que ele registra ou bloqueia, e quem renova o certificado dos serviços expostos, cada um com dono, data e procedimento.",
       "Associar identificadores de domínio confiáveis e autenticados às mensagens, comunicar políticas sobre mensagens que usam esses identificadores e reportar sobre o uso deles."
     ],
     "correta": 3,
@@ -992,9 +992,9 @@
     "enunciado": "Por que o registro de consulta do resolver continua sendo fonte útil quando o transporte de consulta está cifrado?",
     "alternativas": [
       "Porque a cifra protege o trecho entre o cliente e o resolver; o resolver que recebe a consulta continua vendo o nome consultado, e é ele que a organização opera e registra.",
-      "Resolver público melhora a experiência e não custa nada",
-      "Citar o SP 800-81-2 em política interna é aceitável",
-      "Política de e-mail em observação protege o domínio"
+      "Associar identificadores de domínio confiáveis e autenticados às mensagens, comunicar políticas sobre mensagens que usam esses identificadores e reportar sobre o uso deles.",
+      "Integridade de dado e autenticação de origem, considerando que o dado de DNS é público por natureza. O documento foi retirado em 19 de março de 2026.",
+      "Quem responde pela zona, se a resposta é assinada e validada, quem opera o resolver e o que ele registra ou bloqueia, e quem renova o certificado dos serviços expostos, cada um com dono, data e procedimento."
     ],
     "correta": 0,
     "justificativa": ""
@@ -1011,10 +1011,10 @@
     "status": "rascunho",
     "enunciado": "Quais decisões de configuração de DNS precisam de dono e de data em uma política de domínio?",
     "alternativas": [
-      "Resolver público melhora a experiência e não custa nada",
+      "Associar identificadores de domínio confiáveis e autenticados às mensagens, comunicar políticas sobre mensagens que usam esses identificadores e reportar sobre o uso deles.",
       "Quem responde pela zona, se a resposta é assinada e validada, quem opera o resolver e o que ele registra ou bloqueia, e quem renova o certificado dos serviços expostos, cada um com dono, data e procedimento.",
-      "Citar o SP 800-81-2 em política interna é aceitável",
-      "Política de e-mail em observação protege o domínio"
+      "Porque a cifra protege o trecho entre o cliente e o resolver; o resolver que recebe a consulta continua vendo o nome consultado, e é ele que a organização opera e registra.",
+      "Integridade de dado e autenticação de origem, considerando que o dado de DNS é público por natureza. O documento foi retirado em 19 de março de 2026."
     ],
     "correta": 1,
     "justificativa": ""
@@ -1032,9 +1032,9 @@
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Guardar todo o pacote resolve a investigação\". Qual é a correção?",
     "alternativas": [
       "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote",
-      "Detecção por assinatura cobre o que falta em telemetria",
-      "Relógio desalinhado é detalhe de servidor",
-      "Registro é assunto de operação de TI"
+      "Trate retenção, integridade e acesso como decisão de risco, com dono e prazo",
+      "Declare a fonte por pergunta e trate assinatura como consequência da coleta",
+      "Exija sincronismo de horário em todos os dispositivos que geram registro"
     ],
     "correta": 0,
     "justificativa": "Com sigilo direto, a chave da sessão não existe mais, e o custo de armazenamento cresce com o tráfego"
@@ -1051,10 +1051,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Registro é assunto de operação de TI\". Qual é a correção?",
     "alternativas": [
-      "Detecção por assinatura cobre o que falta em telemetria",
+      "Declare a fonte por pergunta e trate assinatura como consequência da coleta",
       "Trate retenção, integridade e acesso como decisão de risco, com dono e prazo",
-      "Guardar todo o pacote resolve a investigação",
-      "Relógio desalinhado é detalhe de servidor"
+      "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote",
+      "Exija sincronismo de horário em todos os dispositivos que geram registro"
     ],
     "correta": 1,
     "justificativa": "O guia do NIST trata de infraestrutura e de processo, com requisito de acesso e de retenção"
@@ -1071,10 +1071,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Detecção por assinatura cobre o que falta em telemetria\". Qual é a correção?",
     "alternativas": [
-      "Guardar todo o pacote resolve a investigação",
-      "Relógio desalinhado é detalhe de servidor",
+      "Trate retenção, integridade e acesso como decisão de risco, com dono e prazo",
+      "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote",
       "Declare a fonte por pergunta e trate assinatura como consequência da coleta",
-      "Registro é assunto de operação de TI"
+      "Exija sincronismo de horário em todos os dispositivos que geram registro"
     ],
     "correta": 2,
     "justificativa": "Assinatura só encontra o que está descrito, e opera sobre a fonte que existe"
@@ -1092,8 +1092,8 @@
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Mais log é sempre melhor\". Qual é a correção?",
     "alternativas": [
       "Detecção por assinatura cobre o que falta em telemetria",
-      "Guardar todo o pacote resolve a investigação",
-      "Relógio desalinhado é detalhe de servidor",
+      "Exija sincronismo de horário em todos os dispositivos que geram registro",
+      "Decida segmentação e pontos de coleta no mesmo projeto",
       "Defina retenção por classe, com pergunta associada a cada fonte"
     ],
     "correta": 3,
@@ -1112,9 +1112,9 @@
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Relógio desalinhado é detalhe de servidor\". Qual é a correção?",
     "alternativas": [
       "Exija sincronismo de horário em todos os dispositivos que geram registro",
-      "Detecção por assinatura cobre o que falta em telemetria",
-      "Guardar todo o pacote resolve a investigação",
-      "Registro é assunto de operação de TI"
+      "Declare a fonte por pergunta e trate assinatura como consequência da coleta",
+      "Trate retenção, integridade e acesso como decisão de risco, com dono e prazo",
+      "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote"
     ],
     "correta": 0,
     "justificativa": "Sem sequência temporal, o evento não se correlaciona com outros registros"
@@ -1133,8 +1133,8 @@
     "alternativas": [
       "Detecção por assinatura cobre o que falta em telemetria",
       "Decida segmentação e pontos de coleta no mesmo projeto",
-      "Guardar todo o pacote resolve a investigação",
-      "Relógio desalinhado é detalhe de servidor"
+      "Defina retenção por classe, com pergunta associada a cada fonte",
+      "Guardar todo o pacote resolve a investigação"
     ],
     "correta": 1,
     "justificativa": "Fronteira entre segmentos é o que cria ponto de observação do tráfego leste-oeste"
@@ -1152,9 +1152,9 @@
     "enunciado": "Por que a segmentação aumenta a capacidade de observação da rede?",
     "alternativas": [
       "Porque cria fronteiras, e tráfego que cruza fronteira passa por um ponto onde a coleta é possível. Sem segmento, o tráfego entre hosts do mesmo grupo não cruza ponto algum.",
-      "Detecção por assinatura cobre o que falta em telemetria",
-      "Guardar todo o pacote resolve a investigação",
-      "Relógio desalinhado é detalhe de servidor"
+      "Porque a consulta de nome acontece antes da conexão, e quem opera o resolver vê o nome consultado mesmo que o conteúdo das sessões esteja cifrado ponta a ponta.",
+      "Sincronismo de horário e integridade. O primeiro permite reconstruir a sequência dos eventos entre fontes diferentes; a segunda permite tratar o registro como prova, e não como texto que qualquer administrador altera.",
+      "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote"
     ],
     "correta": 0,
     "justificativa": ""
@@ -1171,10 +1171,10 @@
     "status": "rascunho",
     "enunciado": "Quais são as duas exigências técnicas que atravessam toda a telemetria, e o que cada uma garante?",
     "alternativas": [
-      "Detecção por assinatura cobre o que falta em telemetria",
+      "Porque cria fronteiras, e tráfego que cruza fronteira passa por um ponto onde a coleta é possível. Sem segmento, o tráfego entre hosts do mesmo grupo não cruza ponto algum.",
       "Sincronismo de horário e integridade. O primeiro permite reconstruir a sequência dos eventos entre fontes diferentes; a segunda permite tratar o registro como prova, e não como texto que qualquer administrador altera.",
-      "Guardar todo o pacote resolve a investigação",
-      "Relógio desalinhado é detalhe de servidor"
+      "Porque a consulta de nome acontece antes da conexão, e quem opera o resolver vê o nome consultado mesmo que o conteúdo das sessões esteja cifrado ponta a ponta.",
+      "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote"
     ],
     "correta": 1,
     "justificativa": ""
@@ -1191,10 +1191,10 @@
     "status": "rascunho",
     "enunciado": "Por que o registro do resolver de nomes continua útil quando o conteúdo do tráfego está cifrado?",
     "alternativas": [
-      "Detecção por assinatura cobre o que falta em telemetria",
-      "Guardar todo o pacote resolve a investigação",
+      "Porque cria fronteiras, e tráfego que cruza fronteira passa por um ponto onde a coleta é possível. Sem segmento, o tráfego entre hosts do mesmo grupo não cruza ponto algum.",
+      "Sincronismo de horário e integridade. O primeiro permite reconstruir a sequência dos eventos entre fontes diferentes; a segunda permite tratar o registro como prova, e não como texto que qualquer administrador altera.",
       "Porque a consulta de nome acontece antes da conexão, e quem opera o resolver vê o nome consultado mesmo que o conteúdo das sessões esteja cifrado ponta a ponta.",
-      "Relógio desalinhado é detalhe de servidor"
+      "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote"
     ],
     "correta": 2,
     "justificativa": ""

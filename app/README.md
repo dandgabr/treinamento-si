@@ -9,7 +9,7 @@ mora em `app/`; o material continua em `conteudo/`, e é de lá que ele vem, sem
 A tela inicial é o painel, com as 18 áreas na ordem de `ordem_estudo`. Cada linha traz o nome da
 área, o nível (`base`, `intermediario` ou `avancado`) e a contagem de temas. Do painel se chega a
 todo o resto: guia da área, temas, glossário, mapa de relações, as 3 trilhas (90 dias, 12 meses, 24
-meses), certificações por fornecedor e o índice de fontes.
+meses), certificações por fornecedor, o índice de fontes e o quiz de múltipla escolha.
 
 Um tema abre com o pré-teste de calibração de confiança, de 1 a 5, e depois as seções na numeração
 do arquivo original. A recuperação ativa esconde o gabarito atrás do botão "Revelar resposta". No
@@ -32,11 +32,13 @@ navegador atual, para abrir o resultado.
 | `npm install` | instala as dependências. Leia a nota sobre `omit=dev` abaixo antes de rodar. |
 | `npm run build:content` | lê `conteudo/` e regrava `app/src/content/generated/content.json` |
 | `npm run check:content` | valida o JSON já gerado e falha o processo quando algo falta |
-| `npm test` | roda a suíte do Vitest: parser, gate e motor pedagógico |
+| `npm run build:questions` | deriva o banco de múltipla escolha do JSON e regrava um arquivo por área em `app/src/content/questions/`, trazendo de volta o `status` de revisão — e derrubando-o quando o texto do item muda |
+| `npm run check:questions` | valida o banco já gravado e falha o processo quando algum item não fecha |
+| `npm test` | roda a suíte do Vitest: parser, gate, banco de questões e motor pedagógico |
 | `npm run dev` | roda `build:content` e sobe o Vite com recarga automática |
 | `npm run build` | gera o conteúdo e produz o build do navegador, em arquivo único |
 | `npm run build:desktop` | produz o build do desktop em `dist-desktop/` (usa o conteúdo já gerado) |
-| `npm run preparar:conteudo` | lê `conteudo/` e valida o JSON gerado — roda uma vez por verificação |
+| `npm run preparar:conteudo` | lê `conteudo/`, valida o JSON gerado, gera o banco de questões e roda o gate dele — roda uma vez por verificação |
 | `npm run medir` | mede O1, O2, O4, O5 e O6 no aplicativo empacotado |
 | `npm run typecheck` | roda o `tsc --noEmit`; o Vite apaga tipos sem conferi-los, então isto precisa existir separado |
 | `npm run verificar` | **o portão do dia a dia**: build, build do Electron, testes, os dois smokes do código e o verificador do material — **não empacota nem testa o pacote** |
@@ -47,14 +49,16 @@ navegador atual, para abrir o resultado.
 | `npm run smoke:desktop` | abre a janela de verdade e confere a casca, o protocolo, o progresso em arquivo e o bloqueio de navegação |
 | `npm run distribuir:<sistema>` | empacota com o `electron-builder`: AppImage, NSIS ou `.dmg`/`.zip` |
 | `npm run smoke:pacote` | abre o **app empacotado** por CDP e confere os fuses, o asar e o progresso |
-| `npm run verificar:pacote` | empacota e roda o smoke do pacote — o portão de quem vai distribuir |
 | `npm run empacotar` | monta a pasta que vai para quem estuda: `dist/Roadmap-CISO-Interativo/` (roda o `build` antes) |
 | `npm run test:watch` | a suíte em modo observador |
 | `npm run preview` | sobe o Vite servindo o `dist/` para inspeção |
 
 A ordem tem uma dependência real: `check:content` lê o JSON em disco, então sozinho ele não adianta
-nada. O `dev` também não vigia `conteudo/`. Editou um tema com o servidor no ar? Rode
-`npm run build:content` de novo e a página recarrega com o texto novo.
+nada. Vale o mesmo para o par do banco: `check:questions` lê o que `build:questions` gravou, e o
+`build` do app chama os quatro na ordem certa. O `dev` também não vigia `conteudo/`. Editou um tema
+com o servidor no ar? Rode `npm run build:content` de novo e a página recarrega com o texto novo — e
+`npm run build:questions` se o tema tinha tabela de erros comuns ou recuperação ativa, porque o quiz
+continua servindo o banco anterior até o gerador rodar.
 
 **Os três smokes conferem o frescor do artefato antes de rodar.** Eles comparam a data de
 `dist/index.html` e de `dist-electron/main.cjs` com a da fonte mais nova; se o binário for anterior,
@@ -66,11 +70,12 @@ aponte o binário pela variável `CHROME_BIN`.
 
 ## O que sai do build
 
-A build inteira vira um arquivo: `app/dist/index.html`, com 7,6 MB na última execução. Ele abre por
-`file://`, roda offline e não pede nada instalado na máquina de quem vai estudar. Esse é o formato
-inteiro do produto, e é o motivo de `inlineDynamicImports` estar ligado no `vite.config.ts`: o
-Mermaid carrega os tipos de diagrama por `import()` dinâmico e um chunk externo não seria lido a
-partir de `file://`.
+A build inteira vira um arquivo: `app/dist/index.html`, com **8,17 MiB** (8.569.173 bytes) na última
+execução. A medição anterior, de antes de o banco entrar inline, era 7,6 MB — os 18 arquivos do banco
+viajam dentro desse arquivo. Ele abre por `file://`, roda offline e não pede nada instalado na
+máquina de quem vai estudar. Esse é o formato inteiro do produto, e é o motivo de
+`inlineDynamicImports` estar ligado no `vite.config.ts`: o Mermaid carrega os tipos de diagrama por
+`import()` dinâmico e um chunk externo não seria lido a partir de `file://`.
 
 `dist/` está no `.gitignore` da raiz, então o HTML pronto não vai para o controle de versão. Quem
 quiser o arquivo precisa gerá-lo.
@@ -123,15 +128,18 @@ quebraria. Então o desktop, que não tem essa restrição, ganha o build dividi
 | | `npm run build` (navegador) | `npm run build:desktop` (desktop) |
 |---|---|---|
 | Saída | `dist/index.html`, um arquivo | `dist-desktop/`, uma pasta |
-| Conteúdo | inline no JavaScript (3,8 MB) | `conteudo.json` ao lado (3,79 MiB) |
+| Conteúdo | inline no JavaScript (3,8 MB) | `conteudo.json` ao lado (3,70 MiB) |
+| Banco de questões | inline no JavaScript, junto com o conteúdo | `questoes.json` ao lado (791.357 bytes, 0,75 MiB) |
 | Diagramas | todos inlinados (3,4 MB) | só o `flowchart`; 35 chunks de outros tipos são descartados |
-| Script no arranque | **7,6 MB** para o V8 analisar | **915 kB** |
+| Script no arranque | **8,17 MiB** para o V8 analisar | **927 kB** (949.138 bytes) |
 | CSP | `<meta>` no HTML, com `'unsafe-inline'` | cabeçalho, `script-src 'self'` |
 | Quem usa | launcher (`dist/Roadmap-CISO-Interativo/`) | empacotado pelo electron-builder |
 
 A diferença entre os dois está isolada em `@fonte` (`src/infrastructure/content/fonte-web.ts` e
 `fonte-desktop.ts`): o repositório de conteúdo é o mesmo, e o resto do app não sabe de onde o
-JSON veio. `carregar()` roda antes da primeira renderização, em `main.tsx`.
+JSON veio. `carregar()` roda antes da primeira renderização, em `main.tsx`. O banco segue o mesmo
+caminho: `lerBancoBruto()` entrega os 18 arquivos num objeto de chave `areaId` — inline no navegador,
+num `questoes.json` só no desktop — e é lido quando a tela de quiz monta, não no arranque.
 
 O corte dos diagramas é por **tipo**, e não por nome de arquivo — os hashes mudam a cada build,
 o prefixo não. A rede de segurança é o `npm run smoke:desktop`, que desenha um diagrama de
@@ -144,10 +152,17 @@ verdade: se o corte levar algo necessário, o teste falha em vez de o app aparec
 
 | O que | Medido em 2026-09-26, Linux x64, Electron 33.4.11 |
 |---|---|
-| AppImage | **104,0 MiB** (109.006.365 bytes) — O7 |
-| `app.asar` | 4,89 MiB (5.124.818 bytes): o `conteudo.json`, os 27 assets que sobraram e o `main`/`preload` |
-| `dist-desktop/index.html` + assets | 915 kB de JavaScript no arranque, contra 7,6 MB inlinados |
-| Pasta desempacotada | 267 MiB — o binário do Electron sozinho tem 177,7 MiB |
+| AppImage | **104,0 MiB** (109.006.365 bytes) — O7, medido **antes do banco** entrar no pacote |
+| `app.asar` | 4,89 MiB (5.124.818 bytes): o `conteudo.json`, os 27 assets que sobraram e o `main`/`preload` — medido **antes do banco** |
+| `questoes.json` | 791.357 bytes (0,75 MiB): o banco de múltipla escolha, que agora viaja dentro do asar |
+| `dist-desktop/index.html` + assets | 927 kB (949.138 bytes) de JavaScript no arranque, contra 8,17 MiB inlinados |
+| Pasta desempacotada | 267 MiB — o binário do Electron sozinho tem 177,7 MiB — medido **antes do banco** |
+
+**O banco entrou no pacote depois destas medições.** A lista de `files` do `electron-builder.yml`
+inclui `dist-desktop/**/*`, e é lá que o `questoes.json` é gravado: o asar de agora é maior que os
+4,89 MiB da tabela, e o AppImage também. As três linhas marcadas esperam o próximo
+`npm run distribuir:<sistema>` para virarem número medido de novo — até então, o que está escrito
+nelas é história, não estado.
 
 As unidades são as mesmas em todas as linhas (MiB, com os bytes ao lado) porque misturar decimal
 com binário produz uma contradição visível: 7,6 MB contra 7,3 MB para o mesmo arquivo faz a asar
@@ -210,25 +225,81 @@ chama `build/` porque esse é o `buildResources` padrão da ferramenta; convive 
 ## Banco de múltipla escolha
 
 `npm run build:questions` deriva o banco do material já verificado e grava um arquivo por área em
-`src/content/questions/`. São **904 itens em 18 áreas**, e nenhum deles é prosa nova:
+`src/content/questions/`. São **955 itens em 18 áreas**, e nenhum deles é prosa nova:
 
 | Origem | Itens | De onde sai |
 |---|---|---|
-| `erro-comum` | 608 | Cada linha da tabela de erros comuns de um tema: o `correto` é o gabarito, a justificativa é o `porque`, e os `equivoco` das outras linhas do **mesmo tema** são os distratores |
-| `recuperacao` | 296 | Os pares de recuperação ativa cuja resposta cabe numa alternativa (até 220 caracteres) |
+| `erro-comum` | 608 | Cada linha da tabela de erros comuns de um tema: o `correto` é o gabarito, a justificativa é o `porque`, e os distratores saem das outras linhas do **mesmo tema** — as duas colunas, `equivoco` e `correto` |
+| `recuperacao` | 347 | Os pares de recuperação ativa cuja resposta cabe numa alternativa (até 220 caracteres). Os distratores saem do **mesmo tema**: as duas colunas da tabela de erros comuns e as respostas dos outros pares |
 
-A regra que sustenta isso está no §7 do plano: o repositório proíbe afirmação sem fonte
-(`CONTRIBUTING` §4), então o banco **não é inventado** — cada item aponta para o tema de origem
-(`ref`) e carrega a fonte herdada dele. O que o gerador faz é semear; quem promove um item de
-`rascunho` para `verificado` é uma pessoa, e o app marca na tela o que ainda não passou por isso.
+Nenhum distrator é inventado, e nenhum vem de fora do material: os candidatos são sempre texto do
+próprio tema, como pede a §7 do plano. Dali o gerador fica com os três mais próximos do gabarito em
+comprimento, e essa é a defesa mais barata que existe contra um item respondível por contagem de
+letras. Com só os `equivoco` no conjunto — curtos, contra um `correto` que explica —, a alternativa
+certa era a mais longa em 79,4% dos itens de erro comum e em todos os de recuperação.
 
-**O status de revisão sobrevive à regeração.** Os arquivos são versionados justamente por isso: o
-gerador reencontra os itens pelo `id` (estável enquanto o material não muda) e traz o status de
-volta, em vez de zerar a revisão a cada build. O gabarito também não fica sempre na mesma posição —
-há uma invariante no gate para isso, porque se a correta fosse sempre a primeira, acertar não
-mediria nada.
+A regra que sustenta tudo isso está no §7 do plano: o repositório proíbe afirmação sem fonte
+(`CONTRIBUTING` §4), então cada item aponta para o tema de origem (`ref`) e carrega a fonte herdada
+dele. O que o gerador faz é semear; quem promove um item de `rascunho` para `verificado` é uma
+pessoa, e o app marca na tela o que ainda não passou por isso.
 
-Falta a **tela de Quiz**: o banco existe, é gated e tem teste, mas o app ainda não o exibe.
+A justificativa segue a mesma ideia. Em item de erro comum ela é o `porque` da linha; em item de
+recuperação o gerador deixa o campo vazio em vez de inventar uma razão, e a tela mostra só a fonte e
+o caminho de volta ao tema. Justificativa vazia ali é decisão, não esquecimento.
+
+**O status de revisão sobrevive à regeração — enquanto o texto não muda.** Os arquivos são
+versionados justamente por isso: o gerador reencontra os itens pelo `id` e traz o status de volta,
+em vez de zerar a revisão a cada build. Só que o `id` é a **posição** da linha de origem
+(`<tema>#E01` é a primeira linha da tabela de erros comuns), não o texto dela, e quem revisou
+revisou um texto. Por isso o gerador compara o resumo do item de agora com o do item que estava no
+arquivo. Se o resumo muda — a linha foi corrigida, ou uma linha entrou no meio da tabela e deslocou
+os `id` seguintes —, o item volta a `rascunho` e o build diz quantos perderam o selo. Perder a
+revisão é o lado certo do erro; mantê-la sobre um texto que ninguém leu seria o app afirmando uma
+auditoria que não houve.
+
+O gabarito também não fica sempre na mesma posição — há uma invariante no gate para isso, porque se
+a correta fosse sempre a primeira, acertar não mediria nada.
+
+### A tela de Quiz
+
+`#/quiz` é o quiz de todas as áreas; `#/quiz/<areaId>`, o de uma. O escopo também se troca no
+seletor do topo, sem sair da tela. Cada rodada sorteia 10 itens com semente determinística: a lista
+não se remexe quando a resposta é gravada, e a ordem põe primeiro o que nunca foi respondido, depois
+o que mais errou.
+
+Responder é marcar uma alternativa e confirmar. Depois disso a questão trava, e o veredito traz o
+acerto ou o erro, a alternativa correta, a justificativa quando existe, a fonte com link e a volta
+ao tema de origem. O item que ainda não passou por revisão humana leva selo: **não revisado** para
+`rascunho`, **em revisão** para `pendente`. `verificado` não leva nada — marcar todo item apagaria a
+diferença entre o revisado e o resto.
+
+**O quiz não mexe no domínio nem na fila de revisão.** O que ele grava é o resultado do item
+(acertos, erros e a última resposta) e o dia como dia com estudo. Errar no quiz não rebaixa assunto
+nenhum: quem reagenda o tema é a recuperação ativa dele, e a própria tela diz isso ao fim da rodada.
+
+A leitura do banco fica em `src/ui/useBanco.ts`, acontece uma vez por sessão e só quando a tela
+monta. Se o arquivo faltar, o quiz diz o comando que o gera e o resto do aplicativo continua
+funcionando.
+
+### Como promover um item
+
+O banco nasce inteiro em `rascunho`. A promoção é manual, item a item, e o que a mão humana guarda
+no JSON é o campo `status` — o texto do item não se corrige ali: o gerador o regrava a partir do
+material, e o gate reprova arquivo cujo texto não bata com a derivação.
+
+1. Abra `app/src/content/questions/<area-id>.json` e ache o item pelo `id`.
+2. Confira a **fonte herdada contra a linha de origem**. O `ref` diz qual é o tema, e o link do quiz
+   leva até lá. Compare enunciado, gabarito e justificativa com a tabela de erros comuns ou o par de
+   recuperação que gerou o item: é a auditoria de citação do `CONTRIBUTING` §4, com uma ressalva a
+   registrar — a data de acesso não vem junto, porque a fonte herdada não a carrega.
+3. Escreva `pendente` enquanto a conferência está aberta e `verificado` quando ela fecha. Se a linha
+   de origem mudar depois, não há o que desfazer: o próximo `build:questions` derruba o item a
+   `rascunho` sozinho, e diz quantos perderam o selo.
+4. Rode `npm run check:questions` — ou `npm run preparar:conteudo`, que já o inclui — e commite o
+   JSON.
+
+Comece pelos itens de `recuperacao`: são de confiança menor que os de `erro-comum`, porque a
+justificativa deles é vazia por decisão e não sobra texto do material para comparar além da resposta.
 
 ## Checagens do plano (O1–O8 e S1–S14)
 
@@ -239,11 +310,11 @@ Esta é a tabela — e a coluna "medido" é a que diz o que ainda falta, não a 
 |---|---|---|---|
 | O1 arranque | — | **sim: 1ª pintura 338 ms, DOMContentLoaded 296 ms** | `npm run medir` |
 | O2 sem tela branca (`show:false` + `ready-to-show`) | sim | sim: o aviso "Carregando o roadmap…" sai quando a carga termina | `medir`, `main.tsx` |
-| O3 bundle dividido | **sim** | sim: 915 kB de script no arranque, contra 7,6 MB inlinados | `vite.desktop.config.ts` |
+| O3 bundle dividido | **sim** | sim: 927 kB de script no arranque, contra 8,17 MiB inlinados | `vite.desktop.config.ts` |
 | O4 só o `flowchart` do Mermaid | **sim** | sim: 35 chunks de outros diagramas removidos; desenhar puxa 8 | `vite.desktop.config.ts`, `medir` |
 | O5 memória após navegações | — | sim: heap de 11 MB na primeira tela, 16 MB com o diagrama | `medir` |
 | O6 diagramas por tela | — | sim: 1 por tema | `medir` |
-| O7 tamanho do instalador | — | sim: AppImage 104,0 MiB (109.006.365 bytes) | acima |
+| O7 tamanho do instalador | — | sim: AppImage 104,0 MiB (109.006.365 bytes) — medição de antes do banco, a repetir no próximo `distribuir` | acima |
 | O8 decisão sobre XP/nível/sequência | — | sim (removidos, com o motivo) | `progresso.test.ts` |
 | S1 prefs endurecidas | sim | parcial: `allowRunningInsecureContent` não é assertado | `smoke-desktop.mjs` |
 | S2 ponte por allowlist | sim | **não** | `electron/preload.ts` |
@@ -264,6 +335,11 @@ Os números saem de `npm run medir`, no aplicativo **empacotado**, e não de um 
 desenvolvimento — é ele que a pessoa recebe. Faltam as medições que exigem uso prolongado
 (memória depois de 20 navegações, por exemplo) e as asserções de S2, S4, S6, S7, S9 e S10,
 todas implementadas no código mas não exercitadas por teste.
+
+O banco de múltipla escolha não tem linha nesta tabela porque não tem item aqui para medir: a §16.3
+é do desktop, e a fase 5 é da §13 do plano. O que ela produziu tem portão próprio
+(`check:questions`), teste próprio (domínio, gerador e gate do banco) e um lugar próprio para as
+contas que ainda faltam — as pendências.
 
 A via da pasta com atalho (`npm run empacotar`) **não tem portão automático nenhum**: nem o
 `verificar` nem teste algum sobe o `servidor.py`. É a única via de entrega sem verificação, e está
@@ -361,8 +437,10 @@ Nenhuma seção do Markdown é reescrita pelo app. Corrigir um parágrafo signif
 
 `conteudo/` está versionado, então um clone já traz o material inteiro e o `build:content` roda
 direto. O que não vai para o controle de versão é o derivado: `app/src/content/generated/` e
-`app/dist/`. Dentro de `conteudo/` há dois diretórios de ferramenta ignorados, `.commandcode/` e
-`.playwright-mcp/`, que não são material de estudo.
+`app/dist/`. O banco de questões é a exceção entre os derivados — `app/src/content/questions/` vai
+**com** o controle de versão, porque a revisão humana mora no campo `status` de cada item e precisa
+sobreviver à próxima regeração. Dentro de `conteudo/` há dois diretórios de ferramenta ignorados,
+`.commandcode/` e `.playwright-mcp/`, que não são material de estudo.
 
 ## O que reprova o build
 
@@ -394,6 +472,16 @@ totais do JSON gerado. Depois percorre cada tema e cada guia. Erra o build quem:
 O gate imprime `verificado: 18 areas, 109 temas, 22 paginas` quando passa. Quando falha, lista cada
 erro e sai com código 1, o que derruba o `npm run build` antes de o Vite entrar em ação.
 
+**O banco tem o gate dele, e ele roda no mesmo `preparar:conteudo`.** `app/scripts/check-questions.ts`
+reprova o item que aponta para `ref` que não existe ou fica em área diferente da do `ref`; que chega
+sem fonte, com esquema que não é `http(s)`, sem enunciado ou com `status` fora dos três; que tem
+menos de três alternativas, alternativa repetida ou vazia, ou `correta` fora da lista; que é de erro
+comum e não tem justificativa; e que repete `id` ou cai no léxico proibido. Reprova também o banco
+editado à mão: cada item em disco é comparado com o que o material deriva agora, e a única diferença
+tolerada é o `status`. No conjunto, reprova o gabarito concentrado na primeira alternativa — fora da
+faixa de 15% a 45%, a posição vira pista. O gate imprime `verificado: 955 itens em 18 areas — 0
+erro(s)` quando passa.
+
 ## Por que existe um `.npmrc` aqui dentro
 
 O npm configurado nesta máquina define `omit=dev` no nível do usuário, e essa opção pula as
@@ -423,9 +511,13 @@ em que entram.
 |---|---|
 | **4.3 — pronto no Linux.** O `electron-builder` está configurado, o AppImage sai com 104,0 MiB (O7) e os sete fuses entram e são conferidos. Faltam os alvos que esta máquina não produz: `.dmg`/`.zip` (precisa de um Mac) e NSIS + portátil (precisa de `wine` ou de um Windows). O `.deb` saiu da configuração por decisão | 4.3 |
 | **4.4 — feito.** Bundle dividido, conteúdo como arquivo, 35 chunks de outros diagramas fora e a CSP do desktop sem `'unsafe-inline'`. Os números estão na tabela acima e na seção "Checagens do plano" | 4.4 |
+| **Viés de comprimento do gabarito**: a alternativa correta é a mais longa em 175 dos 608 itens de erro comum (28,8%) e em 135 dos 347 de recuperação (38,9%), na medição do banco de agora. Era 79,4% e 100% enquanto só os `equivoco` da tabela eram candidatos a distrator — curtos, contra um `correto` que explica; a escolha passou a incluir as duas colunas do tema. Falta decidir se o patamar de agora é aceitável, porque é assimetria das colunas do material e não defeito de código | 5 |
+| **Os 102 itens de checkpoint dos guias não entram no banco**, embora a §7 do plano os liste como fonte: `derivarBanco` lê a tabela de erros comuns e a recuperação do tema, e o checkpoint mora no guia (a tela da área o exibe, com veredito por item) | 5 |
+| **As fontes herdadas pelo banco não têm data de acesso**: o `CONTRIBUTING` §4 exige URL **e** data, e o item carrega título, URL e tipo. Enquanto a herança não trouxer `acessadoEm`, o item não fecha a auditoria de citação sozinho | 5 |
+| **A revisão começou em zero e nada a acompanha**: os 955 itens estão em `rascunho`, o procedimento de promoção está na seção "Como promover um item" e o gate aceita qualquer um dos três status, sem contar quantos já foram conferidos | 5 |
+| **O quiz não tem escopo por tema**: a §11 do plano pede "por tema e por área", e existem `#/quiz` (todas as áreas) e `#/quiz/<areaId>` | 5 |
 | **Falta apertar as outras duas CSPs**: o `<meta>` do build de navegador e o cabeçalho do `launcher/servidor.py` ainda aceitam `script-src 'unsafe-inline'`, porque os dois carregam o bundle inline. O desktop já está em `'self'` | 6 |
 | **S2, S4, S6, S7, S9 e S10 estão implementados e não têm asserção.** É o que falta para a tabela do §16.3 ficar inteira | 6 |
-| **A Fase 5 inteira não existe**: banco de múltipla escolha, `check-questions.ts` e tela de Quiz. É decisão de autoria antes de ser código — exige template novo e auditoria de citação, pelas regras do `CONTRIBUTING` | 5 |
 | Os 1328 links relativos (`../README.md`, `TEMA-*.md`) ficam mortos no arquivo único: precisam ser reescritos para as rotas do app. Os 586 externos abrem normalmente | 6 |
 | Regras do material ainda não implementadas: "duas passagens falhas seguidas mandam para releitura completa" (`plano-12-meses.md`), revisão além de D+90, a tarefa concreta de cada intervalo, a coluna "Artefato produzido" do registro e o diagnóstico por item (hoje é um booleano por tema) | 6 |
 | O **escopo do critério na trilha de 90 dias** (`plano-90-dias.md` §7 recomenda que só os itens 1 e 2 de 02 contem) não é aplicado pelo app, que usa o critério do guia inteiro. O dono do critério já está declarado (`CONTRIBUTING` §3: o guia da área); falta decidir se a trilha é recomendação de escopo ou régua própria | 6 |

@@ -12,9 +12,9 @@
     "enunciado": "Sobre O que é segurança da informação e o que o CISO governa: um colega afirma que \"Segurança da informação é o mesmo que segurança de TI\". Qual é a correção?",
     "alternativas": [
       "O perímetro se define por informação e por obrigação; a TI é um dos meios de proteção, não o escopo",
-      "A política de segurança descreve o que a TI faz",
-      "NOT APPLICABLE significa \"sem risco\"",
-      "Tudo é crítico, logo tudo é HIGH"
+      "A política precisa dizer quais tipos de informação estão cobertos e quem responde pela execução em cada um",
+      "Níveis existem para ordenar gasto; NOT APPLICABLE para confidencialidade de um tipo de informação é uma saída legítima e documentada",
+      "LOW é o piso de um sistema, e LOW ainda é proteção"
     ],
     "correta": 0,
     "justificativa": "A definição legal alcança informação em forma eletrônica ou não eletrônica, e o CSEC2017 inclui fatores humanos, organizacionais e sociais entre as Knowledge Areas"
@@ -31,10 +31,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O que é segurança da informação e o que o CISO governa: um colega afirma que \"Tudo é crítico, logo tudo é HIGH\". Qual é a correção?",
     "alternativas": [
-      "Segurança da informação é o mesmo que segurança de TI",
+      "A política precisa dizer quais tipos de informação estão cobertos e quem responde pela execução em cada um",
       "Níveis existem para ordenar gasto; NOT APPLICABLE para confidencialidade de um tipo de informação é uma saída legítima e documentada",
-      "A política de segurança descreve o que a TI faz",
-      "NOT APPLICABLE significa \"sem risco\""
+      "O perímetro se define por informação e por obrigação; a TI é um dos meios de proteção, não o escopo",
+      "Segurança da informação é o mesmo que segurança de TI"
     ],
     "correta": 1,
     "justificativa": "Se todo objetivo recebe HIGH, o high water mark não distingue nada e o orçamento não tem de onde sair"
@@ -71,9 +71,9 @@
     "status": "rascunho",
     "enunciado": "Sobre O que é segurança da informação e o que o CISO governa: um colega afirma que \"A política de segurança descreve o que a TI faz\". Qual é a correção?",
     "alternativas": [
+      "O perímetro se define por informação e por obrigação; a TI é um dos meios de proteção, não o escopo",
+      "Níveis existem para ordenar gasto; NOT APPLICABLE para confidencialidade de um tipo de informação é uma saída legítima e documentada",
       "Segurança da informação é o mesmo que segurança de TI",
-      "NOT APPLICABLE significa \"sem risco\"",
-      "Tudo é crítico, logo tudo é HIGH",
       "A política precisa dizer quais tipos de informação estão cobertos e quem responde pela execução em cada um"
     ],
     "correta": 3,
@@ -91,10 +91,10 @@
     "status": "rascunho",
     "enunciado": "Cite os seis modos de falha da definição legal de segurança da informação e diga a qual deles a \"conta administrativa sem segundo fator\" expõe a organização.",
     "alternativas": [
-      "Segurança da informação é o mesmo que segurança de TI",
+      "Porque o funcionamento básico do próprio sistema — processamento, funções críticas, informação de nível de sistema — exige um mínimo de proteção. O piso de um sistema é LOW.",
       "Acesso, uso, divulgação, interrupção, modificação e destruição não autorizados. A conta sem segundo fator expõe principalmente a acesso e uso não autorizados, e por tabela a divulgação e a modificação.",
-      "A política de segurança descreve o que a TI faz",
-      "NOT APPLICABLE significa \"sem risco\""
+      "Níveis existem para ordenar gasto; NOT APPLICABLE para confidencialidade de um tipo de informação é uma saída legítima e documentada",
+      "\"Execução\". Assinar a política é um evento; responder pela execução é uma rotina de acompanhamento, cobrança de prazo e evidência."
     ],
     "correta": 1,
     "justificativa": ""
@@ -112,9 +112,9 @@
     "enunciado": "Por que o FIPS 199 proíbe NOT APPLICABLE para um sistema?",
     "alternativas": [
       "Porque o funcionamento básico do próprio sistema — processamento, funções críticas, informação de nível de sistema — exige um mínimo de proteção. O piso de um sistema é LOW.",
-      "Segurança da informação é o mesmo que segurança de TI",
-      "A política de segurança descreve o que a TI faz",
-      "NOT APPLICABLE significa \"sem risco\""
+      "Acesso, uso, divulgação, interrupção, modificação e destruição não autorizados. A conta sem segundo fator expõe principalmente a acesso e uso não autorizados, e por tabela a divulgação e a modificação.",
+      "Níveis existem para ordenar gasto; NOT APPLICABLE para confidencialidade de um tipo de informação é uma saída legítima e documentada",
+      "\"Execução\". Assinar a política é um evento; responder pela execução é uma rotina de acompanhamento, cobrança de prazo e evidência."
     ],
     "correta": 0,
     "justificativa": ""
@@ -131,10 +131,10 @@
     "status": "rascunho",
     "enunciado": "Um diretor responde pela política de segurança cibernética e pela execução do plano de resposta. Qual palavra desse trecho muda o trabalho dele no dia a dia?",
     "alternativas": [
-      "Segurança da informação é o mesmo que segurança de TI",
+      "Níveis existem para ordenar gasto; NOT APPLICABLE para confidencialidade de um tipo de informação é uma saída legítima e documentada",
       "\"Execução\". Assinar a política é um evento; responder pela execução é uma rotina de acompanhamento, cobrança de prazo e evidência.",
-      "A política de segurança descreve o que a TI faz",
-      "NOT APPLICABLE significa \"sem risco\""
+      "A política precisa dizer quais tipos de informação estão cobertos e quem responde pela execução em cada um",
+      "O perímetro se define por informação e por obrigação; a TI é um dos meios de proteção, não o escopo"
     ],
     "correta": 1,
     "justificativa": ""
@@ -151,10 +151,10 @@
     "status": "rascunho",
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"Confidencialidade é sempre o eixo mais importante\". Qual é a correção?",
     "alternativas": [
-      "A média dos tipos de informação dá o nível do sistema",
+      "Integridade exige controle de alteração e registro de auditoria, além de restauração",
       "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la",
-      "Alta disponibilidade implica alta integridade",
-      "Volume de dados define o nível"
+      "Cada objetivo recebe nível próprio, com justificativa própria",
+      "Cem mil registros de baixo impacto podem continuar LOW; um único registro com risco de vida pode ser HIGH"
     ],
     "correta": 1,
     "justificativa": "Em sistemas de controle industrial, o exemplo do próprio FIPS 199 mostra confidencialidade NOT APPLICABLE com integridade e disponibilidade HIGH"
@@ -171,10 +171,10 @@
     "status": "rascunho",
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"Alta disponibilidade implica alta integridade\". Qual é a correção?",
     "alternativas": [
+      "High water mark por objetivo, sem compensação entre eixos",
       "A média dos tipos de informação dá o nível do sistema",
-      "Confidencialidade é sempre o eixo mais importante",
       "Cada objetivo recebe nível próprio, com justificativa própria",
-      "Volume de dados define o nível"
+      "Confidencialidade é sempre o eixo mais importante"
     ],
     "correta": 2,
     "justificativa": "São medidas separadas; um serviço redundante pode entregar dado corrompido com total disponibilidade"
@@ -191,9 +191,9 @@
     "status": "rascunho",
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"Volume de dados define o nível\". Qual é a correção?",
     "alternativas": [
-      "A média dos tipos de informação dá o nível do sistema",
-      "Confidencialidade é sempre o eixo mais importante",
-      "Alta disponibilidade implica alta integridade",
+      "Integridade exige controle de alteração e registro de auditoria, além de restauração",
+      "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la",
+      "Cada objetivo recebe nível próprio, com justificativa própria",
       "Cem mil registros de baixo impacto podem continuar LOW; um único registro com risco de vida pode ser HIGH"
     ],
     "correta": 3,
@@ -212,9 +212,9 @@
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"A média dos tipos de informação dá o nível do sistema\". Qual é a correção?",
     "alternativas": [
       "High water mark por objetivo, sem compensação entre eixos",
+      "Cada objetivo recebe nível próprio, com justificativa própria",
       "Confidencialidade é sempre o eixo mais importante",
-      "Alta disponibilidade implica alta integridade",
-      "Volume de dados define o nível"
+      "Alta disponibilidade implica alta integridade"
     ],
     "correta": 0,
     "justificativa": "O FIPS 199 usa o valor mais alto por objetivo, não média"
@@ -231,10 +231,10 @@
     "status": "rascunho",
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"Backup resolve integridade\". Qual é a correção?",
     "alternativas": [
-      "A média dos tipos de informação dá o nível do sistema",
+      "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la",
       "Integridade exige controle de alteração e registro de auditoria, além de restauração",
-      "Confidencialidade é sempre o eixo mais importante",
-      "Alta disponibilidade implica alta integridade"
+      "Cem mil registros de baixo impacto podem continuar LOW; um único registro com risco de vida pode ser HIGH",
+      "Cada objetivo recebe nível próprio, com justificativa própria"
     ],
     "correta": 1,
     "justificativa": "Não repúdio e autenticidade fazem parte da integridade; restauração não prova quem alterou nem quando"
@@ -252,9 +252,9 @@
     "enunciado": "Um sistema carrega um tipo de informação HIGH em disponibilidade e sete tipos LOW. Qual é o nível de disponibilidade do sistema?",
     "alternativas": [
       "HIGH. O high water mark toma o valor mais alto por objetivo, sem média.",
-      "A média dos tipos de informação dá o nível do sistema",
-      "Confidencialidade é sempre o eixo mais importante",
-      "Alta disponibilidade implica alta integridade"
+      "Cada objetivo recebe nível próprio, com justificativa própria",
+      "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la",
+      "Integridade exige controle de alteração e registro de auditoria, além de restauração"
     ],
     "correta": 0,
     "justificativa": ""
@@ -271,10 +271,10 @@
     "status": "rascunho",
     "enunciado": "Por que NOT APPLICABLE não pode ser usado em um sistema?",
     "alternativas": [
-      "A média dos tipos de informação dá o nível do sistema",
+      "Alteração feita por alguém com acesso legítimo, sem quebra de autenticação, como a troca de um valor em uma tabela de referência por um operador autorizado a acessá-la. O backup restaura o dado e não aponta o autor.",
       "Porque o funcionamento do próprio sistema exige um piso de proteção: processamento, funções críticas e informação de nível de sistema precisam de proteção mínima. O piso é LOW.",
-      "Confidencialidade é sempre o eixo mais importante",
-      "Alta disponibilidade implica alta integridade"
+      "Cem mil registros de baixo impacto podem continuar LOW; um único registro com risco de vida pode ser HIGH",
+      "Integridade exige controle de alteração e registro de auditoria, além de restauração"
     ],
     "correta": 1,
     "justificativa": ""
@@ -291,10 +291,10 @@
     "status": "rascunho",
     "enunciado": "Dê um exemplo de falha de integridade que não seja detectável por restauração de backup.",
     "alternativas": [
-      "A média dos tipos de informação dá o nível do sistema",
-      "Confidencialidade é sempre o eixo mais importante",
+      "Porque o funcionamento do próprio sistema exige um piso de proteção: processamento, funções críticas e informação de nível de sistema precisam de proteção mínima. O piso é LOW.",
+      "Cem mil registros de baixo impacto podem continuar LOW; um único registro com risco de vida pode ser HIGH",
       "Alteração feita por alguém com acesso legítimo, sem quebra de autenticação, como a troca de um valor em uma tabela de referência por um operador autorizado a acessá-la. O backup restaura o dado e não aponta o autor.",
-      "Alta disponibilidade implica alta integridade"
+      "Integridade exige controle de alteração e registro de auditoria, além de restauração"
     ],
     "correta": 2,
     "justificativa": ""
@@ -311,10 +311,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ameaças, vulnerabilidades e risco: o vocabulário mínimo: um colega afirma que \"Vulnerabilidade e risco são a mesma coisa\". Qual é a correção?",
     "alternativas": [
-      "O responsável pela linha é quem executa o controle",
-      "Depois do controle aplicado o risco desaparece",
+      "Registre o risco residual e o responsável pela aceitação",
+      "Nomeie quem responde pela escolha entre tratar, transferir e aceitar",
       "Trate a vulnerabilidade como insumo do risco, não como o risco",
-      "Só existe risco se houver adversário humano"
+      "O responsável pela linha é quem executa o controle"
     ],
     "correta": 2,
     "justificativa": "A definição de vulnerabilidade é fraqueza; risco é função de impacto e probabilidade, e depende de existir fonte de ameaça e consequência"
@@ -331,9 +331,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Ameaças, vulnerabilidades e risco: o vocabulário mínimo: um colega afirma que \"Só existe risco se houver adversário humano\". Qual é a correção?",
     "alternativas": [
-      "O responsável pela linha é quem executa o controle",
-      "Depois do controle aplicado o risco desaparece",
-      "Vulnerabilidade e risco são a mesma coisa",
+      "Use poucos degraus, defina cada um com uma frase, e declare quando falta evidência",
+      "Nomeie quem responde pela escolha entre tratar, transferir e aceitar",
+      "Trate a vulnerabilidade como insumo do risco, não como o risco",
       "Falha de hardware, erro de configuração e evento natural são fontes de ameaça"
     ],
     "correta": 3,
@@ -352,9 +352,9 @@
     "enunciado": "Sobre Ameaças, vulnerabilidades e risco: o vocabulário mínimo: um colega afirma que \"Risco se mede em reais com precisão\". Qual é a correção?",
     "alternativas": [
       "Use poucos degraus, defina cada um com uma frase, e declare quando falta evidência",
-      "O responsável pela linha é quem executa o controle",
-      "Depois do controle aplicado o risco desaparece",
-      "Só existe risco se houver adversário humano"
+      "Falha de hardware, erro de configuração e evento natural são fontes de ameaça",
+      "Nomeie quem responde pela escolha entre tratar, transferir e aceitar",
+      "Trate a vulnerabilidade como insumo do risco, não como o risco"
     ],
     "correta": 0,
     "justificativa": "Estimativa sem histórico produz número sem significado, e a precisão aparente contamina a decisão"
@@ -371,10 +371,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ameaças, vulnerabilidades e risco: o vocabulário mínimo: um colega afirma que \"Depois do controle aplicado o risco desaparece\". Qual é a correção?",
     "alternativas": [
-      "O responsável pela linha é quem executa o controle",
+      "Trate a vulnerabilidade como insumo do risco, não como o risco",
       "Registre o risco residual e o responsável pela aceitação",
-      "Só existe risco se houver adversário humano",
-      "Vulnerabilidade e risco são a mesma coisa"
+      "O responsável pela linha é quem executa o controle",
+      "Nomeie quem responde pela escolha entre tratar, transferir e aceitar"
     ],
     "correta": 1,
     "justificativa": "Risco residual permanece e precisa constar no registro, com quem o aceitou"
@@ -391,10 +391,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ameaças, vulnerabilidades e risco: o vocabulário mínimo: um colega afirma que \"O responsável pela linha é quem executa o controle\". Qual é a correção?",
     "alternativas": [
-      "Depois do controle aplicado o risco desaparece",
-      "Só existe risco se houver adversário humano",
+      "Trate a vulnerabilidade como insumo do risco, não como o risco",
+      "Falha de hardware, erro de configuração e evento natural são fontes de ameaça",
       "Nomeie quem responde pela escolha entre tratar, transferir e aceitar",
-      "Vulnerabilidade e risco são a mesma coisa"
+      "Registre o risco residual e o responsável pela aceitação"
     ],
     "correta": 2,
     "justificativa": "Quem executa não decide sobre orçamento nem responde por aceitar"
@@ -412,9 +412,9 @@
     "enunciado": "Um cadeado quebrado na sala de servidores é qual dos três termos? O que falta para virar risco?",
     "alternativas": [
       "Vulnerabilidade. Falta a fonte de ameaça com método viável e a consequência estimada em impacto e probabilidade.",
-      "O responsável pela linha é quem executa o controle",
-      "Depois do controle aplicado o risco desaparece",
-      "Só existe risco se houver adversário humano"
+      "Transferir o risco por contrato ou seguro, e aceitar formalmente o risco residual com responsável nomeado.",
+      "Exposição — o quanto o alvo é alcançável e o quanto o evento é frequente no setor — e histórico interno dos últimos doze meses.",
+      "Use poucos degraus, defina cada um com uma frase, e declare quando falta evidência"
     ],
     "correta": 0,
     "justificativa": ""
@@ -431,10 +431,10 @@
     "status": "rascunho",
     "enunciado": "Quais são os dois insumos legítimos de uma estimativa de probabilidade?",
     "alternativas": [
-      "O responsável pela linha é quem executa o controle",
+      "Vulnerabilidade. Falta a fonte de ameaça com método viável e a consequência estimada em impacto e probabilidade.",
       "Exposição — o quanto o alvo é alcançável e o quanto o evento é frequente no setor — e histórico interno dos últimos doze meses.",
-      "Depois do controle aplicado o risco desaparece",
-      "Só existe risco se houver adversário humano"
+      "Transferir o risco por contrato ou seguro, e aceitar formalmente o risco residual com responsável nomeado.",
+      "O relatório deixa de ser lista de projetos e passa a ser lista de riscos com impacto, probabilidade, resposta proposta e a assinatura de quem aceita o que sobra."
     ],
     "correta": 1,
     "justificativa": ""
@@ -451,10 +451,10 @@
     "status": "rascunho",
     "enunciado": "Cite duas respostas possíveis a um risco, além de tratá-lo.",
     "alternativas": [
-      "O responsável pela linha é quem executa o controle",
-      "Depois do controle aplicado o risco desaparece",
+      "Vulnerabilidade. Falta a fonte de ameaça com método viável e a consequência estimada em impacto e probabilidade.",
+      "Exposição — o quanto o alvo é alcançável e o quanto o evento é frequente no setor — e histórico interno dos últimos doze meses.",
       "Transferir o risco por contrato ou seguro, e aceitar formalmente o risco residual com responsável nomeado.",
-      "Só existe risco se houver adversário humano"
+      "Use poucos degraus, defina cada um com uma frase, e declare quando falta evidência"
     ],
     "correta": 2,
     "justificativa": ""
@@ -471,9 +471,9 @@
     "status": "rascunho",
     "enunciado": "O que muda no relatório ao comitê quando aceitar risco é ato da administração?",
     "alternativas": [
-      "O responsável pela linha é quem executa o controle",
-      "Depois do controle aplicado o risco desaparece",
-      "Só existe risco se houver adversário humano",
+      "Exposição — o quanto o alvo é alcançável e o quanto o evento é frequente no setor — e histórico interno dos últimos doze meses.",
+      "Vulnerabilidade. Falta a fonte de ameaça com método viável e a consequência estimada em impacto e probabilidade.",
+      "Transferir o risco por contrato ou seguro, e aceitar formalmente o risco residual com responsável nomeado.",
       "O relatório deixa de ser lista de projetos e passa a ser lista de riscos com impacto, probabilidade, resposta proposta e a assinatura de quem aceita o que sobra."
     ],
     "correta": 3,
@@ -512,9 +512,9 @@
     "enunciado": "Sobre O mandato do CISO: o que a lei e o mercado esperam: um colega afirma que \"CISO e encarregado são a mesma função por definição\". Qual é a correção?",
     "alternativas": [
       "Nada impede a mesma pessoa acumular as duas designações, mas cada uma exige ato próprio, e presumir que uma cobre a outra deixa a outra sem dono",
-      "NIST CSF e ISO/IEC 27001 obrigam a empresa brasileira",
-      "Delegar operação é delegar responsabilidade",
-      "A NIS2 só alcança empresas europeias"
+      "Verifique cláusulas de segurança em contratos com clientes europeus antes de presumir que a diretiva não toca você",
+      "A obrigação vem do regulador setorial, da lei e do contrato; o framework é a régua aceita pelo mercado",
+      "Escreva no termo o que pode ser delegado e o que permanece com o designado"
     ],
     "correta": 0,
     "justificativa": "A LGPD atribui ao encarregado tarefas de interlocução com titulares e autoridade; a norma setorial cobra execução do plano de resposta do diretor designado"
@@ -531,10 +531,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O mandato do CISO: o que a lei e o mercado esperam: um colega afirma que \"NIST CSF e ISO/IEC 27001 obrigam a empresa brasileira\". Qual é a correção?",
     "alternativas": [
-      "CISO e encarregado são a mesma função por definição",
+      "Verifique cláusulas de segurança em contratos com clientes europeus antes de presumir que a diretiva não toca você",
       "A obrigação vem do regulador setorial, da lei e do contrato; o framework é a régua aceita pelo mercado",
-      "Delegar operação é delegar responsabilidade",
-      "A NIS2 só alcança empresas europeias"
+      "Escreva no termo o que pode ser delegado e o que permanece com o designado",
+      "Nada impede a mesma pessoa acumular as duas designações, mas cada uma exige ato próprio, e presumir que uma cobre a outra deixa a outra sem dono"
     ],
     "correta": 1,
     "justificativa": "São frameworks e normas de requisitos, sem poder de imposição no Brasil"
@@ -551,10 +551,10 @@
     "status": "rascunho",
     "enunciado": "Sobre O mandato do CISO: o que a lei e o mercado esperam: um colega afirma que \"A NIS2 só alcança empresas europeias\". Qual é a correção?",
     "alternativas": [
-      "NIST CSF e ISO/IEC 27001 obrigam a empresa brasileira",
-      "CISO e encarregado são a mesma função por definição",
+      "A obrigação vem do regulador setorial, da lei e do contrato; o framework é a régua aceita pelo mercado",
+      "Nada impede a mesma pessoa acumular as duas designações, mas cada uma exige ato próprio, e presumir que uma cobre a outra deixa a outra sem dono",
       "Verifique cláusulas de segurança em contratos com clientes europeus antes de presumir que a diretiva não toca você",
-      "Delegar operação é delegar responsabilidade"
+      "Escreva no termo o que pode ser delegado e o que permanece com o designado"
     ],
     "correta": 2,
     "justificativa": "A diretiva alcança entidades de porte médio e grande em 18 setores críticos, e o efeito prático chega por contrato a fornecedores fora da União Europeia"
@@ -571,9 +571,9 @@
     "status": "rascunho",
     "enunciado": "Sobre O mandato do CISO: o que a lei e o mercado esperam: um colega afirma que \"Delegar operação é delegar responsabilidade\". Qual é a correção?",
     "alternativas": [
+      "A designação formal é o que transforma função em mandato",
       "NIST CSF e ISO/IEC 27001 obrigam a empresa brasileira",
       "CISO e encarregado são a mesma função por definição",
-      "A NIS2 só alcança empresas europeias",
       "Escreva no termo o que pode ser delegado e o que permanece com o designado"
     ],
     "correta": 3,
@@ -592,9 +592,9 @@
     "enunciado": "Qual documento brasileiro exige a designação de responsável pela política de segurança cibernética, e o que exatamente ele cobra do designado?",
     "alternativas": [
       "A Resolução CMN nº 4.893/2021, art. 7º. O designado responde pela política de segurança cibernética e pela execução do plano de ação e de resposta a incidentes.",
-      "NIST CSF e ISO/IEC 27001 obrigam a empresa brasileira",
-      "CISO e encarregado são a mesma função por definição",
-      "Delegar operação é delegar responsabilidade"
+      "Nada impede a mesma pessoa acumular as duas designações, mas cada uma exige ato próprio, e presumir que uma cobre a outra deixa a outra sem dono",
+      "Política de segurança aprovada, registro de risco com responsáveis nomeados e evidência de execução do plano de resposta a incidentes.",
+      "Verifique cláusulas de segurança em contratos com clientes europeus antes de presumir que a diretiva não toca você"
     ],
     "correta": 0,
     "justificativa": ""
@@ -611,9 +611,9 @@
     "status": "rascunho",
     "enunciado": "Quantos setores a NIS2 alcança e qual era o prazo de transposição pelos Estados-membros?",
     "alternativas": [
+      "Escreva no termo o que pode ser delegado e o que permanece com o designado",
+      "A designação formal é o que transforma função em mandato",
       "NIST CSF e ISO/IEC 27001 obrigam a empresa brasileira",
-      "CISO e encarregado são a mesma função por definição",
-      "Delegar operação é delegar responsabilidade",
       "18 setores críticos; prazo de transposição em 17 de outubro de 2024."
     ],
     "correta": 3,
@@ -632,9 +632,9 @@
     "enunciado": "Quais são os três artefatos que certificação, cliente e auditoria pedem e que você deveria conseguir produzir em um dia?",
     "alternativas": [
       "Política de segurança aprovada, registro de risco com responsáveis nomeados e evidência de execução do plano de resposta a incidentes.",
-      "NIST CSF e ISO/IEC 27001 obrigam a empresa brasileira",
-      "CISO e encarregado são a mesma função por definição",
-      "Delegar operação é delegar responsabilidade"
+      "Nada impede a mesma pessoa acumular as duas designações, mas cada uma exige ato próprio, e presumir que uma cobre a outra deixa a outra sem dono",
+      "Verifique cláusulas de segurança em contratos com clientes europeus antes de presumir que a diretiva não toca você",
+      "A Resolução CMN nº 4.893/2021, art. 7º. O designado responde pela política de segurança cibernética e pela execução do plano de ação e de resposta a incidentes."
     ],
     "correta": 0,
     "justificativa": ""
@@ -652,9 +652,9 @@
     "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Começar pela ferramenta\". Qual é a correção?",
     "alternativas": [
       "Nos primeiros 90 dias, produza leitura da organização; compra vem depois",
-      "Agenda sem prazo externo no calendário",
-      "Ler sem responder às perguntas",
-      "Estudar tudo antes de decidir"
+      "Decida com o vocabulário mínimo e registre a decisão como provisória",
+      "Responda à seção de recuperação ativa antes de ver o gabarito",
+      "Coloque marcos e prazos regulatórios na mesma página"
     ],
     "correta": 0,
     "justificativa": "Ferramenta exige processo, processo exige política, política exige perímetro, e o perímetro ainda não foi escrito"
@@ -671,10 +671,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Estudar tudo antes de decidir\". Qual é a correção?",
     "alternativas": [
-      "Agenda sem prazo externo no calendário",
+      "Nos primeiros 90 dias, produza leitura da organização; compra vem depois",
       "Decida com o vocabulário mínimo e registre a decisão como provisória",
-      "Ler sem responder às perguntas",
-      "Marco sem pessoa que cobra"
+      "Responda à seção de recuperação ativa antes de ver o gabarito",
+      "Coloque marcos e prazos regulatórios na mesma página"
     ],
     "correta": 1,
     "justificativa": "O cargo já exige decisões na primeira semana, e prazo externo não acompanha o ritmo da leitura"
@@ -691,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Ler sem responder às perguntas\". Qual é a correção?",
     "alternativas": [
-      "Agenda sem prazo externo no calendário",
-      "Estudar tudo antes de decidir",
+      "Decida com o vocabulário mínimo e registre a decisão como provisória",
+      "Coloque marcos e prazos regulatórios na mesma página",
       "Responda à seção de recuperação ativa antes de ver o gabarito",
-      "Marco sem pessoa que cobra"
+      "Nos primeiros 90 dias, produza leitura da organização; compra vem depois"
     ],
     "correta": 2,
     "justificativa": "Ler produz sensação de domínio e não produz recuperação"
@@ -711,9 +711,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Agenda sem prazo externo no calendário\". Qual é a correção?",
     "alternativas": [
-      "Ler sem responder às perguntas",
-      "Estudar tudo antes de decidir",
-      "Marco sem pessoa que cobra",
+      "Nomeie quem cobra cada marco, além de quem executa",
+      "Responda à seção de recuperação ativa antes de ver o gabarito",
+      "Decida com o vocabulário mínimo e registre a decisão como provisória",
       "Coloque marcos e prazos regulatórios na mesma página"
     ],
     "correta": 3,
@@ -732,9 +732,9 @@
     "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Marco sem pessoa que cobra\". Qual é a correção?",
     "alternativas": [
       "Nomeie quem cobra cada marco, além de quem executa",
-      "Agenda sem prazo externo no calendário",
-      "Ler sem responder às perguntas",
-      "Estudar tudo antes de decidir"
+      "Coloque marcos e prazos regulatórios na mesma página",
+      "Responda à seção de recuperação ativa antes de ver o gabarito",
+      "Agenda sem prazo externo no calendário"
     ],
     "correta": 0,
     "justificativa": "Marco sem cobrança vira lista de intenções e o atraso é descoberto no dia 90"
@@ -751,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "Quais são as quatro etapas do ciclo de leitura de um tema, em ordem?",
     "alternativas": [
-      "Agenda sem prazo externo no calendário",
+      "Porque a política mexe na responsabilidade de todas as áreas antes de você ter leitura da organização, e o primeiro entregável deve produzir informação, não conflito.",
       "Pré-teste com nota de confiança; leitura do conteúdo, incluindo o exemplo resolvido; recuperação ativa respondida com o arquivo fechado; agendamento das revisões em D+1, D+7 e D+30.",
-      "Ler sem responder às perguntas",
-      "Estudar tudo antes de decidir"
+      "A trilha em 91-trilhas, que define a cadência, a regra de rebaixamento e o formato do registro. O estado de cada usuário, incluindo o campo `proxima_revisao`, fica no aplicativo. O tema apenas sugere os intervalos.",
+      "Nos primeiros 90 dias, produza leitura da organização; compra vem depois"
     ],
     "correta": 1,
     "justificativa": ""
@@ -771,10 +771,10 @@
     "status": "rascunho",
     "enunciado": "Qual é a regra de rebaixamento para um item errado em D+7 e para um errado em D+30?",
     "alternativas": [
-      "Agenda sem prazo externo no calendário",
-      "Ler sem responder às perguntas",
+      "Responda à seção de recuperação ativa antes de ver o gabarito",
+      "Decida com o vocabulário mínimo e registre a decisão como provisória",
       "Erro em D+7 rebaixa para D+3. Erro em D+30 rebaixa para D+7.",
-      "Estudar tudo antes de decidir"
+      "Coloque marcos e prazos regulatórios na mesma página"
     ],
     "correta": 2,
     "justificativa": ""
@@ -792,9 +792,9 @@
     "enunciado": "Quem é o dono do calendário de revisão espaçada?",
     "alternativas": [
       "A trilha em 91-trilhas, que define a cadência, a regra de rebaixamento e o formato do registro. O estado de cada usuário, incluindo o campo `proxima_revisao`, fica no aplicativo. O tema apenas sugere os intervalos.",
-      "Agenda sem prazo externo no calendário",
-      "Ler sem responder às perguntas",
-      "Estudar tudo antes de decidir"
+      "Pré-teste com nota de confiança; leitura do conteúdo, incluindo o exemplo resolvido; recuperação ativa respondida com o arquivo fechado; agendamento das revisões em D+1, D+7 e D+30.",
+      "Porque a política mexe na responsabilidade de todas as áreas antes de você ter leitura da organização, e o primeiro entregável deve produzir informação, não conflito.",
+      "Nos primeiros 90 dias, produza leitura da organização; compra vem depois"
     ],
     "correta": 0,
     "justificativa": ""
@@ -811,10 +811,10 @@
     "status": "rascunho",
     "enunciado": "Por que o primeiro entregável não deve ser a política de segurança?",
     "alternativas": [
-      "Agenda sem prazo externo no calendário",
+      "Pré-teste com nota de confiança; leitura do conteúdo, incluindo o exemplo resolvido; recuperação ativa respondida com o arquivo fechado; agendamento das revisões em D+1, D+7 e D+30.",
       "Porque a política mexe na responsabilidade de todas as áreas antes de você ter leitura da organização, e o primeiro entregável deve produzir informação, não conflito.",
-      "Ler sem responder às perguntas",
-      "Estudar tudo antes de decidir"
+      "A trilha em 91-trilhas, que define a cadência, a regra de rebaixamento e o formato do registro. O estado de cada usuário, incluindo o campo `proxima_revisao`, fica no aplicativo. O tema apenas sugere os intervalos.",
+      "Nos primeiros 90 dias, produza leitura da organização; compra vem depois"
     ],
     "correta": 1,
     "justificativa": ""

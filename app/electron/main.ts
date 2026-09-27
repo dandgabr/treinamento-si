@@ -44,6 +44,34 @@ const TIPOS: Record<string, string> = {
   '.map': 'application/json; charset=utf-8',
 }
 
+// O que o handler pode servir, e nada mais: o HTML, os dois JSON que o build emite ao lado
+// dele e os chunks em `assets/`.
+//
+// A lista e fechada porque a trava de travessia, sozinha, e lexical: `path.resolve` monta o
+// caminho sem consultar o disco, entao um symlink dentro do build passava por ela como se
+// fosse um arquivo do build — `dist-desktop/atalho -> /etc/passwd` era servido com 200.
+//
+// Ela decide o NOME, e o nome nao basta: um symlink com nome permitido
+// (`assets/chunk-x.js -> /etc/passwd`) passaria. Por isso o handler tambem resolve o caminho
+// real antes de ler (ver `registrarProtocolo`). As duas travas juntas: o que nao for um dos
+// nomes do build nem um arquivo de verdade dentro dele nao e servido.
+//
+// Os nomes de `assets/` sao hashes do Vite (letras, digitos, ponto, hifen, sublinhado). O
+// primeiro caractere de cada segmento nao pode ser ponto, entao `..` — em qualquer
+// codificacao, porque a conferencia e sobre o caminho ja decodificado — nao casa, e uma
+// barra invertida (o separador do Windows) tambem nao.
+const SERVIVEIS: readonly RegExp[] = [
+  /^index\.html$/,
+  /^conteudo\.json$/,
+  /^questoes\.json$/,
+  /^assets\/(?:[A-Za-z0-9_-][A-Za-z0-9._-]*\/)*[A-Za-z0-9_-][A-Za-z0-9._-]*$/,
+]
+
+/** Diz se o caminho pedido e um arquivo que o build emite. Exportada para o teste. */
+export function arquivoServivel(caminho: string): boolean {
+  return SERVIVEIS.some((permitido) => permitido.test(caminho))
+}
+
 // `corsEnabled: true` e obrigatorio junto de `supportFetchAPI`: sem ele, uma pagina de
 // origem remota carregada neste renderer conseguiria ler os recursos de `app://`
 // (padrao do CVE-2026-70604 / GHSA-v3j7-r9gq-3gjw). Hoje nao existe pagina remota aqui,
@@ -72,17 +100,34 @@ function registrarProtocolo(): void {
       // Um host so. O handler ignorava o host, entao `app://qualquercoisa/...` era
       // servido igual.
       if (url.host !== 'bundle') return new Response('nao encontrado', { status: 404 })
-      const caminho = decodeURIComponent(url.pathname).replace(/^\/+/, '')
-      const alvo = path.resolve(RENDERER, caminho || 'index.html')
-      // Trava de travessia: o arquivo tem de estar dentro do build. E o unico ponto em
-      // que um caminho vindo de fora vira leitura de disco.
-      if (alvo !== RENDERER && !alvo.startsWith(RENDERER + path.sep)) {
+      const caminho = decodeURIComponent(url.pathname).replace(/^\/+/, '') || 'index.html'
+      // Allowlist do que o build emite, decidida sobre o caminho ja decodificado: o que nao
+      // casa nao chega a virar caminho de disco. E o que recusa o symlink de nome estranho,
+      // que a conferencia de prefixo logo abaixo sozinha aprovaria (ela compara texto, nao o
+      // arquivo que o texto aponta).
+      if (!arquivoServivel(caminho)) return new Response('nao encontrado', { status: 404 })
+      const alvo = path.resolve(RENDERER, caminho)
+      // Segunda trava, e a unica que olha o disco: a allowlist acima decide o NOME, e um
+      // symlink com nome permitido passaria por ela. Resolver o caminho real e conferir o
+      // prefixo de novo fecha a classe — o que for servido e um arquivo que existe mesmo
+      // dentro do build. A raiz tambem e resolvida: o proprio diretorio do build pode estar
+      // sob um caminho com symlink. Isto substitui a conferencia lexical que havia aqui: ela
+      // so pegava `..` no texto, e o prefixo sobre o caminho real pega isso e o symlink.
+      //
+      // Fica no lugar de ler o caminho real uma vez e guardar: `fs.realpath` funciona dentro
+      // do `app.asar` (conferido na versao empacotada) e nao ha o que otimizar — sao poucos
+      // pedidos por sessao.
+      const raiz = await fs.realpath(RENDERER)
+      const real = await fs.realpath(alvo)
+      if (real !== raiz && !real.startsWith(raiz + path.sep)) {
         return new Response('nao encontrado', { status: 404 })
       }
-      const corpo = await fs.readFile(alvo)
+      const corpo = await fs.readFile(real)
       return new Response(corpo, {
         headers: {
-          'Content-Type': TIPOS[path.extname(alvo)] ?? 'application/octet-stream',
+          // O tipo vem do caminho REAL: se um nome do build for um symlink para outro arquivo
+          // do build, o que se serve e o alvo, e o `nosniff` abaixo nao perdoa o rotulo errado.
+          'Content-Type': TIPOS[path.extname(real)] ?? 'application/octet-stream',
           'Content-Security-Policy': CSP,
           'X-Content-Type-Options': 'nosniff',
           'Cache-Control': 'no-store',

@@ -48,7 +48,7 @@ URLs distintas checadas: **242**. Respondem 2xx/3xx: **228**. Bloqueiam cliente 
 | 200 | <https://abntcatalogo.com.br/sebrae/norma.aspx?Q=OVllOUVzQUhJdVNDOTZsNnJDUWdYaFNFVjEwWkx6ZUpieFQ3bjl5M3pyaz0=> |
 | 200 | <https://abntcatalogo.com.br/sebrae/norma.aspx?Q=WXV0VDkwSGkvd0Z5K2xqb0pOczhybU0xUGFhRllraFE4anAvT2lBQzNxbz0=> |
 | 200 | <https://api-security.owasp.org/> |
-| 200 | <https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf> |
+| 200 | <https://www.comptia.org/en-us/certifications/security/> |
 | 200 | <https://atlas.mitre.org/> |
 | 200 | <https://attack.mitre.org/> |
 | 200 | <https://attack.mitre.org/resources/versions/> |

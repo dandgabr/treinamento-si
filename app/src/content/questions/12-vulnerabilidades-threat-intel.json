@@ -11,9 +11,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"A ferramenta reportou sucesso na instalação, então o item está corrigido\". Qual é a correção?",
     "alternativas": [
-      "A lista de CVEs abertas mede a exposição",
-      "Correção é projeto com data de término",
-      "Software fora de suporte sai da conta",
+      "Coloque janela no calendário e orçamento na base",
+      "Meça tempo de exposição, taxa de verificação e concentração",
+      "Inventarie ativo, dono, software e exposição antes de varrer",
       "Leia a versão do componente no próprio dispositivo"
     ],
     "correta": 3,
@@ -32,9 +32,9 @@
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"Varredura é o começo do processo\". Qual é a correção?",
     "alternativas": [
       "Inventarie ativo, dono, software e exposição antes de varrer",
-      "A ferramenta reportou sucesso na instalação, então o item está corrigido",
-      "A lista de CVEs abertas mede a exposição",
-      "Correção é projeto com data de término"
+      "Meça tempo de exposição, taxa de verificação e concentração",
+      "Decida entre substituir, isolar ou aceitar o risco formalmente",
+      "Leia a versão do componente no próprio dispositivo"
     ],
     "correta": 0,
     "justificativa": "Sem inventário com dono, a varredura gera lista sem responsável"
@@ -53,8 +53,8 @@
     "alternativas": [
       "A ferramenta reportou sucesso na instalação, então o item está corrigido",
       "Combine exploração confirmada, probabilidade estimada e contexto do ativo",
-      "A lista de CVEs abertas mede a exposição",
-      "Correção é projeto com data de término"
+      "Decida entre substituir, isolar ou aceitar o risco formalmente",
+      "Inventarie ativo, dono, software e exposição antes de varrer"
     ],
     "correta": 1,
     "justificativa": "A nota descreve o defeito e ignora a probabilidade de exploração e o valor do ativo"
@@ -71,10 +71,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"Correção é projeto com data de término\". Qual é a correção?",
     "alternativas": [
+      "Leia a versão do componente no próprio dispositivo",
       "A lista de CVEs abertas mede a exposição",
-      "Software fora de suporte sai da conta",
       "Coloque janela no calendário e orçamento na base",
-      "Severidade alta é prioridade alta"
+      "Software fora de suporte sai da conta"
     ],
     "correta": 2,
     "justificativa": "É manutenção preventiva, com janela e orçamento recorrentes"
@@ -91,9 +91,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"Software fora de suporte sai da conta\". Qual é a correção?",
     "alternativas": [
+      "Inventarie ativo, dono, software e exposição antes de varrer",
+      "Meça tempo de exposição, taxa de verificação e concentração",
       "A ferramenta reportou sucesso na instalação, então o item está corrigido",
-      "A lista de CVEs abertas mede a exposição",
-      "Correção é projeto com data de término",
       "Decida entre substituir, isolar ou aceitar o risco formalmente"
     ],
     "correta": 3,
@@ -112,9 +112,9 @@
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"A lista de CVEs abertas mede a exposição\". Qual é a correção?",
     "alternativas": [
       "Meça tempo de exposição, taxa de verificação e concentração",
-      "A ferramenta reportou sucesso na instalação, então o item está corrigido",
-      "Correção é projeto com data de término",
-      "Software fora de suporte sai da conta"
+      "Inventarie ativo, dono, software e exposição antes de varrer",
+      "Decida entre substituir, isolar ou aceitar o risco formalmente",
+      "Leia a versão do componente no próprio dispositivo"
     ],
     "correta": 0,
     "justificativa": "Contagem de itens não distingue probabilidade, exposição do ativo nem idade"
@@ -132,9 +132,9 @@
     "enunciado": "Quais são as cinco etapas do processo definidas pelo NIST SP 800-40 Rev. 4, e qual delas exige instrumentação no dispositivo?",
     "alternativas": [
       "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o host pode reportar a versão do componente corrigido.",
-      "A ferramenta reportou sucesso na instalação, então o item está corrigido",
-      "A lista de CVEs abertas mede a exposição",
-      "Correção é projeto com data de término"
+      "É o item aberto além do prazo declarado na política. Diante dele, as decisões possíveis são corrigir com novo prazo e dono, isolar ou substituir o ativo, ou registrar aceite formal de risco.",
+      "Porque a instalação pode concluir e o sistema seguir executando o código antigo até o reinício, e porque existem reversão e falha silenciosa. A ferramenta prova entrega de pacote; o dispositivo prova versão corrigida.",
+      "O que o ativo é, quem responde por ele, qual software e versão ele executa e quão exposto ele está. Sem dono, a lista de descobertas não vira fila."
     ],
     "correta": 0,
     "justificativa": ""
@@ -151,10 +151,10 @@
     "status": "rascunho",
     "enunciado": "O que o inventário precisa responder por ativo para que a fila de correção exista?",
     "alternativas": [
-      "A ferramenta reportou sucesso na instalação, então o item está corrigido",
+      "É o item aberto além do prazo declarado na política. Diante dele, as decisões possíveis são corrigir com novo prazo e dono, isolar ou substituir o ativo, ou registrar aceite formal de risco.",
       "O que o ativo é, quem responde por ele, qual software e versão ele executa e quão exposto ele está. Sem dono, a lista de descobertas não vira fila.",
-      "A lista de CVEs abertas mede a exposição",
-      "Correção é projeto com data de término"
+      "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o host pode reportar a versão do componente corrigido.",
+      "Porque a instalação pode concluir e o sistema seguir executando o código antigo até o reinício, e porque existem reversão e falha silenciosa. A ferramenta prova entrega de pacote; o dispositivo prova versão corrigida."
     ],
     "correta": 1,
     "justificativa": ""
@@ -171,10 +171,10 @@
     "status": "rascunho",
     "enunciado": "Por que um item com instalação concluída e reportada pela ferramenta não fecha sem verificação no dispositivo?",
     "alternativas": [
-      "A ferramenta reportou sucesso na instalação, então o item está corrigido",
-      "A lista de CVEs abertas mede a exposição",
+      "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o host pode reportar a versão do componente corrigido.",
+      "É o item aberto além do prazo declarado na política. Diante dele, as decisões possíveis são corrigir com novo prazo e dono, isolar ou substituir o ativo, ou registrar aceite formal de risco.",
       "Porque a instalação pode concluir e o sistema seguir executando o código antigo até o reinício, e porque existem reversão e falha silenciosa. A ferramenta prova entrega de pacote; o dispositivo prova versão corrigida.",
-      "Correção é projeto com data de término"
+      "O que o ativo é, quem responde por ele, qual software e versão ele executa e quão exposto ele está. Sem dono, a lista de descobertas não vira fila."
     ],
     "correta": 2,
     "justificativa": ""
@@ -191,9 +191,9 @@
     "status": "rascunho",
     "enunciado": "O que significa um item fora do prazo e quais são as três decisões possíveis diante dele?",
     "alternativas": [
-      "A ferramenta reportou sucesso na instalação, então o item está corrigido",
-      "A lista de CVEs abertas mede a exposição",
-      "Correção é projeto com data de término",
+      "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o host pode reportar a versão do componente corrigido.",
+      "Porque a instalação pode concluir e o sistema seguir executando o código antigo até o reinício, e porque existem reversão e falha silenciosa. A ferramenta prova entrega de pacote; o dispositivo prova versão corrigida.",
+      "O que o ativo é, quem responde por ele, qual software e versão ele executa e quão exposto ele está. Sem dono, a lista de descobertas não vira fila.",
       "É o item aberto além do prazo declarado na política. Diante dele, as decisões possíveis são corrigir com novo prazo e dono, isolar ou substituir o ativo, ou registrar aceite formal de risco."
     ],
     "correta": 3,
@@ -233,8 +233,8 @@
     "alternativas": [
       "Tratar Not Defined como ausência de informação neutral",
       "Use EPSS para ordenar e CVSS para dimensionar o impacto",
-      "Ordenar a fila por EPSS puro e ignorar contexto",
-      "Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade"
+      "Automatize a faixa prioritária e recalcule o resto por exceção",
+      "Ordenar a fila por EPSS puro e ignorar contexto"
     ],
     "correta": 1,
     "justificativa": "O EPSS estima probabilidade de exploração e não descreve impacto"
@@ -251,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Ordenar a fila por EPSS puro e ignorar contexto\". Qual é a correção?",
     "alternativas": [
-      "Tratar Not Defined como ausência de informação neutral",
-      "Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade",
+      "Preencher a métrica é o único caminho para o escore reagir ao tempo",
+      "Automatize a faixa prioritária e recalcule o resto por exceção",
       "Ponderação pelo contexto do ativo é o que a organização acrescenta",
-      "Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura"
+      "Use EPSS para ordenar e CVSS para dimensionar o impacto"
     ],
     "correta": 2,
     "justificativa": "Itens baratos e improváveis ocupam a frente de itens que atingem dado sensível"
@@ -271,9 +271,9 @@
     "status": "rascunho",
     "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Tratar Not Defined como ausência de informação neutral\". Qual é a correção?",
     "alternativas": [
-      "Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade",
-      "Ordenar a fila por EPSS puro e ignorar contexto",
-      "Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura",
+      "Ponderação pelo contexto do ativo é o que a organização acrescenta",
+      "Automatize a faixa prioritária e recalcule o resto por exceção",
+      "Use EPSS para ordenar e CVSS para dimensionar o impacto",
       "Preencher a métrica é o único caminho para o escore reagir ao tempo"
     ],
     "correta": 3,
@@ -292,9 +292,9 @@
     "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Recalcular tudo toda semana\". Qual é a correção?",
     "alternativas": [
       "Automatize a faixa prioritária e recalcule o resto por exceção",
-      "Tratar Not Defined como ausência de informação neutral",
-      "Ordenar a fila por EPSS puro e ignorar contexto",
-      "Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade"
+      "Ponderação pelo contexto do ativo é o que a organização acrescenta",
+      "Preencher a métrica é o único caminho para o escore reagir ao tempo",
+      "Use EPSS para ordenar e CVSS para dimensionar o impacto"
     ],
     "correta": 0,
     "justificativa": "A pontuação muda todos os dias e a base inteira é grande demais"
@@ -313,8 +313,8 @@
     "alternativas": [
       "Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura",
       "Prazo de migração criptográfica tem data de padrão; vulnerabilidade tem prazo de correção",
-      "Tratar Not Defined como ausência de informação neutral",
-      "Ordenar a fila por EPSS puro e ignorar contexto"
+      "Preencher a métrica é o único caminho para o escore reagir ao tempo",
+      "Ponderação pelo contexto do ativo é o que a organização acrescenta"
     ],
     "correta": 1,
     "justificativa": "São decisões de natureza diferente, com dono e data diferentes"
@@ -331,9 +331,9 @@
     "status": "rascunho",
     "enunciado": "O que o EPSS estima exatamente, com que horizonte temporal e com que frequência de publicação?",
     "alternativas": [
-      "Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura",
-      "Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade",
-      "Tratar Not Defined como ausência de informação neutral",
+      "Exigência regulatória, número de clientes afetados, perda financeira, risco à vida ou à propriedade e impacto reputacional. Estão fora do CVSS e continuam dentro da decisão de risco.",
+      "Exploração confirmada em campo, que separa o que já foi usado de verdade; probabilidade estimada de exploração, que ordena o que ainda não foi usado; e contexto do ativo, que pondera a fila por exposição e valor.",
+      "Equivale a Attacked, porque o cálculo assume o pior caso. Não preencher a métrica mantém a pontuação no teto.",
       "A probabilidade de um CVE publicado ser explorado em campo nos próximos 30 dias, publicada como valor entre 0 e 1 com percentil de ranking, todos os dias, para cada CVE."
     ],
     "correta": 3,
@@ -352,9 +352,9 @@
     "enunciado": "O que o valor Not Defined da métrica Exploit Maturity significa no cálculo?",
     "alternativas": [
       "Equivale a Attacked, porque o cálculo assume o pior caso. Não preencher a métrica mantém a pontuação no teto.",
+      "Prazo de migração criptográfica tem data de padrão; vulnerabilidade tem prazo de correção",
       "Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura",
-      "Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade",
-      "Tratar Not Defined como ausência de informação neutral"
+      "Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade"
     ],
     "correta": 0,
     "justificativa": ""
@@ -371,10 +371,10 @@
     "status": "rascunho",
     "enunciado": "Que três sinais se combinam na priorização e o que cada um responde?",
     "alternativas": [
-      "Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura",
+      "Exigência regulatória, número de clientes afetados, perda financeira, risco à vida ou à propriedade e impacto reputacional. Estão fora do CVSS e continuam dentro da decisão de risco.",
       "Exploração confirmada em campo, que separa o que já foi usado de verdade; probabilidade estimada de exploração, que ordena o que ainda não foi usado; e contexto do ativo, que pondera a fila por exposição e valor.",
-      "Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade",
-      "Tratar Not Defined como ausência de informação neutral"
+      "A probabilidade de um CVE publicado ser explorado em campo nos próximos 30 dias, publicada como valor entre 0 e 1 com percentil de ranking, todos os dias, para cada CVE.",
+      "Equivale a Attacked, porque o cálculo assume o pior caso. Não preencher a métrica mantém a pontuação no teto."
     ],
     "correta": 1,
     "justificativa": ""
@@ -391,10 +391,10 @@
     "status": "rascunho",
     "enunciado": "Que fatores a especificação do CVSS declara fora do seu escopo e que, mesmo assim, entram em uma decisão de risco?",
     "alternativas": [
-      "Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura",
-      "Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade",
+      "A probabilidade de um CVE publicado ser explorado em campo nos próximos 30 dias, publicada como valor entre 0 e 1 com percentil de ranking, todos os dias, para cada CVE.",
+      "Exploração confirmada em campo, que separa o que já foi usado de verdade; probabilidade estimada de exploração, que ordena o que ainda não foi usado; e contexto do ativo, que pondera a fila por exposição e valor.",
       "Exigência regulatória, número de clientes afetados, perda financeira, risco à vida ou à propriedade e impacto reputacional. Estão fora do CVSS e continuam dentro da decisão de risco.",
-      "Tratar Not Defined como ausência de informação neutral"
+      "Equivale a Attacked, porque o cálculo assume o pior caso. Não preencher a métrica mantém a pontuação no teto."
     ],
     "correta": 2,
     "justificativa": ""
@@ -411,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Inteligência é a lista de indicadores do fornecedor\". Qual é a correção?",
     "alternativas": [
-      "Mais fontes significam melhor inteligência",
+      "Escritas as regras de publicação, o compartilhamento deixa de ser risco pessoal",
       "Trate o procedimento como o ativo durável e exponha o indicador à expiração",
-      "Coletar primeiro e perguntar depois",
-      "Atribuição é o produto principal"
+      "Escreva a pergunta e o consumidor antes de contratar a fonte",
+      "Priorize verificação e declare a confiança de cada produto"
     ],
     "correta": 1,
     "justificativa": "Indicador sem contexto, sem data e sem prazo de validade gera ruído na detecção"
@@ -431,10 +431,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Coletar primeiro e perguntar depois\". Qual é a correção?",
     "alternativas": [
-      "Inteligência é a lista de indicadores do fornecedor",
-      "Mais fontes significam melhor inteligência",
+      "Priorize verificação e declare a confiança de cada produto",
+      "Registre também a não decisão e reavalie na data marcada",
       "Escreva a pergunta e o consumidor antes de contratar a fonte",
-      "Atribuição é o produto principal"
+      "Inteligência é a lista de indicadores do fornecedor"
     ],
     "correta": 2,
     "justificativa": "Coleta sem requisito produz volume que ninguém consome"
@@ -451,9 +451,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Mais fontes significam melhor inteligência\". Qual é a correção?",
     "alternativas": [
+      "Escreva a pergunta e o consumidor antes de contratar a fonte",
+      "Registre também a não decisão e reavalie na data marcada",
       "Inteligência é a lista de indicadores do fornecedor",
-      "Coletar primeiro e perguntar depois",
-      "Atribuição é o produto principal",
       "Priorize verificação e declare a confiança de cada produto"
     ],
     "correta": 3,
@@ -472,9 +472,9 @@
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Atribuição é o produto principal\". Qual é a correção?",
     "alternativas": [
       "Separe agrupamento, campanha e infraestrutura, e use a atribuição só quando ela muda uma decisão",
-      "Inteligência é a lista de indicadores do fornecedor",
-      "Mais fontes significam melhor inteligência",
-      "Coletar primeiro e perguntar depois"
+      "Escritas as regras de publicação, o compartilhamento deixa de ser risco pessoal",
+      "Trate o procedimento como o ativo durável e exponha o indicador à expiração",
+      "Escreva a pergunta e o consumidor antes de contratar a fonte"
     ],
     "correta": 0,
     "justificativa": "Citar um agrupamento sem evidência não muda detecção nem prazo"
@@ -491,10 +491,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Compartilhar de volta é cortesia\". Qual é a correção?",
     "alternativas": [
-      "Inteligência é a lista de indicadores do fornecedor",
+      "Trate o procedimento como o ativo durável e exponha o indicador à expiração",
       "Escritas as regras de publicação, o compartilhamento deixa de ser risco pessoal",
-      "Mais fontes significam melhor inteligência",
-      "Coletar primeiro e perguntar depois"
+      "Separe agrupamento, campanha e infraestrutura, e use a atribuição só quando ela muda uma decisão",
+      "Escreva a pergunta e o consumidor antes de contratar a fonte"
     ],
     "correta": 1,
     "justificativa": "Informação recebida em confiança tem regra de distribuição"
@@ -511,10 +511,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Relatório sem ação é inútil\". Qual é a correção?",
     "alternativas": [
-      "Inteligência é a lista de indicadores do fornecedor",
-      "Mais fontes significam melhor inteligência",
+      "Priorize verificação e declare a confiança de cada produto",
+      "Escreva a pergunta e o consumidor antes de contratar a fonte",
       "Registre também a não decisão e reavalie na data marcada",
-      "Coletar primeiro e perguntar depois"
+      "Inteligência é a lista de indicadores do fornecedor"
     ],
     "correta": 2,
     "justificativa": "A decisão de não agir, registrada com motivo, evita repetir a mesma análise"
@@ -532,9 +532,9 @@
     "enunciado": "Quais atributos um indicador precisa carregar no registro para ser utilizável em detecção?",
     "alternativas": [
       "Data de coleta, prazo de validade e confiança declarada, além do requisito a que ele responde.",
-      "Inteligência é a lista de indicadores do fornecedor",
-      "Mais fontes significam melhor inteligência",
-      "Coletar primeiro e perguntar depois"
+      "Separe agrupamento, campanha e infraestrutura, e use a atribuição só quando ela muda uma decisão",
+      "Escritas as regras de publicação, o compartilhamento deixa de ser risco pessoal",
+      "Trate o procedimento como o ativo durável e exponha o indicador à expiração"
     ],
     "correta": 0,
     "justificativa": ""
@@ -551,10 +551,10 @@
     "status": "rascunho",
     "enunciado": "Por que um procedimento observado dura mais, como insumo de detecção, do que um endereço ou um hash?",
     "alternativas": [
-      "Inteligência é a lista de indicadores do fornecedor",
-      "Mais fontes significam melhor inteligência",
+      "Significa que o requisito foi avaliado e nada mudou. O registro com motivo permite distinguir, mais tarde, uma decisão correta diante de material fraco de um erro de análise.",
+      "Separe agrupamento, campanha e infraestrutura, e use a atribuição só quando ela muda uma decisão",
       "Porque o endereço e o hash mudam em horas e são triviais de trocar, enquanto o procedimento descreve o que o ator precisa fazer para entrar, persistir e sair, e isso muda devagar.",
-      "Coletar primeiro e perguntar depois"
+      "Data de coleta, prazo de validade e confiança declarada, além do requisito a que ele responde."
     ],
     "correta": 2,
     "justificativa": ""
@@ -571,9 +571,9 @@
     "status": "rascunho",
     "enunciado": "O que significa uma relação de inteligência declarar \"não decisão\" e por que isso precisa ser registrado?",
     "alternativas": [
-      "Inteligência é a lista de indicadores do fornecedor",
-      "Mais fontes significam melhor inteligência",
-      "Coletar primeiro e perguntar depois",
+      "Porque o endereço e o hash mudam em horas e são triviais de trocar, enquanto o procedimento descreve o que o ator precisa fazer para entrar, persistir e sair, e isso muda devagar.",
+      "Separe agrupamento, campanha e infraestrutura, e use a atribuição só quando ela muda uma decisão",
+      "Data de coleta, prazo de validade e confiança declarada, além do requisito a que ele responde.",
       "Significa que o requisito foi avaliado e nada mudou. O registro com motivo permite distinguir, mais tarde, uma decisão correta diante de material fraco de um erro de análise."
     ],
     "correta": 3,
@@ -591,10 +591,10 @@
     "status": "rascunho",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"ATT&CK é uma lista de malwares e ferramentas\". Qual é a correção?",
     "alternativas": [
-      "Citar o agrupamento é o objetivo do relatório",
-      "Sem telemetria, o time de detecção resolve",
+      "Conte táticas e técnicas cobertas, com teste em dado real",
+      "Registre versão da matriz e data da leitura em todo mapa",
       "Mapeie comportamento e trate a ferramenta como pista secundária",
-      "Tática nova é problema de fornecedor"
+      "Separe agrupamento, campanha e infraestrutura, e use a técnica como saída"
     ],
     "correta": 2,
     "justificativa": "Nomes de ferramenta mudam sem que o procedimento mude"
@@ -611,9 +611,9 @@
     "status": "rascunho",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"Cobertura é o número de regras\". Qual é a correção?",
     "alternativas": [
+      "Registre versão da matriz e data da leitura em todo mapa",
+      "Mapeie comportamento e trate a ferramenta como pista secundária",
       "Citar o agrupamento é o objetivo do relatório",
-      "ATT&CK é uma lista de malwares e ferramentas",
-      "Sem telemetria, o time de detecção resolve",
       "Conte táticas e técnicas cobertas, com teste em dado real"
     ],
     "correta": 3,
@@ -632,9 +632,9 @@
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"Citar o agrupamento é o objetivo do relatório\". Qual é a correção?",
     "alternativas": [
       "Separe agrupamento, campanha e infraestrutura, e use a técnica como saída",
-      "ATT&CK é uma lista de malwares e ferramentas",
-      "Sem telemetria, o time de detecção resolve",
-      "Tática nova é problema de fornecedor"
+      "Peça a coleta com nome de fonte, dono e prazo antes de prometer cobertura",
+      "Revise o mapa quando a matriz mudar e a decisão de cobertura for reavaliada",
+      "Mapeie comportamento e trate a ferramenta como pista secundária"
     ],
     "correta": 0,
     "justificativa": "Atribuição sem técnica observada não muda detecção nem prazo"
@@ -651,10 +651,10 @@
     "status": "rascunho",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"O mapa não precisa de versão\". Qual é a correção?",
     "alternativas": [
-      "Citar o agrupamento é o objetivo do relatório",
+      "Conte táticas e técnicas cobertas, com teste em dado real",
       "Registre versão da matriz e data da leitura em todo mapa",
-      "ATT&CK é uma lista de malwares e ferramentas",
-      "Sem telemetria, o time de detecção resolve"
+      "Mapeie comportamento e trate a ferramenta como pista secundária",
+      "Citar o agrupamento é o objetivo do relatório"
     ],
     "correta": 1,
     "justificativa": "A matriz muda e o número deixa de ser comparável entre semestres"
@@ -671,10 +671,10 @@
     "status": "rascunho",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"Tática nova é problema de fornecedor\". Qual é a correção?",
     "alternativas": [
-      "Citar o agrupamento é o objetivo do relatório",
-      "ATT&CK é uma lista de malwares e ferramentas",
+      "Separe agrupamento, campanha e infraestrutura, e use a técnica como saída",
+      "Peça a coleta com nome de fonte, dono e prazo antes de prometer cobertura",
       "Revise o mapa quando a matriz mudar e a decisão de cobertura for reavaliada",
-      "Sem telemetria, o time de detecção resolve"
+      "Mapeie comportamento e trate a ferramenta como pista secundária"
     ],
     "correta": 2,
     "justificativa": "A lacuna é sua: a regra não existe no seu ambiente"
@@ -691,9 +691,9 @@
     "status": "rascunho",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"Sem telemetria, o time de detecção resolve\". Qual é a correção?",
     "alternativas": [
-      "Citar o agrupamento é o objetivo do relatório",
-      "ATT&CK é uma lista de malwares e ferramentas",
-      "Tática nova é problema de fornecedor",
+      "Separe agrupamento, campanha e infraestrutura, e use a técnica como saída",
+      "Revise o mapa quando a matriz mudar e a decisão de cobertura for reavaliada",
+      "Mapeie comportamento e trate a ferramenta como pista secundária",
       "Peça a coleta com nome de fonte, dono e prazo antes de prometer cobertura"
     ],
     "correta": 3,
@@ -711,9 +711,9 @@
     "status": "rascunho",
     "enunciado": "Quantas táticas a matriz Enterprise exibia na leitura registrada neste tema, e cite três delas com o identificador.",
     "alternativas": [
-      "Citar o agrupamento é o objetivo do relatório",
-      "ATT&CK é uma lista de malwares e ferramentas",
-      "Sem telemetria, o time de detecção resolve",
+      "Porque a matriz muda: táticas e sub-técnicas entram, saem e se desmembram. Um número de cobertura sem versão não é comparável entre períodos nem revisável por terceiro.",
+      "A tática ou a técnica, o que falta em termos de telemetria ou de regra, o dono nominal e o prazo, além do critério de aceite com teste em dado real.",
+      "Porque atribuição não gera regra, não define prazo e não altera telemetria. A técnica observada é o que a detecção consegue implementar e verificar.",
       "A matriz exibia 15 táticas na leitura. Entre elas: TA0043 Reconhecimento, TA0001 Initial Access, TA0008 Lateral Movement, TA0112 Defense Impairment e TA0040 Impact."
     ],
     "correta": 3,
@@ -731,10 +731,10 @@
     "status": "rascunho",
     "enunciado": "Por que um mapa de cobertura precisa carregar versão da matriz e data de leitura?",
     "alternativas": [
-      "Citar o agrupamento é o objetivo do relatório",
+      "A matriz exibia 15 táticas na leitura. Entre elas: TA0043 Reconhecimento, TA0001 Initial Access, TA0008 Lateral Movement, TA0112 Defense Impairment e TA0040 Impact.",
       "Porque a matriz muda: táticas e sub-técnicas entram, saem e se desmembram. Um número de cobertura sem versão não é comparável entre períodos nem revisável por terceiro.",
-      "ATT&CK é uma lista de malwares e ferramentas",
-      "Sem telemetria, o time de detecção resolve"
+      "A tática ou a técnica, o que falta em termos de telemetria ou de regra, o dono nominal e o prazo, além do critério de aceite com teste em dado real.",
+      "Porque atribuição não gera regra, não define prazo e não altera telemetria. A técnica observada é o que a detecção consegue implementar e verificar."
     ],
     "correta": 1,
     "justificativa": ""
@@ -751,9 +751,9 @@
     "status": "rascunho",
     "enunciado": "O que uma lacuna declarada precisa conter para entrar em decisão de orçamento?",
     "alternativas": [
-      "Citar o agrupamento é o objetivo do relatório",
-      "ATT&CK é uma lista de malwares e ferramentas",
-      "Sem telemetria, o time de detecção resolve",
+      "Porque atribuição não gera regra, não define prazo e não altera telemetria. A técnica observada é o que a detecção consegue implementar e verificar.",
+      "A matriz exibia 15 táticas na leitura. Entre elas: TA0043 Reconhecimento, TA0001 Initial Access, TA0008 Lateral Movement, TA0112 Defense Impairment e TA0040 Impact.",
+      "Porque a matriz muda: táticas e sub-técnicas entram, saem e se desmembram. Um número de cobertura sem versão não é comparável entre períodos nem revisável por terceiro.",
       "A tática ou a técnica, o que falta em termos de telemetria ou de regra, o dono nominal e o prazo, além do critério de aceite com teste em dado real."
     ],
     "correta": 3,
@@ -772,9 +772,9 @@
     "enunciado": "Por que citar agrupamento sem citar técnica observada limita o valor do relatório de inteligência?",
     "alternativas": [
       "Porque atribuição não gera regra, não define prazo e não altera telemetria. A técnica observada é o que a detecção consegue implementar e verificar.",
-      "Citar o agrupamento é o objetivo do relatório",
-      "ATT&CK é uma lista de malwares e ferramentas",
-      "Sem telemetria, o time de detecção resolve"
+      "A tática ou a técnica, o que falta em termos de telemetria ou de regra, o dono nominal e o prazo, além do critério de aceite com teste em dado real.",
+      "A matriz exibia 15 táticas na leitura. Entre elas: TA0043 Reconhecimento, TA0001 Initial Access, TA0008 Lateral Movement, TA0112 Defense Impairment e TA0040 Impact.",
+      "Porque a matriz muda: táticas e sub-técnicas entram, saem e se desmembram. Um número de cobertura sem versão não é comparável entre períodos nem revisável por terceiro."
     ],
     "correta": 0,
     "justificativa": ""
@@ -791,9 +791,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Bug bounty é o primeiro passo do programa\". Qual é a correção?",
     "alternativas": [
+      "Publique resumo, impacto, versões vulneráveis, versões corrigidas, mitigação e CVE",
       "Divulgação responsável depende da boa vontade do pesquisador",
-      "Ameaçar ação legal resolve relato inconveniente",
-      "ISO/IEC 29147 e 30111 são a mesma coisa",
+      "Escreva escopo, prazo e salvo-conduto, e publique o canal",
       "Publique canal e política, opere sem recompensa e só então decida sobre dinheiro"
     ],
     "correta": 3,
@@ -812,9 +812,9 @@
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Divulgação responsável depende da boa vontade do pesquisador\". Qual é a correção?",
     "alternativas": [
       "Escreva escopo, prazo e salvo-conduto, e publique o canal",
-      "Ameaçar ação legal resolve relato inconveniente",
-      "Bug bounty é o primeiro passo do programa",
-      "ISO/IEC 29147 e 30111 são a mesma coisa"
+      "Trate triagem como função com dono e capacidade reservada",
+      "Responda com processo e mantenha o salvo-conduto",
+      "Ameaçar ação legal resolve relato inconveniente"
     ],
     "correta": 0,
     "justificativa": "O que garante prazo e escopo é política escrita, com salvo-conduto"
@@ -831,10 +831,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Aviso de segurança é risco de imagem\". Qual é a correção?",
     "alternativas": [
-      "Divulgação responsável depende da boa vontade do pesquisador",
+      "Publique canal e política, opere sem recompensa e só então decida sobre dinheiro",
       "Publique resumo, impacto, versões vulneráveis, versões corrigidas, mitigação e CVE",
-      "Ameaçar ação legal resolve relato inconveniente",
-      "Bug bounty é o primeiro passo do programa"
+      "Divulgação responsável depende da boa vontade do pesquisador",
+      "Escreva escopo, prazo e salvo-conduto, e publique o canal"
     ],
     "correta": 1,
     "justificativa": "Ocultar falha é o que destrói confiança; publicar mostra processo"
@@ -851,10 +851,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Triagem é trabalho administrativo\". Qual é a correção?",
     "alternativas": [
+      "Escreva escopo, prazo e salvo-conduto, e publique o canal",
       "Divulgação responsável depende da boa vontade do pesquisador",
-      "Ameaçar ação legal resolve relato inconveniente",
       "Trate triagem como função com dono e capacidade reservada",
-      "Bug bounty é o primeiro passo do programa"
+      "Responda com processo e mantenha o salvo-conduto"
     ],
     "correta": 2,
     "justificativa": "Exige reprodução, contexto de negócio e priorização"
@@ -873,7 +873,7 @@
     "alternativas": [
       "Bug bounty é o primeiro passo do programa",
       "Ameaçar ação legal resolve relato inconveniente",
-      "Aviso de segurança é risco de imagem",
+      "Responda com processo e mantenha o salvo-conduto",
       "Use as duas, uma para fora e uma para dentro"
     ],
     "correta": 3,
@@ -892,9 +892,9 @@
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Ameaçar ação legal resolve relato inconveniente\". Qual é a correção?",
     "alternativas": [
       "Responda com processo e mantenha o salvo-conduto",
+      "Use as duas, uma para fora e uma para dentro",
       "Bug bounty é o primeiro passo do programa",
-      "ISO/IEC 29147 e 30111 são a mesma coisa",
-      "Divulgação responsável depende da boa vontade do pesquisador"
+      "Escreva escopo, prazo e salvo-conduto, e publique o canal"
     ],
     "correta": 0,
     "justificativa": "Agrava a situação e empurra o pesquisador para divulgação integral"
@@ -911,10 +911,10 @@
     "status": "rascunho",
     "enunciado": "Onde fica o arquivo security.txt, qual norma descreve sua localização e quais são os campos obrigatórios?",
     "alternativas": [
-      "Divulgação responsável depende da boa vontade do pesquisador",
-      "Ameaçar ação legal resolve relato inconveniente",
+      "Testar fora do escopo declarado, atuar em jurisdição que restringe engenharia reversa e condicionar a informação a pagamento. A política precisa conter escopo explícito, salvo-conduto e o procedimento de relato.",
+      "Resumo com impacto, lista de versões vulneráveis, lista de versões corrigidas, condições em que o produto é afetado, mitigação ou contorno e o identificador CVE.",
       "No caminho bem conhecido do domínio, como arquivo security.txt, conforme a RFC 9116. Os campos obrigatórios são contato e expiração; idiomas preferidos, canônico, política e vagas são opcionais.",
-      "Bug bounty é o primeiro passo do programa"
+      "Divulgação privada, divulgação integral e divulgação responsável, também chamada de coordenada. A maioria dos programas de recompensa exige a privada."
     ],
     "correta": 2,
     "justificativa": ""
@@ -931,9 +931,9 @@
     "status": "rascunho",
     "enunciado": "Quais são os três modelos de divulgação descritos e qual deles a maioria dos programas de recompensa exige?",
     "alternativas": [
-      "Divulgação responsável depende da boa vontade do pesquisador",
-      "Ameaçar ação legal resolve relato inconveniente",
-      "Bug bounty é o primeiro passo do programa",
+      "Resumo com impacto, lista de versões vulneráveis, lista de versões corrigidas, condições em que o produto é afetado, mitigação ou contorno e o identificador CVE.",
+      "No caminho bem conhecido do domínio, como arquivo security.txt, conforme a RFC 9116. Os campos obrigatórios são contato e expiração; idiomas preferidos, canônico, política e vagas são opcionais.",
+      "Testar fora do escopo declarado, atuar em jurisdição que restringe engenharia reversa e condicionar a informação a pagamento. A política precisa conter escopo explícito, salvo-conduto e o procedimento de relato.",
       "Divulgação privada, divulgação integral e divulgação responsável, também chamada de coordenada. A maioria dos programas de recompensa exige a privada."
     ],
     "correta": 3,
@@ -952,9 +952,9 @@
     "enunciado": "Qual é o conteúdo mínimo de um aviso de segurança publicado?",
     "alternativas": [
       "Resumo com impacto, lista de versões vulneráveis, lista de versões corrigidas, condições em que o produto é afetado, mitigação ou contorno e o identificador CVE.",
-      "Divulgação responsável depende da boa vontade do pesquisador",
-      "Ameaçar ação legal resolve relato inconveniente",
-      "Bug bounty é o primeiro passo do programa"
+      "Divulgação privada, divulgação integral e divulgação responsável, também chamada de coordenada. A maioria dos programas de recompensa exige a privada.",
+      "No caminho bem conhecido do domínio, como arquivo security.txt, conforme a RFC 9116. Os campos obrigatórios são contato e expiração; idiomas preferidos, canônico, política e vagas são opcionais.",
+      "Testar fora do escopo declarado, atuar em jurisdição que restringe engenharia reversa e condicionar a informação a pagamento. A política precisa conter escopo explícito, salvo-conduto e o procedimento de relato."
     ],
     "correta": 0,
     "justificativa": ""
@@ -971,10 +971,10 @@
     "status": "rascunho",
     "enunciado": "O que caracteriza risco jurídico no contato com o pesquisador e o que a política precisa conter para endereçá-lo?",
     "alternativas": [
-      "Divulgação responsável depende da boa vontade do pesquisador",
+      "No caminho bem conhecido do domínio, como arquivo security.txt, conforme a RFC 9116. Os campos obrigatórios são contato e expiração; idiomas preferidos, canônico, política e vagas são opcionais.",
       "Testar fora do escopo declarado, atuar em jurisdição que restringe engenharia reversa e condicionar a informação a pagamento. A política precisa conter escopo explícito, salvo-conduto e o procedimento de relato.",
-      "Ameaçar ação legal resolve relato inconveniente",
-      "Bug bounty é o primeiro passo do programa"
+      "Resumo com impacto, lista de versões vulneráveis, lista de versões corrigidas, condições em que o produto é afetado, mitigação ou contorno e o identificador CVE.",
+      "Divulgação privada, divulgação integral e divulgação responsável, também chamada de coordenada. A maioria dos programas de recompensa exige a privada."
     ],
     "correta": 1,
     "justificativa": ""
@@ -992,9 +992,9 @@
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Percentual de itens fechados mede risco\". Qual é a correção?",
     "alternativas": [
       "Reporte tempo de exposição por faixa de prioridade",
-      "Comparar áreas com a mesma métrica sem a mesma definição",
-      "Dívida é problema de capacidade da equipe",
-      "Instalação reportada equivale a correção"
+      "Meça a taxa de verificação no próprio dispositivo",
+      "Use percentil e separe por faixa de prioridade",
+      "Publique uma definição única antes de comparar"
     ],
     "correta": 0,
     "justificativa": "Mede movimento de lista e ignora tempo, prioridade e exposição do ativo"
@@ -1011,10 +1011,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Média é suficiente para resumir\". Qual é a correção?",
     "alternativas": [
-      "Dívida é problema de capacidade da equipe",
+      "Publique uma definição única antes de comparar",
       "Use percentil e separe por faixa de prioridade",
-      "Instalação reportada equivale a correção",
-      "Percentual de itens fechados mede risco"
+      "Meça a taxa de verificação no próprio dispositivo",
+      "Reporte tempo de exposição por faixa de prioridade"
     ],
     "correta": 1,
     "justificativa": "A média esconde a cauda e é arrastada por itens triviais"
@@ -1031,10 +1031,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Instalação reportada equivale a correção\". Qual é a correção?",
     "alternativas": [
-      "Comparar áreas com a mesma métrica sem a mesma definição",
-      "Dívida é problema de capacidade da equipe",
+      "Reporte tempo de exposição por faixa de prioridade",
+      "Use percentil e separe por faixa de prioridade",
       "Meça a taxa de verificação no próprio dispositivo",
-      "Percentual de itens fechados mede risco"
+      "Publique uma definição única antes de comparar"
     ],
     "correta": 2,
     "justificativa": "Reinício pendente e reversão mantêm o código antigo em execução"
@@ -1051,9 +1051,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Dívida é problema de capacidade da equipe\". Qual é a correção?",
     "alternativas": [
+      "Declare numerador, denominador e data de referência no título",
       "Comparar áreas com a mesma métrica sem a mesma definição",
-      "Instalação reportada equivale a correção",
-      "Percentual de itens fechados mede risco",
+      "Reporte tempo de exposição por faixa de prioridade",
       "Recorte a dívida por ativo e decida substituição ou isolamento"
     ],
     "correta": 3,
@@ -1072,9 +1072,9 @@
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"A métrica mais simples é a mais honesta\". Qual é a correção?",
     "alternativas": [
       "Declare numerador, denominador e data de referência no título",
+      "Recorte a dívida por ativo e decida substituição ou isolamento",
       "Comparar áreas com a mesma métrica sem a mesma definição",
-      "Dívida é problema de capacidade da equipe",
-      "Instalação reportada equivale a correção"
+      "Reporte tempo de exposição por faixa de prioridade"
     ],
     "correta": 0,
     "justificativa": "Simplicidade sem definição de numerador e data de referência esconde manipulação"
@@ -1091,10 +1091,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Comparar áreas com a mesma métrica sem a mesma definição\". Qual é a correção?",
     "alternativas": [
-      "Dívida é problema de capacidade da equipe",
+      "Use percentil e separe por faixa de prioridade",
       "Publique uma definição única antes de comparar",
-      "Instalação reportada equivale a correção",
-      "Percentual de itens fechados mede risco"
+      "Meça a taxa de verificação no próprio dispositivo",
+      "Reporte tempo de exposição por faixa de prioridade"
     ],
     "correta": 1,
     "justificativa": "Prazos e escopos diferentes tornam a comparação inválida"
@@ -1111,10 +1111,10 @@
     "status": "rascunho",
     "enunciado": "O que é dívida de remediação e quais são os quatro cortes de medição?",
     "alternativas": [
-      "Comparar áreas com a mesma métrica sem a mesma definição",
-      "Dívida é problema de capacidade da equipe",
+      "Porque deixa de ser problema de capacidade de correção e passa a ser decisão de arquitetura e contrato: substituir o ativo, isolá-lo ou registrar aceite formal de risco, com orçamento e data.",
+      "Itens com versão corrigida lida no host divididos por itens que a ferramenta reporta como instalados. É barata porque a maior parte das ferramentas de gestão já coleta versão de componente no dispositivo.",
       "É o conjunto de itens abertos além do prazo declarado na política. Os quatro cortes são quantidade, idade, faixa de prioridade e ativos distintos afetados.",
-      "Instalação reportada equivale a correção"
+      "Numerador, denominador e data de referência. Métrica sem os três não é comparável."
     ],
     "correta": 2,
     "justificativa": ""
@@ -1131,9 +1131,9 @@
     "status": "rascunho",
     "enunciado": "Quais três elementos uma métrica precisa declarar para ser comparável entre meses e entre áreas?",
     "alternativas": [
+      "Recorte a dívida por ativo e decida substituição ou isolamento",
+      "Declare numerador, denominador e data de referência no título",
       "Comparar áreas com a mesma métrica sem a mesma definição",
-      "Dívida é problema de capacidade da equipe",
-      "Instalação reportada equivale a correção",
       "Numerador, denominador e data de referência. Métrica sem os três não é comparável."
     ],
     "correta": 3,
@@ -1152,9 +1152,9 @@
     "enunciado": "Como se calcula a taxa de verificação e por que ela é o número mais barato do conjunto?",
     "alternativas": [
       "Itens com versão corrigida lida no host divididos por itens que a ferramenta reporta como instalados. É barata porque a maior parte das ferramentas de gestão já coleta versão de componente no dispositivo.",
-      "Comparar áreas com a mesma métrica sem a mesma definição",
-      "Dívida é problema de capacidade da equipe",
-      "Instalação reportada equivale a correção"
+      "Porque deixa de ser problema de capacidade de correção e passa a ser decisão de arquitetura e contrato: substituir o ativo, isolá-lo ou registrar aceite formal de risco, com orçamento e data.",
+      "É o conjunto de itens abertos além do prazo declarado na política. Os quatro cortes são quantidade, idade, faixa de prioridade e ativos distintos afetados.",
+      "Numerador, denominador e data de referência. Métrica sem os três não é comparável."
     ],
     "correta": 0,
     "justificativa": ""
@@ -1171,10 +1171,10 @@
     "status": "rascunho",
     "enunciado": "Por que a concentração de itens vencidos em poucos ativos muda a decisão de natureza?",
     "alternativas": [
-      "Comparar áreas com a mesma métrica sem a mesma definição",
-      "Dívida é problema de capacidade da equipe",
+      "Itens com versão corrigida lida no host divididos por itens que a ferramenta reporta como instalados. É barata porque a maior parte das ferramentas de gestão já coleta versão de componente no dispositivo.",
+      "É o conjunto de itens abertos além do prazo declarado na política. Os quatro cortes são quantidade, idade, faixa de prioridade e ativos distintos afetados.",
       "Porque deixa de ser problema de capacidade de correção e passa a ser decisão de arquitetura e contrato: substituir o ativo, isolá-lo ou registrar aceite formal de risco, com orçamento e data.",
-      "Instalação reportada equivale a correção"
+      "Numerador, denominador e data de referência. Métrica sem os três não é comparável."
     ],
     "correta": 2,
     "justificativa": ""

@@ -11,9 +11,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Hash é um tipo de cifra fraca\". Qual é a correção?",
     "alternativas": [
-      "Qualquer modo do AES entrega autenticação",
-      "Cifrar com a chave privada é assinar",
-      "Chave maior resolve qualquer risco",
+      "Use assinatura para autoria e integridade, e cifra com chave pública para sigilo",
+      "Separe os dois números ao escrever requisito ou questionário",
+      "Trate chave, modo e custódia como itens separados do plano",
       "Classifique hash como função de integridade, e use cifra quando precisar reaver o conteúdo"
     ],
     "correta": 3,
@@ -32,9 +32,9 @@
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"AES-256 tem bloco de 256 bits\". Qual é a correção?",
     "alternativas": [
       "Separe os dois números ao escrever requisito ou questionário",
-      "Qualquer modo do AES entrega autenticação",
-      "Cifrar com a chave privada é assinar",
-      "Chave maior resolve qualquer risco"
+      "Trate chave, modo e custódia como itens separados do plano",
+      "Autoria exige material secreto ou chave privada",
+      "Qualquer modo do AES entrega autenticação"
     ],
     "correta": 0,
     "justificativa": "O bloco é de 128 bits nas três instâncias; o sufixo indica a chave"
@@ -51,10 +51,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Cifrar com a chave privada é assinar\". Qual é a correção?",
     "alternativas": [
-      "Qualquer modo do AES entrega autenticação",
+      "Classifique hash como função de integridade, e use cifra quando precisar reaver o conteúdo",
       "Use assinatura para autoria e integridade, e cifra com chave pública para sigilo",
-      "Chave maior resolve qualquer risco",
-      "Hash é um tipo de cifra fraca"
+      "Separe os dois números ao escrever requisito ou questionário",
+      "Trate chave, modo e custódia como itens separados do plano"
     ],
     "correta": 1,
     "justificativa": "Cifra com chave privada é operação sem garantia de autoria no uso comum; assinatura tem construção própria e é verificada por qualquer um"
@@ -74,7 +74,7 @@
       "Qualquer modo do AES entrega autenticação",
       "Cifrar com a chave privada é assinar",
       "Autoria exige material secreto ou chave privada",
-      "Chave maior resolve qualquer risco"
+      "Trate chave, modo e custódia como itens separados do plano"
     ],
     "correta": 2,
     "justificativa": "Quem tem a mensagem recalcula o resumo e pode substituí-lo"
@@ -91,9 +91,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Chave maior resolve qualquer risco\". Qual é a correção?",
     "alternativas": [
+      "Separe os dois números ao escrever requisito ou questionário",
+      "Autoria exige material secreto ou chave privada",
       "Qualquer modo do AES entrega autenticação",
-      "Cifrar com a chave privada é assinar",
-      "Hash é um tipo de cifra fraca",
       "Trate chave, modo e custódia como itens separados do plano"
     ],
     "correta": 3,
@@ -112,9 +112,9 @@
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Qualquer modo do AES entrega autenticação\". Qual é a correção?",
     "alternativas": [
       "Consulte a publicação de modos do NIST antes de escolher; a lista não foi conferida nesta execução, portanto NAO CONFIRMADO em fonte oficial",
-      "Cifrar com a chave privada é assinar",
-      "Chave maior resolve qualquer risco",
-      "Hash é um tipo de cifra fraca"
+      "Classifique hash como função de integridade, e use cifra quando precisar reaver o conteúdo",
+      "Use assinatura para autoria e integridade, e cifra com chave pública para sigilo",
+      "Separe os dois números ao escrever requisito ou questionário"
     ],
     "correta": 0,
     "justificativa": "O modo define se a saída tem apenas confidencialidade ou também autenticação"
@@ -132,9 +132,9 @@
     "enunciado": "Qual é a diferença entre tamanho de chave e tamanho de bloco no AES, e qual dos dois aparece no nome AES-256?",
     "alternativas": [
       "O bloco é o tamanho da unidade processada pelo algoritmo e vale 128 bits nas três instâncias do AES; a chave é o material secreto e tem 128, 192 ou 256 bits. O sufixo do nome AES-256 indica o tamanho da chave.",
-      "Qualquer modo do AES entrega autenticação",
-      "Cifrar com a chave privada é assinar",
-      "Chave maior resolve qualquer risco"
+      "Resolve a necessidade de buscar por igualdade sem guardar o valor em claro, já que cifra não preserva igualdade. Expõe o índice a ataque por força bruta quando o conjunto de valores possíveis é pequeno e previsível.",
+      "Prova que o conteúdo não foi alterado sem que o resumo mudasse — detecção de alteração. Não prova autoria, não esconde o conteúdo, e não impede que alguém recalcule o resumo de uma mensagem modificada.",
+      "Porque a troca de chave assimétrica permite combinar um segredo efêmero usando chave pública e chave privada; o segredo derivado dali protege a sessão, e o volume da conversa passa a ser protegido por cifra simétrica."
     ],
     "correta": 0,
     "justificativa": ""
@@ -151,10 +151,10 @@
     "status": "rascunho",
     "enunciado": "O que uma função de hash prova e o que ela não prova?",
     "alternativas": [
-      "Qualquer modo do AES entrega autenticação",
+      "O bloco é o tamanho da unidade processada pelo algoritmo e vale 128 bits nas três instâncias do AES; a chave é o material secreto e tem 128, 192 ou 256 bits. O sufixo do nome AES-256 indica o tamanho da chave.",
       "Prova que o conteúdo não foi alterado sem que o resumo mudasse — detecção de alteração. Não prova autoria, não esconde o conteúdo, e não impede que alguém recalcule o resumo de uma mensagem modificada.",
-      "Cifrar com a chave privada é assinar",
-      "Chave maior resolve qualquer risco"
+      "Resolve a necessidade de buscar por igualdade sem guardar o valor em claro, já que cifra não preserva igualdade. Expõe o índice a ataque por força bruta quando o conjunto de valores possíveis é pequeno e previsível.",
+      "Porque a troca de chave assimétrica permite combinar um segredo efêmero usando chave pública e chave privada; o segredo derivado dali protege a sessão, e o volume da conversa passa a ser protegido por cifra simétrica."
     ],
     "correta": 1,
     "justificativa": ""
@@ -171,10 +171,10 @@
     "status": "rascunho",
     "enunciado": "Por que duas partes que nunca se viram conseguem chegar à mesma chave simétrica por canal público?",
     "alternativas": [
-      "Qualquer modo do AES entrega autenticação",
-      "Cifrar com a chave privada é assinar",
+      "Resolve a necessidade de buscar por igualdade sem guardar o valor em claro, já que cifra não preserva igualdade. Expõe o índice a ataque por força bruta quando o conjunto de valores possíveis é pequeno e previsível.",
+      "O bloco é o tamanho da unidade processada pelo algoritmo e vale 128 bits nas três instâncias do AES; a chave é o material secreto e tem 128, 192 ou 256 bits. O sufixo do nome AES-256 indica o tamanho da chave.",
       "Porque a troca de chave assimétrica permite combinar um segredo efêmero usando chave pública e chave privada; o segredo derivado dali protege a sessão, e o volume da conversa passa a ser protegido por cifra simétrica.",
-      "Chave maior resolve qualquer risco"
+      "Prova que o conteúdo não foi alterado sem que o resumo mudasse — detecção de alteração. Não prova autoria, não esconde o conteúdo, e não impede que alguém recalcule o resumo de uma mensagem modificada."
     ],
     "correta": 2,
     "justificativa": ""
@@ -191,9 +191,9 @@
     "status": "rascunho",
     "enunciado": "Por que um resumo de tamanho pequeno deixa de servir para assinatura depois que alguém encontra duas mensagens diferentes com o mesmo resumo?",
     "alternativas": [
-      "Qualquer modo do AES entrega autenticação",
-      "Cifrar com a chave privada é assinar",
-      "Chave maior resolve qualquer risco",
+      "Prova que o conteúdo não foi alterado sem que o resumo mudasse — detecção de alteração. Não prova autoria, não esconde o conteúdo, e não impede que alguém recalcule o resumo de uma mensagem modificada.",
+      "Consulte a publicação de modos do NIST antes de escolher; a lista não foi conferida nesta execução, portanto NAO CONFIRMADO em fonte oficial",
+      "O bloco é o tamanho da unidade processada pelo algoritmo e vale 128 bits nas três instâncias do AES; a chave é o material secreto e tem 128, 192 ou 256 bits. O sufixo do nome AES-256 indica o tamanho da chave.",
       "Porque a assinatura cobre o resumo, e o verificador aceita a mensagem cujo resumo confere. Duas mensagens com o mesmo resumo tornam a assinatura de uma válida para a outra."
     ],
     "correta": 3,
@@ -212,9 +212,9 @@
     "enunciado": "Que problema um índice de busca derivado por hash com segredo resolve, e o que ele expõe?",
     "alternativas": [
       "Resolve a necessidade de buscar por igualdade sem guardar o valor em claro, já que cifra não preserva igualdade. Expõe o índice a ataque por força bruta quando o conjunto de valores possíveis é pequeno e previsível.",
-      "Qualquer modo do AES entrega autenticação",
-      "Cifrar com a chave privada é assinar",
-      "Chave maior resolve qualquer risco"
+      "Porque a troca de chave assimétrica permite combinar um segredo efêmero usando chave pública e chave privada; o segredo derivado dali protege a sessão, e o volume da conversa passa a ser protegido por cifra simétrica.",
+      "O bloco é o tamanho da unidade processada pelo algoritmo e vale 128 bits nas três instâncias do AES; a chave é o material secreto e tem 128, 192 ou 256 bits. O sufixo do nome AES-256 indica o tamanho da chave.",
+      "Prova que o conteúdo não foi alterado sem que o resumo mudasse — detecção de alteração. Não prova autoria, não esconde o conteúdo, e não impede que alguém recalcule o resumo de uma mensagem modificada."
     ],
     "correta": 0,
     "justificativa": ""
@@ -232,9 +232,9 @@
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Certificado válido significa serviço confiável\". Qual é a correção?",
     "alternativas": [
       "Trate o certificado como identidade técnica, e o resto como decisão de negócio",
+      "Automatize a renovação e monitore a expiração com antecedência",
       "Cadeia que funciona no navegador funciona em todo cliente",
-      "Certificado dentro do prazo é certificado válido",
-      "Revogação resolve o comprometimento"
+      "Combine revogação com reemissão e com rotação de chave"
     ],
     "correta": 0,
     "justificativa": "A autoridade atesta controle do nome e posse da chave, não a qualidade do serviço"
@@ -251,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Certificado dentro do prazo é certificado válido\". Qual é a correção?",
     "alternativas": [
-      "Certificado válido significa serviço confiável",
+      "Teste com o cliente que a aplicação realmente usa",
       "Verifique os cinco critérios, de baixo para cima",
-      "Cadeia que funciona no navegador funciona em todo cliente",
-      "Revogação resolve o comprometimento"
+      "Some o custo operacional da raiz antes de decidir",
+      "Certificado válido significa serviço confiável"
     ],
     "correta": 1,
     "justificativa": "Nome, uso declarado, cadeia e revogação também entram na validação"
@@ -271,10 +271,10 @@
     "status": "rascunho",
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Cadeia que funciona no navegador funciona em todo cliente\". Qual é a correção?",
     "alternativas": [
+      "Some o custo operacional da raiz antes de decidir",
       "Certificado dentro do prazo é certificado válido",
-      "Certificado válido significa serviço confiável",
       "Teste com o cliente que a aplicação realmente usa",
-      "Revogação resolve o comprometimento"
+      "Verifique os cinco critérios, de baixo para cima"
     ],
     "correta": 2,
     "justificativa": "Cada cliente tem loja de raízes e política própria; imagem de contêiner tem loja mínima"
@@ -292,8 +292,8 @@
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Revogação resolve o comprometimento\". Qual é a correção?",
     "alternativas": [
       "Cadeia que funciona no navegador funciona em todo cliente",
-      "Certificado dentro do prazo é certificado válido",
-      "Certificado válido significa serviço confiável",
+      "Teste com o cliente que a aplicação realmente usa",
+      "Some o custo operacional da raiz antes de decidir",
       "Combine revogação com reemissão e com rotação de chave"
     ],
     "correta": 3,
@@ -312,9 +312,9 @@
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Autoridade interna é gratuita\". Qual é a correção?",
     "alternativas": [
       "Some o custo operacional da raiz antes de decidir",
+      "Teste com o cliente que a aplicação realmente usa",
       "Certificado dentro do prazo é certificado válido",
-      "Certificado válido significa serviço confiável",
-      "Cadeia que funciona no navegador funciona em todo cliente"
+      "Verifique os cinco critérios, de baixo para cima"
     ],
     "correta": 0,
     "justificativa": "Ela cria custódia de chave de raiz, política de emissão e processo de auditoria"
@@ -333,8 +333,8 @@
     "alternativas": [
       "Cadeia que funciona no navegador funciona em todo cliente",
       "Automatize a renovação e monitore a expiração com antecedência",
-      "Certificado dentro do prazo é certificado válido",
-      "Certificado válido significa serviço confiável"
+      "Combine revogação com reemissão e com rotação de chave",
+      "Teste com o cliente que a aplicação realmente usa"
     ],
     "correta": 1,
     "justificativa": "É item de disponibilidade com data marcada, e o número de renovação manual tende a crescer"
@@ -351,10 +351,10 @@
     "status": "rascunho",
     "enunciado": "Quais são os cinco critérios verificados na validação de um caminho de certificação?",
     "alternativas": [
-      "Cadeia que funciona no navegador funciona em todo cliente",
+      "Porque o cliente precisa montar a cadeia até a âncora e pode usar o certificado intermediário que já tem em cache; quem não tem o intermediário não consegue validar.",
       "Nome coberto, prazo vigente em cada elo, assinatura de cada elo pela chave do elo acima, uso declarado compatível com o propósito e estado de revogação.",
-      "Certificado dentro do prazo é certificado válido",
-      "Certificado válido significa serviço confiável"
+      "A chave privada da raiz. Ela deve ficar em módulo que não permite exportação, com acesso nominal, uso registrado e cerimônia de ativação separada da operação diária.",
+      "O risco de indisponibilidade por expiração deixa de depender de calendário humano e passa a depender de um processo testado, com monitoramento de falha do próprio processo."
     ],
     "correta": 1,
     "justificativa": ""
@@ -371,10 +371,10 @@
     "status": "rascunho",
     "enunciado": "O que a autoridade certificadora afirma, e o que ela não afirma, ao assinar um certificado?",
     "alternativas": [
-      "Cadeia que funciona no navegador funciona em todo cliente",
-      "Certificado dentro do prazo é certificado válido",
+      "O risco de indisponibilidade por expiração deixa de depender de calendário humano e passa a depender de um processo testado, com monitoramento de falha do próprio processo.",
+      "Porque o cliente precisa montar a cadeia até a âncora e pode usar o certificado intermediário que já tem em cache; quem não tem o intermediário não consegue validar.",
       "Afirma que o solicitante controlava o nome no momento da emissão e que a chave pública é dele. Não afirma que o serviço é seguro, que o conteúdo é confiável nem que o dono é idôneo.",
-      "Certificado válido significa serviço confiável"
+      "A chave privada da raiz. Ela deve ficar em módulo que não permite exportação, com acesso nominal, uso registrado e cerimônia de ativação separada da operação diária."
     ],
     "correta": 2,
     "justificativa": ""
@@ -391,9 +391,9 @@
     "status": "rascunho",
     "enunciado": "Por que um servidor que envia só o próprio certificado funciona para uns clientes e falha para outros?",
     "alternativas": [
-      "Cadeia que funciona no navegador funciona em todo cliente",
-      "Certificado dentro do prazo é certificado válido",
-      "Certificado válido significa serviço confiável",
+      "A chave privada da raiz. Ela deve ficar em módulo que não permite exportação, com acesso nominal, uso registrado e cerimônia de ativação separada da operação diária.",
+      "O risco de indisponibilidade por expiração deixa de depender de calendário humano e passa a depender de um processo testado, com monitoramento de falha do próprio processo.",
+      "Nome coberto, prazo vigente em cada elo, assinatura de cada elo pela chave do elo acima, uso declarado compatível com o propósito e estado de revogação.",
       "Porque o cliente precisa montar a cadeia até a âncora e pode usar o certificado intermediário que já tem em cache; quem não tem o intermediário não consegue validar."
     ],
     "correta": 3,
@@ -412,9 +412,9 @@
     "enunciado": "O que muda no risco quando a renovação passa a ser automática?",
     "alternativas": [
       "O risco de indisponibilidade por expiração deixa de depender de calendário humano e passa a depender de um processo testado, com monitoramento de falha do próprio processo.",
-      "Cadeia que funciona no navegador funciona em todo cliente",
-      "Certificado dentro do prazo é certificado válido",
-      "Certificado válido significa serviço confiável"
+      "Porque o cliente precisa montar a cadeia até a âncora e pode usar o certificado intermediário que já tem em cache; quem não tem o intermediário não consegue validar.",
+      "A chave privada da raiz. Ela deve ficar em módulo que não permite exportação, com acesso nominal, uso registrado e cerimônia de ativação separada da operação diária.",
+      "Afirma que o solicitante controlava o nome no momento da emissão e que a chave pública é dele. Não afirma que o serviço é seguro, que o conteúdo é confiável nem que o dono é idôneo."
     ],
     "correta": 0,
     "justificativa": ""
@@ -431,10 +431,10 @@
     "status": "rascunho",
     "enunciado": "Qual é o item mais valioso de uma autoridade certificadora interna, e como ele deve ser custodiado?",
     "alternativas": [
-      "Cadeia que funciona no navegador funciona em todo cliente",
+      "Porque o cliente precisa montar a cadeia até a âncora e pode usar o certificado intermediário que já tem em cache; quem não tem o intermediário não consegue validar.",
       "A chave privada da raiz. Ela deve ficar em módulo que não permite exportação, com acesso nominal, uso registrado e cerimônia de ativação separada da operação diária.",
-      "Certificado dentro do prazo é certificado válido",
-      "Certificado válido significa serviço confiável"
+      "O risco de indisponibilidade por expiração deixa de depender de calendário humano e passa a depender de um processo testado, com monitoramento de falha do próprio processo.",
+      "Nome coberto, prazo vigente em cada elo, assinatura de cada elo pela chave do elo acima, uso declarado compatível com o propósito e estado de revogação."
     ],
     "correta": 1,
     "justificativa": ""
@@ -451,10 +451,10 @@
     "status": "rascunho",
     "enunciado": "Por que o comportamento do cliente quando a consulta de revogação falha é decisão de projeto?",
     "alternativas": [
-      "Cadeia que funciona no navegador funciona em todo cliente",
-      "Certificado dentro do prazo é certificado válido",
+      "Afirma que o solicitante controlava o nome no momento da emissão e que a chave pública é dele. Não afirma que o serviço é seguro, que o conteúdo é confiável nem que o dono é idôneo.",
+      "O risco de indisponibilidade por expiração deixa de depender de calendário humano e passa a depender de um processo testado, com monitoramento de falha do próprio processo.",
       "Porque falhar fechado derruba o serviço quando a consulta está indisponível e falhar aberto aceita certificado revogado; o padrão define os formatos, não a política de disponibilidade da organização.",
-      "Certificado válido significa serviço confiável"
+      "Porque o cliente precisa montar a cadeia até a âncora e pode usar o certificado intermediário que já tem em cache; quem não tem o intermediário não consegue validar."
     ],
     "correta": 2,
     "justificativa": ""
@@ -471,10 +471,10 @@
     "status": "rascunho",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"Tráfego interno não precisa de TLS\". Qual é a correção?",
     "alternativas": [
-      "Aceitar o certificado no cliente resolve a falha",
+      "Decida por mTLS onde a identidade da máquina precisa ser provada, e conte o custo",
       "Aplique o mesmo critério mínimo a serviço interno, com exceção registrada e datada",
-      "Versão antiga aceita é só questão de desempenho",
-      "Cadeia incompleta é detalhe de configuração"
+      "Corrija a causa e remova a exceção; exceção permanente é o achado mais grave",
+      "Desabilite versões anteriores à política e trate exceção como item de risco"
     ],
     "correta": 1,
     "justificativa": "Rede interna é onde o atacante já está depois do primeiro acesso; escuta passiva é trivial"
@@ -491,10 +491,10 @@
     "status": "rascunho",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"Versão antiga aceita é só questão de desempenho\". Qual é a correção?",
     "alternativas": [
-      "Aceitar o certificado no cliente resolve a falha",
-      "Cadeia incompleta é detalhe de configuração",
+      "Corrija a causa e remova a exceção; exceção permanente é o achado mais grave",
+      "Configure o envio da cadeia completa e teste com cliente de cache limpo",
       "Desabilite versões anteriores à política e trate exceção como item de risco",
-      "Renovação automática elimina o risco"
+      "Decida por mTLS onde a identidade da máquina precisa ser provada, e conte o custo"
     ],
     "correta": 2,
     "justificativa": "Versão antiga carrega algoritmos e fluxos que o critério vigente já proíbe"
@@ -511,9 +511,9 @@
     "status": "rascunho",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"Cadeia incompleta é detalhe de configuração\". Qual é a correção?",
     "alternativas": [
-      "Aceitar o certificado no cliente resolve a falha",
-      "Versão antiga aceita é só questão de desempenho",
-      "Renovação automática elimina o risco",
+      "Desabilite versões anteriores à política e trate exceção como item de risco",
+      "Corrija a causa e remova a exceção; exceção permanente é o achado mais grave",
+      "Decida por mTLS onde a identidade da máquina precisa ser provada, e conte o custo",
       "Configure o envio da cadeia completa e teste com cliente de cache limpo"
     ],
     "correta": 3,
@@ -532,9 +532,9 @@
     "enunciado": "Sobre TLS na prática: um colega afirma que \"mTLS é sempre melhor\". Qual é a correção?",
     "alternativas": [
       "Decida por mTLS onde a identidade da máquina precisa ser provada, e conte o custo",
-      "Aceitar o certificado no cliente resolve a falha",
-      "Versão antiga aceita é só questão de desempenho",
-      "Cadeia incompleta é detalhe de configuração"
+      "Aplique o mesmo critério mínimo a serviço interno, com exceção registrada e datada",
+      "Corrija a causa e remova a exceção; exceção permanente é o achado mais grave",
+      "Desabilite versões anteriores à política e trate exceção como item de risco"
     ],
     "correta": 0,
     "justificativa": "Autenticação mútua multiplica certificados, renovações e revogações a administrar"
@@ -551,10 +551,10 @@
     "status": "rascunho",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"Aceitar o certificado no cliente resolve a falha\". Qual é a correção?",
     "alternativas": [
-      "Versão antiga aceita é só questão de desempenho",
+      "Desabilite versões anteriores à política e trate exceção como item de risco",
       "Corrija a causa e remova a exceção; exceção permanente é o achado mais grave",
-      "Cadeia incompleta é detalhe de configuração",
-      "Renovação automática elimina o risco"
+      "Configure o envio da cadeia completa e teste com cliente de cache limpo",
+      "Decida por mTLS onde a identidade da máquina precisa ser provada, e conte o custo"
     ],
     "correta": 1,
     "justificativa": "A exceção remove a verificação e cria um canal que qualquer certificado satisfaz"
@@ -591,10 +591,10 @@
     "status": "rascunho",
     "enunciado": "O que o handshake do TLS 1.3 autentica, e o que ele não autentica?",
     "alternativas": [
-      "Aceitar o certificado no cliente resolve a falha",
-      "Versão antiga aceita é só questão de desempenho",
+      "Porque a exceção desliga a verificação de identidade de forma permanente e o canal passa a aceitar qualquer certificado, inclusive de um servidor controlado por atacante em posição de rede.",
+      "Porque a chave de sessão foi derivada de um segredo efêmero do handshake, e não da chave privada de longa duração. A chave privada assina e autentica; ela não decifra o histórico de sessões.",
       "Autentica o servidor, por meio do certificado e da prova de posse da chave privada, e protege o canal. Não autentica quem chama o serviço nem define o que essa pessoa pode acessar.",
-      "Cadeia incompleta é detalhe de configuração"
+      "O canal cifrado passa a terminar antes da aplicação: o trecho até o servidor de aplicação trafega em claro ou sob outra cifra, e o material de chave fica concentrado em um ponto administrado."
     ],
     "correta": 2,
     "justificativa": ""
@@ -611,9 +611,9 @@
     "status": "rascunho",
     "enunciado": "Por que a sessão anterior continua protegida quando a chave privada do servidor vaza depois?",
     "alternativas": [
-      "Aceitar o certificado no cliente resolve a falha",
-      "Versão antiga aceita é só questão de desempenho",
-      "Cadeia incompleta é detalhe de configuração",
+      "O canal cifrado passa a terminar antes da aplicação: o trecho até o servidor de aplicação trafega em claro ou sob outra cifra, e o material de chave fica concentrado em um ponto administrado.",
+      "Porque a exceção desliga a verificação de identidade de forma permanente e o canal passa a aceitar qualquer certificado, inclusive de um servidor controlado por atacante em posição de rede.",
+      "Autentica o servidor, por meio do certificado e da prova de posse da chave privada, e protege o canal. Não autentica quem chama o serviço nem define o que essa pessoa pode acessar.",
       "Porque a chave de sessão foi derivada de um segredo efêmero do handshake, e não da chave privada de longa duração. A chave privada assina e autentica; ela não decifra o histórico de sessões."
     ],
     "correta": 3,
@@ -632,9 +632,9 @@
     "enunciado": "O que muda quando o TLS termina no balanceador em vez de terminar na aplicação?",
     "alternativas": [
       "O canal cifrado passa a terminar antes da aplicação: o trecho até o servidor de aplicação trafega em claro ou sob outra cifra, e o material de chave fica concentrado em um ponto administrado.",
-      "Aceitar o certificado no cliente resolve a falha",
-      "Versão antiga aceita é só questão de desempenho",
-      "Cadeia incompleta é detalhe de configuração"
+      "Porque a chave de sessão foi derivada de um segredo efêmero do handshake, e não da chave privada de longa duração. A chave privada assina e autentica; ela não decifra o histórico de sessões.",
+      "Porque a exceção desliga a verificação de identidade de forma permanente e o canal passa a aceitar qualquer certificado, inclusive de um servidor controlado por atacante em posição de rede.",
+      "Autentica o servidor, por meio do certificado e da prova de posse da chave privada, e protege o canal. Não autentica quem chama o serviço nem define o que essa pessoa pode acessar."
     ],
     "correta": 0,
     "justificativa": ""
@@ -651,10 +651,10 @@
     "status": "rascunho",
     "enunciado": "Qual é o critério verificável para aceitar ou recusar uma versão de protocolo em um serviço interno?",
     "alternativas": [
-      "Aceitar o certificado no cliente resolve a falha",
+      "O canal cifrado passa a terminar antes da aplicação: o trecho até o servidor de aplicação trafega em claro ou sob outra cifra, e o material de chave fica concentrado em um ponto administrado.",
       "O critério é a versão mínima definida na política, comparada com a versão efetivamente negociada em cada endpoint, com suporte à versão mais recente exigida. Exceção vive em registro datado, com dono e prazo.",
-      "Versão antiga aceita é só questão de desempenho",
-      "Cadeia incompleta é detalhe de configuração"
+      "Porque a chave de sessão foi derivada de um segredo efêmero do handshake, e não da chave privada de longa duração. A chave privada assina e autentica; ela não decifra o histórico de sessões.",
+      "Porque a exceção desliga a verificação de identidade de forma permanente e o canal passa a aceitar qualquer certificado, inclusive de um servidor controlado por atacante em posição de rede."
     ],
     "correta": 1,
     "justificativa": ""
@@ -671,10 +671,10 @@
     "status": "rascunho",
     "enunciado": "Por que aceitar certificado inválido no cliente é pior do que a falha original?",
     "alternativas": [
-      "Aceitar o certificado no cliente resolve a falha",
-      "Versão antiga aceita é só questão de desempenho",
+      "Porque a chave de sessão foi derivada de um segredo efêmero do handshake, e não da chave privada de longa duração. A chave privada assina e autentica; ela não decifra o histórico de sessões.",
+      "O canal cifrado passa a terminar antes da aplicação: o trecho até o servidor de aplicação trafega em claro ou sob outra cifra, e o material de chave fica concentrado em um ponto administrado.",
       "Porque a exceção desliga a verificação de identidade de forma permanente e o canal passa a aceitar qualquer certificado, inclusive de um servidor controlado por atacante em posição de rede.",
-      "Cadeia incompleta é detalhe de configuração"
+      "Autentica o servidor, por meio do certificado e da prova de posse da chave privada, e protege o canal. Não autentica quem chama o serviço nem define o que essa pessoa pode acessar."
     ],
     "correta": 2,
     "justificativa": ""
@@ -691,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Cifrar o dado é suficiente\". Qual é a correção?",
     "alternativas": [
-      "Backup da chave é igual ao backup do dado",
-      "Fornecedor validado dispensa gestão",
+      "Use hierarquia com DEK por classe e KEK por domínio",
+      "Controle dividido, local separado e teste de restauração",
       "Separe custódia, com acesso nominal e registro de uso",
-      "Uma chave por empresa simplifica"
+      "Trate destruição como operação autorizada, com escopo e registro"
     ],
     "correta": 2,
     "justificativa": "Sem separação entre dado e chave, um único acesso aos dois resolve o problema do atacante"
@@ -711,9 +711,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Uma chave por empresa simplifica\". Qual é a correção?",
     "alternativas": [
+      "Separe custódia, com acesso nominal e registro de uso",
+      "Controle dividido, local separado e teste de restauração",
       "Backup da chave é igual ao backup do dado",
-      "Fornecedor validado dispensa gestão",
-      "Rotação é trabalho de calendário",
       "Use hierarquia com DEK por classe e KEK por domínio"
     ],
     "correta": 3,
@@ -751,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Backup da chave é igual ao backup do dado\". Qual é a correção?",
     "alternativas": [
-      "Fornecedor validado dispensa gestão",
+      "Separe custódia, com acesso nominal e registro de uso",
       "Controle dividido, local separado e teste de restauração",
-      "Uma chave por empresa simplifica",
-      "Rotação é trabalho de calendário"
+      "Use hierarquia com DEK por classe e KEK por domínio",
+      "Trate destruição como operação autorizada, com escopo e registro"
     ],
     "correta": 1,
     "justificativa": "O material de recuperação mal guardado anula a custódia"
@@ -771,10 +771,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Destruir a chave é perder dado\". Qual é a correção?",
     "alternativas": [
-      "Backup da chave é igual ao backup do dado",
-      "Fornecedor validado dispensa gestão",
+      "Peça nível, versão do padrão e data, e verifique o processo interno",
+      "Controle dividido, local separado e teste de restauração",
       "Trate destruição como operação autorizada, com escopo e registro",
-      "Uma chave por empresa simplifica"
+      "Separe custódia, com acesso nominal e registro de uso"
     ],
     "correta": 2,
     "justificativa": "É o efeito desejado quando a retenção termina, e é irreversível quando é erro"
@@ -791,9 +791,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Fornecedor validado dispensa gestão\". Qual é a correção?",
     "alternativas": [
-      "Backup da chave é igual ao backup do dado",
-      "Uma chave por empresa simplifica",
-      "Rotação é trabalho de calendário",
+      "Trate destruição como operação autorizada, com escopo e registro",
+      "Controle dividido, local separado e teste de restauração",
+      "Separe custódia, com acesso nominal e registro de uso",
       "Peça nível, versão do padrão e data, e verifique o processo interno"
     ],
     "correta": 3,
@@ -811,9 +811,9 @@
     "status": "rascunho",
     "enunciado": "Por que uma chave de dados é cifrada por uma chave de chave em vez de ser guardada em claro?",
     "alternativas": [
-      "Backup da chave é igual ao backup do dado",
-      "Fornecedor validado dispensa gestão",
-      "Uma chave por empresa simplifica",
+      "Dimensionar o escopo, conter com suspensão e substituição, erradicar re-embrulhando e re-cifrando o exposto, e evidenciar com registro de uso. A última etapa responde à pergunta de quanto vazou.",
+      "Porque o índice responde a busca por igualdade sobre um conjunto de valores pequeno e previsível, o que o torna alvo muito mais barato de atacar por força bruta do que o conteúdo; separar as chaves limita o dano.",
+      "Garante o que o módulo atesta nos níveis crescentes de segurança definidos no padrão, conforme a validação registrada no CMVP. Não garante que a organização gera, custodia, roda e destrói chaves de acordo com a política.",
       "Porque a chave em claro no mesmo local que o dado elimina a proteção: quem lê o armazenamento lê a chave junto. A chave de chave fica em custódia separada, com acesso auditado e destruição controlada."
     ],
     "correta": 3,
@@ -832,9 +832,9 @@
     "enunciado": "O que a destruição da chave de chave faz com os dados que ela protegia?",
     "alternativas": [
       "Torna os dados irrecuperáveis, já que sem a chave não há decifragem nem por backup. É o efeito desejado no fim da retenção e o efeito catastrófico no erro de escopo.",
-      "Backup da chave é igual ao backup do dado",
-      "Fornecedor validado dispensa gestão",
-      "Uma chave por empresa simplifica"
+      "Operação de uso registrada com identificador de quem chamou, ausência de função de exportação no módulo e prova de que a chave nasceu dentro da fronteira de custódia.",
+      "Dimensionar o escopo, conter com suspensão e substituição, erradicar re-embrulhando e re-cifrando o exposto, e evidenciar com registro de uso. A última etapa responde à pergunta de quanto vazou.",
+      "Porque a chave em claro no mesmo local que o dado elimina a proteção: quem lê o armazenamento lê a chave junto. A chave de chave fica em custódia separada, com acesso auditado e destruição controlada."
     ],
     "correta": 0,
     "justificativa": ""
@@ -851,10 +851,10 @@
     "status": "rascunho",
     "enunciado": "Quais são as evidências mínimas de que ninguém exportou a chave em claro?",
     "alternativas": [
-      "Backup da chave é igual ao backup do dado",
+      "Torna os dados irrecuperáveis, já que sem a chave não há decifragem nem por backup. É o efeito desejado no fim da retenção e o efeito catastrófico no erro de escopo.",
       "Operação de uso registrada com identificador de quem chamou, ausência de função de exportação no módulo e prova de que a chave nasceu dentro da fronteira de custódia.",
-      "Fornecedor validado dispensa gestão",
-      "Uma chave por empresa simplifica"
+      "Dimensionar o escopo, conter com suspensão e substituição, erradicar re-embrulhando e re-cifrando o exposto, e evidenciar com registro de uso. A última etapa responde à pergunta de quanto vazou.",
+      "Porque a chave em claro no mesmo local que o dado elimina a proteção: quem lê o armazenamento lê a chave junto. A chave de chave fica em custódia separada, com acesso auditado e destruição controlada."
     ],
     "correta": 1,
     "justificativa": ""
@@ -871,10 +871,10 @@
     "status": "rascunho",
     "enunciado": "Por que a chave que cifra o conteúdo não deve ser a mesma que constrói o índice de busca?",
     "alternativas": [
-      "Backup da chave é igual ao backup do dado",
-      "Fornecedor validado dispensa gestão",
+      "Garante o que o módulo atesta nos níveis crescentes de segurança definidos no padrão, conforme a validação registrada no CMVP. Não garante que a organização gera, custodia, roda e destrói chaves de acordo com a política.",
+      "Porque a chave em claro no mesmo local que o dado elimina a proteção: quem lê o armazenamento lê a chave junto. A chave de chave fica em custódia separada, com acesso auditado e destruição controlada.",
       "Porque o índice responde a busca por igualdade sobre um conjunto de valores pequeno e previsível, o que o torna alvo muito mais barato de atacar por força bruta do que o conteúdo; separar as chaves limita o dano.",
-      "Uma chave por empresa simplifica"
+      "Dimensionar o escopo, conter com suspensão e substituição, erradicar re-embrulhando e re-cifrando o exposto, e evidenciar com registro de uso. A última etapa responde à pergunta de quanto vazou."
     ],
     "correta": 2,
     "justificativa": ""
@@ -891,9 +891,9 @@
     "status": "rascunho",
     "enunciado": "Qual é a ordem de resposta a um comprometimento de chave, e o que cada etapa entrega?",
     "alternativas": [
-      "Backup da chave é igual ao backup do dado",
-      "Fornecedor validado dispensa gestão",
-      "Uma chave por empresa simplifica",
+      "Porque a chave em claro no mesmo local que o dado elimina a proteção: quem lê o armazenamento lê a chave junto. A chave de chave fica em custódia separada, com acesso auditado e destruição controlada.",
+      "Porque o índice responde a busca por igualdade sobre um conjunto de valores pequeno e previsível, o que o torna alvo muito mais barato de atacar por força bruta do que o conteúdo; separar as chaves limita o dano.",
+      "Garante o que o módulo atesta nos níveis crescentes de segurança definidos no padrão, conforme a validação registrada no CMVP. Não garante que a organização gera, custodia, roda e destrói chaves de acordo com a política.",
       "Dimensionar o escopo, conter com suspensão e substituição, erradicar re-embrulhando e re-cifrando o exposto, e evidenciar com registro de uso. A última etapa responde à pergunta de quanto vazou."
     ],
     "correta": 3,
@@ -912,9 +912,9 @@
     "enunciado": "O que a validação FIPS 140-3 de um módulo garante, e o que ela não garante?",
     "alternativas": [
       "Garante o que o módulo atesta nos níveis crescentes de segurança definidos no padrão, conforme a validação registrada no CMVP. Não garante que a organização gera, custodia, roda e destrói chaves de acordo com a política.",
-      "Backup da chave é igual ao backup do dado",
-      "Fornecedor validado dispensa gestão",
-      "Uma chave por empresa simplifica"
+      "Porque o índice responde a busca por igualdade sobre um conjunto de valores pequeno e previsível, o que o torna alvo muito mais barato de atacar por força bruta do que o conteúdo; separar as chaves limita o dano.",
+      "Porque a chave em claro no mesmo local que o dado elimina a proteção: quem lê o armazenamento lê a chave junto. A chave de chave fica em custódia separada, com acesso auditado e destruição controlada.",
+      "Dimensionar o escopo, conter com suspensão e substituição, erradicar re-embrulhando e re-cifrando o exposto, e evidenciar com registro de uso. A última etapa responde à pergunta de quanto vazou."
     ],
     "correta": 0,
     "justificativa": ""
@@ -931,9 +931,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Variável de ambiente é lugar seguro para segredo\". Qual é a correção?",
     "alternativas": [
-      "Chave de cifra e credencial são a mesma coisa",
-      "Cofre de senha privilegiada cobre tudo",
-      "Apagar o arquivo remove o vazamento",
+      "Escreva a política e defina dono e prazo por tipo de segredo",
+      "Separe os dois inventários e os dois controles de acesso",
+      "Revogue, substitua, reduza o escopo e varra o histórico",
       "Use cofre com entrega autenticada e credencial de curta duração"
     ],
     "correta": 3,
@@ -952,9 +952,9 @@
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Apagar o arquivo remove o vazamento\". Qual é a correção?",
     "alternativas": [
       "Revogue, substitua, reduza o escopo e varra o histórico",
-      "Variável de ambiente é lugar seguro para segredo",
-      "Chave de cifra e credencial são a mesma coisa",
-      "Cofre de senha privilegiada cobre tudo"
+      "Separe os dois inventários e os dois controles de acesso",
+      "Escreva a política e defina dono e prazo por tipo de segredo",
+      "Automatize emissão e expiração, e teste a rotação"
     ],
     "correta": 0,
     "justificativa": "O histórico de repositório preserva o conteúdo e o log de execução pode tê-lo gravado"
@@ -971,10 +971,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Chave de cifra e credencial são a mesma coisa\". Qual é a correção?",
     "alternativas": [
-      "Variável de ambiente é lugar seguro para segredo",
+      "Revogue, substitua, reduza o escopo e varra o histórico",
       "Separe os dois inventários e os dois controles de acesso",
-      "Cofre de senha privilegiada cobre tudo",
-      "Apagar o arquivo remove o vazamento"
+      "Escreva a política e defina dono e prazo por tipo de segredo",
+      "Use cofre com entrega autenticada e credencial de curta duração"
     ],
     "correta": 1,
     "justificativa": "A chave é consumida por algoritmo e não autentica identidade; a credencial autentica"
@@ -991,10 +991,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Cofre de senha privilegiada cobre tudo\". Qual é a correção?",
     "alternativas": [
-      "Variável de ambiente é lugar seguro para segredo",
-      "Chave de cifra e credencial são a mesma coisa",
+      "Use cofre com entrega autenticada e credencial de curta duração",
+      "Escreva a política e defina dono e prazo por tipo de segredo",
       "Trate cofre de PAM e cofre de aplicação como dois sistemas com donos distintos",
-      "Apagar o arquivo remove o vazamento"
+      "Separe os dois inventários e os dois controles de acesso"
     ],
     "correta": 2,
     "justificativa": "Ele protege credencial de pessoa privilegiada, não a credencial de serviço executada por máquina"
@@ -1013,7 +1013,7 @@
     "alternativas": [
       "Variável de ambiente é lugar seguro para segredo",
       "Chave de cifra e credencial são a mesma coisa",
-      "Cofre de senha privilegiada cobre tudo",
+      "Revogue, substitua, reduza o escopo e varra o histórico",
       "Automatize emissão e expiração, e teste a rotação"
     ],
     "correta": 3,
@@ -1032,9 +1032,9 @@
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Cofre resolve a governança\". Qual é a correção?",
     "alternativas": [
       "Escreva a política e defina dono e prazo por tipo de segredo",
-      "Variável de ambiente é lugar seguro para segredo",
-      "Chave de cifra e credencial são a mesma coisa",
-      "Cofre de senha privilegiada cobre tudo"
+      "Use cofre com entrega autenticada e credencial de curta duração",
+      "Separe os dois inventários e os dois controles de acesso",
+      "Revogue, substitua, reduza o escopo e varra o histórico"
     ],
     "correta": 0,
     "justificativa": "Sem política, o cofre guarda o mesmo material antigo com um nome novo"
@@ -1052,9 +1052,9 @@
     "enunciado": "Qual é a diferença entre um segredo de aplicação e a chave que cifra um dado?",
     "alternativas": [
       "O segredo de aplicação autentica uma identidade perante um serviço; a chave é material secreto consumido por um algoritmo. Quando o mesmo material faz as duas coisas, o escopo de exposição dobra.",
-      "Variável de ambiente é lugar seguro para segredo",
-      "Chave de cifra e credencial são a mesma coisa",
-      "Cofre de senha privilegiada cobre tudo"
+      "Porque o material que abre o cofre não pode ficar dentro dele. As saídas são controle dividido entre pessoas, custódia em módulo que não exporta, ou confiança em identidade de máquina do provedor.",
+      "Porque a credencial curta nasce e morre dentro da janela de uso, e o vazamento fora dessa janela não serve para nada; a rotação periódica mantém uma janela longa de validade para quem copiou o valor.",
+      "Porque o conteúdo do arquivo permanece no histórico de repositório, que é imutável por projeto, e pode ter sido gravado em log de execução; a resposta inclui revogar, substituir e varrer."
     ],
     "correta": 0,
     "justificativa": ""
@@ -1071,10 +1071,10 @@
     "status": "rascunho",
     "enunciado": "Quais são os três tipos de segredo usados neste tema, e o que distingue cada um?",
     "alternativas": [
-      "Variável de ambiente é lugar seguro para segredo",
+      "A correção de classe elimina a credencial estática de longa duração e passa a emitir credencial de curta duração a partir da identidade do executante. A correção de instância troca a string do segredo vazado.",
       "Credencial de pessoa, usada por humano; credencial de aplicação, usada por serviço; credencial de automação, usada por pipeline ou robô. O que distingue é o dono do acesso e o grau de exposição do ambiente.",
-      "Chave de cifra e credencial são a mesma coisa",
-      "Cofre de senha privilegiada cobre tudo"
+      "Porque a credencial curta nasce e morre dentro da janela de uso, e o vazamento fora dessa janela não serve para nada; a rotação periódica mantém uma janela longa de validade para quem copiou o valor.",
+      "Porque o material que abre o cofre não pode ficar dentro dele. As saídas são controle dividido entre pessoas, custódia em módulo que não exporta, ou confiança em identidade de máquina do provedor."
     ],
     "correta": 1,
     "justificativa": ""
@@ -1091,10 +1091,10 @@
     "status": "rascunho",
     "enunciado": "Por que a credencial de curta duração reduz risco mais do que a rotação periódica da mesma credencial?",
     "alternativas": [
-      "Variável de ambiente é lugar seguro para segredo",
-      "Chave de cifra e credencial são a mesma coisa",
+      "Porque o material que abre o cofre não pode ficar dentro dele. As saídas são controle dividido entre pessoas, custódia em módulo que não exporta, ou confiança em identidade de máquina do provedor.",
+      "O segredo de aplicação autentica uma identidade perante um serviço; a chave é material secreto consumido por um algoritmo. Quando o mesmo material faz as duas coisas, o escopo de exposição dobra.",
       "Porque a credencial curta nasce e morre dentro da janela de uso, e o vazamento fora dessa janela não serve para nada; a rotação periódica mantém uma janela longa de validade para quem copiou o valor.",
-      "Cofre de senha privilegiada cobre tudo"
+      "Credencial de pessoa, usada por humano; credencial de aplicação, usada por serviço; credencial de automação, usada por pipeline ou robô. O que distingue é o dono do acesso e o grau de exposição do ambiente."
     ],
     "correta": 2,
     "justificativa": ""
@@ -1111,9 +1111,9 @@
     "status": "rascunho",
     "enunciado": "Por que o cofre de segredos tem um problema de inicialização, e quais são as saídas conhecidas?",
     "alternativas": [
-      "Variável de ambiente é lugar seguro para segredo",
-      "Chave de cifra e credencial são a mesma coisa",
-      "Cofre de senha privilegiada cobre tudo",
+      "O segredo de aplicação autentica uma identidade perante um serviço; a chave é material secreto consumido por um algoritmo. Quando o mesmo material faz as duas coisas, o escopo de exposição dobra.",
+      "Porque a credencial curta nasce e morre dentro da janela de uso, e o vazamento fora dessa janela não serve para nada; a rotação periódica mantém uma janela longa de validade para quem copiou o valor.",
+      "Porque o conteúdo do arquivo permanece no histórico de repositório, que é imutável por projeto, e pode ter sido gravado em log de execução; a resposta inclui revogar, substituir e varrer.",
       "Porque o material que abre o cofre não pode ficar dentro dele. As saídas são controle dividido entre pessoas, custódia em módulo que não exporta, ou confiança em identidade de máquina do provedor."
     ],
     "correta": 3,
@@ -1132,9 +1132,9 @@
     "enunciado": "Por que a remoção do segredo do arquivo não encerra o incidente?",
     "alternativas": [
       "Porque o conteúdo do arquivo permanece no histórico de repositório, que é imutável por projeto, e pode ter sido gravado em log de execução; a resposta inclui revogar, substituir e varrer.",
-      "Variável de ambiente é lugar seguro para segredo",
-      "Chave de cifra e credencial são a mesma coisa",
-      "Cofre de senha privilegiada cobre tudo"
+      "O segredo de aplicação autentica uma identidade perante um serviço; a chave é material secreto consumido por um algoritmo. Quando o mesmo material faz as duas coisas, o escopo de exposição dobra.",
+      "Porque o material que abre o cofre não pode ficar dentro dele. As saídas são controle dividido entre pessoas, custódia em módulo que não exporta, ou confiança em identidade de máquina do provedor.",
+      "Porque a credencial curta nasce e morre dentro da janela de uso, e o vazamento fora dessa janela não serve para nada; a rotação periódica mantém uma janela longa de validade para quem copiou o valor."
     ],
     "correta": 0,
     "justificativa": ""
@@ -1151,10 +1151,10 @@
     "status": "rascunho",
     "enunciado": "Qual é a correção que elimina a classe do problema, e qual apenas remedia a instância?",
     "alternativas": [
-      "Variável de ambiente é lugar seguro para segredo",
+      "Credencial de pessoa, usada por humano; credencial de aplicação, usada por serviço; credencial de automação, usada por pipeline ou robô. O que distingue é o dono do acesso e o grau de exposição do ambiente.",
       "A correção de classe elimina a credencial estática de longa duração e passa a emitir credencial de curta duração a partir da identidade do executante. A correção de instância troca a string do segredo vazado.",
-      "Chave de cifra e credencial são a mesma coisa",
-      "Cofre de senha privilegiada cobre tudo"
+      "Porque a credencial curta nasce e morre dentro da janela de uso, e o vazamento fora dessa janela não serve para nada; a rotação periódica mantém uma janela longa de validade para quem copiou o valor.",
+      "Porque o material que abre o cofre não pode ficar dentro dele. As saídas são controle dividido entre pessoas, custódia em módulo que não exporta, ou confiança em identidade de máquina do provedor."
     ],
     "correta": 1,
     "justificativa": ""
@@ -1172,9 +1172,9 @@
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"Pós-quântica é problema de 2035\". Qual é a correção?",
     "alternativas": [
       "Priorize pelo tempo de retenção e pela dependência de fornecedor",
-      "Basta escolher o algoritmo mais novo agora",
-      "Toda a criptografia precisa ser trocada",
-      "Cifra simétrica precisa ser substituída"
+      "Trate re-embrulho de chave como primeira ação no dado em repouso",
+      "Use marcos internos datados e re-baseline quando o documento finalizar",
+      "Separe assimetria de simetria e de hash antes de orçar"
     ],
     "correta": 0,
     "justificativa": "A coleta antecipada já expõe dado com retenção longa, e a troca de hardware leva anos"
@@ -1191,10 +1191,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"Toda a criptografia precisa ser trocada\". Qual é a correção?",
     "alternativas": [
-      "Basta escolher o algoritmo mais novo agora",
+      "Invista em agilidade e em piloto com modo híbrido",
       "Separe assimetria de simetria e de hash antes de orçar",
-      "Cifra simétrica precisa ser substituída",
-      "Inventário é tarefa de ferramenta"
+      "Priorize pelo tempo de retenção e pela dependência de fornecedor",
+      "Trate re-embrulho de chave como primeira ação no dado em repouso"
     ],
     "correta": 1,
     "justificativa": "O impacto concentra-se nos esquemas assimétricos de estabelecimento de chave e de assinatura"
@@ -1211,10 +1211,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"Basta escolher o algoritmo mais novo agora\". Qual é a correção?",
     "alternativas": [
-      "Toda a criptografia precisa ser trocada",
-      "Cifra simétrica precisa ser substituída",
+      "Separe assimetria de simetria e de hash antes de orçar",
+      "Nomeie dono e data por linha do inventário",
       "Invista em agilidade e em piloto com modo híbrido",
-      "Inventário é tarefa de ferramenta"
+      "Toda a criptografia precisa ser trocada"
     ],
     "correta": 2,
     "justificativa": "Esquemas pós-quânticos são recentes, e a migração leva anos por causa de inventário e fornecedor"
@@ -1231,9 +1231,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"O cronograma é definitivo\". Qual é a correção?",
     "alternativas": [
-      "Basta escolher o algoritmo mais novo agora",
-      "Toda a criptografia precisa ser trocada",
-      "Cifra simétrica precisa ser substituída",
+      "Priorize pelo tempo de retenção e pela dependência de fornecedor",
+      "Trate re-embrulho de chave como primeira ação no dado em repouso",
+      "Separe assimetria de simetria e de hash antes de orçar",
       "Use marcos internos datados e re-baseline quando o documento finalizar"
     ],
     "correta": 3,
@@ -1271,10 +1271,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"Cifra simétrica precisa ser substituída\". Qual é a correção?",
     "alternativas": [
-      "Basta escolher o algoritmo mais novo agora",
+      "Priorize pelo tempo de retenção e pela dependência de fornecedor",
       "Trate re-embrulho de chave como primeira ação no dado em repouso",
-      "Toda a criptografia precisa ser trocada",
-      "Inventário é tarefa de ferramenta"
+      "Use marcos internos datados e re-baseline quando o documento finalizar",
+      "Separe assimetria de simetria e de hash antes de orçar"
     ],
     "correta": 1,
     "justificativa": "A cifra de bloco permanece útil; o que muda é a proteção da chave"
@@ -1291,10 +1291,10 @@
     "status": "rascunho",
     "enunciado": "Por que o tempo de retenção do dado define a urgência da migração pós-quântica?",
     "alternativas": [
-      "Basta escolher o algoritmo mais novo agora",
+      "Algoritmo como configuração em vez de código, inventário atualizado por serviço, biblioteca que aceita troca sem recompilar o produto e substituição automatizada de certificado.",
       "Porque tráfego cifrado pode ser capturado hoje e decifrado quando houver capacidade de quebra; dado que precisa continuar secreto depois desse horizonte já está exposto.",
-      "Toda a criptografia precisa ser trocada",
-      "Cifra simétrica precisa ser substituída"
+      "Use marcos internos datados e re-baseline quando o documento finalizar",
+      "Priorize pelo tempo de retenção e pela dependência de fornecedor"
     ],
     "correta": 1,
     "justificativa": ""
@@ -1311,10 +1311,10 @@
     "status": "rascunho",
     "enunciado": "Quais quatro sinais indicam que uma organização tem agilidade criptográfica?",
     "alternativas": [
-      "Basta escolher o algoritmo mais novo agora",
+      "Porque tráfego cifrado pode ser capturado hoje e decifrado quando houver capacidade de quebra; dado que precisa continuar secreto depois desse horizonte já está exposto.",
       "Algoritmo como configuração em vez de código, inventário atualizado por serviço, biblioteca que aceita troca sem recompilar o produto e substituição automatizada de certificado.",
-      "Toda a criptografia precisa ser trocada",
-      "Cifra simétrica precisa ser substituída"
+      "Use marcos internos datados e re-baseline quando o documento finalizar",
+      "Priorize pelo tempo de retenção e pela dependência de fornecedor"
     ],
     "correta": 1,
     "justificativa": ""

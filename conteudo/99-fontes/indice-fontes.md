@@ -57,7 +57,7 @@ Documentos com fontes: **140**. Citações: **718**. URLs distintas: **242**.
 | NIST SP 800-115 — Technical Guide to Information Security Testing and Assessment, setembro de 2008 | primaria | 6 | <https://csrc.nist.gov/pubs/sp/800/115/final> |
 | OWASP Application Security Verification Standard 5.0.0, versão estável de maio de 2025, lançada no Global AppSec EU Barcelona 2025 | primaria | 6 | <https://github.com/OWASP/ASVS> |
 | OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes para LLM e aplicacoes de IA generativa | primaria | 6 | <https://genai.owasp.org/llm-top-10/> |
-| CompTIA Security+ SY0-701 Exam Objectives — 5 domínios com pesos 12%, 22%, 18%, 28% e 20% | primaria | 5 | <https://assets.ctfassets.net/82ripq7fjls2/6TYWUym0Nudqa8nGEnegjG/0f9b974d3b1837fe85ab8e6553f4d623/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf> |
+| CompTIA Security+ SY0-701 Exam Objectives — 5 domínios com pesos 12%, 22%, 18%, 28% e 20% | primaria | 5 | <https://www.comptia.org/en-us/certifications/security/> |
 | Dunlosky et al. (2013) — mesmo artigo em cópia institucional aberta, usada como caminho de leitura | academica | 5 | <https://www.wku.edu/senate/documents/improving_student_learning_dunlosky_2013.pdf> |
 | Dunlosky et al. (2013) — pagina do editor bloqueia acesso automatizado e por navegador — Improving Students' Learning With Effective Learning Techniques, DOI 10.1177/1529100612453266 | academica | 5 | <https://journals.sagepub.com/doi/abs/10.1177/1529100612453266> |
 | ECB — TIBER-EU: threat intelligence-based ethical red teaming | primaria | 5 | <https://www.ecb.europa.eu/paym/cyber-resilience/tiber-eu/html/index.en.html> |

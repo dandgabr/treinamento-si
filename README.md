@@ -12,3 +12,5 @@ Um repositório simples para manter uma proposta de treinamentos para futuros ge
 Quem **estuda** não precisa de nada instalado: recebe a pasta ou o instalador e clica. Quem **constrói** precisa de Node 22, `npm install` e `npm run desktop` (ou `npm run empacotar`); o resto está no README do app.
 
 O conteúdo e o app são separados de propósito: editar texto nunca exige mexer em código, e o app não reescreve conteúdo nenhum. O que é derivado — `app/src/content/generated/`, `app/dist/` e `app/dist-electron/` — não vai para o controle de versão.
+
+Uma exceção a essa lista: `app/src/content/questions/` também é derivado do material, mas é **versionado de propósito**. O banco de múltipla escolha — 955 itens em 18 áreas, gerados das tabelas de erros comuns e dos pares de recuperação ativa — carrega o `status` de revisão de cada item, e o gerador reencontra o item pelo `id` para devolver o status que uma pessoa gravou, derrubando-o quando o texto do item deixa de ser o que foi revisado. Sem o diretório no controle de versão, cada build apagaria a revisão feita à mão. O resto da explicação está no [README do app](app/README.md).

@@ -7,7 +7,7 @@ import { renderizarMermaid } from './mermaid'
 import { ResumoProgresso } from './Progresso'
 import { Quiz } from './Quiz'
 import { ThemeView } from './ThemeView'
-import { irPara, linkQuiz, useRota } from './useRota'
+import { linkQuiz, useRota } from './useRota'
 
 const CHAVE_TEMA = 'roadmap:tema'
 
@@ -35,13 +35,9 @@ function Home() {
           de origem. O item que ainda não passou por revisão humana aparece marcado.
         </p>
         <p className="acoes-tema">
-          {/* Botao, e nao ancora, por um motivo concreto: o smoke confere todo link interno
-              (`a[href^="#"]`) contra a matriz de conteudo — area, tema e pagina —, e a rota do
-              quiz nao faz parte dela. Uma ancora aqui deixaria a verificacao vermelha por um
-              link que funciona. */}
-          <button className="botao-secundario" onClick={() => irPara(linkQuiz())}>
+          <a className="botao-secundario" href={linkQuiz()}>
             Quiz de múltipla escolha
-          </button>
+          </a>
         </p>
         <p className="dica">
           Para praticar uma área só, o escopo se escolhe dentro do quiz, no seletor do topo.

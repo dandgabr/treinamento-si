@@ -11,9 +11,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Privacidade, dado pessoal e o que a distingue de segurança: um colega afirma que \"Dado anonimizado e dado pseudonimizado são a mesma coisa\". Qual é a correção?",
     "alternativas": [
-      "Criptografia encerra a obrigação de privacidade",
-      "O fornecedor é responsável pelo dado do cliente",
-      "Dado público não tem regime",
+      "Dado tornado manifestamente público dispensa consentimento, mas preserva princípios e direitos",
+      "Teste a identificabilidade pelos meios disponíveis, não pela presença de nome",
+      "A cifra é controle de segurança; ela não substitui a base legal",
       "O art. 13, §4º, mantém a informação adicional separada e exige ambiente controlado e seguro"
     ],
     "correta": 3,
@@ -32,9 +32,9 @@
     "enunciado": "Sobre Privacidade, dado pessoal e o que a distingue de segurança: um colega afirma que \"Sem nome, sem dado pessoal\". Qual é a correção?",
     "alternativas": [
       "Teste a identificabilidade pelos meios disponíveis, não pela presença de nome",
-      "Dado anonimizado e dado pseudonimizado são a mesma coisa",
-      "Criptografia encerra a obrigação de privacidade",
-      "O fornecedor é responsável pelo dado do cliente"
+      "O art. 13, §4º, mantém a informação adicional separada e exige ambiente controlado e seguro",
+      "A cifra é controle de segurança; ela não substitui a base legal",
+      "Dado tornado manifestamente público dispensa consentimento, mas preserva princípios e direitos"
     ],
     "correta": 0,
     "justificativa": "Informação identificável basta, e o art. 12, §2º, alcança o conjunto usado para perfil comportamental de pessoa identificada"
@@ -53,8 +53,8 @@
     "alternativas": [
       "Dado anonimizado e dado pseudonimizado são a mesma coisa",
       "A cifra é controle de segurança; ela não substitui a base legal",
-      "O fornecedor é responsável pelo dado do cliente",
-      "Dado público não tem regime"
+      "Papel se define por quem decide, não por quem hospeda",
+      "Teste a identificabilidade pelos meios disponíveis, não pela presença de nome"
     ],
     "correta": 1,
     "justificativa": "Confidencialidade protege contra acesso indevido; finalidade, necessidade e prazo continuam em aberto"
@@ -71,10 +71,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Privacidade, dado pessoal e o que a distingue de segurança: um colega afirma que \"Dado público não tem regime\". Qual é a correção?",
     "alternativas": [
-      "Dado anonimizado e dado pseudonimizado são a mesma coisa",
-      "Criptografia encerra a obrigação de privacidade",
+      "O art. 13, §4º, mantém a informação adicional separada e exige ambiente controlado e seguro",
+      "Teste a identificabilidade pelos meios disponíveis, não pela presença de nome",
       "Dado tornado manifestamente público dispensa consentimento, mas preserva princípios e direitos",
-      "O fornecedor é responsável pelo dado do cliente"
+      "A cifra é controle de segurança; ela não substitui a base legal"
     ],
     "correta": 2,
     "justificativa": "O art. 7º, §3º, manda considerar finalidade, boa-fé e interesse público que justificaram a disponibilização"
@@ -93,7 +93,7 @@
     "alternativas": [
       "Dado anonimizado e dado pseudonimizado são a mesma coisa",
       "Criptografia encerra a obrigação de privacidade",
-      "Dado público não tem regime",
+      "A cifra é controle de segurança; ela não substitui a base legal",
       "Papel se define por quem decide, não por quem hospeda"
     ],
     "correta": 3,
@@ -111,10 +111,10 @@
     "status": "rascunho",
     "enunciado": "Quem é o controlador e como esse papel se distingue do operador e do encarregado?",
     "alternativas": [
-      "Dado anonimizado e dado pseudonimizado são a mesma coisa",
-      "Criptografia encerra a obrigação de privacidade",
+      "Não. O art. 12, §2º, admite expressamente como dado pessoal o conjunto usado para formação de perfil comportamental de determinada pessoa natural, se identificada.",
+      "Dado tornado manifestamente público dispensa consentimento, mas preserva princípios e direitos",
       "Controlador é quem toma as decisões referentes ao tratamento; operador realiza o tratamento em nome do controlador; encarregado é o canal de comunicação entre controlador, titulares e ANPD, sem ser dono da base.",
-      "O fornecedor é responsável pelo dado do cliente"
+      "O art. 13, §4º, mantém a informação adicional separada e exige ambiente controlado e seguro"
     ],
     "correta": 2,
     "justificativa": ""
@@ -131,9 +131,9 @@
     "status": "rascunho",
     "enunciado": "Um conjunto de dados usados para montar perfil comportamental de pessoa identificada pode ser tratado como anônimo? Fundamente.",
     "alternativas": [
-      "Dado anonimizado e dado pseudonimizado são a mesma coisa",
-      "Criptografia encerra a obrigação de privacidade",
-      "O fornecedor é responsável pelo dado do cliente",
+      "Controlador é quem toma as decisões referentes ao tratamento; operador realiza o tratamento em nome do controlador; encarregado é o canal de comunicação entre controlador, titulares e ANPD, sem ser dono da base.",
+      "Dado tornado manifestamente público dispensa consentimento, mas preserva princípios e direitos",
+      "O art. 13, §4º, mantém a informação adicional separada e exige ambiente controlado e seguro",
       "Não. O art. 12, §2º, admite expressamente como dado pessoal o conjunto usado para formação de perfil comportamental de determinada pessoa natural, se identificada."
     ],
     "correta": 3,
@@ -152,9 +152,9 @@
     "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"O catálogo de dados do time de engenharia serve como inventário\". Qual é a correção?",
     "alternativas": [
       "O inventário é por processo de negócio, com as colunas que a lei e a fiscalização pedem",
-      "Registro das operações e relatório de impacto são o mesmo documento",
-      "O inventário é um projeto com data de término",
-      "Guardar tudo é mais seguro que descartar"
+      "A regra de classificação vem do jurídico; a aplicação campo a campo é do dono do processo",
+      "O inventário é um processo com dono, revisão periódica e porta de entrada no ciclo de mudança",
+      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio"
     ],
     "correta": 0,
     "justificativa": "Ele descreve tabelas e colunas, sem hipótese legal, sem prazo e sem dono de negócio"
@@ -171,10 +171,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"O inventário é um projeto com data de término\". Qual é a correção?",
     "alternativas": [
-      "Registro das operações e relatório de impacto são o mesmo documento",
+      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio",
       "O inventário é um processo com dono, revisão periódica e porta de entrada no ciclo de mudança",
-      "O catálogo de dados do time de engenharia serve como inventário",
-      "Guardar tudo é mais seguro que descartar"
+      "A regra de classificação vem do jurídico; a aplicação campo a campo é do dono do processo",
+      "O inventário é por processo de negócio, com as colunas que a lei e a fiscalização pedem"
     ],
     "correta": 1,
     "justificativa": "Bases nascem em todo projeto e todo processo novo cria tratamento novo"
@@ -191,10 +191,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"Marcar sensível é tarefa do jurídico\". Qual é a correção?",
     "alternativas": [
-      "Registro das operações e relatório de impacto são o mesmo documento",
-      "O catálogo de dados do time de engenharia serve como inventário",
+      "O inventário é por processo de negócio, com as colunas que a lei e a fiscalização pedem",
+      "O inventário é um processo com dono, revisão periódica e porta de entrada no ciclo de mudança",
       "A regra de classificação vem do jurídico; a aplicação campo a campo é do dono do processo",
-      "O inventário é um projeto com data de término"
+      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio"
     ],
     "correta": 2,
     "justificativa": "Quem conhece o significado do código da coluna é quem opera o processo"
@@ -211,9 +211,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"Registro das operações e relatório de impacto são o mesmo documento\". Qual é a correção?",
     "alternativas": [
-      "O catálogo de dados do time de engenharia serve como inventário",
-      "O inventário é um projeto com data de término",
-      "Guardar tudo é mais seguro que descartar",
+      "O inventário é um processo com dono, revisão periódica e porta de entrada no ciclo de mudança",
+      "A regra de classificação vem do jurídico; a aplicação campo a campo é do dono do processo",
+      "O inventário é por processo de negócio, com as colunas que a lei e a fiscalização pedem",
       "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio"
     ],
     "correta": 3,
@@ -251,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "O que o art. 37 da LGPD exige de controlador e operador, e em que hipótese a menção é destacada?",
     "alternativas": [
-      "Registro das operações e relatório de impacto são o mesmo documento",
+      "Porque o processo tem dono, contrato, obrigação legal e ponto de partida e de término do tratamento; o sistema é apenas um dos lugares onde o dado passa.",
       "Exige manter registro das operações de tratamento de dados pessoais que realizarem, especialmente quando o tratamento for baseado em legítimo interesse.",
-      "O catálogo de dados do time de engenharia serve como inventário",
-      "O inventário é um projeto com data de término"
+      "O registro das operações de tratamento dos dados pessoais afetados, conforme o art. 8º do Regulamento de Comunicação de Incidente de Segurança.",
+      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio"
     ],
     "correta": 1,
     "justificativa": ""
@@ -271,9 +271,9 @@
     "status": "rascunho",
     "enunciado": "Por que o inventário se organiza por processo de negócio e não por sistema?",
     "alternativas": [
-      "Registro das operações e relatório de impacto são o mesmo documento",
-      "O catálogo de dados do time de engenharia serve como inventário",
-      "O inventário é um projeto com data de término",
+      "Exige manter registro das operações de tratamento de dados pessoais que realizarem, especialmente quando o tratamento for baseado em legítimo interesse.",
+      "O registro das operações de tratamento dos dados pessoais afetados, conforme o art. 8º do Regulamento de Comunicação de Incidente de Segurança.",
+      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio",
       "Porque o processo tem dono, contrato, obrigação legal e ponto de partida e de término do tratamento; o sistema é apenas um dos lugares onde o dado passa."
     ],
     "correta": 3,
@@ -292,9 +292,9 @@
     "enunciado": "Que documento da ANPD pode ser exigido durante a apuração de um incidente, além do relatório de impacto?",
     "alternativas": [
       "O registro das operações de tratamento dos dados pessoais afetados, conforme o art. 8º do Regulamento de Comunicação de Incidente de Segurança.",
-      "Registro das operações e relatório de impacto são o mesmo documento",
-      "O catálogo de dados do time de engenharia serve como inventário",
-      "O inventário é um projeto com data de término"
+      "Exige manter registro das operações de tratamento de dados pessoais que realizarem, especialmente quando o tratamento for baseado em legítimo interesse.",
+      "Porque o processo tem dono, contrato, obrigação legal e ponto de partida e de término do tratamento; o sistema é apenas um dos lugares onde o dado passa.",
+      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio"
     ],
     "correta": 0,
     "justificativa": ""
@@ -311,10 +311,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Manter o dado não incomoda ninguém\". Qual é a correção?",
     "alternativas": [
-      "Eliminar dado de saúde atende qualquer pedido de titular",
+      "Quem assina a tabela é o dono do processo, com validação jurídica",
       "Prazo definido e eliminação comprovada reduzem exposição e custo",
-      "O prazo de retenção é decisão da TI",
-      "Pseudonimizar resolve a retenção"
+      "Eliminar dado de saúde atende qualquer pedido de titular",
+      "Documente o ciclo de rotação com data de expiração ou faça expurgo direcionado"
     ],
     "correta": 1,
     "justificativa": "Reter além do prazo mantém o risco aberto e amplia o escopo de incidente e de pedido de titular"
@@ -331,10 +331,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Backup é exceção permanente\". Qual é a correção?",
     "alternativas": [
-      "Eliminar dado de saúde atende qualquer pedido de titular",
-      "O prazo de retenção é decisão da TI",
+      "Para sair do regime, a anonimização precisa resistir a reversão por esforços razoáveis",
+      "Quem assina a tabela é o dono do processo, com validação jurídica",
       "Documente o ciclo de rotação com data de expiração ou faça expurgo direcionado",
-      "Manter o dado não incomoda ninguém"
+      "Prazo definido e eliminação comprovada reduzem exposição e custo"
     ],
     "correta": 2,
     "justificativa": "Backup com dado que já devia ter sido eliminado continua sendo tratamento ativo, sob o art. 47"
@@ -351,9 +351,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Pseudonimizar resolve a retenção\". Qual é a correção?",
     "alternativas": [
-      "Eliminar dado de saúde atende qualquer pedido de titular",
-      "O prazo de retenção é decisão da TI",
-      "Manter o dado não incomoda ninguém",
+      "A resposta ao titular informa o que foi eliminado e a obrigação que sustenta o que permanece",
+      "Documente o ciclo de rotação com data de expiração ou faça expurgo direcionado",
+      "Quem assina a tabela é o dono do processo, com validação jurídica",
       "Para sair do regime, a anonimização precisa resistir a reversão por esforços razoáveis"
     ],
     "correta": 3,
@@ -372,9 +372,9 @@
     "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"O prazo de retenção é decisão da TI\". Qual é a correção?",
     "alternativas": [
       "Quem assina a tabela é o dono do processo, com validação jurídica",
+      "Prazo definido e eliminação comprovada reduzem exposição e custo",
       "Eliminar dado de saúde atende qualquer pedido de titular",
-      "Manter o dado não incomoda ninguém",
-      "Pseudonimizar resolve a retenção"
+      "Documente o ciclo de rotação com data de expiração ou faça expurgo direcionado"
     ],
     "correta": 0,
     "justificativa": "A base da conservação é obrigação legal ou decisão de negócio, não parâmetro de armazenamento"
@@ -391,10 +391,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Eliminar dado de saúde atende qualquer pedido de titular\". Qual é a correção?",
     "alternativas": [
-      "O prazo de retenção é decisão da TI",
+      "Para sair do regime, a anonimização precisa resistir a reversão por esforços razoáveis",
       "A resposta ao titular informa o que foi eliminado e a obrigação que sustenta o que permanece",
-      "Manter o dado não incomoda ninguém",
-      "Pseudonimizar resolve a retenção"
+      "Documente o ciclo de rotação com data de expiração ou faça expurgo direcionado",
+      "Quem assina a tabela é o dono do processo, com validação jurídica"
     ],
     "correta": 1,
     "justificativa": "O art. 18, inciso VI, ressalva expressamente as hipóteses do art. 16"
@@ -411,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Consentimento é a base legal mais segura\". Qual é a correção?",
     "alternativas": [
-      "O prazo de três dias úteis corre da conclusão da apuração",
-      "Comunicar ao titular é opcional quando o risco é baixo",
+      "Decida com critério escrito; se decidir não comunicar, registre o fundamento e a evidência",
+      "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois",
       "Prefira a hipótese que descreve a obrigação real; use consentimento quando o uso depende da vontade do titular",
-      "Legítimo interesse serve para qualquer uso comercial"
+      "Documente o teste e o resultado, e não use legítimo interesse para dado sensível"
     ],
     "correta": 2,
     "justificativa": "É uma hipótese entre dez, com ônus da prova no controlador, revogação a qualquer momento e nulidade de autorização genérica"
@@ -431,9 +431,9 @@
     "status": "rascunho",
     "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Legítimo interesse serve para qualquer uso comercial\". Qual é a correção?",
     "alternativas": [
-      "O prazo de três dias úteis corre da conclusão da apuração",
-      "Comunicar ao titular é opcional quando o risco é baixo",
-      "Dado de saúde em planilha de RH é problema do RH",
+      "A classificação do dado sensível define controle em todos os pontos do ciclo",
+      "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois",
+      "Mantenha o dado ininteligível desde a origem, com cifra e chave segregada",
       "Documente o teste e o resultado, e não use legítimo interesse para dado sensível"
     ],
     "correta": 3,
@@ -452,9 +452,9 @@
     "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"O prazo de três dias úteis corre da conclusão da apuração\". Qual é a correção?",
     "alternativas": [
       "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois",
-      "Comunicar ao titular é opcional quando o risco é baixo",
-      "Legítimo interesse serve para qualquer uso comercial",
-      "Dado de saúde em planilha de RH é problema do RH"
+      "Decida com critério escrito; se decidir não comunicar, registre o fundamento e a evidência",
+      "Documente o teste e o resultado, e não use legítimo interesse para dado sensível",
+      "A classificação do dado sensível define controle em todos os pontos do ciclo"
     ],
     "correta": 0,
     "justificativa": "O regulamento conta o prazo do conhecimento de que o incidente afetou dados pessoais"
@@ -471,10 +471,10 @@
     "status": "rascunho",
     "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Comunicar ao titular é opcional quando o risco é baixo\". Qual é a correção?",
     "alternativas": [
-      "O prazo de três dias úteis corre da conclusão da apuração",
+      "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois",
       "Decida com critério escrito; se decidir não comunicar, registre o fundamento e a evidência",
-      "Legítimo interesse serve para qualquer uso comercial",
-      "Dado de saúde em planilha de RH é problema do RH"
+      "Documente o teste e o resultado, e não use legítimo interesse para dado sensível",
+      "A classificação do dado sensível define controle em todos os pontos do ciclo"
     ],
     "correta": 1,
     "justificativa": "A obrigação do art. 48 abrange ANPD e titular na mesma frase, na hipótese de risco ou dano relevante"
@@ -491,10 +491,10 @@
     "status": "rascunho",
     "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Anonimizar depois do incidente resolve\". Qual é a correção?",
     "alternativas": [
-      "O prazo de três dias úteis corre da conclusão da apuração",
-      "Comunicar ao titular é opcional quando o risco é baixo",
+      "A classificação do dado sensível define controle em todos os pontos do ciclo",
+      "Documente o teste e o resultado, e não use legítimo interesse para dado sensível",
       "Mantenha o dado ininteligível desde a origem, com cifra e chave segregada",
-      "Legítimo interesse serve para qualquer uso comercial"
+      "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois"
     ],
     "correta": 2,
     "justificativa": "O juízo de gravidade olha o que existia e as medidas adotadas; a anonimização posterior não reescreve o passado"
@@ -511,9 +511,9 @@
     "status": "rascunho",
     "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Dado de saúde em planilha de RH é problema do RH\". Qual é a correção?",
     "alternativas": [
-      "O prazo de três dias úteis corre da conclusão da apuração",
-      "Comunicar ao titular é opcional quando o risco é baixo",
-      "Legítimo interesse serve para qualquer uso comercial",
+      "Mantenha o dado ininteligível desde a origem, com cifra e chave segregada",
+      "Documente o teste e o resultado, e não use legítimo interesse para dado sensível",
+      "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois",
       "A classificação do dado sensível define controle em todos os pontos do ciclo"
     ],
     "correta": 3,
@@ -531,10 +531,10 @@
     "status": "rascunho",
     "enunciado": "Quais são os prazos e os destinatários da comunicação de incidente, e de que evento cada prazo conta?",
     "alternativas": [
-      "O prazo de três dias úteis corre da conclusão da apuração",
-      "Comunicar ao titular é opcional quando o risco é baixo",
+      "Prefira a hipótese que descreve a obrigação real; use consentimento quando o uso depende da vontade do titular",
+      "Decida com critério escrito; se decidir não comunicar, registre o fundamento e a evidência",
       "Três dias úteis à ANPD e três dias úteis ao titular, ambos contados do conhecimento pelo controlador de que o incidente afetou dados pessoais.",
-      "Legítimo interesse serve para qualquer uso comercial"
+      "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois"
     ],
     "correta": 2,
     "justificativa": ""
@@ -551,9 +551,9 @@
     "status": "rascunho",
     "enunciado": "O que o art. 48, §3º, valoriza no juízo de gravidade do incidente?",
     "alternativas": [
-      "O prazo de três dias úteis corre da conclusão da apuração",
-      "Comunicar ao titular é opcional quando o risco é baixo",
-      "Legítimo interesse serve para qualquer uso comercial",
+      "Três dias úteis à ANPD e três dias úteis ao titular, ambos contados do conhecimento pelo controlador de que o incidente afetou dados pessoais.",
+      "Prefira a hipótese que descreve a obrigação real; use consentimento quando o uso depende da vontade do titular",
+      "Decida com critério escrito; se decidir não comunicar, registre o fundamento e a evidência",
       "A comprovação de que foram adotadas medidas técnicas adequadas que tornem os dados pessoais afetados ininteligíveis, no âmbito e nos limites técnicos dos serviços, para terceiros não autorizados a acessá-los."
     ],
     "correta": 3,
@@ -571,9 +571,9 @@
     "status": "rascunho",
     "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Dado hospedado no Brasil não é transferência internacional\". Qual é a correção?",
     "alternativas": [
+      "Exija lista de suboperadores, país e instrumento aplicável a cada um",
+      "Cada regime exige seu instrumento; um contrato pode ter lacuna em um deles",
       "Derrogação por consentimento serve para operação de rotina",
-      "Suboperador é problema do fornecedor",
-      "Vale a cláusula europeia para tudo",
       "Mapeie armazenamento, acesso humano e custódia de chave separadamente"
     ],
     "correta": 3,
@@ -592,9 +592,9 @@
     "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Cifra resolve a transferência\". Qual é a correção?",
     "alternativas": [
       "Instrumento contratual e custódia de chave são decisões distintas e complementares",
-      "Dado hospedado no Brasil não é transferência internacional",
-      "Derrogação por consentimento serve para operação de rotina",
-      "Suboperador é problema do fornecedor"
+      "Cada regime exige seu instrumento; um contrato pode ter lacuna em um deles",
+      "Mapeie armazenamento, acesso humano e custódia de chave separadamente",
+      "Exija lista de suboperadores, país e instrumento aplicável a cada um"
     ],
     "correta": 0,
     "justificativa": "Cifra reduz risco e ajuda a demonstrar ininteligibilidade, mas não substitui o instrumento legal"
@@ -611,10 +611,10 @@
     "status": "rascunho",
     "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Vale a cláusula europeia para tudo\". Qual é a correção?",
     "alternativas": [
-      "Dado hospedado no Brasil não é transferência internacional",
+      "Mapeie armazenamento, acesso humano e custódia de chave separadamente",
       "Cada regime exige seu instrumento; um contrato pode ter lacuna em um deles",
-      "Derrogação por consentimento serve para operação de rotina",
-      "Suboperador é problema do fornecedor"
+      "Exija lista de suboperadores, país e instrumento aplicável a cada um",
+      "Instrumento contratual e custódia de chave são decisões distintas e complementares"
     ],
     "correta": 1,
     "justificativa": "A ANPD define o conteúdo das cláusulas-padrão no regime brasileiro"
@@ -632,9 +632,9 @@
     "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Derrogação por consentimento serve para operação de rotina\". Qual é a correção?",
     "alternativas": [
       "Dado hospedado no Brasil não é transferência internacional",
-      "Suboperador é problema do fornecedor",
+      "Exija lista de suboperadores, país e instrumento aplicável a cada um",
       "Fluxo recorrente pede adequação ou garantias adequadas",
-      "Vale a cláusula europeia para tudo"
+      "Mapeie armazenamento, acesso humano e custódia de chave separadamente"
     ],
     "correta": 2,
     "justificativa": "O art. 49.º trata de situações específicas, não de fluxo contínuo de dados"
@@ -651,9 +651,9 @@
     "status": "rascunho",
     "enunciado": "Sobre GDPR e transferência internacional: um colega afirma que \"Suboperador é problema do fornecedor\". Qual é a correção?",
     "alternativas": [
+      "Mapeie armazenamento, acesso humano e custódia de chave separadamente",
+      "Cada regime exige seu instrumento; um contrato pode ter lacuna em um deles",
       "Dado hospedado no Brasil não é transferência internacional",
-      "Derrogação por consentimento serve para operação de rotina",
-      "Vale a cláusula europeia para tudo",
       "Exija lista de suboperadores, país e instrumento aplicável a cada um"
     ],
     "correta": 3,
@@ -671,10 +671,10 @@
     "status": "rascunho",
     "enunciado": "Quais são as hipóteses de transferência internacional da LGPD ligadas a garantias do controlador?",
     "alternativas": [
-      "Dado hospedado no Brasil não é transferência internacional",
+      "Instrumento contratual e custódia de chave são decisões distintas e complementares",
       "Cláusulas contratuais específicas para determinada transferência; cláusulas-padrão contratuais; normas corporativas globais; e selos, certificados e códigos de conduta regularmente emitidos.",
-      "Derrogação por consentimento serve para operação de rotina",
-      "Suboperador é problema do fornecedor"
+      "Cada regime exige seu instrumento; um contrato pode ter lacuna em um deles",
+      "No GDPR, a Comissão; na LGPD, a ANPD, conforme os critérios do art. 34."
     ],
     "correta": 1,
     "justificativa": ""
@@ -691,10 +691,10 @@
     "status": "rascunho",
     "enunciado": "Quem avalia o nível de proteção do país estrangeiro em cada regime?",
     "alternativas": [
-      "Dado hospedado no Brasil não é transferência internacional",
-      "Derrogação por consentimento serve para operação de rotina",
+      "Mapeie armazenamento, acesso humano e custódia de chave separadamente",
+      "Cada regime exige seu instrumento; um contrato pode ter lacuna em um deles",
       "No GDPR, a Comissão; na LGPD, a ANPD, conforme os critérios do art. 34.",
-      "Suboperador é problema do fornecedor"
+      "Exija lista de suboperadores, país e instrumento aplicável a cada um"
     ],
     "correta": 2,
     "justificativa": ""
@@ -712,9 +712,9 @@
     "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Nomear o encarregado cumpre a obrigação\". Qual é a correção?",
     "alternativas": [
       "Publique o contato em página de livre acesso e registre o fluxo de atendimento",
-      "Programa paralelo ao de segurança é sinal de maturidade",
-      "Relatório de impacto é obrigatório para todo tratamento",
-      "Programa de privacidade é documento de política"
+      "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa",
+      "O programa é um conjunto de processos com dono, ata e evidência de execução",
+      "Integre ao que já existe e acrescente o que é específico de privacidade"
     ],
     "correta": 0,
     "justificativa": "A lei exige também divulgar publicamente identidade e contato, e o programa exige canal e atribuições em operação"
@@ -731,10 +731,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Programa de privacidade é documento de política\". Qual é a correção?",
     "alternativas": [
-      "Programa paralelo ao de segurança é sinal de maturidade",
+      "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa",
       "O programa é um conjunto de processos com dono, ata e evidência de execução",
-      "Relatório de impacto é obrigatório para todo tratamento",
-      "Responder ao titular é trabalho do jurídico"
+      "Publique o contato em página de livre acesso e registre o fluxo de atendimento",
+      "Integre ao que já existe e acrescente o que é específico de privacidade"
     ],
     "correta": 1,
     "justificativa": "O art. 50, §2º, pede processo, supervisão e planos de resposta, com revisão contínua"
@@ -751,10 +751,10 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Programa paralelo ao de segurança é sinal de maturidade\". Qual é a correção?",
     "alternativas": [
-      "Relatório de impacto é obrigatório para todo tratamento",
-      "Programa de privacidade é documento de política",
+      "Priorize tratamento de alto risco e registre o critério de priorização",
+      "O programa é um conjunto de processos com dono, ata e evidência de execução",
       "Integre ao que já existe e acrescente o que é específico de privacidade",
-      "Responder ao titular é trabalho do jurídico"
+      "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa"
     ],
     "correta": 2,
     "justificativa": "Duplica avaliação de risco e resposta a incidente, e produz duas versões da verdade"
@@ -771,9 +771,9 @@
     "status": "rascunho",
     "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Relatório de impacto é obrigatório para todo tratamento\". Qual é a correção?",
     "alternativas": [
-      "Programa paralelo ao de segurança é sinal de maturidade",
-      "Programa de privacidade é documento de política",
-      "Responder ao titular é trabalho do jurídico",
+      "Integre ao que já existe e acrescente o que é específico de privacidade",
+      "O programa é um conjunto de processos com dono, ata e evidência de execução",
+      "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa",
       "Priorize tratamento de alto risco e registre o critério de priorização"
     ],
     "correta": 3,
@@ -792,9 +792,9 @@
     "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Responder ao titular é trabalho do jurídico\". Qual é a correção?",
     "alternativas": [
       "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa",
-      "Programa paralelo ao de segurança é sinal de maturidade",
-      "Relatório de impacto é obrigatório para todo tratamento",
-      "Programa de privacidade é documento de política"
+      "Publique o contato em página de livre acesso e registre o fluxo de atendimento",
+      "O programa é um conjunto de processos com dono, ata e evidência de execução",
+      "Integre ao que já existe e acrescente o que é específico de privacidade"
     ],
     "correta": 0,
     "justificativa": "O art. 41, §2º, coloca a recepção de reclamações do titular no encarregado"
@@ -811,9 +811,9 @@
     "status": "rascunho",
     "enunciado": "Em que critérios de dosimetria da sanção a existência do programa entra?",
     "alternativas": [
-      "Programa paralelo ao de segurança é sinal de maturidade",
-      "Relatório de impacto é obrigatório para todo tratamento",
-      "Programa de privacidade é documento de política",
+      "Publique o contato em página de livre acesso e registre o fluxo de atendimento",
+      "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa",
+      "O programa é um conjunto de processos com dono, ata e evidência de execução",
       "Na adoção reiterada e demonstrada de mecanismos e procedimentos internos capazes de minimizar o dano, na adoção de política de boas práticas e governança e na pronta adoção de medidas corretivas."
     ],
     "correta": 3,
