@@ -23,6 +23,18 @@ import {
 const RENDERER = path.join(__dirname, '..', 'dist-desktop')
 const ESQUEMA = 'app'
 const ORIGEM = `${ESQUEMA}://bundle`
+// A entrada do aplicativo: o UNICO documento que a janela navega.
+//
+// O resto do que o handler serve mora em `app://bundle` e o renderer o consome por
+// `fetch`/`<script>`/`<link>` — `conteudo.json`, `questoes.json` e os chunks de `assets/`.
+// Liberar o prefixo inteiro (o que `will-navigate` e a conferencia de origem faziam) deixava um
+// link escrito no material trocar o DOCUMENTO da janela pelo arquivo: `app://bundle/conteudo.json`
+// e classificado como externo pelo resolvedor do conteudo e sobrevive ao build, e a janela deixava
+// de ser o app (sem execucao — `nosniff` e a CSP seguram —, mas fora da tela).
+//
+// As rotas do app sao `#/…` no MESMO documento: mudanca de fragmento nao emite `will-navigate`
+// (e `did-navigate-in-page`), entao prender a janela a entrada nao tira navegacao nenhuma do app.
+const ENTRADA = 'index.html'
 // Desenvolvimento exige DUAS coisas: a variavel de ambiente E nao estar empacotado.
 //
 // So a variavel — que era o caso — deixava o item de menu "Ferramentas de desenvolvedor"
@@ -106,6 +118,77 @@ function abrirFora(url: string): void {
   } catch {
     // URL invalida: ignora.
   }
+}
+
+/**
+ * Diz se a JANELA pode navegar para esta URL: a entrada do aplicativo, e so ela.
+ *
+ * Exportada para o teste. A decisao e a mesma coisa que a conferencia de origem dos canais usa,
+ * e de proposito: quem pode virar o documento da janela e quem pode falar pelo IPC sao o mesmo
+ * quadro, e duas listas separadas seriam duas coisas para manter em acordo.
+ *
+ * O caminho e normalizado como o handler o normaliza (`/`, `//index.html` e `index.html` sao a
+ * mesma pagina), e o fragmento fica de fora: `app://bundle/index.html#/area/01-fundamentos` e a
+ * entrada com uma rota, nao outro documento.
+ */
+export function navegacaoPermitida(url: string): boolean {
+  try {
+    const alvo = new URL(url)
+    if (alvo.protocol !== `${ESQUEMA}:` || alvo.host !== 'bundle') return false
+    const caminho = decodeURIComponent(alvo.pathname).replace(/^\/+/, '') || ENTRADA
+    return caminho === ENTRADA
+  } catch {
+    // URL malformada (`app://bundle/%` estoura no decode): nao e navegacao permitida.
+    return false
+  }
+}
+
+/**
+ * O que a guarda de navegacao pede de um evento do Electron: poder cancela-lo — e o destino, que
+ * o `will-navigate` entrega no proprio evento (`details.url`, o argumento novo do Electron 44; o
+ * `url` separado ficou marcado como obsoleto).
+ */
+export interface EventoDaGuarda {
+  readonly url: string
+  preventDefault(): void
+}
+
+/**
+ * O minimo que a guarda de navegacao usa de um `webContents`.
+ *
+ * Declarado aqui — e nao como `Electron.WebContents` inteiro — para a guarda nao depender de nada
+ * que ela nao usa e para o teste passar um duble que guarda os ouvintes, em vez de um `as unknown
+ * as`. O `Electron.WebContents` satisfaz este tipo estruturalmente.
+ */
+export interface ConteudoComGuarda {
+  on(
+    evento: 'will-navigate' | 'will-attach-webview',
+    ouvinte: (evento: EventoDaGuarda) => void,
+  ): unknown
+  setWindowOpenHandler(
+    tratador: (detalhes: { url: string }) => Electron.WindowOpenHandlerResponse,
+  ): unknown
+}
+
+/**
+ * Prende a janela ao aplicativo: so a entrada navega, e o destino que nao for dela vai para o
+ * navegador do sistema (ou e descartado, quando nem http(s) e).
+ *
+ * Exportada para o teste exercitar o OUVINTE de `will-navigate` de verdade. A decisao que este
+ * defeito fechou mora no corpo dele — "o prefixo `app://bundle/` inteiro passa" —, e um teste
+ * sobre `navegacaoPermitida` sozinha nao provaria o `preventDefault` nem o `abrirFora`.
+ */
+export function prenderJanelaAoApp(conteudo: ConteudoComGuarda): void {
+  conteudo.on('will-navigate', (detalhes) => {
+    if (navegacaoPermitida(detalhes.url)) return
+    detalhes.preventDefault()
+    abrirFora(detalhes.url)
+  })
+  conteudo.setWindowOpenHandler(({ url }) => {
+    abrirFora(url)
+    return { action: 'deny' }
+  })
+  conteudo.on('will-attach-webview', (evento) => evento.preventDefault())
 }
 
 function registrarProtocolo(): void {
@@ -258,20 +341,10 @@ function criarJanela(): BrowserWindow {
 
   janela.once('ready-to-show', () => janela.show())
 
-  // Nenhuma navegacao sai do app: link do material abre no navegador do sistema.
-  janela.webContents.on('will-navigate', (evento, url) => {
-    if (!url.startsWith(`${ORIGEM}/`)) {
-      evento.preventDefault()
-      abrirFora(url)
-    }
-  })
-  janela.webContents.setWindowOpenHandler(({ url }) => {
-    abrirFora(url)
-    return { action: 'deny' }
-  })
-  janela.webContents.on('will-attach-webview', (evento) => evento.preventDefault())
+  // Nenhuma navegacao sai da entrada do app: link do material abre no navegador do sistema.
+  prenderJanelaAoApp(janela.webContents)
 
-  void janela.loadURL(`${ORIGEM}/index.html`)
+  void janela.loadURL(`${ORIGEM}/${ENTRADA}`)
   return janela
 }
 
@@ -294,10 +367,11 @@ function origemAutorizada(evento: Electron.IpcMainInvokeEvent): boolean {
     // `null` quando o quadro ja foi destruido. O acesso a `senderFrame` de um quadro destruido
     // estoura em vez de devolver `null`, e por isso a leitura esta dentro do `try`.
     if (!quadro || quadro.parent !== null) return false
-    const url = new URL(quadro.url)
-    // A mesma origem que o `loadURL` usa e que a CSP nomeia: `app://bundle`. O caminho e o hash
-    // da rota mudam; a origem, nao.
-    return url.protocol === `${ESQUEMA}:` && url.host === 'bundle'
+    // A MESMA decisao da navegacao, e nao so a origem: o quadro que fala pelo IPC e a entrada do
+    // aplicativo. Antes bastava `app://bundle` com QUALQUER caminho, entao um quadro parado em
+    // `app://bundle/conteudo.json` — o documento que um link conseguia abrir — tambem falava com
+    // todos os canais.
+    return navegacaoPermitida(quadro.url)
   } catch {
     return false
   }

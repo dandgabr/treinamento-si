@@ -330,24 +330,33 @@ async function main() {
     // exibido sob nenhuma travas. Assercao sobre os CABECALHOS (o `status` ja tem a dele acima), e
     // a CSP e a mesma do 200: se o caminho de erro voltar a responder por `send_error`, estas
     // linhas reprovam.
+    //
+    // O 501 entra na MESMA lista porque era o mesmo defeito por outro caminho: ele nao vem de um
+    // `do_*` (nao ha `do_POST`), e sim do `send_error` da biblioteca — e por isso escapava dos
+    // quatro cabecalhos mesmo depois de o 404 e o 421 os receberem. Conferir o 501 aqui e o que
+    // amarra a correcao: um `POST` que volte a sair pelo `send_error` reprova estas quatro linhas.
+    //
+    // Cada linha traz o METODO junto do rotulo: as do 404 e do 421 continuam dizendo `GET`, como
+    // diziam, e a do 501 nao passa a se anunciar como `GET` sendo um `POST`.
     const respostasDeErro = [
-      ['404 (caminho inexistente)', await pedir(porta, '/qualquer-coisa')],
-      ['421 (Host de fora)', await pedir(porta, '/', { host: 'evil.example' })],
+      ['GET', '404 (caminho inexistente)', await pedir(porta, '/qualquer-coisa')],
+      ['GET', '421 (Host de fora)', await pedir(porta, '/', { host: 'evil.example' })],
+      ['POST', '501 (metodo nao suportado)', await pedir(porta, '/', { metodo: 'POST' })],
     ]
-    for (const [rotulo, resposta] of respostasDeErro) {
+    for (const [metodo, rotulo, resposta] of respostasDeErro) {
       conferir(
-        `GET ${rotulo} manda a CSP no cabecalho`,
+        `${metodo} ${rotulo} manda a CSP no cabecalho`,
         (resposta.cabecalhos['content-security-policy'] ?? '').includes("default-src 'none'"),
         true,
       )
       conferir(
-        `GET ${rotulo} nao deixa o navegador adivinhar o tipo`,
+        `${metodo} ${rotulo} nao deixa o navegador adivinhar o tipo`,
         resposta.cabecalhos['x-content-type-options'],
         'nosniff',
       )
-      conferir(`GET ${rotulo} nao guarda cache`, resposta.cabecalhos['cache-control'], 'no-store')
+      conferir(`${metodo} ${rotulo} nao guarda cache`, resposta.cabecalhos['cache-control'], 'no-store')
       conferir(
-        `GET ${rotulo} nao vaza o endereco de origem`,
+        `${metodo} ${rotulo} nao vaza o endereco de origem`,
         resposta.cabecalhos['referrer-policy'],
         'no-referrer',
       )

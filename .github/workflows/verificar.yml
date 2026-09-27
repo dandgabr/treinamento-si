@@ -1,0 +1,57 @@
+# O portao de verificacao rodando sem depender de ninguem lembrar de rodar a mao.
+#
+# Este arquivo reproduz SO a parte do `npm run verificar` que um runner consegue executar. Ficam
+# DE FORA, com o motivo:
+#   - `npm run smoke`         -> abre o app num Chromium de verdade: precisa do browser baixado e
+#                                de sessao grafica (display), que o runner nao tem;
+#   - `npm run smoke:desktop` -> Electron com janela aberta: display de novo;
+#   - `npm run smoke:pacote`  -> exige o pacote JA construido (electron-builder) e rede local;
+#   - `npm run smoke:pasta`   -> idem: pacote construido mais um servidor servindo a pasta.
+# Por isso o `verificar` na maquina continua sendo o portao COMPLETO (ele roda tambem os quatro
+# smokes e o pacote), e o que corre aqui e o que e verificavel sem tela e sem instalador.
+# O `python3` e a biblioteca PyYAML que o verificador do material exige vem do runner do GitHub
+# (imagem ubuntu-latest, sem passo de instalacao).
+name: verificar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# O workflow so LE o repositorio: o token nao precisa de escrita nenhuma.
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    defaults:
+      # O app e o dono dos scripts; `conteudo/` fica um nivel acima, como no `npm run verificar`.
+      run:
+        working-directory: app
+    steps:
+      - name: Baixar o repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar o Node 22 (a faixa que o package.json exige) com cache do npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          # O lockfile e a unica entrada do cache — e ele que fica em `app/`.
+          cache-dependency-path: app/package-lock.json
+
+      - name: Instalar as dependencias exatas do package-lock.json
+        run: npm ci
+
+      - name: Gerar o conteudo e as questoes, e conferir os dois
+        run: npm run preparar:conteudo
+
+      - name: Conferir os tipos
+        run: npm run typecheck
+
+      - name: Rodar a suite (inclui os portoes contra a copia com defeito plantado)
+        run: npm test
+
+      - name: Verificar o material (a mesma invocacao do npm run verificar)
+        run: python3 ../conteudo/scripts/verificar-repo.py

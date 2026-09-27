@@ -23,6 +23,15 @@
 // As leituras tambem cairam para o minimo: a copia intacta serve para o caso de controle (os dois
 // portoes rodam uma vez so, no `beforeAll`, e o caso assere o resultado deles) e para o
 // `content.json` de linha de base — o artefato que a varredura de ARTEFATO confere em cada caso.
+//
+// ONDE A COPIA NASCE — a terceira causa de `exit 1` sem falha de assercao:
+//
+// O caso criava a base temporaria com `os.tmpdir()`. Nesta maquina o `/tmp` e um tmpfs COM COTA
+// DE USUARIO (16 GB, e estava a 80% hoje), e com a cota estourada o `cpSync` do material morria
+// com `EDQUOT` ANTES da primeira assercao: a suite saia 1 sem nenhuma falha de teste. A base
+// agora e o `node_modules/.tmp` do app — mesmo sistema de arquivos do projeto, sem cota de tmpfs
+// para estourar, e ja coberto pelo `.gitignore` —, com `os.tmpdir()` so como ultimo recurso (um
+// `node_modules` ausente) e com a limpeza no `afterAll`, que apaga cada diretorio criado.
 
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'
@@ -45,8 +54,31 @@ const PAGINA_NOVA = '99-fontes/catalogo-inventado.md'
 /** A espera de cada caso: um portao passa dos 5 s da maquina parada, e ha varios em paralelo. */
 const SOBRA = 120_000
 
+/**
+ * A base dos temporarios do arquivo: o `node_modules/.tmp` do app.
+ *
+ * Fica no `node_modules` (que ja esta no `.gitignore`) para a copia do material nascer no MESMO
+ * sistema de arquivos do projeto — o `/tmp` desta maquina e um tmpfs com cota de usuario, e a
+ * cota estourada derrubava o `cpSync` com `EDQUOT` antes de qualquer assercao.
+ */
+const BASE_DO_APP = path.join(APP, 'node_modules', '.tmp')
+
+/**
+ * Devolve a base (criada, se preciso) onde cada caso abre o proprio diretorio temporario.
+ *
+ * O fallback so entra quando nao existe `node_modules`: ali o `mkdirSync` CRIARIA um
+ * `node_modules` vazio ao lado do codigo, que passaria a enganar o proximo `npm install`.
+ */
+function baseDosTemporarios(): string {
+  if (!fs.existsSync(path.join(APP, 'node_modules'))) return os.tmpdir()
+  fs.mkdirSync(BASE_DO_APP, { recursive: true })
+  return BASE_DO_APP
+}
+
 const temporarios: string[] = []
 
+// A limpeza e a promessa do arquivo: ao fim da rodada o diretorio de cada caso sumiu, e o que
+// sobra na base e nada (a propria base, vazia, pode ficar — ela vive dentro do `node_modules`).
 afterAll(() => {
   for (const raiz of temporarios.splice(0)) {
     fs.rmSync(raiz, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 })
@@ -62,7 +94,9 @@ interface Caso {
 
 /** Uma copia do material inteiro, com o content.json FORA dela (como no repositorio). */
 function caso(): Caso {
-  const raiz = fs.mkdtempSync(path.join(os.tmpdir(), 'roadmap-portao-'))
+  // A base nao e `os.tmpdir()`: ver `baseDosTemporarios()`. O diretorio unico nasce dentro dela e
+  // entra na lista que o `afterAll` apaga — nada fica para tras.
+  const raiz = fs.mkdtempSync(path.join(baseDosTemporarios(), 'roadmap-portao-'))
   temporarios.push(raiz)
   const material = path.join(raiz, 'conteudo')
   // `dereference: true` e a guarda que impede a "copia" de ser o proprio material: o `cpSync`
@@ -348,4 +382,29 @@ describe.concurrent('os portoes reprovam o defeito plantado na copia', () => {
     },
     SOBRA,
   )
+})
+
+// O contrato do LUGAR da copia. Sem este caso, "a suite sai 0" conviveria com a base de volta em
+// `os.tmpdir()` — e o `EDQUOT` do tmpfs com cota voltaria a derrubar tudo antes da primeira
+// assercao, que e exatamente o `exit 1` sem falha de teste que este arquivo ja sofreu uma vez.
+describe('a base dos temporarios', () => {
+  it('nasce dentro do app, no sistema de arquivos do material, e nao no tmpfs do sistema', () => {
+    const base = baseDosTemporarios()
+    // A base e o `node_modules/.tmp` do app: ignorado pelo git e no mesmo sistema de arquivos do
+    // material, entao a copia nao disputa a cota do `/tmp`. Esta e a linha que fica VERMELHA se
+    // alguem voltar a criar a base em `os.tmpdir()`.
+    expect(base).toBe(BASE_DO_APP)
+    // Dentro do `node_modules`, que o `.gitignore` ja cobre: a copia nao entra no repositorio.
+    expect(BASE_DO_APP.startsWith(`${path.join(APP, 'node_modules')}${path.sep}`)).toBe(true)
+    expect(os.tmpdir()).not.toBe(base)
+    // Mesmo dispositivo que o material: e isso que faz a base nao ser o tmpfs com cota (num
+    // `/tmp` de disco comum o `dev` bate e a linha passa — ela cobra o fato, nao a maquina).
+    expect(fs.statSync(base).dev).toBe(fs.statSync(MATERIAL).dev)
+    // E o `caso()` usa essa base de verdade: o diretorio de cada caso e filho dela. Sem isto, uma
+    // base declarada certa e um `caso()` que copia para o `/tmp` passariam os dois.
+    const c = caso()
+    const raiz = path.dirname(c.conteudo)
+    expect(path.dirname(raiz)).toBe(base)
+    expect(fs.existsSync(path.join(c.material, TEMA))).toBe(true)
+  })
 })

@@ -10,6 +10,7 @@
   "description": "Aplicativo de estudo interativo para o roadmap CISO",
   "author": "Daniel Gabriel",
   "homepage": "https://github.com/dandgabr/treinamento-si",
+  "desktopName": "br.roadmapciso.estudo.desktop",
   "scripts": {
     "build:content": "tsx scripts/build-content.ts",
     "check:content": "tsx scripts/check-content.ts",

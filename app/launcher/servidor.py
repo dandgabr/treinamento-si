@@ -49,7 +49,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         # Sem ruido na janela do usuario; o banner e impresso uma vez, no inicio.
         pass
 
-    def _erro(self, codigo: int, mensagem: str) -> None:
+    def _erro(self, codigo: int, mensagem: str, frase: str | None = None) -> None:
         """Resposta de erro com os MESMOS cabecalhos de seguranca do 200.
 
         `send_error` do `BaseHTTPRequestHandler` so manda `Content-Type` e `Connection`, entao o
@@ -57,9 +57,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
         sem `X-Content-Type-Options`: a resposta que qualquer origem de fora consegue provocar era
         a unica sem as travas. O corpo continua sendo a mensagem em texto, e agora o navegador a
         exibe sob a mesma politica do app.
+
+        `frase` e o texto da LINHA DE STATUS e `mensagem`, o do corpo. Estao separados porque o
+        erro que vem da biblioteca (o 501) carrega texto tirado do pedido: a linha de status e
+        cabecalho, e um `\\r` no meio do pedido viraria quebra de resposta. Aqui os dois textos
+        sao o mesmo, como eram antes.
         """
         corpo = f"{codigo} {mensagem}\n".encode("utf-8")
-        self.send_response(codigo, mensagem)
+        self.send_response(codigo, mensagem if frase is None else frase)
         self.send_header("Content-Type", "text/plain; charset=utf-8")
         self.send_header("Content-Length", str(len(corpo)))
         for nome, valor in CABECALHOS_DE_SEGURO:
@@ -68,6 +73,31 @@ class Handler(http.server.BaseHTTPRequestHandler):
         # `HEAD` nao tem corpo: escrever aqui seria corpo em resposta a `do_HEAD`.
         if self.command != "HEAD":
             self.wfile.write(corpo)
+
+    def send_error(
+        self, codigo: int, mensagem: str | None = None, explicacao: str | None = None
+    ) -> None:
+        """Todo erro que o `http.server` levanta sozinho passa a sair por `_erro`.
+
+        O 501 de metodo nao suportado nao vem de nenhum `do_*`: quem o emite e o
+        `handle_one_request` da biblioteca, chamando `send_error` — e o `send_error` dela nao
+        aceita cabecalho, so sabe fixar `Content-Type`/`Connection` e uma pagina HTML. Era o
+        unico caminho do servidor fora da politica de conteudo, justamente no verbo que
+        qualquer origem de fora pode tentar. Como nao ha como acrescentar cabecalho a ele, o
+        caminho escolhido e escrever a resposta a mao, pelo mesmo `_erro` do 404 e do 421: os
+        quatro cabecalhos de uma vez e corpo minimo em texto, no lugar da pagina HTML que
+        ninguem le.
+
+        A frase da linha de status e a canonica do codigo, e nao a recebida — que no 501 traz
+        o metodo que veio do pedido (ver `_erro`). `explicacao` fica na assinatura so porque e
+        a da biblioteca: este servidor manda o corpo curto no lugar da explicacao longa.
+        """
+        canonica = self.responses[codigo][0] if codigo in self.responses else None
+        # A biblioteca manda `Connection: close` nesta resposta porque quem a levanta nao leu
+        # o corpo do pedido: fechar de fato evita ler os bytes que sobraram como se fossem um
+        # novo pedido. A linha de status e HTTP/1.0, entao fechar e o que o cliente espera.
+        self.close_connection = True
+        self._erro(codigo, mensagem or canonica or "", canonica)
 
     def _responder(self, enviar_corpo: bool) -> None:
         if self.headers.get("Host") not in HOSTS_ACEITOS:
