@@ -100,26 +100,6 @@
     "justificativa": "É uma lista de riscos e mitigações de aplicação, sem o fechamento de um catálogo de controles de gestão"
   },
   {
-    "id": "16-ia-seguranca#TEMA-01#R04",
-    "ref": "16-ia-seguranca#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "A ISO descreve a ISO/IEC 42001 como aplicável a quais organizações?",
-    "alternativas": [
-      "A empresa que consome API é deployer e responde por supervisão, monitoramento e uso conforme a finalidade",
-      "Organizações de qualquer tamanho envolvidas em desenvolver, fornecer ou usar produtos e serviços baseados em IA, em qualquer setor, incluindo agências do setor público, empresas e organizações sem fins lucrativos.",
-      "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
-      "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
     "id": "16-ia-seguranca#TEMA-02#E01",
     "ref": "16-ia-seguranca#TEMA-02",
     "origem": "erro-comum",
@@ -220,66 +200,6 @@
     "justificativa": "O desenho da aplicação, o contexto montado e as ferramentas expostas são escolha de quem integra"
   },
   {
-    "id": "16-ia-seguranca#TEMA-02#R02",
-    "ref": "16-ia-seguranca#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Qual é a diferença prática entre injection direta e indireta, com um exemplo de cada?",
-    "alternativas": [
-      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
-      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura.",
-      "Retirar agência: credencial própria com menor privilégio, ferramenta restrita, confirmação humana em ação irreversível e validação da saída antes do uso.",
-      "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo"
-    ],
-    "correta": 0,
-    "justificativa": ""
-  },
-  {
-    "id": "16-ia-seguranca#TEMA-02#R04",
-    "ref": "16-ia-seguranca#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Qual controle reduz o impacto quando a injeção tem sucesso mesmo assim?",
-    "alternativas": [
-      "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo",
-      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
-      "Retirar agência: credencial própria com menor privilégio, ferramenta restrita, confirmação humana em ação irreversível e validação da saída antes do uso.",
-      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura."
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "16-ia-seguranca#TEMA-02#R05",
-    "ref": "16-ia-seguranca#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01 prompt injection, LLM05, LLM06, LLM07 e LLM08",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Por que a tentativa de injeção deve ser registrada como evento de segurança?",
-    "alternativas": [
-      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
-      "Retirar agência: credencial própria com menor privilégio, ferramenta restrita, confirmação humana em ação irreversível e validação da saída antes do uso.",
-      "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo",
-      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
     "id": "16-ia-seguranca#TEMA-03#E01",
     "ref": "16-ia-seguranca#TEMA-03",
     "origem": "erro-comum",
@@ -378,66 +298,6 @@
     ],
     "correta": 3,
     "justificativa": "Índice sem marcação exige reconstrução para passar a filtrar"
-  },
-  {
-    "id": "16-ia-seguranca#TEMA-03#R02",
-    "ref": "16-ia-seguranca#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "verificado",
-    "enunciado": "Qual é o controle que impede um assistente de responder sobre documento que o solicitante não pode acessar?",
-    "alternativas": [
-      "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento",
-      "Verificação de permissão no momento da recuperação, com a identidade do solicitante, aplicada ao trecho e não à interface.",
-      "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito.",
-      "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "16-ia-seguranca#TEMA-03#R03",
-    "ref": "16-ia-seguranca#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que muda no pipeline quando o dado é eliminado na origem?",
-    "alternativas": [
-      "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito.",
-      "Verificação de permissão no momento da recuperação, com a identidade do solicitante, aplicada ao trecho e não à interface.",
-      "A cópia no índice, no cache e no histórico permanece até expirar por prazo declarado ou até a reconstrução do índice. Sem prazo e sem dono, a eliminação na origem não chega ao pipeline.",
-      "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "16-ia-seguranca#TEMA-03#R05",
-    "ref": "16-ia-seguranca#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM02, LLM03, LLM04 e LLM08",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Por que marcar por trecho, e não apenas por documento?",
-    "alternativas": [
-      "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito.",
-      "Verificação de permissão no momento da recuperação, com a identidade do solicitante, aplicada ao trecho e não à interface.",
-      "A cópia no índice, no cache e no histórico permanece até expirar por prazo declarado ou até a reconstrução do índice. Sem prazo e sem dono, a eliminação na origem não chega ao pipeline.",
-      "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento"
-    ],
-    "correta": 0,
-    "justificativa": ""
   },
   {
     "id": "16-ia-seguranca#TEMA-04#E01",
@@ -560,46 +420,6 @@
     "justificativa": "Ferramenta ajuda a operar o sistema, e não define escopo, papel e alçada"
   },
   {
-    "id": "16-ia-seguranca#TEMA-04#R02",
-    "ref": "16-ia-seguranca#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system",
-      "url": "https://www.iso.org/standard/42001",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Qual lógica de gestão o padrão usa, segundo a própria ISO?",
-    "alternativas": [
-      "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
-      "Inventário, avaliação de impacto e análise crítica antes da auditoria",
-      "A lógica Plan-Do-Check-Act, a mesma dos demais management system standards.",
-      "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "16-ia-seguranca#TEMA-04#R05",
-    "ref": "16-ia-seguranca#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system",
-      "url": "https://www.iso.org/standard/42001",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais são as cinco entregas do primeiro ano de um sistema de gestão de IA?",
-    "alternativas": [
-      "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias",
-      "Escopo com nome próprio e exclusões justificadas; inventário e critério de aprovação; avaliação de risco e de impacto; evidência de operação com dono e frequência; papéis e alçada de decisão.",
-      "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
-      "A lógica Plan-Do-Check-Act, a mesma dos demais management system standards."
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
     "id": "16-ia-seguranca#TEMA-05#E01",
     "ref": "16-ia-seguranca#TEMA-05",
     "origem": "erro-comum",
@@ -720,46 +540,6 @@
     "justificativa": "Tempo cai também quando o analista investiga menos"
   },
   {
-    "id": "16-ia-seguranca#TEMA-05#R03",
-    "ref": "16-ia-seguranca#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01, LLM06 e LLM10",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais quatro números o piloto precisa produzir?",
-    "alternativas": [
-      "Precisão, cobertura, tempo do analista por alerta com e sem a ferramenta, e completude de evidência no resultado apresentado.",
-      "O analista humano no circuito para ação irreversível, o critério de medição escrito antes da compra e a cláusula de saída com exportação de configuração e dados.",
-      "Trate a telemetria como entrada não confiável e limite a agência da ferramenta",
-      "Meça se a evidência completa está no resumo e exija o original a um clique"
-    ],
-    "correta": 0,
-    "justificativa": ""
-  },
-  {
-    "id": "16-ia-seguranca#TEMA-05#R05",
-    "ref": "16-ia-seguranca#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — LLM01, LLM06 e LLM10",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que o CISO precisa manter sob controle próprio ao adotar triagem assistida por modelo?",
-    "alternativas": [
-      "Precisão, cobertura, tempo do analista por alerta com e sem a ferramenta, e completude de evidência no resultado apresentado.",
-      "Trate a telemetria como entrada não confiável e limite a agência da ferramenta",
-      "O analista humano no circuito para ação irreversível, o critério de medição escrito antes da compra e a cláusula de saída com exportação de configuração e dados.",
-      "Meça se a evidência completa está no resumo e exija o original a um clique"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
     "id": "16-ia-seguranca#TEMA-06#E01",
     "ref": "16-ia-seguranca#TEMA-06",
     "origem": "erro-comum",
@@ -878,85 +658,5 @@
     ],
     "correta": 3,
     "justificativa": "Há obrigação de alfabetização em IA com aplicação declarada desde fevereiro de 2025"
-  },
-  {
-    "id": "16-ia-seguranca#TEMA-06#R04",
-    "ref": "16-ia-seguranca#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "European Commission — AI Act, Regulation (EU) 2024/1689, obrigacoes de alfabetizacao em IA e papel do deployer",
-      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que a Comissão Europeia registra sobre alfabetização em IA e sobre o papel do deployer?",
-    "alternativas": [
-      "Porque o dado pessoal enviado passa a ser tratamento sem base legal declarada, com deveres próprios de comunicação e de atendimento a direitos, que pertencem ao encarregado e ao programa de privacidade.",
-      "Trate como falha de política e de caminho aprovado, e mantenha o relato sem punição",
-      "Que as obrigações de alfabetização em IA passaram a valer em 2 de fevereiro de 2025 e que o deployer responde por supervisão humana e monitoramento.",
-      "Peça retenção, uso para treino e prazo por escrito, e registre a resposta"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "16-ia-seguranca#TEMA-06#R05",
-    "ref": "16-ia-seguranca#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "European Commission — AI Act, Regulation (EU) 2024/1689, obrigacoes de alfabetizacao em IA e papel do deployer",
-      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Por que o episódio de dado pessoal colado em ferramenta pública deixa de ser tema de segurança e passa a ser de privacidade?",
-    "alternativas": [
-      "Que as obrigações de alfabetização em IA passaram a valer em 2 de fevereiro de 2025 e que o deployer responde por supervisão humana e monitoramento.",
-      "Trate como falha de política e de caminho aprovado, e mantenha o relato sem punição",
-      "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
-      "Porque o dado pessoal enviado passa a ser tratamento sem base legal declarada, com deveres próprios de comunicação e de atendimento a direitos, que pertencem ao encarregado e ao programa de privacidade."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "16-ia-seguranca#GUIA#C04",
-    "ref": "16-ia-seguranca#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes para LLM e aplicacoes de IA generativa",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "verificado",
-    "enunciado": "O comitê pede \"um ISO 42001\". Qual é a primeira entrega concreta, antes de escolher ferramenta ou auditor? (TEMA-04)",
-    "alternativas": [
-      "Organizações de qualquer tamanho envolvidas em desenvolver, fornecer ou usar produtos e serviços baseados em IA, em qualquer setor, incluindo agências do setor público, empresas e organizações sem fins lucrativos.",
-      "O inventário de sistemas de IA em uso, com dono e papel da organização, seguido da frase de escopo do sistema de gestão. Sem inventário não existe contexto da organização, e sem escopo não existe auditoria possível.",
-      "Como o modelo foi avaliado em dados parecidos com a telemetria da empresa e qual é a taxa de falso positivo e de falso negativo medida, com o analista humano no circuito. Anúncio de fornecedor não é medida.",
-      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura."
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "16-ia-seguranca#GUIA#C05",
-    "ref": "16-ia-seguranca#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes para LLM e aplicacoes de IA generativa",
-      "url": "https://genai.owasp.org/llm-top-10/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Um fornecedor de EDR anuncia triagem de alerta por modelo de linguagem. Que duas perguntas decidem se o ganho é real? (TEMA-05)",
-    "alternativas": [
-      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura.",
-      "Porque o dado pessoal enviado passa a ser tratamento sem base legal declarada, com deveres próprios de comunicação e de atendimento a direitos, que pertencem ao encarregado e ao programa de privacidade.",
-      "Como o modelo foi avaliado em dados parecidos com a telemetria da empresa e qual é a taxa de falso positivo e de falso negativo medida, com o analista humano no circuito. Anúncio de fornecedor não é medida.",
-      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro."
-    ],
-    "correta": 2,
-    "justificativa": ""
   }
 ]

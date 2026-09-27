@@ -250,35 +250,6 @@ function conteudo() {
   return conteudoCache
 }
 
-/**
- * Quantos itens o banco tem por `ref`, lido do disco.
- *
- * E o que deixa o cenario do quiz por tema conferir o escopo contra o banco de verdade:
- * quantos itens o tema tem, e se a rodada parou nele ou vazou para outro material.
- */
-let bancoCache = null
-function itensPorRef() {
-  if (!bancoCache) {
-    bancoCache = new Map()
-    const pasta = path.join(APP, 'src', 'content', 'questions')
-    for (const arquivo of fs.readdirSync(pasta)) {
-      if (!arquivo.endsWith('.json')) continue
-      for (const item of JSON.parse(fs.readFileSync(path.join(pasta, arquivo), 'utf8'))) {
-        bancoCache.set(item.ref, (bancoCache.get(item.ref) ?? 0) + 1)
-      }
-    }
-  }
-  return bancoCache
-}
-
-/** O tema com mais itens no banco: e o escopo que enche uma rodada inteira. */
-function temaMaisCheio() {
-  const porRef = itensPorRef()
-  const refs = [...porRef.entries()].filter(([ref]) => !ref.endsWith('#GUIA'))
-  refs.sort((a, b) => b[1] - a[1])
-  return refs[0] ?? null
-}
-
 function decodificar(parte) {
   try {
     return decodeURIComponent(parte)
@@ -360,9 +331,10 @@ async function rodarChrome(url, slot = 0) {
  * Chrome e aberto pelo Playwright e uma rodada e respondida de verdade, pelo caminho do
  * usuario: clicar a alternativa, confirmar, avancar.
  *
- * Os dois tipos de item sao distinguidos pelo proprio aviso de revisao da tela, que diz de
- * onde o item saiu ("tabela de erros comuns" ou "recuperação ativa") — e o que permite exigir
- * o "Por quê" de um e a ausencia dele no outro.
+ * O banco tem uma origem so — a tabela de erros comuns do tema — e a tela a expoe no
+ * `data-origem` do item. A rodada inteira e conferida contra esse contrato: toda questao sai
+ * do erro comum e traz a justificativa do material ("Por quê"), que e o unico campo de texto
+ * do item que nao vem das alternativas.
  */
 async function cenarioDoQuizRespondido() {
   const nome = 'quiz (respondido)'
@@ -387,45 +359,42 @@ async function cenarioDoQuizRespondido() {
     await pagina.goto(`${BASE}#/quiz`)
     await pagina.waitForSelector('.bloco-questao .alternativas input[type=radio]')
 
-    // 4 rodadas de 10 itens no maximo: a rodada e um sorteio e o que se quer ver sao os dois
-    // tipos de item. Com ~36% do banco em recuperacao, passar 40 itens sem um deles seria
-    // azar de 1e-8 — e o laco para assim que ambos aparecem, o que acontece na primeira
-    // rodada na quase totalidade das execucoes.
+    // Uma rodada inteira (10 itens) e o que se quer ver; o teto de 40 so existe para o laco
+    // nao girar sem fim se o escopo tiver menos itens que uma rodada e o botao de outra
+    // rodada nao aparecer.
     const MAX_ITENS = 40
-    let erroComum = 0
-    let recuperacao = 0
     let respondidas = 0
+    let deErroComum = 0
 
-    // O piso de 10 percorre uma rodada inteira mesmo quando os dois tipos saem logo nos
-    // primeiros itens: e o que exercita dez trocas de questao com o foco.
-    for (let n = 0; n < MAX_ITENS && (respondidas < 10 || !erroComum || !recuperacao); n++) {
+    for (let n = 0; n < MAX_ITENS && respondidas < 10; n++) {
       if (!(await pagina.locator('.bloco-questao').count())) {
         // Fim da rodada: o titulo recebeu o foco na montagem e o botao abre outra.
         await pagina.getByRole('button', { name: 'Outra rodada' }).click()
         await pagina.waitForSelector('.bloco-questao .alternativas input[type=radio]')
       }
 
-      const aviso = pagina.locator('.bloco-questao > .dica')
-      const rotulo = (await aviso.count()) ? ((await aviso.textContent()) ?? '') : ''
-      // A tela distingue as tres origens em prosa. O item ja promovido a `verificado` nao
-      // leva selo nenhum, e por isso nao diz de onde veio — a conferencia abaixo so vale
-      // para o item que ainda esta em revisao.
-      const emRevisao = rotulo.includes('não revisado') || rotulo.includes('em revisão')
       // A origem vem do PROPRIO item, e nao do texto do aviso: o item promovido a
-      // `verificado` nao leva selo, entao ler a origem pelo selo deixava a variavel nula e
-      // os contadores abaixo nunca disparavam — o teste acusava "nenhum item de erro comum"
-      // num banco em que 64% dos itens sao disso. O selo diz o status; a origem e outro dado.
-      const origemDoItem = await pagina.evaluate(
-        () => document.querySelector('.bloco-questao')?.getAttribute('data-origem') ?? '',
-      )
-      const origem =
-        origemDoItem === 'recuperacao'
-          ? 'recuperação ativa'
-          : origemDoItem === 'erro-comum'
-            ? 'tabela de erros comuns'
-            : origemDoItem === 'checkpoint'
-              ? 'checkpoint do guia'
-              : null
+      // `verificado` nao leva selo, entao ler a origem pelo selo deixava a variavel nula. O
+      // selo diz o status; a origem e outro dado.
+      const doItem = await pagina.evaluate(() => {
+        const questao = document.querySelector('.bloco-questao')
+        return {
+          origem: questao?.getAttribute('data-origem') ?? '',
+          status: questao?.getAttribute('data-status') ?? '',
+        }
+      })
+      conferir('o item diz de onde veio', doItem.origem, 'erro-comum')
+      if (doItem.origem === 'erro-comum') deErroComum += 1
+
+      // O selo de revisao so aparece em item ainda nao verificado, e a frase dele aponta a
+      // origem: com uma origem so no banco, ela nao pode nomear uma que nao existe mais.
+      const selo = pagina.locator('.bloco-questao > .dica')
+      const rotulo = (await selo.count()) ? ((await selo.textContent()) ?? '') : ''
+      const emRevisao = doItem.status === 'rascunho' || doItem.status === 'pendente'
+      conferir('o selo de revisao segue o status do item', !!rotulo, emRevisao)
+      if (emRevisao) {
+        conferir('o selo diz que o item saiu do erro comum', rotulo.includes('erros comuns'), true)
+      }
 
       const antes = await pagina.evaluate(() => {
         const radios = [...document.querySelectorAll('.alternativas input[type=radio]')]
@@ -440,6 +409,9 @@ async function cenarioDoQuizRespondido() {
       conferir('mesmo name nos radios do grupo', antes.nomes.length, 1)
       conferir('o grupo tem name', !!antes.nomes[0], true)
       conferir('gabarito so depois de responder', antes.gabaritos, 0)
+      // O contrato de tamanho do banco: gabarito mais dois a tres distratores. Uma rodada
+      // inteira fora da faixa seria um gerador quebrado, e o item nao mediria.
+      conferir('o item tem de 3 a 4 alternativas', antes.alternativas >= 3 && antes.alternativas <= 4, true)
 
       await pagina.locator('.bloco-questao .alternativa').first().click()
       conferir(
@@ -459,25 +431,10 @@ async function cenarioDoQuizRespondido() {
       conferir('gabarito existe depois de responder', depois.gabaritos, 1)
       conferir('a alternativa correta fica marcada', depois.certas, 1)
       conferir('o grupo trava depois de responder', depois.travados, antes.radios)
-
-      const temPorque = depois.texto.includes('Por quê')
-      // Um aviso de revisao que nao diz de onde o item veio seria uma origem nova que a tela
-      // nao conhece — e o teste nao saberia qual contrato cobrar dela.
-      if (emRevisao) conferir('o aviso de revisão diz de onde o item veio', origem !== 'desconhecida', true)
-      if (origem === 'recuperação ativa') {
-        recuperacao += 1
-        // Item de recuperacao nao tem justificativa derivada: o rotulo nao pode aparecer
-        // sozinho, sem texto.
-        conferir('item de recuperacao sem "Por quê"', temPorque, false)
-      } else if (origem === 'tabela de erros comuns') {
-        erroComum += 1
-        conferir('item de erro comum com "Por quê"', temPorque, true)
-      } else if (origem === 'checkpoint do guia') {
-        // O checkpoint tambem nao tem coluna de "por que isto esta errado": a resposta do
-        // material e o gabarito, e a conferencia de verdade e o guia da area.
-        conferir('item de checkpoint sem "Por quê"', temPorque, false)
-      }
-
+      // A justificativa e obrigatoria em item de erro comum: e o `porque` da linha da tabela,
+      // a unica coisa do item que explica a correcao. Sem ela, a tela nao tem o que mostrar
+      // sob "Por quê" e o item ensina a resposta sem a razao.
+      conferir('o item traz a justificativa do material', depois.texto.includes('Por quê'), true)
 
       await pagina.locator('.acoes-questao button').click()
       respondidas += 1
@@ -504,8 +461,7 @@ async function cenarioDoQuizRespondido() {
     }
 
     conferir('a rodada inteira foi respondida', respondidas >= 10, true)
-    conferir('o sorteio trouxe item de erro comum', erroComum > 0, true)
-    conferir('o sorteio trouxe item de recuperacao', recuperacao > 0, true)
+    conferir('todos os itens da rodada sao de erro comum', deErroComum, respondidas)
 
     // O outro estado da tela: a sessao que NAO pode gravar porque a LEITURA do progresso
     // falhou. Nele `falhaAoGravar` continua `false` (nada foi gravado, e nao houve falha de

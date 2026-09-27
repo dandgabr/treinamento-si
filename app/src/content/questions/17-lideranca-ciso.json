@@ -100,46 +100,6 @@
     "justificativa": "`GV.RR-03` vincula recursos à estratégia de risco declarada"
   },
   {
-    "id": "17-lideranca-ciso#TEMA-01#R01",
-    "ref": "17-lideranca-ciso#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "verificado",
-    "enunciado": "Qual subcategoria do CSF 2.0 declara a liderança responsável e accountable pelo risco cibernético?",
-    "alternativas": [
-      "Responsabilidade (`GV.RR-01`), autoridade (`GV.RR-02`) e recursos (`GV.RR-03`).",
-      "`GV.RR-01`, na categoria Roles, Responsibilities, and Authorities da função Govern.",
-      "Marque a fronteira e chame o encarregado nas decisões que tratam dado pessoal",
-      "Declare a fronteira por escrito e trate o resto como risco de terceiro"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#TEMA-01#R02",
-    "ref": "17-lideranca-ciso#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais são os três componentes verificáveis do mandato, e em quais subcategorias do CSF 2.0 eles aparecem?",
-    "alternativas": [
-      "Marque a fronteira e chame o encarregado nas decisões que tratam dado pessoal",
-      "`GV.RR-01`, na categoria Roles, Responsibilities, and Authorities da função Govern.",
-      "Responsabilidade (`GV.RR-01`), autoridade (`GV.RR-02`) e recursos (`GV.RR-03`).",
-      "Declare a fronteira por escrito e trate o resto como risco de terceiro"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
     "id": "17-lideranca-ciso#TEMA-02#E01",
     "ref": "17-lideranca-ciso#TEMA-02",
     "origem": "erro-comum",
@@ -238,46 +198,6 @@
     ],
     "correta": 1,
     "justificativa": "Prazo de notificação é decisão técnica e regulatória ao mesmo tempo"
-  },
-  {
-    "id": "17-lideranca-ciso#TEMA-02#R01",
-    "ref": "17-lideranca-ciso#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "SEC Release 33-11216 — Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure",
-      "url": "https://www.sec.gov/files/rules/final/2023/33-11216.pdf",
-      "tipo": "primaria"
-    },
-    "status": "verificado",
-    "enunciado": "O que a Regulation S-K, Item 106(c), exige que a companhia descreva sobre o conselho?",
-    "alternativas": [
-      "Acesso é ser ouvido; reporte é a obrigação formal de levar a informação a quem decide; supervisão é quem responde pelo resultado e deixa registro. As três podem existir em separado.",
-      "Confira o que a norma aplicável exige e documente o desenho escolhido",
-      "A supervisão do conselho sobre os riscos de ameaças cibernéticas e o papel da administração na avaliação e gestão de riscos materiais dessa natureza.",
-      "Separe indicador de risco de indicador de desempenho do programa"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#TEMA-02#R03",
-    "ref": "17-lideranca-ciso#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "SEC Release 33-11216 — Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure",
-      "url": "https://www.sec.gov/files/rules/final/2023/33-11216.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Qual é a diferença entre acesso ao conselho, obrigação de reporte e supervisão?",
-    "alternativas": [
-      "Acesso é ser ouvido; reporte é a obrigação formal de levar a informação a quem decide; supervisão é quem responde pelo resultado e deixa registro. As três podem existir em separado.",
-      "A supervisão do conselho sobre os riscos de ameaças cibernéticas e o papel da administração na avaliação e gestão de riscos materiais dessa natureza.",
-      "Confira o que a norma aplicável exige e documente o desenho escolhido",
-      "Separe indicador de risco de indicador de desempenho do programa"
-    ],
-    "correta": 0,
-    "justificativa": ""
   },
   {
     "id": "17-lideranca-ciso#TEMA-03#E01",
@@ -380,66 +300,6 @@
     "justificativa": "Sem quem opere, a licença amplia a superfície de trabalho e não reduz exposição"
   },
   {
-    "id": "17-lideranca-ciso#TEMA-03#R01",
-    "ref": "17-lideranca-ciso#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "EC-Council CCISO Blueprint v3",
-      "url": "https://cert.eccouncil.org/images/doc/CCISO-New-Blueprint-v3.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Como o NIST IR 8286 define exposição, e quais elementos do registro de riscos tornam o orçamento auditável?",
-    "alternativas": [
-      "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora.",
-      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado.",
-      "Use exposição, opções e custo total; trate percentuais de mercado como não confirmados",
-      "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#TEMA-03#R02",
-    "ref": "17-lideranca-ciso#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "EC-Council CCISO Blueprint v3",
-      "url": "https://cert.eccouncil.org/images/doc/CCISO-New-Blueprint-v3.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Qual é a diferença entre apetite de risco e tolerância ao risco?",
-    "alternativas": [
-      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado.",
-      "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável.",
-      "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora.",
-      "Use exposição, opções e custo total; trate percentuais de mercado como não confirmados"
-    ],
-    "correta": 0,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#TEMA-03#R03",
-    "ref": "17-lideranca-ciso#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "EC-Council CCISO Blueprint v3",
-      "url": "https://cert.eccouncil.org/images/doc/CCISO-New-Blueprint-v3.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Por que uma métrica de contagem de vulnerabilidades abertas não serve como medida de retorno de um investimento?",
-    "alternativas": [
-      "Exposição é a combinação entre probabilidade de ocorrência e impacto; no registro, os campos de custo da resposta, dono do risco e status tornam o gasto rastreável.",
-      "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora.",
-      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado.",
-      "Use exposição, opções e custo total; trate percentuais de mercado como não confirmados"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
     "id": "17-lideranca-ciso#TEMA-04#E01",
     "ref": "17-lideranca-ciso#TEMA-04",
     "origem": "erro-comum",
@@ -538,46 +398,6 @@
     ],
     "correta": 3,
     "justificativa": "Detalhe técnico expõe vetor e estado de remediação sem contribuir para a decisão"
-  },
-  {
-    "id": "17-lideranca-ciso#TEMA-04#R02",
-    "ref": "17-lideranca-ciso#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Que tipo de conteúdo os praticantes fornecem para apoiar a decisão de gestores e executivos?",
-    "alternativas": [
-      "Mantenha o número e a conclusão, reduza o detalhe operacional",
-      "Indicadores-chave de desempenho e indicadores-chave de risco.",
-      "Escreva a segunda versão com o mesmo fato e a ação verificável",
-      "Descreva impacto material, opções e o que você precisa aprovar"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#TEMA-04#R03",
-    "ref": "17-lideranca-ciso#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Qual falha de comunicação o NIST IR 8286 identifica no material de risco que chega ao nível corporativo?",
-    "alternativas": [
-      "Escreva a segunda versão com o mesmo fato e a ação verificável",
-      "Descreva impacto material, opções e o que você precisa aprovar",
-      "Volume excessivo e priorização ausente: o material chega como mapa de calor perpetuamente vermelho ou em quantidade impraticável de analisar.",
-      "Mantenha o número e a conclusão, reduza o detalhe operacional"
-    ],
-    "correta": 2,
-    "justificativa": ""
   },
   {
     "id": "17-lideranca-ciso#TEMA-05#E01",
@@ -680,26 +500,6 @@
     "justificativa": "Papel crítico concentrado em uma pessoa é risco de disponibilidade do programa"
   },
   {
-    "id": "17-lideranca-ciso#TEMA-05#R02",
-    "ref": "17-lideranca-ciso#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-181 Rev. 1 — Workforce Framework for Cybersecurity (NICE Framework)",
-      "url": "https://csrc.nist.gov/pubs/sp/800/181/r1/final",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que o CSF 2.0 exige na subcategoria que trata de práticas de recursos humanos?",
-    "alternativas": [
-      "Descreva o papel e o resultado esperado antes de abrir a vaga",
-      "Mantenha interno o escalonamento e a decisão de materialidade",
-      "`GV.RR-04`: a segurança cibernética deve ser incluída nas práticas de recursos humanos.",
-      "Nomeie substituto em treinamento para cada papel crítico"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
     "id": "17-lideranca-ciso#TEMA-06#E01",
     "ref": "17-lideranca-ciso#TEMA-06",
     "origem": "erro-comum",
@@ -798,145 +598,5 @@
     ],
     "correta": 1,
     "justificativa": "`GV.OV-01` a `GV.OV-03` e `ID.IM-01` a `ID.IM-04` tratam de revisão e melhoria contínuas"
-  },
-  {
-    "id": "17-lideranca-ciso#TEMA-06#R02",
-    "ref": "17-lideranca-ciso#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais são os três níveis indicadores de maturidade do C2M2 versão 2.1, e quantos domínios o modelo tem?",
-    "alternativas": [
-      "Use o Tier como contexto de governança e mantenha o risco medido separado",
-      "Meça o que alimenta decisão de verba, reporte ou correção de rota",
-      "Exija uma evidência abrível para cada resultado declarado",
-      "MIL 1 Initiated, MIL 2 Performed e MIL 3 Managed, em 10 domínios, com mais de 350 práticas."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#GUIA#C01",
-    "ref": "17-lideranca-ciso#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Qual subcategoria do CSF 2.0 declara a liderança responsável e accountable pelo risco cibernético? (TEMA-01)",
-    "alternativas": [
-      "MIL 1 Initiated, MIL 2 Performed e MIL 3 Managed, em 10 domínios, com mais de 350 práticas.",
-      "`GV.RR-04`: a segurança cibernética deve ser incluída nas práticas de recursos humanos.",
-      "Use exposição, opções e custo total; trate percentuais de mercado como não confirmados",
-      "`GV.RR-01`, dentro da categoria Roles, Responsibilities, and Authorities da função Govern."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#GUIA#C02",
-    "ref": "17-lideranca-ciso#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que a Regra S-K, Item 106(c), exige que a empresa descreva sobre o conselho? (TEMA-02)",
-    "alternativas": [
-      "A descrição da supervisão do conselho sobre os riscos de ameaças cibernéticas e o papel da administração na avaliação e gestão desses riscos materiais.",
-      "A supervisão do conselho sobre os riscos de ameaças cibernéticas e o papel da administração na avaliação e gestão de riscos materiais dessa natureza.",
-      "Porque mede atividade e não efeito sobre risco: a contagem cai sem que a exposição mude, se o inventário for incompleto, e sobe quando o inventário melhora.",
-      "Volume excessivo e priorização ausente: o material chega como mapa de calor perpetuamente vermelho ou em quantidade impraticável de analisar."
-    ],
-    "correta": 0,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#GUIA#C03",
-    "ref": "17-lideranca-ciso#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Por que uma métrica de contagem de vulnerabilidades abertas não serve como medida de retorno de um investimento? (TEMA-03)",
-    "alternativas": [
-      "Se a atividade existe como papel definido com tarefas próprias e se a competência necessária está descrita antes de virar vaga.",
-      "Porque mede atividade, não efeito sobre risco: o número pode cair sem que a exposição mude, e pode subir porque o inventário melhorou.",
-      "Volume excessivo e priorização ausente: o material chega como mapa de calor perpetuamente vermelho ou em quantidade impraticável de analisar.",
-      "A supervisão do conselho sobre os riscos de ameaças cibernéticas e o papel da administração na avaliação e gestão de riscos materiais dessa natureza."
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#GUIA#C04",
-    "ref": "17-lideranca-ciso#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "verificado",
-    "enunciado": "Qual é o fluxo de informação que o CSF 2.0 descreve entre executivos, gestores e praticantes? (TEMA-04)",
-    "alternativas": [
-      "O perfil atual descreve os resultados que a organização alcança hoje; o perfil alvo descreve os que foram selecionados e priorizados. São quatro Tiers: Partial, Risk Informed, Repeatable e Adaptive.",
-      "Acesso é ser ouvido; reporte é a obrigação formal de levar a informação a quem decide; supervisão é quem responde pelo resultado e deixa registro. As três podem existir em separado.",
-      "Fluxo bidirecional em dois níveis: executivos e gestores trocam prioridade e estratégia; gestores e praticantes trocam operação e resultado, com praticantes enviando atualizações, percepções e preocupações para cima.",
-      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado."
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#GUIA#C05",
-    "ref": "17-lideranca-ciso#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Um gerente pede para contratar uma pessoa para operar o SIEM. Quais duas perguntas a estrutura de papéis responde antes da contratação? (TEMA-05)",
-    "alternativas": [
-      "Porque mede atividade, não efeito sobre risco: o número pode cair sem que a exposição mude, e pode subir porque o inventário melhorou.",
-      "Volume excessivo e priorização ausente: o material chega como mapa de calor perpetuamente vermelho ou em quantidade impraticável de analisar.",
-      "A supervisão do conselho sobre os riscos de ameaças cibernéticas e o papel da administração na avaliação e gestão de riscos materiais dessa natureza.",
-      "Se a atividade existe como papel definido com tarefas próprias e se a competência necessária está descrita antes de virar vaga."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "17-lideranca-ciso#GUIA#C06",
-    "ref": "17-lideranca-ciso#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "NIST Cybersecurity Framework (CSF) 2.0 — NIST CSWP 29",
-      "url": "https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Qual é a diferença entre perfil atual e perfil alvo, e quantos Tiers o CSF 2.0 define? (TEMA-06)",
-    "alternativas": [
-      "O perfil atual descreve os resultados que a organização alcança hoje; o perfil alvo descreve os que foram selecionados e priorizados. São quatro Tiers: Partial, Risk Informed, Repeatable e Adaptive.",
-      "Acesso é ser ouvido; reporte é a obrigação formal de levar a informação a quem decide; supervisão é quem responde pelo resultado e deixa registro. As três podem existir em separado.",
-      "Fluxo bidirecional em dois níveis: executivos e gestores trocam prioridade e estratégia; gestores e praticantes trocam operação e resultado, com praticantes enviando atualizações, percepções e preocupações para cima.",
-      "Apetite é a quantidade de risco que a organização aceita para perseguir objetivos; tolerância é o nível aceitável de variação de desempenho em relação ao objetivo declarado."
-    ],
-    "correta": 0,
-    "justificativa": ""
   }
 ]

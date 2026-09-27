@@ -120,46 +120,6 @@
     "justificativa": "Bloqueio sem catálogo consolidado para a operação no primeiro dia útil"
   },
   {
-    "id": "06-endpoint-plataforma#TEMA-01#R02",
-    "ref": "06-endpoint-plataforma#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
-      "url": "https://attack.mitre.org/tactics/TA0002/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que a definição de lista de permitidos do NIST SP 800-167 muda na pergunta que o defensor faz sobre um programa?",
-    "alternativas": [
-      "A contagem de máquinas que enviaram evento recente, por tipo de evento. Instalação é estado de inventário; envio de evento é comportamento observado, e é o comportamento que sustenta a detecção.",
-      "Controle o que pode executar por autorização, e mantenha o antivírus ao lado disso",
-      "Passe primeiro por auditoria, publique o catálogo e só então aplique a política",
-      "Troca a pergunta \"este programa é malicioso?\" por \"este programa está autorizado?\". A segunda tem resposta verificável contra uma lista publicada e não depende de julgamento sobre intenção."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-01#R04",
-    "ref": "06-endpoint-plataforma#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "MITRE ATT&CK — Execution, Tactic TA0002, versão v19, modificado em 25 de abril de 2025",
-      "url": "https://attack.mitre.org/tactics/TA0002/",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Qual métrica substitui a contagem de agentes instalados, e por quê?",
-    "alternativas": [
-      "Troca a pergunta \"este programa é malicioso?\" por \"este programa está autorizado?\". A segunda tem resposta verificável contra uma lista publicada e não depende de julgamento sobre intenção.",
-      "A contagem de máquinas que enviaram evento recente, por tipo de evento. Instalação é estado de inventário; envio de evento é comportamento observado, e é o comportamento que sustenta a detecção.",
-      "Controle o que pode executar por autorização, e mantenha o antivírus ao lado disso",
-      "Passe primeiro por auditoria, publique o catálogo e só então aplique a política"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
     "id": "06-endpoint-plataforma#TEMA-02#E01",
     "ref": "06-endpoint-plataforma#TEMA-02",
     "origem": "erro-comum",
@@ -278,46 +238,6 @@
     ],
     "correta": 3,
     "justificativa": "Política de execução mal calibrada bloqueia processo de negócio em produção"
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-02#R01",
-    "ref": "06-endpoint-plataforma#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
-      "url": "https://www.cisecurity.org/cis-benchmarks",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais são as quatro propriedades que distinguem um artefato de linha de base de um documento de boas práticas?",
-    "alternativas": [
-      "Identificador do item com a versão do benchmark, motivo de negócio, dono nominal e data de reavaliação. Sem dono nominal o desvio é anônimo, e ninguém tem motivo para revê-lo.",
-      "Classifique em aplicar agora, aplicar com teste e não aplicar, e registre o terceiro grupo",
-      "Trate o registro de desvio como parte do artefato, não como exceção a esconder",
-      "Identifica a família e a versão do sistema alvo, tem número de versão próprio, é aplicado automaticamente a grupos de máquinas e é medido por varredura periódica que separa itens conformes de não conformes."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-02#R05",
-    "ref": "06-endpoint-plataforma#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
-      "url": "https://www.cisecurity.org/cis-benchmarks",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais quatro campos bastam no registro de desvio, e o que acontece quando o dono nominal está ausente?",
-    "alternativas": [
-      "Identifica a família e a versão do sistema alvo, tem número de versão próprio, é aplicado automaticamente a grupos de máquinas e é medido por varredura periódica que separa itens conformes de não conformes.",
-      "Classifique em aplicar agora, aplicar com teste e não aplicar, e registre o terceiro grupo",
-      "Trate o registro de desvio como parte do artefato, não como exceção a esconder",
-      "Identificador do item com a versão do benchmark, motivo de negócio, dono nominal e data de reavaliação. Sem dono nominal o desvio é anônimo, e ninguém tem motivo para revê-lo."
-    ],
-    "correta": 3,
-    "justificativa": ""
   },
   {
     "id": "06-endpoint-plataforma#TEMA-03#E01",
@@ -440,46 +360,6 @@
     "justificativa": "Componente embarcado e biblioteca de terceiro não aparecem nessa lista"
   },
   {
-    "id": "06-endpoint-plataforma#TEMA-03#R01",
-    "ref": "06-endpoint-plataforma#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
-      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais são as cinco etapas do processo de gestão de patch descritas pelo NIST SP 800-40 Rev. 4, e qual delas exige instrumentação no dispositivo?",
-    "alternativas": [
-      "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o próprio host pode reportar o estado da versão corrigida.",
-      "A relação de vulnerabilidades que foram efetivamente exploradas em campo, mantida como fonte autoritativa pela CISA e estabelecida pela Binding Operational Directive 22-01.",
-      "Combine exploração confirmada, probabilidade estimada e exposição do dispositivo",
-      "Amplie o inventário por varredura de componentes no dispositivo"
-    ],
-    "correta": 0,
-    "justificativa": ""
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-03#R03",
-    "ref": "06-endpoint-plataforma#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, abril de 2022",
-      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que o catálogo de vulnerabilidades exploradas em campo mantido pela CISA representa, e por qual instrumento foi estabelecido?",
-    "alternativas": [
-      "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o próprio host pode reportar o estado da versão corrigida.",
-      "Combine exploração confirmada, probabilidade estimada e exposição do dispositivo",
-      "A relação de vulnerabilidades que foram efetivamente exploradas em campo, mantida como fonte autoritativa pela CISA e estabelecida pela Binding Operational Directive 22-01.",
-      "Amplie o inventário por varredura de componentes no dispositivo"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
     "id": "06-endpoint-plataforma#TEMA-04#E01",
     "ref": "06-endpoint-plataforma#TEMA-04",
     "origem": "erro-comum",
@@ -598,66 +478,6 @@
     ],
     "correta": 1,
     "justificativa": "Sem registro não existe revisão, e sem revisão a política não evolui"
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-04#R01",
-    "ref": "06-endpoint-plataforma#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
-      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais são as três características que definem a categoria de detecção e resposta em endpoint, e qual delas a distingue do antivírus tradicional?",
-    "alternativas": [
-      "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência.",
-      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
-      "Horário, identificação da máquina, regra ou modelo que decidiu, ação executada e identificador do alerta correspondente.",
-      "Trate como ponto de decisão com escopo definido, não como assinatura de arquivo"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-04#R03",
-    "ref": "06-endpoint-plataforma#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
-      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Liste as quatro ações de resposta no host em ordem crescente de impacto e diga qual delas destrói evidência.",
-    "alternativas": [
-      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
-      "Horário, identificação da máquina, regra ou modelo que decidiu, ação executada e identificador do alerta correspondente.",
-      "Trate como ponto de decisão com escopo definido, não como assinatura de arquivo",
-      "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-04#R05",
-    "ref": "06-endpoint-plataforma#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Microsoft Learn — Microsoft Defender for Endpoint overview, atualizado em 28 de julho de 2026",
-      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais cinco campos o registro de ação automática precisa conter?",
-    "alternativas": [
-      "Trate como ponto de decisão com escopo definido, não como assinatura de arquivo",
-      "Horário, identificação da máquina, regra ou modelo que decidiu, ação executada e identificador do alerta correspondente.",
-      "Registre horário, máquina, regra, ação e alerta de cada ação automática",
-      "Decida por tipo de dispositivo, com caminho de reversão declarado"
-    ],
-    "correta": 1,
-    "justificativa": ""
   },
   {
     "id": "06-endpoint-plataforma#TEMA-05#E01",
@@ -780,46 +600,6 @@
     "justificativa": "O registro existe, mas ninguém o lê nem o correlaciona com resposta"
   },
   {
-    "id": "06-endpoint-plataforma#TEMA-05#R04",
-    "ref": "06-endpoint-plataforma#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
-      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que caracteriza o modo de simulação e por que ele precede qualquer modo restritivo?",
-    "alternativas": [
-      "Porque o rótulo é mais preciso e depende de disciplina na aplicação, enquanto a detecção por conteúdo funciona sem depender de comportamento humano e cobre o que ficou sem rótulo. A segunda cobre a falha da primeira.",
-      "As ações definidas na política não são aplicadas; o objeto de medição é o volume e o destino do que sairia do dispositivo. Ele precede o modo restritivo porque o volume observado define o que a equipe consegue tratar.",
-      "Use rótulo e detecção por conteúdo em conjunto, com a segunda como rede de segurança",
-      "Política de saída resolve o dado que sai por canal fora do dispositivo"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-05#R05",
-    "ref": "06-endpoint-plataforma#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Microsoft Learn — Learn about data loss prevention, atualizado em 26 de junho de 2026",
-      "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Por que a classificação por rótulo e a classificação por conteúdo se complementam?",
-    "alternativas": [
-      "As ações definidas na política não são aplicadas; o objeto de medição é o volume e o destino do que sairia do dispositivo. Ele precede o modo restritivo porque o volume observado define o que a equipe consegue tratar.",
-      "Use rótulo e detecção por conteúdo em conjunto, com a segunda como rede de segurança",
-      "Porque o rótulo é mais preciso e depende de disciplina na aplicação, enquanto a detecção por conteúdo funciona sem depender de comportamento humano e cobre o que ficou sem rótulo. A segunda cobre a falha da primeira.",
-      "Política de saída resolve o dado que sai por canal fora do dispositivo"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
     "id": "06-endpoint-plataforma#TEMA-06#E01",
     "ref": "06-endpoint-plataforma#TEMA-06",
     "origem": "erro-comum",
@@ -938,65 +718,5 @@
     ],
     "correta": 3,
     "justificativa": "Sem dono não existe negociação de janela, escalonamento de alerta nem decisão de desligamento"
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-06#R04",
-    "ref": "06-endpoint-plataforma#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
-      "url": "https://www.cisecurity.org/cis-benchmarks",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais são as duas fontes de telemetria de uma carga em contêiner e o que cada uma responde?",
-    "alternativas": [
-      "Porque a janela de correção precisa ser negociada com quem responde pelo serviço, o alerta precisa de destinatário e o desligamento de carga órfã precisa de decisão. Sem dono, o item entra na fila e nunca sai dela.",
-      "Trate como regime próprio, com decisão codificada antes do evento",
-      "O agente no nó, que enxerga o motor de contêiner e o comportamento do processo, e o registro de auditoria do orquestrador, que responde quem criou a carga, quando e com qual identidade.",
-      "Combine agente no nó com registro de auditoria do orquestrador"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "06-endpoint-plataforma#TEMA-06#R05",
-    "ref": "06-endpoint-plataforma#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
-      "url": "https://www.cisecurity.org/cis-benchmarks",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Por que carga de trabalho sem dono nomeado inviabiliza o ciclo de correção?",
-    "alternativas": [
-      "O agente no nó, que enxerga o motor de contêiner e o comportamento do processo, e o registro de auditoria do orquestrador, que responde quem criou a carga, quando e com qual identidade.",
-      "Trate como regime próprio, com decisão codificada antes do evento",
-      "Combine agente no nó com registro de auditoria do orquestrador",
-      "Porque a janela de correção precisa ser negociada com quem responde pelo serviço, o alerta precisa de destinatário e o desligamento de carga órfã precisa de decisão. Sem dono, o item entra na fila e nunca sai dela."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "06-endpoint-plataforma#GUIA#C03",
-    "ref": "06-endpoint-plataforma#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
-      "url": "https://www.cisecurity.org/cis-benchmarks",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "A mesma correção tem CVSS 9.8 e probabilidade de exploração de 0,02 nos próximos 30 dias. O que a empresa faz com esse número? (TEMA-03)",
-    "alternativas": [
-      "Prioriza. Probabilidade estimada e ranking percentual dizem onde o esforço limitado de correção produz mais redução de risco primeiro. Score de severidade sem probabilidade ordena por pior caso, não por risco provável.",
-      "As ações definidas na política não são aplicadas; o objeto de medição é o volume e o destino do que sairia do dispositivo. Ele precede o modo restritivo porque o volume observado define o que a equipe consegue tratar.",
-      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
-      "Porque o rótulo é mais preciso e depende de disciplina na aplicação, enquanto a detecção por conteúdo funciona sem depender de comportamento humano e cobre o que ficou sem rótulo. A segunda cobre a falha da primeira."
-    ],
-    "correta": 0,
-    "justificativa": ""
   }
 ]

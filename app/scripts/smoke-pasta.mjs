@@ -49,7 +49,9 @@ const falhas = []
 function conferir(nome, obtido, esperado) {
   const ok = JSON.stringify(obtido) === JSON.stringify(esperado)
   console.log(`${ok ? 'OK   ' : 'FALHA'} ${nome} = ${JSON.stringify(obtido)}`)
-  if (!ok) falhas.push(`${nome}: esperado ${JSON.stringify(esperado)}`)
+  // A lista do fim repete o obtido, como nos outros dois smokes: quem le o relatorio
+  // vermelho no CI nao tem a linha do `OK`/`FALHA` a mao.
+  if (!ok) falhas.push(`${nome}: esperado ${JSON.stringify(esperado)}, obtido ${JSON.stringify(obtido)}`)
 }
 
 /**
@@ -199,6 +201,55 @@ async function main() {
   const faltando = ESPERADOS.filter((nome) => !fs.existsSync(path.join(PASTA, nome)))
   conferir('a pasta tem os arquivos que ela promete', faltando, [])
 
+  // Existir nao basta: um `.sh` sem bit de execucao, ou um `.bat` em LF, abre quebrado no
+  // duplo clique — que e a unica forma de abrir esta via. O `empacotar.mjs` faz as duas
+  // coisas de proposito (chmod nos tres executaveis e conversao de LF para CRLF no `.bat`),
+  // e ate agora nada cobrava isso: qualquer um dos dois podia sumir sem teste vermelho.
+  //
+  // As conferencias abaixo leem arquivo, entao ficam atras do `faltando`: um `statSync`
+  // num arquivo ausente sai com ENOENT e stack trace, engolindo a mensagem que diz o que
+  // falta. O `smoke-pacote.mjs` confere a existencia antes de listar pelo mesmo motivo.
+  if (!faltando.length) {
+    const atalhosUnix = ['Iniciar-Linux.sh', 'Iniciar-macOS.command']
+
+    if (process.platform === 'win32') {
+      // No Windows o `chmod` do Node so mexe no bit de somente-leitura e o `stat` nao
+      // devolve os bits POSIX: exigir `0o111` ali reprovaria um pacote correto.
+      console.log('----  bit de execucao dos atalhos: nao se aplica (Windows nao tem bit POSIX)')
+    } else {
+      const semExecucao = atalhosUnix.filter(
+        (nome) => (fs.statSync(path.join(PASTA, nome)).mode & 0o111) === 0o0,
+      )
+      conferir('os dois atalhos de Unix tem bit de execucao', semExecucao, [])
+    }
+
+    // O `.bat` e o unico arquivo que o repositorio guarda em LF e o pacote entrega em CRLF,
+    // e e a conversao que faz o `cmd.exe` reconhecer o `goto :fallback` do atalho. As duas
+    // assercoes se completam: o `includes('\r\n')` reprova um arquivo vazio ou substituido,
+    // e o `LF cru` reprova a volta para LF — que sozinho passaria por "tem CRLF" num
+    // arquivo com as duas quebras misturadas.
+    const bat = fs.readFileSync(path.join(PASTA, 'Iniciar-Windows.bat'), 'utf8')
+    conferir('Iniciar-Windows.bat tem CRLF', bat.includes('\r\n'), true)
+    conferir('Iniciar-Windows.bat sem LF cru', bat.split('\r\n').join('').includes('\n'), false)
+
+    // Os atalhos de Unix sao o contrario: com CRLF o kernel procuraria `/bin/sh^M` e o
+    // duplo clique nao abriria nada. Prova que a conversao do `.bat` nao vazou para eles.
+    const comCR = atalhosUnix.filter((nome) =>
+      fs.readFileSync(path.join(PASTA, nome), 'utf8').includes('\r'),
+    )
+    conferir('os atalhos de Unix ficam em LF', comCR, [])
+
+    // Igualdade com o build, e nao so entre pasta e resposta: o teste do servidor compara o
+    // corpo com o `index.html` da pasta, o que passaria com qualquer arquivo copiado para
+    // esse nome. Esta linha e que amarra a pasta ao artefato que `npm run build` produz — e
+    // cuja data o portao de frescor la em cima ja cobrou.
+    conferir(
+      'o index.html da pasta e o build',
+      fs.readFileSync(path.join(PASTA, 'index.html')).equals(fs.readFileSync(HTML_DA_BUILD)),
+      true,
+    )
+  }
+
   try {
     await execFileAsync(PYTHON, ['--version'], { encoding: 'utf8' })
   } catch {
@@ -251,7 +302,12 @@ async function main() {
     const outrosCaminhos = [
       ['/qualquer-coisa', 'caminho inexistente'],
       ['/LEIA-ME.txt', 'outro arquivo que esta na pasta'],
-      ['/../servidor.py', 'travessia'],
+      // `/index.html` e servido, mas um caminho que apenas COMECA com ele nao pode ser: um
+      // servidor que comparasse por prefixo (em vez de igualdade) devolveria o app em 200
+      // para qualquer sufixo, e o teste antigo nao via isso.
+      ['/index.html/extra', 'prefixo do caminho aceito, e nao o caminho'],
+      ['/../etc/passwd', 'travessia para fora da pasta'],
+      ['/../servidor.py', 'travessia para o proprio servidor'],
       ['/%2e%2e/servidor.py', 'travessia codificada'],
     ]
     for (const [caminho, motivo] of outrosCaminhos) {

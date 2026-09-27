@@ -3,19 +3,23 @@
 // O repositorio proibe afirmacao sem fonte (CONTRIBUTING §4), entao o banco NAO e escrito
 // livremente: ele e derivado de material ja verificado, e cada item declara de onde veio.
 //
-//   - a tabela de erros comuns de um tema ja e um par (o que se erra -> o que e correto):
-//     o `correto` vira o gabarito e os `equivoco` de outros itens do MESMO tema viram
-//     distratores, porque sao erros que o proprio material documenta;
-//   - os pares de recuperacao ativa viram itens quando a resposta e curta o bastante para
-//     caber numa alternativa; resposta longa nao serve como opcao de multipla escolha;
-//   - os itens de checkpoint do guia da AREA viram itens pela mesma regra, com o escopo do
-//     distrator subindo de tema para area — e o unico material de onde o item saiu.
+// A tabela de erros comuns de um tema ja e um par (o que se erra -> o que e correto): o
+// `correto` vira o gabarito e as duas colunas das OUTRAS linhas do MESMO tema viram
+// distratores, porque sao erros que o proprio material documenta. E a unica origem do banco.
+//
+// Os pares de recuperacao ativa do tema e o checkpoint do guia da area NAO viram item. Eles
+// continuam no material e na tela (o tema mostra a recuperacao, o guia mostra o checkpoint),
+// mas ficam de fora do banco por uma razao que a revisao item a item mostrou: ali a pergunta
+// do material e ABERTA ("cite os seis modos de falha...", "explique por que..."), e resposta
+// de pergunta aberta nao e escolha — nenhuma alternativa e "a resposta", e a correta so se
+// reconhece pela forma da frase. Item assim parece multipla escolha e nao mede nada: quem
+// responde acerta pelo jeito do gabarito, nao por saber. Decisao do dono: as duas saem.
 //
 // Todo item nasce `rascunho`. A promocao para `verificado` e revisao humana, e o app marca
 // na tela o que ainda nao passou por ela.
 
 import { LEXICO } from './validar-content'
-import type { Area, Conteudo, Tema } from '../../src/domain/types'
+import type { Conteudo, Tema } from '../../src/domain/types'
 
 /**
  * O mesmo lexico proibido do material (secao 5 do CONTRIBUTING), aplicado ao texto dos itens.
@@ -30,18 +34,18 @@ function temLexicoProibido(textos: string[]): boolean {
   })
 }
 
-export type OrigemDaQuestao = 'erro-comum' | 'recuperacao' | 'checkpoint'
+export type OrigemDaQuestao = 'erro-comum'
 export type StatusDaQuestao = 'rascunho' | 'pendente' | 'verificado'
 
 export interface Questao {
   id: string
   /**
-   * Material de onde o item saiu, e o que liga a questao ao estudo: `area#TEMA-NN` para os
-   * itens de tema e `area#GUIA` para os de checkpoint, que nao pertencem a tema nenhum.
+   * Material de onde o item saiu, e o que liga a questao ao estudo: `area#TEMA-NN`. Todo item
+   * sai da tabela de erros comuns de um tema, entao a referencia e sempre de tema.
    */
   ref: string
   origem: OrigemDaQuestao
-  /** Herdada do tema (ou da area, no item de guia): sem fonte nao ha item. */
+  /** Herdada do tema: sem fonte nao ha item. */
   fonte: { titulo: string; url: string; tipo: string }
   status: StatusDaQuestao
   enunciado: string
@@ -49,20 +53,6 @@ export interface Questao {
   /** Indice da unica alternativa correta. */
   correta: number
   justificativa: string
-}
-
-/**
- * O rotulo do guia da area no `ref`.
- *
- * O checkpoint de uma area mora no GUIA dela, e nao dentro de um tema: `area#TEMA-NN` nao
- * serve de referencia para ele, e `area#GUIA` e a forma que sobra. Quem traduz essa
- * referencia de volta para a tela e o `linkTema`, que leva ao guia da area.
- */
-export const GUIA = 'GUIA'
-
-/** Referencia do guia de uma area: a que os itens de checkpoint apontam. */
-export function refDoGuia(areaId: string): string {
-  return `${areaId}#${GUIA}`
 }
 
 /** Resposta longa demais nao funciona como alternativa de multipla escolha. */
@@ -96,9 +86,9 @@ function fonteDoTema(tema: Tema): Questao['fonte'] {
 /**
  * Escolhe os distratores mais proximos do gabarito em comprimento.
  *
- * Sem isto, a correta era a mais longa em 4 de 5 itens de erro comum e em TODOS os de
- * recuperacao: dava para acertar sem saber, so contando letras. Aproximar o tamanho nao
- * resolve o item, mas tira o tell mais barato — e o gate vigia o resto.
+ * Sem isto, a correta era a mais longa em 4 de 5 itens: dava para acertar sem saber, so
+ * contando letras. Aproximar o tamanho nao resolve o item, mas tira o tell mais barato — e o
+ * gate vigia o resto.
  */
 function distratoresMaisProximos(correta: string, candidatos: string[], quantos: number): string[] {
   const alvo = correta.trim()
@@ -161,134 +151,6 @@ function daTabelaDeErros(tema: Tema): Questao[] {
   return itens
 }
 
-/**
- * Itens vindos dos pares de recuperacao ativa.
- *
- * Duas coisas que este gerador NAO faz, porque fazer seria mentir:
- *
- *  - **nao inventa justificativa.** A versao anterior usava o primeiro equivoco do tema como
- *    "porque", o que punha um enunciado FALSO sob "Por quê" em 296 itens — o app ensinando
- *    errado. A resposta correta ja e a propria resposta do material; o que a tela mostra e o
- *    link para o tema, que e a conferencia de verdade;
- *  - **nao usa texto de fora do material** como distrator: a secao 7 do plano pede que o
- *    distrator seja texto do proprio tema, e e o que os candidatos sao — as duas colunas da
- *    tabela de erros comuns e as respostas dos outros pares.
- *
- * A resposta de recuperacao e uma frase inteira, e so com os equivocos da tabela (curtos) o
- * gabarito era a alternativa mais longa em 100% dos itens: acertar nao media nada, bastava
- * contar letras. Por isso as respostas dos OUTROS pares tambem entram no conjunto: entre
- * frases do mesmo tipo, os tres distratores mais proximos ficam com tamanho comparavel ao do
- * gabarito.
- */
-function daRecuperacao(tema: Tema): Questao[] {
-  const pares = tema.recuperacao ?? []
-  const fonte = fonteDoTema(tema)
-  const itens: Questao[] = []
-  pares.forEach((par, indice) => {
-    const gabarito = par.resposta.trim()
-    if (!gabarito || gabarito.length > TETO_DA_ALTERNATIVA) return
-    const candidatos = [
-      ...textosDaTabela(tema),
-      ...pares.filter((_, i) => i !== indice).map((outro) => outro.resposta),
-    ]
-    const distratores = distratoresMaisProximos(gabarito, candidatos, 3)
-    if (distratores.length + 1 < MINIMO_DE_ALTERNATIVAS) return
-
-    const id = `${tema.ref}#R${String(indice + 1).padStart(2, '0')}`
-    const { alternativas, correta } = ordenar(id, gabarito, distratores)
-    itens.push({
-      id,
-      ref: tema.ref,
-      origem: 'recuperacao',
-      fonte,
-      status: 'rascunho',
-      enunciado: par.pergunta.trim(),
-      alternativas,
-      correta,
-      // Vazia de proposito: ver o comentario acima.
-      justificativa: '',
-    })
-  })
-  return itens
-}
-
-/**
- * A fonte herdada por um item de guia: a da AREA, que e quem publica o checkpoint.
- *
- * Mesma regra do tema (`fonteDoTema`), aplicada um nivel acima: o item de guia nao tem tema
- * de onde herdar, e a area e o material de onde ele saiu.
- */
-function fonteDaArea(area: Area): Questao['fonte'] {
-  const principal = area.fontes.find((f) => f.url && f.tipo) ?? area.fontes[0]
-  return { titulo: principal?.titulo ?? '', url: principal?.url ?? '', tipo: principal?.tipo ?? '' }
-}
-
-/**
- * Todo o material de resposta curta da AREA: as duas colunas de cada tabela de erros comuns
- * e as respostas de recuperacao de todos os temas dela.
- *
- * E o conjunto de onde sai o distrator de um item de checkpoint. O item de recuperacao busca
- * distrator no proprio tema; o checkpoint nao tem tema, entao o escopo sobe para a area — que
- * continua sendo material do repositorio, e nada de fora dele entra no conjunto.
- */
-function materialDaArea(area: Area, conteudo: Conteudo): string[] {
-  return area.temas.flatMap((ref) => {
-    const tema = conteudo.temas[ref]
-    if (!tema) return []
-    return [...textosDaTabela(tema), ...(tema.recuperacao ?? []).map((par) => par.resposta)]
-  })
-}
-
-/**
- * Itens vindos do checkpoint do guia da area (secao 9 de cada guia).
- *
- * As duas decisoes dos itens de recuperacao valem aqui pelo mesmo motivo:
- *
- *  - **nao inventa justificativa.** O checkpoint e um par pergunta/resposta dentro de um
- *    `<details>`, sem coluna de "por que isto esta errado" — conferido no material. A
- *    resposta E o gabarito, e a conferencia de verdade e o guia, para onde a tela leva;
- *  - **nao usa texto de fora do material** como distrator: os candidatos sao as respostas
- *    dos outros itens do MESMO guia e o material dos temas da area (as duas colunas das
- *    tabelas de erros comuns e as respostas de recuperacao).
- *
- * A resposta longa demais para caber numa alternativa e descartada, como na recuperacao: um
- * checkpoint de 500 caracteres vira prosa, nao opcao de multipla escolha. Por isso o guia
- * nem sempre entrega um item por pergunta, e o numero real esta no build.
- */
-function doCheckpoint(area: Area, conteudo: Conteudo): Questao[] {
-  const pares = area.guia.checkpoint ?? []
-  const fonte = fonteDaArea(area)
-  const ref = refDoGuia(area.areaId)
-  const daArea = materialDaArea(area, conteudo)
-  const itens: Questao[] = []
-  pares.forEach((par, indice) => {
-    const gabarito = par.resposta.trim()
-    if (!gabarito || gabarito.length > TETO_DA_ALTERNATIVA) return
-    const candidatos = [
-      ...pares.filter((_, i) => i !== indice).map((outro) => outro.resposta),
-      ...daArea,
-    ]
-    const distratores = distratoresMaisProximos(gabarito, candidatos, 3)
-    if (distratores.length + 1 < MINIMO_DE_ALTERNATIVAS) return
-
-    const id = `${ref}#C${String(indice + 1).padStart(2, '0')}`
-    const { alternativas, correta } = ordenar(id, gabarito, distratores)
-    itens.push({
-      id,
-      ref,
-      origem: 'checkpoint',
-      fonte,
-      status: 'rascunho',
-      enunciado: par.pergunta.trim(),
-      alternativas,
-      correta,
-      // Vazia de proposito: ver o comentario acima.
-      justificativa: '',
-    })
-  })
-  return itens
-}
-
 export interface Banco {
   /** areaId -> itens, na ordem de estudo. */
   porArea: Record<string, Questao[]>
@@ -307,12 +169,8 @@ export function derivarBanco(conteudo: Conteudo): Banco {
     const tema = conteudo.temas[ref]
     const areaId = areaDoTema(ref)
     if (!tema || !areaId) continue
-    porArea[areaId]!.push(...daTabelaDeErros(tema), ...daRecuperacao(tema))
+    porArea[areaId]!.push(...daTabelaDeErros(tema))
   }
-
-  // O checkpoint e do GUIA da area, e nao de um tema: entra depois dos itens dos temas, na
-  // ordem em que a area aparece no material — a mesma ordem de leitura que o resto do banco.
-  for (const area of conteudo.areas) porArea[area.areaId]!.push(...doCheckpoint(area, conteudo))
 
   const total = Object.values(porArea).reduce((n, lista) => n + lista.length, 0)
   return { porArea, total }
@@ -322,9 +180,6 @@ export function derivarBanco(conteudo: Conteudo): Banco {
 export function validarBanco(banco: Banco, conteudo: Conteudo): string[] {
   const erros: string[] = []
   const refs = new Set(Object.keys(conteudo.temas))
-  // O item de checkpoint nao aponta para tema nenhum: a referencia dele e o guia da area, e
-  // sem esta segunda lista um `ref` legitimo cairia em "ref inexistente".
-  const guias = new Set(conteudo.areas.map((a) => refDoGuia(a.areaId)))
   const idsVistos = new Set<string>()
 
   for (const [areaId, itens] of Object.entries(banco.porArea)) {
@@ -337,37 +192,29 @@ export function validarBanco(banco: Banco, conteudo: Conteudo): string[] {
     }
     for (const q of itens) {
       const onde = q.id
-      if (!/^[a-z0-9-]+#(TEMA-\d+|GUIA)#[A-Z]\d+$/.test(q.id)) erros.push(`${onde}: id fora do padrao`)
+      // O `ref` e sempre de tema e o item sai sempre da tabela de erros comuns dele, entao o
+      // `id` termina em `#E<nn>` — a letra da outra origem que existiu nao volta por engano.
+      if (!/^[a-z0-9-]+#TEMA-\d+#E\d+$/.test(q.id)) erros.push(`${onde}: id fora do padrao`)
       if (idsVistos.has(q.id)) erros.push(`${onde}: id repetido`)
       idsVistos.add(q.id)
 
       // O item tem de apontar para material que existe: e o que liga o banco ao estudo.
-      if (!refs.has(q.ref) && !guias.has(q.ref)) erros.push(`${onde}: ref inexistente (${q.ref})`)
+      if (!refs.has(q.ref)) erros.push(`${onde}: ref inexistente (${q.ref})`)
       else if (!q.ref.startsWith(`${areaId}#`)) {
         erros.push(`${onde}: item de ${areaId} apontando para material de outra area (${q.ref})`)
-      } else if ((q.origem === 'checkpoint') !== (q.ref === refDoGuia(areaId))) {
-        // Item de checkpoint aponta para o guia da area; item de tema, para `area#TEMA-NN`.
-        // Trocar um pelo outro confundiria a procedencia do item e o caminho de volta.
-        erros.push(
-          `${onde}: origem ${q.origem} em ref ${q.ref} — item de checkpoint aponta para ` +
-            `${refDoGuia(areaId)}; item de tema, para ${areaId}#TEMA-NN`,
-        )
       }
 
       if (!q.fonte?.url || !q.fonte.tipo) erros.push(`${onde}: sem fonte`)
       // `javascript:`/`data:` num `href` so nao executa porque o React bloqueia; a decisao
-      // nao pode morar numa biblioteca. As 904 fontes reais sao `https`.
+      // nao pode morar numa biblioteca. As fontes reais sao `https`.
       else if (!/^https?:\/\//.test(q.fonte.url)) {
         erros.push(`${onde}: fonte com esquema nao permitido (${q.fonte.url.slice(0, 40)})`)
       }
       if (!q.enunciado) erros.push(`${onde}: enunciado vazio`)
-      // A justificativa e obrigatoria onde ela existe (o `porque` do material). No item de
-      // recuperacao e no de checkpoint ela e vazia de proposito: o material nao tem, para
-      // esses pares, coluna de "por que isto esta errado", e inventar uma seria ensinar
-      // errado — foi o defeito que a versao anterior do gerador tinha.
-      if (!q.justificativa && q.origem === 'erro-comum') {
-        erros.push(`${onde}: item de erro comum sem justificativa`)
-      }
+      // O unico material do item e a linha da tabela de erros comuns, e o `porque` dela e a
+      // justificativa: sem ele o item afirmaria a correcao sem a razao que o material
+      // documenta, e nao haveria o que conferir sob "Por quê".
+      if (!q.justificativa) erros.push(`${onde}: item de erro comum sem justificativa`)
       if (temLexicoProibido([q.enunciado, q.justificativa, ...q.alternativas])) {
         erros.push(`${onde}: lexico proibido no texto do item`)
       }

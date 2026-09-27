@@ -4,8 +4,6 @@ import { derivarBanco, validarBanco, type Questao } from './questoes'
 
 const REF = '01-fundamentos#TEMA-01'
 const AREA = '01-fundamentos'
-/** O `ref` que o item de checkpoint usa: o guia da area, e nao um tema. */
-const REF_DO_GUIA = `${AREA}#GUIA`
 
 function tema(over: Partial<Tema> = {}): Tema {
   return {
@@ -39,7 +37,7 @@ function tema(over: Partial<Tema> = {}): Tema {
   }
 }
 
-/** O que a area publica e o item de guia herda: as fontes dela e o checkpoint da secao 9. */
+/** O que a área publica no guia: as fontes dela e o checkpoint da seção 9. */
 interface DoGuia {
   checkpoint?: ParQA[]
   fontes?: Fonte[]
@@ -47,8 +45,8 @@ interface DoGuia {
 
 function conteudo(sobre: Partial<Tema> = {}, doGuia: DoGuia = {}): Conteudo {
   const t = tema(sobre)
-  // Duas areas: sem a segunda, "item apontando para tema de outra area" cairia antes em
-  // "ref inexistente" e o caso nao testaria nada.
+  // Duas áreas: sem a segunda, "item apontando para tema de outra área" cairia antes em
+  // "ref inexistente" e o caso não testaria nada.
   const segunda = { ...tema(), ref: '02-grc#TEMA-01', areaId: '02-grc', temaId: 'TEMA-01' }
   return {
     meta: { geradoEm: '2026-01-01T00:00:00.000Z', totais: { areas: 2, temas: 2, paginas: 0 } },
@@ -113,34 +111,29 @@ const FONTE_DA_AREA: Fonte = {
 }
 
 /**
- * Quatro pares de checkpoint do guia. As respostas cabem numa alternativa e nao repetem
- * nenhuma linha da tabela de erros comuns do tema — que tambem entra no conjunto de
- * distratores, e uma repeticao seria descartada em silencio.
+ * As duas seções discursivas do material: a recuperação ativa do tema e o checkpoint do guia.
+ *
+ * Elas continuam no material — o tema e o guia as exibem — e não produzem item nenhum. A
+ * pergunta delas é aberta, e resposta de pergunta aberta não é alternativa de múltipla
+ * escolha. Os fixtures existem para provar isso: sem eles, "não vira item" passaria com as
+ * seções vazias, que é o caso fácil.
  */
-const CHECKPOINT: ParQA[] = [
-  {
-    pergunta: 'Quantas designações a norma exige, e por qual entregável cada uma responde?',
-    resposta: 'Duas: o diretor designado responde pela política; o encarregado, pelos dados pessoais',
-  },
-  {
-    pergunta: 'Qual intervalo de revisão se aplica a um tema acertado sem consulta?',
-    resposta: 'D+1, D+7 e D+30, e o erro devolve o item pela metade do prazo',
-  },
-  {
-    pergunta: 'Uma conta administrativa sem segundo fator: ameaça, vulnerabilidade ou risco?',
-    resposta: 'Vulnerabilidade, porque é a fraqueza que uma fonte de ameaça exploraria',
-  },
-  {
-    pergunta: 'Quais modos de falha a definição legal de segurança da informação cobre?',
-    resposta: 'Acesso, uso, divulgação, interrupção, modificação e destruição',
-  },
+const RECUPERACAO: ParQA[] = [
+  { pergunta: 'Quais modos de falha a definição legal cobre?', resposta: 'Acesso, uso, divulgação, interrupção, modificação e destruição' },
+  { pergunta: 'Por que a segurança não é só do time de segurança?', resposta: 'Porque a decisão é do negócio, com apoio técnico' },
+  { pergunta: 'Explique a diferença entre os dois escopos.', resposta: 'O escopo é a informação, não o meio' },
 ]
 
-/** O conteudo com o guia preenchido, que e o que produz os itens de checkpoint. */
-function conteudoComGuia(doGuia: DoGuia = {}): Conteudo {
-  return conteudo({}, { fontes: [FONTE_DA_AREA], checkpoint: CHECKPOINT, ...doGuia })
-}
+const CHECKPOINT: ParQA[] = [
+  { pergunta: 'Quantas designações a norma exige, e por qual entregável cada uma responde?', resposta: 'Duas: o diretor designado responde pela política; o encarregado, pelos dados pessoais' },
+  { pergunta: 'Qual intervalo de revisão se aplica a um tema acertado sem consulta?', resposta: 'D+1, D+7 e D+30, e o erro devolve o item pela metade do prazo' },
+  { pergunta: 'Uma conta administrativa sem segundo fator: ameaça, vulnerabilidade ou risco?', resposta: 'Vulnerabilidade, porque é a fraqueza que uma fonte de ameaça exploraria' },
+]
 
+/** O conteúdo com as duas seções discursivas cheias. */
+function conteudoComDiscursivas(sobre: Partial<Tema> = {}): Conteudo {
+  return conteudo({ ...sobre, recuperacao: RECUPERACAO }, { fontes: [FONTE_DA_AREA], checkpoint: CHECKPOINT })
+}
 
 /** Um item válido, com o campo indicado quebrado — mutação mínima por caso. */
 function item(over: Partial<Questao> = {}): Questao {
@@ -174,8 +167,8 @@ describe('derivarBanco', () => {
     expect(primeiro.status).toBe('rascunho')
     expect(primeiro.alternativas[primeiro.correta]).toBe('O escopo é a informação, não o meio')
     expect(primeiro.justificativa).toBe('o escopo é a informação')
-    // Os distratores saem do proprio material: as DUAS colunas das linhas do tema — o
-    // equivoco e o correto. Antes so o equivoco entrava, e o gabarito ficava sendo a
+    // Os distratores saem do próprio material: as DUAS colunas das linhas do tema — o
+    // equívoco e o correto. Antes só o equívoco entrava, e o gabarito ficava sendo a
     // alternativa mais longa na maioria dos itens.
     const doMaterial = new Set((tema().errosComuns ?? []).flatMap((l) => [l.equivoco, l.correto]))
     for (const alternativa of primeiro.alternativas) expect(doMaterial.has(alternativa)).toBe(true)
@@ -184,7 +177,7 @@ describe('derivarBanco', () => {
   it('aproxima o tamanho dos distratores do gabarito', () => {
     // A coluna "o que e correto" e mais longa que a do equivoco no material inteiro, entao
     // so com equivocos no conjunto dava para acertar contando letras: o gabarito era a
-    // alternativa mais longa em 79% dos itens de erro comum e em 100% dos de recuperacao.
+    // alternativa mais longa em 79% dos itens.
     const c = conteudo({
       errosComuns: ['A', 'B', 'C', 'D'].map((letra) => ({
         equivoco: `eq${letra}`,
@@ -207,7 +200,7 @@ describe('derivarBanco', () => {
     const linhas = tema().errosComuns ?? []
     const itens = derivarBanco(conteudo()).porArea['01-fundamentos']!
     for (const q of itens) {
-      if (q.origem !== 'erro-comum') continue
+      expect(q.origem).toBe('erro-comum')
       const linha = linhas[Number(q.id.slice(-2)) - 1]!
       // A alternativa nao pode carregar a afirmacao que o proprio enunciado pede para
       // corrigir: responder com ela seria dizer que o equivoco e o equivoco.
@@ -226,17 +219,20 @@ describe('derivarBanco', () => {
   })
 
   it('descarta resposta longa demais para ser alternativa', () => {
+    // O gabarito de uma linha e o `correto` dela: longa demais, nao vira alternativa, e a
+    // linha inteira sai do banco em vez de virar item de prosa.
     const c = conteudo({
-      recuperacao: [
-        { pergunta: 'Q1', resposta: 'x'.repeat(400) },
-        { pergunta: 'Q2', resposta: 'curta 1' },
-        { pergunta: 'Q3', resposta: 'curta 2' },
-        { pergunta: 'Q4', resposta: 'curta 3' },
+      errosComuns: [
+        { equivoco: 'eqA', porque: 'p', correto: 'x'.repeat(400) },
+        { equivoco: 'eqB', porque: 'p', correto: 'Correção B, curta o bastante para a alternativa' },
+        { equivoco: 'eqC', porque: 'p', correto: 'Correção C, curta o bastante para a alternativa' },
+        { equivoco: 'eqD', porque: 'p', correto: 'Correção D, curta o bastante para a alternativa' },
       ],
     })
     const itens = derivarBanco(c).porArea['01-fundamentos']!
-    expect(itens.filter((q) => q.origem === 'recuperacao')).toHaveLength(3)
-    expect(itens.some((q) => q.id.endsWith('#R01'))).toBe(false)
+    expect(itens).toHaveLength(3)
+    expect(itens.some((q) => q.id.endsWith('#E01'))).toBe(false)
+    for (const q of itens) expect(q.alternativas).not.toContain('x'.repeat(400))
   })
 
   it('nao deriva item quando falta distrator', () => {
@@ -257,75 +253,39 @@ describe('derivarBanco', () => {
     expect(a).toBe(b)
   })
 
-  // O checkpoint mora no guia da AREA, e nao num tema: sem uma convencao de `ref` os 102
-  // itens dos guias ficavam de fora do banco, embora a §7 do plano os liste como fonte.
-  describe('checkpoint do guia da area', () => {
-    function itensDoGuia(c: Conteudo = conteudoComGuia()): Questao[] {
-      return derivarBanco(c).porArea[AREA]!.filter((q) => q.origem === 'checkpoint')
-    }
+  // A recuperação ativa e o checkpoint continuam no material e na tela, mas não viram item:
+  // a pergunta deles é aberta ("cite...", "explique por que..."), e nenhuma alternativa é "a
+  // resposta" — o gabarito só se reconhece pela forma da frase. Decisão do dono.
+  describe('as secoes discursivas do material', () => {
+    it('nao viram item, nem quando o material esta cheio', () => {
+      const c = conteudoComDiscursivas()
+      const itens = derivarBanco(c).porArea[AREA]!
 
-    it('deriva um item por par do checkpoint, com a resposta como gabarito', () => {
-      const itens = itensDoGuia()
-      expect(itens).toHaveLength(CHECKPOINT.length)
-
-      const primeiro = itens[0]!
-      expect(primeiro.id).toBe(`${REF_DO_GUIA}#C01`)
-      expect(primeiro.ref).toBe(REF_DO_GUIA)
-      expect(primeiro.status).toBe('rascunho')
-      expect(primeiro.enunciado).toBe(CHECKPOINT[0]!.pergunta)
-      expect(primeiro.alternativas[primeiro.correta]).toBe(CHECKPOINT[0]!.resposta)
-      // Nada de justificativa inventada: o checkpoint nao tem coluna de "por que isto esta
-      // errado", e a resposta do material ja e o gabarito.
-      expect(primeiro.justificativa).toBe('')
-    })
-
-    it('herda a fonte da area: o item de guia nao tem tema de onde herdar', () => {
-      for (const q of itensDoGuia()) {
-        expect(q.fonte.url).toBe(FONTE_DA_AREA.url)
-        expect(q.fonte.tipo).toBe(FONTE_DA_AREA.tipo)
+      // Quatro itens, um por linha da tabela de erros comuns — e nenhum a mais.
+      expect(itens).toHaveLength(4)
+      for (const q of itens) {
+        expect(q.origem).toBe('erro-comum')
+        expect(q.ref).toBe(REF)
+        expect(q.id).toMatch(/#E\d+$/)
+        // O enunciado é o da tabela de erros comuns; a pergunta aberta do material não entra.
+        expect(RECUPERACAO.some((p) => q.enunciado === p.pergunta.trim())).toBe(false)
+        expect(CHECKPOINT.some((p) => q.enunciado === p.pergunta.trim())).toBe(false)
       }
-    })
+      // Nenhum id carrega a letra das duas origens que saíram (#R de recuperação, #C de
+      // checkpoint), e nenhum item aponta para o guia da área.
+      expect(itens.some((q) => /#[RC]\d+$/.test(q.id))).toBe(false)
+      expect(itens.some((q) => q.ref.endsWith('#GUIA'))).toBe(false)
 
-    it('tira o distrator do guia e da area, nunca de fora do material', () => {
-      // Os candidatos sao as respostas dos outros pares do MESMO guia e o material dos temas
-      // da area — as duas colunas de cada tabela de erros comuns e as respostas de recuperacao.
-      const doMaterial = new Set([
-        ...CHECKPOINT.map((p) => p.resposta),
-        ...(tema().errosComuns ?? []).flatMap((linha) => [linha.equivoco, linha.correto]),
-      ])
-      for (const q of itensDoGuia()) {
-        for (const alternativa of q.alternativas) expect(doMaterial.has(alternativa)).toBe(true)
-        // A resposta do proprio par nao pode aparecer duas vezes, nem virar distrator.
-        expect(new Set(q.alternativas).size).toBe(q.alternativas.length)
-      }
-    })
-
-    it('descarta a resposta longa demais para ser alternativa', () => {
-      const c = conteudoComGuia({
-        checkpoint: [
-          ...CHECKPOINT,
-          { pergunta: 'Descreva o processo inteiro', resposta: 'x'.repeat(400) },
-        ],
-      })
-      expect(itensDoGuia(c)).toHaveLength(CHECKPOINT.length)
-      expect(itensDoGuia(c).some((q) => q.id.endsWith('#C05'))).toBe(false)
-    })
-
-    it('nao deriva item de checkpoint quando falta distrator', () => {
-      // Um par so, e nenhuma linha de erro comum no tema: nao ha de onde tirar alternativa.
-      const c = conteudo({ errosComuns: [] }, { fontes: [FONTE_DA_AREA], checkpoint: [CHECKPOINT[0]!] })
-      expect(itensDoGuia(c)).toHaveLength(0)
-    })
-
-    it('entra depois dos itens dos temas, na ordem de leitura da area', () => {
-      const itens = derivarBanco(conteudoComGuia()).porArea[AREA]!
-      const origens = itens.map((q) => q.origem)
-      expect(origens.indexOf('checkpoint')).toBeGreaterThan(origens.lastIndexOf('recuperacao'))
-    })
-
-    it('o banco com itens de guia passa no gate', () => {
-      const c = conteudoComGuia()
+      // E o material com as duas seções intactas continua aprovado pelo gate: elas não
+      // deixaram de existir, só não são item de múltipla escolha.
       expect(validarBanco(derivarBanco(c), c)).toEqual([])
+    })
+
+    it('nao salvam um tema cuja tabela de erros comuns nao existe', () => {
+      // Sem tabela de erros comuns não há par (o que se erra -> o que é correto) e não há
+      // item: as duas seções discursivas são exercício, não fonte de alternativa.
+      const c = conteudoComDiscursivas({ errosComuns: [] })
+      expect(derivarBanco(c).porArea[AREA]).toEqual([])
     })
   })
 })
@@ -343,31 +303,24 @@ describe('validarBanco', () => {
       (q) => void (q.ref = '02-grc#TEMA-01'),
       'material de outra area',
     ],
-    // Os dois lados da convencao de `ref`: checkpoint existe so no guia da area, e item de
-    // tema so aponta para um tema. Trocados, a procedencia do item deixa de ser legivel.
     [
-      'acusa item de checkpoint apontando para um tema',
-      (q) => void (q.origem = 'checkpoint'),
-      'item de checkpoint aponta para 01-fundamentos#GUIA',
+      // O `id` so tem uma letra possivel hoje (`E`, da tabela de erros comuns): a `C` do
+      // checkpoint e a `R` da recuperacao nao podem voltar por engano sem o gate ver.
+      'acusa id com a letra de uma origem extinta',
+      (q) => void (q.id = `${REF}#R01`),
+      'id fora do padrao',
     ],
     [
-      'acusa item de tema apontando para o guia',
-      (q) => {
-        q.ref = REF_DO_GUIA
-        q.id = `${REF_DO_GUIA}#C01`
-      },
-      'item de tema, para 01-fundamentos#TEMA-NN',
-    ],
-    [
-      'acusa ref de guia de area inexistente',
-      (q) => {
-        q.ref = '99-futuro#GUIA'
-        q.id = '99-futuro#GUIA#C01'
-        q.origem = 'checkpoint'
-      },
-      'ref inexistente',
+      'acusa id apontando para o guia da area',
+      (q) => void (q.id = `${AREA}#GUIA#C01`),
+      'id fora do padrao',
     ],
     ['acusa item sem fonte', (q) => void (q.fonte = { titulo: '', url: '', tipo: '' }), 'sem fonte'],
+    [
+      'acusa fonte com esquema nao permitido',
+      (q) => void (q.fonte = { ...q.fonte, url: 'javascript:alert(1)' }),
+      'esquema nao permitido',
+    ],
     ['acusa enunciado vazio', (q) => void (q.enunciado = ''), 'enunciado vazio'],
     [
       'acusa id fora do padrao',
@@ -385,11 +338,21 @@ describe('validarBanco', () => {
       'alternativa repetida',
     ],
     [
+      'acusa alternativa vazia',
+      (q) => void (q.alternativas = ['a', '', 'b']),
+      'alternativa vazia',
+    ],
+    [
       'acusa indice da correta fora da lista',
       (q) => void (q.correta = 9),
       'indice da correta fora da lista',
     ],
     ['acusa item sem justificativa', (q) => void (q.justificativa = ''), 'sem justificativa'],
+    [
+      'acusa o lexico proibido no texto do item',
+      (q) => void (q.enunciado = 'Uma solução abrangente para o tema'),
+      'lexico proibido',
+    ],
     ['acusa status invalido', (q) => void (q.status = 'aprovado' as never), 'status invalido'],
     ['acusa id repetido', () => {}, 'id repetido'],
   ]
@@ -447,6 +410,19 @@ describe('validarBanco', () => {
       expect(problemas[0]).toContain('banco adulterado: 1 item')
       expect(problemas[0]).toContain('conteudo diferente do que o material deriva')
       expect(problemas[0]).toContain(alvo.id)
+    })
+
+    it('acusa origem trocada a mao', () => {
+      // Um item de recuperacao na mao — a origem que o dono mandou tirar — nao passa como se
+      // fosse do material: a assinatura do item carrega a origem.
+      const c = conteudo()
+      const banco = derivarBanco(c)
+      const alvo = banco.porArea['01-fundamentos']![0]!
+      alvo.origem = 'recuperacao' as never
+
+      const problemas = validarBanco(banco, c).join('\n')
+      expect(problemas).toContain('banco adulterado')
+      expect(problemas).toContain('conteudo diferente do que o material deriva')
     })
 
     it('acusa item que nao vem do material', () => {

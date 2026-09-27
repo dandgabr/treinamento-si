@@ -100,46 +100,6 @@
     "justificativa": "O fornecedor normalmente é operador e segue instrução; quem decide finalidade e prazo é o controlador"
   },
   {
-    "id": "14-dados-privacidade#TEMA-01#R03",
-    "ref": "14-dados-privacidade#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — texto atualizado, arts. 1º a 5º e 12",
-      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quem é o controlador e como esse papel se distingue do operador e do encarregado?",
-    "alternativas": [
-      "Não. O art. 12, §2º, admite expressamente como dado pessoal o conjunto usado para formação de perfil comportamental de determinada pessoa natural, se identificada.",
-      "Dado tornado manifestamente público dispensa consentimento, mas preserva princípios e direitos",
-      "Controlador é quem toma as decisões referentes ao tratamento; operador realiza o tratamento em nome do controlador; encarregado é o canal de comunicação entre controlador, titulares e ANPD, sem ser dono da base.",
-      "O art. 13, §4º, mantém a informação adicional separada e exige ambiente controlado e seguro"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "14-dados-privacidade#TEMA-01#R04",
-    "ref": "14-dados-privacidade#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — texto atualizado, arts. 1º a 5º e 12",
-      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Um conjunto de dados usados para montar perfil comportamental de pessoa identificada pode ser tratado como anônimo? Fundamente.",
-    "alternativas": [
-      "Controlador é quem toma as decisões referentes ao tratamento; operador realiza o tratamento em nome do controlador; encarregado é o canal de comunicação entre controlador, titulares e ANPD, sem ser dono da base.",
-      "Dado tornado manifestamente público dispensa consentimento, mas preserva princípios e direitos",
-      "O art. 13, §4º, mantém a informação adicional separada e exige ambiente controlado e seguro",
-      "Não. O art. 12, §2º, admite expressamente como dado pessoal o conjunto usado para formação de perfil comportamental de determinada pessoa natural, se identificada."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
     "id": "14-dados-privacidade#TEMA-02#E01",
     "ref": "14-dados-privacidade#TEMA-02",
     "origem": "erro-comum",
@@ -238,66 +198,6 @@
     ],
     "correta": 0,
     "justificativa": "Reter além do prazo mantém o risco e amplia o escopo de qualquer incidente futuro"
-  },
-  {
-    "id": "14-dados-privacidade#TEMA-02#R01",
-    "ref": "14-dados-privacidade#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
-      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que o art. 37 da LGPD exige de controlador e operador, e em que hipótese a menção é destacada?",
-    "alternativas": [
-      "Porque o processo tem dono, contrato, obrigação legal e ponto de partida e de término do tratamento; o sistema é apenas um dos lugares onde o dado passa.",
-      "Exige manter registro das operações de tratamento de dados pessoais que realizarem, especialmente quando o tratamento for baseado em legítimo interesse.",
-      "O registro das operações de tratamento dos dados pessoais afetados, conforme o art. 8º do Regulamento de Comunicação de Incidente de Segurança.",
-      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "14-dados-privacidade#TEMA-02#R03",
-    "ref": "14-dados-privacidade#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
-      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Por que o inventário se organiza por processo de negócio e não por sistema?",
-    "alternativas": [
-      "Exige manter registro das operações de tratamento de dados pessoais que realizarem, especialmente quando o tratamento for baseado em legítimo interesse.",
-      "O registro das operações de tratamento dos dados pessoais afetados, conforme o art. 8º do Regulamento de Comunicação de Incidente de Segurança.",
-      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio",
-      "Porque o processo tem dono, contrato, obrigação legal e ponto de partida e de término do tratamento; o sistema é apenas um dos lugares onde o dado passa."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "14-dados-privacidade#TEMA-02#R04",
-    "ref": "14-dados-privacidade#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 5º, 9º, 37 e 46",
-      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
-      "tipo": "primaria"
-    },
-    "status": "verificado",
-    "enunciado": "Que documento da ANPD pode ser exigido durante a apuração de um incidente, além do relatório de impacto?",
-    "alternativas": [
-      "O registro das operações de tratamento dos dados pessoais afetados, conforme o art. 8º do Regulamento de Comunicação de Incidente de Segurança.",
-      "Exige manter registro das operações de tratamento de dados pessoais que realizarem, especialmente quando o tratamento for baseado em legítimo interesse.",
-      "Porque o processo tem dono, contrato, obrigação legal e ponto de partida e de término do tratamento; o sistema é apenas um dos lugares onde o dado passa.",
-      "O art. 37 pede o registro; o art. 38 trata do relatório de impacto, com conteúdo mínimo próprio"
-    ],
-    "correta": 0,
-    "justificativa": ""
   },
   {
     "id": "14-dados-privacidade#TEMA-03#E01",
@@ -520,46 +420,6 @@
     "justificativa": "O tratamento alcança também quem armazena e transmite"
   },
   {
-    "id": "14-dados-privacidade#TEMA-04#R04",
-    "ref": "14-dados-privacidade#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 6º a 22, 42 a 49 e 52",
-      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais são os prazos e os destinatários da comunicação de incidente, e de que evento cada prazo conta?",
-    "alternativas": [
-      "Prefira a hipótese que descreve a obrigação real; use consentimento quando o uso depende da vontade do titular",
-      "Decida com critério escrito; se decidir não comunicar, registre o fundamento e a evidência",
-      "Três dias úteis à ANPD e três dias úteis ao titular, ambos contados do conhecimento pelo controlador de que o incidente afetou dados pessoais.",
-      "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "14-dados-privacidade#TEMA-04#R05",
-    "ref": "14-dados-privacidade#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 6º a 22, 42 a 49 e 52",
-      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O que o art. 48, §3º, valoriza no juízo de gravidade do incidente?",
-    "alternativas": [
-      "Três dias úteis à ANPD e três dias úteis ao titular, ambos contados do conhecimento pelo controlador de que o incidente afetou dados pessoais.",
-      "Prefira a hipótese que descreve a obrigação real; use consentimento quando o uso depende da vontade do titular",
-      "Decida com critério escrito; se decidir não comunicar, registre o fundamento e a evidência",
-      "A comprovação de que foram adotadas medidas técnicas adequadas que tornem os dados pessoais afetados ininteligíveis, no âmbito e nos limites técnicos dos serviços, para terceiros não autorizados a acessá-los."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
     "id": "14-dados-privacidade#TEMA-05#E01",
     "ref": "14-dados-privacidade#TEMA-05",
     "origem": "erro-comum",
@@ -660,46 +520,6 @@
     "justificativa": "O controlador responde pelo conjunto, e o art. 46.º alcança as transferências ulteriores"
   },
   {
-    "id": "14-dados-privacidade#TEMA-05#R02",
-    "ref": "14-dados-privacidade#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Regulamento (UE) 2016/679 — art. 44.º a 46.º e 49.º e art. 83.º, n.º 5",
-      "url": "https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:32016R0679",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Quais são as hipóteses de transferência internacional da LGPD ligadas a garantias do controlador?",
-    "alternativas": [
-      "Instrumento contratual e custódia de chave são decisões distintas e complementares",
-      "Cláusulas contratuais específicas para determinada transferência; cláusulas-padrão contratuais; normas corporativas globais; e selos, certificados e códigos de conduta regularmente emitidos.",
-      "Cada regime exige seu instrumento; um contrato pode ter lacuna em um deles",
-      "No GDPR, a Comissão; na LGPD, a ANPD, conforme os critérios do art. 34."
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "14-dados-privacidade#TEMA-05#R03",
-    "ref": "14-dados-privacidade#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Regulamento (UE) 2016/679 — art. 44.º a 46.º e 49.º e art. 83.º, n.º 5",
-      "url": "https://eur-lex.europa.eu/legal-content/PT/TXT/HTML/?uri=CELEX:32016R0679",
-      "tipo": "primaria"
-    },
-    "status": "verificado",
-    "enunciado": "Quem avalia o nível de proteção do país estrangeiro em cada regime?",
-    "alternativas": [
-      "Mapeie armazenamento, acesso humano e custódia de chave separadamente",
-      "Cada regime exige seu instrumento; um contrato pode ter lacuna em um deles",
-      "No GDPR, a Comissão; na LGPD, a ANPD, conforme os critérios do art. 34.",
-      "Exija lista de suboperadores, país e instrumento aplicável a cada um"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
     "id": "14-dados-privacidade#TEMA-06#E01",
     "ref": "14-dados-privacidade#TEMA-06",
     "origem": "erro-comum",
@@ -798,45 +618,5 @@
     ],
     "correta": 0,
     "justificativa": "O art. 41, §2º, coloca a recepção de reclamações do titular no encarregado"
-  },
-  {
-    "id": "14-dados-privacidade#TEMA-06#R03",
-    "ref": "14-dados-privacidade#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — arts. 41, 50, 51, 52 e 55-A a 55-L",
-      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "Em que critérios de dosimetria da sanção a existência do programa entra?",
-    "alternativas": [
-      "Publique o contato em página de livre acesso e registre o fluxo de atendimento",
-      "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa",
-      "O programa é um conjunto de processos com dono, ata e evidência de execução",
-      "Na adoção reiterada e demonstrada de mecanismos e procedimentos internos capazes de minimizar o dano, na adoção de política de boas práticas e governança e na pronta adoção de medidas corretivas."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "14-dados-privacidade#GUIA#C02",
-    "ref": "14-dados-privacidade#GUIA",
-    "origem": "checkpoint",
-    "fonte": {
-      "titulo": "Lei nº 13.709, de 14 de agosto de 2018 — Lei Geral de Proteção de Dados Pessoais, texto atualizado",
-      "url": "https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.pdf",
-      "tipo": "primaria"
-    },
-    "status": "pendente",
-    "enunciado": "O time de segurança pede autorização para reter uma cópia do banco de clientes afetado por um incidente, para análise forense. Que obrigação de privacidade essa cópia cria? (TEMA-04)",
-    "alternativas": [
-      "Controlador é quem toma as decisões referentes ao tratamento; operador realiza o tratamento em nome do controlador; encarregado é o canal de comunicação entre controlador, titulares e ANPD, sem ser dono da base.",
-      "A cópia passa a ser operação de tratamento com finalidade nova, que precisa de hipótese legal própria e de prazo de eliminação ao fim da análise. A cadeia de custódia explica a origem da cópia, não legitima o tratamento.",
-      "A comprovação de que foram adotadas medidas técnicas adequadas que tornem os dados pessoais afetados ininteligíveis, no âmbito e nos limites técnicos dos serviços, para terceiros não autorizados a acessá-los.",
-      "Na adoção reiterada e demonstrada de mecanismos e procedimentos internos capazes de minimizar o dano, na adoção de política de boas práticas e governança e na pronta adoção de medidas corretivas."
-    ],
-    "correta": 1,
-    "justificativa": ""
   }
 ]

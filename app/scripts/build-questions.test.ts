@@ -28,9 +28,6 @@ const REF = `${AREA}#TEMA-01`
 const E01 = `${REF}#E01`
 const E02 = `${REF}#E02`
 const E03 = `${REF}#E03`
-/** O item do checkpoint do guia: `ref` de guia, e nao de tema. */
-const C01 = `${AREA}#GUIA#C01`
-const C02 = `${AREA}#GUIA#C02`
 
 interface Linha {
   equivoco: string
@@ -63,9 +60,24 @@ const LINHAS: Linha[] = [
 ]
 
 /**
- * Quatro pares de checkpoint do guia, o outro item que o material alimenta. Respostas curtas
- * e sem repetir nenhuma linha da tabela acima, que entra no conjunto de distratores.
+ * As seções discursivas do material: a recuperação ativa do tema e o checkpoint do guia.
+ *
+ * Elas continuam no material e não viram item — a pergunta delas é aberta, e resposta de
+ * pergunta aberta não é alternativa de múltipla escolha (decisão do dono). Os fixtures
+ * existem para o gerador ser exercitado com o material cheio: com as seções vazias, "não
+ * virou item" passaria sem provar nada.
  */
+const RECUPERACAO: ParQA[] = [
+  {
+    pergunta: 'Quais modos de falha a definição legal de segurança da informação cobre?',
+    resposta: 'Acesso, uso, divulgação, interrupção, modificação e destruição',
+  },
+  {
+    pergunta: 'Por que a segurança da informação não é só do time de segurança?',
+    resposta: 'Porque a decisão é do negócio, com apoio técnico',
+  },
+]
+
 const CHECKPOINT: ParQA[] = [
   {
     pergunta: 'Quantas designações a norma exige, e por qual entregável cada uma responde?',
@@ -75,14 +87,6 @@ const CHECKPOINT: ParQA[] = [
     pergunta: 'Qual intervalo de revisão se aplica a um tema acertado sem consulta?',
     resposta: 'D+1, D+7 e D+30, e o erro devolve o item pela metade do prazo',
   },
-  {
-    pergunta: 'Uma conta administrativa sem segundo fator: ameaça, vulnerabilidade ou risco?',
-    resposta: 'Vulnerabilidade, porque é a fraqueza que uma fonte de ameaça exploraria',
-  },
-  {
-    pergunta: 'Quais modos de falha a definição legal de segurança da informação cobre?',
-    resposta: 'Acesso, uso, divulgação, interrupção, modificação e destruição',
-  },
 ]
 
 const LINHA_NOVA: Linha = {
@@ -91,8 +95,14 @@ const LINHA_NOVA: Linha = {
   correto: 'Risco é o que ainda pode acontecer; problema é o que já aconteceu',
 }
 
+/** O que o material publica além da tabela de erros comuns, que é a única fonte do banco. */
+interface Discursivas {
+  recuperacao?: ParQA[]
+  checkpoint?: ParQA[]
+}
+
 /** O minimo que `derivarBanco` e `validarBanco` leem, com uma area e um tema. */
-function material(errosComuns: Linha[], checkpoint: ParQA[] = []): unknown {
+function material(errosComuns: Linha[], discursivas: Discursivas = {}): unknown {
   return {
     meta: { geradoEm: '2026-01-01T00:00:00.000Z', totais: { areas: 1, temas: 1, paginas: 0 } },
     areas: [
@@ -105,15 +115,13 @@ function material(errosComuns: Linha[], checkpoint: ParQA[] = []): unknown {
         certificacoes: [],
         preRequisitos: [],
         temas: [REF],
-        // A area e quem publica o checkpoint: e dela que o item de guia herda a fonte, e sem
-        // fonte o gate reprova o banco.
         fontes: [{ titulo: 'CSEC2017', url: 'https://exemplo/area', tipo: 'primaria' }],
         statusVerificacao: 'verificado',
         guia: {
           areaId: AREA,
           intro: '',
           secoes: [],
-          checkpoint,
+          checkpoint: discursivas.checkpoint ?? [],
           criterio: 'acertar 4 dos 5 itens sem consultar os temas',
           tabelaTemas: null,
           objetivos: null,
@@ -142,7 +150,7 @@ function material(errosComuns: Linha[], checkpoint: ParQA[] = []): unknown {
         intro: '<p>abertura</p>',
         secoes: [],
         preTeste: [],
-        recuperacao: [],
+        recuperacao: discursivas.recuperacao ?? [],
         errosComuns,
         mermaid: [],
       },
@@ -166,12 +174,12 @@ afterEach(() => {
   }
 })
 
-function novoCenario(errosComuns: Linha[], checkpoint: ParQA[] = []): Cenario {
+function novoCenario(errosComuns: Linha[], discursivas: Discursivas = {}): Cenario {
   const raiz = fs.mkdtempSync(path.join(os.tmpdir(), 'roadmap-questoes-'))
   temporarios.push(raiz)
   const conteudo = path.join(raiz, 'content.json')
   const questoes = path.join(raiz, 'questoes')
-  fs.writeFileSync(conteudo, JSON.stringify(material(errosComuns, checkpoint)))
+  fs.writeFileSync(conteudo, JSON.stringify(material(errosComuns, discursivas)))
   return { conteudo, questoes, arquivo: path.join(questoes, `${AREA}.json`) }
 }
 
@@ -184,8 +192,8 @@ function gerar(c: Cenario): string {
   })
 }
 
-function escreverMaterial(c: Cenario, errosComuns: Linha[], checkpoint: ParQA[] = []): void {
-  fs.writeFileSync(c.conteudo, JSON.stringify(material(errosComuns, checkpoint)))
+function escreverMaterial(c: Cenario, errosComuns: Linha[], discursivas: Discursivas = {}): void {
+  fs.writeFileSync(c.conteudo, JSON.stringify(material(errosComuns, discursivas)))
 }
 
 function itens(c: Cenario): Questao[] {
@@ -261,66 +269,38 @@ describe('build-questions: o que a revisao humana decidiu', () => {
   })
 })
 
-// O checkpoint do guia entra no mesmo arquivo da area que os itens de tema, e a revisao
-// humana dele segue o mesmo fluxo: o `id` (`area#GUIA#C01`) e estavel enquanto a resposta do
-// par nao muda, e o gerador reencontra o selo pelo `id`.
-describe('build-questions: item do checkpoint do guia', () => {
-  it('grava o item de guia no arquivo da area, com o ref do guia', () => {
-    const c = novoCenario(LINHAS, CHECKPOINT)
+// A recuperacao ativa e o checkpoint do guia continuam no material — o tema e o guia os
+// exibem — e nao aparecem no arquivo que o app le: a pergunta deles e aberta e nenhuma
+// alternativa seria "a resposta". O gerador roda contra o material cheio e nao os ve.
+describe('build-questions: as secoes discursivas do material', () => {
+  it('nao grava item de recuperacao nem de checkpoint', () => {
+    const c = novoCenario(LINHAS, { recuperacao: RECUPERACAO, checkpoint: CHECKPOINT })
     gerar(c)
+    const gravados = itens(c)
 
-    const doGuia = itens(c).filter((q) => q.origem === 'checkpoint')
-    expect(doGuia).toHaveLength(CHECKPOINT.length)
-    expect(doGuia[0]!.id).toBe(C01)
-    expect(doGuia[0]!.ref).toBe(`${AREA}#GUIA`)
-    // A fonte vem da area, e nao de um tema: e ela que sustenta a auditoria de citacao.
-    expect(doGuia[0]!.fonte.url).toBe('https://exemplo/area')
-    // E sem justificativa: o checkpoint nao tem "por que" no material.
-    expect(doGuia[0]!.justificativa).toBe('')
-    // Os itens de tema continuam no mesmo arquivo, com os ids de sempre.
-    expect(itens(c).some((q) => q.id === E01)).toBe(true)
+    // Um item por linha da tabela de erros comuns, e so.
+    expect(gravados).toHaveLength(LINHAS.length)
+    expect(gravados.map((q) => q.origem)).toEqual(LINHAS.map(() => 'erro-comum'))
+    expect(gravados.every((q) => /#E\d+$/.test(q.id))).toBe(true)
+    // Nenhum eco do material que ficou de fora: a pergunta aberta nao vira enunciado e a
+    // resposta dela nao entra como alternativa — os distratores sao as colunas da tabela.
+    for (const par of [...RECUPERACAO, ...CHECKPOINT]) {
+      expect(gravados.some((q) => q.enunciado === par.pergunta)).toBe(false)
+      expect(gravados.some((q) => q.alternativas.includes(par.resposta))).toBe(false)
+    }
   })
 
-  it('preserva o status do item de guia enquanto a resposta regerada for a mesma', () => {
-    const c = novoCenario(LINHAS, CHECKPOINT)
-    gerar(c)
-    marcar(c, C01, 'verificado')
-
-    const saida = gerar(c)
-
-    expect(statusDe(c, C01)).toBe('verificado')
-    expect(itens(c).filter((q) => q.status !== 'rascunho')).toHaveLength(1)
-    expect(saida).toContain('1 com status de revisao preservado')
-  })
-
-  it('rebaixa o item de guia quando a resposta do checkpoint muda', () => {
-    const c = novoCenario(LINHAS, CHECKPOINT)
-    gerar(c)
-    marcar(c, C01, 'verificado')
-    marcar(c, C02, 'pendente')
-
-    // So a primeira resposta muda: o vizinho fica igual, e e o que separa "invalidou porque
-    // mudou" de "invalidou tudo".
-    escreverMaterial(c, LINHAS, [
-      { ...CHECKPOINT[0]!, resposta: 'Duas designações: uma política, um encarregado' },
-      ...CHECKPOINT.slice(1),
-    ])
-    const saida = gerar(c)
-
-    expect(statusDe(c, C01)).toBe('rascunho')
-    expect(saida).toContain('revisao invalidada')
-    expect(saida).toContain(C01)
-    expect(statusDe(c, C02)).toBe('pendente')
-  })
-
-  it('nao renumera os itens de tema quando o checkpoint ganha um par novo', () => {
-    // O checkpoint e a secao 9 do guia, e nao desloca linha de tema nenhuma: os ids `#Exx`
-    // seguem apontando para a mesma linha, e a revisao deles nao pode cair por causa dele.
-    const c = novoCenario(LINHAS, CHECKPOINT)
+  it('nao desloca os ids dos itens de tema quando as secoes discursivas mudam', () => {
+    // Elas não numeram item nenhum: os `#Exx` seguem apontando para a mesma linha da tabela,
+    // e a revisão deles não pode cair por causa de uma seção que não gera item.
+    const c = novoCenario(LINHAS)
     gerar(c)
     marcar(c, E01, 'verificado')
 
-    escreverMaterial(c, LINHAS, [{ pergunta: 'Par novo?', resposta: 'Resposta nova, curta e propria' }, ...CHECKPOINT])
+    escreverMaterial(c, LINHAS, {
+      recuperacao: RECUPERACAO,
+      checkpoint: [{ pergunta: 'Par novo?', resposta: 'Resposta nova, curta e propria' }, ...CHECKPOINT],
+    })
     const saida = gerar(c)
 
     expect(statusDe(c, E01)).toBe('verificado')

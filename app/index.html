@@ -5,23 +5,31 @@
   chegou a ser fixo em "light", o que fazia a tela piscar clara para quem usa o sistema no
   escuro. A CSP do artefato publicado e injetada por plugin do Vite no build
   (`vite.config.ts`): em `npm run dev` ela bloquearia o `<script src>` que o Vite injeta.
+  Quem le a escolha guardada antes da primeira pintura e um script do mesmo plugin — ele nao
+  esta aqui porque o desktop serve este arquivo com `script-src 'self'`.
 -->
 <html lang="pt-BR" data-theme="auto">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- A folha do app chega junto com o bundle. Esta regra pinta a tela de carregamento na
-         cor certa antes disso: sao os mesmos dois fundos de `styles.css` (`--fundo`),
-         repetidos aqui porque a folha ainda nao esta no documento. -->
+         cor certa antes disso, entao repete os DOIS fundos de `--fundo` e os tres valores de
+         `data-theme` que o App escreve: sem a segunda parte, quem escolheu "escuro" num
+         sistema claro veria a tela clara e o app escuro logo depois — e o bundle tem 8,6 MB,
+         ou seja, "logo depois" nao e instantaneo. -->
     <style>
       html {
-        color-scheme: light dark;
-        background: #fbfaf7;
+        color-scheme: light;
+        background: light-dark(#fbfaf7, #16181a);
       }
-      @media (prefers-color-scheme: dark) {
-        html {
-          background: #16181a;
-        }
+      html[data-theme='auto'] {
+        color-scheme: light dark;
+      }
+      html[data-theme='claro'] {
+        color-scheme: light;
+      }
+      html[data-theme='escuro'] {
+        color-scheme: dark;
       }
     </style>
     <title>Roadmap CISO — estudo interativo</title>

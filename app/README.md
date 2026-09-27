@@ -57,8 +57,8 @@ A ordem tem uma dependência real: `check:content` lê o JSON em disco, então s
 nada. Vale o mesmo para o par do banco: `check:questions` lê o que `build:questions` gravou, e o
 `build` do app chama os quatro na ordem certa. O `dev` também não vigia `conteudo/`. Editou um tema
 com o servidor no ar? Rode `npm run build:content` de novo e a página recarrega com o texto novo — e
-`npm run build:questions` se o tema tinha tabela de erros comuns ou recuperação ativa, porque o quiz
-continua servindo o banco anterior até o gerador rodar.
+`npm run build:questions` se o tema tinha tabela de erros comuns, que é de onde saem todos os itens,
+porque o quiz continua servindo o banco anterior até o gerador rodar.
 
 **Os três smokes conferem o frescor do artefato antes de rodar.** Eles comparam a data de
 `dist/index.html` e de `dist-electron/main.cjs` com a da fonte mais nova; se o binário for anterior,
@@ -129,7 +129,7 @@ quebraria. Então o desktop, que não tem essa restrição, ganha o build dividi
 |---|---|---|
 | Saída | `dist/index.html`, um arquivo | `dist-desktop/`, uma pasta |
 | Conteúdo | inline no JavaScript (3,8 MB) | `conteudo.json` ao lado (3,70 MiB) |
-| Banco de questões | inline no JavaScript, junto com o conteúdo | `questoes.json` ao lado (791.357 bytes, 0,75 MiB) |
+| Banco de questões | inline no JavaScript, junto com o conteúdo | `questoes.json` ao lado (542.512 bytes, 0,52 MiB) |
 | Diagramas | todos inlinados (3,4 MB) | só o `flowchart`; 35 chunks de outros tipos são descartados |
 | Script no arranque | **8,17 MiB** para o V8 analisar | **927 kB** (949.138 bytes) |
 | CSP | `<meta>` no HTML, com `'unsafe-inline'` | cabeçalho, `script-src 'self'` |
@@ -154,7 +154,7 @@ verdade: se o corte levar algo necessário, o teste falha em vez de o app aparec
 |---|---|
 | AppImage | **104,0 MiB** (109.006.365 bytes) — O7, medido **antes do banco** entrar no pacote |
 | `app.asar` | 4,89 MiB (5.124.818 bytes): o `conteudo.json`, os 27 assets que sobraram e o `main`/`preload` — medido **antes do banco** |
-| `questoes.json` | 791.357 bytes (0,75 MiB): o banco de múltipla escolha, que agora viaja dentro do asar |
+| `questoes.json` | 542.512 bytes (0,52 MiB): o banco de múltipla escolha, que agora viaja dentro do asar — eram 791.357 bytes antes de as questões discursivas saírem |
 | `dist-desktop/index.html` + assets | 927 kB (949.138 bytes) de JavaScript no arranque, contra 8,17 MiB inlinados |
 | Pasta desempacotada | 267 MiB — o binário do Electron sozinho tem 177,7 MiB — medido **antes do banco** |
 
@@ -225,27 +225,50 @@ chama `build/` porque esse é o `buildResources` padrão da ferramenta; convive 
 ## Banco de múltipla escolha
 
 `npm run build:questions` deriva o banco do material já verificado e grava um arquivo por área em
-`src/content/questions/`. São **955 itens em 18 áreas**, e nenhum deles é prosa nova:
+`src/content/questions/`. São **608 itens em 18 áreas**, e nenhum deles é prosa nova: todos saem da
+**tabela de erros comuns** de um tema. O banco tem uma origem só.
 
 | Origem | Itens | De onde sai |
 |---|---|---|
 | `erro-comum` | 608 | Cada linha da tabela de erros comuns de um tema: o `correto` é o gabarito, a justificativa é o `porque`, e os distratores saem das outras linhas do **mesmo tema** — as duas colunas, `equivoco` e `correto` |
-| `recuperacao` | 347 | Os pares de recuperação ativa cuja resposta cabe numa alternativa (até 220 caracteres). Os distratores saem do **mesmo tema**: as duas colunas da tabela de erros comuns e as respostas dos outros pares |
+
+**As perguntas discursivas do material não entram no banco, por decisão do dono.** Os pares de
+recuperação ativa do tema e os itens de checkpoint do guia da área tinham origem própria
+(`recuperacao` e `checkpoint`: 389 dos 997 itens do banco anterior, que também eram gravados em
+`src/content/questions/`): uma revisão item a item, feita por dois revisores independentes, mostrou o
+defeito de fundo dos dois. **Ali a pergunta do material é aberta** — "Cite os seis modos de falha…",
+"Explique por que…" —, então **nenhuma alternativa é "a resposta"**, e a correta só se reconhece pela
+forma da frase. O item parece de múltipla escolha e mede outra coisa: quem responde acerta pelo jeito
+do gabarito, não por saber. Os 608 itens de erro comum passaram na mesma revisão: o enunciado cita um
+equívoco que o próprio material documenta e as alternativas são células da mesma tabela.
+
+**O que saiu foi só o ITEM.** A recuperação ativa e o checkpoint continuam inteiros no material e na
+tela, que é onde as perguntas discursivas vivem: a recuperação é a seção 10 de cada tema, exibida na
+página do tema com o gabarito atrás do botão "Revelar resposta" e o veredito que agenda a revisão; o
+checkpoint é a seção 9 de cada guia de área, exibido na página da área com veredito por item e o
+critério de aprovação declarado. Os dois vêm do mesmo `content.json` que alimenta o resto do app, e
+nunca passam pelo gerador de itens — `check:content` continua exigindo pelo menos 2 itens de
+recuperação em cada tema e pelo menos 1 par de checkpoint em cada guia. Nada disso virou item, e
+nada disso saiu da tela.
 
 Nenhum distrator é inventado, e nenhum vem de fora do material: os candidatos são sempre texto do
 próprio tema, como pede a §7 do plano. Dali o gerador fica com os três mais próximos do gabarito em
 comprimento, e essa é a defesa mais barata que existe contra um item respondível por contagem de
 letras. Com só os `equivoco` no conjunto — curtos, contra um `correto` que explica —, a alternativa
-certa era a mais longa em 79,4% dos itens de erro comum e em todos os de recuperação.
+certa era a mais longa em 79,4% dos itens; com as duas colunas no conjunto, caiu para 28,8% (175 dos
+608), e o que sobra é assimetria das colunas do material, não do gerador.
 
 A regra que sustenta tudo isso está no §7 do plano: o repositório proíbe afirmação sem fonte
 (`CONTRIBUTING` §4), então cada item aponta para o tema de origem (`ref`) e carrega a fonte herdada
 dele. O que o gerador faz é semear; quem promove um item de `rascunho` para `verificado` é uma
 pessoa, e o app marca na tela o que ainda não passou por isso.
 
-A justificativa segue a mesma ideia. Em item de erro comum ela é o `porque` da linha; em item de
-recuperação o gerador deixa o campo vazio em vez de inventar uma razão, e a tela mostra só a fonte e
-o caminho de volta ao tema. Justificativa vazia ali é decisão, não esquecimento.
+A justificativa segue a mesma ideia: em item de erro comum ela é o `porque` da linha, e o gate
+reprova o item que chega sem ela — é a razão que o material documenta, a única coisa do item além
+das alternativas que explica a correção. Antes havia item com justificativa vazia por decisão (a
+resposta do par de recuperação era o gabarito e não havia coluna de "por que isto está errado"); essa
+situação deixou de existir junto com as duas origens, e o campo passou a ser obrigatório para todo
+item do banco.
 
 **O status de revisão sobrevive à regeração — enquanto o texto não muda.** Os arquivos são
 versionados justamente por isso: o gerador reencontra os itens pelo `id` e traz o status de volta,
@@ -268,10 +291,11 @@ não se remexe quando a resposta é gravada, e a ordem põe primeiro o que nunca
 o que mais errou.
 
 Responder é marcar uma alternativa e confirmar. Depois disso a questão trava, e o veredito traz o
-acerto ou o erro, a alternativa correta, a justificativa quando existe, a fonte com link e a volta
-ao tema de origem. O item que ainda não passou por revisão humana leva selo: **não revisado** para
-`rascunho`, **em revisão** para `pendente`. `verificado` não leva nada — marcar todo item apagaria a
-diferença entre o revisado e o resto.
+acerto ou o erro, a alternativa correta, a justificativa do material — todo item do banco tem uma,
+porque é o `porque` da linha da tabela —, a fonte com link e a volta ao tema de origem. O item que
+ainda não passou por revisão humana leva selo: **não revisado** para `rascunho`, **em revisão** para
+`pendente`. `verificado` não leva nada — marcar todo item apagaria a diferença entre o revisado e o
+resto.
 
 **O quiz não mexe no domínio nem na fila de revisão.** O que ele grava é o resultado do item
 (acertos, erros e a última resposta) e o dia como dia com estudo. Errar no quiz não rebaixa assunto
@@ -289,17 +313,16 @@ material, e o gate reprova arquivo cujo texto não bata com a derivação.
 
 1. Abra `app/src/content/questions/<area-id>.json` e ache o item pelo `id`.
 2. Confira a **fonte herdada contra a linha de origem**. O `ref` diz qual é o tema, e o link do quiz
-   leva até lá. Compare enunciado, gabarito e justificativa com a tabela de erros comuns ou o par de
-   recuperação que gerou o item: é a auditoria de citação do `CONTRIBUTING` §4, com uma ressalva a
-   registrar — a data de acesso não vem junto, porque a fonte herdada não a carrega.
+   leva até lá. Compare enunciado, gabarito e justificativa com a linha da tabela de erros comuns que
+   gerou o item: é a auditoria de citação do `CONTRIBUTING` §4, com uma ressalva a registrar — a data
+   de acesso não vem junto, porque a fonte herdada não a carrega.
 3. Escreva `pendente` enquanto a conferência está aberta e `verificado` quando ela fecha. Se a linha
    de origem mudar depois, não há o que desfazer: o próximo `build:questions` derruba o item a
    `rascunho` sozinho, e diz quantos perderam o selo.
 4. Rode `npm run check:questions` — ou `npm run preparar:conteudo`, que já o inclui — e commite o
    JSON.
 
-Comece pelos itens de `recuperacao`: são de confiança menor que os de `erro-comum`, porque a
-justificativa deles é vazia por decisão e não sobra texto do material para comparar além da resposta.
+Não há uma origem para começar: são todos itens do mesmo material, a tabela de erros comuns do tema.
 
 ## Checagens do plano (O1–O8 e S1–S14)
 
@@ -474,13 +497,13 @@ erro e sai com código 1, o que derruba o `npm run build` antes de o Vite entrar
 
 **O banco tem o gate dele, e ele roda no mesmo `preparar:conteudo`.** `app/scripts/check-questions.ts`
 reprova o item que aponta para `ref` que não existe ou fica em área diferente da do `ref`; que chega
-sem fonte, com esquema que não é `http(s)`, sem enunciado ou com `status` fora dos três; que tem
-menos de três alternativas, alternativa repetida ou vazia, ou `correta` fora da lista; que é de erro
-comum e não tem justificativa; e que repete `id` ou cai no léxico proibido. Reprova também o banco
-editado à mão: cada item em disco é comparado com o que o material deriva agora, e a única diferença
-tolerada é o `status`. No conjunto, reprova o gabarito concentrado na primeira alternativa — fora da
-faixa de 15% a 45%, a posição vira pista. O gate imprime `verificado: 955 itens em 18 areas — 0
-erro(s)` quando passa.
+sem fonte, com esquema que não é `http(s)`, sem enunciado, sem justificativa ou com `status` fora dos
+três; que tem menos de três alternativas, alternativa repetida ou vazia, ou `correta` fora da lista;
+que tem `id` fora do padrão `area#TEMA-NN#E<nn>`; e que repete `id` ou cai no léxico proibido.
+Reprova também o banco editado à mão: cada item em disco é comparado com o que o material deriva
+agora, e a única diferença tolerada é o `status`. No conjunto, reprova o gabarito concentrado na
+primeira alternativa — fora da faixa de 15% a 45%, a posição vira pista. O gate imprime `verificado:
+608 itens em 18 areas — 0 erro(s)` quando passa.
 
 ## Por que existe um `.npmrc` aqui dentro
 
@@ -511,10 +534,10 @@ em que entram.
 |---|---|
 | **4.3 — pronto no Linux.** O `electron-builder` está configurado, o AppImage sai com 104,0 MiB (O7) e os sete fuses entram e são conferidos. Faltam os alvos que esta máquina não produz: `.dmg`/`.zip` (precisa de um Mac) e NSIS + portátil (precisa de `wine` ou de um Windows). O `.deb` saiu da configuração por decisão | 4.3 |
 | **4.4 — feito.** Bundle dividido, conteúdo como arquivo, 35 chunks de outros diagramas fora e a CSP do desktop sem `'unsafe-inline'`. Os números estão na tabela acima e na seção "Checagens do plano" | 4.4 |
-| **Viés de comprimento do gabarito**: a alternativa correta é a mais longa em 175 dos 608 itens de erro comum (28,8%) e em 135 dos 347 de recuperação (38,9%), na medição do banco de agora. Era 79,4% e 100% enquanto só os `equivoco` da tabela eram candidatos a distrator — curtos, contra um `correto` que explica; a escolha passou a incluir as duas colunas do tema. Falta decidir se o patamar de agora é aceitável, porque é assimetria das colunas do material e não defeito de código | 5 |
-| **Os 102 itens de checkpoint dos guias não entram no banco**, embora a §7 do plano os liste como fonte: `derivarBanco` lê a tabela de erros comuns e a recuperação do tema, e o checkpoint mora no guia (a tela da área o exibe, com veredito por item) | 5 |
+| **Viés de comprimento do gabarito**: a alternativa correta é a mais longa em 175 dos 608 itens (28,8%), na medição do banco de agora. Era 79,4% enquanto só os `equivoco` da tabela eram candidatos a distrator — curtos, contra um `correto` que explica; a escolha passou a incluir as duas colunas do tema. Falta decidir se o patamar de agora é aceitável, porque é assimetria das colunas do material e não defeito de código | 5 |
+| **As perguntas discursivas saíram do banco, por decisão do dono.** A recuperação ativa do tema (seção 10) e o checkpoint do guia da área (seção 9) **continuam inteiros no material e na tela**, com veredito — são o exercício principal de cada um —, e não viram item: a pergunta é aberta, e nenhuma alternativa seria "a resposta". O banco ficou com 608 itens, todos da tabela de erros comuns. Fechada — o que ficou de fora está dito em "Banco de múltipla escolha" | — |
 | **As fontes herdadas pelo banco não têm data de acesso**: o `CONTRIBUTING` §4 exige URL **e** data, e o item carrega título, URL e tipo. Enquanto a herança não trouxer `acessadoEm`, o item não fecha a auditoria de citação sozinho | 5 |
-| **A revisão começou em zero e nada a acompanha**: os 955 itens estão em `rascunho`, o procedimento de promoção está na seção "Como promover um item" e o gate aceita qualquer um dos três status, sem contar quantos já foram conferidos | 5 |
+| **A revisão humana não é contada**: o banco de 608 itens está em `verificado` (605) ou `pendente` (3), o procedimento de promoção está na seção "Como promover um item", e o gate aceita qualquer um dos três status — não há onde ver quantos itens ainda faltam conferir | 5 |
 | **O quiz não tem escopo por tema**: a §11 do plano pede "por tema e por área", e existem `#/quiz` (todas as áreas) e `#/quiz/<areaId>` | 5 |
 | **As duas CSPs restantes não são pendência, são consequência.** O `<meta>` do build de navegador e o cabeçalho do `launcher/servidor.py` aceitam `script-src 'unsafe-inline'` porque os dois servem **um arquivo único com script inline** — o formato que `file://` exige. Não há como apertá-las sem dividir o bundle, e dividir quebraria o duplo clique. O desktop, que pode dividir, já roda em `'self'`. Fechada | — |
 | **S2, S4, S6, S7, S9 e S10 estão implementados e não têm asserção.** É o que falta para a tabela do §16.3 ficar inteira | 6 |

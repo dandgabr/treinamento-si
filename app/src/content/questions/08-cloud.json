@@ -100,26 +100,6 @@
     "justificativa": "As matrizes públicas divergem em detalhe e em granularidade por serviço"
   },
   {
-    "id": "08-cloud#TEMA-01#R02",
-    "ref": "08-cloud#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-145 — The NIST Definition of Cloud Computing, setembro de 2011, DOI 10.6028/NIST.SP.800-145",
-      "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Em serviço de banco de dados gerenciado, qual linha da matriz muda de coluna em relação à\n   máquina virtual, e qual não muda?",
-    "alternativas": [
-      "Separe o que é herdado do que é exclusivo; só o herdado se apoia no documento do provedor",
-      "Localize a linha do controle na matriz daquele serviço específico",
-      "Responsabilidade compartilhada significa dividir pela metade",
-      "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as\n   linhas de dado, configuração, identidade e acesso, que seguem com o cliente, conforme a matriz da\n   Microsoft."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
     "id": "08-cloud#TEMA-02#E01",
     "ref": "08-cloud#TEMA-02",
     "origem": "erro-comum",
@@ -220,46 +200,6 @@
     "justificativa": "Cofre guarda segredo, e o segredo continua sendo credencial de longa duração"
   },
   {
-    "id": "08-cloud#TEMA-02#R03",
-    "ref": "08-cloud#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "AWS Identity and Access Management — Security best practices in IAM",
-      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "O que uma permissão efetiva combina, além da política de identidade?",
-    "alternativas": [
-      "Nomeie dono e prazo desde a criação, e reduza com base na atividade registrada",
-      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto\n   e não concedem acesso.",
-      "Restrinja o documento de confiança ao emissor, à audiência e ao projeto",
-      "Prefira credencial temporária; use cofre para o que não tem federação"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-02#R04",
-    "ref": "08-cloud#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "AWS Identity and Access Management — Security best practices in IAM",
-      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Por que o guardrail de organização, sozinho, não garante que ninguém tenha acesso indevido?",
-    "alternativas": [
-      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto\n   e não concedem acesso.",
-      "Nomeie dono e prazo desde a criação, e reduza com base na atividade registrada",
-      "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à\n   identidade ou ao recurso, e uma concessão ampla dentro do teto continua valendo.",
-      "Restrinja o documento de confiança ao emissor, à audiência e ao projeto"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
     "id": "08-cloud#TEMA-03#E01",
     "ref": "08-cloud#TEMA-03",
     "origem": "erro-comum",
@@ -358,66 +298,6 @@
     ],
     "correta": 3,
     "justificativa": "Correção em massa quebra carga de trabalho e gera retrocesso"
-  },
-  {
-    "id": "08-cloud#TEMA-03#R02",
-    "ref": "08-cloud#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Google Cloud — Shared responsibilities and shared fate on Google Cloud, revisado em 21 de agosto de 2023",
-      "url": "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Quais são as cinco etapas do ciclo de gestão de postura, na ordem em que você as usaria?",
-    "alternativas": [
-      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série\n   histórica e permite que a mesma conta pareça melhorar apenas porque a referência mudou.",
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com\n   justificativa e prazo, verificar com nova medição e guardar a evidência.",
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado\n   contínuo quando o recurso permite esse acesso, e a informação de último uso de papéis,\n   permissões e credenciais.",
-      "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-03#R03",
-    "ref": "08-cloud#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Google Cloud — Shared responsibilities and shared fate on Google Cloud, revisado em 21 de agosto de 2023",
-      "url": "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "O que a documentação da AWS oferece para identificar recurso com acesso público e recurso com\n   credencial sem uso?",
-    "alternativas": [
-      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série\n   histórica e permite que a mesma conta pareça melhorar apenas porque a referência mudou.",
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com\n   justificativa e prazo, verificar com nova medição e guardar a evidência.",
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado\n   contínuo quando o recurso permite esse acesso, e a informação de último uso de papéis,\n   permissões e credenciais.",
-      "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-03#R04",
-    "ref": "08-cloud#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Google Cloud — Shared responsibilities and shared fate on Google Cloud, revisado em 21 de agosto de 2023",
-      "url": "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Por que fixar a versão do benchmark antes de medir?",
-    "alternativas": [
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com\n   justificativa e prazo, verificar com nova medição e guardar a evidência.",
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado\n   contínuo quando o recurso permite esse acesso, e a informação de último uso de papéis,\n   permissões e credenciais.",
-      "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério",
-      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série\n   histórica e permite que a mesma conta pareça melhorar apenas porque a referência mudou."
-    ],
-    "correta": 3,
-    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-04#E01",
@@ -620,46 +500,6 @@
     "justificativa": "Indisponibilidade de chave é interrupção de operação"
   },
   {
-    "id": "08-cloud#TEMA-05#R02",
-    "ref": "08-cloud#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "AWS Key Management Service — visão geral, chaves protegidas por HSM validado em FIPS 140-3 nível 3, certificado 4884",
-      "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "O que a AWS atribui ao cliente em serviço de armazenamento de objetos abstrato?",
-    "alternativas": [
-      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e\n   política de chave, que define quem decifra.",
-      "Use limite de conta ou projeto para o que precisa de isolamento forte",
-      "A cifra padrão do provedor pode ser apresentada como controle próprio",
-      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões\n   com as ferramentas de identidade."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-05#R03",
-    "ref": "08-cloud#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "AWS Key Management Service — visão geral, chaves protegidas por HSM validado em FIPS 140-3 nível 3, certificado 4884",
-      "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Cite os três níveis em que a segregação de dado se escreve, do mais forte ao mais dependente de\n   configuração.",
-    "alternativas": [
-      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e\n   política de chave, que define quem decifra.",
-      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões\n   com as ferramentas de identidade.",
-      "Use limite de conta ou projeto para o que precisa de isolamento forte",
-      "A cifra padrão do provedor pode ser apresentada como controle próprio"
-    ],
-    "correta": 0,
-    "justificativa": ""
-  },
-  {
     "id": "08-cloud#TEMA-06#E01",
     "ref": "08-cloud#TEMA-06",
     "origem": "erro-comum",
@@ -758,65 +598,5 @@
     ],
     "correta": 2,
     "justificativa": "A garantia técnica e a contratual precisam estar no mesmo anexo"
-  },
-  {
-    "id": "08-cloud#TEMA-06#R01",
-    "ref": "08-cloud#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "CSA — Cloud Controls Matrix v4.1, 197 control objectives em 17 domínios, com CAIQ e STAR Registry",
-      "url": "https://cloudsecurityalliance.org/research/cloud-controls-matrix",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Quantos control objectives e quantos domínios tem o CCM na versão 4.1, e qual é o propósito\n   declarado dele quanto aos atores da cadeia?",
-    "alternativas": [
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a\n   ISO/IEC 27018:2019 está retirada desde 26/08/2025 e foi substituída pela ISO/IEC 27018:2025.",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de\n   mudança de controle de segurança.",
-      "Trate custódia de chave, região e transferência no mesmo documento",
-      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia\n   de nuvem deve implementar cada controle, além de questionário de respostas de sim ou não e\n   registro de autoavaliação."
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-06#R03",
-    "ref": "08-cloud#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "CSA — Cloud Controls Matrix v4.1, 197 control objectives em 17 domínios, com CAIQ e STAR Registry",
-      "url": "https://cloudsecurityalliance.org/research/cloud-controls-matrix",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Quais são as duas cláusulas que mais mudam a situação da empresa em incidente e em mudança de\n   controle?",
-    "alternativas": [
-      "Trate custódia de chave, região e transferência no mesmo documento",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de\n   mudança de controle de segurança.",
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a\n   ISO/IEC 27018:2019 está retirada desde 26/08/2025 e foi substituída pela ISO/IEC 27018:2025.",
-      "Teste a exportação e escreva o prazo de apoio antes de renovar"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-06#R04",
-    "ref": "08-cloud#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "CSA — Cloud Controls Matrix v4.1, 197 control objectives em 17 domínios, com CAIQ e STAR Registry",
-      "url": "https://cloudsecurityalliance.org/research/cloud-controls-matrix",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Qual é a situação das edições ISO/IEC 27017 e ISO/IEC 27018 confirmadas nesta execução?",
-    "alternativas": [
-      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia\n   de nuvem deve implementar cada controle, além de questionário de respostas de sim ou não e\n   registro de autoavaliação.",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de\n   mudança de controle de segurança.",
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a\n   ISO/IEC 27018:2019 está retirada desde 26/08/2025 e foi substituída pela ISO/IEC 27018:2025.",
-      "Trate custódia de chave, região e transferência no mesmo documento"
-    ],
-    "correta": 2,
-    "justificativa": ""
   }
 ]

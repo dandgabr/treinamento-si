@@ -18,13 +18,20 @@
   --altura-topo: 3.25rem;
 }
 
-/* Escolha explicita do usuario. Sem `data-theme` (ou em "auto"), quem decide e o sistema. */
-html[data-theme='dark'] {
-  color-scheme: dark;
-}
-
+/* Os tres valores que o App escreve em `data-theme`, com os mesmos nomes do rotulo do botao:
+   "auto" segue o sistema, "claro" e "escuro" sao escolha explicita. Este bloco casava com
+   "dark", que ninguem escreve — a escolha de tema escuro nao pintava nada, e a pagina ficava
+   clara com o botao dizendo "escuro". O `:root` acima responde pela ausencia do atributo. */
 html[data-theme='auto'] {
   color-scheme: light dark;
+}
+
+html[data-theme='claro'] {
+  color-scheme: light;
+}
+
+html[data-theme='escuro'] {
+  color-scheme: dark;
 }
 
 * {
@@ -452,6 +459,21 @@ h3 {
   text-align: left;
   vertical-align: top;
   overflow-wrap: anywhere;
+}
+
+/* Link que e o conteudo INTEIRO da celula: as tabelas de indice do material levam a uma
+   area, a um tema ou a outra trilha, e ali o link e o alvo da linha, nao um link no meio de
+   uma frase — medido em 375 px dava 19 px de altura. Em 948 celulas do material o link e o
+   unico elemento filho; nas 40 restantes ele vem com uma nota ao lado ("01 Fundamentos,
+   ordem 2") e a linha fica mais alta por causa do alvo, que e o preco de nao errar o toque.
+
+   O mesmo seletor em `<p>` ou `<li>` erraria: dos 253 paragrafos com link unico, os 253 tem
+   texto em volta — `:only-child` conta elementos, e nao texto. Link dentro de frase segue
+   inline, que e a isencao que a WCAG 2.5.8 declara. */
+:is(.secao, .intro) td > a:only-child {
+  display: inline-block;
+  min-height: 44px;
+  vertical-align: middle;
 }
 
 /* Cabecalho fixo nas tabelas longas — a do mapa de relacoes tem 188 linhas e 36 mil px de
