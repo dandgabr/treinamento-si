@@ -1,9 +1,14 @@
 // Tela de quiz de multipla escolha sobre o banco derivado do material.
 //
-// O banco nao e prosa nova: cada item saiu da tabela de erros comuns ou da recuperacao
-// ativa de um tema, e por isso a tela sempre devolve o caminho de volta — justificativa,
-// fonte e link do tema de origem. Quase tudo ainda esta `rascunho`, e o item nao revisado
-// aparece marcado, sem alarme: o selo diz o que aconteceu, nao que o material errou.
+// O banco nao e prosa nova: cada item saiu da tabela de erros comuns, da recuperacao ativa de
+// um tema ou do checkpoint do guia de uma area, e por isso a tela sempre devolve o caminho de
+// volta — justificativa, fonte e link do material de origem. Quase tudo ainda esta `rascunho`,
+// e o item nao revisado aparece marcado, sem alarme: o selo diz o que aconteceu, nao que o
+// material errou.
+//
+// A rodada se restringe a uma area, ou a um tema de uma area: `#/quiz`,
+// `#/quiz/<areaId>` e `#/quiz/<areaId>/<temaId>` sao a mesma tela com escopos diferentes,
+// escolhidos no seletor do topo ou no botao "Praticar este tema" da pagina do tema.
 //
 // Tres decisoes de mecanica que valem o comentario:
 //   - a rodada e montada UMA vez, na montagem (`useState`), e nao a cada render: o
@@ -35,7 +40,8 @@ import {
   type Questao,
 } from '../domain/questoes'
 import { content } from '../infrastructure/content/repository'
-import { irPara, linkQuiz, linkTema } from './useRota'
+import { Principal } from './Blocos'
+import { ehRefDeGuia, irPara, linkQuiz, linkTema } from './useRota'
 import { useBanco } from './useBanco'
 
 /**
@@ -53,14 +59,52 @@ function rotuloDeRevisao(status: Questao['status']): string | null {
   return status === 'rascunho' ? 'não revisado' : 'em revisão'
 }
 
-/** De onde o item saiu, em prosa, para a frase do selo. */
+/**
+ * De onde o item saiu, em prosa, para a frase do selo.
+ *
+ * O item de checkpoint nao sai de tema nenhum: sai do guia da AREA. Chamar o guia de tema
+ * mandaria a pessoa procurar o item num lugar onde ele nao esta.
+ */
 function origemEmProsa(questao: Questao): string {
-  return questao.origem === 'erro-comum' ? 'tabela de erros comuns' : 'recuperação ativa'
+  switch (questao.origem) {
+    case 'erro-comum':
+      return 'da tabela de erros comuns do tema'
+    case 'recuperacao':
+      return 'da recuperação ativa do tema'
+    default:
+      return 'do checkpoint do guia da área'
+  }
+}
+
+/** O material de onde o item saiu, para a frase e o link de volta. */
+function materialDeOrigem(questao: Questao): { href: string; nome: string; rotulo: string } {
+  const href = linkTema(questao.ref)
+  if (ehRefDeGuia(questao.ref)) {
+    const areaId = questao.ref.split('#')[0] ?? ''
+    const area = content.areas.find((a) => a.areaId === areaId)
+    return { href, nome: area?.areaNome ?? areaId, rotulo: 'guia da área' }
+  }
+  return { href, nome: content.temas[questao.ref]?.titulo ?? questao.ref, rotulo: 'tema' }
 }
 
 /** A semente da proxima rodada nao pode repetir: ela entra na `key` que remonta a rodada. */
 function proximaSemente(atual: number): number {
   return Math.max(Date.now(), atual + 1)
+}
+
+/**
+ * Os itens de um escopo: o banco inteiro, uma area ou um tema.
+ *
+ * O recorte por area e do dominio (`questoesDe`), e o de tema e o filtro pelo `ref` do item —
+ * a mesma chave que liga o item ao material. Nao ha filtro novo no dominio por causa disso:
+ * `sortear` e `priorizar` ja aceitam qualquer subconjunto, e `ref` ja identifica o tema. Um
+ * item de checkpoint tem `ref` de guia e nunca entra num escopo de tema.
+ */
+function itensDoEscopo(banco: Banco, areaId: string | null, temaId: string | null): Questao[] {
+  const daArea = questoesDe(banco, areaId ?? undefined)
+  if (!areaId || !temaId) return daArea
+  const ref = `${areaId}#${temaId}`
+  return daArea.filter((q) => q.ref === ref)
 }
 
 /**
@@ -75,14 +119,21 @@ function proximaSemente(atual: number): number {
 function montarRodada(
   banco: Banco,
   areaId: string | null,
+  temaId: string | null,
   progresso: Progresso,
   semente: number,
 ): Questao[] {
-  const daVez = sortear(questoesDe(banco, areaId ?? undefined), POR_RODADA, semente)
-  return priorizar(daVez, progresso)
+  const doEscopo = itensDoEscopo(banco, areaId, temaId)
+  return priorizar(sortear(doEscopo, POR_RODADA, semente), progresso)
 }
 
-export function Quiz({ areaId }: { areaId: string | null }) {
+/** Como o escopo e chamado na tela, para as frases que falam dele. */
+function escopoEmProsa(areaId: string | null, temaId: string | null): string {
+  if (temaId) return 'deste tema'
+  return areaId ? 'desta área' : 'de nenhuma área'
+}
+
+export function Quiz({ areaId, temaId }: { areaId: string | null; temaId: string | null }) {
   const { banco, erro, carregando } = useBanco()
   // Sessao cuja leitura do progresso falhou: o store a marca como "nao pode gravar", mas
   // `falhaAoGravar` continua `false` — nao houve falha de gravacao, nada foi gravado. Quem
@@ -93,28 +144,63 @@ export function Quiz({ areaId }: { areaId: string | null }) {
   // tem de ficar parada.
   const [semente, setSemente] = useState(() => Date.now())
   const area = areaId ? content.areas.find((a) => a.areaId === areaId) : undefined
-  const titulo = area ? `Quiz — ${area.areaNome}` : 'Quiz de múltipla escolha'
+  const tema = area && temaId ? content.temas[`${area.areaId}#${temaId}`] : undefined
+  const titulo = tema
+    ? `Quiz — ${tema.titulo}`
+    : area
+      ? `Quiz — ${area.areaNome}`
+      : 'Quiz de múltipla escolha'
 
   if (areaId && !area) {
     return (
-      <main className="conteudo tela-quiz">
+      <Principal className="conteudo tela-quiz">
         <nav className="migalhas">
           <a href="#/">Painel</a> / <span>Quiz</span>
         </nav>
         <p>Área não encontrada: {areaId}</p>
         <a href="#/">Voltar ao painel</a>
-      </main>
+      </Principal>
+    )
+  }
+
+  // Tema de outra area, ou que nao existe: a rota diz o par, e quem confere e esta tela —
+  // o mesmo cuidado da area, para a rodada nao abrir num escopo que nao existe.
+  if (temaId && !tema) {
+    return (
+      <Principal className="conteudo tela-quiz">
+        <nav className="migalhas">
+          <a href="#/">Painel</a>
+          {area ? (
+            <>
+              {' / '}
+              <a href={`#/area/${area.areaId}`}>{area.areaNome}</a>
+            </>
+          ) : null}
+          {' / '}
+          <span>Quiz</span>
+        </nav>
+        <p>Tema não encontrado: {areaId}#{temaId}</p>
+        <a href={area ? `#/area/${area.areaId}` : '#/'}>
+          {area ? 'Voltar ao guia da área' : 'Voltar ao painel'}
+        </a>
+      </Principal>
     )
   }
 
   return (
-    <main className="conteudo tela-quiz">
+    <Principal className="conteudo tela-quiz">
       <nav className="migalhas">
         <a href="#/">Painel</a>
         {area ? (
           <>
             {' / '}
             <a href={`#/area/${area.areaId}`}>{area.areaNome}</a>
+          </>
+        ) : null}
+        {tema ? (
+          <>
+            {' / '}
+            <a href={linkTema(tema.ref)}>{tema.temaId}</a>
           </>
         ) : null}
         {' / '}
@@ -126,12 +212,13 @@ export function Quiz({ areaId }: { areaId: string | null }) {
         <p className="meta">
           <span className="selo">{POR_RODADA} por rodada</span>
           <span className="selo">uma alternativa correta</span>
-          {area ? <span className={`selo nivel-${area.nivel}`}>{area.nivel}</span> : null}
+          {tema ? <span className={`selo nivel-${tema.nivel}`}>{tema.nivel}</span> : null}
+          {!tema && area ? <span className={`selo nivel-${area.nivel}`}>{area.nivel}</span> : null}
         </p>
         <p className="objetivo">
           Responda sem consultar o material. Ao confirmar a alternativa, a tela mostra o acerto ou
-          o erro, a justificativa e a fonte, com o link do tema de origem — que é onde o item foi
-          escrito. Cada resposta entra no seu progresso por item.
+          o erro, a justificativa e a fonte, com o link do material de origem — que é onde o item
+          foi escrito. Cada resposta entra no seu progresso por item.
         </p>
       </header>
 
@@ -143,7 +230,7 @@ export function Quiz({ areaId }: { areaId: string | null }) {
         </p>
       ) : null}
 
-      <Escopo areaId={areaId} />
+      <Escopo areaId={areaId} temaId={temaId} />
 
       {erro ? (
         <section className="secao">
@@ -161,25 +248,34 @@ export function Quiz({ areaId }: { areaId: string | null }) {
         // A `key` e o que garante rodada nova quando o escopo muda ou quando se pede outra
         // rodada, sem que a lista se remexa a cada resposta gravada.
         <Rodada
-          key={`${areaId ?? 'todas'}-${semente}`}
+          key={`${areaId ?? 'todas'}-${temaId ?? 'todos'}-${semente}`}
           banco={banco}
           areaId={areaId}
+          temaId={temaId}
           semente={semente}
           aoTrocarRodada={() => setSemente(proximaSemente)}
         />
       ) : null}
-    </main>
+    </Principal>
   )
 }
 
-/** Escopo da rodada: uma area, ou todas. */
-function Escopo({ areaId }: { areaId: string | null }) {
-  const id = useId()
+/**
+ * Escopo da rodada: todas as areas, uma area, ou um tema dela.
+ *
+ * Os dois seletores sao a mesma decisao em dois niveis, e por isso trocar a area zera o tema —
+ * um tema de outra area nao e um escopo, e sim um escopo que nao existe. As opcoes saem do
+ * conteudo, entao a lista de temas e a do material, na ordem de estudo da area.
+ */
+function Escopo({ areaId, temaId }: { areaId: string | null; temaId: string | null }) {
+  const idArea = useId()
+  const idTema = useId()
+  const area = areaId ? content.areas.find((a) => a.areaId === areaId) : undefined
   return (
     <p className="escopo">
-      <label htmlFor={id}>Escopo da rodada</label>
+      <label htmlFor={idArea}>Escopo da rodada</label>
       <select
-        id={id}
+        id={idArea}
         value={areaId ?? ''}
         onChange={(evento) => irPara(linkQuiz(evento.target.value || undefined))}
       >
@@ -190,6 +286,25 @@ function Escopo({ areaId }: { areaId: string | null }) {
           </option>
         ))}
       </select>
+      {area ? (
+        <>
+          <label htmlFor={idTema}>Tema</label>
+          <select
+            id={idTema}
+            value={temaId ?? ''}
+            onChange={(evento) =>
+              irPara(linkQuiz(area.areaId, evento.target.value || undefined))
+            }
+          >
+            <option value="">A área inteira</option>
+            {area.temas.map((ref) => (
+              <option key={ref} value={ref.split('#')[1]}>
+                {content.temas[ref]?.titulo ?? ref}
+              </option>
+            ))}
+          </select>
+        </>
+      ) : null}
     </p>
   )
 }
@@ -197,11 +312,13 @@ function Escopo({ areaId }: { areaId: string | null }) {
 function Rodada({
   banco,
   areaId,
+  temaId,
   semente,
   aoTrocarRodada,
 }: {
   banco: Banco
   areaId: string | null
+  temaId: string | null
   semente: number
   aoTrocarRodada: () => void
 }) {
@@ -210,7 +327,12 @@ function Rodada({
   const erroDeCarga = useErroDeCarga()
   // `useState` e nao `useMemo`: a lista tem de nascer uma vez e ficar — o progresso muda a
   // cada resposta gravada e um `useMemo` dependente dele remexeria a rodada no meio.
-  const [itens] = useState<Questao[]>(() => montarRodada(banco, areaId, progresso, semente))
+  const [itens] = useState<Questao[]>(() =>
+    montarRodada(banco, areaId, temaId, progresso, semente),
+  )
+  // O tamanho do escopo inteiro, e nao o da rodada: a rodada corta em `POR_RODADA`, e o que
+  // interessa para dizer "o tema tem poucos itens" e quanto o tema tem no banco.
+  const [disponiveis] = useState(() => itensDoEscopo(banco, areaId, temaId).length)
   const [indice, setIndice] = useState(0)
   // Marcacao e confirmacao sao duas coisas, e nao uma. Num grupo de radios, a seta para baixo
   // MARCA a proxima alternativa enquanto se le as opcoes: se marcar ja respondesse, percorrer
@@ -267,10 +389,16 @@ function Rodada({
         <section className="secao">
           <h2>Sem itens neste escopo</h2>
           <p className="dica">
-            O banco derivado do material não tem item {areaId ? 'nesta área' : 'nenhum'}. Rode
+            O banco derivado do material não tem item {escopoEmProsa(areaId, temaId)}. Rode
             `npm run build:questions` e recarregue.
           </p>
-          <a href="#/">Voltar ao painel</a>
+          <p className="dica">
+            Um tema sem item de múltipla escolha continua tendo pré-teste e recuperação ativa na
+            própria página: a rodada vazia não é falta de material, é falta de item derivado.
+          </p>
+          <a href={areaId ? `#/area/${areaId}` : '#/'}>
+            {areaId ? 'Voltar ao guia da área' : 'Voltar ao painel'}
+          </a>
         </section>
       </>
     )
@@ -284,6 +412,7 @@ function Rodada({
           acertos={placar.acertos}
           respondidas={respondidas}
           areaId={areaId}
+          temaId={temaId}
           erroDeCarga={erroDeCarga}
           aoTrocarRodada={aoTrocarRodada}
         />
@@ -296,6 +425,7 @@ function Rodada({
   const ganhou = resposta === true
   const textoCorreto = questao.alternativas[questao.correta]
   const rotulo = rotuloDeRevisao(questao.status)
+  const deOnde = materialDeOrigem(questao)
 
   // `const` com arrow, e nao `function`: o `questao` que o `if` acima estreitou continua
   // estreitado dentro de uma closure criada depois dele, mas nao dentro de uma funcao
@@ -322,15 +452,24 @@ function Rodada({
   return (
     <>
       {resumo}
+      {/* Escopo menor que uma rodada: o numero esta dito, e nao escondido, porque "10 por
+          rodada" e o selo do topo — sem esta frase, uma rodada de 3 itens parece um sorteio
+          que perdeu itens. */}
+      {areaId && disponiveis < POR_RODADA ? (
+        <p className="dica">
+          Este escopo tem {disponiveis} item(ns) no banco — menos que os {POR_RODADA} de uma
+          rodada cheia, e a rodada traz todos eles.
+        </p>
+      ) : null}
       <section className="secao bloco-questao">
         <h2 tabIndex={-1} ref={perguntaRef}>
           Questão {indice + 1} de {itens.length}
         </h2>
         {rotulo ? (
           <p className="dica">
-            <span className="selo selo-revisao">{rotulo}</span> Item derivado automaticamente da{' '}
-            {origemEmProsa(questao)} do tema e ainda sem revisão humana: leia o gabarito como
-            indicação e confira contra o material.
+            <span className="selo selo-revisao">{rotulo}</span> Item derivado automaticamente{' '}
+            {origemEmProsa(questao)} e ainda sem revisão humana: leia o gabarito como indicação e
+            confira contra o material.
           </p>
         ) : null}
 
@@ -384,8 +523,9 @@ function Rodada({
                 </>
               )}
             </p>
-            {/* Item de recuperacao nao tem "porque" derivado: o gerador deixa o campo vazio
-                em vez de inventar uma razao, e a tela nao pode exibir um rotulo sem texto. */}
+            {/* Item de recuperacao e item de checkpoint nao tem "porque" derivado: o gerador
+                deixa o campo vazio em vez de inventar uma razao, e a tela nao pode exibir um
+                rotulo sem texto. */}
             {questao.justificativa ? (
               <p>
                 <strong>Por quê:</strong> {questao.justificativa}
@@ -396,8 +536,7 @@ function Rodada({
               <a href={questao.fonte.url}>{questao.fonte.titulo}</a> ({questao.fonte.tipo})
             </p>
             <p className="volta-ao-tema">
-              O item saiu do tema{' '}
-              <a href={linkTema(questao.ref)}>{content.temas[questao.ref]?.titulo ?? questao.ref}</a>
+              O item saiu do {deOnde.rotulo} <a href={deOnde.href}>{deOnde.nome}</a>
               {questao.justificativa
                 ? ': é lá que a justificativa está escrita, com o resto do assunto.'
                 : ': é lá que a resposta está escrita, com o resto do assunto.'}
@@ -480,12 +619,14 @@ function FimDaRodada({
   acertos,
   respondidas,
   areaId,
+  temaId,
   erroDeCarga,
   aoTrocarRodada,
 }: {
   acertos: number
   respondidas: number
   areaId: string | null
+  temaId: string | null
   erroDeCarga: string | null
   aoTrocarRodada: () => void
 }) {
@@ -523,6 +664,11 @@ function FimDaRodada({
         <button className="botao-secundario" onClick={aoTrocarRodada}>
           Outra rodada
         </button>
+        {temaId && areaId ? (
+          <a className="botao-secundario" href={linkTema(`${areaId}#${temaId}`)}>
+            Ver o tema
+          </a>
+        ) : null}
         {areaId ? (
           <a className="botao-secundario" href={`#/area/${areaId}`}>
             Ver o guia da área

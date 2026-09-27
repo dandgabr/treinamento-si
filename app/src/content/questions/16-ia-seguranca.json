@@ -8,7 +8,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"\"Não treinamos modelo, então não temos risco de IA\"\". Qual é a correção?",
     "alternativas": [
       "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
@@ -28,7 +28,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"\"O fornecedor é responsável por tudo\"\". Qual é a correção?",
     "alternativas": [
       "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04",
@@ -48,7 +48,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Classificar pelo tipo de modelo\". Qual é a correção?",
     "alternativas": [
       "Tratar o OWASP Top 10 for LLM como catálogo de controles",
@@ -68,7 +68,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Inventário só com uso aprovado\". Qual é a correção?",
     "alternativas": [
       "Uso não aprovado entra na lista com situação própria e decisão registrada",
@@ -88,7 +88,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Tratar o OWASP Top 10 for LLM como catálogo de controles\". Qual é a correção?",
     "alternativas": [
       "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
@@ -108,7 +108,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "A ISO descreve a ISO/IEC 42001 como aplicável a quais organizações?",
     "alternativas": [
       "A empresa que consome API é deployer e responde por supervisão, monitoramento e uso conforme a finalidade",
@@ -128,7 +128,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Prompt injection é jailbreak\"\". Qual é a correção?",
     "alternativas": [
       "A garantia que se pede ao fornecedor é contratual e de configuração, não de comportamento do modelo",
@@ -148,7 +148,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Filtro de palavras proibidas resolve\"\". Qual é a correção?",
     "alternativas": [
       "\"O assistente herda a permissão do usuário, então é mais seguro\"",
@@ -168,7 +168,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Só leio documento interno, então estou protegido\"\". Qual é a correção?",
     "alternativas": [
       "Toda fonte que o assistente lê é entrada não confiável, inclusive a intranet",
@@ -188,7 +188,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"O assistente herda a permissão do usuário, então é mais seguro\"\". Qual é a correção?",
     "alternativas": [
       "A garantia que se pede ao fornecedor é contratual e de configuração, não de comportamento do modelo",
@@ -208,7 +208,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"O fornecedor do modelo garante que não acontece\"\". Qual é a correção?",
     "alternativas": [
       "Credencial própria do assistente, com menor privilégio e ação irreversível sob confirmação",
@@ -228,7 +228,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a diferença prática entre injection direta e indireta, com um exemplo de cada?",
     "alternativas": [
       "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
@@ -248,7 +248,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual controle reduz o impacto quando a injeção tem sucesso mesmo assim?",
     "alternativas": [
       "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo",
@@ -268,7 +268,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a tentativa de injeção deve ser registrada como evento de segurança?",
     "alternativas": [
       "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro.",
@@ -288,7 +288,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"O controle de acesso da pasta é suficiente\"\". Qual é a correção?",
     "alternativas": [
       "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta",
@@ -308,7 +308,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Removi da origem, então saiu do assistente\"\". Qual é a correção?",
     "alternativas": [
       "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta",
@@ -328,7 +328,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Não treino modelo, então não há envenenamento\"\". Qual é a correção?",
     "alternativas": [
       "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
@@ -348,7 +348,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"O fornecedor já apaga tudo\"\". Qual é a correção?",
     "alternativas": [
       "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa",
@@ -368,7 +368,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Classificar depois é mais rápido\"\". Qual é a correção?",
     "alternativas": [
       "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa",
@@ -388,7 +388,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Qual é o controle que impede um assistente de responder sobre documento que o solicitante não pode acessar?",
     "alternativas": [
       "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento",
@@ -408,7 +408,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que muda no pipeline quando o dado é eliminado na origem?",
     "alternativas": [
       "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito.",
@@ -428,7 +428,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que marcar por trecho, e não apenas por documento?",
     "alternativas": [
       "Porque a sensibilidade varia dentro do mesmo documento. Marcar só por documento força a escolha entre excluir conteúdo útil e expor anexo restrito.",
@@ -448,7 +448,7 @@
       "url": "https://www.iso.org/standard/42001",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"\"Declarar em ata que IA fica dentro do ISMS basta\"\". Qual é a correção?",
     "alternativas": [
       "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias",
@@ -468,7 +468,7 @@
       "url": "https://www.iso.org/standard/42001",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"\"Como só consumimos API, não precisamos de nada disso\"\". Qual é a correção?",
     "alternativas": [
       "Escopo próprio, com nome dos sistemas de IA e papel na cadeia",
@@ -488,7 +488,7 @@
       "url": "https://www.iso.org/standard/42001",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Copiar o escopo do ISMS\". Qual é a correção?",
     "alternativas": [
       "O papel de deployer tem obrigação própria e exige evidência",
@@ -508,7 +508,7 @@
       "url": "https://www.iso.org/standard/42001",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Contratar auditoria antes de rodar um ciclo\". Qual é a correção?",
     "alternativas": [
       "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
@@ -528,7 +528,7 @@
       "url": "https://www.iso.org/standard/42001",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Afirmar número de controles do Anexo A\". Qual é a correção?",
     "alternativas": [
       "Escreva `NAO CONFIRMADO` até conferir no texto adquirido",
@@ -548,7 +548,7 @@
       "url": "https://www.iso.org/standard/42001",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Tratar governança de IA como projeto de ferramenta\". Qual é a correção?",
     "alternativas": [
       "Inventário, avaliação de impacto e análise crítica antes da auditoria",
@@ -568,7 +568,7 @@
       "url": "https://www.iso.org/standard/42001",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual lógica de gestão o padrão usa, segundo a própria ISO?",
     "alternativas": [
       "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
@@ -588,7 +588,7 @@
       "url": "https://www.iso.org/standard/42001",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as cinco entregas do primeiro ano de um sistema de gestão de IA?",
     "alternativas": [
       "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias",
@@ -608,7 +608,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"A demonstração do fornecedor acertou, então funciona\"\". Qual é a correção?",
     "alternativas": [
       "Meça precisão e cobertura junto do tempo",
@@ -628,7 +628,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"O modelo reduz falso positivo\"\". Qual é a correção?",
     "alternativas": [
       "Aplique retenção, região e base contratual como em qualquer tratamento",
@@ -648,7 +648,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"A ferramenta só lê, não executa nada\"\". Qual é a correção?",
     "alternativas": [
       "Meça se a evidência completa está no resumo e exija o original a um clique",
@@ -668,7 +668,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"O analista confere tudo depois\"\". Qual é a correção?",
     "alternativas": [
       "Meça se a evidência completa está no resumo e exija o original a um clique",
@@ -688,7 +688,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"Dado agregado não é dado pessoal\"\". Qual é a correção?",
     "alternativas": [
       "Peça precisão e cobertura medidas, com o processo de rotulagem descrito",
@@ -708,7 +708,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"Medir adoção pelo tempo economizado só\". Qual é a correção?",
     "alternativas": [
       "\"A ferramenta só lê, não executa nada\"",
@@ -728,7 +728,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais quatro números o piloto precisa produzir?",
     "alternativas": [
       "Precisão, cobertura, tempo do analista por alerta com e sem a ferramenta, e completude de evidência no resultado apresentado.",
@@ -748,7 +748,7 @@
       "url": "https://genai.owasp.org/llm-top-10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o CISO precisa manter sob controle próprio ao adotar triagem assistida por modelo?",
     "alternativas": [
       "Precisão, cobertura, tempo do analista por alerta com e sem a ferramenta, e completude de evidência no resultado apresentado.",
@@ -768,7 +768,7 @@
       "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"Bloquear o domínio resolve\"\". Qual é a correção?",
     "alternativas": [
       "Some fontes de identidade, despesa, extensão e relato",
@@ -788,7 +788,7 @@
       "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"Isso é shadow IT, já sei tratar\"\". Qual é a correção?",
     "alternativas": [
       "Registre com situação e dono, como qualquer sistema de IA",
@@ -808,7 +808,7 @@
       "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"O funcionário agiu de má-fé\"\". Qual é a correção?",
     "alternativas": [
       "Trate como falha de política e de caminho aprovado, e mantenha o relato sem punição",
@@ -828,7 +828,7 @@
       "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"A ferramenta diz que não guarda dado\"\". Qual é a correção?",
     "alternativas": [
       "Registre treinamento por pessoa e mantenha no calendário de evidência",
@@ -848,7 +848,7 @@
       "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"Deixar o caso fora do registro quando a ferramenta é gratuita\". Qual é a correção?",
     "alternativas": [
       "Some fontes de identidade, despesa, extensão e relato",
@@ -868,7 +868,7 @@
       "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"Treinar uma vez e considerar cumprido\". Qual é a correção?",
     "alternativas": [
       "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
@@ -888,7 +888,7 @@
       "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que a Comissão Europeia registra sobre alfabetização em IA e sobre o papel do deployer?",
     "alternativas": [
       "Porque o dado pessoal enviado passa a ser tratamento sem base legal declarada, com deveres próprios de comunicação e de atendimento a direitos, que pertencem ao encarregado e ao programa de privacidade.",
@@ -908,7 +908,7 @@
       "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o episódio de dado pessoal colado em ferramenta pública deixa de ser tema de segurança e passa a ser de privacidade?",
     "alternativas": [
       "Que as obrigações de alfabetização em IA passaram a valer em 2 de fevereiro de 2025 e que o deployer responde por supervisão humana e monitoramento.",
@@ -917,6 +917,46 @@
       "Porque o dado pessoal enviado passa a ser tratamento sem base legal declarada, com deveres próprios de comunicação e de atendimento a direitos, que pertencem ao encarregado e ao programa de privacidade."
     ],
     "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "16-ia-seguranca#GUIA#C04",
+    "ref": "16-ia-seguranca#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes para LLM e aplicacoes de IA generativa",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "verificado",
+    "enunciado": "O comitê pede \"um ISO 42001\". Qual é a primeira entrega concreta, antes de escolher ferramenta ou auditor? (TEMA-04)",
+    "alternativas": [
+      "Organizações de qualquer tamanho envolvidas em desenvolver, fornecer ou usar produtos e serviços baseados em IA, em qualquer setor, incluindo agências do setor público, empresas e organizações sem fins lucrativos.",
+      "O inventário de sistemas de IA em uso, com dono e papel da organização, seguido da frase de escopo do sistema de gestão. Sem inventário não existe contexto da organização, e sem escopo não existe auditoria possível.",
+      "Como o modelo foi avaliado em dados parecidos com a telemetria da empresa e qual é a taxa de falso positivo e de falso negativo medida, com o analista humano no circuito. Anúncio de fornecedor não é medida.",
+      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura."
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "16-ia-seguranca#GUIA#C05",
+    "ref": "16-ia-seguranca#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "OWASP Top 10 for LLM Applications 2025 — riscos e mitigacoes para LLM e aplicacoes de IA generativa",
+      "url": "https://genai.owasp.org/llm-top-10/",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Um fornecedor de EDR anuncia triagem de alerta por modelo de linguagem. Que duas perguntas decidem se o ganho é real? (TEMA-05)",
+    "alternativas": [
+      "Porque o volume e a forma das tentativas mostram se o desenho resiste, alimentam o ajuste do prompt e das regras de detecção, e sustentam a decisão de restringir uma ferramenta que não se mostrou segura.",
+      "Porque o dado pessoal enviado passa a ser tratamento sem base legal declarada, com deveres próprios de comunicação e de atendimento a direitos, que pertencem ao encarregado e ao programa de privacidade.",
+      "Como o modelo foi avaliado em dados parecidos com a telemetria da empresa e qual é a taxa de falso positivo e de falso negativo medida, com o analista humano no circuito. Anúncio de fornecedor não é medida.",
+      "Direta: o próprio usuário escreve a instrução que desvia o comportamento. Indireta: a instrução vem embutida em conteúdo que o assistente lê, como e-mail, página web, anexo ou campo livre de cadastro."
+    ],
+    "correta": 2,
     "justificativa": ""
   }
 ]

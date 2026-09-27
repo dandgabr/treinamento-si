@@ -1,26 +1,30 @@
 :root {
+  /* `light-dark()` resolve pela `color-scheme` usada no elemento: claro por padrao, escuro
+     quando o `data-theme` diz, e a do sistema quando ele e "auto". Assim a paleta existe uma
+     vez so — em vez de repetida num bloco de tema escuro e de novo dentro de um `@media`. */
   color-scheme: light;
-  --fundo: #fbfaf7;
-  --fundo-alt: #ffffff;
-  --texto: #1d1c1a;
-  --texto-suave: #5c5852;
-  --borda: #e3ded6;
-  --acento: #0f6f5c;
-  --acento-suave: #e3f1ec;
-  --alerta: #8a4b00;
+  --fundo: light-dark(#fbfaf7, #16181a);
+  --fundo-alt: light-dark(#ffffff, #1e2124);
+  --texto: light-dark(#1d1c1a, #e9e6e1);
+  --texto-suave: light-dark(#5c5852, #a5a09a);
+  --borda: light-dark(#e3ded6, #2e3236);
+  --acento: light-dark(#0f6f5c, #5fd0b2);
+  --acento-suave: light-dark(#e3f1ec, #1c2f2a);
+  --alerta: light-dark(#8a4b00, #e0b070);
   --raio: 10px;
   --largura: 78ch;
+  /* Altura do cabecalho fixo. O `.topo` a respeita e o cabecalho de tabela se apoia nela:
+     um numero so, para os dois nao sairem de sincronia quando um deles mudar. */
+  --altura-topo: 3.25rem;
 }
 
+/* Escolha explicita do usuario. Sem `data-theme` (ou em "auto"), quem decide e o sistema. */
 html[data-theme='dark'] {
-  --fundo: #16181a;
-  --fundo-alt: #1e2124;
-  --texto: #e9e6e1;
-  --texto-suave: #a5a09a;
-  --borda: #2e3236;
-  --acento: #5fd0b2;
-  --acento-suave: #1c2f2a;
-  --alerta: #e0b070;
+  color-scheme: dark;
+}
+
+html[data-theme='auto'] {
+  color-scheme: light dark;
 }
 
 * {
@@ -32,10 +36,6 @@ html[data-theme='dark'] {
 :focus-visible {
   outline: 2px solid var(--acento);
   outline-offset: 2px;
-}
-
-html[data-theme='dark'] {
-  color-scheme: dark;
 }
 
 html,
@@ -62,6 +62,30 @@ a {
   flex-direction: column;
 }
 
+/* Pular para o conteudo: fora da tela ate receber foco de teclado.
+   E um `button`, e nao um `<a href="#...">`, porque a rota do app mora no fragmento: uma
+   ancora de verdade (`#conteudo`) viraria a rota "desconhecida" e a tela inteira cairia. */
+.pular {
+  position: absolute;
+  top: 0;
+  left: 0.75rem;
+  z-index: 20;
+  transform: translateY(-150%);
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--texto);
+  background: var(--fundo-alt);
+  border: 1px solid var(--acento);
+  border-radius: var(--raio);
+  padding: 0.6rem 1rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.pular:focus-visible {
+  transform: translateY(0.5rem);
+}
+
 .topo {
   position: sticky;
   top: 0;
@@ -70,13 +94,19 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.7rem 1.25rem;
+  /* A altura vem de `--altura-topo`, a mesma variavel que desloca o cabecalho de tabela:
+     com altura propria, o cabecalho fixo e o `top` da tabela podiam divergir. */
+  min-height: var(--altura-topo);
+  padding: 0 1.25rem;
   background: color-mix(in srgb, var(--fundo) 88%, transparent);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--borda);
 }
 
 .marca {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-weight: 700;
   text-decoration: none;
   color: var(--texto);
@@ -87,6 +117,15 @@ a {
   width: min(100% - 2.5rem, var(--largura));
   margin: 0 auto;
   padding: 2rem 0 5rem;
+  /* O foco vem para ca na troca de rota e no "pular para o conteudo": rolar ate o topo do
+     bloco nao pode deixar o titulo escondido atras do cabecalho fixo. */
+  scroll-margin-top: var(--altura-topo);
+}
+
+/* O foco chega aqui por codigo, nao por clique: o contorno contornaria a pagina inteira.
+   Quem diz onde o foco esta e o deslocamento, e o leitor de tela anuncia o bloco. */
+.conteudo:focus {
+  outline: none;
 }
 
 /* ---------------------------------------------------------------- cabecalhos */
@@ -170,7 +209,16 @@ h3 {
 .migalhas {
   font-size: 0.85rem;
   color: var(--texto-suave);
-  margin-bottom: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+/* Os alvos de uma migalha sao os proprios links, que mediam 39x19 px. A linha fica mais
+   alta e a margem encolhe na mesma medida, para o topo da pagina nao mudar de lugar. */
+.migalhas a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.3rem;
 }
 
 .aviso-erro {
@@ -198,6 +246,7 @@ h3 {
   display: flex;
   align-items: baseline;
   gap: 0.85rem;
+  min-height: 44px;
   padding: 0.7rem 0.5rem;
   border-bottom: 1px solid var(--borda);
   text-decoration: none;
@@ -232,7 +281,17 @@ h3 {
 .lista-paginas {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
+  gap: 0 1.25rem;
+}
+
+/* Link solto em lista (referencia, trilhas, vizinhos): 22 px de altura era alvo pequeno
+   demais no dedo. `.lista-areas`/`.lista-temas` ja resolvem pelo `min-height` da linha. */
+.lista-paginas a,
+.vizinhos a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.35rem;
 }
 
 /* --------------------------------------------------------------- qa / test */
@@ -257,13 +316,20 @@ h3 {
 }
 
 .botao-secundario {
+  /* O alvo de toque e o botao inteiro: 34 px de altura nao serve no dedo. O `inline-flex`
+     centra o rotulo sem tirar a forma de pilula nem o comportamento de link, quando ele e
+     um `a.botao-secundario`. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   font: inherit;
   font-size: 0.85rem;
   color: var(--acento);
   background: transparent;
   border: 1px solid color-mix(in srgb, var(--acento) 40%, var(--borda));
   border-radius: 999px;
-  padding: 0.3rem 0.85rem;
+  padding: 0.3rem 0.9rem;
   cursor: pointer;
 }
 
@@ -298,17 +364,40 @@ h3 {
 
 .confianca {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.15rem 0.5rem;
   font-size: 0.85rem;
   color: var(--texto-suave);
+}
+
+/* A escala vai em coluna — botoes em cima, pontas embaixo — porque rotular as pontas na
+   mesma linha dos cinco botoes de 44 px nao cabe em 375 px. `justify-content: space-between`
+   prende "chutei" e "certeza" exatamente sob o 1 e o 5. */
+.escala {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.escala-botoes {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.escala-pontas {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  line-height: 1.2;
 }
 
 .nivel {
   font: inherit;
   font-size: 0.8rem;
-  width: 1.8rem;
-  height: 1.8rem;
+  /* Eram 29 px — pendencia registrada no repositorio. O alvo e o proprio numero. */
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   border: 1px solid var(--borda);
   background: transparent;
@@ -343,12 +432,17 @@ h3 {
 }
 
 :is(.secao, .intro) table {
+  /* `display: table` e nao `block` + rolagem lateral: so assim o cabecalho pode ser
+     `position: sticky`. Com rolagem propria a tabela vira o conteiner de rolagem dela, o
+     `top` do `th` se ancora nesse conteiner e a barra nunca sai do lugar — medido, nao
+     suposto. Nenhuma tabela do material estoura a coluna nesse modo (as celulas quebram a
+     palavra): a mais larga tem 1234 px de largura natural e passa a caber em 335 px, com a
+     altura dobrando. Altura e o preco do cabecalho fixo em 188 linhas. */
   width: 100%;
+  table-layout: auto;
   border-collapse: collapse;
   font-size: 0.9rem;
   margin: 1rem 0;
-  display: block;
-  overflow-x: auto;
 }
 
 :is(.secao, .intro) th,
@@ -357,6 +451,17 @@ h3 {
   padding: 0.45rem 0.6rem;
   text-align: left;
   vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+/* Cabecalho fixo nas tabelas longas — a do mapa de relacoes tem 188 linhas e 36 mil px de
+   altura. O deslocamento e a mesma `--altura-topo` que o `.topo` respeita; a borda de baixo
+   sai como sombra interna porque o navegador nao pinta a borda de uma celula `sticky`. */
+:is(.secao, .intro) thead th {
+  position: sticky;
+  top: var(--altura-topo);
+  z-index: 1;
+  box-shadow: inset 0 -1px 0 var(--borda);
 }
 
 :is(.secao, .intro) th {
@@ -403,6 +508,16 @@ h3 {
 :is(.secao, .intro) summary {
   cursor: pointer;
   font-weight: 600;
+  /* Alvo de toque: o triangulo do `<summary>` some se o `display` virar flex, entao a altura
+     vem do `min-height`, com o texto no topo da caixa. */
+  min-height: 44px;
+  padding: 0.55rem 0;
+}
+
+/* Alvo do sumario: rolar ate um cabecalho coberto pelo `.topo` esconderia o proprio titulo
+   que a pessoa acabou de pedir. */
+:is(.secao, .intro) :is(h2, h3) {
+  scroll-margin-top: calc(var(--altura-topo) + 0.5rem);
 }
 
 /* Ressalvas de credibilidade do material ("arquivo gerado, nao edite a mao") saem
@@ -438,6 +553,103 @@ h3 {
 .mermaid svg {
   max-width: none;
   height: auto;
+}
+
+/* Diagrama com botao: o fluxograma de ~3000 px rola na horizontal dentro da coluna, e no
+   celular a figura inteira nunca aparece de uma vez. O botao abre o diagrama na janela
+   toda, onde a rolagem e dele. */
+.diagrama {
+  margin: 1.25rem 0;
+}
+
+.diagrama .mermaid {
+  margin: 0;
+}
+
+.diagrama-acoes {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.35rem;
+}
+
+.diagrama.ampliado {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0.75rem;
+  background: var(--fundo);
+}
+
+/* O diagrama ampliado fica com a rolagem nos dois eixos; a coluna de texto atras nao rola.
+   O `:has` mantem o quadro e a pagina em sincronia sem estado em JavaScript: quando o quadro
+   sai do DOM (troca de rota, troca de tema), a trava sai junto. */
+html:has(.diagrama.ampliado) {
+  overflow: hidden;
+}
+
+.diagrama.ampliado .mermaid {
+  flex: 1;
+  overflow: auto;
+}
+
+/* ---------------------------------------------------------------------- sumario */
+
+/* Sumario das paginas longas: um botao por cabecalho que ja existe no material.
+   Botao, e nao `href="#..."`: o fragmento da URL e da rota, e uma ancora viraria a rota
+   "desconhecida" — a tela inteira cairia. */
+.sumario {
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--fundo-alt);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+}
+
+.sumario-rotulo {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--texto-suave);
+}
+
+.sumario ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0 0.5rem;
+}
+
+.sumario button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  min-height: 44px;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  color: var(--acento);
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.3rem 0.35rem;
+  cursor: pointer;
+}
+
+.sumario button:hover {
+  background: var(--acento-suave);
+}
+
+.sumario-num {
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------------------------------------------------------------- progresso */
@@ -481,7 +693,12 @@ h3 {
   margin: 0;
 }
 
+/* As acoes do tema na mesma linha, com quebra: sao dois botoes de mesmo peso ("Lido" e
+   "Praticar este tema") desde que o quiz ganhou escopo por tema. */
 .acoes-tema {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   margin: 0.5rem 0 0;
 }
 
@@ -523,14 +740,29 @@ h3 {
 
 .resumo-fila li {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.3rem 0;
   border-bottom: 1px solid var(--borda);
 }
 
 .resumo-fila li:last-child {
   border-bottom: 0;
+}
+
+/* O alvo e o titulo do tema, e nao a linha: sem altura minima ele tinha os 22 px de uma
+   linha de texto. */
+.resumo-fila a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Ver a fila inteira, quando ela passa dos cinco primeiros: o botao ocupa a linha toda do
+   painel, abaixo da lista. */
+.resumo-ver-todos {
+  align-self: flex-start;
+  margin-top: 0.35rem;
 }
 
 .resumo-data {
@@ -699,17 +931,6 @@ h3 {
   margin: 0;
 }
 
-/* Alvos de 44 px tambem nos botoes desta tela. O `.botao-secundario` do app tem 34 px de
-   altura, e o alvo de toque no celular e pendencia registrada (fase 6); ela nao se repete
-   aqui. Fica escopado em `.tela-quiz` para nao mudar, de tabela, as outras telas. */
-.tela-quiz .botao-secundario {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0.45rem 1rem;
-}
-
 /* Selo de estado, nao de alarme: mesma linguagem do selo de nivel, em amarelo de aviso. */
 .selo-revisao {
   border-color: color-mix(in srgb, var(--alerta) 45%, var(--borda));
@@ -717,9 +938,9 @@ h3 {
 }
 
 /* Os links de saida do fim da rodada usam a forma dos botoes secundarios; sem isto o
-   sublinhado do link brigaria com a borda arredondada. */
+   sublinhado do link brigaria com a borda arredondada. O `display` fica com o
+   `.botao-secundario`, que ja e `inline-flex` para centrar o rotulo nos 44 px. */
 a.botao-secundario {
-  display: inline-block;
   text-decoration: none;
 }
 
@@ -730,12 +951,17 @@ a.botao-secundario {
 }
 
 @media (max-width: 480px) {
-  .alternativa {
+  /* 48 px onde o ponteiro e o dedo. Vale para todo controle com alvo proprio: os 44 px
+     valem no ponteiro fino, e o `.alternativa` (o rotulo inteiro do radio) ja vinha assim. */
+  .alternativa,
+  .botao-secundario,
+  .nivel,
+  .pular {
     min-height: 48px;
   }
 
-  .tela-quiz .botao-secundario {
-    min-height: 48px;
+  .nivel {
+    min-width: 48px;
   }
 
   .escopo {

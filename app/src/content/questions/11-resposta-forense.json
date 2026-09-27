@@ -8,7 +8,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"O ciclo começa no alerta\". Qual é a correção?",
     "alternativas": [
       "Contratar resposta gerenciada transfere a responsabilidade",
@@ -28,7 +28,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"O prazo regulatório conta da conclusão da apuração\". Qual é a correção?",
     "alternativas": [
       "Severidade sai de matriz acordada com o negócio, não da contagem de alertas",
@@ -48,7 +48,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"Encerrar é parar de receber alertas do caso\". Qual é a correção?",
     "alternativas": [
       "Encerramento exige item de plano, dono e data, e a ISO/IEC 27035-1:2023 nomeia a aplicação de lições aprendidas entre as atividades-chave",
@@ -68,7 +68,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"Investir em ferramenta reduz o tempo total\". Qual é a correção?",
     "alternativas": [
       "O prazo regulatório conta da conclusão da apuração",
@@ -88,7 +88,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"Contratar resposta gerenciada transfere a responsabilidade\". Qual é a correção?",
     "alternativas": [
       "Trate t0 e t1 como marcas separadas, com dono diferente",
@@ -108,7 +108,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"O incidente mais grave é o que gera mais alertas\". Qual é a correção?",
     "alternativas": [
       "Escreva o contrato com as marcas de tempo exigidas do fornecedor",
@@ -128,7 +128,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Quais são as atividades-chave do processo de gestão de incidentes segundo o resumo da ISO/IEC 27035-1:2023, e qual delas vem antes da detecção?",
     "alternativas": [
       "Encerramento exige item de plano, dono e data, e a ISO/IEC 27035-1:2023 nomeia a aplicação de lições aprendidas entre as atividades-chave",
@@ -148,7 +148,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "De que evento o prazo de três dias úteis para comunicar à ANPD começa a contar, e o que o regulamento prevê para informação incompleta?",
     "alternativas": [
       "Encerramento exige item de plano, dono e data, e a ISO/IEC 27035-1:2023 nomeia a aplicação de lições aprendidas entre as atividades-chave",
@@ -168,7 +168,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Playbook longo é playbook completo\". Qual é a correção?",
     "alternativas": [
       "O contrato de resposta cobre o que a empresa precisa",
@@ -188,7 +188,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Playbook cita nomes de pessoas\". Qual é a correção?",
     "alternativas": [
       "Papéis com nome de função, e lista nominal só na rota de escalonamento, com data de revisão",
@@ -208,7 +208,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"O plano de resposta já cobre todos os casos\". Qual é a correção?",
     "alternativas": [
       "Suba a dificuldade e inclua indisponibilidade de ferramenta",
@@ -228,7 +228,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Exercício serve para treinar o time técnico\". Qual é a correção?",
     "alternativas": [
       "O plano de resposta já cobre todos os casos",
@@ -248,7 +248,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Exercício sem lacuna está bom\". Qual é a correção?",
     "alternativas": [
       "Teste o acionamento real no exercício e ajuste a cláusula",
@@ -268,7 +268,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"O contrato de resposta cobre o que a empresa precisa\". Qual é a correção?",
     "alternativas": [
       "Teste o acionamento real no exercício e ajuste a cláusula",
@@ -288,7 +288,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Preparação: playbooks, papéis e exercícios: um colega afirma que \"Preparação é documento, não atividade\". Qual é a correção?",
     "alternativas": [
       "Teste o acionamento real no exercício e ajuste a cláusula",
@@ -308,7 +308,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a ação pré-autorizada é o item mais importante da alçada em um playbook de contenção?",
     "alternativas": [
       "O acionamento real: telefone que atende fora do horário, prazo de chegada, quem assina o aceite e o limite de escopo sem nova aprovação. Sem testar, a empresa não sabe qual serviço comprou de fato.",
@@ -328,7 +328,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que a ISO/IEC 27035-1:2023 coloca antes da detecção no processo de gestão de incidentes?",
     "alternativas": [
       "Suba a dificuldade e inclua indisponibilidade de ferramenta",
@@ -348,7 +348,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/84/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que parte do contrato com fornecedor de resposta precisa ser testada em exercício, e por quê?",
     "alternativas": [
       "O acionamento real: telefone que atende fora do horário, prazo de chegada, quem assina o aceite e o limite de escopo sem nova aprovação. Sem testar, a empresa não sabe qual serviço comprou de fato.",
@@ -368,7 +368,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Conter é isolar a máquina\". Qual é a correção?",
     "alternativas": [
       "Contenha identidade e máquina na mesma ação, com a ordem definida",
@@ -388,7 +388,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Desligar o servidor preserva a evidência\". Qual é a correção?",
     "alternativas": [
       "Reconstrua a partir de origem verificada e rotacione o que a conta podia ler",
@@ -408,7 +408,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Remover o arquivo malicioso encerra a erradicação\". Qual é a correção?",
     "alternativas": [
       "Contenha identidade e máquina na mesma ação, com a ordem definida",
@@ -428,7 +428,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Voltar ao ar rápido reduz o impacto\". Qual é a correção?",
     "alternativas": [
       "Limpar o host comprometido em nível administrativo resolve",
@@ -448,7 +448,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Reabilitar a conta é problema do dono do serviço\". Qual é a correção?",
     "alternativas": [
       "Avise o dono do serviço antes de conter, com hora e prazo de retorno",
@@ -468,7 +468,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Limpar o host comprometido em nível administrativo resolve\". Qual é a correção?",
     "alternativas": [
       "Decida com a tabela de custo e com quem responde pela indisponibilidade",
@@ -488,7 +488,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"A contenção é decisão do time técnico\". Qual é a correção?",
     "alternativas": [
       "Avise o dono do serviço antes de conter, com hora e prazo de retorno",
@@ -508,7 +508,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que revogar chave ou certificado é a opção mais difícil de reverter?",
     "alternativas": [
       "Adversário sem caminho conhecido de retorno, inventário de erradicação fechado com evidência, credenciais expostas rotacionadas, detecção elevada por janela declarada e restauração a partir de cópia verificada.",
@@ -528,7 +528,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os critérios de saída que autorizam declarar a operação restabelecida?",
     "alternativas": [
       "Adversário sem caminho conhecido de retorno, inventário de erradicação fechado com evidência, credenciais expostas rotacionadas, detecção elevada por janela declarada e restauração a partir de cópia verificada.",
@@ -548,7 +548,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Desligar o host é a forma segura de preservar\". Qual é a correção?",
     "alternativas": [
       "A evidência pode ficar na pasta compartilhada do time",
@@ -568,7 +568,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Copiar arquivos pela rede é suficiente\". Qual é a correção?",
     "alternativas": [
       "Registre cada transferência, com quem, quando, para quê",
@@ -588,7 +588,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Hash comprovado é toda a custódia necessária\". Qual é a correção?",
     "alternativas": [
       "Guarde em cofre com acesso nominal e registro de acesso",
@@ -608,7 +608,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"A evidência pode ficar na pasta compartilhada do time\". Qual é a correção?",
     "alternativas": [
       "Guarde em cofre com acesso nominal e registro de acesso",
@@ -628,7 +628,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Analisar no original é mais rápido\". Qual é a correção?",
     "alternativas": [
       "Desligar o host é a forma segura de preservar",
@@ -648,7 +648,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Coletar é decisão técnica\". Qual é a correção?",
     "alternativas": [
       "Registre cada transferência, com quem, quando, para quê",
@@ -668,7 +668,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Caso encerrado, material pode ser descartado\". Qual é a correção?",
     "alternativas": [
       "Adquira o item com método documentado e hash do conjunto",
@@ -688,7 +688,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as quatro atividades de manuseio de evidência digital descritas pela ISO/IEC 27037:2012?",
     "alternativas": [
       "Defina prazo de retenção e eliminação programada desde a coleta",
@@ -708,7 +708,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Cite os campos mínimos de um registro de custódia.",
     "alternativas": [
       "Identificação do item, origem com host e caminho, quem coletou e com que ferramenta, data e hora com fuso, método de aquisição, hash, local de guarda e cada transferência com assinatura e motivo.",
@@ -728,7 +728,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a cópia de um disco com 800 mil registros de clientes cria obrigação de privacidade, e qual é o limite de uso?",
     "alternativas": [
       "Identificação do item, origem com host e caminho, quem coletou e com que ferramenta, data e hora com fuso, método de aquisição, hash, local de guarda e cada transferência com assinatura e motivo.",
@@ -748,7 +748,7 @@
       "url": "https://www.iso.org/standard/75106.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Backup feito é backup disponível\". Qual é a correção?",
     "alternativas": [
       "Plano de continuidade é o plano de recuperação de desastre",
@@ -768,7 +768,7 @@
       "url": "https://www.iso.org/standard/75106.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"O RTO declarado é o RTO praticado\". Qual é a correção?",
     "alternativas": [
       "Mantenha os dois, com donos diferentes e interface declarada",
@@ -788,7 +788,7 @@
       "url": "https://www.iso.org/standard/75106.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Plano de continuidade é o plano de recuperação de desastre\". Qual é a correção?",
     "alternativas": [
       "Mantenha os dois, com donos diferentes e interface declarada",
@@ -808,7 +808,7 @@
       "url": "https://www.iso.org/standard/75106.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Restaurar o banco é recuperar o serviço\". Qual é a correção?",
     "alternativas": [
       "Negocie prazo com crédito ou com obrigação de reporte de recuperação",
@@ -828,7 +828,7 @@
       "url": "https://www.iso.org/standard/75106.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Continuidade é responsabilidade da TI\". Qual é a correção?",
     "alternativas": [
       "Restaure e valide a cadeia inteira, com teste funcional ponta a ponta",
@@ -848,7 +848,7 @@
       "url": "https://www.iso.org/standard/75106.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Cláusula de prazo no contrato resolve\". Qual é a correção?",
     "alternativas": [
       "Mantenha o procedimento crítico em papel, com cópia física acessível",
@@ -868,7 +868,7 @@
       "url": "https://www.iso.org/standard/75106.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Procedimento de contingência pode ficar no sistema\". Qual é a correção?",
     "alternativas": [
       "Mantenha o procedimento crítico em papel, com cópia física acessível",
@@ -888,7 +888,7 @@
       "url": "https://www.iso.org/standard/75106.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a identificação da norma brasileira de continuidade, segundo o catálogo oficial da ABNT, e quantas páginas ela tem?",
     "alternativas": [
       "ABNT NBR ISO 22301:2020, do comitê ABNT/CEE-063 Gestão de Riscos, com 24 páginas.",
@@ -908,7 +908,7 @@
       "url": "https://www.iso.org/standard/75106.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o tempo real de recuperação de um processo é o maior tempo da cadeia de dependências?",
     "alternativas": [
       "ABNT NBR ISO 22301:2020, do comitê ABNT/CEE-063 Gestão de Riscos, com 24 páginas.",
@@ -928,7 +928,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Sem dado pessoal confirmado, não há prazo\". Qual é a correção?",
     "alternativas": [
       "Informe o número com o escopo conhecido e complemente com o número final",
@@ -948,7 +948,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Comunicar cedo demais expõe a empresa\". Qual é a correção?",
     "alternativas": [
       "Comunique o que sabe, explique a demora e complemente",
@@ -968,7 +968,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"O comunicado ao cliente substitui a notificação\". Qual é a correção?",
     "alternativas": [
       "Registre a decisão e os motivos da ausência de comunicação",
@@ -988,7 +988,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Incidente não comunicado não precisa de registro\". Qual é a correção?",
     "alternativas": [
       "Faça as duas comunicações, com textos e aprovações separados",
@@ -1008,7 +1008,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"O número de titulares pode ser estimado no comunicado\". Qual é a correção?",
     "alternativas": [
       "Registre quando soube e trate a classificação do dado como etapa do ciclo",
@@ -1028,7 +1028,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Texto tranquilizador reduz o dano\". Qual é a correção?",
     "alternativas": [
       "Descreva o que sabe, sem prometer ausência de impacto",
@@ -1048,7 +1048,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Comunicação é assunto do jurídico\". Qual é a correção?",
     "alternativas": [
       "Informe o número com o escopo conhecido e complemente com o número final",
@@ -1068,7 +1068,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Quais são os prazos de comunicação à ANPD e ao titular, e de que evento cada um conta?",
     "alternativas": [
       "Determinar ampla divulgação do incidente em meios de comunicação, às expensas do controlador, compatível com a abrangência da empresa e com a localização dos titulares afetados.",
@@ -1088,7 +1088,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Como a empresa comunica quando não consegue identificar todos os titulares afetados?",
     "alternativas": [
       "Determinar ampla divulgação do incidente em meios de comunicação, às expensas do controlador, compatível com a abrangência da empresa e com a localização dos titulares afetados.",
@@ -1108,7 +1108,7 @@
       "url": "https://www.in.gov.br/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que a autoridade pode fazer se considerar a comunicação da empresa insuficiente para alcançar parcela significativa dos titulares?",
     "alternativas": [
       "Pelos meios de divulgação disponíveis, como sítio eletrônico, aplicativos, mídias sociais e canais de atendimento, com conhecimento amplo e fácil visualização, pelo período de no mínimo três meses.",
@@ -1117,6 +1117,106 @@
       "Registre quando soube e trate a classificação do dado como etapa do ciclo"
     ],
     "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "11-resposta-forense#GUIA#C02",
+    "ref": "11-resposta-forense#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "O playbook diz \"em caso de ransomware, isolar a máquina\". Quem executa essa ação às 3h da manhã, e o que faz o playbook faltar quando ninguém responde? (TEMA-02)",
+    "alternativas": [
+      "Porque tudo que depende da chave ou do certificado deixa de funcionar até que a substituição seja distribuída, o que exige janela de mudança e coordenação com todos os donos de sistema.",
+      "Porque sem uma lista de ações que dispensam aprovação, toda contenção fora do horário comercial espera alguém com alçada responder, e o intervalo é tempo de operação do adversário.",
+      "O playbook precisa nomear o papel de plantão com alçada, não só a ação. Sem cobertura horária declarada, a ação de contenção espera o horário comercial e o atacante ganha o intervalo.",
+      "O registro do incidente, inclusive do incidente não comunicado, com os motivos da ausência de comunicação entre os oito itens mínimos do art. 10, mantido por no mínimo cinco anos."
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "11-resposta-forense#GUIA#C03",
+    "ref": "11-resposta-forense#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Durante a contenção, o time quer desligar o servidor comprometido para interromper o ataque. Que decisão do TEMA-03 responde a essa pergunta, e o que se perde se ela for tomada sem critério? (TEMA-03)",
+    "alternativas": [
+      "Porque a cópia é operação de tratamento com finalidade nova, que exige base legal e prazo de eliminação. O uso fica restrito à finalidade declarada da investigação, com acesso nominalmente controlado.",
+      "A cópia é operação de tratamento com finalidade nova, com base legal própria e prazo de eliminação. A cadeia de custódia explica a origem da cópia; ela não autoriza usar o dado para outra finalidade.",
+      "Do conhecimento pelo controlador de que o incidente afetou dados pessoais, não da conclusão da apuração. O regulamento permite complementação fundamentada em vinte dias úteis a contar da comunicação.",
+      "A decisão de contenção considera custo e reversibilidade antes de agir. Desligar sem capturar o estado volátil perde processos em execução, conexões abertas e conteúdo de memória, que não voltam depois."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "11-resposta-forense#GUIA#C04",
+    "ref": "11-resposta-forense#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "verificado",
+    "enunciado": "A investigação exige uma cópia do banco de clientes afetado. Que obrigação a cópia cria e qual é o limite entre investigar e tratar dado pessoal? (TEMA-04)",
+    "alternativas": [
+      "A cópia é operação de tratamento com finalidade nova, com base legal própria e prazo de eliminação. A cadeia de custódia explica a origem da cópia; ela não autoriza usar o dado para outra finalidade.",
+      "Do conhecimento pelo controlador de que o incidente afetou dados pessoais, não da conclusão da apuração. O regulamento permite complementação fundamentada em vinte dias úteis a contar da comunicação.",
+      "Porque a cópia é operação de tratamento com finalidade nova, que exige base legal e prazo de eliminação. O uso fica restrito à finalidade declarada da investigação, com acesso nominalmente controlado.",
+      "O acionamento real: telefone que atende fora do horário, prazo de chegada, quem assina o aceite e o limite de escopo sem nova aprovação. Sem testar, a empresa não sabe qual serviço comprou de fato."
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "11-resposta-forense#GUIA#C05",
+    "ref": "11-resposta-forense#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "O plano declara RTO de 4 horas, mas o cofre de chaves que o sistema usa leva 6 horas para voltar. Qual é o RTO real do serviço? (TEMA-05)",
+    "alternativas": [
+      "Papéis com nome de função, e lista nominal só na rota de escalonamento, com data de revisão",
+      "Seis horas, porque o RTO do serviço é o maior tempo da cadeia de dependências, e não o menor.",
+      "Comunique com o que sabe, registre os motivos da demora e complemente em vinte dias úteis",
+      "Preserve o volátil antes de desligar, e decida o desligamento com base no que se perde"
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "11-resposta-forense#GUIA#C06",
+    "ref": "11-resposta-forense#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "verificado",
+    "enunciado": "A empresa decide não comunicar porque o dado afetado é \"só cadastro\". Que registro precisa existir, mesmo assim, e por quanto tempo? (TEMA-06)",
+    "alternativas": [
+      "Porque sem uma lista de ações que dispensam aprovação, toda contenção fora do horário comercial espera alguém com alçada responder, e o intervalo é tempo de operação do adversário.",
+      "Determinar ampla divulgação do incidente em meios de comunicação, às expensas do controlador, compatível com a abrangência da empresa e com a localização dos titulares afetados.",
+      "O registro do incidente, inclusive do incidente não comunicado, com os motivos da ausência de comunicação entre os oito itens mínimos do art. 10, mantido por no mínimo cinco anos.",
+      "O playbook precisa nomear o papel de plantão com alçada, não só a ação. Sem cobertura horária declarada, a ação de contenção espera o horário comercial e o atacante ganha o intervalo."
+    ],
+    "correta": 2,
     "justificativa": ""
   }
 ]

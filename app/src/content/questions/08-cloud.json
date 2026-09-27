@@ -8,7 +8,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelo de responsabilidade compartilhada: um colega afirma que \"O provedor é certificado, então o controle está atendido\". Qual é a correção?",
     "alternativas": [
       "Localize a linha do controle na matriz daquele serviço específico",
@@ -28,7 +28,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelo de responsabilidade compartilhada: um colega afirma que \"Responsabilidade compartilhada significa dividir pela metade\". Qual é a correção?",
     "alternativas": [
       "O provedor é certificado, então o controle está atendido",
@@ -48,7 +48,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelo de responsabilidade compartilhada: um colega afirma que \"Serviço gerenciado elimina a responsabilidade do cliente\". Qual é a correção?",
     "alternativas": [
       "Trate regra de rede como item exclusivo do cliente",
@@ -68,7 +68,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelo de responsabilidade compartilhada: um colega afirma que \"Em máquina virtual, o firewall é do provedor\". Qual é a correção?",
     "alternativas": [
       "Trate regra de rede como item exclusivo do cliente",
@@ -88,7 +88,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelo de responsabilidade compartilhada: um colega afirma que \"O modelo é igual em todos os provedores\". Qual é a correção?",
     "alternativas": [
       "O provedor é certificado, então o controle está atendido",
@@ -100,26 +100,6 @@
     "justificativa": "As matrizes públicas divergem em detalhe e em granularidade por serviço"
   },
   {
-    "id": "08-cloud#TEMA-01#R01",
-    "ref": "08-cloud#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-145 — The NIST Definition of Cloud Computing, setembro de 2011, DOI 10.6028/NIST.SP.800-145",
-      "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Quais três famílias de controle a AWS nomeia e qual exemplo cada uma recebe?",
-    "alternativas": [
-      "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as",
-      "Porque o mesmo recurso físico atende vários clientes: o controle físico e o hipervisor ficam com",
-      "Herdado, com exemplo no controle físico e ambiental; compartilhado, com exemplos em gestão de",
-      "A decisão sobre cifrar e sobre quem detém a chave é do cliente; a evidência pode vir em parte do"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
     "id": "08-cloud#TEMA-01#R02",
     "ref": "08-cloud#TEMA-01",
     "origem": "recuperacao",
@@ -129,54 +109,14 @@
       "tipo": "primaria"
     },
     "status": "rascunho",
-    "enunciado": "Em serviço de banco de dados gerenciado, qual linha da matriz muda de coluna em relação à",
+    "enunciado": "Em serviço de banco de dados gerenciado, qual linha da matriz muda de coluna em relação à\n   máquina virtual, e qual não muda?",
     "alternativas": [
-      "Herdado, com exemplo no controle físico e ambiental; compartilhado, com exemplos em gestão de",
-      "Porque o mesmo recurso físico atende vários clientes: o controle físico e o hipervisor ficam com",
-      "A decisão sobre cifrar e sobre quem detém a chave é do cliente; a evidência pode vir em parte do",
-      "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as"
+      "Separe o que é herdado do que é exclusivo; só o herdado se apoia no documento do provedor",
+      "Localize a linha do controle na matriz daquele serviço específico",
+      "Responsabilidade compartilhada significa dividir pela metade",
+      "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as\n   linhas de dado, configuração, identidade e acesso, que seguem com o cliente, conforme a matriz da\n   Microsoft."
     ],
     "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-01#R03",
-    "ref": "08-cloud#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-145 — The NIST Definition of Cloud Computing, setembro de 2011, DOI 10.6028/NIST.SP.800-145",
-      "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Por que o pool de recursos compartilhados, descrito no NIST SP 800-145, é a causa da",
-    "alternativas": [
-      "Porque o mesmo recurso físico atende vários clientes: o controle físico e o hipervisor ficam com",
-      "A decisão sobre cifrar e sobre quem detém a chave é do cliente; a evidência pode vir em parte do",
-      "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as",
-      "Herdado, com exemplo no controle físico e ambiental; compartilhado, com exemplos em gestão de"
-    ],
-    "correta": 0,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-01#R04",
-    "ref": "08-cloud#TEMA-01",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-145 — The NIST Definition of Cloud Computing, setembro de 2011, DOI 10.6028/NIST.SP.800-145",
-      "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "A empresa quer provar ao regulador que o dado está criptografado. Qual parte da matriz produz a",
-    "alternativas": [
-      "Porque o mesmo recurso físico atende vários clientes: o controle físico e o hipervisor ficam com",
-      "A decisão sobre cifrar e sobre quem detém a chave é do cliente; a evidência pode vir em parte do",
-      "Muda a linha do sistema operacional, que passa ao provedor no serviço gerenciado. Não mudam as",
-      "Herdado, com exemplo no controle físico e ambiental; compartilhado, com exemplos em gestão de"
-    ],
-    "correta": 1,
     "justificativa": ""
   },
   {
@@ -188,7 +128,7 @@
       "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Identidade e acesso em nuvem: um colega afirma que \"Federação resolve o problema de credencial de carga de trabalho\". Qual é a correção?",
     "alternativas": [
       "Permissão ampla é aceitável no começo e some depois",
@@ -208,7 +148,7 @@
       "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Identidade e acesso em nuvem: um colega afirma que \"Papel sem senha é seguro por natureza\". Qual é a correção?",
     "alternativas": [
       "Prefira credencial temporária; use cofre para o que não tem federação",
@@ -228,7 +168,7 @@
       "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Identidade e acesso em nuvem: um colega afirma que \"Permissão ampla é aceitável no começo e some depois\". Qual é a correção?",
     "alternativas": [
       "Nomeie dono e prazo desde a criação, e reduza com base na atividade registrada",
@@ -248,7 +188,7 @@
       "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Identidade e acesso em nuvem: um colega afirma que \"Guardrail de organização já concede acesso\". Qual é a correção?",
     "alternativas": [
       "Federação resolve o problema de credencial de carga de trabalho",
@@ -268,7 +208,7 @@
       "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Identidade e acesso em nuvem: um colega afirma que \"Cofre de segredo de aplicação substitui a federação\". Qual é a correção?",
     "alternativas": [
       "Restrinja o documento de confiança ao emissor, à audiência e ao projeto",
@@ -278,46 +218,6 @@
     ],
     "correta": 2,
     "justificativa": "Cofre guarda segredo, e o segredo continua sendo credencial de longa duração"
-  },
-  {
-    "id": "08-cloud#TEMA-02#R01",
-    "ref": "08-cloud#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "AWS Identity and Access Management — Security best practices in IAM",
-      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Quais dois grupos a página de boas práticas da AWS coloca sob credencial temporária obrigatória, e",
-    "alternativas": [
-      "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à",
-      "Certificado X.509 da sua própria infraestrutura de chave pública usando o serviço de acesso para",
-      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto",
-      "Usuário humano, que deve usar federação com provedor de identidade e assumir papel, e carga de"
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-02#R02",
-    "ref": "08-cloud#TEMA-02",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "AWS Identity and Access Management — Security best practices in IAM",
-      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Cite três formas listadas pelo provedor para entregar credencial temporária a carga que executa",
-    "alternativas": [
-      "Certificado X.509 da sua própria infraestrutura de chave pública usando o serviço de acesso para",
-      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto",
-      "Usuário humano, que deve usar federação com provedor de identidade e assumir papel, e carga de",
-      "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à"
-    ],
-    "correta": 0,
-    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-02#R03",
@@ -331,10 +231,10 @@
     "status": "rascunho",
     "enunciado": "O que uma permissão efetiva combina, além da política de identidade?",
     "alternativas": [
-      "Certificado X.509 da sua própria infraestrutura de chave pública usando o serviço de acesso para",
-      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto",
-      "Usuário humano, que deve usar federação com provedor de identidade e assumir papel, e carga de",
-      "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à"
+      "Nomeie dono e prazo desde a criação, e reduza com base na atividade registrada",
+      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto\n   e não concedem acesso.",
+      "Restrinja o documento de confiança ao emissor, à audiência e ao projeto",
+      "Prefira credencial temporária; use cofre para o que não tem federação"
     ],
     "correta": 1,
     "justificativa": ""
@@ -351,10 +251,10 @@
     "status": "rascunho",
     "enunciado": "Por que o guardrail de organização, sozinho, não garante que ninguém tenha acesso indevido?",
     "alternativas": [
-      "Usuário humano, que deve usar federação com provedor de identidade e assumir papel, e carga de",
-      "Certificado X.509 da sua própria infraestrutura de chave pública usando o serviço de acesso para",
-      "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à",
-      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto"
+      "Combina política de recurso, condição contextual e limite de permissão; guardrails definem o teto\n   e não concedem acesso.",
+      "Nomeie dono e prazo desde a criação, e reduza com base na atividade registrada",
+      "Porque ele só limita o que pode ser concedido. A permissão continua vindo da política ligada à\n   identidade ou ao recurso, e uma concessão ampla dentro do teto continua valendo.",
+      "Restrinja o documento de confiança ao emissor, à audiência e ao projeto"
     ],
     "correta": 2,
     "justificativa": ""
@@ -368,7 +268,7 @@
       "url": "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Reduzir a contagem de achados é o objetivo\". Qual é a correção?",
     "alternativas": [
       "Regra de desvio aceito exige motivo, aprovador, prazo e data de revisão",
@@ -388,7 +288,7 @@
       "url": "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Achado crítico da ferramenta é prioridade automática\". Qual é a correção?",
     "alternativas": [
       "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério",
@@ -408,7 +308,7 @@
       "url": "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Aceitar o achado sem registro resolve\". Qual é a correção?",
     "alternativas": [
       "Meça desvio aceito, prazo vencido e reincidência por item de benchmark",
@@ -428,7 +328,7 @@
       "url": "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Configuração é tarefa só do time de plataforma\". Qual é a correção?",
     "alternativas": [
       "Achado crítico da ferramenta é prioridade automática",
@@ -448,7 +348,7 @@
       "url": "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Corrigir tudo de uma vez é o caminho mais rápido\". Qual é a correção?",
     "alternativas": [
       "Regra de desvio aceito exige motivo, aprovador, prazo e data de revisão",
@@ -458,26 +358,6 @@
     ],
     "correta": 3,
     "justificativa": "Correção em massa quebra carga de trabalho e gera retrocesso"
-  },
-  {
-    "id": "08-cloud#TEMA-03#R01",
-    "ref": "08-cloud#TEMA-03",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "Google Cloud — Shared responsibilities and shared fate on Google Cloud, revisado em 21 de agosto de 2023",
-      "url": "https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Cite três versões atuais de benchmarks de fundação de provedor de nuvem publicados pela CIS.",
-    "alternativas": [
-      "Amazon Web Services Foundations 7.0.0, Microsoft Azure Foundations 6.0.0 e Google Cloud",
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com",
-      "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério",
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado"
-    ],
-    "correta": 0,
-    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-03#R02",
@@ -491,10 +371,10 @@
     "status": "rascunho",
     "enunciado": "Quais são as cinco etapas do ciclo de gestão de postura, na ordem em que você as usaria?",
     "alternativas": [
-      "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério",
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com",
-      "Amazon Web Services Foundations 7.0.0, Microsoft Azure Foundations 6.0.0 e Google Cloud",
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado"
+      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série\n   histórica e permite que a mesma conta pareça melhorar apenas porque a referência mudou.",
+      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com\n   justificativa e prazo, verificar com nova medição e guardar a evidência.",
+      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado\n   contínuo quando o recurso permite esse acesso, e a informação de último uso de papéis,\n   permissões e credenciais.",
+      "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério"
     ],
     "correta": 1,
     "justificativa": ""
@@ -509,12 +389,12 @@
       "tipo": "primaria"
     },
     "status": "rascunho",
-    "enunciado": "O que a documentação da AWS oferece para identificar recurso com acesso público e recurso com",
+    "enunciado": "O que a documentação da AWS oferece para identificar recurso com acesso público e recurso com\n   credencial sem uso?",
     "alternativas": [
-      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série",
-      "Amazon Web Services Foundations 7.0.0, Microsoft Azure Foundations 6.0.0 e Google Cloud",
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado",
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com"
+      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série\n   histórica e permite que a mesma conta pareça melhorar apenas porque a referência mudou.",
+      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com\n   justificativa e prazo, verificar com nova medição e guardar a evidência.",
+      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado\n   contínuo quando o recurso permite esse acesso, e a informação de último uso de papéis,\n   permissões e credenciais.",
+      "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério"
     ],
     "correta": 2,
     "justificativa": ""
@@ -531,10 +411,10 @@
     "status": "rascunho",
     "enunciado": "Por que fixar a versão do benchmark antes de medir?",
     "alternativas": [
-      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado",
-      "Amazon Web Services Foundations 7.0.0, Microsoft Azure Foundations 6.0.0 e Google Cloud",
-      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com",
-      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série"
+      "Medir contra a referência, triar por exposição, atribuir dono, corrigir ou aceitar com\n   justificativa e prazo, verificar com nova medição e guardar a evidência.",
+      "A verificação de acesso público e entre contas para tipos de recurso suportados, que gera achado\n   contínuo quando o recurso permite esse acesso, e a informação de último uso de papéis,\n   permissões e credenciais.",
+      "Aplique exposição de dado, impacto de negócio e possibilidade de quebra como critério",
+      "Porque o item muda de identificador e de conteúdo entre versões, o que impede comparação da série\n   histórica e permite que a mesma conta pareça melhorar apenas porque a referência mudou."
     ],
     "correta": 3,
     "justificativa": ""
@@ -548,7 +428,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/190/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Cluster gerenciado transfere toda a segurança da carga ao provedor\". Qual é a correção?",
     "alternativas": [
       "Escreva a matriz de camadas por serviço, como no TEMA-01",
@@ -568,7 +448,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/190/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Etiqueta de versão é suficiente para identificar a imagem\". Qual é a correção?",
     "alternativas": [
       "Use identidade de carga com credencial temporária",
@@ -588,7 +468,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/190/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Segredo embutido na imagem é aceitável se a imagem é privada\". Qual é a correção?",
     "alternativas": [
       "Política de rede do cluster é detalhe de operação",
@@ -608,7 +488,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/190/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Corrigir o nó resolve a segurança do contêiner\". Qual é a correção?",
     "alternativas": [
       "Escreva a matriz de camadas por serviço, como no TEMA-01",
@@ -628,7 +508,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/190/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Política de rede do cluster é detalhe de operação\". Qual é a correção?",
     "alternativas": [
       "Trate a política como item de benchmark, com dono e versão",
@@ -640,86 +520,6 @@
     "justificativa": "A política define o alcance de um contêiner comprometido"
   },
   {
-    "id": "08-cloud#TEMA-04#R01",
-    "ref": "08-cloud#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-190 — Application Container Security Guide, setembro de 2017, final em 25/09/2017, DOI 10.6028/NIST.SP.800-190",
-      "url": "https://csrc.nist.gov/pubs/sp/800/190/final",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Como o NIST SP 800-190 define contêiner e qual é a consequência de isolamento dessa definição?",
-    "alternativas": [
-      "Kubernetes 2.0.1, Amazon Elastic Kubernetes Service 2.0.0, Azure Kubernetes Service 2.0.0,",
-      "Forma de virtualização do sistema operacional combinada com empacotamento de software de",
-      "Imagem base e versão, identificação por digest, usuário dentro do contêiner, política de rede,",
-      "Por papel associado à identidade da carga: o serviço de computação entrega credencial temporária"
-    ],
-    "correta": 1,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-04#R02",
-    "ref": "08-cloud#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-190 — Application Container Security Guide, setembro de 2017, final em 25/09/2017, DOI 10.6028/NIST.SP.800-190",
-      "url": "https://csrc.nist.gov/pubs/sp/800/190/final",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Cite cinco benchmarks publicados pela CIS que se aplicam a ambiente de contêiner.",
-    "alternativas": [
-      "Forma de virtualização do sistema operacional combinada com empacotamento de software de",
-      "Imagem base e versão, identificação por digest, usuário dentro do contêiner, política de rede,",
-      "Kubernetes 2.0.1, Amazon Elastic Kubernetes Service 2.0.0, Azure Kubernetes Service 2.0.0,",
-      "Por papel associado à identidade da carga: o serviço de computação entrega credencial temporária"
-    ],
-    "correta": 2,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-04#R03",
-    "ref": "08-cloud#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-190 — Application Container Security Guide, setembro de 2017, final em 25/09/2017, DOI 10.6028/NIST.SP.800-190",
-      "url": "https://csrc.nist.gov/pubs/sp/800/190/final",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Quais decisões continuam com o cliente quando o cluster é gerenciado?",
-    "alternativas": [
-      "Por papel associado à identidade da carga: o serviço de computação entrega credencial temporária",
-      "Kubernetes 2.0.1, Amazon Elastic Kubernetes Service 2.0.0, Azure Kubernetes Service 2.0.0,",
-      "Forma de virtualização do sistema operacional combinada com empacotamento de software de",
-      "Imagem base e versão, identificação por digest, usuário dentro do contêiner, política de rede,"
-    ],
-    "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-04#R04",
-    "ref": "08-cloud#TEMA-04",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "NIST SP 800-190 — Application Container Security Guide, setembro de 2017, final em 25/09/2017, DOI 10.6028/NIST.SP.800-190",
-      "url": "https://csrc.nist.gov/pubs/sp/800/190/final",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Como a carga de trabalho obtém credencial para serviço de nuvem sem guardar chave na imagem?",
-    "alternativas": [
-      "Por papel associado à identidade da carga: o serviço de computação entrega credencial temporária",
-      "Imagem base e versão, identificação por digest, usuário dentro do contêiner, política de rede,",
-      "Kubernetes 2.0.1, Amazon Elastic Kubernetes Service 2.0.0, Azure Kubernetes Service 2.0.0,",
-      "Forma de virtualização do sistema operacional combinada com empacotamento de software de"
-    ],
-    "correta": 0,
-    "justificativa": ""
-  },
-  {
     "id": "08-cloud#TEMA-05#E01",
     "ref": "08-cloud#TEMA-05",
     "origem": "erro-comum",
@@ -728,7 +528,7 @@
       "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"Cifra em repouso ligada significa dado protegido\". Qual é a correção?",
     "alternativas": [
       "Escolha por classe de dado, com base em requisito e impacto",
@@ -748,7 +548,7 @@
       "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"Chave gerenciada pelo cliente é sempre melhor\". Qual é a correção?",
     "alternativas": [
       "Tenha procedimento de emergência com dono e teste registrado",
@@ -768,7 +568,7 @@
       "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"Segregação por pasta resolve o isolamento\". Qual é a correção?",
     "alternativas": [
       "A cifra padrão do provedor pode ser apresentada como controle próprio",
@@ -788,7 +588,7 @@
       "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"A cifra padrão do provedor pode ser apresentada como controle próprio\". Qual é a correção?",
     "alternativas": [
       "Registre-a como herdada e não como controle implementado por você",
@@ -808,7 +608,7 @@
       "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"Perder a chave é risco aceitável em troca de segurança\". Qual é a correção?",
     "alternativas": [
       "Escolha por classe de dado, com base em requisito e impacto",
@@ -818,26 +618,6 @@
     ],
     "correta": 1,
     "justificativa": "Indisponibilidade de chave é interrupção de operação"
-  },
-  {
-    "id": "08-cloud#TEMA-05#R01",
-    "ref": "08-cloud#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "AWS Key Management Service — visão geral, chaves protegidas por HSM validado em FIPS 140-3 nível 3, certificado 4884",
-      "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Descreva a hierarquia de chave usada na cifra em envelope e onde a chave raiz fica.",
-    "alternativas": [
-      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e",
-      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões",
-      "A chave raiz protege as chaves de dado, e estas protegem o conteúdo. A chave raiz é criada,",
-      "A ISO/IEC 27018:2019, edição 2, com 23 páginas, alinhada a princípios de privacidade e voltada a"
-    ],
-    "correta": 2,
-    "justificativa": ""
   },
   {
     "id": "08-cloud#TEMA-05#R02",
@@ -851,10 +631,10 @@
     "status": "rascunho",
     "enunciado": "O que a AWS atribui ao cliente em serviço de armazenamento de objetos abstrato?",
     "alternativas": [
-      "A ISO/IEC 27018:2019, edição 2, com 23 páginas, alinhada a princípios de privacidade e voltada a",
-      "A chave raiz protege as chaves de dado, e estas protegem o conteúdo. A chave raiz é criada,",
-      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e",
-      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões"
+      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e\n   política de chave, que define quem decifra.",
+      "Use limite de conta ou projeto para o que precisa de isolamento forte",
+      "A cifra padrão do provedor pode ser apresentada como controle próprio",
+      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões\n   com as ferramentas de identidade."
     ],
     "correta": 3,
     "justificativa": ""
@@ -869,34 +649,14 @@
       "tipo": "primaria"
     },
     "status": "rascunho",
-    "enunciado": "Cite os três níveis em que a segregação de dado se escreve, do mais forte ao mais dependente de",
+    "enunciado": "Cite os três níveis em que a segregação de dado se escreve, do mais forte ao mais dependente de\n   configuração.",
     "alternativas": [
-      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e",
-      "A chave raiz protege as chaves de dado, e estas protegem o conteúdo. A chave raiz é criada,",
-      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões",
-      "A ISO/IEC 27018:2019, edição 2, com 23 páginas, alinhada a princípios de privacidade e voltada a"
+      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e\n   política de chave, que define quem decifra.",
+      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões\n   com as ferramentas de identidade.",
+      "Use limite de conta ou projeto para o que precisa de isolamento forte",
+      "A cifra padrão do provedor pode ser apresentada como controle próprio"
     ],
     "correta": 0,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-05#R04",
-    "ref": "08-cloud#TEMA-05",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "AWS Key Management Service — visão geral, chaves protegidas por HSM validado em FIPS 140-3 nível 3, certificado 4884",
-      "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Qual documento trata da proteção de informação pessoal identificável em nuvem pública por quem",
-    "alternativas": [
-      "Gerenciar o dado, o que inclui as opções de cifra, classificar os ativos e aplicar as permissões",
-      "A ISO/IEC 27018:2019, edição 2, com 23 páginas, alinhada a princípios de privacidade e voltada a",
-      "A chave raiz protege as chaves de dado, e estas protegem o conteúdo. A chave raiz é criada,",
-      "Limite de conta ou projeto; política de rede que define quem alcança o serviço de dado; e"
-    ],
-    "correta": 1,
     "justificativa": ""
   },
   {
@@ -908,7 +668,7 @@
       "url": "https://cloudsecurityalliance.org/research/cloud-controls-matrix",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança multi-cloud e contrato: um colega afirma que \"Certificado do provedor substitui o anexo\". Qual é a correção?",
     "alternativas": [
       "Auditoria direta é o padrão de mercado",
@@ -928,7 +688,7 @@
       "url": "https://cloudsecurityalliance.org/research/cloud-controls-matrix",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança multi-cloud e contrato: um colega afirma que \"Auditoria direta é o padrão de mercado\". Qual é a correção?",
     "alternativas": [
       "Teste a exportação e escreva o prazo de apoio antes de renovar",
@@ -948,7 +708,7 @@
       "url": "https://cloudsecurityalliance.org/research/cloud-controls-matrix",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança multi-cloud e contrato: um colega afirma que \"Portabilidade é problema do futuro\". Qual é a correção?",
     "alternativas": [
       "Teste a exportação e escreva o prazo de apoio antes de renovar",
@@ -968,7 +728,7 @@
       "url": "https://cloudsecurityalliance.org/research/cloud-controls-matrix",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança multi-cloud e contrato: um colega afirma que \"Multi-cloud é só multiplicar contratos\". Qual é a correção?",
     "alternativas": [
       "Negocie direito de verificação documental com prazo e escopo",
@@ -988,7 +748,7 @@
       "url": "https://cloudsecurityalliance.org/research/cloud-controls-matrix",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Governança multi-cloud e contrato: um colega afirma que \"Dado pessoal em nuvem é assunto só de privacidade\". Qual é a correção?",
     "alternativas": [
       "Teste a exportação e escreva o prazo de apoio antes de renovar",
@@ -1009,34 +769,14 @@
       "tipo": "primaria"
     },
     "status": "rascunho",
-    "enunciado": "Quantos control objectives e quantos domínios tem o CCM na versão 4.1, e qual é o propósito",
+    "enunciado": "Quantos control objectives e quantos domínios tem o CCM na versão 4.1, e qual é o propósito\n   declarado dele quanto aos atores da cadeia?",
     "alternativas": [
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de",
-      "Escopo e papéis, com governança, risco e conformidade; controle de acesso e privilégio do",
-      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia"
+      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a\n   ISO/IEC 27018:2019 está retirada desde 26/08/2025 e foi substituída pela ISO/IEC 27018:2025.",
+      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de\n   mudança de controle de segurança.",
+      "Trate custódia de chave, região e transferência no mesmo documento",
+      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia\n   de nuvem deve implementar cada controle, além de questionário de respostas de sim ou não e\n   registro de autoavaliação."
     ],
     "correta": 3,
-    "justificativa": ""
-  },
-  {
-    "id": "08-cloud#TEMA-06#R02",
-    "ref": "08-cloud#TEMA-06",
-    "origem": "recuperacao",
-    "fonte": {
-      "titulo": "CSA — Cloud Controls Matrix v4.1, 197 control objectives em 17 domínios, com CAIQ e STAR Registry",
-      "url": "https://cloudsecurityalliance.org/research/cloud-controls-matrix",
-      "tipo": "primaria"
-    },
-    "status": "rascunho",
-    "enunciado": "Cite quatro dos blocos do anexo de segurança e um controle de referência para cada um.",
-    "alternativas": [
-      "Escopo e papéis, com governança, risco e conformidade; controle de acesso e privilégio do",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de",
-      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia",
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a"
-    ],
-    "correta": 0,
     "justificativa": ""
   },
   {
@@ -1049,12 +789,12 @@
       "tipo": "primaria"
     },
     "status": "rascunho",
-    "enunciado": "Quais são as duas cláusulas que mais mudam a situação da empresa em incidente e em mudança de",
+    "enunciado": "Quais são as duas cláusulas que mais mudam a situação da empresa em incidente e em mudança de\n   controle?",
     "alternativas": [
-      "Escopo e papéis, com governança, risco e conformidade; controle de acesso e privilégio do",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de",
-      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia",
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a"
+      "Trate custódia de chave, região e transferência no mesmo documento",
+      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de\n   mudança de controle de segurança.",
+      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a\n   ISO/IEC 27018:2019 está retirada desde 26/08/2025 e foi substituída pela ISO/IEC 27018:2025.",
+      "Teste a exportação e escreva o prazo de apoio antes de renovar"
     ],
     "correta": 1,
     "justificativa": ""
@@ -1071,10 +811,10 @@
     "status": "rascunho",
     "enunciado": "Qual é a situação das edições ISO/IEC 27017 e ISO/IEC 27018 confirmadas nesta execução?",
     "alternativas": [
-      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia",
-      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de",
-      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a",
-      "Escopo e papéis, com governança, risco e conformidade; controle de acesso e privilégio do"
+      "197 control objectives em 17 domínios, com o propósito declarado de orientar qual ator da cadeia\n   de nuvem deve implementar cada controle, além de questionário de respostas de sim ou não e\n   registro de autoavaliação.",
+      "A cláusula de notificação de incidente, com prazo e conteúdo mínimo, e a de aviso prévio de\n   mudança de controle de segurança.",
+      "A ISO/IEC 27017:2015 está retirada desde 27/07/2026 e foi substituída pela ISO/IEC 27017:2026; a\n   ISO/IEC 27018:2019 está retirada desde 26/08/2025 e foi substituída pela ISO/IEC 27018:2025.",
+      "Trate custódia de chave, região e transferência no mesmo documento"
     ],
     "correta": 2,
     "justificativa": ""

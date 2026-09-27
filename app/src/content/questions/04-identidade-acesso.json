@@ -8,7 +8,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"MFA significa dois aplicativos ou dois códigos\". Qual é a correção?",
     "alternativas": [
       "A comparação biométrica precisa acompanhar um autenticador físico, e a verificação local é preferível",
@@ -28,7 +28,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Biometria resolve autenticação forte\". Qual é a correção?",
     "alternativas": [
       "O fator é a categoria do segredo; um autenticador de múltiplos fatores executa dois fatores em um ato",
@@ -48,7 +48,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Pergunta de segurança ajuda como segundo fator\". Qual é a correção?",
     "alternativas": [
       "Substituir por autenticador de posse ou por verificação local no dispositivo",
@@ -68,7 +68,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Aumentar a frequência de troca de senha aumenta a segurança\". Qual é a correção?",
     "alternativas": [
       "Tratar risco de contexto como controle adicional, nunca como substituto",
@@ -88,7 +88,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Passkey sincronizada serve para qualquer acesso\". Qual é a correção?",
     "alternativas": [
       "O fator é a categoria do segredo; um autenticador de múltiplos fatores executa dois fatores em um ato",
@@ -108,7 +108,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Indicador de risco de login substitui o fator\". Qual é a correção?",
     "alternativas": [
       "Bloquear senhas vazadas e conhecidas, exigir comprimento e oferecer MFA",
@@ -128,7 +128,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quantos níveis de garantia de autenticação existem no SP 800-63B-4 e qual é a data do documento final?",
     "alternativas": [
       "O fator é a categoria do segredo; um autenticador de múltiplos fatores executa dois fatores em um ato",
@@ -148,7 +148,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o nível 2 exige de tempo limite de reautenticação e de inatividade, e o que ele exige sobre resistência a phishing?",
     "alternativas": [
       "Tempo limite geral de reautenticação recomendado em até 24 horas e de inatividade em 1 hora. O verificador deve oferecer pelo menos uma opção resistente a phishing, que é recomendada nesse nível.",
@@ -168,7 +168,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a norma proíbe autenticadores sincronizáveis no nível 3?",
     "alternativas": [
       "É o requisito de que o usuário pratique uma ação deliberada, como tocar a chave, em vez de o autenticador responder sozinho. É recomendada no nível 2 e obrigatória no nível 3.",
@@ -188,7 +188,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que é intenção de autenticação e em qual nível ela é obrigatória?",
     "alternativas": [
       "Tempo limite geral de reautenticação recomendado em até 24 horas e de inatividade em 1 hora. O verificador deve oferecer pelo menos uma opção resistente a phishing, que é recomendada nesse nível.",
@@ -208,7 +208,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"ABAC substitui RBAC\". Qual é a correção?",
     "alternativas": [
       "Validar assinatura, emissor e público, e checar a política do recurso",
@@ -228,7 +228,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Criar um papel por pedido especial\". Qual é a correção?",
     "alternativas": [
       "Usar atributo ou exceção com prazo, dono e revisão",
@@ -248,7 +248,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Excluir o usuário do grupo equivale a retirar o acesso\". Qual é a correção?",
     "alternativas": [
       "Validar assinatura, emissor e público, e checar a política do recurso",
@@ -268,7 +268,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"O ponto de execução é o único ponto relevante\". Qual é a correção?",
     "alternativas": [
       "Verificar o direito efetivo no ponto de decisão, não a associação",
@@ -288,7 +288,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Escopo de papel é detalhe de produto\". Qual é a correção?",
     "alternativas": [
       "Usar papel para o que é estável e atributo para o que muda por contexto",
@@ -308,7 +308,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Autorização em API é só token válido\". Qual é a correção?",
     "alternativas": [
       "Validar assinatura, emissor e público, e checar a política do recurso",
@@ -328,7 +328,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a diferença entre ponto de decisão de política e ponto de execução de política?",
     "alternativas": [
       "Declarar o escopo de cada atribuição, como o PIM faz ao limitar o papel a um conjunto de recursos",
@@ -348,7 +348,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Como o glossário do NIST define menor privilégio e quantas definições aparecem na mesma entrada?",
     "alternativas": [
       "Papel descreve o que é estável na função e serve para revisão e recertificação; atributo descreve contexto, como unidade, carteira, classificação e horário, e permite negar por padrão sem multiplicar papéis.",
@@ -368,7 +368,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que papel e atributo resolvem partes diferentes do problema de autorização?",
     "alternativas": [
       "Cada entidade recebe o mínimo de recursos e autorizações de sistema necessários para cumprir sua função. A entrada do glossário traz três definições, com origem em CNSSI 4009-2022, SP 800-12 Rev. 1 e SP 800-53 Rev. 5.",
@@ -388,7 +388,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o OWASP diz sobre a diferença entre OAuth e OpenID Connect?",
     "alternativas": [
       "OAuth é estrutura de autorização para acesso delegado a APIs; OpenID Connect é camada de identidade sobre OAuth, usada para autenticar o usuário final e obter declarações de forma interoperável.",
@@ -408,7 +408,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/162/upd2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que precaução um modelo de autorização precisa tomar quando o atributo usado na regra não está preenchido?",
     "alternativas": [
       "OAuth é estrutura de autorização para acesso delegado a APIs; OpenID Connect é camada de identidade sobre OAuth, usada para autenticar o usuário final e obter declarações de forma interoperável.",
@@ -428,7 +428,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Desativar a conta encerra o acesso\". Qual é a correção?",
     "alternativas": [
       "Desativar a conta, encerrar sessões e invalidar tokens no mesmo evento",
@@ -448,7 +448,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Excluir a conta é o passo mais seguro da saída\". Qual é a correção?",
     "alternativas": [
       "Desativar a conta, encerrar sessões e invalidar tokens no mesmo evento",
@@ -468,7 +468,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Cadastro inicial cobre o ciclo de vida\". Qual é a correção?",
     "alternativas": [
       "Desativar a conta, encerrar sessões e invalidar tokens no mesmo evento",
@@ -488,7 +488,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Terceiro é caso especial demais para automatizar\". Qual é a correção?",
     "alternativas": [
       "Reservar rotação periódica para segredos de aplicação e de serviço",
@@ -508,7 +508,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Rotação periódica de senha de usuário melhora a postura\". Qual é a correção?",
     "alternativas": [
       "Reservar rotação periódica para segredos de aplicação e de serviço",
@@ -528,7 +528,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Revisão de acesso é conferência de lista\". Qual é a correção?",
     "alternativas": [
       "Exigir prazo declarado, aprovação registrada e rotina de expiração",
@@ -548,7 +548,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as quatro perguntas que a governança de identidade responde, segundo a documentação do Entra ID Governance?",
     "alternativas": [
       "O SCIM, protocolo HTTP de provisão e gestão de identidade em cenários multi-domínio, com esquema comum de usuário. Depende de TLS e de esquemas padrão de autenticação HTTP, e desaconselha autenticação básica.",
@@ -568,7 +568,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a diferença entre identidade, conta e concessão?",
     "alternativas": [
       "Data e hora da ação, quem autorizou, qual evento disparou, quais concessões foram removidas e qual foi a origem do dado. Sem essas cinco informações não há como reconstruir o caminho.",
@@ -588,7 +588,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o RFC 7644 define e de que autenticação o protocolo depende?",
     "alternativas": [
       "Quais identidades devem ter acesso a quais recursos, o que essas identidades fazem com o acesso, se existem controles organizacionais para gerir o acesso e se o auditor consegue verificar que os controles funcionam.",
@@ -608,7 +608,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a mudança de função concentra mais risco do que a admissão?",
     "alternativas": [
       "Porque conceder é imediato e retirar depende de evento explícito. A admissão tem gatilho contratual; a mudança de área costuma ser acompanhada apenas da nova concessão.",
@@ -628,7 +628,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais registros mínimos a auditoria precisa para provar a retirada de acesso?",
     "alternativas": [
       "Identidade é a representação do sujeito; conta é o objeto autenticável ligado a ela, e pode haver mais de uma por identidade; concessão é o direito concreto sobre recurso, grupo ou papel.",
@@ -648,7 +648,7 @@
       "url": "https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que fazer com a conta local de uma aplicação que não tem correspondência no diretório?",
     "alternativas": [
       "Identidade é a representação do sujeito; conta é o objeto autenticável ligado a ela, e pode haver mais de uma por identidade; concessão é o direito concreto sobre recurso, grupo ou papel.",
@@ -668,7 +668,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Acesso just-in-time é apenas configurar prazo curto\". Qual é a correção?",
     "alternativas": [
       "Manter poucas contas de emergência com acesso aprovado por duas pessoas e testadas",
@@ -688,7 +688,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Quem ativa o papel deve ser quem aprova\". Qual é a correção?",
     "alternativas": [
       "Remover o que não for reafirmado e medir taxa e prazo de resposta",
@@ -708,7 +708,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Revisão de acesso que aprova tudo está funcionando\". Qual é a correção?",
     "alternativas": [
       "Separar quem pede de quem aprova, com regra explícita para o plantão",
@@ -728,7 +728,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Retirar o privilégio de todos os administradores é o objetivo\". Qual é a correção?",
     "alternativas": [
       "Manter poucas contas de emergência com acesso aprovado por duas pessoas e testadas",
@@ -748,7 +748,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Menor privilégio é assunto só de acesso humano\". Qual é a correção?",
     "alternativas": [
       "Separar quem pede de quem aprova, com regra explícita para o plantão",
@@ -768,7 +768,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Converter para elegível resolve o excesso de escopo\". Qual é a correção?",
     "alternativas": [
       "Menor privilégio é assunto só de acesso humano",
@@ -788,7 +788,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o modelo just-in-time impede, segundo a definição do PIM?",
     "alternativas": [
       "Porque a ausência de confirmação é, por si, informação: se ninguém reafirmou, não há dono atento ao acesso. Sem remoção, a revisão deixa de ser controle e vira registro.",
@@ -808,7 +808,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais ações podem ser exigidas na ativação de um papel elegível?",
     "alternativas": [
       "Verificação por múltiplos fatores, justificativa de negócio, aprovação de aprovador designado e escolha da duração dentro do máximo configurado.",
@@ -828,7 +828,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a revisão de acesso precisa remover automaticamente o que não foi reafirmado?",
     "alternativas": [
       "Que usuário mal-intencionado ou não autorizado mantenha o acesso depois que a permissão expira. O acesso é concedido por necessidade e deixa de existir em seguida.",
@@ -848,7 +848,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual requisito de autenticação faz sentido para ativação de papel de alto impacto e por quê?",
     "alternativas": [
       "Número de atribuições ativas permanentes e duração máxima configurada de ativação. A resposta é a maior entre o tempo até a troca de credencial e a duração máxima de ativação vigente.",
@@ -868,7 +868,7 @@
       "url": "https://csrc.nist.gov/glossary/term/least_privilege",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Se a auditoria pedir o tempo máximo em que uma conta administrativa comprometida manteria poder, quais números você usa para responder?",
     "alternativas": [
       "Porque a ausência de confirmação é, por si, informação: se ninguém reafirmou, não há dono atento ao acesso. Sem remoção, a revisão deixa de ser controle e vira registro.",
@@ -888,7 +888,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Cofre resolve o problema de senha compartilhada por si\". Qual é a correção?",
     "alternativas": [
       "Colocar todas as contas no cofre é o objetivo do projeto",
@@ -908,7 +908,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Colocar todas as contas no cofre é o objetivo do projeto\". Qual é a correção?",
     "alternativas": [
       "Guardar em cofre secundário, com duplo controle, e testar em rotina",
@@ -928,7 +928,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Variável de ambiente é lugar seguro para segredo\". Qual é a correção?",
     "alternativas": [
       "Buscar no cofre com identidade da carga de trabalho ou injetar por contêiner lateral",
@@ -948,7 +948,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Rotacionar senha de usuário a cada 90 dias fortalece a postura\". Qual é a correção?",
     "alternativas": [
       "Guardar em cofre secundário, com duplo controle, e testar em rotina",
@@ -968,7 +968,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Conta de emergência pode ficar guardada sem teste\". Qual é a correção?",
     "alternativas": [
       "Reservar cofre para conta compartilhada, conta de serviço e emergência",
@@ -988,7 +988,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Auditoria do cofre é log de acesso\". Qual é a correção?",
     "alternativas": [
       "Reservar cofre para conta compartilhada, conta de serviço e emergência",
@@ -1008,7 +1008,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a diferença entre rotação automática de segredo estático e emissão dinâmica, e qual reduz a superfície de reuso?",
     "alternativas": [
       "A rotação automática troca o valor do segredo estático em intervalo definido. A emissão dinâmica entrega credencial nova a cada início de sessão, que morre no fim. A emissão dinâmica reduz a superfície de reuso.",
@@ -1028,7 +1028,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o guia recomenda para credencial de usuário quanto à rotação, e para credencial de emergência quanto à guarda?",
     "alternativas": [
       "A rotação automática troca o valor do segredo estático em intervalo definido. A emissão dinâmica entrega credencial nova a cada início de sessão, que morre no fim. A emissão dinâmica reduz a superfície de reuso.",
@@ -1048,7 +1048,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Cite dois motivos técnicos para não colocar segredo em variável de ambiente.",
     "alternativas": [
       "Buscar no cofre com identidade da carga de trabalho ou injetar por contêiner lateral",
@@ -1068,7 +1068,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Zero trust é produto que se compra\". Qual é a correção?",
     "alternativas": [
       "Tratar identidade de dispositivo e de carga de trabalho com o mesmo rigor",
@@ -1088,7 +1088,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Usar VPN com segundo fator é zero trust\". Qual é a correção?",
     "alternativas": [
       "Decidir por recurso e por operação, com avaliação também do dispositivo",
@@ -1108,7 +1108,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Zero trust significa eliminar a rede interna\". Qual é a correção?",
     "alternativas": [
       "Decidir por recurso e por operação, com avaliação também do dispositivo",
@@ -1128,7 +1128,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Só identidade de usuário interessa\". Qual é a correção?",
     "alternativas": [
       "Combinar identidade forte com segmentação, conforme o TEMA-04 da área 03",
@@ -1148,7 +1148,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Confiar no dispositivo porque está inscrito é suficiente\". Qual é a correção?",
     "alternativas": [
       "Decidir por recurso e por operação, com avaliação também do dispositivo",
@@ -1168,7 +1168,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Zero trust é projeto com data de término\". Qual é a correção?",
     "alternativas": [
       "Tratar como direção com marcos verificáveis e financiamento por etapa",
@@ -1188,7 +1188,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o documento diz sobre autenticação e autorização de sujeito e de dispositivo em relação ao início da sessão?",
     "alternativas": [
       "Perguntar qual confiança implícita será removida primeiro e como a remoção será medida.",
@@ -1208,7 +1208,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o documento afirma que o foco é proteger recursos e não segmentos de rede?",
     "alternativas": [
       "Definir quais decisões passam a usar identidade e estado de dispositivo, com medida de progresso",
@@ -1228,7 +1228,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais quatro elementos compõem uma decisão de acesso no modelo por recurso?",
     "alternativas": [
       "Porque a localização de rede deixou de ser o componente principal da postura de segurança do recurso.",
@@ -1248,7 +1248,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a pergunta que revela se um plano de zero trust é concreto ou apenas discurso?",
     "alternativas": [
       "São funções discretas executadas antes de estabelecer a sessão com o recurso da empresa.",
@@ -1257,6 +1257,86 @@
       "Tratar identidade de dispositivo e de carga de trabalho com o mesmo rigor"
     ],
     "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "04-identidade-acesso#GUIA#C02",
+    "ref": "04-identidade-acesso#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-63B-4 — Digital Identity Guidelines: Authentication and Authenticator Management, final de 31/07/2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Um papel de leitura de relatórios passa a permitir exportar a base de clientes. Isso é mudança de autenticação ou de autorização, e onde ela deveria ser registrada? (TEMA-02)",
+    "alternativas": [
+      "Identidade é a representação do sujeito; conta é o objeto autenticável ligado a ela, e pode haver mais de uma por identidade; concessão é o direito concreto sobre recurso, grupo ou papel.",
+      "Atribuição, revogação e rotação. Não é possível saber qual pessoa usou a credencial em qual momento, nem retirar o acesso de uma pessoa específica, nem trocar a senha sem quebrar a aplicação.",
+      "Autorização. A identidade não mudou; mudou o conjunto de operações permitidas sobre o objeto. O registro pertence à definição do papel e à matriz de acesso, com autorizador nomeado e data.",
+      "Tratar atributo ausente como negação. Atributo não preenchido não pode ser interpretado como permissão, sob pena de a política liberar acesso justamente para a população sem cadastro completo."
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "04-identidade-acesso#GUIA#C03",
+    "ref": "04-identidade-acesso#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-63B-4 — Digital Identity Guidelines: Authentication and Authenticator Management, final de 31/07/2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "O RH cadastra a pessoa no sistema de folha e o time de TI cria a conta no diretório manualmente. Qual é o risco principal desse desenho? (TEMA-03)",
+    "alternativas": [
+      "OAuth é estrutura de autorização para acesso delegado a APIs; OpenID Connect é camada de identidade sobre OAuth, usada para autenticar o usuário final e obter declarações de forma interoperável.",
+      "Tempo limite geral de reautenticação recomendado em até 24 horas e de inatividade em 1 hora. O verificador deve oferecer pelo menos uma opção resistente a phishing, que é recomendada nesse nível.",
+      "Incluir no inventário de descoberta, nomear dono, descrever finalidade e decidir entre migrar para a identidade central ou desativar. Manter sem dono é a opção que não se sustenta em auditoria.",
+      "Perda de rastreabilidade da autorização. Sem a fonte da verdade, não existe prova de quem autorizou o acesso, e a retirada no desligamento depende de uma pessoa lembrar de agir em dois sistemas."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "04-identidade-acesso#GUIA#C05",
+    "ref": "04-identidade-acesso#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-63B-4 — Digital Identity Guidelines: Authentication and Authenticator Management, final de 31/07/2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "A equipe compartilha a senha do usuário de banco usado pela aplicação de folha. Quais produtos de auditoria ficam impossíveis com essa prática? (TEMA-05)",
+    "alternativas": [
+      "Tratar atributo ausente como negação. Atributo não preenchido não pode ser interpretado como permissão, sob pena de a política liberar acesso justamente para a população sem cadastro completo.",
+      "Atribuição, revogação e rotação. Não é possível saber qual pessoa usou a credencial em qual momento, nem retirar o acesso de uma pessoa específica, nem trocar a senha sem quebrar a aplicação.",
+      "Incluir no inventário de descoberta, nomear dono, descrever finalidade e decidir entre migrar para a identidade central ou desativar. Manter sem dono é a opção que não se sustenta em auditoria.",
+      "Autorização. A identidade não mudou; mudou o conjunto de operações permitidas sobre o objeto. O registro pertence à definição do papel e à matriz de acesso, com autorizador nomeado e data."
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "04-identidade-acesso#GUIA#C06",
+    "ref": "04-identidade-acesso#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-63B-4 — Digital Identity Guidelines: Authentication and Authenticator Management, final de 31/07/2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/63/b/4/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Um servidor de banco aceita conexão sem autenticação de dispositivo porque está na rede interna. Qual pressuposto do zero trust está violado? (TEMA-06)",
+    "alternativas": [
+      "Papel descreve o que é estável na função e serve para revisão e recertificação; atributo descreve contexto, como unidade, carteira, classificação e horário, e permite negar por padrão sem multiplicar papéis.",
+      "O SCIM, protocolo HTTP de provisão e gestão de identidade em cenários multi-domínio, com esquema comum de usuário. Depende de TLS e de esquemas padrão de autenticação HTTP, e desaconselha autenticação básica.",
+      "O pressuposto de que autenticação e autorização de sujeito e de dispositivo são funções executadas antes de estabelecer a sessão com o recurso. Confiar no dispositivo pela localização é confiança implícita.",
+      "Credencial de usuário fica fora da rotação periódica e é trocada só sob suspeita ou evidência de comprometimento. Credencial de emergência vai para cofre secundário, com backup regular, e é testada em rotina."
+    ],
+    "correta": 2,
     "justificativa": ""
   }
 ]

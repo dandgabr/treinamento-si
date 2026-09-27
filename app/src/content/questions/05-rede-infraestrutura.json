@@ -8,7 +8,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Rede interna com faixa privada é rede protegida\". Qual é a correção?",
     "alternativas": [
       "Autenticação e autorização são funções executadas antes de estabelecer a sessão com o recurso",
@@ -28,7 +28,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Regra de firewall pode citar nome de serviço\". Qual é a correção?",
     "alternativas": [
       "Nome entra na conversa de negócio; a regra precisa do endereço e da porta correspondentes",
@@ -48,7 +48,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Estar na rede interna equivale a estar autenticado\". Qual é a correção?",
     "alternativas": [
       "Nome entra na conversa de negócio; a regra precisa do endereço e da porta correspondentes",
@@ -68,7 +68,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Todo acesso começa no firewall\". Qual é a correção?",
     "alternativas": [
       "Combine proteção de transporte com registro de fluxo e de resolução",
@@ -88,7 +88,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"HTTPS resolve o problema de visibilidade\". Qual é a correção?",
     "alternativas": [
       "Desenhe o caminho leste-oeste, que é onde falta ponto de decisão",
@@ -108,7 +108,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Aumentar a faixa de endereços privados dá mais segurança\". Qual é a correção?",
     "alternativas": [
       "Trate plano de endereçamento como decisão de arquitetura, não como medida de proteção",
@@ -128,7 +128,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os cinco elementos que identificam um fluxo, e por que o nome do sistema não é um deles?",
     "alternativas": [
       "Endereço de origem, porta de origem, endereço de destino, porta de destino e protocolo de transporte. O nome é resolvido antes, para um endereço; a política de rede é escrita sobre a quíntupla.",
@@ -148,7 +148,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o RFC 1918 afirma no capítulo de considerações de segurança, e como esse texto é usado para responder ao argumento \"a rede interna é protegida\"?",
     "alternativas": [
       "Endereço de origem, porta de origem, endereço de destino, porta de destino e protocolo de transporte. O nome é resolvido antes, para um endereço; a política de rede é escrita sobre a quíntupla.",
@@ -168,7 +168,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os três blocos de endereço reservados para uso privado pelo RFC 1918?",
     "alternativas": [
       "A faixa privada contém alcance externo; o controle do que é alcançado dentro vem da regra e da identidade",
@@ -188,7 +188,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o NIST SP 800-81 Rev. 3 afirma que um ataque ao DNS ameaça toda a operação de rede da empresa?",
     "alternativas": [
       "Porque a operação de rede da empresa depende de resolução de nomes: quem controla a resposta escolhe para onde o tráfego vai, e a indisponibilidade do serviço interrompe o resto.",
@@ -208,7 +208,7 @@
       "url": "https://www.rfc-editor.org/info/rfc1918/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Em um caminho entre dois servidores do mesmo segmento, quantos pontos de decisão costumam existir, e o que isso implica para a detecção?",
     "alternativas": [
       "Endereço de origem, porta de origem, endereço de destino, porta de destino e protocolo de transporte. O nome é resolvido antes, para um endereço; a política de rede é escrita sobre a quíntupla.",
@@ -228,7 +228,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Firewall e sistema de detecção de intrusão são a mesma função\". Qual é a correção?",
     "alternativas": [
       "Se o dispositivo só alerta, ele não cumpre a função de controle, e vice-versa",
@@ -248,7 +248,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Regra permissiva herdada é dívida técnica\". Qual é a correção?",
     "alternativas": [
       "Bloquear porta administrativa resolve acesso remoto indevido",
@@ -268,7 +268,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Bloquear porta administrativa resolve acesso remoto indevido\". Qual é a correção?",
     "alternativas": [
       "Firewall e sistema de detecção de intrusão são a mesma função",
@@ -288,7 +288,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Fronteira é um equipamento\". Qual é a correção?",
     "alternativas": [
       "Revise por gatilho, com data e autor, e mantenha fila de exceções vencidas",
@@ -308,7 +308,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Inspecionar tudo é sempre melhor\". Qual é a correção?",
     "alternativas": [
       "Decida o que inspecionar por classe de dado e registre a justificativa e a retenção",
@@ -328,7 +328,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Revisar a política anualmente é suficiente\". Qual é a correção?",
     "alternativas": [
       "Enumere as superfícies de fronteira que existem hoje e dê dono a cada uma",
@@ -348,7 +348,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as cinco ações que o mesmo documento recomenda na sequência, e por que a ordem importa?",
     "alternativas": [
       "Porque a regra específica nunca é avaliada. Detecta-se por revisão da ordem, por ferramenta de análise de política e por teste que tenta o acesso que a regra específica deveria permitir e não permite.",
@@ -368,7 +368,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os cinco itens de disciplina de política apresentados no tema?",
     "alternativas": [
       "Negação por padrão; regra com origem, destino, porta, protocolo, ação e registro; dono e data por regra; verificação de ordem e de regra inalcançável; processo de exceção com prazo e verificação de vencimento.",
@@ -388,7 +388,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que uma regra ampla colocada antes de uma regra específica é problema, e como se detecta isso?",
     "alternativas": [
       "Estabelecer políticas de firewall e selecionar, configurar, testar, implantar e gerenciar soluções. A política define o critério; sem ela, o teste e a configuração não têm contra o que ser comparados.",
@@ -408,7 +408,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que recomendação o RFC 1918 faz para o link entre a empresa e redes externas, e qual é a finalidade declarada?",
     "alternativas": [
       "Negação por padrão; regra com origem, destino, porta, protocolo, ação e registro; dono e data por regra; verificação de ordem e de regra inalcançável; processo de exceção com prazo e verificação de vencimento.",
@@ -428,7 +428,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Ter VLAN é ter segmentação\". Qual é a correção?",
     "alternativas": [
       "Use a localização como contenção e decida acesso por identidade",
@@ -448,7 +448,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Rede interna é zona de confiança\". Qual é a correção?",
     "alternativas": [
       "Escreva a matriz de fluxo e configure a negação por padrão nela",
@@ -468,7 +468,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Segmentar por identidade dispensa segmentar por endereço\". Qual é a correção?",
     "alternativas": [
       "Escreva a matriz de fluxo e configure a negação por padrão nela",
@@ -488,7 +488,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Exceção de fornecedor é permanente\". Qual é a correção?",
     "alternativas": [
       "Exceção com prazo, dono e a regra que a substitui",
@@ -508,7 +508,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Microssegmentação exige trocar toda a infraestrutura\". Qual é a correção?",
     "alternativas": [
       "Revise a matriz com o dono do risco e registre quem aprovou cada exceção",
@@ -528,7 +528,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Matriz de fluxo é documento da equipe de rede\". Qual é a correção?",
     "alternativas": [
       "Comece pelas cargas que tratam dado mais sensível e cresça por risco",
@@ -548,7 +548,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é o critério correto para agrupar ativos em um segmento?",
     "alternativas": [
       "Listar os grupos a partir de dados e funções; montar a matriz de fluxo com negação por padrão; declarar o que cada grupo não permite; tratar as exceções com dono, prazo e regra substituta.",
@@ -568,7 +568,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os quatro passos do desenho apresentados no tema, na ordem?",
     "alternativas": [
       "O dano que uma credencial comprometida dentro do grupo pode causar e o conjunto de destinos de que o grupo precisa para operar. Nem organograma, nem tipo de equipamento.",
@@ -588,7 +588,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que campos mínimos uma exceção precisa ter para não virar arquitetura invisível?",
     "alternativas": [
       "Revise a matriz com o dono do risco e registre quem aprovou cada exceção",
@@ -608,7 +608,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Usar VPN significa estar protegido\". Qual é a correção?",
     "alternativas": [
       "Inventarie antes, agrupe por exposição e desative por onda com plano de reversão",
@@ -628,7 +628,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Certificado vencido é falha de segurança de dados\". Qual é a correção?",
     "alternativas": [
       "Decida com finalidade, retenção, controle de acesso e dono declarados",
@@ -648,7 +648,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"TLS 1.2 pode ser desativado sem inventário\". Qual é a correção?",
     "alternativas": [
       "Inventarie antes, agrupe por exposição e desative por onda com plano de reversão",
@@ -668,7 +668,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Interceptar TLS aumenta a segurança e nada mais\". Qual é a correção?",
     "alternativas": [
       "Trate como item de continuidade, com dono, calendário e alerta antecipado",
@@ -688,7 +688,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Captura de pacote resolve a investigação futura\". Qual é a correção?",
     "alternativas": [
       "Cite o documento vigente e registre a data da revisão da política",
@@ -708,7 +708,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Citar RFC 8446 é suficiente para política de TLS\". Qual é a correção?",
     "alternativas": [
       "Decida com finalidade, retenção, controle de acesso e dono declarados",
@@ -728,7 +728,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o RFC 9846 obsoleta, além do RFC 8446?",
     "alternativas": [
       "O RFC 5246, que especificava o TLS 1.2, e também os RFCs 5077, 6961, 7627 e 8422, além de atualizar os RFCs 5705 e 6066.",
@@ -748,7 +748,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o NIST SP 800-52 Rev. 2 exige de TLS 1.2 e de TLS 1.3, e qual é a data limite citada no resumo?",
     "alternativas": [
       "Um controle de segurança de camada de rede amplamente usado, framework de padrões abertos para comunicações privadas sobre redes IP, com configuração em geral feita pelo protocolo de troca de chaves IKE.",
@@ -768,7 +768,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o NIST SP 800-77 Rev. 1 descreve como IPsec, e por qual protocolo a configuração costuma ser feita?",
     "alternativas": [
       "Exige que TLS 1.2 configurado com suítes de cifra baseadas em FIPS seja suportado por todos os servidores e clientes TLS do governo, e exige suporte a TLS 1.3 até 1º de janeiro de 2024.",
@@ -788,7 +788,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"DNSSEC cobre a segurança do DNS inteiro\". Qual é a correção?",
     "alternativas": [
       "Combine autorização de envio, assinatura de mensagem e política publicada",
@@ -808,7 +808,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Política de e-mail em observação protege o domínio\". Qual é a correção?",
     "alternativas": [
       "Defina prazo de transição, leia o relatório e avance de modo",
@@ -828,7 +828,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Filtro de spam resolve fraude de identidade\". Qual é a correção?",
     "alternativas": [
       "Trate DNSSEC, registro de consulta e redundância como controles distintos",
@@ -848,7 +848,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Cadeado no navegador significa site confiável\". Qual é a correção?",
     "alternativas": [
       "Atualize a política para a revisão vigente e registre a data da revisão",
@@ -868,7 +868,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Citar o SP 800-81-2 em política interna é aceitável\". Qual é a correção?",
     "alternativas": [
       "Verifique o certificado, o domínio exato e o que o site faz com o dado",
@@ -888,7 +888,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Resolver público melhora a experiência e não custa nada\". Qual é a correção?",
     "alternativas": [
       "Decida o resolver como controle, com registro e dono",
@@ -908,7 +908,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as quatro palavras-chave da revisão 3 do guia de DNS do NIST relacionadas a segurança do serviço, e quando essa revisão foi publicada?",
     "alternativas": [
       "DNSSEC, registro de DNS, DNS cifrado e DNS protetivo. Publicada em março de 2026, com final em 19/03/2026, substituindo o SP 800-81-2.",
@@ -928,7 +928,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o resumo da revisão 3 afirma sobre o efeito de um ataque contra a infraestrutura de DNS de uma empresa?",
     "alternativas": [
       "Trate DNSSEC, registro de consulta e redundância como controles distintos",
@@ -948,7 +948,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o SP 800-81-2 descrevia como objetivos primários de segurança do DNS, e em que data ele foi retirado?",
     "alternativas": [
       "DNSSEC, registro de DNS, DNS cifrado e DNS protetivo. Publicada em março de 2026, com final em 19/03/2026, substituindo o SP 800-81-2.",
@@ -968,7 +968,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o RFC 7489 permite aos originadores de correio fazer, segundo o resumo do documento?",
     "alternativas": [
       "Porque a cifra protege o trecho entre o cliente e o resolver; o resolver que recebe a consulta continua vendo o nome consultado, e é ele que a organização opera e registra.",
@@ -988,7 +988,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o registro de consulta do resolver continua sendo fonte útil quando o transporte de consulta está cifrado?",
     "alternativas": [
       "Porque a cifra protege o trecho entre o cliente e o resolver; o resolver que recebe a consulta continua vendo o nome consultado, e é ele que a organização opera e registra.",
@@ -1008,7 +1008,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/81/r3/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais decisões de configuração de DNS precisam de dono e de data em uma política de domínio?",
     "alternativas": [
       "Associar identificadores de domínio confiáveis e autenticados às mensagens, comunicar políticas sobre mensagens que usam esses identificadores e reportar sobre o uso deles.",
@@ -1028,7 +1028,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Guardar todo o pacote resolve a investigação\". Qual é a correção?",
     "alternativas": [
       "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote",
@@ -1048,7 +1048,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Registro é assunto de operação de TI\". Qual é a correção?",
     "alternativas": [
       "Declare a fonte por pergunta e trate assinatura como consequência da coleta",
@@ -1068,7 +1068,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Detecção por assinatura cobre o que falta em telemetria\". Qual é a correção?",
     "alternativas": [
       "Trate retenção, integridade e acesso como decisão de risco, com dono e prazo",
@@ -1088,7 +1088,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Mais log é sempre melhor\". Qual é a correção?",
     "alternativas": [
       "Detecção por assinatura cobre o que falta em telemetria",
@@ -1108,7 +1108,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Relógio desalinhado é detalhe de servidor\". Qual é a correção?",
     "alternativas": [
       "Exija sincronismo de horário em todos os dispositivos que geram registro",
@@ -1128,7 +1128,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Segmentação é assunto de desempenho\". Qual é a correção?",
     "alternativas": [
       "Detecção por assinatura cobre o que falta em telemetria",
@@ -1148,7 +1148,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a segmentação aumenta a capacidade de observação da rede?",
     "alternativas": [
       "Porque cria fronteiras, e tráfego que cruza fronteira passa por um ponto onde a coleta é possível. Sem segmento, o tráfego entre hosts do mesmo grupo não cruza ponto algum.",
@@ -1168,7 +1168,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as duas exigências técnicas que atravessam toda a telemetria, e o que cada uma garante?",
     "alternativas": [
       "Porque cria fronteiras, e tráfego que cruza fronteira passa por um ponto onde a coleta é possível. Sem segmento, o tráfego entre hosts do mesmo grupo não cruza ponto algum.",
@@ -1188,13 +1188,33 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o registro do resolver de nomes continua útil quando o conteúdo do tráfego está cifrado?",
     "alternativas": [
       "Porque cria fronteiras, e tráfego que cruza fronteira passa por um ponto onde a coleta é possível. Sem segmento, o tráfego entre hosts do mesmo grupo não cruza ponto algum.",
       "Sincronismo de horário e integridade. O primeiro permite reconstruir a sequência dos eventos entre fontes diferentes; a segunda permite tratar o registro como prova, e não como texto que qualquer administrador altera.",
       "Porque a consulta de nome acontece antes da conexão, e quem opera o resolver vê o nome consultado mesmo que o conteúdo das sessões esteja cifrado ponta a ponta.",
       "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote"
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "05-rede-infraestrutura#GUIA#C03",
+    "ref": "05-rede-infraestrutura#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-41 Rev. 1 — Guidelines on Firewalls and Firewall Policy, setembro de 2009",
+      "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "A empresa tem 40 VLANs e a conta de suporte alcança todas elas. Houve ganho de contenção? Justifique em duas linhas. (TEMA-03)",
+    "alternativas": [
+      "Endereço de origem, porta de origem, endereço de destino, porta de destino e protocolo de transporte. O nome é resolvido antes, para um endereço; a política de rede é escrita sobre a quíntupla.",
+      "Nenhum ou um, quando o comutador aplica alguma política. Sem ponto de inspeção, o que sobra é o registro do próprio host e o fluxo do roteador, e a detecção depende de telemetria do endpoint.",
+      "Não. A quantidade de segmentos não altera o alcance da credencial; o que altera é a matriz de fluxo. Quarenta VLANs com uma linha que liga tudo produzem exatamente o mesmo dano de uma rede plana.",
+      "Estabelecer políticas de firewall e selecionar, configurar, testar, implantar e gerenciar soluções. A política define o critério; sem ela, o teste e a configuração não têm contra o que ser comparados."
     ],
     "correta": 2,
     "justificativa": ""

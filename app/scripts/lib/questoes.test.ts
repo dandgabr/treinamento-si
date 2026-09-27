@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import type { Conteudo, Tema } from '../../src/domain/types'
+import type { Conteudo, Fonte, ParQA, Tema } from '../../src/domain/types'
 import { derivarBanco, validarBanco, type Questao } from './questoes'
 
 const REF = '01-fundamentos#TEMA-01'
+const AREA = '01-fundamentos'
+/** O `ref` que o item de checkpoint usa: o guia da area, e nao um tema. */
+const REF_DO_GUIA = `${AREA}#GUIA`
 
 function tema(over: Partial<Tema> = {}): Tema {
   return {
@@ -36,7 +39,13 @@ function tema(over: Partial<Tema> = {}): Tema {
   }
 }
 
-function conteudo(sobre: Partial<Tema> = {}): Conteudo {
+/** O que a area publica e o item de guia herda: as fontes dela e o checkpoint da secao 9. */
+interface DoGuia {
+  checkpoint?: ParQA[]
+  fontes?: Fonte[]
+}
+
+function conteudo(sobre: Partial<Tema> = {}, doGuia: DoGuia = {}): Conteudo {
   const t = tema(sobre)
   // Duas areas: sem a segunda, "item apontando para tema de outra area" cairia antes em
   // "ref inexistente" e o caso nao testaria nada.
@@ -45,7 +54,7 @@ function conteudo(sobre: Partial<Tema> = {}): Conteudo {
     meta: { geradoEm: '2026-01-01T00:00:00.000Z', totais: { areas: 2, temas: 2, paginas: 0 } },
     areas: [
       {
-        areaId: '01-fundamentos',
+        areaId: AREA,
         areaNome: 'Fundamentos',
         ordemEstudo: 1,
         nivel: 'base',
@@ -53,13 +62,13 @@ function conteudo(sobre: Partial<Tema> = {}): Conteudo {
         certificacoes: [],
         preRequisitos: [],
         temas: [REF],
-        fontes: [],
+        fontes: doGuia.fontes ?? [],
         statusVerificacao: 'verificado',
         guia: {
-          areaId: '01-fundamentos',
+          areaId: AREA,
           intro: '',
           secoes: [],
-          checkpoint: [],
+          checkpoint: doGuia.checkpoint ?? [],
           criterio: 'acertar 4 dos 5 itens sem consultar os temas',
           tabelaTemas: null,
           objetivos: null,
@@ -96,6 +105,42 @@ function conteudo(sobre: Partial<Tema> = {}): Conteudo {
     paginas: [],
   }
 }
+
+const FONTE_DA_AREA: Fonte = {
+  titulo: 'Guia da área — NIST CSF 2.0',
+  url: 'https://exemplo/guia',
+  tipo: 'primaria',
+}
+
+/**
+ * Quatro pares de checkpoint do guia. As respostas cabem numa alternativa e nao repetem
+ * nenhuma linha da tabela de erros comuns do tema — que tambem entra no conjunto de
+ * distratores, e uma repeticao seria descartada em silencio.
+ */
+const CHECKPOINT: ParQA[] = [
+  {
+    pergunta: 'Quantas designações a norma exige, e por qual entregável cada uma responde?',
+    resposta: 'Duas: o diretor designado responde pela política; o encarregado, pelos dados pessoais',
+  },
+  {
+    pergunta: 'Qual intervalo de revisão se aplica a um tema acertado sem consulta?',
+    resposta: 'D+1, D+7 e D+30, e o erro devolve o item pela metade do prazo',
+  },
+  {
+    pergunta: 'Uma conta administrativa sem segundo fator: ameaça, vulnerabilidade ou risco?',
+    resposta: 'Vulnerabilidade, porque é a fraqueza que uma fonte de ameaça exploraria',
+  },
+  {
+    pergunta: 'Quais modos de falha a definição legal de segurança da informação cobre?',
+    resposta: 'Acesso, uso, divulgação, interrupção, modificação e destruição',
+  },
+]
+
+/** O conteudo com o guia preenchido, que e o que produz os itens de checkpoint. */
+function conteudoComGuia(doGuia: DoGuia = {}): Conteudo {
+  return conteudo({}, { fontes: [FONTE_DA_AREA], checkpoint: CHECKPOINT, ...doGuia })
+}
+
 
 /** Um item válido, com o campo indicado quebrado — mutação mínima por caso. */
 function item(over: Partial<Questao> = {}): Questao {
@@ -211,6 +256,78 @@ describe('derivarBanco', () => {
     const b = JSON.stringify(derivarBanco(conteudo()))
     expect(a).toBe(b)
   })
+
+  // O checkpoint mora no guia da AREA, e nao num tema: sem uma convencao de `ref` os 102
+  // itens dos guias ficavam de fora do banco, embora a §7 do plano os liste como fonte.
+  describe('checkpoint do guia da area', () => {
+    function itensDoGuia(c: Conteudo = conteudoComGuia()): Questao[] {
+      return derivarBanco(c).porArea[AREA]!.filter((q) => q.origem === 'checkpoint')
+    }
+
+    it('deriva um item por par do checkpoint, com a resposta como gabarito', () => {
+      const itens = itensDoGuia()
+      expect(itens).toHaveLength(CHECKPOINT.length)
+
+      const primeiro = itens[0]!
+      expect(primeiro.id).toBe(`${REF_DO_GUIA}#C01`)
+      expect(primeiro.ref).toBe(REF_DO_GUIA)
+      expect(primeiro.status).toBe('rascunho')
+      expect(primeiro.enunciado).toBe(CHECKPOINT[0]!.pergunta)
+      expect(primeiro.alternativas[primeiro.correta]).toBe(CHECKPOINT[0]!.resposta)
+      // Nada de justificativa inventada: o checkpoint nao tem coluna de "por que isto esta
+      // errado", e a resposta do material ja e o gabarito.
+      expect(primeiro.justificativa).toBe('')
+    })
+
+    it('herda a fonte da area: o item de guia nao tem tema de onde herdar', () => {
+      for (const q of itensDoGuia()) {
+        expect(q.fonte.url).toBe(FONTE_DA_AREA.url)
+        expect(q.fonte.tipo).toBe(FONTE_DA_AREA.tipo)
+      }
+    })
+
+    it('tira o distrator do guia e da area, nunca de fora do material', () => {
+      // Os candidatos sao as respostas dos outros pares do MESMO guia e o material dos temas
+      // da area — as duas colunas de cada tabela de erros comuns e as respostas de recuperacao.
+      const doMaterial = new Set([
+        ...CHECKPOINT.map((p) => p.resposta),
+        ...(tema().errosComuns ?? []).flatMap((linha) => [linha.equivoco, linha.correto]),
+      ])
+      for (const q of itensDoGuia()) {
+        for (const alternativa of q.alternativas) expect(doMaterial.has(alternativa)).toBe(true)
+        // A resposta do proprio par nao pode aparecer duas vezes, nem virar distrator.
+        expect(new Set(q.alternativas).size).toBe(q.alternativas.length)
+      }
+    })
+
+    it('descarta a resposta longa demais para ser alternativa', () => {
+      const c = conteudoComGuia({
+        checkpoint: [
+          ...CHECKPOINT,
+          { pergunta: 'Descreva o processo inteiro', resposta: 'x'.repeat(400) },
+        ],
+      })
+      expect(itensDoGuia(c)).toHaveLength(CHECKPOINT.length)
+      expect(itensDoGuia(c).some((q) => q.id.endsWith('#C05'))).toBe(false)
+    })
+
+    it('nao deriva item de checkpoint quando falta distrator', () => {
+      // Um par so, e nenhuma linha de erro comum no tema: nao ha de onde tirar alternativa.
+      const c = conteudo({ errosComuns: [] }, { fontes: [FONTE_DA_AREA], checkpoint: [CHECKPOINT[0]!] })
+      expect(itensDoGuia(c)).toHaveLength(0)
+    })
+
+    it('entra depois dos itens dos temas, na ordem de leitura da area', () => {
+      const itens = derivarBanco(conteudoComGuia()).porArea[AREA]!
+      const origens = itens.map((q) => q.origem)
+      expect(origens.indexOf('checkpoint')).toBeGreaterThan(origens.lastIndexOf('recuperacao'))
+    })
+
+    it('o banco com itens de guia passa no gate', () => {
+      const c = conteudoComGuia()
+      expect(validarBanco(derivarBanco(c), c)).toEqual([])
+    })
+  })
 })
 
 describe('validarBanco', () => {
@@ -224,10 +341,39 @@ describe('validarBanco', () => {
     [
       'acusa item de area apontando para outra area',
       (q) => void (q.ref = '02-grc#TEMA-01'),
-      'tema de outra area',
+      'material de outra area',
+    ],
+    // Os dois lados da convencao de `ref`: checkpoint existe so no guia da area, e item de
+    // tema so aponta para um tema. Trocados, a procedencia do item deixa de ser legivel.
+    [
+      'acusa item de checkpoint apontando para um tema',
+      (q) => void (q.origem = 'checkpoint'),
+      'item de checkpoint aponta para 01-fundamentos#GUIA',
+    ],
+    [
+      'acusa item de tema apontando para o guia',
+      (q) => {
+        q.ref = REF_DO_GUIA
+        q.id = `${REF_DO_GUIA}#C01`
+      },
+      'item de tema, para 01-fundamentos#TEMA-NN',
+    ],
+    [
+      'acusa ref de guia de area inexistente',
+      (q) => {
+        q.ref = '99-futuro#GUIA'
+        q.id = '99-futuro#GUIA#C01'
+        q.origem = 'checkpoint'
+      },
+      'ref inexistente',
     ],
     ['acusa item sem fonte', (q) => void (q.fonte = { titulo: '', url: '', tipo: '' }), 'sem fonte'],
     ['acusa enunciado vazio', (q) => void (q.enunciado = ''), 'enunciado vazio'],
+    [
+      'acusa id fora do padrao',
+      (q) => void (q.id = `${REF}#E`),
+      'id fora do padrao',
+    ],
     [
       'acusa menos de tres alternativas',
       (q) => void (q.alternativas = ['a', 'b']),

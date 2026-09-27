@@ -136,7 +136,14 @@ export function fatiarSecoes(corpo: string): { intro: string; secoes: SecaoCrua[
   return { intro, secoes }
 }
 
-const RE_ITEM = /^(\d+)\.\s+([\s\S]*?)(?=^\d+\.\s|$)/gm
+// Um item numerado termina onde comeca o proximo, onde comeca uma linha NAO indentada
+// (as continuacoes do material sao indentadas) ou no fim do texto.
+//
+// A versao anterior era `/^(\d+)\.\s+([\s\S]*?)(?=^\d+\.\s|$)/gm`: com a flag `m`, o `$`
+// casa no fim de CADA linha, entao o corpo do item parava na primeira quebra e a frase
+// continuada na linha de baixo era descartada. O defeito chegava a tela — 24 pares de
+// recuperacao ativa eram exibidos cortados no meio da palavra.
+const RE_ITEM = /(?:^|\n)(\d+)\.[ \t]+([\s\S]*?)(?=\n\d+\.[ \t]|\n\S|$)/g
 
 export function itensNumerados(texto: string): string[] {
   const out: string[] = []

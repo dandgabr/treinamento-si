@@ -22,6 +22,7 @@
     "smoke": "node scripts/smoke.mjs",
     "smoke:desktop": "node scripts/smoke-desktop.mjs",
     "smoke:pacote": "node scripts/smoke-pacote.mjs",
+    "smoke:pasta": "node scripts/smoke-pasta.mjs",
     "medir": "node scripts/medir-desktop.mjs",
     "distribuir": "npm run preparar:conteudo && npm run build:desktop && npm run build:electron && electron-builder --publish never",
     "distribuir:linux": "npm run preparar:conteudo && npm run build:desktop && npm run build:electron && electron-builder --linux AppImage --publish never",

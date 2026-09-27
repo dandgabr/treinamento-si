@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { content } from '../infrastructure/content/repository'
 import { ponte } from '../infrastructure/storage/ponte'
 import { aprovouNoCriterio, interpretarCriterio } from '../domain/criterio'
@@ -98,6 +98,15 @@ export function BotaoLido({ refTema }: { refTema: string }) {
 }
 
 /**
+ * Quantos temas da fila aparecem antes do botao que abre o resto.
+ *
+ * A fila e um atalho para o que vence hoje, e nao um painel de acompanhamento: cinco itens
+ * cabem no resumo sem empurrar o resto do painel para baixo, e o botao mostra o tamanho
+ * real da fila em vez de esconder que ela continua.
+ */
+const FILA_VISIVEL = 5
+
+/**
  * Resumo do topo do painel.
  *
  * Sem XP, sem nivel, sem sequencia de dias: tudo isso mediria cliques do proprio
@@ -109,6 +118,8 @@ export function ResumoProgresso() {
   const progresso = useProgresso()
   const carregado = useCarregado()
   const erroDeCarga = useErroDeCarga()
+  const [filaToda, setFilaToda] = useState(false)
+  const idFila = useId()
   const agora = new Date()
   // Enquanto a leitura nao volta, "0 de 109" e "nada vencido" seriam afirmacoes falsas: o
   // estado vazio e o nao lido sao indistinguiveis. Com a leitura falhando e pior — os zeros
@@ -120,6 +131,7 @@ export function ResumoProgresso() {
   const firmes = dominios.reduce((n, d) => n + d.firmes, 0)
   const aprovados = dominios.filter((d) => d.checkpointAprovado === true).length
   const respondidos = dominios.filter((d) => d.checkpointAprovado !== null).length
+  const visiveis = filaToda ? fila : fila.slice(0, FILA_VISIVEL)
   return (
     <section className="resumo">
       {semDados ? (
@@ -131,8 +143,8 @@ export function ResumoProgresso() {
         <span className="resumo-rotulo">Fila de hoje</span>
         <strong>{semDados ? '—' : fila.length === 0 ? 'nada vencido' : `${fila.length} tema(s)`}</strong>
         {!semDados && fila.length ? (
-          <ul className="resumo-fila">
-            {fila.slice(0, 5).map((e) => (
+          <ul className="resumo-fila" id={idFila}>
+            {visiveis.map((e) => (
               <li key={e.ref}>
                 <a href={linkTema(e.ref)}>{content.temas[e.ref]?.titulo ?? e.ref}</a>
                 <span className="resumo-data">{dataCurta(e.proximaRevisao)}</span>
@@ -142,6 +154,18 @@ export function ResumoProgresso() {
         ) : semDados ? null : (
           <span className="resumo-detalhe">nada vencido em D+1, D+7 ou D+30.</span>
         )}
+        {/* O botao so existe quando ha o que abrir: com cinco ou menos, a lista ja e inteira. */}
+        {fila.length > FILA_VISIVEL ? (
+          <button
+            type="button"
+            className="botao-secundario resumo-ver-todos"
+            aria-expanded={filaToda}
+            aria-controls={idFila}
+            onClick={() => setFilaToda((v) => !v)}
+          >
+            {filaToda ? `Mostrar só os ${FILA_VISIVEL} primeiros` : `Ver os ${fila.length} vencidos`}
+          </button>
+        ) : null}
       </div>
 
       <div className="resumo-item">
@@ -265,8 +289,25 @@ function Versao() {
   return <p className="resumo-detalhe">Aplicativo desktop, versão {versao}.</p>
 }
 
-/** Checkpoint da area: veredito por item, e o total e o que conta para o criterio. */
-export function CheckpointArea({ areaId, area }: { areaId: string; area: Area }) {
+/**
+ * Checkpoint da area: veredito por item, e o total e o que conta para o criterio.
+ *
+ * O que o progresso guarda e o PLACAR (acertos e total); a marca de cada item e da passagem
+ * que esta na tela. Por isso o texto abaixo separa as duas coisas: sem isso, quem recarrega
+ * a pagina ve os botoes em branco logo depois de ler "resultado gravado" e conclui que o app
+ * perdeu o que ele respondeu. Nada muda no formato do progresso — o campo por item nao
+ * existe no estado, e um formato paralelo so criaria duas verdades para o mesmo dado.
+ */
+export function CheckpointArea({
+  areaId,
+  area,
+  id,
+}: {
+  areaId: string
+  area: Area
+  /** Ancora do sumario, quando o bloco e uma das secoes numeradas da tela. */
+  id?: string
+}) {
   const progresso = useProgresso()
   const [veredictos, setVeredictos] = useState<(boolean | null)[]>(() =>
     area.guia.checkpoint.map(() => null),
@@ -286,6 +327,7 @@ export function CheckpointArea({ areaId, area }: { areaId: string; area: Area })
   const aprovado = guardado
     ? aprovouNoCriterio(alvo, guardado.acertos, area.guia.checkpoint.length || guardado.total)
     : null
+  const julgados = veredictos.filter((v) => v !== null).length
 
   return (
     <>
@@ -293,6 +335,7 @@ export function CheckpointArea({ areaId, area }: { areaId: string; area: Area })
         titulo="9. Checkpoint da área"
         pares={area.guia.checkpoint}
         criterio={area.guia.criterio}
+        id={id}
         veredictoPorItem={{
           obter: (i) => veredictos[i] ?? null,
           definir: (i, acertou) =>
@@ -301,7 +344,7 @@ export function CheckpointArea({ areaId, area }: { areaId: string; area: Area })
       />
       <p className="dominio-checkpoint" role="status">
         {guardado
-          ? `Último resultado registrado: ${guardado.acertos} de ${guardado.total}${
+          ? `Último resultado gravado: ${guardado.acertos} de ${guardado.total}${
               aprovado === null
                 ? '.'
                 : aprovado
@@ -310,6 +353,14 @@ export function CheckpointArea({ areaId, area }: { areaId: string; area: Area })
             }`
           : 'Nenhum checkpoint registrado nesta área.'}
       </p>
+      {/* Só faz sentido dizer isto no caso em que a tela contradiz o dado guardado: placar
+          registrado e nenhuma marca na tela. */}
+      {guardado && julgados === 0 ? (
+        <p className="dominio-checkpoint">
+          Fica guardado o placar, e não a marca de cada item: por isso os botões voltam em branco
+          ao reabrir. Julgar os itens de novo regrava o resultado.
+        </p>
+      ) : null}
     </>
   )
 }

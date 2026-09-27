@@ -8,7 +8,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Segurança é a fase de teste antes do lançamento\". Qual é a correção?",
     "alternativas": [
       "Exceção com dono, justificativa, prazo e reavaliação registrados",
@@ -28,7 +28,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Ter política de desenvolvimento seguro equivale a praticá-lo\". Qual é a correção?",
     "alternativas": [
       "Definir o que bloqueia onde, e registrar o que apenas alerta",
@@ -48,7 +48,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"O SSDF é um framework a ser implantado por completo antes de produzir efeito\". Qual é a correção?",
     "alternativas": [
       "Escolher as práticas que atacam as causas raiz dos seus achados e instrumentá-las",
@@ -68,7 +68,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Citar requisito sem versão é suficiente\". Qual é a correção?",
     "alternativas": [
       "Exceção com dono, justificativa, prazo e reavaliação registrados",
@@ -88,7 +88,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Todos os gates devem bloquear para ter efeito\". Qual é a correção?",
     "alternativas": [
       "Ter política de desenvolvimento seguro equivale a praticá-lo",
@@ -108,7 +108,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Exceção aceita é decisão técnica\". Qual é a correção?",
     "alternativas": [
       "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5",
@@ -128,7 +128,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais três resultados o SSDF declara perseguir, segundo o resumo do NIST?",
     "alternativas": [
       "No build. Fora dele, a informação sobre o que foi compilado, com quais entradas e por qual processo, já não está disponível de forma confiável, e reconstruí-la exige investigar histórico e máquina.",
@@ -148,7 +148,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Em que etapa do fluxo a proveniência do build é produzida e por que ela não pode ser reconstruída depois sem custo?",
     "alternativas": [
       "Reduzir o número de vulnerabilidades na versão publicada; mitigar o impacto potencial da exploração de vulnerabilidades não detectadas ou não tratadas; endereçar as causas raiz para evitar recorrência.",
@@ -168,7 +168,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que um gate que bloqueia toda mudança pequena tende a ser desativado em poucos meses?",
     "alternativas": [
       "No build. Fora dele, a informação sobre o que foi compilado, com quais entradas e por qual processo, já não está disponível de forma confiável, e reconstruí-la exige investigar histórico e máquina.",
@@ -188,7 +188,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"O Top 10 é uma lista de verificação de conformidade\". Qual é a correção?",
     "alternativas": [
       "Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação",
@@ -208,7 +208,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"Ausência de achado de uma categoria no relatório prova que ela não existe na aplicação\". Qual é a correção?",
     "alternativas": [
       "Tratar zero achado como hipótese a investigar, não como resultado",
@@ -228,7 +228,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"A posição na lista é o grau de risco da minha aplicação\". Qual é a correção?",
     "alternativas": [
       "Tratar zero achado como hipótese a investigar, não como resultado",
@@ -248,7 +248,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"As categorias de 2021 servem para relatório de 2026\". Qual é a correção?",
     "alternativas": [
       "Tratar zero achado como hipótese a investigar, não como resultado",
@@ -268,7 +268,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"Categoria nova significa risco novo\". Qual é a correção?",
     "alternativas": [
       "A posição na lista é o grau de risco da minha aplicação",
@@ -288,7 +288,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre OWASP Top 10 para gestores: um colega afirma que \"Monitoramento registrado é suficiente\". Qual é a correção?",
     "alternativas": [
       "Verificar alerta, não só log",
@@ -308,7 +308,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Quantas categorias foram ranqueadas na edição 2025 e quantas delas vieram do levantamento com a comunidade?",
     "alternativas": [
       "Doze categorias foram ranqueadas; oito entraram por dado e duas foram promovidas pela votação da comunidade, totalizando as dez publicadas.",
@@ -328,7 +328,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Quantas CWEs existem dentro das dez categorias e quantas existiam no dicionário MITRE na data do lançamento?",
     "alternativas": [
       "A02:2025 Security Misconfiguration, com 3,00% das aplicações testadas apresentando ao menos uma das 16 CWEs da categoria.",
@@ -348,7 +348,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Qual categoria subiu da posição 5 em 2021 para a posição 2 em 2025, e que percentual de aplicações testadas apresentou ao menos uma das 16 CWEs dela?",
     "alternativas": [
       "248 CWEs dentro das dez categorias, contra 968 CWEs no dicionário MITRE disponível na data do lançamento.",
@@ -368,7 +368,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Modelar o sistema inteiro antes de modelar a função\". Qual é a correção?",
     "alternativas": [
       "Modelar a função que está em especificação, com o detalhe que gera teste",
@@ -388,7 +388,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Modelo de ameaças é uma reunião\". Qual é a correção?",
     "alternativas": [
       "Registrar dono de risco, justificativa e data de reavaliação",
@@ -408,7 +408,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"A resposta mitigar encerra o assunto\". Qual é a correção?",
     "alternativas": [
       "Definir gatilhos de revisão ligados à mudança",
@@ -428,7 +428,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Aceitar é decidir não fazer nada\". Qual é a correção?",
     "alternativas": [
       "Manter diagrama, lista, respostas, requisitos e data de revisão",
@@ -448,7 +448,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Caminhos automáticos não precisam de modelo\". Qual é a correção?",
     "alternativas": [
       "Marcar esses caminhos no diagrama e tratá-los como limite de confiança",
@@ -468,7 +468,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Revisar por calendário resolve\". Qual é a correção?",
     "alternativas": [
       "Escrever o requisito e o teste na mesma sessão",
@@ -488,7 +488,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Quais cinco elementos o diagrama de fluxo de dados precisa mostrar para sustentar a etapa de enumeração?",
     "alternativas": [
       "Modelar a função que está em especificação, com o detalhe que gera teste",
@@ -508,7 +508,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que webhook, fila e tarefa agendada merecem tratamento próprio no desenho?",
     "alternativas": [
       "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
@@ -528,7 +528,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual a diferença entre aceitar uma ameaça e ignorá-la?",
     "alternativas": [
       "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
@@ -548,7 +548,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que gatilhos de revisão você definiria para uma aplicação que integra dois fornecedores externos?",
     "alternativas": [
       "Porque nesses caminhos não existe usuário autenticando na frente; a verificação de origem, assinatura, titularidade e limite de frequência precisa ser desenhada explicitamente.",
@@ -568,7 +568,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Instalar ferramenta é implementar controle\". Qual é a correção?",
     "alternativas": [
       "Separar por natureza e por classe de ferramenta ao priorizar",
@@ -588,7 +588,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Gate que bloqueia tudo é mais rigoroso\". Qual é a correção?",
     "alternativas": [
       "Registrar a análise que concluiu pelo falso positivo, com autor e data",
@@ -608,7 +608,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Bloquear a ramificação de trabalho acelera a correção\". Qual é a correção?",
     "alternativas": [
       "Registrar a análise que concluiu pelo falso positivo, com autor e data",
@@ -628,7 +628,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Todos os críticos têm o mesmo esforço de correção\". Qual é a correção?",
     "alternativas": [
       "Separar por natureza e por classe de ferramenta ao priorizar",
@@ -648,7 +648,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Falso positivo não precisa de registro\". Qual é a correção?",
     "alternativas": [
       "Bloquear achado novo e severo na linha principal; registrar o resto",
@@ -668,7 +668,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"O relatório de varredura prova o que foi publicado\". Qual é a correção?",
     "alternativas": [
       "Bloquear a ramificação de trabalho acelera a correção",
@@ -688,7 +688,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que pergunta o SAST responde e que pergunta ele não responde?",
     "alternativas": [
       "Identificador do artefato exato analisado e versão do conjunto de regras. Sem os dois, não há como provar que a versão publicada foi a versão verificada, nem comparar resultado entre execuções.",
@@ -708,7 +708,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a análise de dependência precisa de um inventário do que foi construído, e não apenas da lista de dependências declaradas?",
     "alternativas": [
       "Identificador do artefato exato analisado e versão do conjunto de regras. Sem os dois, não há como provar que a versão publicada foi a versão verificada, nem comparar resultado entre execuções.",
@@ -728,7 +728,7 @@
       "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que dois elementos o relatório de varredura precisa carregar para ser rastreável, e por quê?",
     "alternativas": [
       "Responde se o código escrito contém padrão conhecido de falha e se dado não confiável chega a ponto sensível. Não responde como o sistema se comporta em execução, nem se a configuração do ambiente está segura.",
@@ -748,7 +748,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Inventário de componentes é documento de conformidade\". Qual é a correção?",
     "alternativas": [
       "Definir o nível de build como decisão de risco, com o dono do risco",
@@ -768,7 +768,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Gerar o inventário uma vez por ano resolve\". Qual é a correção?",
     "alternativas": [
       "Manter os dois, com o inventário como base",
@@ -788,7 +788,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Varredura de vulnerabilidade substitui o inventário\". Qual é a correção?",
     "alternativas": [
       "Manter os dois, com o inventário como base",
@@ -808,7 +808,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Dependência transitiva é responsabilidade de quem a escreveu\". Qual é a correção?",
     "alternativas": [
       "Registrar a análise que sustenta o não afetado, com autor e data",
@@ -828,7 +828,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Proveniência é assunto de time de plataforma\". Qual é a correção?",
     "alternativas": [
       "Gerar no build, amarrar ao artefato e usar na resposta a incidente",
@@ -848,7 +848,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Declarar não afetado é sempre resposta aceitável\". Qual é a correção?",
     "alternativas": [
       "Medir a contagem no artefato construído, não na lista declarada",
@@ -868,7 +868,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual a diferença entre inventário de componentes, varredura de vulnerabilidade e proveniência de build?",
     "alternativas": [
       "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
@@ -888,7 +888,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Para que serve o VEX, e o que acontece quando ele não existe?",
     "alternativas": [
       "O inventário responde o que está no artefato e em que versão; a varredura responde o que ali tem falha conhecida; a proveniência responde como o artefato foi construído e por quem.",
@@ -908,7 +908,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Qual é a versão corrente do CycloneDX, quando foi publicada e sob qual norma ela é registrada?",
     "alternativas": [
       "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído.",
@@ -928,7 +928,7 @@
       "url": "https://cyclonedx.org/specification/overview/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a contagem de componentes do artefato construído é maior que a contagem do arquivo de dependências declaradas?",
     "alternativas": [
       "Porque dependências transitivas — os pacotes trazidos pelos pacotes que a equipe escolheu — não aparecem no arquivo de dependências declaradas, mas entram no artefato construído.",
@@ -948,7 +948,7 @@
       "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Token válido no gateway resolve acesso\". Qual é a correção?",
     "alternativas": [
       "Verificar exposição externa como parte da publicação da versão",
@@ -968,7 +968,7 @@
       "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Limite de frequência protege contra quebra de autorização\". Qual é a correção?",
     "alternativas": [
       "Tratar limite como controle de consumo e autorização como controle separado",
@@ -988,7 +988,7 @@
       "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Filtrar a resposta é o mesmo que não devolver o dado\". Qual é a correção?",
     "alternativas": [
       "Endpoint de depuração é assunto de time de desenvolvimento",
@@ -1008,7 +1008,7 @@
       "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Documentar a API resolve o inventário\". Qual é a correção?",
     "alternativas": [
       "Tratar limite como controle de consumo e autorização como controle separado",
@@ -1028,7 +1028,7 @@
       "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Dado de API de terceiro é confiável por vir do parceiro\". Qual é a correção?",
     "alternativas": [
       "Tratar limite como controle de consumo e autorização como controle separado",
@@ -1048,7 +1048,7 @@
       "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de API: um colega afirma que \"Endpoint de depuração é assunto de time de desenvolvimento\". Qual é a correção?",
     "alternativas": [
       "Verificar exposição externa como parte da publicação da versão",
@@ -1068,7 +1068,7 @@
       "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o risco API3:2023 unificou em relação à edição de 2019?",
     "alternativas": [
       "A01:2025 Broken Access Control absorveu Server-Side Request Forgery, e a prevalência medida foi de 3,73% das aplicações testadas com ao menos uma das 40 CWEs da categoria.",
@@ -1088,7 +1088,7 @@
       "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que inventário de hosts e versões aparece como risco próprio na lista?",
     "alternativas": [
       "A01:2025 Broken Access Control absorveu Server-Side Request Forgery, e a prevalência medida foi de 3,73% das aplicações testadas com ao menos uma das 40 CWEs da categoria.",
@@ -1108,7 +1108,7 @@
       "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Que categoria da edição 2025 do Top 10 de aplicação web absorveu Server-Side Request Forgery, e qual a prevalência medida dessa categoria?",
     "alternativas": [
       "Porque APIs expõem mais endpoints que aplicações web tradicionais, e inventário incompleto mantém versões obsoletas e endpoints de depuração acessíveis, sem dono.",
@@ -1117,6 +1117,66 @@
       "Validar esquema, verificar origem e assinatura, limitar tamanho e tempo de espera"
     ],
     "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "09-aplicacoes-devsecops#GUIA#C02",
+    "ref": "09-aplicacoes-devsecops#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs distribuídas em 10 categorias",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "verificado",
+    "enunciado": "Qual categoria do Top 10 subiu da posição 5 em 2021 para a posição 2 em 2025, e que percentual de aplicações testadas apresentou ao menos uma das 16 CWEs dela? (TEMA-02)",
+    "alternativas": [
+      "248 CWEs dentro das dez categorias, contra 968 CWEs no dicionário MITRE disponível na data do lançamento.",
+      "Doze categorias foram ranqueadas; oito entraram por dado e duas foram promovidas pela votação da comunidade, totalizando as dez publicadas.",
+      "A02:2025 Security Misconfiguration, com 3,00% das aplicações testadas apresentando ao menos uma das 16 CWEs da categoria.",
+      "Porque cria fila, atrasa entrega e transforma o pedido de exceção em rotina; o processo perde autoridade e o controle é removido por decisão informal."
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "09-aplicacoes-devsecops#GUIA#C05",
+    "ref": "09-aplicacoes-devsecops#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs distribuídas em 10 categorias",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Quais três resultados o SSDF declara perseguir, segundo o resumo do NIST? (TEMA-01)",
+    "alternativas": [
+      "Reduzir o número de vulnerabilidades na versão publicada; mitigar o impacto potencial da exploração de vulnerabilidades não detectadas ou não tratadas; endereçar as causas raiz para evitar recorrência.",
+      "Reduzir o número de vulnerabilidades na versão publicada, mitigar o impacto potencial da exploração de vulnerabilidades não detectadas ou não tratadas, e endereçar as causas raiz para evitar recorrência.",
+      "No build. Fora dele, a informação sobre o que foi compilado, com quais entradas e por qual processo, já não está disponível de forma confiável, e reconstruí-la exige investigar histórico e máquina.",
+      "Responde se o código escrito contém padrão conhecido de falha e se dado não confiável chega a ponto sensível. Não responde como o sistema se comporta em execução, nem se a configuração do ambiente está segura."
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "09-aplicacoes-devsecops#GUIA#C06",
+    "ref": "09-aplicacoes-devsecops#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "OWASP Top 10:2025 — Introduction, oitava edição da série, 248 CWEs distribuídas em 10 categorias",
+      "url": "https://top10.owasp.org/2025/0x00_2025-Introduction/",
+      "tipo": "primaria"
+    },
+    "status": "verificado",
+    "enunciado": "O que a categoria A06:2025 registra sobre a evolução da modelagem de ameaças na indústria? (TEMA-03)",
+    "alternativas": [
+      "Porque APIs expõem mais endpoints que aplicações web tradicionais, e inventário incompleto mantém versões obsoletas e endpoints de depuração acessíveis, sem dono.",
+      "Aceitar é decisão registrada, com dono de risco, justificativa, prazo e reavaliação; ignorar é ausência de decisão, e a ameaça continua aberta sem que ninguém saiba.",
+      "Que a categoria foi introduzida em 2021 e que a indústria mostrou melhoras perceptíveis relacionadas a modelagem de ameaças e a maior ênfase em desenho seguro.",
+      "Versão 1.7, publicada em 21 de outubro de 2025, registrada como norma ECMA-424, com comitê técnico na TC54 e manutenção da OWASP Foundation com a Ecma International."
+    ],
+    "correta": 2,
     "justificativa": ""
   }
 ]

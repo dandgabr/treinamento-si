@@ -1,25 +1,36 @@
 <!doctype html>
-<html lang="pt-BR" data-theme="light">
+<!--
+  `data-theme` nasce em "auto": a paleta segue a preferencia do sistema (`styles.css`) ate o
+  bundle ler a escolha guardada, e a escolha explicita entra quando ele monta. O atributo
+  chegou a ser fixo em "light", o que fazia a tela piscar clara para quem usa o sistema no
+  escuro. A CSP do artefato publicado e injetada por plugin do Vite no build
+  (`vite.config.ts`): em `npm run dev` ela bloquearia o `<script src>` que o Vite injeta.
+-->
+<html lang="pt-BR" data-theme="auto">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--
-      O app roda offline num arquivo unico, sem backend e sem credenciais. A CSP aqui
-      nao impede XSS (o script inline do singlefile exige 'unsafe-inline'); ela corta
-      rede e formularios, que e o que um XSS conseguiria usar para exfiltrar. Freio,
-      nao antidoto: a defesa de verdade e a sanitizacao no build.
-    -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
-    />
+    <!-- A folha do app chega junto com o bundle. Esta regra pinta a tela de carregamento na
+         cor certa antes disso: sao os mesmos dois fundos de `styles.css` (`--fundo`),
+         repetidos aqui porque a folha ainda nao esta no documento. -->
+    <style>
+      html {
+        color-scheme: light dark;
+        background: #fbfaf7;
+      }
+      @media (prefers-color-scheme: dark) {
+        html {
+          background: #16181a;
+        }
+      }
+    </style>
     <title>Roadmap CISO — estudo interativo</title>
   </head>
   <body>
     <!-- Placeholder: o bundle tem 7,6 MB e leva um instante para montar. Sem isto, quem
          abre por duplo clique encara tela branca e pode achar que o arquivo quebrou. -->
     <div id="root">
-      <p style="font: 16px system-ui; padding: 2rem">Carregando o roadmap…</p>
+      <p style="font: 16px system-ui; padding: 2rem; margin: 0">Carregando o roadmap…</p>
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

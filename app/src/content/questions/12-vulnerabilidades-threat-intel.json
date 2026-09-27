@@ -8,7 +8,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"A ferramenta reportou sucesso na instalação, então o item está corrigido\". Qual é a correção?",
     "alternativas": [
       "Coloque janela no calendário e orçamento na base",
@@ -28,7 +28,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"Varredura é o começo do processo\". Qual é a correção?",
     "alternativas": [
       "Inventarie ativo, dono, software e exposição antes de varrer",
@@ -48,7 +48,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"Severidade alta é prioridade alta\". Qual é a correção?",
     "alternativas": [
       "A ferramenta reportou sucesso na instalação, então o item está corrigido",
@@ -68,7 +68,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"Correção é projeto com data de término\". Qual é a correção?",
     "alternativas": [
       "Leia a versão do componente no próprio dispositivo",
@@ -88,7 +88,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"Software fora de suporte sai da conta\". Qual é a correção?",
     "alternativas": [
       "Inventarie ativo, dono, software e exposição antes de varrer",
@@ -108,7 +108,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades: do inventário ao fechamento: um colega afirma que \"A lista de CVEs abertas mede a exposição\". Qual é a correção?",
     "alternativas": [
       "Meça tempo de exposição, taxa de verificação e concentração",
@@ -128,7 +128,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Quais são as cinco etapas do processo definidas pelo NIST SP 800-40 Rev. 4, e qual delas exige instrumentação no dispositivo?",
     "alternativas": [
       "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o host pode reportar a versão do componente corrigido.",
@@ -148,7 +148,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "O que o inventário precisa responder por ativo para que a fila de correção exista?",
     "alternativas": [
       "É o item aberto além do prazo declarado na política. Diante dele, as decisões possíveis são corrigir com novo prazo e dono, isolar ou substituir o ativo, ou registrar aceite formal de risco.",
@@ -168,7 +168,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que um item com instalação concluída e reportada pela ferramenta não fecha sem verificação no dispositivo?",
     "alternativas": [
       "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o host pode reportar a versão do componente corrigido.",
@@ -188,7 +188,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que significa um item fora do prazo e quais são as três decisões possíveis diante dele?",
     "alternativas": [
       "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o host pode reportar a versão do componente corrigido.",
@@ -208,7 +208,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura\". Qual é a correção?",
     "alternativas": [
       "Registre sempre a nomenclatura junto ao número",
@@ -228,7 +228,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Usar EPSS como se fosse nota de gravidade\". Qual é a correção?",
     "alternativas": [
       "Tratar Not Defined como ausência de informação neutral",
@@ -248,7 +248,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Ordenar a fila por EPSS puro e ignorar contexto\". Qual é a correção?",
     "alternativas": [
       "Preencher a métrica é o único caminho para o escore reagir ao tempo",
@@ -268,7 +268,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Tratar Not Defined como ausência de informação neutral\". Qual é a correção?",
     "alternativas": [
       "Ponderação pelo contexto do ativo é o que a organização acrescenta",
@@ -288,7 +288,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Recalcular tudo toda semana\". Qual é a correção?",
     "alternativas": [
       "Automatize a faixa prioritária e recalcule o resto por exceção",
@@ -308,7 +308,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade\". Qual é a correção?",
     "alternativas": [
       "Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura",
@@ -328,7 +328,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o EPSS estima exatamente, com que horizonte temporal e com que frequência de publicação?",
     "alternativas": [
       "Exigência regulatória, número de clientes afetados, perda financeira, risco à vida ou à propriedade e impacto reputacional. Estão fora do CVSS e continuam dentro da decisão de risco.",
@@ -348,7 +348,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o valor Not Defined da métrica Exploit Maturity significa no cálculo?",
     "alternativas": [
       "Equivale a Attacked, porque o cálculo assume o pior caso. Não preencher a métrica mantém a pontuação no teto.",
@@ -368,7 +368,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que três sinais se combinam na priorização e o que cada um responde?",
     "alternativas": [
       "Exigência regulatória, número de clientes afetados, perda financeira, risco à vida ou à propriedade e impacto reputacional. Estão fora do CVSS e continuam dentro da decisão de risco.",
@@ -388,7 +388,7 @@
       "url": "https://www.first.org/cvss/v4.0/specification-document",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que fatores a especificação do CVSS declara fora do seu escopo e que, mesmo assim, entram em uma decisão de risco?",
     "alternativas": [
       "A probabilidade de um CVE publicado ser explorado em campo nos próximos 30 dias, publicada como valor entre 0 e 1 com percentil de ranking, todos os dias, para cada CVE.",
@@ -408,7 +408,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/150/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Inteligência é a lista de indicadores do fornecedor\". Qual é a correção?",
     "alternativas": [
       "Escritas as regras de publicação, o compartilhamento deixa de ser risco pessoal",
@@ -428,7 +428,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/150/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Coletar primeiro e perguntar depois\". Qual é a correção?",
     "alternativas": [
       "Priorize verificação e declare a confiança de cada produto",
@@ -448,7 +448,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/150/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Mais fontes significam melhor inteligência\". Qual é a correção?",
     "alternativas": [
       "Escreva a pergunta e o consumidor antes de contratar a fonte",
@@ -468,7 +468,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/150/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Atribuição é o produto principal\". Qual é a correção?",
     "alternativas": [
       "Separe agrupamento, campanha e infraestrutura, e use a atribuição só quando ela muda uma decisão",
@@ -488,7 +488,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/150/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Compartilhar de volta é cortesia\". Qual é a correção?",
     "alternativas": [
       "Trate o procedimento como o ativo durável e exponha o indicador à expiração",
@@ -508,7 +508,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/150/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Relatório sem ação é inútil\". Qual é a correção?",
     "alternativas": [
       "Priorize verificação e declare a confiança de cada produto",
@@ -528,7 +528,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/150/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Quais atributos um indicador precisa carregar no registro para ser utilizável em detecção?",
     "alternativas": [
       "Data de coleta, prazo de validade e confiança declarada, além do requisito a que ele responde.",
@@ -548,7 +548,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/150/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que um procedimento observado dura mais, como insumo de detecção, do que um endereço ou um hash?",
     "alternativas": [
       "Significa que o requisito foi avaliado e nada mudou. O registro com motivo permite distinguir, mais tarde, uma decisão correta diante de material fraco de um erro de análise.",
@@ -568,7 +568,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/150/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que significa uma relação de inteligência declarar \"não decisão\" e por que isso precisa ser registrado?",
     "alternativas": [
       "Porque o endereço e o hash mudam em horas e são triviais de trocar, enquanto o procedimento descreve o que o ator precisa fazer para entrar, persistir e sair, e isso muda devagar.",
@@ -588,7 +588,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"ATT&CK é uma lista de malwares e ferramentas\". Qual é a correção?",
     "alternativas": [
       "Conte táticas e técnicas cobertas, com teste em dado real",
@@ -608,7 +608,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"Cobertura é o número de regras\". Qual é a correção?",
     "alternativas": [
       "Registre versão da matriz e data da leitura em todo mapa",
@@ -628,7 +628,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"Citar o agrupamento é o objetivo do relatório\". Qual é a correção?",
     "alternativas": [
       "Separe agrupamento, campanha e infraestrutura, e use a técnica como saída",
@@ -648,7 +648,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"O mapa não precisa de versão\". Qual é a correção?",
     "alternativas": [
       "Conte táticas e técnicas cobertas, com teste em dado real",
@@ -668,7 +668,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"Tática nova é problema de fornecedor\". Qual é a correção?",
     "alternativas": [
       "Separe agrupamento, campanha e infraestrutura, e use a técnica como saída",
@@ -688,7 +688,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"Sem telemetria, o time de detecção resolve\". Qual é a correção?",
     "alternativas": [
       "Separe agrupamento, campanha e infraestrutura, e use a técnica como saída",
@@ -708,7 +708,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quantas táticas a matriz Enterprise exibia na leitura registrada neste tema, e cite três delas com o identificador.",
     "alternativas": [
       "Porque a matriz muda: táticas e sub-técnicas entram, saem e se desmembram. Um número de cobertura sem versão não é comparável entre períodos nem revisável por terceiro.",
@@ -728,7 +728,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que um mapa de cobertura precisa carregar versão da matriz e data de leitura?",
     "alternativas": [
       "A matriz exibia 15 táticas na leitura. Entre elas: TA0043 Reconhecimento, TA0001 Initial Access, TA0008 Lateral Movement, TA0112 Defense Impairment e TA0040 Impact.",
@@ -748,7 +748,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que uma lacuna declarada precisa conter para entrar em decisão de orçamento?",
     "alternativas": [
       "Porque atribuição não gera regra, não define prazo e não altera telemetria. A técnica observada é o que a detecção consegue implementar e verificar.",
@@ -768,7 +768,7 @@
       "url": "https://attack.mitre.org/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que citar agrupamento sem citar técnica observada limita o valor do relatório de inteligência?",
     "alternativas": [
       "Porque atribuição não gera regra, não define prazo e não altera telemetria. A técnica observada é o que a detecção consegue implementar e verificar.",
@@ -788,7 +788,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Bug bounty é o primeiro passo do programa\". Qual é a correção?",
     "alternativas": [
       "Publique resumo, impacto, versões vulneráveis, versões corrigidas, mitigação e CVE",
@@ -808,7 +808,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Divulgação responsável depende da boa vontade do pesquisador\". Qual é a correção?",
     "alternativas": [
       "Escreva escopo, prazo e salvo-conduto, e publique o canal",
@@ -828,7 +828,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Aviso de segurança é risco de imagem\". Qual é a correção?",
     "alternativas": [
       "Publique canal e política, opere sem recompensa e só então decida sobre dinheiro",
@@ -848,7 +848,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Triagem é trabalho administrativo\". Qual é a correção?",
     "alternativas": [
       "Escreva escopo, prazo e salvo-conduto, e publique o canal",
@@ -868,7 +868,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"ISO/IEC 29147 e 30111 são a mesma coisa\". Qual é a correção?",
     "alternativas": [
       "Bug bounty é o primeiro passo do programa",
@@ -888,7 +888,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Ameaçar ação legal resolve relato inconveniente\". Qual é a correção?",
     "alternativas": [
       "Responda com processo e mantenha o salvo-conduto",
@@ -908,7 +908,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Onde fica o arquivo security.txt, qual norma descreve sua localização e quais são os campos obrigatórios?",
     "alternativas": [
       "Testar fora do escopo declarado, atuar em jurisdição que restringe engenharia reversa e condicionar a informação a pagamento. A política precisa conter escopo explícito, salvo-conduto e o procedimento de relato.",
@@ -928,7 +928,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os três modelos de divulgação descritos e qual deles a maioria dos programas de recompensa exige?",
     "alternativas": [
       "Resumo com impacto, lista de versões vulneráveis, lista de versões corrigidas, condições em que o produto é afetado, mitigação ou contorno e o identificador CVE.",
@@ -948,7 +948,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é o conteúdo mínimo de um aviso de segurança publicado?",
     "alternativas": [
       "Resumo com impacto, lista de versões vulneráveis, lista de versões corrigidas, condições em que o produto é afetado, mitigação ou contorno e o identificador CVE.",
@@ -968,7 +968,7 @@
       "url": "https://www.iso.org/standard/72311.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "O que caracteriza risco jurídico no contato com o pesquisador e o que a política precisa conter para endereçá-lo?",
     "alternativas": [
       "No caminho bem conhecido do domínio, como arquivo security.txt, conforme a RFC 9116. Os campos obrigatórios são contato e expiração; idiomas preferidos, canônico, política e vagas são opcionais.",
@@ -988,7 +988,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Percentual de itens fechados mede risco\". Qual é a correção?",
     "alternativas": [
       "Reporte tempo de exposição por faixa de prioridade",
@@ -1008,7 +1008,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Média é suficiente para resumir\". Qual é a correção?",
     "alternativas": [
       "Publique uma definição única antes de comparar",
@@ -1028,7 +1028,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Instalação reportada equivale a correção\". Qual é a correção?",
     "alternativas": [
       "Reporte tempo de exposição por faixa de prioridade",
@@ -1048,7 +1048,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Dívida é problema de capacidade da equipe\". Qual é a correção?",
     "alternativas": [
       "Declare numerador, denominador e data de referência no título",
@@ -1068,7 +1068,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"A métrica mais simples é a mais honesta\". Qual é a correção?",
     "alternativas": [
       "Declare numerador, denominador e data de referência no título",
@@ -1088,7 +1088,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Comparar áreas com a mesma métrica sem a mesma definição\". Qual é a correção?",
     "alternativas": [
       "Use percentil e separe por faixa de prioridade",
@@ -1108,7 +1108,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que é dívida de remediação e quais são os quatro cortes de medição?",
     "alternativas": [
       "Porque deixa de ser problema de capacidade de correção e passa a ser decisão de arquitetura e contrato: substituir o ativo, isolá-lo ou registrar aceite formal de risco, com orçamento e data.",
@@ -1128,7 +1128,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais três elementos uma métrica precisa declarar para ser comparável entre meses e entre áreas?",
     "alternativas": [
       "Recorte a dívida por ativo e decida substituição ou isolamento",
@@ -1148,7 +1148,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Como se calcula a taxa de verificação e por que ela é o número mais barato do conjunto?",
     "alternativas": [
       "Itens com versão corrigida lida no host divididos por itens que a ferramenta reporta como instalados. É barata porque a maior parte das ferramentas de gestão já coleta versão de componente no dispositivo.",
@@ -1168,7 +1168,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a concentração de itens vencidos em poucos ativos muda a decisão de natureza?",
     "alternativas": [
       "Itens com versão corrigida lida no host divididos por itens que a ferramenta reporta como instalados. É barata porque a maior parte das ferramentas de gestão já coleta versão de componente no dispositivo.",
@@ -1177,6 +1177,86 @@
       "Numerador, denominador e data de referência. Métrica sem os três não é comparável."
     ],
     "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "12-vulnerabilidades-threat-intel#GUIA#C02",
+    "ref": "12-vulnerabilidades-threat-intel#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, publicado em abril de 2022, substitui a Rev. 3 de 22/07/2013, DOI 10.6028/NIST.SP.800-40r4",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Qual é o pré-requisito operacional que o OWASP Cheat Sheet de divulgação exige antes de abrir um programa de recompensa? (TEMA-05)",
+    "alternativas": [
+      "Resumo com impacto, lista de versões vulneráveis, lista de versões corrigidas, condições em que o produto é afetado, mitigação ou contorno e o identificador CVE.",
+      "Ter um processo de divulgação maduro, com capacidade de triagem e de correção antes de receber volume externo. Sem isso a recompensa compra fila, não segurança.",
+      "A matriz exibia 15 táticas na leitura. Entre elas: TA0043 Reconhecimento, TA0001 Initial Access, TA0008 Lateral Movement, TA0112 Defense Impairment e TA0040 Impact.",
+      "É o conjunto de itens abertos além do prazo declarado na política. Os quatro cortes são quantidade, idade, faixa de prioridade e ativos distintos afetados."
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "12-vulnerabilidades-threat-intel#GUIA#C04",
+    "ref": "12-vulnerabilidades-threat-intel#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, publicado em abril de 2022, substitui a Rev. 3 de 22/07/2013, DOI 10.6028/NIST.SP.800-40r4",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Por que um item com instalação concluída e reportada pela ferramenta não fecha sem verificação no dispositivo? (TEMA-01)",
+    "alternativas": [
+      "Exploração confirmada em campo, que separa o que já foi usado de verdade; probabilidade estimada de exploração, que ordena o que ainda não foi usado; e contexto do ativo, que pondera a fila por exposição e valor.",
+      "Testar fora do escopo declarado, atuar em jurisdição que restringe engenharia reversa e condicionar a informação a pagamento. A política precisa conter escopo explícito, salvo-conduto e o procedimento de relato.",
+      "Porque a instalação pode concluir e o sistema seguir executando o código antigo até o reinício, e porque existem reversão e falha silenciosa. A ferramenta prova entrega de pacote; o dispositivo prova versão corrigida.",
+      "Porque a instalação pode concluir e o sistema seguir executando o código antigo até o reinício, e porque existem reversão e falha silenciosa. O que prova correção é o estado da versão lido no próprio dispositivo."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "12-vulnerabilidades-threat-intel#GUIA#C05",
+    "ref": "12-vulnerabilidades-threat-intel#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, publicado em abril de 2022, substitui a Rev. 3 de 22/07/2013, DOI 10.6028/NIST.SP.800-40r4",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Quantas táticas a matriz Enterprise do ATT&CK exibia na leitura data desta área, e por que o mapeamento precisa de versão? (TEMA-04)",
+    "alternativas": [
+      "A matriz exibia 15 táticas na data de acesso registrada em TEMA-04. O mapa precisa de versão e data porque a matriz muda: táticas e sub-técnicas entram e saem, e um mapa sem versão não é auditável.",
+      "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o host pode reportar a versão do componente corrigido.",
+      "No caminho bem conhecido do domínio, como arquivo security.txt, conforme a RFC 9116. Os campos obrigatórios são contato e expiração; idiomas preferidos, canônico, política e vagas são opcionais.",
+      "Porque deixa de ser problema de capacidade de correção e passa a ser decisão de arquitetura e contrato: substituir o ativo, isolá-lo ou registrar aceite formal de risco, com orçamento e data."
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "12-vulnerabilidades-threat-intel#GUIA#C06",
+    "ref": "12-vulnerabilidades-threat-intel#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-40 Rev. 4 — Guide to Enterprise Patch Management Planning: Preventive Maintenance for Technology, publicado em abril de 2022, substitui a Rev. 3 de 22/07/2013, DOI 10.6028/NIST.SP.800-40r4",
+      "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Quais três filtros de priorização o TEMA-03 da área 06 aplica em sequência? (06-endpoint-plataforma#TEMA-03)",
+    "alternativas": [
+      "Separe agrupamento, campanha e infraestrutura, e use a atribuição só quando ela muda uma decisão",
+      "Exploração confirmada em campo, probabilidade estimada de exploração e exposição do dispositivo.",
+      "Data de coleta, prazo de validade e confiança declarada, além do requisito a que ele responde.",
+      "Prazo de migração criptográfica tem data de padrão; vulnerabilidade tem prazo de correção"
+    ],
+    "correta": 1,
     "justificativa": ""
   }
 ]

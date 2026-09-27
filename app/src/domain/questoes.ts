@@ -13,12 +13,15 @@
 import { lerBancoBruto } from '@fonte'
 import type { Progresso } from './progresso'
 
-export type OrigemDaQuestao = 'erro-comum' | 'recuperacao'
+export type OrigemDaQuestao = 'erro-comum' | 'recuperacao' | 'checkpoint'
 export type StatusDaQuestao = 'rascunho' | 'pendente' | 'verificado'
 
 export interface Questao {
   id: string
-  /** Tema de origem: é o que liga o item ao material e ao progresso. */
+  /**
+   * Material de origem: é o que liga o item ao material e ao progresso. `area#TEMA-NN` para os
+   * itens de tema e `area#GUIA` para os de checkpoint, que saem do guia da área e não de um tema.
+   */
   ref: string
   origem: OrigemDaQuestao
   fonte: { titulo: string; url: string; tipo: string }
@@ -34,7 +37,7 @@ export interface Questao {
 export type Banco = Record<string, Questao[]>
 
 /** Listas fechadas do gerador. O guard as usa em vez de repetir a união. */
-const ORIGENS: readonly OrigemDaQuestao[] = ['erro-comum', 'recuperacao']
+const ORIGENS: readonly OrigemDaQuestao[] = ['erro-comum', 'recuperacao', 'checkpoint']
 const STATUS: readonly StatusDaQuestao[] = ['rascunho', 'pendente', 'verificado']
 
 function ehFonte(valor: unknown): boolean {

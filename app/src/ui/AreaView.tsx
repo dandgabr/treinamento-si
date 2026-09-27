@@ -1,13 +1,16 @@
 import { useEffect, useRef } from 'react'
 import { content } from '../infrastructure/content/repository'
-import { Html } from './Blocos'
+import { Html, idDaSecao, Principal, Sumario, type ItemDeSumario } from './Blocos'
 import { renderizarMermaid } from './mermaid'
 import { CheckpointArea, SituacaoDaArea } from './Progresso'
 import { linkTema } from './useRota'
 
+/** Minimo de secoes para o sumario valer a pena: tela curta nao precisa de indice. */
+const MIN_ITENS_SUMARIO = 4
+
 export function AreaView({ areaId, escuro }: { areaId: string; escuro: boolean }) {
   const area = content.areas.find((a) => a.areaId === areaId)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     if (containerRef.current) void renderizarMermaid(containerRef.current, escuro)
@@ -15,15 +18,22 @@ export function AreaView({ areaId, escuro }: { areaId: string; escuro: boolean }
 
   if (!area) {
     return (
-      <main className="conteudo">
+      <Principal>
         <p>Área não encontrada: {areaId}</p>
         <a href="#/">Voltar ao painel</a>
-      </main>
+      </Principal>
     )
   }
 
+  const secoes = area.guia.secoes.slice().sort((a, b) => a.numero - b.numero)
+  const itens: ItemDeSumario[] = secoes.map((s) => ({
+    id: idDaSecao(s.numero),
+    numero: s.numero,
+    texto: s.titulo,
+  }))
+
   return (
-    <main className="conteudo" ref={containerRef}>
+    <Principal refPrincipal={containerRef}>
       <nav className="migalhas">
         <a href="#/">Painel</a> / <span>{area.areaNome}</span>
       </nav>
@@ -38,6 +48,8 @@ export function AreaView({ areaId, escuro }: { areaId: string; escuro: boolean }
       </header>
 
       <SituacaoDaArea area={area} />
+
+      {itens.length >= MIN_ITENS_SUMARIO ? <Sumario itens={itens} /> : null}
 
       {area.guia.intro ? (
         <Html key={`intro-${escuro}`} className="intro" html={area.guia.intro} />
@@ -61,24 +73,22 @@ export function AreaView({ areaId, escuro }: { areaId: string; escuro: boolean }
         </ol>
       </section>
 
-      {area.guia.secoes
-        .slice()
-        .sort((a, b) => a.numero - b.numero)
-        .map((s) => {
-          // A key inclui a area: sem isso o React reaproveita o componente ao trocar de
-          // area e os vereditos da anterior passam a valer para a nova, gravando um
-          // checkpoint que ninguem respondeu.
-          if (s.numero === 9)
-            return <CheckpointArea key={area.areaId} areaId={area.areaId} area={area} />
-          return (
-            <section key={`${s.numero}-${escuro}`} className="secao">
-              <h2>
-                <span className="secao-num">{s.numero}.</span> {s.titulo}
-              </h2>
-              <Html html={s.html} />
-            </section>
-          )
-        })}
-    </main>
+      {secoes.map((s) => {
+        // A key inclui a area: sem isso o React reaproveita o componente ao trocar de
+        // area e os veredictos da anterior passam a valer para a nova, gravando um
+        // checkpoint que ninguem respondeu.
+        if (s.numero === 9)
+          return <CheckpointArea key={area.areaId} areaId={area.areaId} area={area} id={idDaSecao(9)} />
+        return (
+          <section key={`${s.numero}-${escuro}`} className="secao">
+            <h2 id={idDaSecao(s.numero)} tabIndex={-1}>
+              <span className="secao-num">{s.numero}.</span> {s.titulo}
+            </h2>
+            <Html html={s.html} />
+          </section>
+        )
+      })}
+    </Principal>
   )
 }
+

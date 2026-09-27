@@ -8,7 +8,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"O usuário é o elo mais fraco\"\". Qual é a correção?",
     "alternativas": [
       "Cubra no programa os canais que a organização efetivamente usa",
@@ -28,7 +28,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Treinamento resolve *phishing*\"\". Qual é a correção?",
     "alternativas": [
       "Use a lista de decisões atacadas no seu ambiente, que você consegue levantar",
@@ -48,7 +48,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Um percentual conhecido de incidentes vem de erro humano\"\". Qual é a correção?",
     "alternativas": [
       "Use a lista de decisões atacadas no seu ambiente, que você consegue levantar",
@@ -68,7 +68,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"*Phishing* é um problema de e-mail\"\". Qual é a correção?",
     "alternativas": [
       "Ajuste canal e conteúdo do programa ao modelo de trabalho real",
@@ -88,7 +88,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Trabalho híbrido não muda a exposição\"\". Qual é a correção?",
     "alternativas": [
       "Cubra no programa os canais que a organização efetivamente usa",
@@ -108,7 +108,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"*Phishing* é problema de e-mail\"\". Qual é a correção?",
     "alternativas": [
       "Defina o que se mede antes de escolher se a simulação é anunciada",
@@ -128,7 +128,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"O filtro de e-mail resolve\"\". Qual é a correção?",
     "alternativas": [
       "Some a filtragem a monitoração de correio e mensagens internas",
@@ -148,7 +148,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Basta habilitar MFA\"\". Qual é a correção?",
     "alternativas": [
       "\"Bloquear domínio malicioso encerra o problema\"",
@@ -168,7 +168,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Bloquear domínio malicioso encerra o problema\"\". Qual é a correção?",
     "alternativas": [
       "Defina o que se mede antes de escolher se a simulação é anunciada",
@@ -188,7 +188,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Anunciar a simulação educa\"\". Qual é a correção?",
     "alternativas": [
       "Priorize padrão de comportamento e restrinja o que pode executar",
@@ -208,7 +208,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Treinar uma vez por ano basta\"\". Qual é a correção?",
     "alternativas": [
       "Combine revisão anual com verificação de retenção e canal de reporte ativo",
@@ -228,7 +228,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o guia considera a monitoração de correio e mensagens internas essencial?",
     "alternativas": [
       "O canal de reporte com resposta registrada. Sem ele nenhuma camada fica sabendo que a tentativa existiu, e não há dado para decidir o próximo investimento.",
@@ -248,7 +248,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Como a autenticação única participa da defesa contra engenharia social, segundo o guia?",
     "alternativas": [
       "Concentra o acesso e reduz a chance de a pessoa ser convencida a entregar credencial, além de produzir trilha de auditoria que pode ser examinada de forma proativa ou retroativa após suspeita ou confirmação de incidente.",
@@ -268,7 +268,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2025-03/Phishing%20Guidance%20-%20Stopping%20the%20Attack%20Cycle%20at%20Phase%20One%20508.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é o primeiro controle a implantar quando não há orçamento novo, e por que ele é o primeiro?",
     "alternativas": [
       "Porque a pessoa pode ser enganada por origem interna ou sem que o time de segurança saiba, e o equilíbrio de tráfego interno permite notar desvio em relação à linha de base.",
@@ -288,7 +288,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Programa é o curso anual obrigatório\"\". Qual é a correção?",
     "alternativas": [
       "Declare as quatro etapas do ciclo e o retorno da avaliação para o desenho",
@@ -308,7 +308,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Conteúdo único atende todos\"\". Qual é a correção?",
     "alternativas": [
       "\"Depois de um incidente, basta reforçar o mesmo material\"",
@@ -328,7 +328,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"100% de conclusão prova eficácia\"\". Qual é a correção?",
     "alternativas": [
       "\"Depois de um incidente, basta reforçar o mesmo material\"",
@@ -348,7 +348,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Segurança e privacidade são campanhas separadas\"\". Qual é a correção?",
     "alternativas": [
       "\"Programa é o curso anual obrigatório\"",
@@ -368,7 +368,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Depois de um incidente, basta reforçar o mesmo material\"\". Qual é a correção?",
     "alternativas": [
       "Gere material novo a partir do caso real, com prazo declarado",
@@ -388,7 +388,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Sem plataforma não há programa\"\". Qual é a correção?",
     "alternativas": [
       "Declare as quatro etapas do ciclo e o retorno da avaliação para o desenho",
@@ -408,7 +408,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Quais são as quatro etapas do ciclo de vida descritas na edição de 2003 da NIST SP 800-50, e qual seção cobre cada uma?",
     "alternativas": [
       "Conclusão registra que a pessoa passou pelo conteúdo. Retenção verifica o que permaneceu depois, e é a única das duas que pode ser ligada a uma decisão futura.",
@@ -428,7 +428,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais publicações a SP 800-50 Rev. 1 substitui, e o que cada uma cobria?",
     "alternativas": [
       "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
@@ -448,7 +448,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Qual obrigação legal de 1987 está na origem das diretrizes de conscientização e treinamento, e qual característica ela impôs?",
     "alternativas": [
       "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
@@ -468,7 +468,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "O que o guia do CISA recomenda como verificação ao final de um programa de treinamento antiphishing?",
     "alternativas": [
       "O *Computer Security Act of 1987*, Lei Pública 100-235, que obrigou a NIST e o OPM a criar diretrizes baseadas em papéis organizacionais funcionais.",
@@ -488,7 +488,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a diferença entre medir conclusão e verificar retenção?",
     "alternativas": [
       "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6.",
@@ -508,7 +508,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Cultura se resolve com comunicação interna\"\". Qual é a correção?",
     "alternativas": [
       "Trate como hipótese operacional e teste na sua própria organização",
@@ -528,7 +528,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Cultura é responsabilidade do time de segurança\"\". Qual é a correção?",
     "alternativas": [
       "Observe exceção concedida, reporte feito e desvio tratado",
@@ -548,7 +548,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Pesquisa de clima mede cultura\"\". Qual é a correção?",
     "alternativas": [
       "Faça o critério ser escrito antes do material de campanha",
@@ -568,7 +568,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Toda exceção é falha de cultura\"\". Qual é a correção?",
     "alternativas": [
       "Trate como problema a exceção sem critério e sem prazo",
@@ -588,7 +588,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Uma campanha forte muda o comportamento\"\". Qual é a correção?",
     "alternativas": [
       "Observe exceção concedida, reporte feito e desvio tratado",
@@ -608,7 +608,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"O exemplo da liderança tem efeito mensurável conhecido\"\". Qual é a correção?",
     "alternativas": [
       "Nomeie o dono de cada decisão de conflito e o critério dele",
@@ -628,7 +628,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os três canais pelos quais a cultura em segurança opera na prática?",
     "alternativas": [
       "Ataque as decisões que contradizem a mensagem, e não o alcance da mensagem",
@@ -648,7 +648,7 @@
       "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Risco interno é assunto do time de segurança\"\". Qual é a correção?",
     "alternativas": [
       "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
@@ -668,7 +668,7 @@
       "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Instalar monitoração resolve\"\". Qual é a correção?",
     "alternativas": [
       "Comece por privilégio, revisão de acesso e critério de escalonamento",
@@ -688,7 +688,7 @@
       "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Insider threat é o mesmo que PAM\"\". Qual é a correção?",
     "alternativas": [
       "Trate os dois como camadas distintas e complementares",
@@ -708,7 +708,7 @@
       "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Todo acesso fora de horário indica risco interno\"\". Qual é a correção?",
     "alternativas": [
       "Comece por privilégio, revisão de acesso e critério de escalonamento",
@@ -728,7 +728,7 @@
       "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Exportação em massa é motivo para desligar alguém\"\". Qual é a correção?",
     "alternativas": [
       "Trate os dois como camadas distintas e complementares",
@@ -748,7 +748,7 @@
       "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"O programa começa pela ferramenta\"\". Qual é a correção?",
     "alternativas": [
       "Escreva o critério com Jurídico e Recursos Humanos antes de coletar",
@@ -768,7 +768,7 @@
       "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quantas práticas a sétima edição do guia do SEI apresenta, e sobre quantos casos a pesquisa se baseia?",
     "alternativas": [
       "Vinte e duas práticas, baseadas na análise de 3.000 casos de risco interno.",
@@ -788,7 +788,7 @@
       "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais partes interessadas o SEI nomeia como destinatárias dos recursos de cada prática?",
     "alternativas": [
       "Porque o controle que permitiu o alcance do ativo está errado independentemente da conclusão sobre a intenção, e misturar as duas coisas adia a correção até o fim de uma apuração que pode levar meses.",
@@ -808,7 +808,7 @@
       "url": "https://www.sei.cmu.edu/library/common-sense-guide-to-mitigating-insider-threats-seventh-edition/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a correção do acesso deve ser tratada separadamente da decisão sobre a pessoa?",
     "alternativas": [
       "Porque o controle que permitiu o alcance do ativo está errado independentemente da conclusão sobre a intenção, e misturar as duas coisas adia a correção até o fim de uma apuração que pode levar meses.",
@@ -828,7 +828,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Taxa de cliques mede suscetibilidade\"\". Qual é a correção?",
     "alternativas": [
       "\"Anunciar a simulação melhora o indicador\"",
@@ -848,7 +848,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Anunciar a simulação melhora o indicador\"\". Qual é a correção?",
     "alternativas": [
       "Se anunciar, não use o resultado como medida de risco",
@@ -868,7 +868,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Relatório individual de quem falhou aumenta a accountability\"\". Qual é a correção?",
     "alternativas": [
       "Declare o comportamento esperado e a verificação de retenção",
@@ -888,7 +888,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Conclusão de 100% é a meta do programa\"\". Qual é a correção?",
     "alternativas": [
       "\"Relatório individual de quem falhou aumenta a accountability\"",
@@ -908,7 +908,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Sem plataforma é impossível medir\"\". Qual é a correção?",
     "alternativas": [
       "Se anunciar, não use o resultado como medida de risco",
@@ -928,7 +928,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Métrica boa é métrica que sempre melhora\"\". Qual é a correção?",
     "alternativas": [
       "Defina o limiar que muda canal, conteúdo ou dono do risco",
@@ -948,7 +948,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os cinco elementos que um indicador precisa ter para ser levado a um comitê?",
     "alternativas": [
       "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara.",
@@ -968,7 +968,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Qual verificação o guia do CISA recomenda ao final de um programa de treinamento, e o que ela mede?",
     "alternativas": [
       "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência.",
@@ -988,7 +988,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o guia do CISA diz sobre o valor de reportar atividade suspeita?",
     "alternativas": [
       "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material. Ela mede retenção, e não a decisão de clicar.",
@@ -1008,13 +1008,73 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "O que a NIST SP 800-50 Rev. 1 declara sobre o uso de métricas no programa?",
     "alternativas": [
       "Que a orientação inclui métricas sugeridas e métodos de avaliação, para melhorar e atualizar o programa conforme as necessidades mudam.",
       "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material. Ela mede retenção, e não a decisão de clicar.",
       "Unidade de medida, fonte do dado, dono, direção desejada e decisão que ele dispara.",
       "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência."
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "15-fatores-humanos#GUIA#C02",
+    "ref": "15-fatores-humanos#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "verificado",
+    "enunciado": "Onde termina o programa de aprendizagem e começa o problema de cultura? (TEMA-04)",
+    "alternativas": [
+      "Porque o controle que permitiu o alcance do ativo está errado independentemente da conclusão sobre a intenção, e misturar as duas coisas adia a correção até o fim de uma apuração que pode levar meses.",
+      "Que reportar atividade suspeita de *phishing* é uma das formas mais eficientes de proteger a organização, porque ajuda o provedor de serviço de e-mail a identificar ataques novos ou em tendência.",
+      "No momento em que o comportamento observado de quem tem autoridade contradiz o que foi ensinado. O programa entrega conteúdo; a cultura aparece na decisão de quem poderia aplicar exceção e não aplica.",
+      "A SP 800-50 de outubro de 2003, que trabalhava o nível estratégico de construção do programa, e a SP 800-16 de abril de 1998, que descrevia o treinamento baseado em papel, no nível tático."
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "15-fatores-humanos#GUIA#C03",
+    "ref": "15-fatores-humanos#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Um gestor relata que o indicador de cliques caiu no trimestre. Qual pergunta você faz antes de aceitar o número? (TEMA-06)",
+    "alternativas": [
+      "Que a orientação inclui métricas sugeridas e métodos de avaliação, para melhorar e atualizar o programa conforme as necessidades mudam.",
+      "Uma verificação de treinamento que certifique que o empregado reteve o conteúdo do programa, ao final do ciclo de revisão anual do material.",
+      "Critério e registro de exceção; custo de reportar; e resposta ao desvio, incluindo se o caso gerou mudança de processo ou exceção permanente.",
+      "Qual foi a definição do indicador, se as simulações foram anunciadas, quem clicou, e qual comportamento real mudou depois disso."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "15-fatores-humanos#GUIA#C04",
+    "ref": "15-fatores-humanos#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-50 Rev. 1 — Building a Cybersecurity and Privacy Learning Program, setembro de 2024",
+      "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Por que a exploração de uma pessoa é mais barata para o atacante do que explorar uma falha técnica? (TEMA-01)",
+    "alternativas": [
+      "Porque a pessoa já tem autorização legítima. O ataque não precisa quebrar controle nenhum: ele convence o dono da autorização a usá-la em favor de terceiro.",
+      "O canal de reporte com resposta registrada. Sem ele nenhuma camada fica sabendo que a tentativa existiu, e não há dado para decidir o próximo investimento.",
+      "Conclusão registra que a pessoa passou pelo conteúdo. Retenção verifica o que permaneceu depois, e é a única das duas que pode ser ligada a uma decisão futura.",
+      "Desenho do programa de conscientização e treinamento, seção 3; desenvolvimento do material, seção 4; implementação do programa, seção 5; pós-implementação, seção 6."
     ],
     "correta": 0,
     "justificativa": ""

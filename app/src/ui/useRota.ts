@@ -5,9 +5,10 @@ export type Rota =
   | { nome: 'area'; areaId: string }
   | { nome: 'tema'; ref: string }
   | { nome: 'pagina'; slug: string }
-  // `areaId` nulo e o quiz de todas as areas: as duas telas sao a mesma, e o escopo vazio
-  // nao precisa de uma rota propria.
-  | { nome: 'quiz'; areaId: string | null }
+  // `areaId` nulo e o quiz de todas as areas; `areaId` com `temaId` nulo e o da area
+  // inteira; com os dois, o de um tema. E a mesma tela nos tres casos, e por isso nao ha uma
+  // rota propria para cada escopo.
+  | { nome: 'quiz'; areaId: string | null; temaId: string | null }
   | { nome: 'desconhecida' }
 
 function analisar(hash: string): Rota {
@@ -29,9 +30,12 @@ function analisar(hash: string): Rota {
   if (partes[0] === 'area' && partes[1]) return { nome: 'area', areaId: partes[1] }
   if (partes[0] === 'tema' && partes[1] && partes[2]) return { nome: 'tema', ref: `${partes[1]}#${partes[2]}` }
   if (partes[0] === 'pagina' && partes[1]) return { nome: 'pagina', slug: partes.slice(1).join('/') }
-  // Sem area, `#/quiz` e o quiz geral; `#/quiz/<areaId>` e o da area. Nada mais e lido da
-  // rota: o escopo inexistente e resolvido na tela, que sabe dizer "area nao encontrada".
-  if (partes[0] === 'quiz') return { nome: 'quiz', areaId: partes[1] ?? null }
+  // Sem area, `#/quiz` e o quiz geral; `#/quiz/<areaId>`, o da area; `#/quiz/<areaId>/<temaId>`,
+  // o do tema. Nada mais e lido da rota: escopo inexistente e resolvido na tela, que sabe
+  // dizer "area nao encontrada" e "tema nao encontrado".
+  if (partes[0] === 'quiz') {
+    return { nome: 'quiz', areaId: partes[1] ?? null, temaId: partes[2] ?? null }
+  }
   return { nome: 'desconhecida' }
 }
 
@@ -53,16 +57,68 @@ export function irPara(hash: string): void {
 }
 
 /**
- * Monta o href de um tema a partir do `ref` ("area_id#TEMA-NN").
- * O `#` do ref nao pode ir cru para a URL: ele encerraria o fragmento e a rota
- * viraria "desconhecida".
+ * Leva a rolagem E o foco para um cabecalho do material.
+ *
+ * O alvo fica no `id` do cabecalho, e nao na URL: o fragmento pertence a rota, e uma ancora
+ * de verdade viraria a rota "desconhecida". O foco vai junto porque rolar sem focar deixaria
+ * quem usa leitor de tela no ponto antigo, lendo o que ja passou.
  */
-export function linkTema(ref: string): string {
-  const [areaId, temaId] = ref.split('#')
-  return `#/tema/${areaId}/${temaId}`
+export function irParaSecao(id: string): void {
+  const alvo = document.getElementById(id)
+  if (!alvo) return
+  alvo.focus({ preventScroll: true })
+  alvo.scrollIntoView({ block: 'start' })
 }
 
-/** Monta o href do quiz: com area, o da area; sem, o de todas. */
-export function linkQuiz(areaId?: string): string {
+/**
+ * Poe o foco no bloco principal da tela.
+ *
+ * Dois usos: o "pular para o conteudo" (`rolar`), que precisa levar a pagina junto, e a
+ * troca de rota, que so move o foco — o topo ja foi restaurado pelo App. O bloco precisa do
+ * `tabIndex={-1}` que o `Principal` poe em todo `main`: focavel, e ainda assim fora da
+ * tabulacao normal.
+ */
+export function focarConteudo(rolar = false): void {
+  const principal = document.querySelector('main')
+  if (!principal) return
+  principal.focus({ preventScroll: !rolar })
+  if (rolar) principal.scrollIntoView({ block: 'start' })
+}
+
+/**
+ * O sufixo que marca, no `ref`, o item que saiu do GUIA de uma area.
+ *
+ * Quem escreve a convencao e o gerador (`GUIA`, em `scripts/lib/questoes.ts`), e quem a
+ * confere e o gate do banco; aqui ela e lida para montar o caminho de volta. O gate
+ * (`validarBanco`) recusa um `ref` de guia com origem de tema e vice-versa, entao um
+ * desencontro entre os dois lados aparece no build, e nao na tela.
+ */
+const SUFIXO_DE_GUIA = '#GUIA'
+
+/** Diz se o `ref` aponta para o guia da area — item de checkpoint, sem tema de origem. */
+export function ehRefDeGuia(ref: string): boolean {
+  return ref.endsWith(SUFIXO_DE_GUIA)
+}
+
+/**
+ * Monta o href de um item a partir do `ref`.
+ *
+ * `area#TEMA-NN` leva ao tema; `area#GUIA` leva ao **guia da area**, que e onde o checkpoint
+ * esta escrito — nao existe tema para ele, e mandar a pessoa procurar o item num tema seria
+ * mandar para o lugar errado.
+ *
+ * O `#` do ref nao pode ir cru para a URL: ele encerraria o fragmento e a rota viraria
+ * "desconhecida".
+ */
+export function linkTema(ref: string): string {
+  const [areaId, parte] = ref.split('#')
+  if (ehRefDeGuia(ref)) return `#/area/${areaId}`
+  return `#/tema/${areaId}/${parte}`
+}
+
+/** Monta o href do quiz: com tema, o do tema; com area, o da area; sem, o de todas. */
+export function linkQuiz(areaId?: string, temaId?: string): string {
+  if (areaId && temaId) return `#/quiz/${areaId}/${temaId}`
   return areaId ? `#/quiz/${areaId}` : '#/quiz'
 }
+

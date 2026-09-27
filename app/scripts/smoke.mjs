@@ -104,6 +104,13 @@ const cenarios = [
         0,
       ],
       ['botao de leitura', d.querySelectorAll('.acoes-tema button').length, 1],
+      // O quiz tem escopo por tema, e o caminho da pagina do tema ate ele e este botao: sem a
+      // asserção, o `href` errado (tema da area errada, por exemplo) so apareceria no clique.
+      [
+        'link para praticar o tema',
+        d.querySelector('.acoes-tema a.botao-secundario')?.getAttribute('href'),
+        '#/quiz/01-fundamentos/TEMA-01',
+      ],
       ['bloco de recuperacao ativa', d.querySelectorAll('.bloco-qa').length, 1],
       ['gabarito comecou escondido', d.querySelector('.bloco-qa .gabarito')?.hasAttribute('hidden'), true],
       [
@@ -203,7 +210,8 @@ function rotasDaMatriz() {
   const rotas = []
   // A rota do quiz entra na matriz: era a unica tela do app que cenario nenhum visitava, e
   // por isso o defeito de foco ao avancar questao (o foco caia no `body`) so apareceu numa
-  // revisao manual. `#/quiz` e o quiz de todas as areas; `#/quiz/<areaId>`, o da area.
+  // revisao manual. Os tres escopos entram: `#/quiz` (todas as areas), `#/quiz/<areaId>` e
+  // `#/quiz/<areaId>/<temaId>`.
   rotas.push({ nome: 'quiz', rota: '#/quiz' })
   for (const a of c.areas) {
     rotas.push({ nome: `area ${a.areaId}`, rota: `#/area/${a.areaId}` })
@@ -212,6 +220,7 @@ function rotasDaMatriz() {
     if (primeiro) {
       const [areaId, temaId] = primeiro.split('#')
       rotas.push({ nome: `tema ${primeiro}`, rota: `#/tema/${areaId}/${temaId}` })
+      rotas.push({ nome: `quiz do tema ${primeiro}`, rota: `#/quiz/${areaId}/${temaId}` })
     }
   }
   for (const p of c.paginas) rotas.push({ nome: `pagina ${p.slug}`, rota: `#/pagina/${p.slug}` })
@@ -239,6 +248,35 @@ function conteudo() {
     )
   }
   return conteudoCache
+}
+
+/**
+ * Quantos itens o banco tem por `ref`, lido do disco.
+ *
+ * E o que deixa o cenario do quiz por tema conferir o escopo contra o banco de verdade:
+ * quantos itens o tema tem, e se a rodada parou nele ou vazou para outro material.
+ */
+let bancoCache = null
+function itensPorRef() {
+  if (!bancoCache) {
+    bancoCache = new Map()
+    const pasta = path.join(APP, 'src', 'content', 'questions')
+    for (const arquivo of fs.readdirSync(pasta)) {
+      if (!arquivo.endsWith('.json')) continue
+      for (const item of JSON.parse(fs.readFileSync(path.join(pasta, arquivo), 'utf8'))) {
+        bancoCache.set(item.ref, (bancoCache.get(item.ref) ?? 0) + 1)
+      }
+    }
+  }
+  return bancoCache
+}
+
+/** O tema com mais itens no banco: e o escopo que enche uma rodada inteira. */
+function temaMaisCheio() {
+  const porRef = itensPorRef()
+  const refs = [...porRef.entries()].filter(([ref]) => !ref.endsWith('#GUIA'))
+  refs.sort((a, b) => b[1] - a[1])
+  return refs[0] ?? null
 }
 
 function decodificar(parte) {
@@ -269,11 +307,13 @@ function hrefsInvalidos(d) {
       (partes[0] === 'area' && areas.has(partes[1])) ||
       (partes[0] === 'tema' && temas.has(`${partes[1]}#${partes[2]}`)) ||
       (partes[0] === 'pagina' && slugs.has(partes.slice(1).join('/'))) ||
-      // O quiz tem duas rotas — `#/quiz`, de todas as areas, e `#/quiz/<areaId>` — e as duas
-      // sao visitadas pela matriz. Sem esta linha, o link do painel para o quiz seria
-      // reprovado por apontar para uma rota que existe.
+      // O quiz tem tres rotas — `#/quiz`, `#/quiz/<areaId>` e `#/quiz/<areaId>/<temaId>` — e
+      // as tres sao visitadas pela matriz. Sem esta linha, o link do painel e o botao
+      // "Praticar este tema" seriam reprovados por apontarem para rotas que existem.
       (partes[0] === 'quiz' &&
-        (partes.length === 1 || (partes.length === 2 && areas.has(partes[1]))))
+        (partes.length === 1 ||
+          (partes.length === 2 && areas.has(partes[1])) ||
+          (partes.length === 3 && temas.has(`${partes[1]}#${partes[2]}`))))
     if (!ok) invalidos.push(href)
   }
   return invalidos
@@ -367,11 +407,19 @@ async function cenarioDoQuizRespondido() {
 
       const aviso = pagina.locator('.bloco-questao > .dica')
       const rotulo = (await aviso.count()) ? ((await aviso.textContent()) ?? '') : ''
+      // A tela distingue as tres origens em prosa. O item ja promovido a `verificado` nao
+      // leva selo nenhum, e por isso nao diz de onde veio — a conferencia abaixo so vale
+      // para o item que ainda esta em revisao.
+      const emRevisao = rotulo.includes('não revisado') || rotulo.includes('em revisão')
       const origem = rotulo.includes('recuperação ativa')
         ? 'recuperação ativa'
         : rotulo.includes('tabela de erros comuns')
           ? 'tabela de erros comuns'
-          : null
+          : rotulo.includes('checkpoint do guia')
+            ? 'checkpoint do guia'
+            : emRevisao
+              ? 'desconhecida'
+              : null
 
       const antes = await pagina.evaluate(() => {
         const radios = [...document.querySelectorAll('.alternativas input[type=radio]')]
@@ -407,6 +455,9 @@ async function cenarioDoQuizRespondido() {
       conferir('o grupo trava depois de responder', depois.travados, antes.radios)
 
       const temPorque = depois.texto.includes('Por quê')
+      // Um aviso de revisao que nao diz de onde o item veio seria uma origem nova que a tela
+      // nao conhece — e o teste nao saberia qual contrato cobrar dela.
+      if (emRevisao) conferir('o aviso de revisão diz de onde o item veio', origem !== 'desconhecida', true)
       if (origem === 'recuperação ativa') {
         recuperacao += 1
         // Item de recuperacao nao tem justificativa derivada: o rotulo nao pode aparecer
@@ -415,7 +466,12 @@ async function cenarioDoQuizRespondido() {
       } else if (origem === 'tabela de erros comuns') {
         erroComum += 1
         conferir('item de erro comum com "Por quê"', temPorque, true)
+      } else if (origem === 'checkpoint do guia') {
+        // O checkpoint tambem nao tem coluna de "por que isto esta errado": a resposta do
+        // material e o gabarito, e a conferencia de verdade e o guia da area.
+        conferir('item de checkpoint sem "Por quê"', temPorque, false)
       }
+
 
       await pagina.locator('.acoes-questao button').click()
       respondidas += 1

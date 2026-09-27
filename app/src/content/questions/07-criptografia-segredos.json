@@ -8,7 +8,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Hash é um tipo de cifra fraca\". Qual é a correção?",
     "alternativas": [
       "Use assinatura para autoria e integridade, e cifra com chave pública para sigilo",
@@ -28,7 +28,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"AES-256 tem bloco de 256 bits\". Qual é a correção?",
     "alternativas": [
       "Separe os dois números ao escrever requisito ou questionário",
@@ -48,7 +48,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Cifrar com a chave privada é assinar\". Qual é a correção?",
     "alternativas": [
       "Classifique hash como função de integridade, e use cifra quando precisar reaver o conteúdo",
@@ -68,7 +68,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Hash sem chave prova autoria\". Qual é a correção?",
     "alternativas": [
       "Qualquer modo do AES entrega autenticação",
@@ -88,7 +88,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Chave maior resolve qualquer risco\". Qual é a correção?",
     "alternativas": [
       "Separe os dois números ao escrever requisito ou questionário",
@@ -108,7 +108,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Qualquer modo do AES entrega autenticação\". Qual é a correção?",
     "alternativas": [
       "Consulte a publicação de modos do NIST antes de escolher; a lista não foi conferida nesta execução, portanto NAO CONFIRMADO em fonte oficial",
@@ -128,7 +128,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a diferença entre tamanho de chave e tamanho de bloco no AES, e qual dos dois aparece no nome AES-256?",
     "alternativas": [
       "O bloco é o tamanho da unidade processada pelo algoritmo e vale 128 bits nas três instâncias do AES; a chave é o material secreto e tem 128, 192 ou 256 bits. O sufixo do nome AES-256 indica o tamanho da chave.",
@@ -148,7 +148,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que uma função de hash prova e o que ela não prova?",
     "alternativas": [
       "O bloco é o tamanho da unidade processada pelo algoritmo e vale 128 bits nas três instâncias do AES; a chave é o material secreto e tem 128, 192 ou 256 bits. O sufixo do nome AES-256 indica o tamanho da chave.",
@@ -168,7 +168,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que duas partes que nunca se viram conseguem chegar à mesma chave simétrica por canal público?",
     "alternativas": [
       "Resolve a necessidade de buscar por igualdade sem guardar o valor em claro, já que cifra não preserva igualdade. Expõe o índice a ataque por força bruta quando o conjunto de valores possíveis é pequeno e previsível.",
@@ -188,7 +188,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que um resumo de tamanho pequeno deixa de servir para assinatura depois que alguém encontra duas mensagens diferentes com o mesmo resumo?",
     "alternativas": [
       "Prova que o conteúdo não foi alterado sem que o resumo mudasse — detecção de alteração. Não prova autoria, não esconde o conteúdo, e não impede que alguém recalcule o resumo de uma mensagem modificada.",
@@ -208,7 +208,7 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que problema um índice de busca derivado por hash com segredo resolve, e o que ele expõe?",
     "alternativas": [
       "Resolve a necessidade de buscar por igualdade sem guardar o valor em claro, já que cifra não preserva igualdade. Expõe o índice a ataque por força bruta quando o conjunto de valores possíveis é pequeno e previsível.",
@@ -228,7 +228,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Certificado válido significa serviço confiável\". Qual é a correção?",
     "alternativas": [
       "Trate o certificado como identidade técnica, e o resto como decisão de negócio",
@@ -248,7 +248,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Certificado dentro do prazo é certificado válido\". Qual é a correção?",
     "alternativas": [
       "Teste com o cliente que a aplicação realmente usa",
@@ -268,7 +268,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Cadeia que funciona no navegador funciona em todo cliente\". Qual é a correção?",
     "alternativas": [
       "Some o custo operacional da raiz antes de decidir",
@@ -288,7 +288,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Revogação resolve o comprometimento\". Qual é a correção?",
     "alternativas": [
       "Cadeia que funciona no navegador funciona em todo cliente",
@@ -308,7 +308,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Autoridade interna é gratuita\". Qual é a correção?",
     "alternativas": [
       "Some o custo operacional da raiz antes de decidir",
@@ -328,7 +328,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre PKI, certificados e cadeia de confiança: um colega afirma que \"Renovação é tarefa administrativa\". Qual é a correção?",
     "alternativas": [
       "Cadeia que funciona no navegador funciona em todo cliente",
@@ -348,7 +348,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os cinco critérios verificados na validação de um caminho de certificação?",
     "alternativas": [
       "Porque o cliente precisa montar a cadeia até a âncora e pode usar o certificado intermediário que já tem em cache; quem não tem o intermediário não consegue validar.",
@@ -368,7 +368,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que a autoridade certificadora afirma, e o que ela não afirma, ao assinar um certificado?",
     "alternativas": [
       "O risco de indisponibilidade por expiração deixa de depender de calendário humano e passa a depender de um processo testado, com monitoramento de falha do próprio processo.",
@@ -388,7 +388,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que um servidor que envia só o próprio certificado funciona para uns clientes e falha para outros?",
     "alternativas": [
       "A chave privada da raiz. Ela deve ficar em módulo que não permite exportação, com acesso nominal, uso registrado e cerimônia de ativação separada da operação diária.",
@@ -408,7 +408,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que muda no risco quando a renovação passa a ser automática?",
     "alternativas": [
       "O risco de indisponibilidade por expiração deixa de depender de calendário humano e passa a depender de um processo testado, com monitoramento de falha do próprio processo.",
@@ -428,7 +428,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é o item mais valioso de uma autoridade certificadora interna, e como ele deve ser custodiado?",
     "alternativas": [
       "Porque o cliente precisa montar a cadeia até a âncora e pode usar o certificado intermediário que já tem em cache; quem não tem o intermediário não consegue validar.",
@@ -448,7 +448,7 @@
       "url": "https://www.rfc-editor.org/info/rfc5280/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o comportamento do cliente quando a consulta de revogação falha é decisão de projeto?",
     "alternativas": [
       "Afirma que o solicitante controlava o nome no momento da emissão e que a chave pública é dele. Não afirma que o serviço é seguro, que o conteúdo é confiável nem que o dono é idôneo.",
@@ -468,7 +468,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"Tráfego interno não precisa de TLS\". Qual é a correção?",
     "alternativas": [
       "Decida por mTLS onde a identidade da máquina precisa ser provada, e conte o custo",
@@ -488,7 +488,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"Versão antiga aceita é só questão de desempenho\". Qual é a correção?",
     "alternativas": [
       "Corrija a causa e remova a exceção; exceção permanente é o achado mais grave",
@@ -508,7 +508,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"Cadeia incompleta é detalhe de configuração\". Qual é a correção?",
     "alternativas": [
       "Desabilite versões anteriores à política e trate exceção como item de risco",
@@ -528,7 +528,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"mTLS é sempre melhor\". Qual é a correção?",
     "alternativas": [
       "Decida por mTLS onde a identidade da máquina precisa ser provada, e conte o custo",
@@ -548,7 +548,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"Aceitar o certificado no cliente resolve a falha\". Qual é a correção?",
     "alternativas": [
       "Desabilite versões anteriores à política e trate exceção como item de risco",
@@ -568,7 +568,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre TLS na prática: um colega afirma que \"Renovação automática elimina o risco\". Qual é a correção?",
     "alternativas": [
       "Aceitar o certificado no cliente resolve a falha",
@@ -588,7 +588,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o handshake do TLS 1.3 autentica, e o que ele não autentica?",
     "alternativas": [
       "Porque a exceção desliga a verificação de identidade de forma permanente e o canal passa a aceitar qualquer certificado, inclusive de um servidor controlado por atacante em posição de rede.",
@@ -608,7 +608,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a sessão anterior continua protegida quando a chave privada do servidor vaza depois?",
     "alternativas": [
       "O canal cifrado passa a terminar antes da aplicação: o trecho até o servidor de aplicação trafega em claro ou sob outra cifra, e o material de chave fica concentrado em um ponto administrado.",
@@ -628,7 +628,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que muda quando o TLS termina no balanceador em vez de terminar na aplicação?",
     "alternativas": [
       "O canal cifrado passa a terminar antes da aplicação: o trecho até o servidor de aplicação trafega em claro ou sob outra cifra, e o material de chave fica concentrado em um ponto administrado.",
@@ -648,7 +648,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é o critério verificável para aceitar ou recusar uma versão de protocolo em um serviço interno?",
     "alternativas": [
       "O canal cifrado passa a terminar antes da aplicação: o trecho até o servidor de aplicação trafega em claro ou sob outra cifra, e o material de chave fica concentrado em um ponto administrado.",
@@ -668,7 +668,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/52/r2/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que aceitar certificado inválido no cliente é pior do que a falha original?",
     "alternativas": [
       "Porque a chave de sessão foi derivada de um segredo efêmero do handshake, e não da chave privada de longa duração. A chave privada assina e autentica; ela não decifra o histórico de sessões.",
@@ -688,7 +688,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Cifrar o dado é suficiente\". Qual é a correção?",
     "alternativas": [
       "Use hierarquia com DEK por classe e KEK por domínio",
@@ -708,7 +708,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Uma chave por empresa simplifica\". Qual é a correção?",
     "alternativas": [
       "Separe custódia, com acesso nominal e registro de uso",
@@ -728,7 +728,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Rotação é trabalho de calendário\". Qual é a correção?",
     "alternativas": [
       "Defina gatilhos, teste e monitore",
@@ -748,7 +748,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Backup da chave é igual ao backup do dado\". Qual é a correção?",
     "alternativas": [
       "Separe custódia, com acesso nominal e registro de uso",
@@ -768,7 +768,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Destruir a chave é perder dado\". Qual é a correção?",
     "alternativas": [
       "Peça nível, versão do padrão e data, e verifique o processo interno",
@@ -788,7 +788,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Fornecedor validado dispensa gestão\". Qual é a correção?",
     "alternativas": [
       "Trate destruição como operação autorizada, com escopo e registro",
@@ -808,7 +808,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que uma chave de dados é cifrada por uma chave de chave em vez de ser guardada em claro?",
     "alternativas": [
       "Dimensionar o escopo, conter com suspensão e substituição, erradicar re-embrulhando e re-cifrando o exposto, e evidenciar com registro de uso. A última etapa responde à pergunta de quanto vazou.",
@@ -828,7 +828,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que a destruição da chave de chave faz com os dados que ela protegia?",
     "alternativas": [
       "Torna os dados irrecuperáveis, já que sem a chave não há decifragem nem por backup. É o efeito desejado no fim da retenção e o efeito catastrófico no erro de escopo.",
@@ -848,7 +848,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as evidências mínimas de que ninguém exportou a chave em claro?",
     "alternativas": [
       "Torna os dados irrecuperáveis, já que sem a chave não há decifragem nem por backup. É o efeito desejado no fim da retenção e o efeito catastrófico no erro de escopo.",
@@ -868,7 +868,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a chave que cifra o conteúdo não deve ser a mesma que constrói o índice de busca?",
     "alternativas": [
       "Garante o que o módulo atesta nos níveis crescentes de segurança definidos no padrão, conforme a validação registrada no CMVP. Não garante que a organização gera, custodia, roda e destrói chaves de acordo com a política.",
@@ -888,7 +888,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a ordem de resposta a um comprometimento de chave, e o que cada etapa entrega?",
     "alternativas": [
       "Porque a chave em claro no mesmo local que o dado elimina a proteção: quem lê o armazenamento lê a chave junto. A chave de chave fica em custódia separada, com acesso auditado e destruição controlada.",
@@ -908,7 +908,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que a validação FIPS 140-3 de um módulo garante, e o que ela não garante?",
     "alternativas": [
       "Garante o que o módulo atesta nos níveis crescentes de segurança definidos no padrão, conforme a validação registrada no CMVP. Não garante que a organização gera, custodia, roda e destrói chaves de acordo com a política.",
@@ -928,7 +928,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Variável de ambiente é lugar seguro para segredo\". Qual é a correção?",
     "alternativas": [
       "Escreva a política e defina dono e prazo por tipo de segredo",
@@ -948,7 +948,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Apagar o arquivo remove o vazamento\". Qual é a correção?",
     "alternativas": [
       "Revogue, substitua, reduza o escopo e varra o histórico",
@@ -968,7 +968,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Chave de cifra e credencial são a mesma coisa\". Qual é a correção?",
     "alternativas": [
       "Revogue, substitua, reduza o escopo e varra o histórico",
@@ -988,7 +988,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Cofre de senha privilegiada cobre tudo\". Qual é a correção?",
     "alternativas": [
       "Use cofre com entrega autenticada e credencial de curta duração",
@@ -1008,7 +1008,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Rotação é trocar a string\". Qual é a correção?",
     "alternativas": [
       "Variável de ambiente é lugar seguro para segredo",
@@ -1028,7 +1028,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Cofre resolve a governança\". Qual é a correção?",
     "alternativas": [
       "Escreva a política e defina dono e prazo por tipo de segredo",
@@ -1048,7 +1048,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a diferença entre um segredo de aplicação e a chave que cifra um dado?",
     "alternativas": [
       "O segredo de aplicação autentica uma identidade perante um serviço; a chave é material secreto consumido por um algoritmo. Quando o mesmo material faz as duas coisas, o escopo de exposição dobra.",
@@ -1068,7 +1068,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os três tipos de segredo usados neste tema, e o que distingue cada um?",
     "alternativas": [
       "A correção de classe elimina a credencial estática de longa duração e passa a emitir credencial de curta duração a partir da identidade do executante. A correção de instância troca a string do segredo vazado.",
@@ -1088,7 +1088,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a credencial de curta duração reduz risco mais do que a rotação periódica da mesma credencial?",
     "alternativas": [
       "Porque o material que abre o cofre não pode ficar dentro dele. As saídas são controle dividido entre pessoas, custódia em módulo que não exporta, ou confiança em identidade de máquina do provedor.",
@@ -1108,7 +1108,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o cofre de segredos tem um problema de inicialização, e quais são as saídas conhecidas?",
     "alternativas": [
       "O segredo de aplicação autentica uma identidade perante um serviço; a chave é material secreto consumido por um algoritmo. Quando o mesmo material faz as duas coisas, o escopo de exposição dobra.",
@@ -1128,7 +1128,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a remoção do segredo do arquivo não encerra o incidente?",
     "alternativas": [
       "Porque o conteúdo do arquivo permanece no histórico de repositório, que é imutável por projeto, e pode ter sido gravado em log de execução; a resposta inclui revogar, substituir e varrer.",
@@ -1148,7 +1148,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a correção que elimina a classe do problema, e qual apenas remedia a instância?",
     "alternativas": [
       "Credencial de pessoa, usada por humano; credencial de aplicação, usada por serviço; credencial de automação, usada por pipeline ou robô. O que distingue é o dono do acesso e o grau de exposição do ambiente.",
@@ -1168,7 +1168,7 @@
       "url": "https://csrc.nist.gov/pubs/ir/8547/ipd",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"Pós-quântica é problema de 2035\". Qual é a correção?",
     "alternativas": [
       "Priorize pelo tempo de retenção e pela dependência de fornecedor",
@@ -1188,7 +1188,7 @@
       "url": "https://csrc.nist.gov/pubs/ir/8547/ipd",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"Toda a criptografia precisa ser trocada\". Qual é a correção?",
     "alternativas": [
       "Invista em agilidade e em piloto com modo híbrido",
@@ -1208,7 +1208,7 @@
       "url": "https://csrc.nist.gov/pubs/ir/8547/ipd",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"Basta escolher o algoritmo mais novo agora\". Qual é a correção?",
     "alternativas": [
       "Separe assimetria de simetria e de hash antes de orçar",
@@ -1228,7 +1228,7 @@
       "url": "https://csrc.nist.gov/pubs/ir/8547/ipd",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"O cronograma é definitivo\". Qual é a correção?",
     "alternativas": [
       "Priorize pelo tempo de retenção e pela dependência de fornecedor",
@@ -1248,7 +1248,7 @@
       "url": "https://csrc.nist.gov/pubs/ir/8547/ipd",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"Inventário é tarefa de ferramenta\". Qual é a correção?",
     "alternativas": [
       "Nomeie dono e data por linha do inventário",
@@ -1268,7 +1268,7 @@
       "url": "https://csrc.nist.gov/pubs/ir/8547/ipd",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Criptografia pós-quântica e agilidade criptográfica: um colega afirma que \"Cifra simétrica precisa ser substituída\". Qual é a correção?",
     "alternativas": [
       "Priorize pelo tempo de retenção e pela dependência de fornecedor",
@@ -1288,7 +1288,7 @@
       "url": "https://csrc.nist.gov/pubs/ir/8547/ipd",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o tempo de retenção do dado define a urgência da migração pós-quântica?",
     "alternativas": [
       "Algoritmo como configuração em vez de código, inventário atualizado por serviço, biblioteca que aceita troca sem recompilar o produto e substituição automatizada de certificado.",
@@ -1308,13 +1308,133 @@
       "url": "https://csrc.nist.gov/pubs/ir/8547/ipd",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais quatro sinais indicam que uma organização tem agilidade criptográfica?",
     "alternativas": [
       "Porque tráfego cifrado pode ser capturado hoje e decifrado quando houver capacidade de quebra; dado que precisa continuar secreto depois desse horizonte já está exposto.",
       "Algoritmo como configuração em vez de código, inventário atualizado por serviço, biblioteca que aceita troca sem recompilar o produto e substituição automatizada de certificado.",
       "Use marcos internos datados e re-baseline quando o documento finalizar",
       "Priorize pelo tempo de retenção e pela dependência de fornecedor"
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "07-criptografia-segredos#GUIA#C01",
+    "ref": "07-criptografia-segredos#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "FIPS 197, Advanced Encryption Standard (AES)",
+      "url": "https://csrc.nist.gov/pubs/fips/197/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Por que uma chave de dados é cifrada por uma chave de chave em vez de ser guardada em claro?",
+    "alternativas": [
+      "Porque a chave de dados em claro no mesmo lugar que o dado elimina a proteção: quem lê o armazenamento lê a chave. A chave de chave fica em custódia separada, com acesso auditado e possibilidade de destruição em massa.",
+      "Porque a troca de chave assimétrica permite combinar um segredo efêmero usando chave pública e chave privada; o segredo derivado dali protege a sessão, e o volume da conversa passa a ser protegido por cifra simétrica.",
+      "Garante o que o módulo atesta nos níveis crescentes de segurança definidos no padrão, conforme a validação registrada no CMVP. Não garante que a organização gera, custodia, roda e destrói chaves de acordo com a política.",
+      "Resolve a necessidade de buscar por igualdade sem guardar o valor em claro, já que cifra não preserva igualdade. Expõe o índice a ataque por força bruta quando o conjunto de valores possíveis é pequeno e previsível."
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "07-criptografia-segredos#GUIA#C02",
+    "ref": "07-criptografia-segredos#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "FIPS 197, Advanced Encryption Standard (AES)",
+      "url": "https://csrc.nist.gov/pubs/fips/197/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Por que o tempo de retenção do dado define a urgência da migração pós-quântica?",
+    "alternativas": [
+      "Prova que o conteúdo não foi alterado sem que o resumo mudasse — detecção de alteração. Não prova autoria, não esconde o conteúdo, e não impede que alguém recalcule o resumo de uma mensagem modificada.",
+      "Porque existe coleta de tráfego cifrado hoje para decifrar quando houver computador quântico suficiente. Dado que precisa sobreviver a essa janela corre risco agora; dado que expira em semanas não corre.",
+      "Porque a chave em claro no mesmo local que o dado elimina a proteção: quem lê o armazenamento lê a chave junto. A chave de chave fica em custódia separada, com acesso auditado e destruição controlada.",
+      "Credencial de pessoa, usada por humano; credencial de aplicação, usada por serviço; credencial de automação, usada por pipeline ou robô. O que distingue é o dono do acesso e o grau de exposição do ambiente."
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "07-criptografia-segredos#GUIA#C03",
+    "ref": "07-criptografia-segredos#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "FIPS 197, Advanced Encryption Standard (AES)",
+      "url": "https://csrc.nist.gov/pubs/fips/197/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Qual é a diferença entre tamanho de chave e tamanho de bloco no AES, e qual dos dois aparece no nome AES-256?",
+    "alternativas": [
+      "Consulte a publicação de modos do NIST antes de escolher; a lista não foi conferida nesta execução, portanto NAO CONFIRMADO em fonte oficial",
+      "Nome coberto, prazo vigente em cada elo, assinatura de cada elo pela chave do elo acima, uso declarado compatível com o propósito e estado de revogação.",
+      "O bloco do AES é de 128 bits nas três instâncias; o sufixo do nome indica o tamanho da chave. AES-256 tem bloco de 128 bits e chave de 256 bits.",
+      "Porque o cliente precisa montar a cadeia até a âncora e pode usar o certificado intermediário que já tem em cache; quem não tem o intermediário não consegue validar."
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "07-criptografia-segredos#GUIA#C04",
+    "ref": "07-criptografia-segredos#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "FIPS 197, Advanced Encryption Standard (AES)",
+      "url": "https://csrc.nist.gov/pubs/fips/197/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Por que a sessão anterior continua protegida quando a chave privada do servidor vaza depois?",
+    "alternativas": [
+      "Afirma que o solicitante controlava o nome no momento da emissão e que a chave pública é dele. Não afirma que o serviço é seguro, que o conteúdo é confiável nem que o dono é idôneo.",
+      "Autentica o servidor, por meio do certificado e da prova de posse da chave privada, e protege o canal. Não autentica quem chama o serviço nem define o que essa pessoa pode acessar.",
+      "Prova que duas cópias do mesmo conteúdo produzem o mesmo resultado, o que detecta alteração. Não prova autoria, não cifra e não esconde conteúdo de quem tem a mensagem e a função.",
+      "Porque a chave de sessão é derivada de um segredo efêmero do handshake, não da chave privada do servidor. A chave privada assina e autentica; ela não decifra a sessão já estabelecida."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "07-criptografia-segredos#GUIA#C05",
+    "ref": "07-criptografia-segredos#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "FIPS 197, Advanced Encryption Standard (AES)",
+      "url": "https://csrc.nist.gov/pubs/fips/197/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Qual é a diferença entre um segredo de aplicação e a chave que cifra um dado?",
+    "alternativas": [
+      "O segredo de aplicação autentica uma identidade perante um serviço. A chave cifra ou assina dado. Quando o mesmo material faz as duas coisas, o escopo de exposição dobra.",
+      "Porque tráfego cifrado pode ser capturado hoje e decifrado quando houver capacidade de quebra; dado que precisa continuar secreto depois desse horizonte já está exposto.",
+      "Porque a assinatura cobre o resumo, e o verificador aceita a mensagem cujo resumo confere. Duas mensagens com o mesmo resumo tornam a assinatura de uma válida para a outra.",
+      "O risco de indisponibilidade por expiração deixa de depender de calendário humano e passa a depender de um processo testado, com monitoramento de falha do próprio processo."
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "07-criptografia-segredos#GUIA#C06",
+    "ref": "07-criptografia-segredos#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "FIPS 197, Advanced Encryption Standard (AES)",
+      "url": "https://csrc.nist.gov/pubs/fips/197/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "O que uma função de hash prova e o que ela não prova?",
+    "alternativas": [
+      "Autentica o servidor, por meio do certificado e da prova de posse da chave privada, e protege o canal. Não autentica quem chama o serviço nem define o que essa pessoa pode acessar.",
+      "Prova que duas cópias do mesmo conteúdo produzem o mesmo resultado, o que detecta alteração. Não prova autoria, não cifra e não esconde conteúdo de quem tem a mensagem e a função.",
+      "Afirma que o solicitante controlava o nome no momento da emissão e que a chave pública é dele. Não afirma que o serviço é seguro, que o conteúdo é confiável nem que o dono é idôneo.",
+      "Algoritmo como configuração em vez de código, inventário atualizado por serviço, biblioteca que aceita troca sem recompilar o produto e substituição automatizada de certificado."
     ],
     "correta": 1,
     "justificativa": ""

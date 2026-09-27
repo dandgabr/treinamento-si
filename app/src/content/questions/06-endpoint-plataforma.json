@@ -8,7 +8,7 @@
       "url": "https://attack.mitre.org/tactics/TA0002/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Endpoint é sinônimo de estação de trabalho\". Qual é a correção?",
     "alternativas": [
       "Privilégio administrativo local é questão de conforto do usuário",
@@ -28,7 +28,7 @@
       "url": "https://attack.mitre.org/tactics/TA0002/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Antivírus com assinatura atualizada resolve execução\". Qual é a correção?",
     "alternativas": [
       "Passe primeiro por auditoria, publique o catálogo e só então aplique a política",
@@ -48,7 +48,7 @@
       "url": "https://attack.mitre.org/tactics/TA0002/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Agente instalado significa agente funcionando\". Qual é a correção?",
     "alternativas": [
       "Bloquear tudo que não está na lista é o objetivo final",
@@ -68,7 +68,7 @@
       "url": "https://attack.mitre.org/tactics/TA0002/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Inventário de dispositivo é inventário de software\". Qual é a correção?",
     "alternativas": [
       "Mantenha as duas listas e cruze uma com a outra",
@@ -88,7 +88,7 @@
       "url": "https://attack.mitre.org/tactics/TA0002/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Privilégio administrativo local é questão de conforto do usuário\". Qual é a correção?",
     "alternativas": [
       "Passe primeiro por auditoria, publique o catálogo e só então aplique a política",
@@ -108,7 +108,7 @@
       "url": "https://attack.mitre.org/tactics/TA0002/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Bloquear tudo que não está na lista é o objetivo final\". Qual é a correção?",
     "alternativas": [
       "Controle o que pode executar por autorização, e mantenha o antivírus ao lado disso",
@@ -128,7 +128,7 @@
       "url": "https://attack.mitre.org/tactics/TA0002/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que a definição de lista de permitidos do NIST SP 800-167 muda na pergunta que o defensor faz sobre um programa?",
     "alternativas": [
       "A contagem de máquinas que enviaram evento recente, por tipo de evento. Instalação é estado de inventário; envio de evento é comportamento observado, e é o comportamento que sustenta a detecção.",
@@ -148,7 +148,7 @@
       "url": "https://attack.mitre.org/tactics/TA0002/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual métrica substitui a contagem de agentes instalados, e por quê?",
     "alternativas": [
       "Troca a pergunta \"este programa é malicioso?\" por \"este programa está autorizado?\". A segunda tem resposta verificável contra uma lista publicada e não depende de julgamento sobre intenção.",
@@ -168,7 +168,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Aplicar o benchmark inteiro é o objetivo\". Qual é a correção?",
     "alternativas": [
       "Trate o registro de desvio como parte do artefato, não como exceção a esconder",
@@ -188,7 +188,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Endurecer de uma vez, sem medir antes\". Qual é a correção?",
     "alternativas": [
       "Cubra também o parque de estações, com benchmark próprio",
@@ -208,7 +208,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Linha de base é assunto de servidor\". Qual é a correção?",
     "alternativas": [
       "Cubra também o parque de estações, com benchmark próprio",
@@ -228,7 +228,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Imagem de instalação resolve a linha de base\". Qual é a correção?",
     "alternativas": [
       "Aplicar o benchmark inteiro é o objetivo",
@@ -248,7 +248,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Desvio aceito é falha de conformidade\". Qual é a correção?",
     "alternativas": [
       "Classifique em aplicar agora, aplicar com teste e não aplicar, e registre o terceiro grupo",
@@ -268,7 +268,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Controle de execução é ligar e esquecer\". Qual é a correção?",
     "alternativas": [
       "Cubra também o parque de estações, com benchmark próprio",
@@ -288,7 +288,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as quatro propriedades que distinguem um artefato de linha de base de um documento de boas práticas?",
     "alternativas": [
       "Identificador do item com a versão do benchmark, motivo de negócio, dono nominal e data de reavaliação. Sem dono nominal o desvio é anônimo, e ninguém tem motivo para revê-lo.",
@@ -308,7 +308,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais quatro campos bastam no registro de desvio, e o que acontece quando o dono nominal está ausente?",
     "alternativas": [
       "Identifica a família e a versão do sistema alvo, tem número de versão próprio, é aplicado automaticamente a grupos de máquinas e é medido por varredura periódica que separa itens conformes de não conformes.",
@@ -328,7 +328,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"A ferramenta reportou sucesso, logo o item está corrigido\". Qual é a correção?",
     "alternativas": [
       "Software descontinuado sai da conta quando sai do suporte",
@@ -348,7 +348,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Severidade alta é prioridade alta\". Qual é a correção?",
     "alternativas": [
       "Combine exploração confirmada, probabilidade estimada e exposição do dispositivo",
@@ -368,7 +368,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Patch é projeto com data de término\". Qual é a correção?",
     "alternativas": [
       "A ferramenta reportou sucesso, logo o item está corrigido",
@@ -388,7 +388,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Software descontinuado sai da conta quando sai do suporte\". Qual é a correção?",
     "alternativas": [
       "Amplie o inventário por varredura de componentes no dispositivo",
@@ -408,7 +408,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Instalar em todas as máquinas ao mesmo tempo é eficiência\". Qual é a correção?",
     "alternativas": [
       "Patch é projeto com data de término",
@@ -428,7 +428,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"O inventário de software instalado é suficiente\". Qual é a correção?",
     "alternativas": [
       "Amplie o inventário por varredura de componentes no dispositivo",
@@ -448,7 +448,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as cinco etapas do processo de gestão de patch descritas pelo NIST SP 800-40 Rev. 4, e qual delas exige instrumentação no dispositivo?",
     "alternativas": [
       "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o próprio host pode reportar o estado da versão corrigida.",
@@ -468,7 +468,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/40/r4/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que o catálogo de vulnerabilidades exploradas em campo mantido pela CISA representa, e por qual instrumento foi estabelecido?",
     "alternativas": [
       "Identificar, priorizar, adquirir, instalar e verificar a instalação. A verificação é a etapa que exige instrumentação no dispositivo, porque só o próprio host pode reportar o estado da versão corrigida.",
@@ -488,7 +488,7 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"EDR é antivírus com nome novo\". Qual é a correção?",
     "alternativas": [
       "Trate como ponto de decisão com escopo definido, não como assinatura de arquivo",
@@ -508,7 +508,7 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Ligar todas as ações automáticas é o estado desejado\". Qual é a correção?",
     "alternativas": [
       "Decida por tipo de dispositivo, com caminho de reversão declarado",
@@ -528,7 +528,7 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Isolar a máquina é sempre a primeira ação\". Qual é a correção?",
     "alternativas": [
       "Defina escopo por grupo de máquinas e por criticidade do serviço",
@@ -548,7 +548,7 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Remover o artefato resolve o caso\". Qual é a correção?",
     "alternativas": [
       "Defina escopo por grupo de máquinas e por criticidade do serviço",
@@ -568,7 +568,7 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"XDR elimina a necessidade de integrar fontes\". Qual é a correção?",
     "alternativas": [
       "Meça a cobertura por fonte e por tipo de evento",
@@ -588,7 +588,7 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Ação automática dispensa registro\". Qual é a correção?",
     "alternativas": [
       "Decida por tipo de dispositivo, com caminho de reversão declarado",
@@ -608,7 +608,7 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as três características que definem a categoria de detecção e resposta em endpoint, e qual delas a distingue do antivírus tradicional?",
     "alternativas": [
       "Coletar o artefato, bloquear a execução, isolar a máquina da rede mantendo o canal do agente, e remover ou restaurar arquivo e chave de registro. A remoção é a ação que destrói evidência.",
@@ -628,7 +628,7 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Liste as quatro ações de resposta no host em ordem crescente de impacto e diga qual delas destrói evidência.",
     "alternativas": [
       "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
@@ -648,7 +648,7 @@
       "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais cinco campos o registro de ação automática precisa conter?",
     "alternativas": [
       "Trate como ponto de decisão com escopo definido, não como assinatura de arquivo",
@@ -668,7 +668,7 @@
       "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Criptografia de disco protege o dado em uso\". Qual é a correção?",
     "alternativas": [
       "Coloque a leitura do registro na rotina semanal com critério definido",
@@ -688,7 +688,7 @@
       "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Classificação é etapa dispensável se a ferramenta detecta conteúdo\". Qual é a correção?",
     "alternativas": [
       "Política de saída resolve o dado que sai por canal fora do dispositivo",
@@ -708,7 +708,7 @@
       "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Bloquear tudo desde o primeiro dia é firmeza\". Qual é a correção?",
     "alternativas": [
       "Cubra por canal e revise a lista de canais periodicamente",
@@ -728,7 +728,7 @@
       "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Política de saída resolve o dado que sai por canal fora do dispositivo\". Qual é a correção?",
     "alternativas": [
       "Cubra por canal e revise a lista de canais periodicamente",
@@ -748,7 +748,7 @@
       "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Apagar o disco é procedimento óbvio e sem risco\". Qual é a correção?",
     "alternativas": [
       "Comece em modo de simulação e avance uma regra por vez",
@@ -768,7 +768,7 @@
       "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Registro de auditoria é consequência automática da ferramenta\". Qual é a correção?",
     "alternativas": [
       "Trate criptografia como controle contra perda e roubo de equipamento",
@@ -788,7 +788,7 @@
       "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que caracteriza o modo de simulação e por que ele precede qualquer modo restritivo?",
     "alternativas": [
       "Porque o rótulo é mais preciso e depende de disciplina na aplicação, enquanto a detecção por conteúdo funciona sem depender de comportamento humano e cobre o que ficou sem rótulo. A segunda cobre a falha da primeira.",
@@ -808,7 +808,7 @@
       "url": "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a classificação por rótulo e a classificação por conteúdo se complementam?",
     "alternativas": [
       "As ações definidas na política não são aplicadas; o objeto de medição é o volume e o destino do que sairia do dispositivo. Ele precede o modo restritivo porque o volume observado define o que a equipe consegue tratar.",
@@ -828,7 +828,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Servidor é estação com mais memória\". Qual é a correção?",
     "alternativas": [
       "Combine agente no nó com registro de auditoria do orquestrador",
@@ -848,7 +848,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Aplicar o benchmark do sistema operacional cobre a carga\". Qual é a correção?",
     "alternativas": [
       "Nomeie dono por carga antes de prometer prazo de correção",
@@ -868,7 +868,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Corrigir o processo em execução resolve\". Qual é a correção?",
     "alternativas": [
       "Corrija a imagem e substitua as instâncias",
@@ -888,7 +888,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Configurar servidor à mão e depois documentar\". Qual é a correção?",
     "alternativas": [
       "Nomeie dono por carga antes de prometer prazo de correção",
@@ -908,7 +908,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Telemetria do nó cobre o que acontece na carga\". Qual é a correção?",
     "alternativas": [
       "Trate como regime próprio, com decisão codificada antes do evento",
@@ -928,7 +928,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Carga sem dono é assunto administrativo\". Qual é a correção?",
     "alternativas": [
       "Aplicar o benchmark do sistema operacional cobre a carga",
@@ -948,7 +948,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as duas fontes de telemetria de uma carga em contêiner e o que cada uma responde?",
     "alternativas": [
       "Porque a janela de correção precisa ser negociada com quem responde pelo serviço, o alerta precisa de destinatário e o desligamento de carga órfã precisa de decisão. Sem dono, o item entra na fila e nunca sai dela.",
@@ -968,7 +968,7 @@
       "url": "https://www.cisecurity.org/cis-benchmarks",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que carga de trabalho sem dono nomeado inviabiliza o ciclo de correção?",
     "alternativas": [
       "O agente no nó, que enxerga o motor de contêiner e o comportamento do processo, e o registro de auditoria do orquestrador, que responde quem criou a carga, quando e com qual identidade.",
@@ -977,6 +977,26 @@
       "Porque a janela de correção precisa ser negociada com quem responde pelo serviço, o alerta precisa de destinatário e o desligamento de carga órfã precisa de decisão. Sem dono, o item entra na fila e nunca sai dela."
     ],
     "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "06-endpoint-plataforma#GUIA#C03",
+    "ref": "06-endpoint-plataforma#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "CIS Benchmarks List — recomendações prescritivas de configuração para mais de 25 famílias de produtos",
+      "url": "https://www.cisecurity.org/cis-benchmarks",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "A mesma correção tem CVSS 9.8 e probabilidade de exploração de 0,02 nos próximos 30 dias. O que a empresa faz com esse número? (TEMA-03)",
+    "alternativas": [
+      "Prioriza. Probabilidade estimada e ranking percentual dizem onde o esforço limitado de correção produz mais redução de risco primeiro. Score de severidade sem probabilidade ordena por pior caso, não por risco provável.",
+      "As ações definidas na política não são aplicadas; o objeto de medição é o volume e o destino do que sairia do dispositivo. Ele precede o modo restritivo porque o volume observado define o que a equipe consegue tratar.",
+      "Coleta contínua de eventos do sistema, análise de comportamento e capacidade de agir sobre o próprio dispositivo. A coleta contínua é o que distingue do antivírus tradicional, que examina arquivo em pontos discretos.",
+      "Porque o rótulo é mais preciso e depende de disciplina na aplicação, enquanto a detecção por conteúdo funciona sem depender de comportamento humano e cobre o que ficou sem rótulo. A segunda cobre a falha da primeira."
+    ],
+    "correta": 0,
     "justificativa": ""
   }
 ]

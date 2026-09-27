@@ -1,22 +1,91 @@
 import { useEffect, useRef, useState } from 'react'
 import { content, erroConteudo } from '../infrastructure/content/repository'
 import { gravarTexto, lerTexto } from '../infrastructure/storage/local'
+import type { Pagina } from '../domain/types'
 import { AreaView } from './AreaView'
-import { Html, Secoes } from './Blocos'
+import {
+  Html,
+  idDaSecao,
+  Principal,
+  Secoes,
+  Sumario,
+  useCabecalhos,
+  type ItemDeSumario,
+} from './Blocos'
 import { renderizarMermaid } from './mermaid'
 import { ResumoProgresso } from './Progresso'
 import { Quiz } from './Quiz'
 import { ThemeView } from './ThemeView'
-import { linkQuiz, useRota } from './useRota'
+import { focarConteudo, linkQuiz, useRota, type Rota } from './useRota'
 
 const CHAVE_TEMA = 'roadmap:tema'
+const NOME_DO_APP = 'Roadmap CISO'
+
+/**
+ * De onde vem o tema da tela: do sistema ou de uma escolha de quem usa o app.
+ *
+ * "sistema" e o estado inicial de todo mundo e o unico que nao grava nada: o `data-theme`
+ * fica em "auto" e quem responde ao `prefers-color-scheme` e o `styles.css`. Gravar a
+ * preferencia na primeira abertura congelaria o sistema (numa maquina que troca de tema ao
+ * anoitecer, o app ficaria no tema da primeira visita).
+ */
+type ModoTema = 'sistema' | 'claro' | 'escuro'
+
+const ROTULO_DO_TEMA: Record<ModoTema, string> = {
+  sistema: 'sistema',
+  claro: 'claro',
+  escuro: 'escuro',
+}
+
+/** O ciclo do botao: sistema -> claro -> escuro -> sistema. */
+const PROXIMO_TEMA: Record<ModoTema, ModoTema> = {
+  sistema: 'claro',
+  claro: 'escuro',
+  escuro: 'sistema',
+}
+
+function temaGuardado(): ModoTema {
+  const salvo = lerTexto(CHAVE_TEMA)
+  return salvo === 'claro' || salvo === 'escuro' ? salvo : 'sistema'
+}
+
+/**
+ * Titulo da janela, por rota.
+ *
+ * O `<title>` do `index.html` vale para a primeira pintura, antes do bundle; deixado como
+ * estava, ele nomeava as ~150 telas do app e a lista de abas virava uma repeticao. O nome do
+ * app entra como sufixo, e o mesmo titulo que a tela mostra no `h1` vem primeiro.
+ */
+function tituloDaRota(rota: Rota): string {
+  const titulo = (nome: string): string => `${nome} · ${NOME_DO_APP}`
+  if (rota.nome === 'area') {
+    return titulo(content.areas.find((a) => a.areaId === rota.areaId)?.areaNome ?? 'Área não encontrada')
+  }
+  if (rota.nome === 'tema') {
+    return titulo(content.temas[rota.ref]?.titulo ?? 'Tema não encontrado')
+  }
+  if (rota.nome === 'pagina') {
+    return titulo(content.paginas.find((p) => p.slug === rota.slug)?.titulo ?? 'Página não encontrada')
+  }
+  if (rota.nome === 'quiz') {
+    const tema = rota.areaId && rota.temaId ? content.temas[`${rota.areaId}#${rota.temaId}`] : undefined
+    if (tema) return titulo(`Quiz — ${tema.titulo}`)
+    const area = rota.areaId ? content.areas.find((a) => a.areaId === rota.areaId) : undefined
+    return titulo(area ? `Quiz — ${area.areaNome}` : 'Quiz de múltipla escolha')
+  }
+  if (rota.nome === 'desconhecida') return titulo('Rota não reconhecida')
+  return titulo('Painel')
+}
+
+/** Minimo de cabecalhos para o sumario valer a pena numa pagina de referencia. */
+const MIN_ITENS_SUMARIO_PAGINA = 2
 
 function Home() {
   const referencias = content.paginas.filter((p) => p.grupo === 'referencia')
   const catalogos = content.paginas.filter((p) => /^(90|91|99)-/.test(p.grupo))
 
   return (
-    <main className="conteudo">
+    <Principal>
       <header className="hero">
         <h1>Roadmap CISO</h1>
         <p>
@@ -30,9 +99,10 @@ function Home() {
       <section className="secao">
         <h2>Praticar</h2>
         <p className="dica">
-          Múltipla escolha derivada das tabelas de erros comuns e da recuperação ativa dos temas:
-          uma questão por vez, com acerto ou erro, justificativa, fonte e o caminho de volta ao tema
-          de origem. O item que ainda não passou por revisão humana aparece marcado.
+          Múltipla escolha derivada das tabelas de erros comuns, da recuperação ativa dos temas e dos
+          checkpoints dos guias: uma questão por vez, com acerto ou erro, justificativa, fonte e o
+          caminho de volta ao material de origem. O item que ainda não passou por revisão humana
+          aparece marcado.
         </p>
         <p className="acoes-tema">
           <a className="botao-secundario" href={linkQuiz()}>
@@ -40,7 +110,8 @@ function Home() {
           </a>
         </p>
         <p className="dica">
-          Para praticar uma área só, o escopo se escolhe dentro do quiz, no seletor do topo.
+          A rodada se restringe a uma área ou a um tema só no seletor do topo do quiz — e o botão
+          "Praticar este tema", no fim de cada tema, já abre a rodada dele.
         </p>
       </section>
 
@@ -85,57 +156,107 @@ function Home() {
           </ul>
         </section>
       ) : null}
-    </main>
+    </Principal>
   )
 }
 
 function PaginaView({ slug, escuro }: { slug: string; escuro: boolean }) {
   const pagina = content.paginas.find((p) => p.slug === slug)
-  // O intro de uma pagina pode conter diagrama (o mapa de relacoes tem), entao este
-  // container tambem precisa disparar a renderizacao do Mermaid.
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (containerRef.current) void renderizarMermaid(containerRef.current, escuro)
-  }, [slug, pagina, escuro])
 
   if (!pagina) {
     return (
-      <main className="conteudo">
+      <Principal>
         <p>Página não encontrada: {slug}</p>
         <a href="#/">Voltar ao painel</a>
-      </main>
+      </Principal>
     )
   }
+  // `key` pelo slug: pagina nova e container novo, que e o que o Mermaid precisa para
+  // redesenhar (ele marca os nos que ja processou e pula os demais).
+  return <PaginaConteudo key={pagina.slug} pagina={pagina} escuro={escuro} />
+}
+
+function PaginaConteudo({ pagina, escuro }: { pagina: Pagina; escuro: boolean }) {
+  // O intro de uma pagina pode conter diagrama (o mapa de relacoes tem), entao este
+  // container tambem precisa disparar a renderizacao do Mermaid.
+  const containerRef = useRef<HTMLElement>(null)
+  // O material sem `## N.` (glossario, mapa de relacoes) cai inteiro no `intro`: os
+  // cabecalhos de la dentro sao o sumario e as ancoras que a tela tem.
+  const cabecalhos = useCabecalhos(pagina.intro, 'intro')
+  const porSecao = pagina.secoes.length > 0
+  const itens: ItemDeSumario[] = porSecao
+    ? pagina.secoes.map((s) => ({ id: idDaSecao(s.numero), numero: s.numero, texto: s.titulo }))
+    : cabecalhos.itens
+
+  useEffect(() => {
+    if (containerRef.current) void renderizarMermaid(containerRef.current, escuro)
+  }, [pagina, escuro])
+
   return (
-    <main className="conteudo" ref={containerRef}>
+    <Principal refPrincipal={containerRef}>
       <nav className="migalhas">
         <a href="#/">Painel</a> / <span>{pagina.titulo}</span>
       </nav>
       <header className="cabecalho-tema">
         <h1>{pagina.titulo}</h1>
       </header>
-      <Html key={`intro-${escuro}`} className="intro" html={pagina.intro} />
+      {itens.length >= MIN_ITENS_SUMARIO_PAGINA ? <Sumario itens={itens} /> : null}
+      <Html key={`intro-${escuro}`} className="intro" html={porSecao ? pagina.intro : cabecalhos.html} />
       <Secoes secoes={pagina.secoes} escuro={escuro} />
-    </main>
+    </Principal>
   )
 }
 
 export function App() {
   const rota = useRota()
-  const [escuro, setEscuro] = useState(() => lerTexto(CHAVE_TEMA) === 'escuro')
+  const [tema, setTema] = useState<ModoTema>(temaGuardado)
+  const sistemaEscuro = useSistemaEscuro()
+  // O Mermaid escolhe o tema do diagrama em JavaScript, e nao pela folha: ele precisa do
+  // valor ja resolvido. No modo "sistema", quem responde e o `matchMedia` abaixo.
+  const escuro = tema === 'escuro' || (tema === 'sistema' && sistemaEscuro)
+  // A rota da montagem: o foco so se move quando a rota MUDA. Quem abre o app no meio de um
+  // tema escolheu aquela tela, e nao pediu para pular para o conteudo.
+  const rotaInicial = useRef(rota)
+
+  // A escolha mora no `data-theme`; "sistema" vira "auto" e quem decide e o
+  // `prefers-color-scheme` do `styles.css`. Nada e gravado na montagem: o efeito depende do
+  // estado, entao a preferencia do sistema continua valendo enquanto ninguem escolher.
+  useEffect(() => {
+    document.documentElement.dataset.theme = tema === 'sistema' ? 'auto' : tema
+  }, [tema])
 
   useEffect(() => {
-    document.documentElement.dataset.theme = escuro ? 'dark' : 'light'
-    gravarTexto(CHAVE_TEMA, escuro ? 'escuro' : 'claro')
-  }, [escuro])
+    document.title = tituloDaRota(rota)
+  }, [rota])
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [rota])
 
+  // Troca de rota: o foco vai para o conteudo novo. Sem isto quem usa leitor de tela
+  // continua no cabecalho da tela anterior, e o primeiro TAB da a volta pela navegacao.
+  useEffect(() => {
+    if (rotaInicial.current === rota) return
+    rotaInicial.current = rota
+    focarConteudo()
+  }, [rota])
+
+  function trocarTema(): void {
+    const proximo = PROXIMO_TEMA[tema]
+    setTema(proximo)
+    gravarTexto(CHAVE_TEMA, proximo)
+  }
+
+  const proximo = PROXIMO_TEMA[tema]
+
   return (
     <div className="app">
+      {/* Primeiro alvo de tabulacao da tela: quem chega pelo teclado pula o cabecalho sem
+          passar por cada link dele. */}
+      <button type="button" className="pular" onClick={() => focarConteudo(true)}>
+        Pular para o conteúdo
+      </button>
+
       <header className="topo">
         <a className="marca" href="#/">
           Roadmap CISO
@@ -143,10 +264,10 @@ export function App() {
         <div className="topo-acoes">
           <button
             className="botao-secundario"
-            onClick={() => setEscuro((v) => !v)}
-            aria-label="Alternar tema claro e escuro"
+            onClick={trocarTema}
+            aria-label={`Tema: ${ROTULO_DO_TEMA[tema]}. Trocar para ${ROTULO_DO_TEMA[proximo]}.`}
           >
-            {escuro ? 'Claro' : 'Escuro'}
+            Tema: {ROTULO_DO_TEMA[tema]}
           </button>
         </div>
       </header>
@@ -157,13 +278,33 @@ export function App() {
       {rota.nome === 'area' ? <AreaView areaId={rota.areaId} escuro={escuro} /> : null}
       {rota.nome === 'tema' ? <ThemeView key={rota.ref} refTema={rota.ref} escuro={escuro} /> : null}
       {rota.nome === 'pagina' ? <PaginaView slug={rota.slug} escuro={escuro} /> : null}
-      {rota.nome === 'quiz' ? <Quiz areaId={rota.areaId} /> : null}
+      {rota.nome === 'quiz' ? <Quiz areaId={rota.areaId} temaId={rota.temaId} /> : null}
       {rota.nome === 'desconhecida' ? (
-        <main className="conteudo">
+        <Principal>
           <p>Rota não reconhecida.</p>
           <a href="#/">Voltar ao painel</a>
-        </main>
+        </Principal>
       ) : null}
     </div>
   )
+}
+
+/**
+ * A preferencia de tema do sistema, viva.
+ *
+ * O Mermaid nao le a folha de estilo: ele desenha com o tema que recebe em JavaScript, e sem
+ * este observador um diagrama aberto no modo "sistema" ficaria com as cores da preferencia
+ * antiga depois que o sistema trocasse de tema ao anoitecer.
+ */
+function useSistemaEscuro(): boolean {
+  const [escuro, setEscuro] = useState(
+    () => window.matchMedia('(prefers-color-scheme: dark)').matches,
+  )
+  useEffect(() => {
+    const consulta = window.matchMedia('(prefers-color-scheme: dark)')
+    const aoTrocar = (evento: MediaQueryListEvent) => setEscuro(evento.matches)
+    consulta.addEventListener('change', aoTrocar)
+    return () => consulta.removeEventListener('change', aoTrocar)
+  }, [])
+  return escuro
 }

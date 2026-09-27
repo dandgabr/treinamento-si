@@ -8,7 +8,7 @@
       "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Princípio é discurso de arquiteto, configuração é trabalho real\". Qual é a correção?",
     "alternativas": [
       "Procure o caminho que contorna o serviço, não o que passa por ele",
@@ -28,7 +28,7 @@
       "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Arquitetura é o desenho grande, configuração é o detalhe\". Qual é a correção?",
     "alternativas": [
       "Mediação completa significa ter autenticação",
@@ -48,7 +48,7 @@
       "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Duas camadas iguais formam defesa em profundidade\". Qual é a correção?",
     "alternativas": [
       "Princípio é discurso de arquiteto, configuração é trabalho real",
@@ -68,7 +68,7 @@
       "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Mediação completa significa ter autenticação\". Qual é a correção?",
     "alternativas": [
       "Procure o caminho que contorna o serviço, não o que passa por ele",
@@ -88,7 +88,7 @@
       "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Menor privilégio vale só para pessoas\". Qual é a correção?",
     "alternativas": [
       "Escreva o princípio como requisito verificável e como formato de exceção",
@@ -108,7 +108,7 @@
       "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Princípios de arquitetura de segurança: um colega afirma que \"Exceção aprovada é falha de governança\". Qual é a correção?",
     "alternativas": [
       "Duas camadas iguais formam defesa em profundidade",
@@ -128,7 +128,7 @@
       "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é o critério prático que separa decisão de arquitetura de ajuste de configuração?",
     "alternativas": [
       "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é.",
@@ -148,7 +148,7 @@
       "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o vocabulário da definição de defesa em profundidade usa \"barreiras variáveis\"?",
     "alternativas": [
       "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é.",
@@ -168,7 +168,7 @@
       "url": "https://web.mit.edu/Saltzer/www/publications/protection/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que um registro de decisão de arquitetura precisa conter para sobreviver à troca de gestor?",
     "alternativas": [
       "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é.",
@@ -188,7 +188,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelagem de ameaças é uma reunião\". Qual é a correção?",
     "alternativas": [
       "Percorra as categorias por elemento e por limite de confiança",
@@ -208,7 +208,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Sem atacante identificado não há ameaça relevante\". Qual é a correção?",
     "alternativas": [
       "Produza diagrama, lista de ameaças, respostas e data de revisão",
@@ -228,7 +228,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"A matriz de probabilidade e impacto resolve a prioridade\". Qual é a correção?",
     "alternativas": [
       "Ordene por exposição, alcance e esforço de correção",
@@ -248,7 +248,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Mitigação anotada é mitigação feita\". Qual é a correção?",
     "alternativas": [
       "A matriz de probabilidade e impacto resolve a prioridade",
@@ -268,7 +268,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelar uma vez e arquivar\". Qual é a correção?",
     "alternativas": [
       "Produza diagrama, lista de ameaças, respostas e data de revisão",
@@ -288,7 +288,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelar só no fim do projeto\". Qual é a correção?",
     "alternativas": [
       "Ordene por exposição, alcance e esforço de correção",
@@ -308,7 +308,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais cinco elementos o diagrama de fluxo de dados precisa mostrar para sustentar a etapa de identificação?",
     "alternativas": [
       "Fluxos de dado, depósitos de dado, processos, entidades externas e limites de confiança.",
@@ -328,7 +328,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as quatro respostas possíveis a uma ameaça identificada, e o que falta para uma mitigação existir de fato?",
     "alternativas": [
       "Fluxos de dado, depósitos de dado, processos, entidades externas e limites de confiança.",
@@ -348,7 +348,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Ter VLAN é ter segmentação\". Qual é a correção?",
     "alternativas": [
       "Exceção de acesso remoto de fornecedor é inevitável e permanente",
@@ -368,7 +368,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Rede interna é zona de confiança\". Qual é a correção?",
     "alternativas": [
       "Trate a localização como contenção, não como autorização",
@@ -388,7 +388,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Segmentar por identidade dispensa segmentar por rede\". Qual é a correção?",
     "alternativas": [
       "Comece pelas cargas de trabalho que mais contêm dado sensível",
@@ -408,7 +408,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Exceção de acesso remoto de fornecedor é inevitável e permanente\". Qual é a correção?",
     "alternativas": [
       "Microssegmentação exige trocar toda a rede",
@@ -428,7 +428,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Matriz de fluxo é documento de rede\". Qual é a correção?",
     "alternativas": [
       "Exceção de acesso remoto de fornecedor é inevitável e permanente",
@@ -448,7 +448,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Microssegmentação exige trocar toda a rede\". Qual é a correção?",
     "alternativas": [
       "Comece pelas cargas de trabalho que mais contêm dado sensível",
@@ -468,7 +468,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é o critério para agrupar ativos em uma zona de confiança?",
     "alternativas": [
       "Listar zonas a partir de dados e funções, montar a matriz de fluxo com negação por padrão, declarar o que cada zona não permite e tratar as exceções com prazo e dono.",
@@ -488,7 +488,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os quatro passos do desenho de zonas apresentados no tema, na ordem?",
     "alternativas": [
       "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
@@ -508,7 +508,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a zona de gestão é a que mais rende quando é separada?",
     "alternativas": [
       "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos.",
@@ -528,7 +528,7 @@
       "url": "https://attack.mitre.org/tactics/TA0008/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Que campos mínimos uma exceção precisa ter para não virar arquitetura permanente?",
     "alternativas": [
       "O nível de exposição compartilhado, o dano que uma credencial comprometida dentro dela pode causar e o conjunto de destinos a que os ativos da zona precisam chegar.",
@@ -548,7 +548,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Zero trust é produto\". Qual é a correção?",
     "alternativas": [
       "Verifique se a proposta descreve decisão por sessão e por recurso",
@@ -568,7 +568,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Ter VPN e segundo fator é ser zero trust\". Qual é a correção?",
     "alternativas": [
       "Combine decisão por identidade com caminho restrito",
@@ -588,7 +588,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Zero trust dispensa segmentação\". Qual é a correção?",
     "alternativas": [
       "Avalie cada recurso, não apenas a entrada na rede",
@@ -608,7 +608,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Defesa em profundidade é ter dois produtos de segurança\". Qual é a correção?",
     "alternativas": [
       "Combine decisão por identidade com caminho restrito",
@@ -628,7 +628,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Detecção é acessório depois da prevenção\". Qual é a correção?",
     "alternativas": [
       "Trate prevenção e detecção como camadas de naturezas distintas",
@@ -648,7 +648,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Menor privilégio vale só para pessoas\". Qual é a correção?",
     "alternativas": [
       "Verifique se a proposta descreve decisão por sessão e por recurso",
@@ -668,7 +668,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais duas funções o resumo do SP 800-207 declara serem distintas e executadas antes de estabelecer a sessão com um recurso?",
     "alternativas": [
       "Aplique às contas de serviço e às identidades de carga de trabalho",
@@ -688,7 +688,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Requisito não funcional é detalhe técnico do time\". Qual é a correção?",
     "alternativas": [
       "Decida na etapa de desenho, com modelo de ameaças como insumo",
@@ -708,7 +708,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"\"Aderente às melhores práticas\" é requisito\". Qual é a correção?",
     "alternativas": [
       "Requisito não funcional é detalhe técnico do time",
@@ -728,7 +728,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Segurança por design é revisar no fim do projeto\". Qual é a correção?",
     "alternativas": [
       "Escreva objeto, condição, limite e evidência, com dono nomeado",
@@ -748,7 +748,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Todo requisito de segurança custa disponibilidade\". Qual é a correção?",
     "alternativas": [
       "Declare o trade-off e registre quem o aprovou",
@@ -768,7 +768,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Métrica de segurança é assunto de dashboard\". Qual é a correção?",
     "alternativas": [
       "Segurança por design é revisar no fim do projeto",
@@ -788,7 +788,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Requisito verificável exige ferramenta cara\". Qual é a correção?",
     "alternativas": [
       "Requisito não funcional é detalhe técnico do time",
@@ -808,7 +808,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Descreva a diferença entre segurança construída no desenho e segurança aplicada por cima, usando o argumento de custo registrado pela OWASP.",
     "alternativas": [
       "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção.",
@@ -828,7 +828,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as quatro partes de um requisito verificável?",
     "alternativas": [
       "Escreva objeto, condição, limite e evidência, com dono nomeado",
@@ -848,7 +848,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Liste as quatro famílias de requisito não funcional de segurança apresentadas no tema.",
     "alternativas": [
       "Identidade e acesso, proteção de dado, registro e detecção, resiliência e operação.",
@@ -868,7 +868,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Qual é a diferença entre \"protection needs\" e \"engineering trades\" no vocabulário do SP 800-160 Rev. 1?",
     "alternativas": [
       "Porque sem evidência não há aceite nem recusa formalmente registrada, e a decisão sobre cumprir ou não volta a depender de quem argumenta melhor na reunião.",
@@ -888,7 +888,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que um requisito sem evidência definida é negociado a cada reunião?",
     "alternativas": [
       "\"Protection needs\" é a declaração do que precisa ser protegido e contra o quê; \"engineering trades\" é a análise explícita do que se sacrifica para obter essa proteção.",
@@ -908,7 +908,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Revisão anual é suficiente\". Qual é a correção?",
     "alternativas": [
       "Dívida de segurança é vulnerabilidade não corrigida",
@@ -928,7 +928,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Dívida de segurança é vulnerabilidade não corrigida\". Qual é a correção?",
     "alternativas": [
       "Defina gatilhos de convocação além do calendário",
@@ -948,7 +948,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Revisão serve para achar culpa\". Qual é a correção?",
     "alternativas": [
       "Publique o critério antes e avalie o desenho, não as pessoas",
@@ -968,7 +968,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Achado sem dono continua vivo\". Qual é a correção?",
     "alternativas": [
       "Publique o critério antes e avalie o desenho, não as pessoas",
@@ -988,7 +988,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Dívida técnica e dívida de segurança são a mesma coisa\". Qual é a correção?",
     "alternativas": [
       "Publique o critério antes e avalie o desenho, não as pessoas",
@@ -1008,7 +1008,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Contar itens basta como métrica\". Qual é a correção?",
     "alternativas": [
       "Dívida de segurança é vulnerabilidade não corrigida",
@@ -1028,7 +1028,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os quatro gatilhos de convocação de revisão apresentados no tema?",
     "alternativas": [
       "Mudança de arquitetura, entrada de novo tipo de dado ou novo fluxo, incidente com causa ligada a desenho e renovação de contrato de fornecedor relevante.",
@@ -1048,7 +1048,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Descreva os cinco campos do registro de achado e o que cada par de campos separa.",
     "alternativas": [
       "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente.",
@@ -1068,7 +1068,7 @@
       "url": "https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Cite um indicador de dívida de segurança que sobrevive ao comitê e explique por que ele funciona melhor que a contagem simples.",
     "alternativas": [
       "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente.",
@@ -1077,6 +1077,106 @@
       "Trate a dívida de segurança como item de risco, com reporte próprio"
     ],
     "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "03-arquitetura-engenharia#GUIA#C01",
+    "ref": "03-arquitetura-engenharia#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Um firewall libera a porta do banco de dados apenas para a rede administrativa. Essa é uma decisão de arquitetura ou de configuração, e sob qual princípio ela se justifica? (TEMA-01)",
+    "alternativas": [
+      "A decisão tomada, o princípio que a sustenta, a proteção que se aceitou sacrificar e o nome de quem aprovou. Sem a terceira e a quarta colunas, o registro não permite reconstruir a troca nem cobrar autoria.",
+      "Identificar a questão de segurança na fase de desenho permite que a segurança faça parte do sistema, em vez de ser acrescentada depois, com custo maior de mudança e risco de conflito com decisões já tomadas.",
+      "Configuração, com efeito de arquitetura. A regra é reversível em minutos; o que sustenta a escolha é a mediação completa — nenhum caminho alternativo chega ao banco sem passar por um ponto de verificação.",
+      "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é."
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "03-arquitetura-engenharia#GUIA#C02",
+    "ref": "03-arquitetura-engenharia#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Quais são as quatro perguntas que o processo de modelagem de ameaças precisa responder, e em qual etapa entra o diagrama de fluxo de dados? (TEMA-02)",
+    "alternativas": [
+      "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos.",
+      "Custo de reversão. Se desfazer exige mudar contrato, modelo de dados, integração ou processo de várias equipes, é decisão de arquitetura; se desfazer é uma alteração de configuração em minutos, não é.",
+      "Reduz o conjunto de destinos que a credencial alcança. A permissão passa a depender do par origem e destino declarado, e o que não está na matriz é negado, o que limita o deslocamento lateral.",
+      "O que estamos construindo, o que pode dar errado, o que faremos a respeito e se fizemos um trabalho suficiente. O diagrama de fluxo de dados pertence à primeira pergunta, a decomposição do sistema."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "03-arquitetura-engenharia#GUIA#C03",
+    "ref": "03-arquitetura-engenharia#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "A rede é plana e a conta de suporte alcança qualquer servidor. O que uma matriz de fluxo com negação por padrão muda nesse alcance? (TEMA-03)",
+    "alternativas": [
+      "Reduz o conjunto de destinos que a credencial alcança. A permissão passa a depender do par origem e destino declarado, e o que não está na matriz é negado, o que limita o deslocamento lateral.",
+      "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente.",
+      "O que estamos construindo, o que pode dar errado, o que faremos a respeito e se fizemos um trabalho suficiente. O diagrama de fluxo de dados pertence à primeira pergunta, a decomposição do sistema.",
+      "Porque é por ela que passa o movimento lateral: é a zona com maior privilégio e menor número de usuários legítimos, e a que costuma concentrar protocolos administrativos aceitos por muitos destinos."
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "03-arquitetura-engenharia#GUIA#C05",
+    "ref": "03-arquitetura-engenharia#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Um edital exige \"solução segura e aderente às boas práticas\". Por que esse texto não é um requisito verificável, e o que falta nele? (TEMA-05)",
+    "alternativas": [
+      "Autenticação e autorização, tanto de sujeito quanto de dispositivo, como funções distintas executadas antes de estabelecer a sessão com o recurso corporativo.",
+      "Porque sem evidência não há aceite nem recusa formalmente registrada, e a decisão sobre cumprir ou não volta a depender de quem argumenta melhor na reunião.",
+      "Porque não define critério observável nem forma de verificação. Falta o objeto protegido, o limite quantitativo ou a condição de aceite e a evidência exigida.",
+      "Mudança de arquitetura, entrada de novo tipo de dado ou novo fluxo, incidente com causa ligada a desenho e renovação de contrato de fornecedor relevante."
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "03-arquitetura-engenharia#GUIA#C06",
+    "ref": "03-arquitetura-engenharia#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-160 Vol. 1 Rev. 1 — Engineering Trustworthy Secure Systems",
+      "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Uma funcionalidade de exportação foi entregue sem limite de volume. É dívida de segurança ou vulnerabilidade? Justifique em duas linhas e diga quem assina o prazo. (TEMA-06)",
+    "alternativas": [
+      "O que está diferente do aprovado, o risco criado, o dono, o prazo e o custo estimado. Os três primeiros campos separam dívida de opinião; os dois últimos separam dívida de intenção.",
+      "O número de itens acima do prazo acordado no próprio registro. Ele funciona melhor porque mede envelhecimento, e envelhecimento é o que transforma decisão adiada em arquitetura permanente.",
+      "Reduz o conjunto de destinos que a credencial alcança. A permissão passa a depender do par origem e destino declarado, e o que não está na matriz é negado, o que limita o deslocamento lateral.",
+      "Dívida de segurança: não há falha explorável imediata, há decisão de desenho que adia o limite. O prazo é assinado por quem responde pelo serviço, não pelo time que executa a correção."
+    ],
+    "correta": 3,
     "justificativa": ""
   }
 ]

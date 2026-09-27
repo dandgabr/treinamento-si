@@ -8,7 +8,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Comprar SIEM para \"ter um SOC\"\". Qual é a correção?",
     "alternativas": [
       "escrever o que o provedor pode fazer sozinho e o que volta para o cadastro interno de decisão",
@@ -28,7 +28,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Tratar plantão como detalhe operacional\". Qual é a correção?",
     "alternativas": [
       "escrever o que o provedor pode fazer sozinho e o que volta para o cadastro interno de decisão",
@@ -48,7 +48,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Supor que nível de analista é padrão normativo\". Qual é a correção?",
     "alternativas": [
       "o que as fontes verificadas exigem é coordenador de incidente designado e caminho de escalonamento documentado",
@@ -68,7 +68,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre O que é um SOC e seus modelos: um colega afirma que \"Contratar monitoramento esperando transferir responsabilidade\". Qual é a correção?",
     "alternativas": [
       "escolher o modelo primeiro e dimensionar a ferramenta pela cobertura e pelo volume que ele exige",
@@ -88,7 +88,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são as três variáveis que definem um modelo de SOC?",
     "alternativas": [
       "o que as fontes verificadas exigem é coordenador de incidente designado e caminho de escalonamento documentado",
@@ -108,7 +108,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Confundir \"registrar\" com \"ter log\"\". Qual é a correção?",
     "alternativas": [
       "cada fonte entra com a pergunta de investigação que ela responde",
@@ -128,7 +128,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Acreditar que o fornecedor de nuvem entrega o log que você precisa por padrão\". Qual é a correção?",
     "alternativas": [
       "conferir quais categorias de log existem no plano de controle e habilitar explicitamente",
@@ -148,7 +148,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Coletar tudo para \"não perder nada\"\". Qual é a correção?",
     "alternativas": [
       "o inventário precisa da coluna de retenção e da coluna de destino",
@@ -168,7 +168,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Fontes de log e telemetria: um colega afirma que \"Guardar o log apenas na origem\". Qual é a correção?",
     "alternativas": [
       "o inventário precisa da coluna de retenção e da coluna de destino",
@@ -188,7 +188,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que o mesmo playbook manda gerenciar sensores por caminho fora de banda?",
     "alternativas": [
       "Conteúdo útil, destino de armazenamento, prazo de retenção, dono da fonte e a pergunta de investigação que ela responde.",
@@ -208,7 +208,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O que precisa estar escrito no inventário de fontes, além do nome da fonte?",
     "alternativas": [
       "conferir quais categorias de log existem no plano de controle e habilitar explicitamente",
@@ -228,7 +228,7 @@
       "url": "https://attack.mitre.org/tactics/enterprise/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Medir cobertura pela quantidade de regras\". Qual é a correção?",
     "alternativas": [
       "medir cobertura por tática com regra em produção, ativa e revisada",
@@ -248,7 +248,7 @@
       "url": "https://attack.mitre.org/tactics/enterprise/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Tratar a lista de indicadores como detecção\". Qual é a correção?",
     "alternativas": [
       "medir cobertura por tática com regra em produção, ativa e revisada",
@@ -268,7 +268,7 @@
       "url": "https://attack.mitre.org/tactics/enterprise/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Deixar a exceção na cabeça do analista\". Qual é a correção?",
     "alternativas": [
       "gravar a versão do ATT&CK em cada avaliação de cobertura",
@@ -288,7 +288,7 @@
       "url": "https://attack.mitre.org/tactics/enterprise/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Detecção: regras, casos de uso e MITRE ATT&CK: um colega afirma que \"Não registrar a versão do framework usada\". Qual é a correção?",
     "alternativas": [
       "declarar a exceção na regra ou no filtro compartilhado",
@@ -308,7 +308,7 @@
       "url": "https://attack.mitre.org/tactics/enterprise/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais campos da especificação Sigma são obrigatórios e quais são opcionais?",
     "alternativas": [
       "O campo `logsource`, que descreve o dado por categoria, produto e serviço e permite apontar a mesma regra para fontes equivalentes, em vez de replicar a lógica por produto.",
@@ -328,7 +328,7 @@
       "url": "https://attack.mitre.org/tactics/enterprise/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Um analista propõe criar três regras separadas para o mesmo padrão, uma por produto de origem do log. Qual recurso da especificação evita essa triplicação e por quê?",
     "alternativas": [
       "Qual versão do ATT&CK foi usada, o que conta como coberta — regra em produção, ativa, com nível alto e dono — e se a contagem inclui técnica sem fonte de telemetria disponível no ambiente.",
@@ -348,7 +348,7 @@
       "url": "https://attack.mitre.org/tactics/enterprise/",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Um relatório de cobertura diz que a organização cobre 70% das técnicas de ATT&CK. Qual pergunta você faz antes de aceitar o número?",
     "alternativas": [
       "Qual versão do ATT&CK foi usada, o que conta como coberta — regra em produção, ativa, com nível alto e dono — e se a contagem inclui técnica sem fonte de telemetria disponível no ambiente.",
@@ -368,7 +368,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Usar notícia de vulnerabilidade para definir severidade de incidente\". Qual é a correção?",
     "alternativas": [
       "preservar memória e imagem antes da ação destrutiva, com registro de quem coletou",
@@ -388,7 +388,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Deixar o critério de severidade na cabeça do analista sênior\". Qual é a correção?",
     "alternativas": [
       "Automatizar contenção antes de preservar evidência",
@@ -408,7 +408,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Contar a hora da notificação a partir da descoberta do time de segurança\". Qual é a correção?",
     "alternativas": [
       "Deixar o critério de severidade na cabeça do analista sênior",
@@ -428,7 +428,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Triagem, severidade e escalonamento: um colega afirma que \"Automatizar contenção antes de preservar evidência\". Qual é a correção?",
     "alternativas": [
       "preservar memória e imagem antes da ação destrutiva, com registro de quem coletou",
@@ -448,7 +448,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quais são os quatro produtos obrigatórios de uma triagem?",
     "alternativas": [
       "Contar a hora da notificação a partir da descoberta do time de segurança",
@@ -468,7 +468,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "O playbook do CISA exige procedimento para descartar conflito com atividade autorizada. Dê um exemplo concreto do que essa verificação evita.",
     "alternativas": [
       "Evita tratar como ataque a atualização remota aplicada pelo administrador de rede à noite, que é o exemplo dado pelo próprio documento. Sem a verificação, o plantão isola produção ou descarta o alerta errado.",
@@ -488,7 +488,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Quem decide escalar o incidente para instância superior de coordenação, segundo o material verificado?",
     "alternativas": [
       "usar critério de incidente, como categoria, extensão, privilégio obtido e impacto",
@@ -508,7 +508,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Apresentar volume de alertas como resultado\". Qual é a correção?",
     "alternativas": [
       "congelar a definição por escrito, com o evento de início e o de fim",
@@ -528,7 +528,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Comparar tempo médio sem definição de início e de fim\". Qual é a correção?",
     "alternativas": [
       "apresentar cobertura, custo de atenção por caso e origem da descoberta",
@@ -548,7 +548,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Tratar falso positivo como problema de postura do analista\". Qual é a correção?",
     "alternativas": [
       "ajustar regra e nível, e declarar o falso positivo esperado no próprio arquivo da regra",
@@ -568,7 +568,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Otimizar eficiência e ignorar efetividade\". Qual é a correção?",
     "alternativas": [
       "congelar a definição por escrito, com o evento de início e o de fim",
@@ -588,7 +588,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre Métricas de SOC e o problema dos falsos positivos: um colega afirma que \"Avaliar cobertura sem registrar a versão do framework\". Qual é a correção?",
     "alternativas": [
       "Comparar tempo médio sem definição de início e de fim",
@@ -608,7 +608,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Por que a hora de triagem por caso real muda mais comportamento que a contagem de alertas?",
     "alternativas": [
       "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida.",
@@ -628,7 +628,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "A operação cortou pela metade o número de alertas semanais depois de desligar dez regras. Que outro número você consulta antes de aceitar isso como melhoria?",
     "alternativas": [
       "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida.",
@@ -648,7 +648,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Um analista diz que \"o tempo médio para detectar caiu 40 por cento\". Qual é a primeira pergunta?",
     "alternativas": [
       "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando.",
@@ -668,7 +668,7 @@
       "url": "https://csrc.nist.gov/pubs/sp/800/137/final",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "O que o valor informativo do campo de nível de uma regra diz sobre abrir caso?",
     "alternativas": [
       "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente.",
@@ -688,7 +688,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Automatizar primeiro a ação mais visível, como isolar máquina\". Qual é a correção?",
     "alternativas": [
       "repositório versionado, com migração acompanhando a versão da especificação",
@@ -708,7 +708,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Tratar automação como projeto de ferramenta\". Qual é a correção?",
     "alternativas": [
       "padronizar o processo antes e usar a ferramenta como executor",
@@ -728,7 +728,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Automatizar antes de preservar evidência\". Qual é a correção?",
     "alternativas": [
       "gatilho de revisão declarado ligado à publicação de versão do catálogo",
@@ -748,7 +748,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Manter regras e playbooks sem controle de versão\". Qual é a correção?",
     "alternativas": [
       "começar por enriquecimento, abertura de chamado e ação reversível com expiração",
@@ -768,7 +768,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Sobre SOAR, automação e o futuro do SOC: um colega afirma que \"Revisar cobertura uma vez por ano\". Qual é a correção?",
     "alternativas": [
       "coleta antes da ação destrutiva, com registro do que, quando e por quem",
@@ -788,7 +788,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "verificado",
     "enunciado": "Quais são as três condições que uma ação deve cumprir para entrar em execução automática?",
     "alternativas": [
       "Ação reversível ou de efeito desprezível; insumo de disparo confiável, com falso positivo medido; e registro suficiente para reconstruir o que aconteceu.",
@@ -808,7 +808,7 @@
       "url": "https://www.cisa.gov/sites/default/files/2024-08/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf",
       "tipo": "primaria"
     },
-    "status": "rascunho",
+    "status": "pendente",
     "enunciado": "Cite duas classes de contramedida do D3FEND que correspondem a ações típicas de contenção.",
     "alternativas": [
       "Ação reversível ou de efeito desprezível; insumo de disparo confiável, com falso positivo medido; e registro suficiente para reconstruir o que aconteceu.",
@@ -817,6 +817,106 @@
       "Entre as verificadas: isolamento de rede, bloqueio de conta, revogação de credencial, encerramento de sessão, suspensão de processo e remoção de processo."
     ],
     "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "10-operacoes-soc#GUIA#C01",
+    "ref": "10-operacoes-soc#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Item 3 do TEMA-03 (escrever a regra a partir do objetivo de cobertura).",
+    "alternativas": [
+      "Operação — própria, terceira ou mista —, horário de cobertura e escopo de ativos. A autoridade de decisão é a quarta variável de governança que precisa estar escrita.",
+      "A regra precisa declarar logsource, condição, nível e falsos positivos esperados, além da técnica de ATT&CK que ela cobre; sem o mapeamento a cobertura não é auditável.",
+      "O campo `logsource`, que descreve o dado por categoria, produto e serviço e permite apontar a mesma regra para fontes equivalentes, em vez de replicar a lógica por produto.",
+      "Que a regra é destinada a enriquecimento e que, pela definição da especificação, não deve abrir caso nem disparar alerta, porque se espera grande volume de eventos casando."
+    ],
+    "correta": 1,
+    "justificativa": ""
+  },
+  {
+    "id": "10-operacoes-soc#GUIA#C02",
+    "ref": "10-operacoes-soc#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Item 1 do TEMA-05 (definir a métrica antes de medir).",
+    "alternativas": [
+      "Conteúdo útil, destino de armazenamento, prazo de retenção, dono da fonte e a pergunta de investigação que ela responde.",
+      "A autoridade central, junto com a polícia federal no caso dos Estados Unidos, conforme o playbook, e não a organização afetada.",
+      "Métrica só entra em painel se tiver definição escrita, fonte de dado e decisão associada; sem decisão, é número decorativo.",
+      "A fonte ausente precisa ser nomeada junto com a classe de técnica que fica sem evidência, como credencial ou comando e controle."
+    ],
+    "correta": 2,
+    "justificativa": ""
+  },
+  {
+    "id": "10-operacoes-soc#GUIA#C03",
+    "ref": "10-operacoes-soc#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Item 2 do TEMA-01 (escolher o modelo para um caso dado).",
+    "alternativas": [
+      "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada.",
+      "A fonte ausente precisa ser nomeada junto com a classe de técnica que fica sem evidência, como credencial ou comando e controle.",
+      "A autoridade central, junto com a polícia federal no caso dos Estados Unidos, conforme o playbook, e não a organização afetada.",
+      "O modelo se justifica pelas variáveis de operação, horário e escopo, e a autoridade de decisão precisa estar escrita antes do incidente."
+    ],
+    "correta": 3,
+    "justificativa": ""
+  },
+  {
+    "id": "10-operacoes-soc#GUIA#C04",
+    "ref": "10-operacoes-soc#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Item 4 do TEMA-04 (classificar severidade e justificar escalonamento).",
+    "alternativas": [
+      "A severidade sai do critério declarado (tipo de ativo, privilégio obtido, extensão e impacto) e o escalonamento tem dono e prazo; nota de vulnerabilidade não é nota de incidente.",
+      "Para que o adversário que já opera na rede corporativa não alcance o gerenciamento do sensor, não leia o tráfego de administração e não possa desativá-lo antes de ser contido.",
+      "Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente.",
+      "A cobertura de táticas com regra ativa e fonte de telemetria disponível, e a origem da descoberta dos incidentes confirmados. Sem elas, a queda de alerta pode ser cegueira adquirida."
+    ],
+    "correta": 0,
+    "justificativa": ""
+  },
+  {
+    "id": "10-operacoes-soc#GUIA#C05",
+    "ref": "10-operacoes-soc#GUIA",
+    "origem": "checkpoint",
+    "fonte": {
+      "titulo": "NIST SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile, abril de 2025",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "tipo": "primaria"
+    },
+    "status": "pendente",
+    "enunciado": "Item 2 do TEMA-02 (nomear a fonte ausente e a técnica que fica sem evidência).",
+    "alternativas": [
+      "A autoridade central, junto com a polícia federal no caso dos Estados Unidos, conforme o playbook, e não a organização afetada.",
+      "A fonte ausente precisa ser nomeada junto com a classe de técnica que fica sem evidência, como credencial ou comando e controle.",
+      "Métrica só entra em painel se tiver definição escrita, fonte de dado e decisão associada; sem decisão, é número decorativo.",
+      "Qual é a definição exata de início e de fim, e quem a registrou. Sem isso, o número não é comparável e o percentual não significa nada."
+    ],
+    "correta": 1,
     "justificativa": ""
   }
 ]
