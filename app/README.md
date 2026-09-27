@@ -290,16 +290,16 @@ instalador/Roadmap CISO-<versão>.AppImage.sha256
 O arquivo de soma é o do `sha256sum`, e as linhas de comentário existem porque o formato não tem
 onde guardar a versão e o tamanho — nele, tudo o que vem depois dos dois espaços é o nome do
 arquivo, e uma coluna a mais faria a conferência procurar um arquivo chamado
-`Roadmap CISO-0.1.0.AppImage  109100595`. Com `#`, o `sha256sum -c` ignora o comentário e confere a
+`Roadmap CISO-0.1.0.AppImage  109100531`. Com `#`, o `sha256sum -c` ignora o comentário e confere a
 soma:
 
 ```
 # release 0.1.0 — Roadmap CISO
 # arquivo: Roadmap CISO-0.1.0.AppImage
-# tamanho: 109100595 bytes
-# gerado em: 2026-09-27T18:08:16.446Z
+# tamanho: 109100531 bytes
+# gerado em: 2026-09-27
 # confira com: sha256sum -c "Roadmap CISO-0.1.0.AppImage.sha256"
-092e0ec6287726cb3aaef710e8e0976583733775178e3a3c614d00f158833820  Roadmap CISO-0.1.0.AppImage
+d33ac80153bd33d5f74849bb601b427776230c9614b0f05f6703eef3de3e88ee  Roadmap CISO-0.1.0.AppImage
 ```
 
 Quem baixa roda `sha256sum -c "Roadmap CISO-0.1.0.AppImage.sha256"` com o artefato ao lado e recebe
@@ -309,11 +309,27 @@ soma depois de gravar para conferir que o nome, o tamanho e o resumo são os do 
 de sair. `app/instalador/` está no `.gitignore`, então o par viaja como **anexo da release**, não
 como commit — refazer o pacote muda o hash, e um hash versionado seria mentira no dia seguinte.
 
-### O AppImage que estava no disco antes desta fase (medido, não copiado)
+### A release desta árvore (medida, não copiada)
 
 | | Valor |
 |---|---|
 | arquivo | `instalador/Roadmap CISO-0.1.0.AppImage` |
+| origem | reconstruído do commit `1136c52` (HEAD), com a árvore limpa |
+| tamanho | **109.100.531 bytes** (104,0 MiB) |
+| SHA-256 | `d33ac80153bd33d5f74849bb601b427776230c9614b0f05f6703eef3de3e88ee` |
+| conferido com | `sha256sum -c` → `SUCESSO` |
+| SBOM ao lado | `instalador/sbom.cdx.json` (CycloneDX 1.6, 572 componentes) |
+| medido em | 2026-09-27 |
+
+Refazer o pacote muda o hash, e é por isso que ele não é versionado: publica-se o par como anexo.
+A diferença de tamanho para o pacote de 26/09 é compressão entre builds, não conteúdo — o que vale
+como prova de origem é a soma conferida contra o arquivo que se baixou.
+
+### O AppImage que estava no disco antes (guardado em `anteriores/`, medido, não copiado)
+
+| | Valor |
+|---|---|
+| arquivo | `instalador/anteriores/Roadmap CISO-0.1.0.AppImage` (guardado com o par intacto) |
 | tamanho | **109.137.711 bytes** (104,1 MiB) |
 | SHA-256 | `cbebd26b69ae50f41af585b126fa0270838ed22e091cf21c953781c0fc366997` |
 | data do arquivo | 2026-09-26 22:45:41 (-03:00) |
@@ -430,7 +446,7 @@ comparado com o da origem oficial. O `.desktop` que o AppImage distribui abre co
 
 A §16.2 do plano separa as duas coisas, e a assinatura também não resolve a segunda: os fuses e o
 `.sha256` provam a **integridade** do que foi empacotado, não o **inventário** do que está dentro. O
-SBOM continua pendente, e o `package-lock.json` já cobre a matéria-prima dele.
+O SBOM saiu em 27/09: `npx @cyclonedx/cyclonedx-npm --omit dev` gerou `instalador/sbom.cdx.json` (CycloneDX 1.6), que inventaria a árvore de dependências declarada no `package-lock.json` (produção) — não os bytes dentro do AppImage, que é o que a soma cobre. Os dois viajam como anexo da release.
 
 ## Banco de múltipla escolha
 
