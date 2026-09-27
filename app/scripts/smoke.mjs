@@ -411,14 +411,20 @@ async function cenarioDoQuizRespondido() {
       // leva selo nenhum, e por isso nao diz de onde veio — a conferencia abaixo so vale
       // para o item que ainda esta em revisao.
       const emRevisao = rotulo.includes('não revisado') || rotulo.includes('em revisão')
-      const origem = rotulo.includes('recuperação ativa')
-        ? 'recuperação ativa'
-        : rotulo.includes('tabela de erros comuns')
-          ? 'tabela de erros comuns'
-          : rotulo.includes('checkpoint do guia')
-            ? 'checkpoint do guia'
-            : emRevisao
-              ? 'desconhecida'
+      // A origem vem do PROPRIO item, e nao do texto do aviso: o item promovido a
+      // `verificado` nao leva selo, entao ler a origem pelo selo deixava a variavel nula e
+      // os contadores abaixo nunca disparavam — o teste acusava "nenhum item de erro comum"
+      // num banco em que 64% dos itens sao disso. O selo diz o status; a origem e outro dado.
+      const origemDoItem = await pagina.evaluate(
+        () => document.querySelector('.bloco-questao')?.getAttribute('data-origem') ?? '',
+      )
+      const origem =
+        origemDoItem === 'recuperacao'
+          ? 'recuperação ativa'
+          : origemDoItem === 'erro-comum'
+            ? 'tabela de erros comuns'
+            : origemDoItem === 'checkpoint'
+              ? 'checkpoint do guia'
               : null
 
       const antes = await pagina.evaluate(() => {

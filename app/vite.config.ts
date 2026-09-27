@@ -45,12 +45,12 @@ function cspNoBuild(): Plugin {
 // `inlineDynamicImports` e obrigatorio: o mermaid carrega os tipos de diagrama por
 // import() dinamico, e um chunk externo nao seria carregado a partir de file://.
 // O desktop nao tem essa restricao e usa `vite.desktop.config.ts`.
-  // `cspNoBuild` vem antes do `viteSingleFile` de proposito: a CSP entra no head do template,
- * antes do script que o singlefile inlina ali — uma meta de CSP nao alcanca o que ja foi
- * analisado antes dela.
- */
+//
+// `cspNoBuild` fica depois do `viteSingleFile`: o singlefile inlina o script e a folha no
+// head, e a meta sai como ultimo elemento dele. A ordem nos dois sentidos foi conferida e
+// gera o mesmo HTML, entao fica a que se le de cima para baixo.
 export default defineConfig({
-  plugins: [react(), cspNoBuild(), viteSingleFile()],
+  plugins: [react(), viteSingleFile(), cspNoBuild()],
   resolve: {
     alias: { '@fonte': path.join(AQUI, 'src/infrastructure/content/fonte-web.ts') },
   },

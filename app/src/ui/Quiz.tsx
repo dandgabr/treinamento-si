@@ -461,7 +461,15 @@ function Rodada({
           rodada cheia, e a rodada traz todos eles.
         </p>
       ) : null}
-      <section className="secao bloco-questao">
+      <section
+        className="secao bloco-questao"
+        // Origem e status sao coisas diferentes, e o selo so mostra o status (item
+        // verificado nao leva selo). Sem estes atributos, quem le a tela de fora — o smoke —
+        // nao tem como saber de onde o item veio, e acabava inferindo pelo selo: quando a
+        // revisao promoveu os itens, a inferencia passou a dar zero.
+        data-origem={questao.origem}
+        data-status={questao.status}
+      >
         <h2 tabIndex={-1} ref={perguntaRef}>
           Questão {indice + 1} de {itens.length}
         </h2>
