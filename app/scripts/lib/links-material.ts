@@ -169,7 +169,7 @@ export interface RelatorioDeLinks {
   paraRota: number
   /** Links declarados: o texto fica, a marca de link sai. */
   comoTexto: number
-  /** Links externos (`http(s)`, `mailto:`) e para fora do material: nao mudam. */
+  /** Links externos (`http(s)`, `mailto:`): nao mudam, e nao ha defeito a apontar. */
   intactos: number
   /** Caminho declarado -> quantos links apontaram para ele. */
   declaradosUsados: Map<string, number>
@@ -218,17 +218,47 @@ export function resolverDeLinks(
       return { acao: 'manter' }
     }
 
-    // Absoluto (`/x.md`) e externo (`https://`, `mailto:`): o material nao usa o primeiro, e o
-    // segundo e decisao de quem escreve — nenhum dos dois passa pelo mapa.
-    if (caminhoBruto.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(caminhoBruto)) {
+    // Externo (`https://`, `mailto:`): decisao de quem escreve, nao passa pelo mapa — e o unico
+    // ramo que fica intacto sem defeito nenhum.
+    if (/^[a-z][a-z0-9+.-]*:/i.test(caminhoBruto)) {
       relatorio.intactos++
+      return { acao: 'manter' }
+    }
+
+    // Absoluto (`/x.md`) e protocol-relative (`//host/x.md`): nenhum dos dois e caminho do
+    // material, e nao ha rota para onde trocar. Ficam como o material escreveu e entram no
+    // relatorio, como o link para arquivo que nao existe: o `href` que sobra no HTML nao abre em
+    // lugar nenhum — `/x.md` e a raiz de onde o app foi aberto, que em `file://` nao e o material
+    // — e o protocol-relative ainda leva a requisicao para o host que o link nomeia. O portao ja
+    // reprovava os dois por `hrefsRelativos`, mas ele so roda em `check:content`; a geracao pura
+    // (`build:content`, o caminho do `dev`) passava em silencio.
+    if (caminhoBruto.startsWith('//')) {
+      relatorio.erros.push(
+        `${origem}: o link "${href}" e protocol-relative ("//host/…"), e o destino nao e o ` +
+          `material — e sim um host de fora, que o app nao monta: escreva o caminho relativo a ` +
+          `raiz do material`,
+      )
+      return { acao: 'manter' }
+    }
+    if (caminhoBruto.startsWith('/')) {
+      relatorio.erros.push(
+        `${origem}: o link "${href}" e um caminho absoluto ("/…"), que nao e caminho do material: ` +
+          `na raiz de onde o app foi aberto ele nao leva a lugar nenhum — escreva o caminho ` +
+          `relativo a raiz do material`,
+      )
       return { acao: 'manter' }
     }
 
     const caminho = resolverCaminho(origem, decodificar(caminhoBruto).replace(/\/+$/, ''))
     if (caminho === null) {
-      // Sai da raiz do material: nao ha rota possivel, e o app nao alcanca o arquivo de fora.
-      relatorio.intactos++
+      // Sai da raiz do material: nao ha rota possivel (`resolverCaminho` devolveu `null`), e o
+      // app nao alcanca o arquivo de fora. O que sobra e o href relativo que nao abre em lugar
+      // nenhum dentro do app — defeito, e nao link externo: entra no relatorio como o caminho que
+      // nao existe no material. O texto do link continua nomeando para onde a referencia apontava.
+      relatorio.erros.push(
+        `${origem}: o link "${href}" sai da raiz do material (o caminho sobe acima dele), e nao ha ` +
+          `rota para fora do material — o href relativo nao abre em lugar nenhum no app`,
+      )
       return { acao: 'manter' }
     }
 
@@ -282,9 +312,14 @@ export function resolverDeLinks(
  * endereca secao por `idDaSecao(numero)` — `secao-4` em `Blocos.tsx`. Como o fragmento da URL
  * pertence a ROTA (`#/area/<areaId>`), a ancora viaja como ultimo segmento dela:
  * `#/area/01-fundamentos/secao-4`. E a gramatica que `useRota.analisar` e o `hrefsInvalidos` do
- * smoke ja aceitam — os dois leem os dois primeiros segmentos e ignoram o resto. Um `#` a mais
- * nao serve: ele nao e delimitador de segmento, e `#/area/x#secao-4` viraria areaId
- * `x#secao-4`, ou seja, "area nao encontrada".
+ * smoke ja aceitam: os dois primeiros segmentos identificam a tela e o ultimo e o alvo DENTRO
+ * dela, que a tela monta no `id` do elemento. Um `#` a mais nao serve: ele nao e delimitador de
+ * segmento, e `#/area/x#secao-4` viraria areaId `x#secao-4`, ou seja, "area nao encontrada".
+ *
+ * O guia da area entra porque ele expoe as mesmas `secao-<numero>` do tema (`AreaView` as monta
+ * com o `idDaSecao`), entao a promessa do link tem onde chegar. A area sem o `ancora` na rota era
+ * o defeito: o `#4-temas` do material abria a area no topo e deixava a secao 4 a milhares de
+ * pixels de distancia.
  *
  * Pagina (`glossario`, `mapa-relacoes`, catalogos) nao entra: elas nao expoem secao numerada, e
  * uma ancora para la nao tem destino — reprova em vez de prometer o que a tela nao faz.

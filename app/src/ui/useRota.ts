@@ -3,9 +3,10 @@ import { content } from '../infrastructure/content/repository'
 
 export type Rota =
   | { nome: 'home' }
-  | { nome: 'area'; areaId: string }
-  // `ancora` e o id de um alvo DENTRO da tela (a secao 10 do tema, um verbete do glossario),
-  // quando a rota termina nele.
+  // `ancora` e o id de um alvo DENTRO da tela (a secao 4 do guia, a secao 10 do tema, um verbete
+  // do glossario), quando a rota termina nele. O guia da area expoe as mesmas `secao-<numero>` do
+  // tema, entao a ancora do material chega nos dois do mesmo jeito.
+  | { nome: 'area'; areaId: string; ancora: string | null }
   | { nome: 'tema'; ref: string; ancora: string | null }
   // `slug` pode ter mais de um segmento (`91-trilhas/plano-90-dias`); `ancora` e o id de um
   // alvo DENTRO da pagina (o termo do glossario), quando a rota termina nele.
@@ -66,7 +67,12 @@ function analisar(hash: string, slugs: readonly string[]): Rota {
       }
     })
   if (!partes.length) return { nome: 'home' }
-  if (partes[0] === 'area' && partes[1]) return { nome: 'area', areaId: partes[1] }
+  // O ultimo segmento da rota de area e o alvo dentro da tela (`#/area/01-fundamentos/secao-4`, a
+  // ancora que `links-material` tira de `README.md#4-temas`). O guia monta esse id como o tema
+  // monta as secoes dele: sem ler este segmento, a area abria no topo e o link prometia uma secao
+  // que ninguem alcancava.
+  if (partes[0] === 'area' && partes[1])
+    return { nome: 'area', areaId: partes[1], ancora: partes[2] ?? null }
   if (partes[0] === 'tema' && partes[1] && partes[2])
     return { nome: 'tema', ref: `${partes[1]}#${partes[2]}`, ancora: partes[3] ?? null }
   if (partes[0] === 'pagina' && partes[1]) {

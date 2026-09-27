@@ -547,6 +547,62 @@ describe('normalizarProgresso', () => {
     expect(p.temas[REF]?.revisao.proximaRevisao).toBe('2026-03-11T12:00:00.000Z')
   })
 
+  it('recusa a revisão agendada fora da janela sã de datas', () => {
+    // `Date.parse` lê qualquer coisa até ±8,64e15 ms — uns 275 mil anos. Uma data dessas vinha
+    // de arquivo de fora e não descrevia estudo nenhum: o degrau final do SRS somava D+90 sobre
+    // ela e `toISOString()` lançava `RangeError: Invalid time value` no clique de "Acertei sem
+    // consultar". O tema volta ao estado inicial em vez de entrar com a data impossível.
+    const noLimite = new Date(8.64e15).toISOString()
+    expect(Date.parse(noLimite)).not.toBeNaN()
+
+    const p = normalizarProgresso(
+      {
+        versao: 1,
+        temas: {
+          [REF]: {
+            ref: REF,
+            revisao: { intervaloDias: 30, proximaRevisao: noLimite, consolidado: true },
+          },
+        },
+        checkpoints: {},
+        diasAtivos: [],
+      },
+      HOJE,
+    )
+
+    expect(p.temas[REF]?.revisao.intervaloDias).toBe(1)
+    expect(p.temas[REF]?.revisao.proximaRevisao).toBe('2026-03-11T12:00:00.000Z')
+    expect(p.temas[REF]?.revisao.consolidado).toBe(false)
+
+    // E a passagem de recuperação seguinte não estoura: é ela que reagenda o degrau final.
+    const depois = registrarRecuperacao(p, REF, true, HOJE)
+    expect(depois.temas[REF]?.revisao.proximaRevisao).toBe('2026-03-17T12:00:00.000Z')
+  })
+
+  it('recusa a data absurda no passado também, e mantém a plausível', () => {
+    const p = normalizarProgresso(
+      {
+        versao: 1,
+        temas: {
+          antigo: { revisao: { intervaloDias: 7, proximaRevisao: '-271821-04-20T00:00:00.000Z' } },
+          futuro: { revisao: { intervaloDias: 7, proximaRevisao: '+275760-09-13T00:00:00.000Z' } },
+          vencido: { revisao: { intervaloDias: 7, proximaRevisao: '2020-03-10T12:00:00.000Z' } },
+        },
+        checkpoints: {},
+        diasAtivos: [],
+      },
+      HOJE,
+    )
+
+    // Uma data no limite do `Date` para cada lado é recusada...
+    expect(p.temas.antigo?.revisao.proximaRevisao).toBe('2026-03-11T12:00:00.000Z')
+    expect(p.temas.futuro?.revisao.proximaRevisao).toBe('2026-03-11T12:00:00.000Z')
+    // ...e um tema parado há anos, que é o passado legítimo, continua vencido e não é descartado:
+    // a janela existe para recusar o impossível, não para apagar histórico.
+    expect(p.temas.vencido?.revisao.proximaRevisao).toBe('2020-03-10T12:00:00.000Z')
+    expect(filaDoProgresso(p, HOJE).map((e) => e.ref)).toEqual(['vencido'])
+  })
+
   it('descarta dias em formato inválido', () => {
     const p = normalizarProgresso(
       { versao: 1, temas: {}, checkpoints: {}, diasAtivos: ['2026-03-10', 'ontem', 42] },

@@ -47,6 +47,12 @@ export interface Celula {
   texto: string
   /** O HTML original, que pode trazer link: a tela nao inventa conteudo, so o reaproveita. */
   html: string
+  /**
+   * A celula ja traz um `<a>` do material — o que decide o desenho da PRIMEIRA coluna.
+   * Dois `<a>` aninhados nao existem em HTML, entao a celula que ja tem link nao pode receber
+   * o envoltorio do endereco do verbete (ver `Tabela`).
+   */
+  temLink: boolean
 }
 
 export interface Verbete {
@@ -137,6 +143,9 @@ function lerTabela(tabela: Element, chave: string, usados: Set<string>): TabelaD
     const celulas = Array.from(linha.querySelectorAll('td')).map((td) => ({
       texto: (td.textContent ?? '').trim(),
       html: td.innerHTML,
+      // Pelo elemento, e nao pelo HTML em texto: e a leitura do DOM que diz se a celula ja tem
+      // link, sem uma varredura de HTML que erra em comentario, atributo ou tag maiuscula.
+      temLink: td.querySelector('a') !== null,
     }))
     if (celulas.length !== colunas.length) return null
     const termo = celulas[0]?.texto ?? ''
@@ -292,6 +301,20 @@ function itensDoSumario(blocos: BlocoDoGlossario[]): ItemDeSumario[] {
  * daquele termo) e desempata os nomes repetidos entre as duas tabelas — "TLS" e o termo e a
  * sigla. O `id` da linha e o ultimo segmento da rota, que e o que faz o endereco ficar
  * compartilhavel.
+ *
+ * A excecao e a celula que JA traz um link do material. Dois `<a>` aninhados nao existem em HTML,
+ * e desfazer esse no tem dois caminhos, os dois medidos no jsdom: o `innerHTML` que o React usa no
+ * `<a>` de fora — o parser de fragmento comeca com a lista de elementos de formatacao VAZIA, e o
+ * algoritmo de adocao nao roda — deixa o `<a>` de dentro DENTRO do de fora, e a celula fica com
+ * dois links de mesmo texto, com o clique caindo no mais interno (o do material): o endereco do
+ * termo perde o clique. E o mesmo markup re-parseado como documento fecha o de fora antes de abrir
+ * o de dentro (`<a href="…"></a><a href="…">README</a>`), e ai o endereco do termo fica VAZIO.
+ *
+ * Nos dois casos o envoltorio nao entra: a celula vai crua, o destino que o material escreveu e o
+ * que fica (a tela nao apaga conteudo do material) e o endereco do verbete continua valendo pelo
+ * `id` da linha — que e o alvo de `#/pagina/<slug>/<id>` e o que `irParaSecao` foca. O material de
+ * hoje nao tem tabela de verbete com link na primeira coluna; a decisao existe para o dia em que
+ * tiver.
  */
 function Tabela({ tabela, slug }: { tabela: TabelaDeVerbetes; slug: string }): ReactElement | null {
   if (!tabela.verbetes.length) return null
@@ -318,8 +341,16 @@ function Tabela({ tabela, slug }: { tabela: TabelaDeVerbetes; slug: string }): R
         <tbody>
           {tabela.verbetes.map((verbete) => (
             <tr className="verbete" id={verbete.id} key={verbete.id} tabIndex={-1}>
-              {verbete.celulas.map((celula, i) =>
-                i === 0 ? (
+              {verbete.celulas.map((celula, i) => {
+                if (i !== 0)
+                  return <td key={i} dangerouslySetInnerHTML={{ __html: celula.html }} />
+                // Celula com link do material: sem envoltorio (dois `<a>` aninhados se desfazem
+                // no parse, e o endereco do verbete ficaria vazio). O HTML entra direto no `<td>`,
+                // e nao dentro de um `<span>`: o 44 px de alvo de toque do `styles.css` vale para
+                // `td > a:only-child`, e um elemento no meio quebraria a regra.
+                if (celula.temLink)
+                  return <td key={i} dangerouslySetInnerHTML={{ __html: celula.html }} />
+                return (
                   <td key={i}>
                     <a
                       href={`#/pagina/${slug}/${verbete.id}`}
@@ -327,10 +358,8 @@ function Tabela({ tabela, slug }: { tabela: TabelaDeVerbetes; slug: string }): R
                       dangerouslySetInnerHTML={{ __html: celula.html }}
                     />
                   </td>
-                ) : (
-                  <td key={i} dangerouslySetInnerHTML={{ __html: celula.html }} />
-                ),
-              )}
+                )
+              })}
             </tr>
           ))}
         </tbody>
@@ -347,7 +376,14 @@ export function Glossario({ estrutura, escuro }: { estrutura: GlossarioLido; esc
   const total = contarVerbetes(estrutura.blocos)
   const achados = contarVerbetes(blocos)
   const itens = itensDoSumario(blocos)
-  const vazio = palavras.length > 0 && achados === 0
+  /**
+   * Ha filtro quando ha PALAVRA, e nao quando ha texto no campo: so espaco e o campo
+   * "preenchido" sem consulta nenhuma. Com `busca` como regua, a tela se partia em duas — o
+   * botao de limpar dizia "filtro ativo" enquanto a contagem anunciava o total, e o leitor de
+   * tela ouvia a contradicao. Uma regua so (`palavras`) mantem as duas metades de acordo.
+   */
+  const filtrando = palavras.length > 0
+  const vazio = filtrando && achados === 0
 
   return (
     <>
@@ -363,7 +399,7 @@ export function Glossario({ estrutura, escuro }: { estrutura: GlossarioLido; esc
           autoComplete="off"
           onChange={(evento) => setBusca(evento.target.value)}
         />
-        {busca ? (
+        {filtrando ? (
           <button type="button" className="botao-secundario" onClick={() => setBusca('')}>
             Limpar busca
           </button>
@@ -372,7 +408,7 @@ export function Glossario({ estrutura, escuro }: { estrutura: GlossarioLido; esc
             a contagem muda a cada tecla, e sem isto quem usa leitor de tela nao sabe se a
             lista encolheu, cresceu ou ficou vazia. */}
         <p className={vazio ? 'busca-contagem busca-vazia' : 'busca-contagem'} role="status">
-          {palavras.length === 0
+          {!filtrando
             ? `${total} termos e siglas`
             : vazio
               ? `Nenhum termo bate com “${busca.trim()}”. O acento e a maiúscula não mudam a busca.`

@@ -339,11 +339,35 @@ describe('resolverDeLinks', () => {
     expect(r.paraRota).toBe(0)
   })
 
-  it('nao muda o link que sai da raiz do material', () => {
+  it('acusa o link que sai da raiz do material, sem trocar o href', () => {
+    // Subir acima do material nao tem rota e nao e link externo — e defeito. O href fica como o
+    // material escreveu (nao ha para onde trocar) e o relatorio acusa: sem isto o ramo contava o
+    // link como "intacto" e so o portao (`hrefsRelativos`, que o `build:content` do `dev` nao
+    // roda) o pegava.
     expect(resolverCaminho('01-fundamentos/README.md', '../../fora-do-material.md')).toBeNull()
-    expect(resolver('01-fundamentos/README.md', '../../fora-do-material.md').destino).toEqual({
-      acao: 'manter',
-    })
+    const { destino, r } = resolver('01-fundamentos/README.md', '../../fora-do-material.md')
+    expect(destino).toEqual({ acao: 'manter' })
+    expect(r.erros.join('\n')).toContain('sai da raiz do material')
+    expect(r.intactos).toBe(0)
+  })
+
+  it('acusa o link de caminho absoluto, que nao e caminho do material', () => {
+    // `/x.md` nao e relativo a nada: fora do material ele e a raiz de onde o app foi aberto, onde
+    // o arquivo nao existe. Nao muda de acao (nao ha rota) e nao passa mais em silencio.
+    const { destino, r } = resolver('01-fundamentos/TEMA-01-um.md', '/fora/x.md')
+    expect(destino).toEqual({ acao: 'manter' })
+    expect(r.erros.join('\n')).toContain('caminho absoluto')
+    expect(r.intactos).toBe(0)
+  })
+
+  it('acusa o link protocol-relative, que leva a requisicao para outro host', () => {
+    // `//host/x.md` comeca com `/`, mas nao e um caminho: o navegador o resolve contra o ESQUEMA
+    // da pagina e busca em `host`, que nao e o app. E o mais perigoso dos tres, e o unico que
+    // `hrefsRelativos` tambem pega — o relatorio precisa acusar os dois do mesmo jeito.
+    const { destino, r } = resolver('01-fundamentos/TEMA-01-um.md', '//evil.example/x.md')
+    expect(destino).toEqual({ acao: 'manter' })
+    expect(r.erros.join('\n')).toContain('protocol-relative')
+    expect(r.intactos).toBe(0)
   })
 
   it('acusa a declaracao que ninguem mais linka, e so ela', () => {
@@ -506,6 +530,26 @@ describe('geracao do material em disco', () => {
     expect(hrefsRelativos(conteudo.temas['01-fundamentos#TEMA-02']?.intro ?? '')).toEqual([
       './anexos/nota.md',
     ])
+  })
+
+  it('acusa o link que sai do material e o protocol-relative, e deixa os dois visiveis no HTML', () => {
+    // A mutacao e no MATERIAL: `../../../etc/passwd` sobe acima da raiz e `//evil.example/x.md`
+    // nem e caminho do material. Nenhum dos dois tem rota para onde trocar, entao os dois ficam
+    // como escritos e os dois entram no relatorio. Sem essa acusacao, `npm run build:content`
+    // (o caminho do `dev`) terminava sem erro nenhum, e quem reprovava era so o portao do
+    // `check:content`, pelo href que sobra no HTML.
+    const { conteudo, links } = comTema2(
+      `${TEMA2}\n\n[fora](../../../etc/passwd) · [host](//evil.example/x.md)`,
+    )
+    const erros = links.erros.join('\n')
+    expect(erros).toContain('sai da raiz do material')
+    expect(erros).toContain('protocol-relative')
+
+    const html = conteudo.temas['01-fundamentos#TEMA-02']?.intro ?? ''
+    expect(html).toContain('href="../../../etc/passwd"')
+    expect(html).toContain('href="//evil.example/x.md"')
+    // E o portao continua com por onde reprovar: os dois sobreviveram fora de qualquer rota.
+    expect(hrefsRelativos(html)).toEqual(['../../../etc/passwd', '//evil.example/x.md'])
   })
 
   it('reprova o fragmento puro escrito no material, e deixa o defeito visivel no HTML', () => {

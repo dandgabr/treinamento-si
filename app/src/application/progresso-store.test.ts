@@ -216,6 +216,69 @@ describe('progresso-store', () => {
     expect(Object.keys(store.instantaneo().estado.temas)).toEqual(['b#TEMA-01'])
   })
 
+  it('não responde "importado" quando a gravação do import falha', async () => {
+    // A gravação era só enfileirada: a resposta "Progresso importado." saía mesmo quando ela
+    // lançava (teto, ENOSPC) e o arquivo continuava o antigo. A pessoa fechava o app confiando
+    // numa importação que nunca existiu.
+    const importado = {
+      versao: 1,
+      temas: { 'b#TEMA-01': { ref: 'b#TEMA-01', lido: true, preTeste: {} } },
+      checkpoints: {},
+      diasAtivos: [],
+    }
+    const { provedor, registro } = provedorDeTeste({
+      leitura: () => Promise.resolve(estadoDoDisco()),
+      gravacao: () => Promise.reject(new Error('ENOSPC')),
+      importacao: () => Promise.resolve({ estado: 'ok', dado: importado }),
+    })
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    const aviso = await store.importar()
+
+    expect(aviso?.tipo).toBe('erro')
+    expect(aviso?.texto).toContain('Não consegui gravar o progresso importado')
+    // Nada chegou ao provedor: a importação não virou arquivo.
+    expect(registro.gravados).toHaveLength(0)
+  })
+
+  it('espera a gravação terminar antes de responder "importado"', async () => {
+    let liberar: () => void = () => undefined
+    const emVoo = new Promise<void>((resolver) => {
+      liberar = resolver
+    })
+    let gravacoes = 0
+    const importado = {
+      versao: 1,
+      temas: { 'b#TEMA-01': { ref: 'b#TEMA-01', lido: true, preTeste: {} } },
+      checkpoints: {},
+      diasAtivos: [],
+    }
+    const { provedor } = provedorDeTeste({
+      leitura: () => Promise.resolve(estadoDoDisco()),
+      gravacao: () => {
+        gravacoes += 1
+        return emVoo
+      },
+      importacao: () => Promise.resolve({ estado: 'ok', dado: importado }),
+    })
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    const promessa = store.importar()
+    let respondido = false
+    void promessa.then(() => {
+      respondido = true
+    })
+    // Um macrotique basta para a importação chegar à gravação e parar nela. Sem `setImmediate`
+    // isto mediria a ordem dos microtiques, e não se a resposta esperou o disco.
+    await new Promise((resolver) => setImmediate(resolver))
+    expect([gravacoes, respondido]).toEqual([1, false])
+
+    liberar()
+    await expect(promessa).resolves.toEqual({ tipo: 'ok', texto: 'Progresso importado.' })
+  })
+
   it('recomeçar apaga o arquivo e zera o estado', async () => {
     const { provedor, registro } = provedorDeTeste({
       leitura: () => Promise.resolve(estadoDoDisco()),

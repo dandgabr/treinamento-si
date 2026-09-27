@@ -270,11 +270,14 @@ export function App() {
   useEffect(() => {
     const mudou = rotaInicial.current !== rota
     rotaInicial.current = rota
-    // Rota que termina num alvo (`#/pagina/glossario/termo-tls`, `#/tema/<area>/<tema>/secao-10`):
-    // o foco e a rolagem sao do alvo, e nao do topo da tela — quem abre o endereco de um termo
-    // quer o termo, e quem vem da fila de hoje quer a secao 10 do tema. Vale tambem na montagem,
-    // que e o caso do link compartilhado aberto direto.
-    const ancora = rota.nome === 'pagina' || rota.nome === 'tema' ? rota.ancora : null
+    // Rota que termina num alvo (`#/area/01-fundamentos/secao-4`, `#/tema/<area>/<tema>/secao-10`,
+    // `#/pagina/glossario/termo-tls`): o foco e a rolagem sao do alvo, e nao do topo da tela —
+    // quem abre o endereco da secao 4 do guia quer a secao 4, e quem vem da fila de hoje quer a
+    // secao 10 do tema. Vale tambem na montagem, que e o caso do link compartilhado aberto
+    // direto. A area entra com o guia dela: e dele que sai a ancora do material
+    // (`README.md#4-temas` -> `#/area/01-fundamentos/secao-4`).
+    const ancora =
+      rota.nome === 'area' || rota.nome === 'tema' || rota.nome === 'pagina' ? rota.ancora : null
     if (ancora !== null && irParaSecao(ancora)) return
     if (mudou) focarConteudo()
   }, [rota])

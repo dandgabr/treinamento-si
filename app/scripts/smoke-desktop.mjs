@@ -103,6 +103,42 @@ function valorDoResumo(janela, rotulo) {
   }, rotulo)
 }
 
+/** O aviso que a tela mostra quando a leitura do arquivo de progresso falha. */
+function avisoDeCarga(janela) {
+  return janela.evaluate(
+    () => document.querySelector('.acoes-progresso .aviso-erro')?.textContent?.trim() ?? null,
+  )
+}
+
+/**
+ * Abre um tema e faz o clique que gravaria, numa sessao que NAO conseguiu ler o arquivo.
+ *
+ * Devolve o que se pode medir desse clique: se o arquivo guardado mudou, se o clique chegou ao
+ * store (a confianca marcada) e se sobrou temporario. A marcacao importa: sem ela, "o arquivo
+ * nao mudou" tambem seria verdade se o clique nao tivesse acontecido.
+ */
+async function cliqueQueNaoPodeGravar(janela, arquivo) {
+  const antes = fs.readFileSync(arquivo, 'utf8')
+  await janela.evaluate(() => {
+    location.hash = '#/tema/01-fundamentos/TEMA-01'
+  })
+  await janela.waitForSelector('.bloco-pre-teste .nivel')
+  await janela.locator('.bloco-pre-teste .nivel').first().click()
+  await janela.waitForTimeout(300)
+  const medido = {
+    arquivoMudou: fs.readFileSync(arquivo, 'utf8') !== antes,
+    marcados: await janela.locator('.bloco-pre-teste .nivel[aria-pressed="true"]').count(),
+    temporarios: fs.readdirSync(path.dirname(arquivo)).filter((nome) => nome.endsWith('.tmp')),
+  }
+  // Volta ao painel: o `reload` seguinte carrega a rota do `hash`, e o resto do smoke mede o
+  // resumo da tela inicial.
+  await janela.evaluate(() => {
+    location.hash = '#/'
+  })
+  await janela.waitForSelector('.acoes-progresso')
+  return medido
+}
+
 /**
  * Um servidor HTTP local que so conta o que chega — o interceptor de S9.
  *
@@ -274,7 +310,47 @@ async function primeiraSessao() {
     ),
     'recusou',
   )
-  fs.writeFileSync(arquivo, arquivoIntacto)
+
+  // S8 — o mesmo teto, medido do outro lado. O `length` conta unidades de codigo e o arquivo
+  // ocupa bytes: 600 mil caracteres acentuados passam no `length` e sao 1,2 MB no disco. Era
+  // assim que um progresso importado de 600 kB era gravado com 1,8 MB, nao voltava a ser lido no
+  // relancamento (o app abria zerado) e o primeiro clique apagava o que a pessoa importou. O
+  // payload e conferido aqui nas duas medidas: sem isso, a asserção poderia passar por outro
+  // motivo.
+  const arquivoAntesDoTeto = fs.readFileSync(arquivo, 'utf8')
+  const tetoEmBytes = await janela.evaluate(() =>
+    (async () => {
+      const valor = {
+        versao: 1,
+        temas: {},
+        checkpoints: {},
+        questoes: {},
+        diasAtivos: [],
+        enchimento: 'á'.repeat(600_000),
+      }
+      const texto = JSON.stringify(valor)
+      return {
+        caracteres: texto.length,
+        bytes: new TextEncoder().encode(texto).length,
+        resultado: await window.roadmap.progresso
+          .gravar(valor)
+          .then(() => 'gravou', () => 'recusou'),
+      }
+    })(),
+  )
+  conferir(
+    'S8 a ponte mede o teto em bytes: recusa o acentuado que passa em caracteres',
+    [tetoEmBytes.caracteres < 1_048_576, tetoEmBytes.bytes > 1_048_576, tetoEmBytes.resultado],
+    [true, true, 'recusou'],
+  )
+  conferir(
+    'S8 a gravação recusada não toca no arquivo nem deixa .tmp para trás',
+    [
+      fs.readFileSync(arquivo, 'utf8') === arquivoAntesDoTeto,
+      fs.readdirSync(pasta).filter((nome) => nome.endsWith('.tmp')),
+    ],
+    [true, []],
+  )
 
   // Navegacao para fora tem de ser bloqueada; file: nao abre nada no sistema.
   await janela.evaluate(() => {
@@ -366,6 +442,60 @@ async function primeiraSessao() {
     await rede.fechar()
   }
 
+  // S13 — a importacao que EFETIVAMENTE grava. O dialogo nativo nao abre num teste, entao este
+  // caminho so existia por inspecao: aqui o `showOpenDialog` do processo principal responde com
+  // um arquivo de verdade, e a resposta "Progresso importado." so pode sair depois de o arquivo
+  // ter sido escrito — a gravacao era enfileirada e nao aguardada, e a resposta saia mesmo quando
+  // ela falhava. Fica no fim da sessao porque mexe no arquivo: as conferencias de navegacao acima
+  // valem para o estado que o teste construiu antes.
+  const importado = {
+    versao: 1,
+    temas: {
+      '02-grc#TEMA-01': {
+        ref: '02-grc#TEMA-01',
+        lido: true,
+        preTeste: [],
+        recuperacaoOk: true,
+        revisao: { intervaloDias: 7, proximaRevisao: '2026-03-17T12:00:00.000Z' },
+      },
+    },
+    checkpoints: { '02-grc': { acertos: 4, total: 5 } },
+    questoes: {},
+    diasAtivos: ['2026-03-09'],
+  }
+  const arquivoDeImportacao = path.join(dados, 'para-importar.json')
+  fs.writeFileSync(arquivoDeImportacao, JSON.stringify(importado))
+  await app.evaluate(({ dialog }, caminho) => {
+    dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [caminho] })
+  }, arquivoDeImportacao)
+  // O botao Importar mora no painel da tela inicial, e nao na rota do tema.
+  await janela.evaluate(() => {
+    location.hash = '#/'
+  })
+  await janela.waitForSelector('.acoes-progresso')
+  await janela.getByRole('button', { name: 'Importar progresso' }).click()
+  const importouGravando = await ate(() => {
+    try {
+      return JSON.parse(fs.readFileSync(arquivo, 'utf8'))?.temas?.['02-grc#TEMA-01']?.lido === true
+    } catch {
+      return false
+    }
+  })
+  conferir('S13 a importação grava o arquivo, e não só a memória', importouGravando, true)
+  conferir(
+    'S13 a tela confirma a importação depois da gravação',
+    (await janela.locator('.acoes-progresso [role="status"]').textContent())?.trim(),
+    'Progresso importado.',
+  )
+  conferir(
+    'S13 a importação não deixa .tmp na pasta de dados',
+    fs.readdirSync(pasta).filter((nome) => nome.endsWith('.tmp')),
+    [],
+  )
+  // A segunda sessao conta com o progresso que este teste construiu antes: o arquivo volta ao
+  // que era.
+  fs.writeFileSync(arquivo, arquivoIntacto)
+
   await app.close()
   return { pasta }
 }
@@ -384,11 +514,13 @@ async function segundaSessao() {
 }
 
 /**
- * S6 e S7 no lado da LEITURA da ponte, com o arquivo trocado entre um `reload` e outro.
+ * S6, S7, S8 e S12 no lado da LEITURA da ponte, com o arquivo trocado entre um `reload` e outro.
  *
  * O que atravessa a ponte vem de fora: um arquivo que alguem copiou, editou ou corrompeu. A
- * leitura tem de normalizar campo a campo (S6) e cortar pelo tamanho ANTES do `JSON.parse`
- * (S7) — sem isso, um dado invalido viraria estado e um arquivo gigante seria analisado.
+ * leitura tem de normalizar campo a campo (S6), cortar pelo tamanho ANTES do `JSON.parse` (S7) —
+ * na mesma unidade da gravacao, os bytes (S8) — e tratar arquivo acima do teto ou truncado como
+ * ERRO, e nao como "primeira vez": e a diferenca entre a tela avisar e o primeiro clique apagar
+ * o progresso importado (S12).
  */
 async function terceiraSessao(pasta) {
   const arquivo = path.join(pasta, 'progresso.json')
@@ -431,35 +563,73 @@ async function terceiraSessao(pasta) {
     '1',
   )
 
-  // S7 na leitura: o teto de 1 MB corta o arquivo antes do `JSON.parse`. O conteudo abaixo e
-  // um progresso VALIDO (daria "1 de 109") que passa de 1 MB: se o corte sumisse, ele seria
-  // lido e o tema apareceria firme.
+  // S7 e S8 na leitura: o teto e medido em BYTES, e o que passa dele e ERRO — nao "comeca vazio".
+  // O arquivo abaixo e um progresso VALIDO (daria "1 de 109") com 600 mil caracteres acentuados
+  // de enchimento: cabe em unidades de codigo e passa de 1 MB no disco. Antes, o teto era
+  // conferido em unidades diferentes na escrita e na leitura; aqui o arquivo era recusado em
+  // silencio, a tela dizia "0 de 109" e "Primeira vez aqui?", e o primeiro clique substituia o
+  // progresso importado pelo estado vazio mais um clique.
+  const arquivoAcentuado = JSON.stringify({
+    versao: 1,
+    temas: {
+      '01-fundamentos#TEMA-01': {
+        ref: '01-fundamentos#TEMA-01',
+        lido: true,
+        preTeste: [],
+        recuperacaoOk: true,
+        revisao: { intervaloDias: 7, proximaRevisao: '2026-03-17T12:00:00.000Z' },
+      },
+    },
+    checkpoints: {},
+    questoes: {},
+    diasAtivos: ['2026-03-09'],
+    enchimento: 'á'.repeat(600_000),
+  })
+  fs.writeFileSync(arquivo, arquivoAcentuado)
+  await janela.reload()
+  await janela.waitForSelector('.lista-areas li')
+  await esperarPainel(janela)
+  conferir(
+    'S7 o teto é o mesmo dos dois lados: o payload valida em caracteres e estoura em bytes',
+    [arquivoAcentuado.length < 1_048_576, Buffer.byteLength(arquivoAcentuado, 'utf8') > 1_048_576],
+    [true, true],
+  )
+  conferir(
+    'S8 arquivo acima do teto é erro de leitura, não "0 de 109"',
+    [
+      await valorDoResumo(janela, 'Temas firmes'),
+      (await avisoDeCarga(janela))?.startsWith('Não consegui ler o progresso guardado'),
+    ],
+    ['—', true],
+  )
+  conferir(
+    'S8 o clique que gravaria não sobrescreve o arquivo que não conseguimos ler',
+    await cliqueQueNaoPodeGravar(janela, arquivo),
+    { arquivoMudou: false, marcados: 1, temporarios: [] },
+  )
+
+  // S12 — arquivo ilegivel (truncado, como o de uma copia interrompida). Antes, o `JSON.parse`
+  // lancava, o `catch` devolvia `null` e o app abria com `podeGravar=true`: a defesa de "nao
+  // comecar vazio e gravar por cima" existia no store, tinha teste, e NUNCA ligava no desktop.
   fs.writeFileSync(
     arquivo,
-    JSON.stringify({
-      versao: 1,
-      temas: {
-        '01-fundamentos#TEMA-01': {
-          ref: '01-fundamentos#TEMA-01',
-          lido: true,
-          preTeste: [],
-          recuperacaoOk: true,
-          revisao: { intervaloDias: 7, proximaRevisao: '2026-03-17T12:00:00.000Z' },
-        },
-      },
-      checkpoints: {},
-      questoes: {},
-      diasAtivos: ['2026-03-09'],
-      enchimento: 'a'.repeat(1_200_000),
-    }),
+    '{"versao":1,"temas":{"01-fundamentos#TEMA-01":{"ref":"01-fundamentos#TEMA-01","lido":true',
   )
   await janela.reload()
   await janela.waitForSelector('.lista-areas li')
   await esperarPainel(janela)
   conferir(
-    'S7 arquivo acima do teto é cortado antes do parse',
-    await valorDoResumo(janela, 'Temas firmes'),
-    '0 de 109',
+    'S12 arquivo truncado vira aviso, em vez de "Primeira vez aqui?"',
+    [
+      await valorDoResumo(janela, 'Temas firmes'),
+      (await avisoDeCarga(janela))?.startsWith('Não consegui ler o progresso guardado'),
+    ],
+    ['—', true],
+  )
+  conferir(
+    'S12 o clique que gravaria não substitui o arquivo truncado',
+    await cliqueQueNaoPodeGravar(janela, arquivo),
+    { arquivoMudou: false, marcados: 1, temporarios: [] },
   )
 
   await app.close()

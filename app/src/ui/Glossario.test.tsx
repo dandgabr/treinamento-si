@@ -75,6 +75,26 @@ const TABELA_COM_SIGLA_REPETIDA = `
   </tbody>
 </table>`
 
+/**
+ * A tabela de verbete cuja PRIMEIRA coluna já traz um link do material.
+ *
+ * É o caso que os 78 verbetes de hoje não exercitam (a única célula com link do material não é
+ * tabela de verbete), e é onde o endereço do termo se desmonta: o `<a>` do endereço envolveria
+ * outro `<a>`, e o termo passaria a ter DOIS links com o mesmo texto — o `innerHTML` que o React
+ * usa deixa o de dentro dentro do de fora, e o clique cai no mais interno (o do material). Se o
+ * mesmo markup fosse re-parseado como documento, o algoritmo de adoção fecharia o de fora antes de
+ * abrir o de dentro e o endereço do verbete sairia VAZIO.
+ */
+const TABELA_COM_LINK_NO_TERMO = `
+<table>
+  <thead>
+    <tr><th>Termo</th><th>Definição</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><a href="#/pagina/README">README</a></td><td>arquivo de abertura do material</td></tr>
+  </tbody>
+</table>`
+
 describe('leitura do material', () => {
   it('vira duas tabelas de verbetes, termos e siglas', () => {
     const lido = ler()
@@ -128,6 +148,31 @@ describe('a tela', () => {
     const link = screen.getByRole('link', { name: `Endereço do termo ${primeiro?.termo}` })
     expect(link.getAttribute('href')).toBe(`#/pagina/glossario/${primeiro?.id}`)
     expect(link.closest('tr')?.id).toBe(primeiro?.id)
+  })
+
+  it('não envolve no endereço do verbete a célula do termo que já tem um link do material', () => {
+    const lido = lerGlossario(TABELA_COM_LINK_NO_TERMO, 'glossario')
+    if (!lido) throw new Error('a fixture de termo com link nao virou tabela de verbetes')
+    const { container } = render(<Glossario estrutura={lido} escuro={false} />)
+
+    const linha = container.querySelector('tr.verbete')
+    expect(linha).not.toBeNull()
+    // O endereço do verbete continua de pé pelo id da linha — é ele que `#/pagina/glossario/
+    // termo-readme` alcança e que `irParaSecao` foca. O que sai é só o invólucro, que com um
+    // `<a>` dentro se desfaz no parse do navegador.
+    expect(linha?.id).toBe('termo-readme')
+    expect(document.getElementById('termo-readme')).toBe(linha)
+
+    // UM link na célula do termo: o do material, com o texto e o destino dele. Com o invólucro
+    // ficam DOIS — o de fora com o mesmo texto (o `innerHTML` do React aninha os dois `<a>`) ou
+    // vazio (o markup re-parseado como documento, quando o algoritmo de adoção fecha o de fora).
+    // Nas duas formas o endereço do termo deixa de ser o que o clique do termo alcança.
+    const naCelula = [...(linha?.querySelector('td')?.querySelectorAll('a') ?? [])]
+    expect(naCelula.map((a) => [a.getAttribute('href'), a.textContent])).toEqual([
+      ['#/pagina/README', 'README'],
+    ])
+    // E a causa por trás da contagem: nenhum `<a>` dentro de outro nesta tabela.
+    expect(container.querySelectorAll('a a').length).toBe(0)
   })
 
   it('tem rótulo de verdade na busca, e não placeholder', () => {
@@ -270,5 +315,42 @@ describe('a tela', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'Limpar busca' }))
     expect(document.querySelectorAll('.verbete').length).toBe(todos)
+  })
+
+  it('só espaço no campo não é filtro: sem botão de limpar e sem contagem filtrada', async () => {
+    render(<Glossario estrutura={ler()} escuro={false} />)
+    const campo = screen.getByLabelText('Buscar termo')
+    const total = document.querySelectorAll('.verbete').length
+    expect(total).toBeGreaterThan(0)
+    expect(contagem()).toBe(`${total} termos e siglas`)
+
+    // Só espaço deixa `palavras` vazio: não há consulta. Julgada pelo texto do campo (`busca`),
+    // a tela se partia — o botão de limpar dizia "filtro ativo" e a contagem dizia o total. A
+    // régua é uma só, e é `palavras`; com o botão de volta, este teste reprova.
+    await userEvent.type(campo, '   ')
+
+    expect(document.querySelectorAll('.verbete').length).toBe(total)
+    expect(screen.queryByRole('button', { name: 'Limpar busca' })).toBeNull()
+    expect(contagem()).toBe(`${total} termos e siglas`)
+  })
+
+  it('acha por pedaço de palavra: "confid" traz a confidencialidade', async () => {
+    render(<Glossario estrutura={ler()} escuro={false} />)
+    const total = document.querySelectorAll('.verbete').length
+
+    // O casamento é por `includes` DE PROPÓSITO: é ele que faz a digitação parcial funcionar
+    // enquanto se digita ("confid" antes de "confidencialidade"), e o material real tem o
+    // verbete para provar. Trocar por fronteira de palavra — exigir o termo inteiro — faria
+    // esta consulta cair em "Nenhum termo bate": é regressão de uso, não conserto de bug, e
+    // este teste existe para barrá-la.
+    await userEvent.type(screen.getByLabelText('Buscar termo'), 'confid')
+
+    expect(
+      screen.getByRole('link', { name: 'Endereço do termo confidencialidade' }),
+    ).toBeTruthy()
+    const filtrados = document.querySelectorAll('.verbete').length
+    expect(filtrados).toBeGreaterThan(0)
+    expect(filtrados).toBeLessThan(total)
+    expect(contagem()).toBe(`${filtrados} de ${total} termos e siglas`)
   })
 })

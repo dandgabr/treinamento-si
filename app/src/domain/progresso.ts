@@ -342,6 +342,27 @@ const CHAVES_RECUSADAS = new Set(['__proto__', 'constructor', 'prototype'])
 /** Teto de sanidade para o intervalo agendado. */
 const TETO_DIAS = 3650
 
+/**
+ * Folga da janela de sanidade da data agendada, em dias em volta de "agora".
+ *
+ * `Date.parse` aceita qualquer coisa ate ±8,64e15 ms — uns 275 mil anos. Uma data dessas vinha
+ * de um arquivo de fora (exportado, editado a mao, ou de uma maquina com o relogio errado) e
+ * nao descrevia estudo nenhum; pior: `reagendarDegrauFinal` (srs.ts) soma D+90 sobre ela e
+ * chama `toISOString()`, que lanca `RangeError: Invalid time value` no clique de "Acertei sem
+ * consultar". A janela e larga de proposito — dez anos para cada lado — e so recusa o que nao
+ * pode ser uma data de estudo: um tema parado ha anos continua vencido, e nao descartado.
+ */
+const JANELA_DIAS = 3650
+
+/** A data agendada e legivel E plausivel: dentro da janela de sanidade em volta de `agora`. */
+function dataPlausivel(quando: unknown, agora: Date): quando is string {
+  if (typeof quando !== 'string') return false
+  const ms = Date.parse(quando)
+  if (Number.isNaN(ms)) return false
+  const folga = JANELA_DIAS * 24 * 60 * 60 * 1000
+  return ms >= agora.getTime() - folga && ms <= agora.getTime() + folga
+}
+
 function normalizarRevisao(valor: unknown, ref: string, agora: Date): EstadoRevisao {
   const padrao = criarEstado(ref, agora)
   if (!valor || typeof valor !== 'object') return padrao
@@ -349,10 +370,7 @@ function normalizarRevisao(valor: unknown, ref: string, agora: Date): EstadoRevi
   const brutoIntervalo = r.intervaloDias
   const intervalo =
     numeroFinito(brutoIntervalo, TETO_DIAS) && brutoIntervalo > 0 ? brutoIntervalo : null
-  const quando =
-    typeof r.proximaRevisao === 'string' && !Number.isNaN(Date.parse(r.proximaRevisao))
-      ? r.proximaRevisao
-      : null
+  const quando = dataPlausivel(r.proximaRevisao, agora) ? r.proximaRevisao : null
   if (intervalo === null || quando === null) return padrao
   const brutoRebaixamentos = r.rebaixamentos
   const brutoPassagens = r.passagens

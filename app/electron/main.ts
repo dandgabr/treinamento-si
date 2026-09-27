@@ -7,7 +7,7 @@
 import { app, BrowserWindow, Menu, dialog, ipcMain, protocol, shell } from 'electron'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { apagarProgresso, gravarProgresso, lerProgresso, TETO_BYTES } from './progresso'
+import { apagarProgresso, gravarProgresso, lerImportado, lerProgresso } from './progresso'
 
 // O desktop usa o build proprio (`vite.desktop.config.ts`), com arquivos separados: o
 // conteudo e um JSON ao lado do HTML e os diagramas sao chunks. O build do navegador
@@ -280,18 +280,10 @@ function registrarCanais(): void {
       properties: ['openFile'],
     })
     if (escolha.canceled || !escolha.filePaths[0]) return { estado: 'cancelado' } as const
-    const caminho = escolha.filePaths[0]
-    // Tamanho conferido antes de ler: o corte protege contra arquivo gigante escolhido
-    // por engano ou por ma-fe.
-    const informacao = await fs.stat(caminho)
-    if (informacao.size > TETO_BYTES) {
-      return { estado: 'erro', mensagem: 'O arquivo passa de 1 MB.' } as const
-    }
-    try {
-      return { estado: 'ok', dado: JSON.parse(await fs.readFile(caminho, 'utf8')) as unknown } as const
-    } catch {
-      return { estado: 'erro', mensagem: 'O arquivo não é um JSON válido.' } as const
-    }
+    // O teto e a leitura saem do MESMO descritor (ver `lerImportado`). Com `stat` sobre o
+    // caminho antes do `readFile`, o tamanho conferido podia ser de outro arquivo — e um FIFO
+    // (`size === 0`) passava pelo teto e deixava o handler pendurado, sem resposta para a tela.
+    return await lerImportado(escolha.filePaths[0])
   })
 }
 

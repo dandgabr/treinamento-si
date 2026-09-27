@@ -60,8 +60,15 @@ function marcarFalha(falhou: boolean): void {
   for (const ouvinte of ouvintesDeFalha) ouvinte()
 }
 
-/** Uma gravacao por vez: evita duas disputando o mesmo arquivo temporario. */
-function agendarGravacao(valor: Progresso): void {
+/**
+ * Uma gravacao por vez: evita duas disputando o mesmo arquivo temporario.
+ *
+ * Devolve o fim da fila — a promessa da gravacao que acabou de ser enfileirada. Ela nunca
+ * rejeita: a falha vira aviso na tela (`falhaAoGravar`) e quem espera confere o aviso. E e isso
+ * que permite a acao que RESPONDE algo ao usuario (a importacao) so responder "ok" depois de o
+ * arquivo existir.
+ */
+function agendarGravacao(valor: Progresso): Promise<void> {
   fila = fila.then(() => onde().gravar(valor)).then(
     () => marcarFalha(false),
     (erro: unknown) => {
@@ -69,6 +76,7 @@ function agendarGravacao(valor: Progresso): void {
       marcarFalha(true)
     },
   )
+  return fila
 }
 
 const carga: Promise<void> = onde().carregar().then(
@@ -104,28 +112,36 @@ export function aguardarGravacoes(): Promise<void> {
   return fila
 }
 
-function publicar(redutor: Redutor): void {
+/**
+ * Aplica o redutor e agenda a gravacao.
+ *
+ * Devolve o fim da gravacao agendada, ou `null` quando nao houve gravacao nenhuma (nada mudou,
+ * a carga ainda nao chegou, ou a sessao nao pode escrever). Quem so quer reagir a mudanca ignora
+ * o retorno; quem precisa responder "gravei" a espera.
+ */
+function publicar(redutor: Redutor): Promise<void> | null {
   const novo = redutor(estado)
   // Os redutores devolvem a mesma referencia quando nada muda; sem esta guarda, cada
   // clique gravaria e re-renderizaria os consumidores a toa.
-  if (Object.is(novo, estado)) return
+  if (Object.is(novo, estado)) return null
   estado = novo
   if (!carregado) {
     // A carga ainda nao chegou: gravar agora substituiria o arquivo pelo estado vazio mais
     // um clique. A intencao fica retida e e reaplicada sobre o que veio do disco.
     pendentes.push(redutor)
     notificar()
-    return
+    return null
   }
   if (!podeGravar) {
     // A leitura falhou: a sessao segue em memoria e nao escreve por cima do que nao
     // conseguimos ler. Nao entra em `pendentes` — depois da carga ninguem drenaria a fila,
     // e a intencao ficaria retida para sempre, dando a impressao de estar guardada.
     notificar()
-    return
+    return null
   }
-  agendarGravacao(novo)
+  const gravacao = agendarGravacao(novo)
   notificar()
+  return gravacao
 }
 
 /**
@@ -262,6 +278,23 @@ export function definirProgresso(novo: unknown, agora: Date = new Date()): Aviso
   return null
 }
 
+/**
+ * Substitui o estado inteiro e ESPERA a gravacao: `null` quando o arquivo foi escrito, o aviso
+ * de erro quando nao foi.
+ *
+ * A importacao responde "Progresso importado." ao usuario. Com a gravacao so enfileirada, essa
+ * resposta saia mesmo quando ela lancava (teto, ENOSPC, disco cheio) e o arquivo continuava o
+ * antigo: a pessoa fechava o app confiando numa importacao que nunca existiu, e so o banner de
+ * falha (que aparece por outro caminho) desmentia.
+ */
+async function substituirEAgravar(novo: unknown, agora: Date): Promise<Aviso> {
+  if (!podeGravar) return { tipo: 'erro', texto: SEM_ESCRITA }
+  const gravacao = publicar(() => normalizarProgresso(novo, agora))
+  if (!gravacao) return NAO_GRAVOU
+  await gravacao
+  return falhaAoGravar ? NAO_GRAVOU : null
+}
+
 /** Apaga o que esta guardado e volta ao zero. */
 export async function recomecar(): Promise<Aviso> {
   await carga
@@ -290,6 +323,16 @@ export type Aviso = { tipo: 'ok' | 'erro'; texto: string } | null
 const SEM_ESCRITA =
   'Esta sessão não pode gravar: o progresso guardado não pôde ser lido. Exporte o que fez aqui e reimporte depois de reiniciar o aplicativo.'
 
+/**
+ * O que dizer quando a substituicao do estado nao chegou ao disco. Sem este aviso, a importacao
+ * responderia "Progresso importado." com o arquivo antigo intacto.
+ */
+const NAO_GRAVOU: { tipo: 'erro'; texto: string } = {
+  tipo: 'erro',
+  texto:
+    'Não consegui gravar o progresso importado: o arquivo guardado continua como estava. Exporte o que já estudou antes de fechar o aplicativo.',
+}
+
 /** Devolve null quando foi cancelado. */
 export async function exportar(): Promise<Aviso> {
   // Sem esperar a carga, o arquivo sairia com o estado vazio.
@@ -313,7 +356,7 @@ export async function importar(): Promise<Aviso> {
   if (!pareceProgresso(resultado.dado)) {
     return { tipo: 'erro', texto: 'O arquivo não é um progresso do Roadmap CISO.' }
   }
-  const falha = definirProgresso(resultado.dado)
+  const falha = await substituirEAgravar(resultado.dado, new Date())
   if (falha) return falha
   return { tipo: 'ok', texto: 'Progresso importado.' }
 }
