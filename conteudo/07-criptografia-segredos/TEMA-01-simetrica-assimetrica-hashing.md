@@ -89,7 +89,7 @@ O erro de classificação é o que gera incidente. Tratar hash como cifra leva a
 
 ### 5.2 Como funciona
 
-Cifra de bloco processa exatamente um bloco por vez: no AES, 128 bits, conforme o FIPS 197. Cifrar um arquivo exige um modo de operação, que encadeia blocos e define o que acontece com dado que não preenche o último bloco. Modo de operação define também se a saída é apenas confidencial ou confidencial e autenticada. A lista de modos aprovados pertence às publicações NIST SP 800-38, que não foram lidas nesta execução — a escolha de modo é decisão de projeto que exige consulta a essa fonte, e não pode ser resolvida por analogia.
+Cifra de bloco processa exatamente um bloco por vez: no AES, 128 bits, conforme o FIPS 197. Cifrar um arquivo exige um modo de operação, que encadeia blocos e define o que acontece com dado que não preenche o último bloco. Modo de operação define também se a saída é apenas confidencial ou confidencial e autenticada. A lista de modos aprovados pertence às publicações NIST SP 800-38, que não foram lidas nesta execução: **NAO CONFIRMADO em fonte oficial** para a lista de modos aprovados. A escolha de modo é decisão de projeto que exige consulta a essa fonte, e não pode ser resolvida por analogia.
 
 Cifra assimétrica se organiza em duas operações distintas. Na troca de chave, as partes combinam um segredo efêmero e derivam uma chave simétrica, que passa a proteger o volume da conversa. Na assinatura, a chave privada produz um valor que a chave pública verifica, e o que se verifica é o resumo da mensagem. Como o resumo tem tamanho fixo e menor que a mensagem, a assinatura cobre o resumo e herda a resistência a colisão da função escolhida.
 
@@ -165,7 +165,7 @@ Explique em três frases por que um hash de senha não é cifra de senha. Conect
 | Cifrar com a chave privada é assinar | Cifra com chave privada é operação sem garantia de autoria no uso comum; assinatura tem construção própria e é verificada por qualquer um | Use assinatura para autoria e integridade, e cifra com chave pública para sigilo |
 | Hash sem chave prova autoria | Quem tem a mensagem recalcula o resumo e pode substituí-lo | Autoria exige material secreto ou chave privada |
 | Chave maior resolve qualquer risco | Tamanho de chave não cobre custódia, modo de operação nem exposição do endpoint | Trate chave, modo e custódia como itens separados do plano |
-| Qualquer modo do AES entrega autenticação | O modo define se a saída tem apenas confidencialidade ou também autenticação | Consulte a publicação de modos do NIST antes de escolher; a lista não foi conferida nesta execução, portanto NAO CONFIRMADO em fonte oficial |
+| Qualquer modo do AES entrega autenticação | O modo define se a saída tem apenas confidencialidade ou também autenticação | Consulte a publicação de modos do NIST antes de escolher o modo; não presuma autenticação pelo nome do algoritmo |
 
 ## 10. Recuperação ativa
 

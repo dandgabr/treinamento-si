@@ -166,7 +166,7 @@ Explique o tema em 3 frases, sem consultar o texto. Uma frase sobre por que a cl
 | "Não treinamos modelo, então não temos risco de IA" | O risco de aplicação nasce do uso, do dado que entra e da saída que circula; o OWASP Top 10 for LLM Applications 2025 é escrito para quem constrói e para quem integra aplicação | A empresa que consome API é deployer e responde por supervisão, monitoramento e uso conforme a finalidade |
 | "O fornecedor é responsável por tudo" | O papel na cadeia define obrigações próprias para quem coloca o sistema em uso | Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa |
 | Classificar pelo tipo de modelo | Modelo de uso geral aparece em usos de risco alto e em usos de risco mínimo, com obrigações diferentes | Classifique pela finalidade declarada e pelo efeito sobre pessoa |
-| Inventário só com uso aprovado | O risco mora justamente no que não passou pelo processo | Uso não aprovado entra na lista com situação própria e decisão registrada |
+| Inventariar só o uso aprovado | O risco mora justamente no que não passou pelo processo | Uso não aprovado entra na lista com situação própria e decisão registrada |
 | Tratar o OWASP Top 10 for LLM como catálogo de controles | É uma lista de riscos e mitigações de aplicação, sem o fechamento de um catálogo de controles de gestão | Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04 |
 
 ## 10. Recuperação ativa

@@ -12,8 +12,8 @@
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Hash é um tipo de cifra fraca\". Qual é a correção?",
     "alternativas": [
       "Use assinatura para autoria e integridade, e cifra com chave pública para sigilo",
+      "Consulte a publicação de modos do NIST antes de escolher o modo; não presuma autenticação pelo nome do algoritmo",
       "Separe os dois números ao escrever requisito ou questionário",
-      "Trate chave, modo e custódia como itens separados do plano",
       "Classifique hash como função de integridade, e use cifra quando precisar reaver o conteúdo"
     ],
     "correta": 3,
@@ -49,7 +49,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Cifrar com a chave privada é assinar\". Qual é a correção?",
+    "enunciado": "Sobre Simétrica, assimétrica e hashing: é comum ouvir o seguinte: \"Cifrar com a chave privada é assinar\". Qual é a correção?",
     "alternativas": [
       "Classifique hash como função de integridade, e use cifra quando precisar reaver o conteúdo",
       "Use assinatura para autoria e integridade, e cifra com chave pública para sigilo",
@@ -108,10 +108,10 @@
       "url": "https://csrc.nist.gov/pubs/fips/197/final",
       "tipo": "primaria"
     },
-    "status": "pendente",
+    "status": "verificado",
     "enunciado": "Sobre Simétrica, assimétrica e hashing: um colega afirma que \"Qualquer modo do AES entrega autenticação\". Qual é a correção?",
     "alternativas": [
-      "Consulte a publicação de modos do NIST antes de escolher; a lista não foi conferida nesta execução, portanto NAO CONFIRMADO em fonte oficial",
+      "Consulte a publicação de modos do NIST antes de escolher o modo; não presuma autenticação pelo nome do algoritmo",
       "Classifique hash como função de integridade, e use cifra quando precisar reaver o conteúdo",
       "Use assinatura para autoria e integridade, e cifra com chave pública para sigilo",
       "Separe os dois números ao escrever requisito ou questionário"
@@ -329,7 +329,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre TLS na prática: um colega afirma que \"Aceitar o certificado no cliente resolve a falha\". Qual é a correção?",
+    "enunciado": "Sobre TLS na prática: é comum ouvir o seguinte: \"Aceitar o certificado no cliente resolve a falha\". Qual é a correção?",
     "alternativas": [
       "Desabilite versões anteriores à política e trate exceção como item de risco",
       "Corrija a causa e remova a exceção; exceção permanente é o achado mais grave",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Cifrar o dado é suficiente\". Qual é a correção?",
+    "enunciado": "Sobre Gestão de chaves e ciclo de vida: é comum ouvir o seguinte: \"Cifrar o dado é suficiente\". Qual é a correção?",
     "alternativas": [
       "Use hierarquia com DEK por classe e KEK por domínio",
       "Controle dividido, local separado e teste de restauração",
@@ -449,7 +449,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Gestão de chaves e ciclo de vida: um colega afirma que \"Destruir a chave é perder dado\". Qual é a correção?",
+    "enunciado": "Sobre Gestão de chaves e ciclo de vida: é comum ouvir o seguinte: \"Destruir a chave é perder dado\". Qual é a correção?",
     "alternativas": [
       "Peça nível, versão do padrão e data, e verifique o processo interno",
       "Controle dividido, local separado e teste de restauração",
@@ -509,7 +509,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Gestão de segredos e cofres: um colega afirma que \"Apagar o arquivo remove o vazamento\". Qual é a correção?",
+    "enunciado": "Sobre Gestão de segredos e cofres: é comum ouvir o seguinte: \"Apagar o arquivo remove o vazamento\". Qual é a correção?",
     "alternativas": [
       "Revogue, substitua, reduza o escopo e varra o histórico",
       "Separe os dois inventários e os dois controles de acesso",

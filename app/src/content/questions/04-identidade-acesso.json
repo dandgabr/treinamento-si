@@ -69,7 +69,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: um colega afirma que \"Aumentar a frequência de troca de senha aumenta a segurança\". Qual é a correção?",
+    "enunciado": "Sobre Autenticação: fatores, MFA e FIDO2: é comum ouvir o seguinte: \"Aumentar a frequência de troca de senha aumenta a segurança\". Qual é a correção?",
     "alternativas": [
       "Tratar risco de contexto como controle adicional, nunca como substituto",
       "Bloquear senhas vazadas e conhecidas, exigir comprimento e oferecer MFA",
@@ -149,7 +149,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Criar um papel por pedido especial\". Qual é a correção?",
+    "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: é comum ouvir o seguinte: \"Criar um papel por pedido especial\". Qual é a correção?",
     "alternativas": [
       "Usar atributo ou exceção com prazo, dono e revisão",
       "Excluir o usuário do grupo equivale a retirar o acesso",
@@ -169,7 +169,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: um colega afirma que \"Excluir o usuário do grupo equivale a retirar o acesso\". Qual é a correção?",
+    "enunciado": "Sobre Autorização: RBAC, ABAC e o modelo de decisão: é comum ouvir o seguinte: \"Excluir o usuário do grupo equivale a retirar o acesso\". Qual é a correção?",
     "alternativas": [
       "Validar assinatura, emissor e público, e checar a política do recurso",
       "Verificar o direito efetivo no ponto de decisão, não a associação",
@@ -249,7 +249,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Desativar a conta encerra o acesso\". Qual é a correção?",
+    "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: é comum ouvir o seguinte: \"Desativar a conta encerra o acesso\". Qual é a correção?",
     "alternativas": [
       "Desativar a conta, encerrar sessões e invalidar tokens no mesmo evento",
       "Retirar concessões na saída e excluir a conta após o prazo de retenção",
@@ -269,7 +269,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: um colega afirma que \"Excluir a conta é o passo mais seguro da saída\". Qual é a correção?",
+    "enunciado": "Sobre Ciclo de vida da identidade e governança de acesso: é comum ouvir o seguinte: \"Excluir a conta é o passo mais seguro da saída\". Qual é a correção?",
     "alternativas": [
       "Desativar a conta, encerrar sessões e invalidar tokens no mesmo evento",
       "Retirar concessões na saída e excluir a conta após o prazo de retenção",
@@ -429,7 +429,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Retirar o privilégio de todos os administradores é o objetivo\". Qual é a correção?",
+    "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: é comum ouvir o seguinte: \"Retirar o privilégio de todos os administradores é o objetivo\". Qual é a correção?",
     "alternativas": [
       "Manter poucas contas de emergência com acesso aprovado por duas pessoas e testadas",
       "Combinar prazo, prova na ativação, justificativa e aprovação conforme o impacto",
@@ -469,7 +469,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: um colega afirma que \"Converter para elegível resolve o excesso de escopo\". Qual é a correção?",
+    "enunciado": "Sobre Menor privilégio, acesso just-in-time e revisão de acessos: é comum ouvir o seguinte: \"Converter para elegível resolve o excesso de escopo\". Qual é a correção?",
     "alternativas": [
       "Menor privilégio é assunto só de acesso humano",
       "Revisão de acesso que aprova tudo está funcionando",
@@ -509,7 +509,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Colocar todas as contas no cofre é o objetivo do projeto\". Qual é a correção?",
+    "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: é comum ouvir o seguinte: \"Colocar todas as contas no cofre é o objetivo do projeto\". Qual é a correção?",
     "alternativas": [
       "Guardar em cofre secundário, com duplo controle, e testar em rotina",
       "Registrar pedido, aprovação, uso com origem, expiração e tentativa de reuso",
@@ -549,7 +549,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: um colega afirma que \"Rotacionar senha de usuário a cada 90 dias fortalece a postura\". Qual é a correção?",
+    "enunciado": "Sobre PAM: contas privilegiadas e cofres de senha: é comum ouvir o seguinte: \"Rotacionar senha de usuário a cada 90 dias fortalece a postura\". Qual é a correção?",
     "alternativas": [
       "Guardar em cofre secundário, com duplo controle, e testar em rotina",
       "Destinar rotação automática a segredo de aplicação e de serviço",
@@ -629,7 +629,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Usar VPN com segundo fator é zero trust\". Qual é a correção?",
+    "enunciado": "Sobre Zero trust: identidade como novo perímetro: é comum ouvir o seguinte: \"Usar VPN com segundo fator é zero trust\". Qual é a correção?",
     "alternativas": [
       "Decidir por recurso e por operação, com avaliação também do dispositivo",
       "Avaliar estado no momento da decisão, não apenas existência do cadastro",
@@ -689,7 +689,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Zero trust: identidade como novo perímetro: um colega afirma que \"Confiar no dispositivo porque está inscrito é suficiente\". Qual é a correção?",
+    "enunciado": "Sobre Zero trust: identidade como novo perímetro: é comum ouvir o seguinte: \"Confiar no dispositivo porque está inscrito é suficiente\". Qual é a correção?",
     "alternativas": [
       "Decidir por recurso e por operação, com avaliação também do dispositivo",
       "Combinar identidade forte com segmentação, conforme o TEMA-04 da área 03",

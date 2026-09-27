@@ -82,8 +82,10 @@ def substitui(caminho: Path, bloco: str, escrever: bool) -> bool:
     txt = caminho.read_text(encoding="utf-8")
     achados = list(RE_NAV.finditer(txt))
     if not achados:
-        print(f"AVISO  {caminho.relative_to(RAIZ)}: rodape nao localizado")
-        return False
+        # Rodape ausente e divergencia, e nao aviso: enquanto era aviso o arquivo saia da
+        # conta e o verificador dava verde sobre um guia sem caminho de leitura.
+        print(f"DIVERGE  {caminho.relative_to(RAIZ)} (rodapé de navegação ausente)")
+        return True
     m = achados[-1]
     corpo = txt[: m.start()].rstrip("\n")
     novo = corpo + "\n\n" + bloco
@@ -113,7 +115,12 @@ def main() -> int:
             if substitui(area["pasta"] / nome, bloco_tema(area, ant, prox), escrever):
                 mudou += 1
     print(f"\n{len(areas)} areas, {mudou} arquivos {'atualizados' if escrever else 'divergentes'}")
-    return 0
+    if not escrever:
+        # Linha que o `verificar-repo.py` exige: prova que o script chegou ao fim, mesmo
+        # quando nao ha nada a fazer. Sem ela, um script que morre no meio (e nao imprime
+        # DIVERGE nenhum) passaria como "sem divergencia".
+        print(f"CHECK {Path(__file__).name} {mudou}")
+    return 1 if (mudou and not escrever) else 0
 
 
 if __name__ == "__main__":

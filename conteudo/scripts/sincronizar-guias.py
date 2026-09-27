@@ -22,6 +22,9 @@ except ImportError:  # pragma: no cover
     sys.exit("PyYAML ausente. Instale com: pip install pyyaml")
 
 RAIZ = Path(__file__).resolve().parent.parent
+# Catalogos (90/91/99) nao tem a secao "Conexoes com outras areas": so a ausencia ali e
+# esperada. A ausencia num guia de area e divergencia, e nao aviso.
+CATALOGOS = {"90-certificacoes", "91-trilhas", "99-fontes"}
 TODAS = {"complementa", "aprofundado_por", "aplicado_em", "nao_confundir_com"}
 RE_FM = re.compile(r"^---\n(.*?)\n---\n", re.S)
 RE_HEADING = re.compile(r"^##\s+\d+\.\s+Conexões com outras áreas[ \t]*$", re.M)
@@ -82,8 +85,11 @@ def processa(pasta: Path, escrever: bool) -> bool:
     texto = readme.read_text(encoding="utf-8")
     m = RE_HEADING.search(texto)
     if not m:
-        print(f"AVISO  {readme.relative_to(RAIZ)}: secao 'Conexões com outras áreas' ausente")
-        return False
+        if pasta.name in CATALOGOS:
+            print(f"AVISO  {readme.relative_to(RAIZ)}: secao 'Conexões com outras áreas' ausente")
+            return False
+        print(f"DIVERGE  {readme.relative_to(RAIZ)} (seção 'Conexões com outras áreas' ausente)")
+        return True
 
     inicio = m.end()
     seguinte = RE_PROX.search(texto, inicio)
@@ -109,6 +115,10 @@ def main() -> int:
                 divergencias += 1
     acao = "regenerados" if escrever else "divergentes"
     print(f"\n{len(pastas)} areas verificadas, {divergencias} {acao}")
+    if not escrever:
+        # Linha exigida pelo `verificar-repo.py`: prova que o script chegou ao fim. Sem ela,
+        # script interrompido no meio nao imprimiria DIVERGE e a conferencia passaria.
+        print(f"CHECK {Path(__file__).name} {divergencias}")
     return 1 if (divergencias and not escrever) else 0
 
 

@@ -1,7 +1,13 @@
 // Gate do banco de questoes ja gravado em `src/content/questions/`.
 //
 // Roda depois do build do banco e antes do Vite, como o `check:content`: se um item perder
-// a fonte, ficar sem alternativa ou apontar para tema inexistente, o build para.
+// a fonte, ficar sem alternativa ou apontar para tema inexistente, o build para. E se o banco
+// deixou de ser o que o material deriva agora (material editado sem `npm run build:questions`),
+// tambem: a conferencia item a item contra a derivacao vive no `validarBanco`.
+//
+// Uso: npm run check:questions
+// Variaveis opcionais (as mesmas do `build-questions`): ROADMAP_CONTENT_FILE e
+// ROADMAP_QUESTIONS_DIR, para o gate ser exercitado num diretorio temporario.
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -11,8 +17,9 @@ import { validarBanco, type Questao } from './lib/questoes'
 
 const AQUI = path.dirname(fileURLToPath(import.meta.url))
 const APP = path.resolve(AQUI, '..')
-const CONTENT_FILE = path.join(APP, 'src', 'content', 'generated', 'content.json')
-const BANCO = path.join(APP, 'src', 'content', 'questions')
+const CONTENT_FILE =
+  process.env.ROADMAP_CONTENT_FILE ?? path.join(APP, 'src', 'content', 'generated', 'content.json')
+const BANCO = process.env.ROADMAP_QUESTIONS_DIR ?? path.join(APP, 'src', 'content', 'questions')
 
 const conteudo = JSON.parse(fs.readFileSync(CONTENT_FILE, 'utf-8')) as Conteudo
 

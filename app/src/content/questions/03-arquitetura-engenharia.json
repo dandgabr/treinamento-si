@@ -209,7 +209,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelar uma vez e arquivar\". Qual é a correção?",
+    "enunciado": "Sobre Modelagem de ameaças: é comum ouvir o seguinte: \"Modelar uma vez e arquivar\". Qual é a correção?",
     "alternativas": [
       "Produza diagrama, lista de ameaças, respostas e data de revisão",
       "Percorra as categorias por elemento e por limite de confiança",
@@ -229,7 +229,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Modelagem de ameaças: um colega afirma que \"Modelar só no fim do projeto\". Qual é a correção?",
+    "enunciado": "Sobre Modelagem de ameaças: é comum ouvir o seguinte: \"Modelar só no fim do projeto\". Qual é a correção?",
     "alternativas": [
       "Ordene por exposição, alcance e esforço de correção",
       "Sem atacante identificado não há ameaça relevante",
@@ -249,7 +249,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Ter VLAN é ter segmentação\". Qual é a correção?",
+    "enunciado": "Sobre Segmentação e zonas de confiança: é comum ouvir o seguinte: \"Ter VLAN é ter segmentação\". Qual é a correção?",
     "alternativas": [
       "Exceção de acesso remoto de fornecedor é inevitável e permanente",
       "Revise a matriz a cada mudança relevante e registre quem aprovou",
@@ -289,7 +289,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segmentação e zonas de confiança: um colega afirma que \"Segmentar por identidade dispensa segmentar por rede\". Qual é a correção?",
+    "enunciado": "Sobre Segmentação e zonas de confiança: é comum ouvir o seguinte: \"Segmentar por identidade dispensa segmentar por rede\". Qual é a correção?",
     "alternativas": [
       "Comece pelas cargas de trabalho que mais contêm dado sensível",
       "Combine as duas: caminho negado é melhor que ator verificado",
@@ -389,7 +389,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: um colega afirma que \"Ter VPN e segundo fator é ser zero trust\". Qual é a correção?",
+    "enunciado": "Sobre Padrões de arquitetura: zero trust e defesa em profundidade: é comum ouvir o seguinte: \"Ter VPN e segundo fator é ser zero trust\". Qual é a correção?",
     "alternativas": [
       "Combine decisão por identidade com caminho restrito",
       "Avalie cada recurso, não apenas a entrada na rede",
@@ -509,7 +509,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"\"Aderente às melhores práticas\" é requisito\". Qual é a correção?",
+    "enunciado": "Sobre Segurança por design e requisitos não funcionais: um colega afirma que \"Aderente às melhores práticas é requisito\". Qual é a correção?",
     "alternativas": [
       "Requisito não funcional é detalhe técnico do time",
       "Todo requisito de segurança custa disponibilidade",
@@ -709,7 +709,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: um colega afirma que \"Contar itens basta como métrica\". Qual é a correção?",
+    "enunciado": "Sobre Revisão de arquitetura e dívida de segurança: é comum ouvir o seguinte: \"Contar itens basta como métrica\". Qual é a correção?",
     "alternativas": [
       "Dívida de segurança é vulnerabilidade não corrigida",
       "Dívida técnica e dívida de segurança são a mesma coisa",

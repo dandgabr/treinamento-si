@@ -41,6 +41,7 @@ def main() -> int:
     somente_check = "--check" in sys.argv
     existentes = chaves_existentes()
     limpos = 0
+    problemas = 0
 
     for pasta in sorted(p for p in RAIZ.glob("[0-9][0-9]-*") if p.is_dir()):
         for arquivo in sorted(pasta.glob("TEMA-*.md")):
@@ -66,10 +67,12 @@ def main() -> int:
                 novo, n = padrao.subn(r"\1", novo)
                 if n == 0:
                     print(f"FALHA  {arquivo.relative_to(RAIZ)}: nao localizei a marca de {alvo}")
+                    problemas += 1
             try:
                 yaml.safe_load(RE_FM.match(novo).group(1))
             except Exception as e:
                 print(f"ERRO   {arquivo.relative_to(RAIZ)}: YAML invalido apos limpeza ({e})")
+                problemas += 1
                 continue
             print(f"{'LIMPO' if not somente_check else 'OBSOLETO'}  {arquivo.relative_to(RAIZ)}: {len(obsoletos)} marca(s)")
             if not somente_check:
@@ -77,7 +80,12 @@ def main() -> int:
             limpos += len(obsoletos)
 
     print(f"\n{limpos} marcas {'removidas' if not somente_check else 'obsoletas'}")
-    return 0
+    if somente_check:
+        # Linha exigida pelo `verificar-repo.py`: prova que o script chegou ao fim.
+        print(f"CHECK {Path(__file__).name} {limpos + problemas}")
+    # Marca obsoleta e pendencia de verdade: o metadado mente sobre o material, e desde que o
+    # `--check` passou a conta-la o modo de conferencia tambem reprova (antes saia 0 sempre).
+    return 1 if ((limpos or problemas) and somente_check) or (problemas and not somente_check) else 0
 
 
 if __name__ == "__main__":

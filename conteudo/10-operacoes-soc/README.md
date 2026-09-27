@@ -176,22 +176,22 @@ ainda não foram escritos.
 
 ## 9. Checkpoint da área
 
-Avaliação somativa e intercalada. Os itens vivem nos temas, seção 10; aqui eles são reordenados e nenhum item novo é criado.
+Avaliação somativa e intercalada. Os itens vivem nos temas, seção 10; aqui eles são reordenados e nenhum item novo é criado. Responda antes de abrir o gabarito.
 
-1. Item 3 do TEMA-03 (escrever a regra a partir do objetivo de cobertura).
-2. Item 1 do TEMA-05 (definir a métrica antes de medir).
-3. Item 2 do TEMA-01 (escolher o modelo para um caso dado).
-4. Item 4 do TEMA-04 (classificar severidade e justificar escalonamento).
-5. Item 2 do TEMA-02 (nomear a fonte ausente e a técnica que fica sem evidência).
+1. Um analista propõe criar três regras separadas para o mesmo padrão, uma por produto de origem do log. Qual recurso da especificação evita essa triplicação e por quê? (TEMA-03)
+2. Por que a hora de triagem por caso real muda mais comportamento que a contagem de alertas? (TEMA-05)
+3. Uma empresa com obrigação de notificar incidente em uma hora roda monitoramento 24x7 contratado, mas a decisão de declarar incidente é de uma pessoa que dorme às 23h e não tem substituto. Qual é o defeito do modelo e qual é a correção mínima? (TEMA-01)
+4. Quem decide escalar o incidente para instância superior de coordenação, segundo o material verificado? (TEMA-04)
+5. Um incidente de movimento lateral não deixa vestígio no log de host porque só o tráfego de rede registra. A organização tem fluxo de rede sem captura de pacote e sem log de autenticação centralizado. Nomeie a fonte ausente mais crítica e a técnica que fica sem evidência. (TEMA-02)
 
 <details>
 <summary>Conferir respostas e critério</summary>
 
-1. A regra precisa declarar logsource, condição, nível e falsos positivos esperados, além da técnica de ATT&CK que ela cobre; sem o mapeamento a cobertura não é auditável.
-2. Métrica só entra em painel se tiver definição escrita, fonte de dado e decisão associada; sem decisão, é número decorativo.
-3. O modelo se justifica pelas variáveis de operação, horário e escopo, e a autoridade de decisão precisa estar escrita antes do incidente.
-4. A severidade sai do critério declarado (tipo de ativo, privilégio obtido, extensão e impacto) e o escalonamento tem dono e prazo; nota de vulnerabilidade não é nota de incidente.
-5. A fonte ausente precisa ser nomeada junto com a classe de técnica que fica sem evidência, como credencial ou comando e controle.
+1. O campo `logsource`, que descreve o dado por categoria, produto e serviço e permite apontar a mesma regra para fontes equivalentes, em vez de replicar a lógica por produto.
+2. Porque liga o ruído ao recurso escasso. Alerta é barato de gerar e caro de ler; a hora por caso real revela o custo de atenção que a operação paga para confirmar um único incidente.
+3. O defeito é que a capacidade de 24x7 termina no alerta: não há decisão à noite. A correção mínima é designar um substituto com autoridade limitada e declarada — por exemplo, declarar incidente e conter um host sem impacto em produção — e registrar isso na regra de escalonamento.
+4. A autoridade central, junto com a polícia federal no caso dos Estados Unidos, conforme o playbook, e não a organização afetada.
+5. A fonte crítica é o log de autenticação centralizado; sem ele não há prova de qual conta autenticou onde, e o movimento lateral por uso de conta válida fica sem evidência, junto com a elevação de privilégio e o acesso a credencial.
 
 Critério para seguir adiante: acertar 80% ou mais sem consultar os temas.
 </details>

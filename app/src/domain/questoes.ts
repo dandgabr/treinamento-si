@@ -13,14 +13,15 @@
 import { lerBancoBruto } from '@fonte'
 import type { Progresso } from './progresso'
 
-export type OrigemDaQuestao = 'erro-comum' | 'recuperacao' | 'checkpoint'
+export type OrigemDaQuestao = 'erro-comum'
 export type StatusDaQuestao = 'rascunho' | 'pendente' | 'verificado'
 
 export interface Questao {
   id: string
   /**
-   * Material de origem: é o que liga o item ao material e ao progresso. `area#TEMA-NN` para os
-   * itens de tema e `area#GUIA` para os de checkpoint, que saem do guia da área e não de um tema.
+   * Material de origem: é o que liga o item ao material e ao progresso. `area#TEMA-NN`, o tema
+   * de onde saiu a linha da tabela de erros comuns. O banco tem uma origem só, e todo item sai
+   * de um tema — não há item de guia.
    */
   ref: string
   origem: OrigemDaQuestao
@@ -36,8 +37,12 @@ export interface Questao {
 /** areaId -> itens */
 export type Banco = Record<string, Questao[]>
 
-/** Listas fechadas do gerador. O guard as usa em vez de repetir a união. */
-const ORIGENS: readonly OrigemDaQuestao[] = ['erro-comum', 'recuperacao', 'checkpoint']
+/**
+ * Lista fechada da única origem que o banco tem desde que as discursivas saíram
+ * (`recuperacao` e `checkpoint`). O guard a usa em vez de repetir a união — e a mantém
+ * fechada: uma origem fora dela é recusada, e não apenas ignorada.
+ */
+const ORIGENS: readonly OrigemDaQuestao[] = ['erro-comum']
 const STATUS: readonly StatusDaQuestao[] = ['rascunho', 'pendente', 'verificado']
 
 function ehFonte(valor: unknown): boolean {

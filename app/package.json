@@ -28,7 +28,7 @@
     "distribuir:linux": "npm run preparar:conteudo && npm run build:desktop && npm run build:electron && electron-builder --linux AppImage --publish never",
     "distribuir:win": "npm run preparar:conteudo && npm run build:desktop && npm run build:electron && electron-builder --win --publish never",
     "distribuir:mac": "npm run preparar:conteudo && npm run build:desktop && npm run build:electron && electron-builder --mac --publish never",
-    "verificar": "npm run build && npm run build:desktop && npm run build:electron && npm test && npm run smoke && npm run smoke:desktop && python3 ../conteudo/scripts/verificar-repo.py",
+    "verificar": "npm run build && npm run build:desktop && npm run build:electron && npm test && npm run smoke && npm run smoke:desktop && npm run smoke:pasta && python3 ../conteudo/scripts/verificar-repo.py",
     "verificar:pacote": "npm run distribuir && npm run smoke:pacote",
     "empacotar": "npm run build && node scripts/empacotar.mjs",
     "build:electron": "vite build --config vite.electron.config.ts",
@@ -46,6 +46,8 @@
   "devDependencies": {
     "@electron/asar": "^3.4.1",
     "@electron/fuses": "^2.1.3",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
     "@types/jsdom": "^21.1.7",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^22.10.2",

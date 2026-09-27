@@ -86,33 +86,17 @@ export function focarConteudo(rolar = false): void {
 }
 
 /**
- * O sufixo que marca, no `ref`, o item que saiu do GUIA de uma area.
- *
- * Quem escreve a convencao e o gerador (`GUIA`, em `scripts/lib/questoes.ts`), e quem a
- * confere e o gate do banco; aqui ela e lida para montar o caminho de volta. O gate
- * (`validarBanco`) recusa um `ref` de guia com origem de tema e vice-versa, entao um
- * desencontro entre os dois lados aparece no build, e nao na tela.
- */
-const SUFIXO_DE_GUIA = '#GUIA'
-
-/** Diz se o `ref` aponta para o guia da area — item de checkpoint, sem tema de origem. */
-export function ehRefDeGuia(ref: string): boolean {
-  return ref.endsWith(SUFIXO_DE_GUIA)
-}
-
-/**
  * Monta o href de um item a partir do `ref`.
  *
- * `area#TEMA-NN` leva ao tema; `area#GUIA` leva ao **guia da area**, que e onde o checkpoint
- * esta escrito — nao existe tema para ele, e mandar a pessoa procurar o item num tema seria
- * mandar para o lugar errado.
+ * O banco tem uma origem só e todo item sai de um tema: `area#TEMA-NN` leva ao tema, e a
+ * convenção de `#GUIA` (item de checkpoint) saiu junto com as discursivas — o gerador não a
+ * grava mais e o gate não a aceita.
  *
  * O `#` do ref nao pode ir cru para a URL: ele encerraria o fragmento e a rota viraria
  * "desconhecida".
  */
 export function linkTema(ref: string): string {
   const [areaId, parte] = ref.split('#')
-  if (ehRefDeGuia(ref)) return `#/area/${areaId}`
   return `#/tema/${areaId}/${parte}`
 }
 

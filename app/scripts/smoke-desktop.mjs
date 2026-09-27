@@ -8,6 +8,7 @@
  * `npm run build:electron` antes)
  */
 import fs from 'node:fs'
+import http from 'node:http'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -84,6 +85,50 @@ async function ate(condicao, timeoutMs = 5000) {
   return false
 }
 
+/** Espera o painel sair de "carregando o progresso…": ler antes disso daria "0 de 109". */
+async function esperarPainel(janela) {
+  await janela.waitForFunction(() => {
+    const painel = document.querySelector('.acoes-progresso')
+    return !!painel && !painel.textContent.includes('carregando')
+  })
+}
+
+/** O `<strong>` de um item do resumo, pelo rotulo — o numero medido, sem regex sobre o blob. */
+function valorDoResumo(janela, rotulo) {
+  return janela.evaluate((procurado) => {
+    const item = Array.from(document.querySelectorAll('.resumo-item')).find(
+      (i) => i.querySelector('.resumo-rotulo')?.textContent === procurado,
+    )
+    return item?.querySelector('strong')?.textContent ?? null
+  }, rotulo)
+}
+
+/**
+ * Um servidor HTTP local que so conta o que chega — o interceptor de S9.
+ *
+ * Ele responde com CORS liberado: sem a CSP, um `fetch` do renderer a este endereco
+ * completaria. E o `smoke` o alcanca do proprio Node antes, como controle positivo: se o
+ * contador nao subisse nem com o controle, a asserção estaria passando por ausencia.
+ */
+async function subirServidorDeRede() {
+  const pedidos = []
+  const servidor = http.createServer((_requisicao, resposta) => {
+    pedidos.push(1)
+    resposta.writeHead(200, {
+      'content-type': 'text/plain',
+      'access-control-allow-origin': '*',
+    })
+    resposta.end('ok')
+  })
+  await new Promise((ok, erro) => servidor.once('error', erro).listen(0, '127.0.0.1', ok))
+  const { port } = servidor.address()
+  return {
+    url: `http://127.0.0.1:${port}/`,
+    pedidos,
+    fechar: () => new Promise((ok) => servidor.close(ok)),
+  }
+}
+
 async function primeiraSessao() {
   const app = await abrir()
   const janela = await app.firstWindow()
@@ -113,6 +158,45 @@ async function primeiraSessao() {
     'ponte exposta',
     await janela.evaluate(async () => typeof (await window.roadmap?.versao())),
     'string',
+  )
+
+  // S2 — a ponte é uma lista fechada de canais. A superfície exposta tem de ser exatamente a
+  // que o preload declara: um canal a mais é superfície a mais no renderer, e um
+  // `ipcRenderer` cru daria ao renderer todos os canais do Electron, não só estes.
+  conferir(
+    'S2 a ponte expõe só a lista de canais',
+    await janela.evaluate(() => Object.keys(window.roadmap ?? {}).sort()),
+    ['aoEscolherNoMenu', 'progresso', 'versao'],
+  )
+  conferir(
+    'S2 a ponte de progresso expõe só a lista de canais',
+    await janela.evaluate(() => Object.keys(window.roadmap?.progresso ?? {}).sort()),
+    ['apagar', 'exportar', 'gravar', 'importar', 'ler'],
+  )
+  conferir(
+    'S2 nenhum ipcRenderer/electron cru no renderer',
+    await janela.evaluate(() => [
+      typeof window.ipcRenderer,
+      typeof window.electron,
+      typeof window.require,
+    ]),
+    ['undefined', 'undefined', 'undefined'],
+  )
+
+  // S10 — o app não usa câmera, microfone, localização nem notificação. O `main.ts` nega pelas
+  // duas checagens: a assíncrona (o pedido) e a síncrona (a consulta). Sem uma delas, a outra
+  // responderia sozinha e a permissão poderia vazar.
+  conferir(
+    'S10 o pedido de notificação é negado',
+    await janela.evaluate(() => Notification.requestPermission()),
+    'denied',
+  )
+  conferir(
+    'S10 a consulta de permissão responde negada',
+    await janela.evaluate(
+      async () => (await navigator.permissions.query({ name: 'geolocation' })).state,
+    ),
+    'denied',
   )
 
   conferir('areas listadas', await janela.locator('.lista-areas li').count(), 18)
@@ -163,6 +247,35 @@ async function primeiraSessao() {
   const guardado = fs.existsSync(arquivo) ? JSON.parse(fs.readFileSync(arquivo, 'utf8')) : null
   conferir('tema com veredito no arquivo', guardado?.temas?.['01-fundamentos#TEMA-01']?.recuperacaoOk, true)
 
+  // S6 e S7, no lado da ESCRITA da ponte. O processo principal só recusa o que nem objeto é
+  // (a forma é do normalizador do renderer), e corta pelo tamanho ANTES de gravar. O arquivo
+  // é restaurado no fim do bloco: a segunda sessão depende dele.
+  const arquivoIntacto = fs.readFileSync(arquivo, 'utf8')
+  conferir(
+    'S6 a ponte recusa valor que não é objeto',
+    await janela.evaluate(() =>
+      window.roadmap.progresso.gravar('texto').then(() => 'aceitou', () => 'recusou'),
+    ),
+    'recusou',
+  )
+  conferir(
+    'S6 a ponte deixa passar objeto (a forma é do renderer)',
+    await janela.evaluate(() =>
+      window.roadmap.progresso.gravar({ versao: 1, temas: {} }).then(() => 'aceitou', () => 'recusou'),
+    ),
+    'aceitou',
+  )
+  conferir(
+    'S7 a ponte recusa gravar acima do teto',
+    await janela.evaluate(() =>
+      window.roadmap.progresso
+        .gravar({ versao: 1, temas: {}, checkpoints: {}, questoes: {}, diasAtivos: [], x: 'a'.repeat(1_100_000) })
+        .then(() => 'gravou', () => 'recusou'),
+    ),
+    'recusou',
+  )
+  fs.writeFileSync(arquivo, arquivoIntacto)
+
   // Navegacao para fora tem de ser bloqueada; file: nao abre nada no sistema.
   await janela.evaluate(() => {
     location.href = 'file:///etc/passwd'
@@ -172,6 +285,19 @@ async function primeiraSessao() {
   // pagina teria saido e este seletor nao responderia. `.bloco-qa` e da rota do tema, que
   // e onde o teste esta.
   conferir('o documento continua o nosso', await janela.locator('.bloco-qa').count(), 1)
+
+  // S4 — sem janela nova e sem `webview`. O `setWindowOpenHandler` nega (e o `window.open`
+  // devolve `null`), o `webviewTag` está desligado e o `will-attach-webview` preventa: a
+  // única saída para fora é o `shell.openExternal`, e só para http(s).
+  conferir(
+    'S4 window.open é negado (devolve null)',
+    await janela.evaluate(() => window.open('https://exemplo.invalid/', '_blank') === null),
+    true,
+  )
+  // Tempo para uma janela que porventura abrisse aparecer: sem o handler, ela nasceria.
+  await janela.waitForTimeout(300)
+  conferir('S4 nenhuma janela nova', app.windows().length, 1)
+  conferir('S4 webviewTag desligado', preferencias?.webviewTag, false)
 
   // A superficie do protocolo, exercitada de dentro do processo principal. Nada disso era
   // testado: a travessia, o host unico e o cabecalho de CSP existiam so por inspecao do
@@ -206,6 +332,40 @@ async function primeiraSessao() {
   conferir('protocolo recusa travessia', protocolo.travessia.status, 404)
   conferir('protocolo recusa host estranho', protocolo.host.status, 404)
 
+  // S9 — nenhuma requisição de rede. A prova é ativa e tem controle positivo: um servidor
+  // HTTP local conta o que chega. O smoke o alcança do próprio Node (o contador funciona),
+  // e o renderer TENTA o mesmo endereço: a CSP `connect-src 'self'` (`app://`) o barra antes
+  // do fio, e a contagem fica só com o controle. Sem a CSP, o `fetch` completaria e o número
+  // subiria — a asserção reprova.
+  const rede = await subirServidorDeRede()
+  try {
+    const controle = await fetch(rede.url)
+    conferir('S9 controle: o servidor de rede responde ao smoke', controle.status, 200)
+    conferir('S9 controle: o servidor registrou o acesso', rede.pedidos.length, 1)
+
+    conferir(
+      'S9 o renderer recusa requisição fora do app://',
+      await janela.evaluate(async (url) => {
+        try {
+          await fetch(url)
+          return 'fez'
+        } catch {
+          return 'recusou'
+        }
+      }, rede.url),
+      'recusou',
+    )
+    // Uma requisição que escapasse da CSP chegaria depois: o tempo separa as duas coisas.
+    await janela.waitForTimeout(300)
+    conferir(
+      'S9 nenhuma requisição do renderer chegou ao servidor',
+      rede.pedidos.length,
+      1,
+    )
+  } finally {
+    await rede.fechar()
+  }
+
   await app.close()
   return { pasta }
 }
@@ -216,20 +376,100 @@ async function segundaSessao() {
   const janela = await app.firstWindow()
   await janela.waitForSelector('.lista-areas li')
   // A leitura do arquivo e assincrona: ler o painel antes dela daria "0 de 109".
-  await janela.waitForFunction(() => {
-    const painel = document.querySelector('.acoes-progresso')
-    return !!painel && !painel.textContent.includes('carregando')
-  })
+  await esperarPainel(janela)
   const painel = ((await janela.locator('.resumo').textContent()) ?? '').replace(/\s+/g, ' ')
   conferir('estado sobreviveu ao fechar e reabrir', /Temas firmes ?1 de 109/.test(painel), true)
   conferir('progresso lido do arquivo', /pasta de dados do aplicativo/.test(painel), true)
   await app.close()
 }
 
+/**
+ * S6 e S7 no lado da LEITURA da ponte, com o arquivo trocado entre um `reload` e outro.
+ *
+ * O que atravessa a ponte vem de fora: um arquivo que alguem copiou, editou ou corrompeu. A
+ * leitura tem de normalizar campo a campo (S6) e cortar pelo tamanho ANTES do `JSON.parse`
+ * (S7) — sem isso, um dado invalido viraria estado e um arquivo gigante seria analisado.
+ */
+async function terceiraSessao(pasta) {
+  const arquivo = path.join(pasta, 'progresso.json')
+  const app = await abrir()
+  const janela = await app.firstWindow()
+  await janela.waitForSelector('.lista-areas li')
+  await esperarPainel(janela)
+
+  // S6 na leitura: cada campo invalido e descartado, um a um. `lido: "sim"` nao vira `true`,
+  // `recuperacaoOk: "talvez"` nao vira firme, `confianca: 99` sai do pre-teste e o dia de
+  // calendario inexistente (`2020-13-99`) nao conta — so o `2026-01-01` sobrevive.
+  fs.writeFileSync(
+    arquivo,
+    JSON.stringify({
+      versao: 1,
+      temas: {
+        '01-fundamentos#TEMA-01': {
+          ref: '01-fundamentos#TEMA-01',
+          lido: 'sim',
+          preTeste: [{ indice: 0, confianca: 99 }],
+          recuperacaoOk: 'talvez',
+          revisao: { intervaloDias: -3, proximaRevisao: '2020-13-99' },
+        },
+      },
+      checkpoints: { '01-fundamentos': { acertos: 9, total: 2 } },
+      diasAtivos: ['2020-13-99', '2026-01-01'],
+    }),
+  )
+  await janela.reload()
+  await janela.waitForSelector('.lista-areas li')
+  await esperarPainel(janela)
+  conferir(
+    'S6 o checkpoint com placar impossível é descartado',
+    await valorDoResumo(janela, 'Checkpoints'),
+    '0 de 18',
+  )
+  conferir(
+    'S6 o dia inexistente é descartado e o válido fica',
+    await valorDoResumo(janela, 'Dias com estudo'),
+    '1',
+  )
+
+  // S7 na leitura: o teto de 1 MB corta o arquivo antes do `JSON.parse`. O conteudo abaixo e
+  // um progresso VALIDO (daria "1 de 109") que passa de 1 MB: se o corte sumisse, ele seria
+  // lido e o tema apareceria firme.
+  fs.writeFileSync(
+    arquivo,
+    JSON.stringify({
+      versao: 1,
+      temas: {
+        '01-fundamentos#TEMA-01': {
+          ref: '01-fundamentos#TEMA-01',
+          lido: true,
+          preTeste: [],
+          recuperacaoOk: true,
+          revisao: { intervaloDias: 7, proximaRevisao: '2026-03-17T12:00:00.000Z' },
+        },
+      },
+      checkpoints: {},
+      questoes: {},
+      diasAtivos: ['2026-03-09'],
+      enchimento: 'a'.repeat(1_200_000),
+    }),
+  )
+  await janela.reload()
+  await janela.waitForSelector('.lista-areas li')
+  await esperarPainel(janela)
+  conferir(
+    'S7 arquivo acima do teto é cortado antes do parse',
+    await valorDoResumo(janela, 'Temas firmes'),
+    '0 de 109',
+  )
+
+  await app.close()
+}
+
 async function main() {
   try {
-    await primeiraSessao()
+    const { pasta } = await primeiraSessao()
     await segundaSessao()
+    await terceiraSessao(pasta)
   } finally {
     // No `finally`: se um `waitForSelector` estourar no meio, o diretorio de dados ficaria
     // para tras. O do pacote ja limpa assim.

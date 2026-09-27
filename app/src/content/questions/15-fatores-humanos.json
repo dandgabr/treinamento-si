@@ -9,7 +9,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"O usuário é o elo mais fraco\"\". Qual é a correção?",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"O usuário é o elo mais fraco\". Qual é a correção?",
     "alternativas": [
       "Cubra no programa os canais que a organização efetivamente usa",
       "Ajuste canal e conteúdo do programa ao modelo de trabalho real",
@@ -29,7 +29,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Treinamento resolve *phishing*\"\". Qual é a correção?",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"Treinamento resolve *phishing*\". Qual é a correção?",
     "alternativas": [
       "Use a lista de decisões atacadas no seu ambiente, que você consegue levantar",
       "Cubra no programa os canais que a organização efetivamente usa",
@@ -49,7 +49,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Um percentual conhecido de incidentes vem de erro humano\"\". Qual é a correção?",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"Um percentual conhecido de incidentes vem de erro humano\". Qual é a correção?",
     "alternativas": [
       "Use a lista de decisões atacadas no seu ambiente, que você consegue levantar",
       "Trate treinamento e MFA resistente a *phishing* como metas distintas e obrigatórias",
@@ -69,7 +69,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"*Phishing* é um problema de e-mail\"\". Qual é a correção?",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"*Phishing* é um problema de e-mail\". Qual é a correção?",
     "alternativas": [
       "Ajuste canal e conteúdo do programa ao modelo de trabalho real",
       "Cubra no programa os canais que a organização efetivamente usa",
@@ -89,7 +89,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"\"Trabalho híbrido não muda a exposição\"\". Qual é a correção?",
+    "enunciado": "Sobre O fator humano: por que pessoas são exploradas: um colega afirma que \"Trabalho híbrido não muda a exposição\". Qual é a correção?",
     "alternativas": [
       "Cubra no programa os canais que a organização efetivamente usa",
       "Descreva a decisão atacada e o controle que faltou no caminho",
@@ -109,7 +109,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"*Phishing* é problema de e-mail\"\". Qual é a correção?",
+    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"*Phishing* é problema de e-mail\". Qual é a correção?",
     "alternativas": [
       "Defina o que se mede antes de escolher se a simulação é anunciada",
       "Priorize padrão de comportamento e restrinja o que pode executar",
@@ -129,7 +129,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"O filtro de e-mail resolve\"\". Qual é a correção?",
+    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"O filtro de e-mail resolve\". Qual é a correção?",
     "alternativas": [
       "Some a filtragem a monitoração de correio e mensagens internas",
       "Priorize padrão de comportamento e restrinja o que pode executar",
@@ -149,7 +149,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Basta habilitar MFA\"\". Qual é a correção?",
+    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"Basta habilitar MFA\". Qual é a correção?",
     "alternativas": [
       "\"Bloquear domínio malicioso encerra o problema\"",
       "Trate tipo de MFA como decisão por classe de conta",
@@ -169,7 +169,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Bloquear domínio malicioso encerra o problema\"\". Qual é a correção?",
+    "enunciado": "Sobre Engenharia social e phishing: é comum ouvir o seguinte: \"Bloquear domínio malicioso encerra o problema\". Qual é a correção?",
     "alternativas": [
       "Defina o que se mede antes de escolher se a simulação é anunciada",
       "Some a filtragem a monitoração de correio e mensagens internas",
@@ -189,7 +189,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Anunciar a simulação educa\"\". Qual é a correção?",
+    "enunciado": "Sobre Engenharia social e phishing: é comum ouvir o seguinte: \"Anunciar a simulação educa\". Qual é a correção?",
     "alternativas": [
       "Priorize padrão de comportamento e restrinja o que pode executar",
       "Cubra no programa e na coleta de log os canais que a organização usa",
@@ -209,7 +209,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Engenharia social e phishing: um colega afirma que \"\"Treinar uma vez por ano basta\"\". Qual é a correção?",
+    "enunciado": "Sobre Engenharia social e phishing: é comum ouvir o seguinte: \"Treinar uma vez por ano basta\". Qual é a correção?",
     "alternativas": [
       "Combine revisão anual com verificação de retenção e canal de reporte ativo",
       "Cubra no programa e na coleta de log os canais que a organização usa",
@@ -229,7 +229,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Programa é o curso anual obrigatório\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"Programa é o curso anual obrigatório\". Qual é a correção?",
     "alternativas": [
       "Declare as quatro etapas do ciclo e o retorno da avaliação para o desenho",
       "Registre com o meio disponível e não prometa certificação automática",
@@ -249,7 +249,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Conteúdo único atende todos\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"Conteúdo único atende todos\". Qual é a correção?",
     "alternativas": [
       "\"Depois de um incidente, basta reforçar o mesmo material\"",
       "Segmente pelo menos em conscientização, papel e educação",
@@ -269,7 +269,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"100% de conclusão prova eficácia\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"100% de conclusão prova eficácia\". Qual é a correção?",
     "alternativas": [
       "\"Depois de um incidente, basta reforçar o mesmo material\"",
       "Segmente pelo menos em conscientização, papel e educação",
@@ -289,7 +289,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Segurança e privacidade são campanhas separadas\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"Segurança e privacidade são campanhas separadas\". Qual é a correção?",
     "alternativas": [
       "\"Programa é o curso anual obrigatório\"",
       "\"100% de conclusão prova eficácia\"",
@@ -309,7 +309,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Depois de um incidente, basta reforçar o mesmo material\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"Depois de um incidente, basta reforçar o mesmo material\". Qual é a correção?",
     "alternativas": [
       "Gere material novo a partir do caso real, com prazo declarado",
       "Verifique retenção e observe a decisão no dado operacional",
@@ -329,7 +329,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"\"Sem plataforma não há programa\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de conscientização que funciona: um colega afirma que \"Sem plataforma não há programa\". Qual é a correção?",
     "alternativas": [
       "Declare as quatro etapas do ciclo e o retorno da avaliação para o desenho",
       "Registre com o meio disponível e não prometa certificação automática",
@@ -349,7 +349,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Cultura se resolve com comunicação interna\"\". Qual é a correção?",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"Cultura se resolve com comunicação interna\". Qual é a correção?",
     "alternativas": [
       "Trate como hipótese operacional e teste na sua própria organização",
       "Ataque as decisões que contradizem a mensagem, e não o alcance da mensagem",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Cultura é responsabilidade do time de segurança\"\". Qual é a correção?",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"Cultura é responsabilidade do time de segurança\". Qual é a correção?",
     "alternativas": [
       "Observe exceção concedida, reporte feito e desvio tratado",
       "Faça o critério ser escrito antes do material de campanha",
@@ -389,7 +389,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Pesquisa de clima mede cultura\"\". Qual é a correção?",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"Pesquisa de clima mede cultura\". Qual é a correção?",
     "alternativas": [
       "Faça o critério ser escrito antes do material de campanha",
       "\"O exemplo da liderança tem efeito mensurável conhecido\"",
@@ -409,7 +409,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Toda exceção é falha de cultura\"\". Qual é a correção?",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"Toda exceção é falha de cultura\". Qual é a correção?",
     "alternativas": [
       "Trate como problema a exceção sem critério e sem prazo",
       "\"O exemplo da liderança tem efeito mensurável conhecido\"",
@@ -429,7 +429,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"Uma campanha forte muda o comportamento\"\". Qual é a correção?",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"Uma campanha forte muda o comportamento\". Qual é a correção?",
     "alternativas": [
       "Observe exceção concedida, reporte feito e desvio tratado",
       "Faça o critério ser escrito antes do material de campanha",
@@ -449,7 +449,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"\"O exemplo da liderança tem efeito mensurável conhecido\"\". Qual é a correção?",
+    "enunciado": "Sobre Cultura de segurança e o papel da liderança: um colega afirma que \"O exemplo da liderança tem efeito mensurável conhecido\". Qual é a correção?",
     "alternativas": [
       "Nomeie o dono de cada decisão de conflito e o critério dele",
       "Ataque as decisões que contradizem a mensagem, e não o alcance da mensagem",
@@ -469,7 +469,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Risco interno é assunto do time de segurança\"\". Qual é a correção?",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"Risco interno é assunto do time de segurança\". Qual é a correção?",
     "alternativas": [
       "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
       "Comece por privilégio, revisão de acesso e critério de escalonamento",
@@ -489,7 +489,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Instalar monitoração resolve\"\". Qual é a correção?",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: é comum ouvir o seguinte: \"Instalar monitoração resolve\". Qual é a correção?",
     "alternativas": [
       "Comece por privilégio, revisão de acesso e critério de escalonamento",
       "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
@@ -509,7 +509,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Insider threat é o mesmo que PAM\"\". Qual é a correção?",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"Insider threat é o mesmo que PAM\". Qual é a correção?",
     "alternativas": [
       "Trate os dois como camadas distintas e complementares",
       "\"Exportação em massa é motivo para desligar alguém\"",
@@ -529,7 +529,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Todo acesso fora de horário indica risco interno\"\". Qual é a correção?",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"Todo acesso fora de horário indica risco interno\". Qual é a correção?",
     "alternativas": [
       "Comece por privilégio, revisão de acesso e critério de escalonamento",
       "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
@@ -549,7 +549,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"Exportação em massa é motivo para desligar alguém\"\". Qual é a correção?",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"Exportação em massa é motivo para desligar alguém\". Qual é a correção?",
     "alternativas": [
       "Trate os dois como camadas distintas e complementares",
       "\"Todo acesso fora de horário indica risco interno\"",
@@ -569,7 +569,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"\"O programa começa pela ferramenta\"\". Qual é a correção?",
+    "enunciado": "Sobre Insider threat e o acesso privilegiado humano: um colega afirma que \"O programa começa pela ferramenta\". Qual é a correção?",
     "alternativas": [
       "Escreva o critério com Jurídico e Recursos Humanos antes de coletar",
       "Monitore acesso em massa a ativo crítico, que é sinal mais específico",
@@ -589,7 +589,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Taxa de cliques mede suscetibilidade\"\". Qual é a correção?",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"Taxa de cliques mede suscetibilidade\". Qual é a correção?",
     "alternativas": [
       "\"Anunciar a simulação melhora o indicador\"",
       "\"Métrica boa é métrica que sempre melhora\"",
@@ -609,7 +609,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Anunciar a simulação melhora o indicador\"\". Qual é a correção?",
+    "enunciado": "Sobre Medir comportamento, não cliques: é comum ouvir o seguinte: \"Anunciar a simulação melhora o indicador\". Qual é a correção?",
     "alternativas": [
       "Se anunciar, não use o resultado como medida de risco",
       "Use o registro disponível e declare o que não é medido",
@@ -629,7 +629,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Relatório individual de quem falhou aumenta a accountability\"\". Qual é a correção?",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"Relatório individual de quem falhou aumenta a accountability\". Qual é a correção?",
     "alternativas": [
       "Declare o comportamento esperado e a verificação de retenção",
       "Trate reporte como comportamento a ser reforçado, sem exposição individual",
@@ -649,7 +649,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Conclusão de 100% é a meta do programa\"\". Qual é a correção?",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"Conclusão de 100% é a meta do programa\". Qual é a correção?",
     "alternativas": [
       "\"Relatório individual de quem falhou aumenta a accountability\"",
       "Defina o limiar que muda canal, conteúdo ou dono do risco",
@@ -669,7 +669,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Sem plataforma é impossível medir\"\". Qual é a correção?",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"Sem plataforma é impossível medir\". Qual é a correção?",
     "alternativas": [
       "Se anunciar, não use o resultado como medida de risco",
       "Defina o limiar que muda canal, conteúdo ou dono do risco",
@@ -689,7 +689,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"\"Métrica boa é métrica que sempre melhora\"\". Qual é a correção?",
+    "enunciado": "Sobre Medir comportamento, não cliques: um colega afirma que \"Métrica boa é métrica que sempre melhora\". Qual é a correção?",
     "alternativas": [
       "Defina o limiar que muda canal, conteúdo ou dono do risco",
       "Declare o comportamento esperado e a verificação de retenção",

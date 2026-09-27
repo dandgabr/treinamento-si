@@ -56,8 +56,8 @@ flowchart TD
   AREA --> T3[TEMA 03 controles]
 ```
 
-Regras de sintaxe: rótulo sem `<`, sem `"`, sem `(` e sem `#`; nunca usar `end` como id de nó;
-sem `click` nem links em nós. Conferir o render no GitHub e no Obsidian antes de commitar.
+Regras de sintaxe e caracteres proibidos em rótulo: [CONTRIBUTING §7](../CONTRIBUTING.md#7-diagramas-mermaid).
+Conferir o render no GitHub e no Obsidian antes de commitar.
 
 ## 4. Temas
 

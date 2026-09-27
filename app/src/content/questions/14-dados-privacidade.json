@@ -149,7 +149,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"Marcar sensível é tarefa do jurídico\". Qual é a correção?",
+    "enunciado": "Sobre Classificação e inventário de dados: é comum ouvir o seguinte: \"Marcar sensível é tarefa do jurídico\". Qual é a correção?",
     "alternativas": [
       "O inventário é por processo de negócio, com as colunas que a lei e a fiscalização pedem",
       "O inventário é um processo com dono, revisão periódica e porta de entrada no ciclo de mudança",
@@ -189,7 +189,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Classificação e inventário de dados: um colega afirma que \"Guardar tudo é mais seguro que descartar\". Qual é a correção?",
+    "enunciado": "Sobre Classificação e inventário de dados: é comum ouvir o seguinte: \"Guardar tudo é mais seguro que descartar\". Qual é a correção?",
     "alternativas": [
       "Prazo definido e eliminação comprovada reduzem a exposição",
       "O catálogo de dados do time de engenharia serve como inventário",
@@ -209,7 +209,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Manter o dado não incomoda ninguém\". Qual é a correção?",
+    "enunciado": "Sobre Ciclo de vida do dado e retenção: é comum ouvir o seguinte: \"Manter o dado não incomoda ninguém\". Qual é a correção?",
     "alternativas": [
       "Quem assina a tabela é o dono do processo, com validação jurídica",
       "Prazo definido e eliminação comprovada reduzem exposição e custo",
@@ -249,7 +249,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Pseudonimizar resolve a retenção\". Qual é a correção?",
+    "enunciado": "Sobre Ciclo de vida do dado e retenção: é comum ouvir o seguinte: \"Pseudonimizar resolve a retenção\". Qual é a correção?",
     "alternativas": [
       "A resposta ao titular informa o que foi eliminado e a obrigação que sustenta o que permanece",
       "Documente o ciclo de rotação com data de expiração ou faça expurgo direcionado",
@@ -289,7 +289,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ciclo de vida do dado e retenção: um colega afirma que \"Eliminar dado de saúde atende qualquer pedido de titular\". Qual é a correção?",
+    "enunciado": "Sobre Ciclo de vida do dado e retenção: é comum ouvir o seguinte: \"Eliminar dado de saúde atende qualquer pedido de titular\". Qual é a correção?",
     "alternativas": [
       "Para sair do regime, a anonimização precisa resistir a reversão por esforços razoáveis",
       "A resposta ao titular informa o que foi eliminado e a obrigação que sustenta o que permanece",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Comunicar ao titular é opcional quando o risco é baixo\". Qual é a correção?",
+    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: é comum ouvir o seguinte: \"Comunicar ao titular é opcional quando o risco é baixo\". Qual é a correção?",
     "alternativas": [
       "Comunique com o que se sabe, informe os motivos de eventual demora e complemente depois",
       "Decida com critério escrito; se decidir não comunicar, registre o fundamento e a evidência",
@@ -389,7 +389,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: um colega afirma que \"Anonimizar depois do incidente resolve\". Qual é a correção?",
+    "enunciado": "Sobre LGPD: bases legais, direitos do titular e incidentes: é comum ouvir o seguinte: \"Anonimizar depois do incidente resolve\". Qual é a correção?",
     "alternativas": [
       "A classificação do dado sensível define controle em todos os pontos do ciclo",
       "Documente o teste e o resultado, e não use legítimo interesse para dado sensível",
@@ -529,7 +529,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Nomear o encarregado cumpre a obrigação\". Qual é a correção?",
+    "enunciado": "Sobre Programa de privacidade e o papel do encarregado: é comum ouvir o seguinte: \"Nomear o encarregado cumpre a obrigação\". Qual é a correção?",
     "alternativas": [
       "Publique o contato em página de livre acesso e registre o fluxo de atendimento",
       "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa",
@@ -609,7 +609,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de privacidade e o papel do encarregado: um colega afirma que \"Responder ao titular é trabalho do jurídico\". Qual é a correção?",
+    "enunciado": "Sobre Programa de privacidade e o papel do encarregado: é comum ouvir o seguinte: \"Responder ao titular é trabalho do jurídico\". Qual é a correção?",
     "alternativas": [
       "Defina o fluxo entre atendimento, encarregado e jurídico, com prazo por etapa",
       "Publique o contato em página de livre acesso e registre o fluxo de atendimento",

@@ -89,7 +89,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Papel da governança de segurança e a estrutura decisória: um colega afirma que \"Aprovar política é o bastante\". Qual é a correção?",
+    "enunciado": "Sobre Papel da governança de segurança e a estrutura decisória: é comum ouvir o seguinte: \"Aprovar política é o bastante\". Qual é a correção?",
     "alternativas": [
       "O CSF 2.0 coloca os dois em categorias distintas, com supervisão em `GV.OV`",
       "Toda norma precisa do caminho de exceção, do prazo e de quem assina a exceção",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre ISMS e ISO/IEC 27001: um colega afirma que \"Contratar auditoria antes de rodar o ciclo interno é mais rápido\". Qual é a correção?",
+    "enunciado": "Sobre ISMS e ISO/IEC 27001: é comum ouvir o seguinte: \"Contratar auditoria antes de rodar o ciclo interno é mais rápido\". Qual é a correção?",
     "alternativas": [
       "O sistema vive por ciclos; a manutenção do certificado exige auditorias de acompanhamento",
       "O escopo é declarado com nome próprio; o que fica fora recebe justificativa, dono e data de reavaliação",
@@ -449,7 +449,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Frameworks de controles: NIST CSF 2.0 e CIS Controls: um colega afirma que \"Adotar o CSF 2.0 é obrigatório\". Qual é a correção?",
+    "enunciado": "Sobre Frameworks de controles: NIST CSF 2.0 e CIS Controls: é comum ouvir o seguinte: \"Adotar o CSF 2.0 é obrigatório\". Qual é a correção?",
     "alternativas": [
       "Govern produz contexto, estratégia, papéis, política e supervisão antes e durante os controles",
       "A 27001 define o sistema, a 27002 orienta os controles, os CIS Controls ordenam a execução",

@@ -151,8 +151,8 @@ Explique em três frases, sem consultar: por que o pré-teste vem antes do conte
 | Começar pela ferramenta | Ferramenta exige processo, processo exige política, política exige perímetro, e o perímetro ainda não foi escrito | Nos primeiros 90 dias, produza leitura da organização; compra vem depois |
 | Estudar tudo antes de decidir | O cargo já exige decisões na primeira semana, e prazo externo não acompanha o ritmo da leitura | Decida com o vocabulário mínimo e registre a decisão como provisória |
 | Ler sem responder às perguntas | Ler produz sensação de domínio e não produz recuperação | Responda à seção de recuperação ativa antes de ver o gabarito |
-| Agenda sem prazo externo no calendário | O prazo que não está escrito é o que vence sem aviso, como mostra o atraso de transposição da NIS2 | Coloque marcos e prazos regulatórios na mesma página |
-| Marco sem pessoa que cobra | Marco sem cobrança vira lista de intenções e o atraso é descoberto no dia 90 | Nomeie quem cobra cada marco, além de quem executa |
+| Deixar o prazo externo fora do calendário | O prazo que não está escrito é o que vence sem aviso, como mostra o atraso de transposição da NIS2 | Coloque marcos e prazos regulatórios na mesma página |
+| Definir marco sem nomear quem cobra | Marco sem cobrança vira lista de intenções e o atraso é descoberto no dia 90 | Nomeie quem cobra cada marco, além de quem executa |
 
 ## 10. Recuperação ativa
 

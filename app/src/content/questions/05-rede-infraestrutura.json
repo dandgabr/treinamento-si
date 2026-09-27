@@ -49,7 +49,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Estar na rede interna equivale a estar autenticado\". Qual é a correção?",
+    "enunciado": "Sobre Fundamentos de rede para o gestor: é comum ouvir o seguinte: \"Estar na rede interna equivale a estar autenticado\". Qual é a correção?",
     "alternativas": [
       "Nome entra na conversa de negócio; a regra precisa do endereço e da porta correspondentes",
       "Autenticação e autorização são funções executadas antes de estabelecer a sessão com o recurso",
@@ -109,7 +109,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Fundamentos de rede para o gestor: um colega afirma que \"Aumentar a faixa de endereços privados dá mais segurança\". Qual é a correção?",
+    "enunciado": "Sobre Fundamentos de rede para o gestor: é comum ouvir o seguinte: \"Aumentar a faixa de endereços privados dá mais segurança\". Qual é a correção?",
     "alternativas": [
       "Trate plano de endereçamento como decisão de arquitetura, não como medida de proteção",
       "Nome entra na conversa de negócio; a regra precisa do endereço e da porta correspondentes",
@@ -169,7 +169,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Bloquear porta administrativa resolve acesso remoto indevido\". Qual é a correção?",
+    "enunciado": "Sobre Perímetro, firewall e inspeção: é comum ouvir o seguinte: \"Bloquear porta administrativa resolve acesso remoto indevido\". Qual é a correção?",
     "alternativas": [
       "Firewall e sistema de detecção de intrusão são a mesma função",
       "Enumere as superfícies de fronteira que existem hoje e dê dono a cada uma",
@@ -209,7 +209,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Inspecionar tudo é sempre melhor\". Qual é a correção?",
+    "enunciado": "Sobre Perímetro, firewall e inspeção: é comum ouvir o seguinte: \"Inspecionar tudo é sempre melhor\". Qual é a correção?",
     "alternativas": [
       "Decida o que inspecionar por classe de dado e registre a justificativa e a retenção",
       "Se o dispositivo só alerta, ele não cumpre a função de controle, e vice-versa",
@@ -229,7 +229,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Perímetro, firewall e inspeção: um colega afirma que \"Revisar a política anualmente é suficiente\". Qual é a correção?",
+    "enunciado": "Sobre Perímetro, firewall e inspeção: é comum ouvir o seguinte: \"Revisar a política anualmente é suficiente\". Qual é a correção?",
     "alternativas": [
       "Enumere as superfícies de fronteira que existem hoje e dê dono a cada uma",
       "Revise por gatilho, com data e autor, e mantenha fila de exceções vencidas",
@@ -249,7 +249,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Ter VLAN é ter segmentação\". Qual é a correção?",
+    "enunciado": "Sobre Segmentação, VLAN e microssegmentação: é comum ouvir o seguinte: \"Ter VLAN é ter segmentação\". Qual é a correção?",
     "alternativas": [
       "Use a localização como contenção e decida acesso por identidade",
       "Escreva a matriz de fluxo e configure a negação por padrão nela",
@@ -289,7 +289,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segmentação, VLAN e microssegmentação: um colega afirma que \"Segmentar por identidade dispensa segmentar por endereço\". Qual é a correção?",
+    "enunciado": "Sobre Segmentação, VLAN e microssegmentação: é comum ouvir o seguinte: \"Segmentar por identidade dispensa segmentar por endereço\". Qual é a correção?",
     "alternativas": [
       "Escreva a matriz de fluxo e configure a negação por padrão nela",
       "Use a localização como contenção e decida acesso por identidade",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Usar VPN significa estar protegido\". Qual é a correção?",
+    "enunciado": "Sobre Criptografia de transporte: TLS e VPN: é comum ouvir o seguinte: \"Usar VPN significa estar protegido\". Qual é a correção?",
     "alternativas": [
       "Inventarie antes, agrupe por exposição e desative por onda com plano de reversão",
       "Trate como item de continuidade, com dono, calendário e alerta antecipado",
@@ -429,7 +429,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Interceptar TLS aumenta a segurança e nada mais\". Qual é a correção?",
+    "enunciado": "Sobre Criptografia de transporte: TLS e VPN: é comum ouvir o seguinte: \"Interceptar TLS aumenta a segurança e nada mais\". Qual é a correção?",
     "alternativas": [
       "Trate como item de continuidade, com dono, calendário e alerta antecipado",
       "Decida com finalidade, retenção, controle de acesso e dono declarados",
@@ -469,7 +469,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Criptografia de transporte: TLS e VPN: um colega afirma que \"Citar RFC 8446 é suficiente para política de TLS\". Qual é a correção?",
+    "enunciado": "Sobre Criptografia de transporte: TLS e VPN: é comum ouvir o seguinte: \"Citar RFC 8446 é suficiente para política de TLS\". Qual é a correção?",
     "alternativas": [
       "Decida com finalidade, retenção, controle de acesso e dono declarados",
       "Priorize metadado, registro de sessão e registro de resolução",
@@ -569,7 +569,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Citar o SP 800-81-2 em política interna é aceitável\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de DNS, e-mail e web: é comum ouvir o seguinte: \"Citar o SP 800-81-2 em política interna é aceitável\". Qual é a correção?",
     "alternativas": [
       "Verifique o certificado, o domínio exato e o que o site faz com o dado",
       "Trate DNSSEC, registro de consulta e redundância como controles distintos",
@@ -589,7 +589,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de DNS, e-mail e web: um colega afirma que \"Resolver público melhora a experiência e não custa nada\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de DNS, e-mail e web: é comum ouvir o seguinte: \"Resolver público melhora a experiência e não custa nada\". Qual é a correção?",
     "alternativas": [
       "Decida o resolver como controle, com registro e dono",
       "Citar o SP 800-81-2 em política interna é aceitável",
@@ -609,7 +609,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: um colega afirma que \"Guardar todo o pacote resolve a investigação\". Qual é a correção?",
+    "enunciado": "Sobre Monitoramento de tráfego e arquitetura de rede segura: é comum ouvir o seguinte: \"Guardar todo o pacote resolve a investigação\". Qual é a correção?",
     "alternativas": [
       "Priorize registro de dispositivo, fluxo e registro do resolver antes de pacote",
       "Trate retenção, integridade e acesso como decisão de risco, com dono e prazo",

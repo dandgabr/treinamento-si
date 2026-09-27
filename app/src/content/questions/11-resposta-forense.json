@@ -49,7 +49,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"Encerrar é parar de receber alertas do caso\". Qual é a correção?",
+    "enunciado": "Sobre Ciclo de resposta a incidentes: é comum ouvir o seguinte: \"Encerrar é parar de receber alertas do caso\". Qual é a correção?",
     "alternativas": [
       "Encerramento exige item de plano, dono e data, e a ISO/IEC 27035-1:2023 nomeia a aplicação de lições aprendidas entre as atividades-chave",
       "Comunique com o que sabe, registre os motivos da demora e complemente em vinte dias úteis",
@@ -69,7 +69,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"Investir em ferramenta reduz o tempo total\". Qual é a correção?",
+    "enunciado": "Sobre Ciclo de resposta a incidentes: é comum ouvir o seguinte: \"Investir em ferramenta reduz o tempo total\". Qual é a correção?",
     "alternativas": [
       "O prazo regulatório conta da conclusão da apuração",
       "Meça cada transição antes de escolher onde gastar",
@@ -89,7 +89,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ciclo de resposta a incidentes: um colega afirma que \"Contratar resposta gerenciada transfere a responsabilidade\". Qual é a correção?",
+    "enunciado": "Sobre Ciclo de resposta a incidentes: é comum ouvir o seguinte: \"Contratar resposta gerenciada transfere a responsabilidade\". Qual é a correção?",
     "alternativas": [
       "Trate t0 e t1 como marcas separadas, com dono diferente",
       "Severidade sai de matriz acordada com o negócio, não da contagem de alertas",
@@ -269,7 +269,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Conter é isolar a máquina\". Qual é a correção?",
+    "enunciado": "Sobre Contenção, erradicação e recuperação: é comum ouvir o seguinte: \"Conter é isolar a máquina\". Qual é a correção?",
     "alternativas": [
       "Contenha identidade e máquina na mesma ação, com a ordem definida",
       "Percorra o inventário de saída da seção 5.2 com evidência por item",
@@ -289,7 +289,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Desligar o servidor preserva a evidência\". Qual é a correção?",
+    "enunciado": "Sobre Contenção, erradicação e recuperação: é comum ouvir o seguinte: \"Desligar o servidor preserva a evidência\". Qual é a correção?",
     "alternativas": [
       "Reconstrua a partir de origem verificada e rotacione o que a conta podia ler",
       "Preserve o volátil antes de desligar, e decida o desligamento com base no que se perde",
@@ -309,7 +309,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Remover o arquivo malicioso encerra a erradicação\". Qual é a correção?",
+    "enunciado": "Sobre Contenção, erradicação e recuperação: é comum ouvir o seguinte: \"Remover o arquivo malicioso encerra a erradicação\". Qual é a correção?",
     "alternativas": [
       "Contenha identidade e máquina na mesma ação, com a ordem definida",
       "Avise o dono do serviço antes de conter, com hora e prazo de retorno",
@@ -329,7 +329,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Voltar ao ar rápido reduz o impacto\". Qual é a correção?",
+    "enunciado": "Sobre Contenção, erradicação e recuperação: é comum ouvir o seguinte: \"Voltar ao ar rápido reduz o impacto\". Qual é a correção?",
     "alternativas": [
       "Limpar o host comprometido em nível administrativo resolve",
       "Contenha identidade e máquina na mesma ação, com a ordem definida",
@@ -349,7 +349,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Reabilitar a conta é problema do dono do serviço\". Qual é a correção?",
+    "enunciado": "Sobre Contenção, erradicação e recuperação: é comum ouvir o seguinte: \"Reabilitar a conta é problema do dono do serviço\". Qual é a correção?",
     "alternativas": [
       "Avise o dono do serviço antes de conter, com hora e prazo de retorno",
       "Percorra o inventário de saída da seção 5.2 com evidência por item",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Contenção, erradicação e recuperação: um colega afirma que \"Limpar o host comprometido em nível administrativo resolve\". Qual é a correção?",
+    "enunciado": "Sobre Contenção, erradicação e recuperação: é comum ouvir o seguinte: \"Limpar o host comprometido em nível administrativo resolve\". Qual é a correção?",
     "alternativas": [
       "Decida com a tabela de custo e com quem responde pela indisponibilidade",
       "Reconstrua a partir de origem verificada e rotacione o que a conta podia ler",
@@ -409,7 +409,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Desligar o host é a forma segura de preservar\". Qual é a correção?",
+    "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: é comum ouvir o seguinte: \"Desligar o host é a forma segura de preservar\". Qual é a correção?",
     "alternativas": [
       "A evidência pode ficar na pasta compartilhada do time",
       "Preserve o volátil antes de decidir o desligamento",
@@ -429,7 +429,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Copiar arquivos pela rede é suficiente\". Qual é a correção?",
+    "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: é comum ouvir o seguinte: \"Copiar arquivos pela rede é suficiente\". Qual é a correção?",
     "alternativas": [
       "Registre cada transferência, com quem, quando, para quê",
       "Guarde em cofre com acesso nominal e registro de acesso",
@@ -489,7 +489,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Analisar no original é mais rápido\". Qual é a correção?",
+    "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: é comum ouvir o seguinte: \"Analisar no original é mais rápido\". Qual é a correção?",
     "alternativas": [
       "Desligar o host é a forma segura de preservar",
       "Analise sempre a cópia, com o original lacrado",
@@ -509,7 +509,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: um colega afirma que \"Coletar é decisão técnica\". Qual é a correção?",
+    "enunciado": "Sobre Forense digital: evidência e cadeia de custódia: é comum ouvir o seguinte: \"Coletar é decisão técnica\". Qual é a correção?",
     "alternativas": [
       "Registre cada transferência, com quem, quando, para quê",
       "Guarde em cofre com acesso nominal e registro de acesso",
@@ -609,7 +609,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: um colega afirma que \"Restaurar o banco é recuperar o serviço\". Qual é a correção?",
+    "enunciado": "Sobre Continuidade de negócios e recuperação de desastre: é comum ouvir o seguinte: \"Restaurar o banco é recuperar o serviço\". Qual é a correção?",
     "alternativas": [
       "Negocie prazo com crédito ou com obrigação de reporte de recuperação",
       "Restaure e valide a cadeia inteira, com teste funcional ponta a ponta",
@@ -709,7 +709,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Comunicação de crise e notificação regulatória: um colega afirma que \"Comunicar cedo demais expõe a empresa\". Qual é a correção?",
+    "enunciado": "Sobre Comunicação de crise e notificação regulatória: é comum ouvir o seguinte: \"Comunicar cedo demais expõe a empresa\". Qual é a correção?",
     "alternativas": [
       "Comunique o que sabe, explique a demora e complemente",
       "O número de titulares pode ser estimado no comunicado",

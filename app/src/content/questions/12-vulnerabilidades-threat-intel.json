@@ -129,7 +129,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura\". Qual é a correção?",
+    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: é comum ouvir o seguinte: \"Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura\". Qual é a correção?",
     "alternativas": [
       "Registre sempre a nomenclatura junto ao número",
       "Ordenar a fila por EPSS puro e ignorar contexto",
@@ -149,7 +149,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Usar EPSS como se fosse nota de gravidade\". Qual é a correção?",
+    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: é comum ouvir o seguinte: \"Usar EPSS como se fosse nota de gravidade\". Qual é a correção?",
     "alternativas": [
       "Tratar Not Defined como ausência de informação neutral",
       "Use EPSS para ordenar e CVSS para dimensionar o impacto",
@@ -169,7 +169,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Ordenar a fila por EPSS puro e ignorar contexto\". Qual é a correção?",
+    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: é comum ouvir o seguinte: \"Ordenar a fila por EPSS puro e ignorar contexto\". Qual é a correção?",
     "alternativas": [
       "Preencher a métrica é o único caminho para o escore reagir ao tempo",
       "Automatize a faixa prioritária e recalcule o resto por exceção",
@@ -189,7 +189,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Tratar Not Defined como ausência de informação neutral\". Qual é a correção?",
+    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: é comum ouvir o seguinte: \"Tratar Not Defined como ausência de informação neutral\". Qual é a correção?",
     "alternativas": [
       "Ponderação pelo contexto do ativo é o que a organização acrescenta",
       "Automatize a faixa prioritária e recalcule o resto por exceção",
@@ -209,7 +209,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Recalcular tudo toda semana\". Qual é a correção?",
+    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: é comum ouvir o seguinte: \"Recalcular tudo toda semana\". Qual é a correção?",
     "alternativas": [
       "Automatize a faixa prioritária e recalcule o resto por exceção",
       "Ponderação pelo contexto do ativo é o que a organização acrescenta",
@@ -229,7 +229,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: um colega afirma que \"Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade\". Qual é a correção?",
+    "enunciado": "Sobre CVSS, EPSS e priorização por risco real: é comum ouvir o seguinte: \"Confundir prazo de descontinuação de algoritmo com pontuação de vulnerabilidade\". Qual é a correção?",
     "alternativas": [
       "Comparar CVSS-B publicado pelo fornecedor com o escore interno sem declarar nomenclatura",
       "Prazo de migração criptográfica tem data de padrão; vulnerabilidade tem prazo de correção",
@@ -269,7 +269,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Coletar primeiro e perguntar depois\". Qual é a correção?",
+    "enunciado": "Sobre Threat intelligence: fontes e níveis: é comum ouvir o seguinte: \"Coletar primeiro e perguntar depois\". Qual é a correção?",
     "alternativas": [
       "Priorize verificação e declare a confiança de cada produto",
       "Registre também a não decisão e reavalie na data marcada",
@@ -329,7 +329,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Threat intelligence: fontes e níveis: um colega afirma que \"Compartilhar de volta é cortesia\". Qual é a correção?",
+    "enunciado": "Sobre Threat intelligence: fontes e níveis: é comum ouvir o seguinte: \"Compartilhar de volta é cortesia\". Qual é a correção?",
     "alternativas": [
       "Trate o procedimento como o ativo durável e exponha o indicador à expiração",
       "Escritas as regras de publicação, o compartilhamento deixa de ser risco pessoal",
@@ -409,7 +409,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre MITRE ATT&CK na prática: um colega afirma que \"Citar o agrupamento é o objetivo do relatório\". Qual é a correção?",
+    "enunciado": "Sobre MITRE ATT&CK na prática: é comum ouvir o seguinte: \"Citar o agrupamento é o objetivo do relatório\". Qual é a correção?",
     "alternativas": [
       "Separe agrupamento, campanha e infraestrutura, e use a técnica como saída",
       "Peça a coleta com nome de fonte, dono e prazo antes de prometer cobertura",
@@ -589,7 +589,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Bug bounty e divulgação responsável: um colega afirma que \"Ameaçar ação legal resolve relato inconveniente\". Qual é a correção?",
+    "enunciado": "Sobre Bug bounty e divulgação responsável: é comum ouvir o seguinte: \"Ameaçar ação legal resolve relato inconveniente\". Qual é a correção?",
     "alternativas": [
       "Responda com processo e mantenha o salvo-conduto",
       "Use as duas, uma para fora e uma para dentro",
@@ -709,7 +709,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Métricas de exposição e dívida de remediação: um colega afirma que \"Comparar áreas com a mesma métrica sem a mesma definição\". Qual é a correção?",
+    "enunciado": "Sobre Métricas de exposição e dívida de remediação: é comum ouvir o seguinte: \"Comparar áreas com a mesma métrica sem a mesma definição\". Qual é a correção?",
     "alternativas": [
       "Use percentil e separe por faixa de prioridade",
       "Publique uma definição única antes de comparar",

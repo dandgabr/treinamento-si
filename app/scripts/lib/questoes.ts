@@ -105,6 +105,63 @@ function distratoresMaisProximos(correta: string, candidatos: string[], quantos:
 }
 
 /**
+ * Tira da celula as aspas que ela ja traz da tabela.
+ *
+ * As linhas do material chegam prontas para a tabela, nao para dentro de outra citacao: em
+ * `13-ofensiva-pentest#TEMA-01` a coluna do equivoco e uma frase inteira entre aspas
+ * (`"Pentest e a forma mais completa de achar vulnerabilidade"`), e em
+ * `10-operacoes-soc#TEMA-02` ha um termo entre aspas no meio da celula
+ * (`Confundir "registrar" com "ter log"`). Como o enunciado cita a celula, o resultado eram
+ * aspas duplas na tela: `um colega afirma que ""Pentest e a forma mais completa...""`. A
+ * moldura do enunciado e o UNICO lugar em que a celula entra dentro de outra citacao, entao e
+ * aqui que elas saem; o gabarito e os distratores guardam o texto da tabela como esta.
+ */
+function semAspas(texto: string): string {
+  return texto.replace(/["“”]/g, '').trim()
+}
+
+/**
+ * Substantivos que terminam em -er/-ir/-ar e que o material usa como primeira palavra do
+ * equivoco. Sem esta lista, `Cluster gerenciado transfere toda a seguranca...` seria lido como
+ * infinitivo e cairia na moldura neutra sem precisar.
+ */
+const NAO_E_INFINITIVO = new Set(['tier', 'cluster', 'insider', 'qualquer'])
+
+/**
+ * Palavras que podem abrir uma prescricao antes do verbo. `Nao registrar a versao do
+ * framework` e a mesma forma de `Automatizar primeiro a acao visivel`, so que negada: sem
+ * descontar o adverbio, a celula voltava para a moldura de afirmacao e o enunciado quebrava.
+ */
+const ANTES_DO_VERBO = new Set([
+  'não', 'nunca', 'jamais', 'sempre', 'só', 'apenas', 'também', 'já', 'ainda', 'depois', 'antes',
+])
+
+/**
+ * A celula comeca com verbo no infinitivo — ou seja, e prescricao sem sujeito, e nao afirmacao.
+ *
+ * `um colega afirma que "Automatizar primeiro a acao mais visivel, como isolar maquina"` nao e
+ * oracao: a moldura antiga pedia um complemento com sujeito e verbo conjugado, e a secao 9 da
+ * area 10 inteira (26 linhas) e feita assim, alem de linhas espalhadas em outras areas que
+ * tambem descrevem o que se faz de errado em vez do que se acredita de errado.
+ *
+ * A regra olha o primeiro token (ou o segundo, quando o primeiro e adverbio). Ela nao separa a
+ * prescricao sem sujeito da oracao cujo sujeito e o proprio infinitivo (`Delegar operacao e
+ * delegar responsabilidade`): isso exigiria analise sintatica, que o gerador nao faz, e a lista
+ * de formas finitas que o material usa ficaria desatualizada em silencio na proxima linha
+ * escrita. Como a moldura neutra CITA a frase em vez de afirmar o seu conteudo, ela aceita as
+ * duas formas: o falso positivo custa tom, nunca concordancia. `-or` fica de fora de proposito —
+ * o material tambem fecha substantivo com ele (`ator`, `indicador`, `servidor`).
+ */
+function comecaComInfinitivo(celula: string): boolean {
+  const partes = semAspas(celula).replace(/[*`]/g, '').split(/\s+/)
+  const palavra = (texto: string | undefined): string =>
+    (texto ?? '').replace(/[^\p{L}]/gu, '').toLocaleLowerCase('pt-BR')
+  const primeira = palavra(partes[0])
+  const alvo = ANTES_DO_VERBO.has(primeira) ? palavra(partes[1]) : primeira
+  return /(ar|er|ir)$/.test(alvo) && !NAO_E_INFINITIVO.has(alvo)
+}
+
+/**
  * As duas colunas de uma tabela de erros comuns, menos a linha `exceto`: o `equivoco` que o
  * material documenta e o `correto` que o corrige.
  *
@@ -136,13 +193,19 @@ function daTabelaDeErros(tema: Tema): Questao[] {
 
     const id = `${tema.ref}#E${String(indice + 1).padStart(2, '0')}`
     const { alternativas, correta } = ordenar(id, gabarito, distratores)
+    // Moldura neutra para a celula sem sujeito: ela cita a frase em vez de afirmar o conteudo,
+    // e por isso aceita tanto a prescricao quanto a oracao (ver `comecaComInfinitivo`). A
+    // pergunta final e a mesma nos dois casos: o que o item pede e a correcao do equivoco.
+    const moldura = comecaComInfinitivo(linha.equivoco)
+      ? `é comum ouvir o seguinte: "${semAspas(linha.equivoco)}"`
+      : `um colega afirma que "${semAspas(linha.equivoco)}"`
     itens.push({
       id,
       ref: tema.ref,
       origem: 'erro-comum',
       fonte,
       status: 'rascunho',
-      enunciado: `Sobre ${tema.titulo}: um colega afirma que "${linha.equivoco}". Qual é a correção?`,
+      enunciado: `Sobre ${tema.titulo}: ${moldura}. Qual é a correção?`,
       alternativas,
       correta,
       justificativa: linha.porque,

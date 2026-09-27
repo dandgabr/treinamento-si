@@ -116,6 +116,15 @@ describe('pareceBanco', () => {
     expect(pareceBanco({ [AREA_A]: [questao({ fonte: { titulo: 't' } as never })] })).toBe(false)
     expect(pareceBanco({ [AREA_A]: [questao({ enunciado: 42 as never })] })).toBe(false)
   })
+
+  it('recusa as origens que saíram do banco', () => {
+    // `recuperacao` e `checkpoint` eram valores válidos e deixaram de ser quando as
+    // discursivas saíram. Um banco velho, ou editado à mão, tem de ser recusado — não
+    // aceito com uma origem que o gerador não grava mais.
+    for (const origem of ['recuperacao', 'checkpoint']) {
+      expect(pareceBanco({ [AREA_A]: [questao({ origem: origem as never })] })).toBe(false)
+    }
+  })
 })
 
 describe('questoesDe', () => {

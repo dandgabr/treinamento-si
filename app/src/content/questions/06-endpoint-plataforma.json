@@ -109,7 +109,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Endpoint como superfície e como sensor: um colega afirma que \"Bloquear tudo que não está na lista é o objetivo final\". Qual é a correção?",
+    "enunciado": "Sobre Endpoint como superfície e como sensor: é comum ouvir o seguinte: \"Bloquear tudo que não está na lista é o objetivo final\". Qual é a correção?",
     "alternativas": [
       "Controle o que pode executar por autorização, e mantenha o antivírus ao lado disso",
       "Trate privilégio local como decisão de segurança, com prazo e justificativa",
@@ -129,7 +129,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Aplicar o benchmark inteiro é o objetivo\". Qual é a correção?",
+    "enunciado": "Sobre Hardening e linhas de base: é comum ouvir o seguinte: \"Aplicar o benchmark inteiro é o objetivo\". Qual é a correção?",
     "alternativas": [
       "Trate o registro de desvio como parte do artefato, não como exceção a esconder",
       "Passe por auditoria e modo de avaliação antes do bloqueio",
@@ -149,7 +149,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Hardening e linhas de base: um colega afirma que \"Endurecer de uma vez, sem medir antes\". Qual é a correção?",
+    "enunciado": "Sobre Hardening e linhas de base: é comum ouvir o seguinte: \"Endurecer de uma vez, sem medir antes\". Qual é a correção?",
     "alternativas": [
       "Cubra também o parque de estações, com benchmark próprio",
       "Passe por auditoria e modo de avaliação antes do bloqueio",
@@ -329,7 +329,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: um colega afirma que \"Instalar em todas as máquinas ao mesmo tempo é eficiência\". Qual é a correção?",
+    "enunciado": "Sobre Gestão de vulnerabilidades e patches no endpoint: é comum ouvir o seguinte: \"Instalar em todas as máquinas ao mesmo tempo é eficiência\". Qual é a correção?",
     "alternativas": [
       "Patch é projeto com data de término",
       "Severidade alta é prioridade alta",
@@ -389,7 +389,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Ligar todas as ações automáticas é o estado desejado\". Qual é a correção?",
+    "enunciado": "Sobre EDR, XDR e resposta no host: é comum ouvir o seguinte: \"Ligar todas as ações automáticas é o estado desejado\". Qual é a correção?",
     "alternativas": [
       "Decida por tipo de dispositivo, com caminho de reversão declarado",
       "Defina escopo por grupo de máquinas e por criticidade do serviço",
@@ -409,7 +409,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Isolar a máquina é sempre a primeira ação\". Qual é a correção?",
+    "enunciado": "Sobre EDR, XDR e resposta no host: é comum ouvir o seguinte: \"Isolar a máquina é sempre a primeira ação\". Qual é a correção?",
     "alternativas": [
       "Defina escopo por grupo de máquinas e por criticidade do serviço",
       "Colete antes de remover, e trate remoção como decisão humana",
@@ -429,7 +429,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre EDR, XDR e resposta no host: um colega afirma que \"Remover o artefato resolve o caso\". Qual é a correção?",
+    "enunciado": "Sobre EDR, XDR e resposta no host: é comum ouvir o seguinte: \"Remover o artefato resolve o caso\". Qual é a correção?",
     "alternativas": [
       "Defina escopo por grupo de máquinas e por criticidade do serviço",
       "Decida por tipo de dispositivo, com caminho de reversão declarado",
@@ -529,7 +529,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Bloquear tudo desde o primeiro dia é firmeza\". Qual é a correção?",
+    "enunciado": "Sobre Proteção de dados no endpoint e DLP: é comum ouvir o seguinte: \"Bloquear tudo desde o primeiro dia é firmeza\". Qual é a correção?",
     "alternativas": [
       "Cubra por canal e revise a lista de canais periodicamente",
       "Defina método, responsável e evidência do descarte",
@@ -569,7 +569,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Proteção de dados no endpoint e DLP: um colega afirma que \"Apagar o disco é procedimento óbvio e sem risco\". Qual é a correção?",
+    "enunciado": "Sobre Proteção de dados no endpoint e DLP: é comum ouvir o seguinte: \"Apagar o disco é procedimento óbvio e sem risco\". Qual é a correção?",
     "alternativas": [
       "Comece em modo de simulação e avance uma regra por vez",
       "Defina método, responsável e evidência do descarte",
@@ -629,7 +629,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Aplicar o benchmark do sistema operacional cobre a carga\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: é comum ouvir o seguinte: \"Aplicar o benchmark do sistema operacional cobre a carga\". Qual é a correção?",
     "alternativas": [
       "Nomeie dono por carga antes de prometer prazo de correção",
       "Automatize o provisionamento e recrie a máquina divergente",
@@ -649,7 +649,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Corrigir o processo em execução resolve\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: é comum ouvir o seguinte: \"Corrigir o processo em execução resolve\". Qual é a correção?",
     "alternativas": [
       "Corrija a imagem e substitua as instâncias",
       "Configurar servidor à mão e depois documentar",
@@ -669,7 +669,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: um colega afirma que \"Configurar servidor à mão e depois documentar\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de servidores e cargas de trabalho: é comum ouvir o seguinte: \"Configurar servidor à mão e depois documentar\". Qual é a correção?",
     "alternativas": [
       "Nomeie dono por carga antes de prometer prazo de correção",
       "Automatize o provisionamento e recrie a máquina divergente",

@@ -14,10 +14,12 @@ Sinais considerados:
 
 Uso:
     python3 scripts/gerar-fila-auditoria.py
+    python3 scripts/gerar-fila-auditoria.py --check    # confere contra o arquivo, sem escrever
 """
 from __future__ import annotations
 
 import re
+import sys
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
@@ -33,6 +35,11 @@ STATUS_LINKS = RAIZ / "99-fontes" / "status-links.md"
 RE_FM = re.compile(r"^---\n(.*?)\n---\n", re.S)
 MARCA = "NAO CONFIRMADO em fonte oficial"
 SIMETRICAS = {"complementa", "nao_confundir_com"}
+
+
+def sem_data(texto: str) -> str:
+    """Neutraliza o `atualizado_em` gerado: a data sai de `date.today()` e mudaria todo dia."""
+    return re.sub(r'^atualizado_em: ".*"$', 'atualizado_em: "AAAA-MM-DD"', texto, flags=re.M)
 
 
 def dominios_bloqueados() -> set[str]:
@@ -156,7 +163,20 @@ def main() -> int:
         "| [README](../README.md) |",
         "",
     ]
-    SAIDA.write_text("\n".join(linhas), encoding="utf-8")
+    novo = "\n".join(linhas)
+
+    if "--check" in sys.argv:
+        # Visao derivada (relacoes, marcas NAO CONFIRMADO, status e dominios bloqueados):
+        # arquivo velho aqui mandava a revisao humana para a ordem antiga sem avisar.
+        atual = sem_data(SAIDA.read_text(encoding="utf-8")) if SAIDA.exists() else ""
+        divergencias = 1 if atual != sem_data(novo) else 0
+        if divergencias:
+            print(f"DIVERGE  {SAIDA.relative_to(RAIZ)}{'' if SAIDA.exists() else ' (ausente)'}")
+        print(f"{len(risco)} arquivos com sinal de risco")
+        print(f"CHECK {Path(__file__).name} {divergencias}")
+        return 1 if divergencias else 0
+
+    SAIDA.write_text(novo, encoding="utf-8")
 
     print(f"{len(risco)} arquivos com sinal de risco")
     for k, v in sorted(resumo.items(), key=lambda x: -x[1]):

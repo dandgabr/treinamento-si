@@ -134,7 +134,12 @@ def main() -> int:
             espelhados += 1
 
     print(f"\n{len(temas)} temas, {espelhados} espelhados, {conflitos} conflitos, {problemas} problemas")
-    return 1 if (conflitos or problemas) else 0
+    if somente_check:
+        # Linha exigida pelo `verificar-repo.py`: prova que o script chegou ao fim.
+        print(f"CHECK {Path(__file__).name} {espelhados + conflitos + problemas}")
+    # Em `--check`, par simetrico declarado de um so lado e pendencia: antes o script imprimia
+    # ESPELHADO e devolvia 0, e o verificador tratava como "nada a fazer".
+    return 1 if (conflitos or problemas or (espelhados and somente_check)) else 0
 
 
 if __name__ == "__main__":

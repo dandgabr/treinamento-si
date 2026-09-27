@@ -189,7 +189,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Objetivos de segurança em conflito e o custo do high water mark: um colega afirma que \"Melhorar um objetivo nunca piora outro\". Qual é a correção?",
+    "enunciado": "Sobre Objetivos de segurança em conflito e o custo do high water mark: é comum ouvir o seguinte: \"Melhorar um objetivo nunca piora outro\". Qual é a correção?",
     "alternativas": [
       "Declare o trade-off e o dono do sacrifício",
       "O critério é autorização, não ocultação",
@@ -229,7 +229,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ativos, classificação e ciclo de vida da informação: um colega afirma que \"Classificar tudo como confidencial protege mais\". Qual é a correção?",
+    "enunciado": "Sobre Ativos, classificação e ciclo de vida da informação: é comum ouvir o seguinte: \"Classificar tudo como confidencial protege mais\". Qual é a correção?",
     "alternativas": [
       "Retenção é assunto de arquivamento, não de segurança",
       "Registre o descarte com data, método e responsável",
@@ -329,7 +329,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Ameaças, atores e motivações: um colega afirma que \"\"Ciberataque\" é uma ameaça\". Qual é a correção?",
+    "enunciado": "Sobre Ameaças, atores e motivações: um colega afirma que \"Ciberataque é uma ameaça\". Qual é a correção?",
     "alternativas": [
       "Ameaça e vulnerabilidade são a mesma coisa",
       "Ator externo é sempre o risco principal",
@@ -489,7 +489,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Vulnerabilidades, exposição e superfície de ataque: um colega afirma que \"Corrigir tudo é sempre a resposta\". Qual é a correção?",
+    "enunciado": "Sobre Vulnerabilidades, exposição e superfície de ataque: é comum ouvir o seguinte: \"Corrigir tudo é sempre a resposta\". Qual é a correção?",
     "alternativas": [
       "Processo deficiente é vulnerabilidade tanto quanto código",
       "Reduza o que ninguém usa antes de atualizar o que sobra",
@@ -589,7 +589,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: um colega afirma que \"Multiplicar pontuação estima prejuízo\". Qual é a correção?",
+    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: é comum ouvir o seguinte: \"Multiplicar pontuação estima prejuízo\". Qual é a correção?",
     "alternativas": [
       "Defina observação para probabilidade e unidade de negócio para impacto",
       "Use a pontuação para ordenar e outra técnica para estimar valor",
@@ -649,7 +649,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: um colega afirma que \"Aceitar risco é omissão\". Qual é a correção?",
+    "enunciado": "Sobre Risco: probabilidade, impacto e risco residual: é comum ouvir o seguinte: \"Aceitar risco é omissão\". Qual é a correção?",
     "alternativas": [
       "Formalize com dono, justificativa e data de revisão",
       "Risco combina falha, ameaça, probabilidade e impacto",
@@ -688,16 +688,16 @@
       "url": "https://csrc.nist.gov/glossary/term/security_control",
       "tipo": "primaria"
     },
-    "status": "pendente",
+    "status": "verificado",
     "enunciado": "Sobre Controles: preventivos, detectivos, corretivos e compensatórios: um colega afirma que \"Controle compensatório é exceção autorizada\". Qual é a correção?",
     "alternativas": [
-      "Evidência é o campo que mostra a regra que ficou esquecida",
-      "Colete aceite escrito de quem formulou o requisito",
       "Classifique pela função que gera evidência, não pelo produto",
+      "A exceção aceita o descumprimento; o compensatório mantém o requisito com outro mecanismo",
+      "Evidência é o campo que mostra a regra que ficou esquecida",
       "Registre a data de entrada em operação"
     ],
     "correta": 1,
-    "justificativa": "A exceção aceita o descumprimento; o compensatório substitui o mecanismo com efeito equivalente"
+    "justificativa": "A exceção só existe com autoridade que aceita o risco no lugar do requisito; tratar o compensatório como exceção esconde que a obrigação continua valendo"
   },
   {
     "id": "01-fundamentos#TEMA-07#E02",
@@ -712,9 +712,9 @@
     "enunciado": "Sobre Controles: preventivos, detectivos, corretivos e compensatórios: um colega afirma que \"Antivírus é preventivo ou detectivo\". Qual é a correção?",
     "alternativas": [
       "Evidência é o campo que mostra a regra que ficou esquecida",
-      "Colete aceite escrito de quem formulou o requisito",
+      "Controle compensatório é exceção autorizada",
       "Classifique pela função que gera evidência, não pelo produto",
-      "Controle compensatório é exceção autorizada"
+      "Registre a data de entrada em operação"
     ],
     "correta": 2,
     "justificativa": "A mesma ferramenta cumpre funções diferentes conforme a configuração"
@@ -792,9 +792,9 @@
     "enunciado": "Sobre Controles: preventivos, detectivos, corretivos e compensatórios: um colega afirma que \"Evidência é papelada\". Qual é a correção?",
     "alternativas": [
       "Classifique pela função que gera evidência, não pelo produto",
-      "Colete aceite escrito de quem formulou o requisito",
+      "Controle compensatório é exceção autorizada",
       "Evidência é o campo que mostra a regra que ficou esquecida",
-      "Controle compensatório é exceção autorizada"
+      "Registre a data de entrada em operação"
     ],
     "correta": 2,
     "justificativa": "Sem evidência não existe prova de operação nem sinal de decadência"

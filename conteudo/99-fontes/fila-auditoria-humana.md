@@ -2,7 +2,7 @@
 escopo: "fila de auditoria humana"
 gerado_por: "scripts/gerar-fila-auditoria.py"
 fontes: []
-atualizado_em: "2026-09-25"
+atualizado_em: "2026-09-27"
 revisar_ate: null
 status_verificacao: rascunho
 ---
@@ -13,13 +13,13 @@ status_verificacao: rascunho
 > duplicação e status das URLs. O que resta ao humano é conferir se o texto diz o que a
 > fonte diz. Esta é a ordem sugerida para essa conferência.
 
-Arquivos com algum sinal de risco: **88**. Prioridade = soma dos sinais.
+Arquivos com algum sinal de risco: **87**. Prioridade = soma dos sinais.
 
 ## Sinais por tipo
 
 | Sinal | Arquivos |
 |---|---|
-| lacuna declarada | 76 |
+| lacuna declarada | 75 |
 | dominio bloqueado | 29 |
 | fonte secundaria | 1 |
 
@@ -127,7 +127,6 @@ Arquivos com algum sinal de risco: **88**. Prioridade = soma dos sinais.
 | 1 | 09-aplicacoes-devsecops/TEMA-05-gestao-de-dependencias-e-cadeia-de-suprimentos.md | 1 marca(s) NAO CONFIRMADO em fonte oficial |
 | 1 | 09-aplicacoes-devsecops/TEMA-06-seguranca-de-api.md | 1 marca(s) NAO CONFIRMADO em fonte oficial |
 | 1 | 10-operacoes-soc/README.md | 1 marca(s) NAO CONFIRMADO em fonte oficial |
-| 1 | 10-operacoes-soc/TEMA-01-o-que-e-um-soc-e-seus-modelos.md | 1 marca(s) NAO CONFIRMADO em fonte oficial |
 | 1 | 10-operacoes-soc/TEMA-05-metricas-de-soc-e-falsos-positivos.md | 1 marca(s) NAO CONFIRMADO em fonte oficial |
 | 1 | 10-operacoes-soc/TEMA-06-soar-automacao-e-o-futuro-do-soc.md | 1 marca(s) NAO CONFIRMADO em fonte oficial |
 | 1 | 12-vulnerabilidades-threat-intel/TEMA-01-gestao-de-vulnerabilidades-do-inventario-ao-fechamento.md | 1 marca(s) NAO CONFIRMADO em fonte oficial |

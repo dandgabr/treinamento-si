@@ -29,7 +29,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Ter política de desenvolvimento seguro equivale a praticá-lo\". Qual é a correção?",
+    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: é comum ouvir o seguinte: \"Ter política de desenvolvimento seguro equivale a praticá-lo\". Qual é a correção?",
     "alternativas": [
       "Definir o que bloqueia onde, e registrar o que apenas alerta",
       "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5",
@@ -69,7 +69,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: um colega afirma que \"Citar requisito sem versão é suficiente\". Qual é a correção?",
+    "enunciado": "Sobre Segurança no ciclo de vida de desenvolvimento: é comum ouvir o seguinte: \"Citar requisito sem versão é suficiente\". Qual é a correção?",
     "alternativas": [
       "Exceção com dono, justificativa, prazo e reavaliação registrados",
       "Citar com versão, no formato usado pelo ASVS, como v5.0.0-1.2.5",
@@ -249,7 +249,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Modelar o sistema inteiro antes de modelar a função\". Qual é a correção?",
+    "enunciado": "Sobre Modelagem de ameaças em aplicações: é comum ouvir o seguinte: \"Modelar o sistema inteiro antes de modelar a função\". Qual é a correção?",
     "alternativas": [
       "Modelar a função que está em especificação, com o detalhe que gera teste",
       "Marcar esses caminhos no diagrama e tratá-los como limite de confiança",
@@ -309,7 +309,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Aceitar é decidir não fazer nada\". Qual é a correção?",
+    "enunciado": "Sobre Modelagem de ameaças em aplicações: é comum ouvir o seguinte: \"Aceitar é decidir não fazer nada\". Qual é a correção?",
     "alternativas": [
       "Manter diagrama, lista, respostas, requisitos e data de revisão",
       "Modelar o sistema inteiro antes de modelar a função",
@@ -349,7 +349,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Modelagem de ameaças em aplicações: um colega afirma que \"Revisar por calendário resolve\". Qual é a correção?",
+    "enunciado": "Sobre Modelagem de ameaças em aplicações: é comum ouvir o seguinte: \"Revisar por calendário resolve\". Qual é a correção?",
     "alternativas": [
       "Escrever o requisito e o teste na mesma sessão",
       "Definir gatilhos de revisão ligados à mudança",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Instalar ferramenta é implementar controle\". Qual é a correção?",
+    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: é comum ouvir o seguinte: \"Instalar ferramenta é implementar controle\". Qual é a correção?",
     "alternativas": [
       "Separar por natureza e por classe de ferramenta ao priorizar",
       "Escrever a política de gate, os prazos e o caminho de exceção",
@@ -409,7 +409,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: um colega afirma que \"Bloquear a ramificação de trabalho acelera a correção\". Qual é a correção?",
+    "enunciado": "Sobre SAST, DAST, SCA e segurança no pipeline: é comum ouvir o seguinte: \"Bloquear a ramificação de trabalho acelera a correção\". Qual é a correção?",
     "alternativas": [
       "Registrar a análise que concluiu pelo falso positivo, com autor e data",
       "Bloquear achado novo e severo na linha principal; registrar o resto",
@@ -509,7 +509,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Gerar o inventário uma vez por ano resolve\". Qual é a correção?",
+    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: é comum ouvir o seguinte: \"Gerar o inventário uma vez por ano resolve\". Qual é a correção?",
     "alternativas": [
       "Manter os dois, com o inventário como base",
       "Proveniência é assunto de time de plataforma",
@@ -589,7 +589,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: um colega afirma que \"Declarar não afetado é sempre resposta aceitável\". Qual é a correção?",
+    "enunciado": "Sobre Gestão de dependências e cadeia de suprimentos de software: é comum ouvir o seguinte: \"Declarar não afetado é sempre resposta aceitável\". Qual é a correção?",
     "alternativas": [
       "Medir a contagem no artefato construído, não na lista declarada",
       "Gerar no build, amarrar ao artefato e usar na resposta a incidente",
@@ -649,7 +649,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de API: um colega afirma que \"Filtrar a resposta é o mesmo que não devolver o dado\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de API: é comum ouvir o seguinte: \"Filtrar a resposta é o mesmo que não devolver o dado\". Qual é a correção?",
     "alternativas": [
       "Endpoint de depuração é assunto de time de desenvolvimento",
       "Definir lista de campos permitidos na resposta e na entrada",
@@ -669,7 +669,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de API: um colega afirma que \"Documentar a API resolve o inventário\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de API: é comum ouvir o seguinte: \"Documentar a API resolve o inventário\". Qual é a correção?",
     "alternativas": [
       "Tratar limite como controle de consumo e autorização como controle separado",
       "Validar esquema, verificar origem e assinatura, limitar tamanho e tempo de espera",

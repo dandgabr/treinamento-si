@@ -9,7 +9,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"\"Não treinamos modelo, então não temos risco de IA\"\". Qual é a correção?",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Não treinamos modelo, então não temos risco de IA\". Qual é a correção?",
     "alternativas": [
       "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
       "A empresa que consome API é deployer e responde por supervisão, monitoramento e uso conforme a finalidade",
@@ -29,7 +29,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"\"O fornecedor é responsável por tudo\"\". Qual é a correção?",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"O fornecedor é responsável por tudo\". Qual é a correção?",
     "alternativas": [
       "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04",
       "Uso não aprovado entra na lista com situação própria e decisão registrada",
@@ -49,7 +49,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Classificar pelo tipo de modelo\". Qual é a correção?",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: é comum ouvir o seguinte: \"Classificar pelo tipo de modelo\". Qual é a correção?",
     "alternativas": [
       "Tratar o OWASP Top 10 for LLM como catálogo de controles",
       "Uso não aprovado entra na lista com situação própria e decisão registrada",
@@ -69,7 +69,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Inventário só com uso aprovado\". Qual é a correção?",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: é comum ouvir o seguinte: \"Inventariar só o uso aprovado\". Qual é a correção?",
     "alternativas": [
       "Uso não aprovado entra na lista com situação própria e decisão registrada",
       "Classifique pela finalidade declarada e pelo efeito sobre pessoa",
@@ -89,7 +89,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Riscos de IA e o que muda na segurança: um colega afirma que \"Tratar o OWASP Top 10 for LLM como catálogo de controles\". Qual é a correção?",
+    "enunciado": "Sobre Riscos de IA e o que muda na segurança: é comum ouvir o seguinte: \"Tratar o OWASP Top 10 for LLM como catálogo de controles\". Qual é a correção?",
     "alternativas": [
       "Divida a responsabilidade por escrito: o que o contrato cobre e o que fica com a empresa",
       "Use como checklist de avaliação e leve o tratamento para o sistema de gestão do TEMA-04",
@@ -109,7 +109,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Prompt injection é jailbreak\"\". Qual é a correção?",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"Prompt injection é jailbreak\". Qual é a correção?",
     "alternativas": [
       "A garantia que se pede ao fornecedor é contratual e de configuração, não de comportamento do modelo",
       "Credencial própria do assistente, com menor privilégio e ação irreversível sob confirmação",
@@ -129,7 +129,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Filtro de palavras proibidas resolve\"\". Qual é a correção?",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"Filtro de palavras proibidas resolve\". Qual é a correção?",
     "alternativas": [
       "\"O assistente herda a permissão do usuário, então é mais seguro\"",
       "\"Só leio documento interno, então estou protegido\"",
@@ -149,7 +149,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"Só leio documento interno, então estou protegido\"\". Qual é a correção?",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"Só leio documento interno, então estou protegido\". Qual é a correção?",
     "alternativas": [
       "Toda fonte que o assistente lê é entrada não confiável, inclusive a intranet",
       "\"O assistente herda a permissão do usuário, então é mais seguro\"",
@@ -169,7 +169,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"O assistente herda a permissão do usuário, então é mais seguro\"\". Qual é a correção?",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"O assistente herda a permissão do usuário, então é mais seguro\". Qual é a correção?",
     "alternativas": [
       "A garantia que se pede ao fornecedor é contratual e de configuração, não de comportamento do modelo",
       "Credencial própria do assistente, com menor privilégio e ação irreversível sob confirmação",
@@ -189,7 +189,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"\"O fornecedor do modelo garante que não acontece\"\". Qual é a correção?",
+    "enunciado": "Sobre Prompt injection e manipulação de modelos: um colega afirma que \"O fornecedor do modelo garante que não acontece\". Qual é a correção?",
     "alternativas": [
       "Credencial própria do assistente, com menor privilégio e ação irreversível sob confirmação",
       "Trate injection como falha de arquitetura de aplicação, com fronteira de confiança, e não como problema de conteúdo",
@@ -209,7 +209,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"O controle de acesso da pasta é suficiente\"\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"O controle de acesso da pasta é suficiente\". Qual é a correção?",
     "alternativas": [
       "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta",
       "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
@@ -229,7 +229,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Removi da origem, então saiu do assistente\"\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"Removi da origem, então saiu do assistente\". Qual é a correção?",
     "alternativas": [
       "Declare o prazo de reconstrução e teste a eliminação de ponta a ponta",
       "Verifique permissão na recuperação, com a identidade do solicitante",
@@ -249,7 +249,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Não treino modelo, então não há envenenamento\"\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"Não treino modelo, então não há envenenamento\". Qual é a correção?",
     "alternativas": [
       "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
       "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa",
@@ -269,7 +269,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"O fornecedor já apaga tudo\"\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"O fornecedor já apaga tudo\". Qual é a correção?",
     "alternativas": [
       "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa",
       "Classifique antes da ingestão e marque por trecho quando a sensibilidade variar dentro do documento",
@@ -289,7 +289,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de dados em pipelines de IA: um colega afirma que \"\"Classificar depois é mais rápido\"\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de dados em pipelines de IA: é comum ouvir o seguinte: \"Classificar depois é mais rápido\". Qual é a correção?",
     "alternativas": [
       "Aplique o controle ao que você controla: ingestão, versionamento e revisão de fonte externa",
       "Peça por escrito, configure o que for configurável e registre a resposta no inventário",
@@ -309,7 +309,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"\"Declarar em ata que IA fica dentro do ISMS basta\"\". Qual é a correção?",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: é comum ouvir o seguinte: \"Declarar em ata que IA fica dentro do ISMS basta\". Qual é a correção?",
     "alternativas": [
       "Escopo, inventário, critério de aprovação e calendário de evidência são entregas próprias",
       "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
@@ -329,7 +329,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"\"Como só consumimos API, não precisamos de nada disso\"\". Qual é a correção?",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Como só consumimos API, não precisamos de nada disso\". Qual é a correção?",
     "alternativas": [
       "Escopo próprio, com nome dos sistemas de IA e papel na cadeia",
       "O papel de deployer tem obrigação própria e exige evidência",
@@ -349,7 +349,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Copiar o escopo do ISMS\". Qual é a correção?",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: é comum ouvir o seguinte: \"Copiar o escopo do ISMS\". Qual é a correção?",
     "alternativas": [
       "O papel de deployer tem obrigação própria e exige evidência",
       "Escreva `NAO CONFIRMADO` até conferir no texto adquirido",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Contratar auditoria antes de rodar um ciclo\". Qual é a correção?",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: é comum ouvir o seguinte: \"Contratar auditoria antes de rodar um ciclo\". Qual é a correção?",
     "alternativas": [
       "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
       "Escopo próprio, com nome dos sistemas de IA e papel na cadeia",
@@ -389,7 +389,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Afirmar número de controles do Anexo A\". Qual é a correção?",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: é comum ouvir o seguinte: \"Afirmar número de controles do Anexo A\". Qual é a correção?",
     "alternativas": [
       "Escreva `NAO CONFIRMADO` até conferir no texto adquirido",
       "\"Como só consumimos API, não precisamos de nada disso\"",
@@ -409,7 +409,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: um colega afirma que \"Tratar governança de IA como projeto de ferramenta\". Qual é a correção?",
+    "enunciado": "Sobre Governança de IA e ISO/IEC 42001: é comum ouvir o seguinte: \"Tratar governança de IA como projeto de ferramenta\". Qual é a correção?",
     "alternativas": [
       "Inventário, avaliação de impacto e análise crítica antes da auditoria",
       "Escreva primeiro escopo, aprovação e calendário, depois escolha a ferramenta",
@@ -429,7 +429,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"A demonstração do fornecedor acertou, então funciona\"\". Qual é a correção?",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"A demonstração do fornecedor acertou, então funciona\". Qual é a correção?",
     "alternativas": [
       "Meça precisão e cobertura junto do tempo",
       "Piloto às cegas com amostra rotulada pelo próprio time",
@@ -449,7 +449,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"O modelo reduz falso positivo\"\". Qual é a correção?",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"O modelo reduz falso positivo\". Qual é a correção?",
     "alternativas": [
       "Aplique retenção, região e base contratual como em qualquer tratamento",
       "Meça se a evidência completa está no resumo e exija o original a um clique",
@@ -469,7 +469,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"A ferramenta só lê, não executa nada\"\". Qual é a correção?",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"A ferramenta só lê, não executa nada\". Qual é a correção?",
     "alternativas": [
       "Meça se a evidência completa está no resumo e exija o original a um clique",
       "Peça precisão e cobertura medidas, com o processo de rotulagem descrito",
@@ -489,7 +489,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"O analista confere tudo depois\"\". Qual é a correção?",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"O analista confere tudo depois\". Qual é a correção?",
     "alternativas": [
       "Meça se a evidência completa está no resumo e exija o original a um clique",
       "Peça precisão e cobertura medidas, com o processo de rotulagem descrito",
@@ -509,7 +509,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"\"Dado agregado não é dado pessoal\"\". Qual é a correção?",
+    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"Dado agregado não é dado pessoal\". Qual é a correção?",
     "alternativas": [
       "Peça precisão e cobertura medidas, com o processo de rotulagem descrito",
       "Aplique retenção, região e base contratual como em qualquer tratamento",
@@ -529,7 +529,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre IA como ferramenta de defesa: um colega afirma que \"Medir adoção pelo tempo economizado só\". Qual é a correção?",
+    "enunciado": "Sobre IA como ferramenta de defesa: é comum ouvir o seguinte: \"Medir adoção pelo tempo economizado só\". Qual é a correção?",
     "alternativas": [
       "\"A ferramenta só lê, não executa nada\"",
       "\"Dado agregado não é dado pessoal\"",
@@ -549,7 +549,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"Bloquear o domínio resolve\"\". Qual é a correção?",
+    "enunciado": "Sobre Shadow AI: uso não governado: é comum ouvir o seguinte: \"Bloquear o domínio resolve\". Qual é a correção?",
     "alternativas": [
       "Some fontes de identidade, despesa, extensão e relato",
       "\"A ferramenta diz que não guarda dado\"",
@@ -569,7 +569,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"Isso é shadow IT, já sei tratar\"\". Qual é a correção?",
+    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"Isso é shadow IT, já sei tratar\". Qual é a correção?",
     "alternativas": [
       "Registre com situação e dono, como qualquer sistema de IA",
       "Descubra, decida e ofereça alternativa aprovada",
@@ -589,7 +589,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"O funcionário agiu de má-fé\"\". Qual é a correção?",
+    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"O funcionário agiu de má-fé\". Qual é a correção?",
     "alternativas": [
       "Trate como falha de política e de caminho aprovado, e mantenha o relato sem punição",
       "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
@@ -609,7 +609,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"\"A ferramenta diz que não guarda dado\"\". Qual é a correção?",
+    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"A ferramenta diz que não guarda dado\". Qual é a correção?",
     "alternativas": [
       "Registre treinamento por pessoa e mantenha no calendário de evidência",
       "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
@@ -629,7 +629,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"Deixar o caso fora do registro quando a ferramenta é gratuita\". Qual é a correção?",
+    "enunciado": "Sobre Shadow AI: uso não governado: é comum ouvir o seguinte: \"Deixar o caso fora do registro quando a ferramenta é gratuita\". Qual é a correção?",
     "alternativas": [
       "Some fontes de identidade, despesa, extensão e relato",
       "Descubra, decida e ofereça alternativa aprovada",
@@ -649,7 +649,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Shadow AI: uso não governado: um colega afirma que \"Treinar uma vez e considerar cumprido\". Qual é a correção?",
+    "enunciado": "Sobre Shadow AI: uso não governado: é comum ouvir o seguinte: \"Treinar uma vez e considerar cumprido\". Qual é a correção?",
     "alternativas": [
       "Peça retenção, uso para treino e prazo por escrito, e registre a resposta",
       "Deixar o caso fora do registro quando a ferramenta é gratuita",

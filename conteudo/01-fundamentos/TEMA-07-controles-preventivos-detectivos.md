@@ -156,7 +156,7 @@ Explique em três frases a diferença entre controle compensatório e exceção.
 
 | Equívoco | Por que está errado | O que é correto |
 |---|---|---|
-| Controle compensatório é exceção autorizada | A exceção aceita o descumprimento; o compensatório substitui o mecanismo com efeito equivalente | Colete aceite escrito de quem formulou o requisito |
+| Controle compensatório é exceção autorizada | A exceção só existe com autoridade que aceita o risco no lugar do requisito; tratar o compensatório como exceção esconde que a obrigação continua valendo | A exceção aceita o descumprimento; o compensatório mantém o requisito com outro mecanismo |
 | Antivírus é preventivo ou detectivo | A mesma ferramenta cumpre funções diferentes conforme a configuração | Classifique pela função que gera evidência, não pelo produto |
 | Controle aprovado é controle operante | A definição de risco residual exige resposta documentada e executada | Registre a data de entrada em operação |
 | Mais prevenção sempre reduz mais risco | Nenhum controle preventivo é infalível, e sem detecção o tempo de descoberta fica indefinido | Distribua verba entre as três funções |

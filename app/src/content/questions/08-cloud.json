@@ -209,7 +209,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Reduzir a contagem de achados é o objetivo\". Qual é a correção?",
+    "enunciado": "Sobre Configuração incorreta e gestão de postura: é comum ouvir o seguinte: \"Reduzir a contagem de achados é o objetivo\". Qual é a correção?",
     "alternativas": [
       "Regra de desvio aceito exige motivo, aprovador, prazo e data de revisão",
       "Priorize por exposição e proteja a correção com verificação antes do deploy",
@@ -249,7 +249,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Aceitar o achado sem registro resolve\". Qual é a correção?",
+    "enunciado": "Sobre Configuração incorreta e gestão de postura: é comum ouvir o seguinte: \"Aceitar o achado sem registro resolve\". Qual é a correção?",
     "alternativas": [
       "Meça desvio aceito, prazo vencido e reincidência por item de benchmark",
       "Regra de desvio aceito exige motivo, aprovador, prazo e data de revisão",
@@ -289,7 +289,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Configuração incorreta e gestão de postura: um colega afirma que \"Corrigir tudo de uma vez é o caminho mais rápido\". Qual é a correção?",
+    "enunciado": "Sobre Configuração incorreta e gestão de postura: é comum ouvir o seguinte: \"Corrigir tudo de uma vez é o caminho mais rápido\". Qual é a correção?",
     "alternativas": [
       "Regra de desvio aceito exige motivo, aprovador, prazo e data de revisão",
       "Meça desvio aceito, prazo vencido e reincidência por item de benchmark",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Segurança de workloads e containers: um colega afirma que \"Corrigir o nó resolve a segurança do contêiner\". Qual é a correção?",
+    "enunciado": "Sobre Segurança de workloads e containers: é comum ouvir o seguinte: \"Corrigir o nó resolve a segurança do contêiner\". Qual é a correção?",
     "alternativas": [
       "Escreva a matriz de camadas por serviço, como no TEMA-01",
       "Etiqueta de versão é suficiente para identificar a imagem",
@@ -489,7 +489,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Dados em nuvem: criptografia e segregação: um colega afirma que \"Perder a chave é risco aceitável em troca de segurança\". Qual é a correção?",
+    "enunciado": "Sobre Dados em nuvem: criptografia e segregação: é comum ouvir o seguinte: \"Perder a chave é risco aceitável em troca de segurança\". Qual é a correção?",
     "alternativas": [
       "Escolha por classe de dado, com base em requisito e impacto",
       "Tenha procedimento de emergência com dono e teste registrado",

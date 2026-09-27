@@ -7,6 +7,7 @@ repositorio passa de cem arquivos.
 
 Uso:
     python3 scripts/gerar-indice-fontes.py
+    python3 scripts/gerar-indice-fontes.py --check    # confere contra o arquivo, sem escrever
 """
 from __future__ import annotations
 
@@ -31,6 +32,11 @@ def arquivos() -> list[Path]:
     alvos = sorted(RAIZ.glob("[0-9][0-9]-*/*.md"))
     alvos += [RAIZ / "README.md", RAIZ / "glossario.md"]
     return [a for a in alvos if a.exists()]
+
+
+def sem_data(texto: str) -> str:
+    """Neutraliza o `atualizado_em` gerado: a data sai de `date.today()` e mudaria todo dia."""
+    return re.sub(r'^atualizado_em: ".*"$', 'atualizado_em: "AAAA-MM-DD"', texto, flags=re.M)
 
 
 def main() -> int:
@@ -121,7 +127,20 @@ def main() -> int:
         linhas += [f"- {r}" for r in sorted(set(sem_fonte))]
 
     linhas += ["", "---", "", "| Home |", "|---|", "| [README](../README.md) |", ""]
-    SAIDA.write_text("\n".join(linhas), encoding="utf-8")
+    novo = "\n".join(linhas)
+
+    if "--check" in sys.argv:
+        # O indice e visao derivada: alterar `fontes` num tema e nao regerar deixava o
+        # verificador verde, porque nada comparava o arquivo com o frontmatter de agora.
+        atual = sem_data(SAIDA.read_text(encoding="utf-8")) if SAIDA.exists() else ""
+        divergencias = 0 if atual == sem_data(novo) else 1
+        if divergencias:
+            print(f"DIVERGE  {SAIDA.relative_to(RAIZ)}{'' if SAIDA.exists() else ' (ausente)'}")
+        print(f"citações: {total_fontes} | URLs distintas: {len(por_url)}")
+        print(f"CHECK {Path(__file__).name} {divergencias}")
+        return 1 if divergencias else 0
+
+    SAIDA.write_text(novo, encoding="utf-8")
 
     print(f"citações: {total_fontes} | URLs distintas: {len(por_url)} | tipos: {dict(tipos)}")
     print(f"documentos sem fontes: {len(set(sem_fonte))}")

@@ -10,6 +10,7 @@ Produz 99-fontes/auditoria-arquivos.md e um resumo no terminal.
 
 Uso:
     python3 scripts/auditar-arquivos.py
+    python3 scripts/auditar-arquivos.py --check    # confere o relatorio, sem escrever
     python3 scripts/auditar-arquivos.py --quiet
 """
 from __future__ import annotations
@@ -67,6 +68,11 @@ paragrafos: dict[str, list[str]] = defaultdict(list)
 
 def achado(sev: str, arq: str, msg: str) -> None:
     resultados.append((sev, arq, msg))
+
+
+def sem_data(texto: str) -> str:
+    """Neutraliza o `atualizado_em` gerado: a data sai de `date.today()` e mudaria todo dia."""
+    return re.sub(r'^atualizado_em: ".*"$', 'atualizado_em: "AAAA-MM-DD"', texto, flags=re.M)
 
 
 def tipo_de(p: Path, rel: str) -> str:
@@ -353,7 +359,24 @@ def main() -> int:
     for sev, arq, msg in sorted(resultados):
         out.append(f"- **{sev.upper()}** `{arq}`: {msg}")
     out += ["", "---", "", "| Home |", "|---|", "| [README](../README.md) |", ""]
-    SAIDA.write_text("\n".join(out), encoding="utf-8")
+    novo = "\n".join(out)
+
+    if "--check" in sys.argv:
+        # Relatorio derivado do material: editar um arquivo e nao regerar deixava o
+        # `auditoria-arquivos.md` mentindo sem ninguem ver.
+        atual = sem_data(SAIDA.read_text(encoding="utf-8")) if SAIDA.exists() else ""
+        divergencias = 1 if atual != sem_data(novo) else 0
+        if divergencias:
+            print(f"DIVERGE  {SAIDA.relative_to(RAIZ)}{'' if SAIDA.exists() else ' (ausente)'}")
+        print(f"{len(linhas)} arquivos auditados, {len(erros)} erros, {len(avisos)} avisos")
+        for sev, arq, msg in sorted(erros):
+            print(f"ERRO   {arq}: {msg}")
+        # A conta inclui os erros da propria auditoria: quem confere quer saber de tudo que
+        # exige acao, e nao so do relatorio velho.
+        print(f"CHECK {Path(__file__).name} {divergencias + len(erros)}")
+        return 1 if (divergencias or erros) else 0
+
+    SAIDA.write_text(novo, encoding="utf-8")
 
     print(f"{len(linhas)} arquivos auditados, {len(erros)} erros, {len(avisos)} avisos")
     if "--quiet" not in sys.argv:

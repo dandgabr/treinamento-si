@@ -152,9 +152,9 @@ Explique em três frases, sem consultar: por que os três eixos são independent
 | Equívoco | Por que está errado | O que é correto |
 |---|---|---|
 | Confidencialidade é sempre o eixo mais importante | Em sistemas de controle industrial, o exemplo do próprio FIPS 199 mostra confidencialidade NOT APPLICABLE com integridade e disponibilidade HIGH | O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la |
-| Alta disponibilidade implica alta integridade | São medidas separadas; um serviço redundante pode entregar dado corrompido com total disponibilidade | Cada objetivo recebe nível próprio, com justificativa própria |
+| Alta disponibilidade implica alta integridade | Um serviço redundante pode entregar dado corrompido com disponibilidade total: o eixo em que o risco se realiza é outro | Os três eixos são independentes — nível alto em um não implica nem compensa o outro |
 | Volume de dados define o nível | A faixa de impacto é definida por efeito sobre operação, ativos e pessoas | Cem mil registros de baixo impacto podem continuar LOW; um único registro com risco de vida pode ser HIGH |
-| A média dos tipos de informação dá o nível do sistema | O FIPS 199 usa o valor mais alto por objetivo, não média | High water mark por objetivo, sem compensação entre eixos |
+| A média dos tipos de informação dá o nível do sistema | A média esconde o tipo de informação que mais pesa: um único tipo HIGH entre sete LOW não perde impacto por estar em minoria | O nível do objetivo é o mais alto entre os tipos de informação que ele carrega, sem média |
 | Backup resolve integridade | Não repúdio e autenticidade fazem parte da integridade; restauração não prova quem alterou nem quando | Integridade exige controle de alteração e registro de auditoria, além de restauração |
 
 ## 10. Recuperação ativa

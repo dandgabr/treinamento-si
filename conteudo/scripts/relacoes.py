@@ -9,7 +9,7 @@ Chave de identidade de um tema: `area_id#tema_id` (ex.: `01-fundamentos#TEMA-03`
 
 Uso:
     python3 scripts/relacoes.py            # valida e regenera mapa-relacoes.md
-    python3 scripts/relacoes.py --check    # apenas valida
+    python3 scripts/relacoes.py --check    # valida e confere o mapa sem escrever
 
 Codigo de saida: 0 sem erros, 1 com erros.
 """
@@ -203,7 +203,7 @@ def valida_ciclos(temas: dict[str, dict]) -> None:
         visita(no, [])
 
 
-def gera_mapa(temas: dict[str, dict]) -> None:
+def corpo_do_mapa(temas: dict[str, dict]) -> str:
     linhas: list[tuple[str, str, str, str, str]] = []
     for origem, dados in sorted(temas.items()):
         rel = dados["fm"].get("relacoes") or {}
@@ -271,7 +271,22 @@ def gera_mapa(temas: dict[str, dict]) -> None:
         corpo.append("Sem dados.")
 
     corpo += ["", "---", "", "| Home |", "|---|", "| [README](./README.md) |", ""]
-    MAPA.write_text("\n".join(corpo), encoding="utf-8")
+    return "\n".join(corpo)
+
+
+def sem_data(texto: str) -> str:
+    """Neutraliza o `atualizado_em` gerado: a data sai de `date.today()` e mudaria todo dia."""
+    return re.sub(r'^atualizado_em: ".*"$', 'atualizado_em: "AAAA-MM-DD"', texto, flags=re.M)
+
+
+def confere_mapa(temas: dict[str, dict]) -> int:
+    """Diz se `mapa-relacoes.md` reproduz o frontmatter de agora. 1 = precisa regerar."""
+    atual = sem_data(MAPA.read_text(encoding="utf-8")) if MAPA.exists() else ""
+    novo = sem_data(corpo_do_mapa(temas))
+    if atual == novo:
+        return 0
+    print(f"DIVERGE  mapa-relacoes.md{'' if MAPA.exists() else ' (ausente)'}")
+    return 1
 
 
 def main() -> int:
@@ -287,11 +302,18 @@ def main() -> int:
 
     print(f"\n{len(temas)} temas, {len(erros)} erros, {len(avisos)} avisos")
 
-    if "--check" not in sys.argv:
-        gera_mapa(temas)
+    divergencias = 0
+    if "--check" in sys.argv:
+        # O mapa e visao derivada do frontmatter: editar o `relacoes` de um tema e nao regerar
+        # deixava o `--check` verde, que so validava (nao comparava) neste modo.
+        divergencias = confere_mapa(temas)
+        # Linha exigida pelo `verificar-repo.py`: prova que o script chegou ao fim.
+        print(f"CHECK {Path(__file__).name} {divergencias}")
+    else:
+        MAPA.write_text(corpo_do_mapa(temas), encoding="utf-8")
         print(f"mapa-relacoes.md regenerado a partir de {len(temas)} temas")
 
-    return 1 if erros else 0
+    return 1 if (erros or divergencias) else 0
 
 
 if __name__ == "__main__":

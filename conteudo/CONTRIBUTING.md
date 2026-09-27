@@ -136,11 +136,17 @@ conexões com outros temas → certificações e leitura → fontes verificadas.
 
 - Sintaxe `flowchart TD` com rótulos em `[...]`.
 - **Proibido nos rótulos:** `<`, `>`, `"`, `(`, `)`, `#`. O GitHub sanitiza `<` como HTML e o nó
-  desaparece ou quebra o parse.
+  desaparece ou quebra o parse. O ampersand **não** entra na lista: `ATT&CK` é rótulo legítimo.
 - **Proibido** usar `end` como id de nó (palavra reservada, sensível a maiúsculas).
 - Não usar `click` nem links em nós: o GitHub descarta.
 - Não usar `%%{init}%%`: o GitHub bloqueia.
 - **Conferir o render no GitHub e no Obsidian** antes de commitar.
+
+<!-- O bloco abaixo é a forma legível por máquina das regras acima, e é a única cópia delas:
+     `scripts/verificar-repo.py` e o gate do app (`app/scripts/lib/validar-content.ts`) leem
+     daqui. O verificador confere que a prosa desta seção concorda com o bloco — se um dos dois
+     mudar sozinho, a verificação reprova em vez de deixar as duas versões conviverem. -->
+<!-- contrato-mermaid: {"rotulos_proibidos": ["<", ">", "\"", "(", ")", "#"], "ids_proibidos": ["end"], "diretivas_proibidas": ["%%{init"], "recursos_proibidos": ["click"]} -->
 
 ## 8. Andragogia aplicada (Knowles)
 
@@ -211,9 +217,12 @@ Tudo o que é visão derivada é gerado — escrever à mão garante divergênci
 | `scripts/auditar-arquivos.py` | auditoria estrutural arquivo por arquivo; gera `99-fontes/auditoria-arquivos.md` | sim |
 | `scripts/checar-links.py` | status HTTP de cada URL citada; gera `99-fontes/status-links.md` | sim |
 | `scripts/gerar-fila-auditoria.py` | ranqueia os arquivos por risco; gera `99-fontes/fila-auditoria-humana.md` | sim |
-| `scripts/verificar-repo.py` | auditoria mecânica: frontmatter, léxico, Mermaid, links, estrutura | não |
+| `scripts/verificar-repo.py` | auditoria mecânica: frontmatter, léxico, Mermaid, links, estrutura, visões derivadas, fichas de `templates/` e esta convenção | não |
 
-Todos aceitam `--check` para rodar sem escrever, exceto o gerador de índice e o verificador.
+Todos aceitam `--check` para conferir sem escrever, e nesse modo terminam com a linha
+`CHECK <script> <n>` e reprovam quando a visão derivada está velha — é assim que
+`verificar-repo.py` sabe que o sincronizador rodou até o fim. Exceção: o próprio
+`verificar-repo.py`, que não escreve em modo nenhum.
 O ciclo completo antes de considerar uma onda encerrada:
 
 ```
@@ -230,9 +239,14 @@ python3 scripts/gerar-fila-auditoria.py
 python3 scripts/verificar-repo.py
 ```
 
-`verificar-repo.py` roda os três sincronizadores em modo `--check` e reprova se o corpo divergir
-da fonte. Sem isso ele dava verde sobre um repositório cuja navegação formava ciclo — porque só
-olhava o frontmatter.
+`verificar-repo.py` roda **todos** os sincronizadores em modo `--check` e reprova se o corpo
+divergir da fonte. Ele exige a linha final `CHECK <script> <n>` de cada um: sem ela, um
+sincronizador que morre no meio não imprime divergência nenhuma e a conferência passaria verde.
+Também reprova o bordão da seção 5 (que antes era só aviso), a ficha de `templates/` que
+contraria o esquema de `templates/FRONTMATTER.md`, e esta convenção quando ela cita um arquivo
+que não existe. O que ele **não** cobre: o que o app deriva — `app/src/content/generated/content.json`
+e o banco de questões. Isso é do gate do app (`npm run check:content` e `check:questions`), que
+regera e compara; o verificador daqui não roda Node e não tem como regerar esses arquivos.
 
 ## 13. Limite conhecido: fontes que bloqueiam leitura automatizada
 

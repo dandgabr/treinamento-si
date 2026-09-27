@@ -1,10 +1,9 @@
 // Tela de quiz de multipla escolha sobre o banco derivado do material.
 //
-// O banco nao e prosa nova: cada item saiu da tabela de erros comuns, da recuperacao ativa de
-// um tema ou do checkpoint do guia de uma area, e por isso a tela sempre devolve o caminho de
-// volta — justificativa, fonte e link do material de origem. Quase tudo ainda esta `rascunho`,
-// e o item nao revisado aparece marcado, sem alarme: o selo diz o que aconteceu, nao que o
-// material errou.
+// O banco nao e prosa nova: cada item saiu da tabela de erros comuns de um tema, e por isso a
+// tela sempre devolve o caminho de volta — justificativa, fonte e link do material de origem.
+// Quase tudo ainda esta `rascunho`, e o item nao revisado aparece marcado, sem alarme: o selo
+// diz o que aconteceu, nao que o material errou.
 //
 // A rodada se restringe a uma area, ou a um tema de uma area: `#/quiz`,
 // `#/quiz/<areaId>` e `#/quiz/<areaId>/<temaId>` sao a mesma tela com escopos diferentes,
@@ -41,7 +40,7 @@ import {
 } from '../domain/questoes'
 import { content } from '../infrastructure/content/repository'
 import { Principal } from './Blocos'
-import { ehRefDeGuia, irPara, linkQuiz, linkTema } from './useRota'
+import { irPara, linkQuiz, linkTema } from './useRota'
 import { useBanco } from './useBanco'
 
 /**
@@ -62,29 +61,26 @@ function rotuloDeRevisao(status: Questao['status']): string | null {
 /**
  * De onde o item saiu, em prosa, para a frase do selo.
  *
- * O item de checkpoint nao sai de tema nenhum: sai do guia da AREA. Chamar o guia de tema
- * mandaria a pessoa procurar o item num lugar onde ele nao esta.
+ * O banco tem uma origem so desde que as discursivas saíram; o `default` existe para um JSON
+ * editado à mão, e devolve a origem generica do material em vez de nomear uma tabela que o
+ * item pode não ter saído. O tipo garante que, do gerador, este ramo nunca roda.
  */
 function origemEmProsa(questao: Questao): string {
   switch (questao.origem) {
     case 'erro-comum':
       return 'da tabela de erros comuns do tema'
-    case 'recuperacao':
-      return 'da recuperação ativa do tema'
     default:
-      return 'do checkpoint do guia da área'
+      return 'do material'
   }
 }
 
 /** O material de onde o item saiu, para a frase e o link de volta. */
 function materialDeOrigem(questao: Questao): { href: string; nome: string; rotulo: string } {
-  const href = linkTema(questao.ref)
-  if (ehRefDeGuia(questao.ref)) {
-    const areaId = questao.ref.split('#')[0] ?? ''
-    const area = content.areas.find((a) => a.areaId === areaId)
-    return { href, nome: area?.areaNome ?? areaId, rotulo: 'guia da área' }
+  return {
+    href: linkTema(questao.ref),
+    nome: content.temas[questao.ref]?.titulo ?? questao.ref,
+    rotulo: 'tema',
   }
-  return { href, nome: content.temas[questao.ref]?.titulo ?? questao.ref, rotulo: 'tema' }
 }
 
 /** A semente da proxima rodada nao pode repetir: ela entra na `key` que remonta a rodada. */
@@ -97,8 +93,7 @@ function proximaSemente(atual: number): number {
  *
  * O recorte por area e do dominio (`questoesDe`), e o de tema e o filtro pelo `ref` do item —
  * a mesma chave que liga o item ao material. Nao ha filtro novo no dominio por causa disso:
- * `sortear` e `priorizar` ja aceitam qualquer subconjunto, e `ref` ja identifica o tema. Um
- * item de checkpoint tem `ref` de guia e nunca entra num escopo de tema.
+ * `sortear` e `priorizar` ja aceitam qualquer subconjunto, e `ref` ja identifica o tema.
  */
 function itensDoEscopo(banco: Banco, areaId: string | null, temaId: string | null): Questao[] {
   const daArea = questoesDe(banco, areaId ?? undefined)
@@ -531,9 +526,9 @@ function Rodada({
                 </>
               )}
             </p>
-            {/* Item de recuperacao e item de checkpoint nao tem "porque" derivado: o gerador
-                deixa o campo vazio em vez de inventar uma razao, e a tela nao pode exibir um
-                rotulo sem texto. */}
+            {/* O gate exige justificativa em todo item do banco, mas a tela nao pode exibir um
+                rotulo sem texto se um JSON editado a mao chegar aqui: o "Por quê:" so aparece
+                com a justificativa. */}
             {questao.justificativa ? (
               <p>
                 <strong>Por quê:</strong> {questao.justificativa}

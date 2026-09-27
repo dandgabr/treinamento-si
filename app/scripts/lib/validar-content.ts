@@ -6,6 +6,7 @@
 import { interpretarCriterio } from '../../src/domain/criterio'
 import { SEQUENCIA_DIAS } from '../../src/domain/srs'
 import type { Area, Conteudo, Fonte, Guia, Pagina, Secao, Tema } from '../../src/domain/types'
+import { lerContratoMermaid } from './contrato-mermaid'
 
 /** Sequencia que o escalonador do app implementa hoje. */
 const SEQUENCIA_PADRAO: readonly number[] = SEQUENCIA_DIAS
@@ -36,9 +37,9 @@ const NIVEIS = new Set(['base', 'intermediario', 'avancado'])
 /** Grupos que hoje existem em `paginas`. Um grupo novo tem de entrar aqui de proposito. */
 const GRUPOS_DE_PAGINA = new Set(['home', 'referencia', '90-certificacoes', '91-trilhas', '99-fontes'])
 
-// Espelha `checa_mermaid` do verificador do material. `&` NAO entra: `ATT&CK` e rotulo
-// legitimo, e o proprio verificador do conteudo o aceita.
-const PROIBIDOS_NO_ROTULO = ['<', '>', '"', '(', ')', '#']
+// (A lista de caracteres proibidos em rotulo Mermaid nao mora aqui: ela e o contrato da secao 7
+// do CONTRIBUTING, lido por `./contrato-mermaid`. `&` nunca esteve proibido — `ATT&CK` e rotulo
+// legitimo, e o material o usa.)
 
 /** Formato de data ISO com hora, o que `geradoEm` promete ser. */
 const RE_DATA_ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/
@@ -81,13 +82,15 @@ function checarSecoes(onde: string, secoes: Secao[], erros: string[], exigirUma:
 }
 
 /**
- * Espelha `checa_mermaid` do verificador do material. Um rotulo com `<` ou `#` faz o
- * Mermaid interpretar HTML e comer pedaco do texto, e o defeito so aparece na tela.
+ * Espelha `checa_mermaid` do verificador do material, lendo as mesmas regras do mesmo lugar que
+ * ele: o contrato da secao 7 do CONTRIBUTING. Um rotulo com `<` ou `#` faz o Mermaid interpretar
+ * HTML e comer pedaco do texto, e o defeito so aparece na tela.
  */
 function checarMermaid(onde: string, diagramas: string[], erros: string[]): void {
+  const proibidos = lerContratoMermaid().rotulos_proibidos
   for (const diagrama of diagramas ?? []) {
     for (const rotulo of diagrama.match(/\[[^\]\n]*\]/g) ?? []) {
-      for (const proibido of PROIBIDOS_NO_ROTULO) {
+      for (const proibido of proibidos) {
         if (rotulo.includes(proibido)) {
           erros.push(`${onde}: rotulo Mermaid com caractere proibido (${proibido}) em ${rotulo}`)
         }

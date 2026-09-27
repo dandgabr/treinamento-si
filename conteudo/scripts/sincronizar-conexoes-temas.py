@@ -61,8 +61,10 @@ def processa(arquivo: Path, escrever: bool) -> bool:
     txt = arquivo.read_text(encoding="utf-8")
     m = RE_SEC.search(txt)
     if not m:
-        print(f"AVISO  {arquivo.relative_to(RAIZ)}: secao §12 ausente")
-        return False
+        # Secao ausente e divergencia, e nao aviso: enquanto era aviso, o tema saia da conta
+        # e o verificador dava verde sobre um tema sem a leitura das proprias relacoes.
+        print(f"DIVERGE  {arquivo.relative_to(RAIZ)} (seção §12 'Conexões com outros temas' ausente)")
+        return True
     inicio = m.end()
     prox = RE_PROX.search(txt, inicio)
     fim = prox.start() if prox else len(txt)
@@ -83,7 +85,11 @@ def main() -> int:
             if processa(arq, escrever):
                 mudou += 1
     print(f"\n{mudou} arquivos {'atualizados' if escrever else 'divergentes'}")
-    return 0
+    if not escrever:
+        # Linha exigida pelo `verificar-repo.py`: prova que o script chegou ao fim. Sem ela,
+        # script interrompido no meio nao imprimiria DIVERGE e a conferencia passaria.
+        print(f"CHECK {Path(__file__).name} {mudou}")
+    return 1 if (mudou and not escrever) else 0
 
 
 if __name__ == "__main__":

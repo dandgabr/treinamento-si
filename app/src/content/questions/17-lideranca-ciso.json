@@ -9,7 +9,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"O CISO é dono de todo o risco de tecnologia\"\". Qual é a correção?",
+    "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"O CISO é dono de todo o risco de tecnologia\". Qual é a correção?",
     "alternativas": [
       "Declare a fronteira por escrito e trate o resto como risco de terceiro",
       "Documente as decisões que você autoriza, com base em `GV.RR-02`",
@@ -29,7 +29,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"Quem tem o cargo tem o mandato\"\". Qual é a correção?",
+    "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"Quem tem o cargo tem o mandato\". Qual é a correção?",
     "alternativas": [
       "Defina quem executa o controle e quem assina o aceite do risco",
       "Documente as decisões que você autoriza, com base em `GV.RR-02`",
@@ -49,7 +49,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"Ser accountable significa que executo\"\". Qual é a correção?",
+    "enunciado": "Sobre O papel e o mandato do CISO: é comum ouvir o seguinte: \"Ser accountable significa que executo\". Qual é a correção?",
     "alternativas": [
       "Documente as decisões que você autoriza, com base em `GV.RR-02`",
       "Declare a fronteira por escrito e trate o resto como risco de terceiro",
@@ -69,7 +69,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"O encarregado de dados está dentro da segurança\"\". Qual é a correção?",
+    "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"O encarregado de dados está dentro da segurança\". Qual é a correção?",
     "alternativas": [
       "Declare a fronteira por escrito e trate o resto como risco de terceiro",
       "Documente as decisões que você autoriza, com base em `GV.RR-02`",
@@ -89,7 +89,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O papel e o mandato do CISO: um colega afirma que \"\"Pedir mais verba é sinal de falha de gestão\"\". Qual é a correção?",
+    "enunciado": "Sobre O papel e o mandato do CISO: é comum ouvir o seguinte: \"Pedir mais verba é sinal de falha de gestão\". Qual é a correção?",
     "alternativas": [
       "Peça com risco documentado, não com urgência",
       "\"O CISO é dono de todo o risco de tecnologia\"",
@@ -109,7 +109,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Ter 15 minutos na reunião do conselho é reporte\"\". Qual é a correção?",
+    "enunciado": "Sobre Posição na estrutura e reporte ao board: é comum ouvir o seguinte: \"Ter 15 minutos na reunião do conselho é reporte\". Qual é a correção?",
     "alternativas": [
       "\"Painel de 40 métricas demonstra rigor\"",
       "Leve um item de decisão e registre em ata",
@@ -129,7 +129,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Reportar ao CIO inviabiliza o cargo\"\". Qual é a correção?",
+    "enunciado": "Sobre Posição na estrutura e reporte ao board: é comum ouvir o seguinte: \"Reportar ao CIO inviabiliza o cargo\". Qual é a correção?",
     "alternativas": [
       "Separe indicador de risco de indicador de desempenho do programa",
       "Nomeie um dono do calendário regulatório com data e responsável",
@@ -149,7 +149,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Avaliação de risco é assunto do comitê de risco\"\". Qual é a correção?",
+    "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"Avaliação de risco é assunto do comitê de risco\". Qual é a correção?",
     "alternativas": [
       "Nomeie um dono do calendário regulatório com data e responsável",
       "Confira o que a norma aplicável exige e documente o desenho escolhido",
@@ -169,7 +169,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Painel de 40 métricas demonstra rigor\"\". Qual é a correção?",
+    "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"Painel de 40 métricas demonstra rigor\". Qual é a correção?",
     "alternativas": [
       "Três a cinco indicadores ligados a decisões pendentes",
       "\"Ter 15 minutos na reunião do conselho é reporte\"",
@@ -189,7 +189,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"\"Compliance é assunto do jurídico\"\". Qual é a correção?",
+    "enunciado": "Sobre Posição na estrutura e reporte ao board: um colega afirma que \"Compliance é assunto do jurídico\". Qual é a correção?",
     "alternativas": [
       "Separe indicador de risco de indicador de desempenho do programa",
       "Nomeie um dono do calendário regulatório com data e responsável",
@@ -209,7 +209,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"Basta alinhar o gasto a um percentual de referência do mercado\"\". Qual é a correção?",
+    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"Basta alinhar o gasto a um percentual de referência do mercado\". Qual é a correção?",
     "alternativas": [
       "Separe as duas linhas no orçamento para não perder a discussão de retorno",
       "Peça verba vinculada a uma declaração de apetite já existente",
@@ -229,7 +229,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"Apetite de risco e orçamento tratam da mesma coisa\"\". Qual é a correção?",
+    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"Apetite de risco e orçamento tratam da mesma coisa\". Qual é a correção?",
     "alternativas": [
       "Use exposição estimada mais uma métrica de tempo ou cobertura",
       "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
@@ -249,7 +249,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"Conformidade e redução de risco são o mesmo gasto\"\". Qual é a correção?",
+    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"Conformidade e redução de risco são o mesmo gasto\". Qual é a correção?",
     "alternativas": [
       "Separe as duas linhas no orçamento para não perder a discussão de retorno",
       "\"Basta alinhar o gasto a um percentual de referência do mercado\"",
@@ -269,7 +269,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"ROI de segurança se mede pelo número de incidentes\"\". Qual é a correção?",
+    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"ROI de segurança se mede pelo número de incidentes\". Qual é a correção?",
     "alternativas": [
       "Peça verba vinculada a uma declaração de apetite já existente",
       "Use exposição estimada mais uma métrica de tempo ou cobertura",
@@ -289,7 +289,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: um colega afirma que \"\"Comprar a licença resolve\"\". Qual é a correção?",
+    "enunciado": "Sobre Orçamento, priorização e retorno de segurança: é comum ouvir o seguinte: \"Comprar a licença resolve\". Qual é a correção?",
     "alternativas": [
       "\"Conformidade e redução de risco são o mesmo gasto\"",
       "\"Apetite de risco e orçamento tratam da mesma coisa\"",
@@ -309,7 +309,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Quanto mais dados, mais credibilidade\"\". Qual é a correção?",
+    "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"Quanto mais dados, mais credibilidade\". Qual é a correção?",
     "alternativas": [
       "\"Comunicar incidente para o board exige detalhe técnico\"",
       "\"O técnico já sabe o que fazer com o relatório executivo\"",
@@ -329,7 +329,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Simplificar para o executivo é omitir risco\"\". Qual é a correção?",
+    "enunciado": "Sobre Comunicação com o executivo e com o técnico: é comum ouvir o seguinte: \"Simplificar para o executivo é omitir risco\". Qual é a correção?",
     "alternativas": [
       "Mantenha o número e a conclusão, reduza o detalhe operacional",
       "Escreva a segunda versão com o mesmo fato e a ação verificável",
@@ -349,7 +349,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"O técnico já sabe o que fazer com o relatório executivo\"\". Qual é a correção?",
+    "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"O técnico já sabe o que fazer com o relatório executivo\". Qual é a correção?",
     "alternativas": [
       "Descreva impacto material, opções e o que você precisa aprovar",
       "Escreva a segunda versão com o mesmo fato e a ação verificável",
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Informe e decisão são o mesmo documento\"\". Qual é a correção?",
+    "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"Informe e decisão são o mesmo documento\". Qual é a correção?",
     "alternativas": [
       "\"O técnico já sabe o que fazer com o relatório executivo\"",
       "Entregue poucos indicadores ligados a decisões pendentes",
@@ -389,7 +389,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Comunicação com o executivo e com o técnico: um colega afirma que \"\"Comunicar incidente para o board exige detalhe técnico\"\". Qual é a correção?",
+    "enunciado": "Sobre Comunicação com o executivo e com o técnico: é comum ouvir o seguinte: \"Comunicar incidente para o board exige detalhe técnico\". Qual é a correção?",
     "alternativas": [
       "Escreva a segunda versão com o mesmo fato e a ação verificável",
       "Mantenha o número e a conclusão, reduza o detalhe operacional",
@@ -409,7 +409,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Contratar mais gente resolve capacidade\"\". Qual é a correção?",
+    "enunciado": "Sobre Construir e liderar o time de segurança: é comum ouvir o seguinte: \"Contratar mais gente resolve capacidade\". Qual é a correção?",
     "alternativas": [
       "Descreva o papel e o resultado esperado antes de abrir a vaga",
       "Mantenha interno o escalonamento e a decisão de materialidade",
@@ -429,7 +429,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Terceirizar SOC terceiriza a responsabilidade\"\". Qual é a correção?",
+    "enunciado": "Sobre Construir e liderar o time de segurança: é comum ouvir o seguinte: \"Terceirizar SOC terceiriza a responsabilidade\". Qual é a correção?",
     "alternativas": [
       "Descreva o papel e o resultado esperado antes de abrir a vaga",
       "Mantenha interno o escalonamento e a decisão de materialidade",
@@ -449,7 +449,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Descrição de vaga copiada do framework é suficiente\"\". Qual é a correção?",
+    "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"Descrição de vaga copiada do framework é suficiente\". Qual é a correção?",
     "alternativas": [
       "Separe conscientização geral de formação por função",
       "\"Terceirizar SOC terceiriza a responsabilidade\"",
@@ -469,7 +469,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Treinamento é evento anual de conscientização\"\". Qual é a correção?",
+    "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"Treinamento é evento anual de conscientização\". Qual é a correção?",
     "alternativas": [
       "Aponte a referência, a versão e a data de consulta",
       "\"Descrição de vaga copiada do framework é suficiente\"",
@@ -489,7 +489,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"\"Sem plano de sucessão, o time segue igual\"\". Qual é a correção?",
+    "enunciado": "Sobre Construir e liderar o time de segurança: um colega afirma que \"Sem plano de sucessão, o time segue igual\". Qual é a correção?",
     "alternativas": [
       "Nomeie substituto em treinamento para cada papel crítico",
       "\"Descrição de vaga copiada do framework é suficiente\"",
@@ -509,7 +509,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Maturidade alta significa organização segura\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"Maturidade alta significa organização segura\". Qual é a correção?",
     "alternativas": [
       "Meça o que alimenta decisão de verba, reporte ou correção de rota",
       "Use o Tier como contexto de governança e mantenha o risco medido separado",
@@ -529,7 +529,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Autoavaliação sem evidência economiza tempo\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"Autoavaliação sem evidência economiza tempo\". Qual é a correção?",
     "alternativas": [
       "Revise o perfil atual e os planos em ciclo trimestral",
       "Escreva cada linha com dono, custo, métrica e data",
@@ -549,7 +549,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Plano de maturidade é lista de projetos de TI\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"Plano de maturidade é lista de projetos de TI\". Qual é a correção?",
     "alternativas": [
       "Revise o perfil atual e os planos em ciclo trimestral",
       "\"Maturidade alta significa organização segura\"",
@@ -569,7 +569,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Medir tudo demonstra rigor\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de segurança e plano de maturidade: é comum ouvir o seguinte: \"Medir tudo demonstra rigor\". Qual é a correção?",
     "alternativas": [
       "Meça o que alimenta decisão de verba, reporte ou correção de rota",
       "Use o Tier como contexto de governança e mantenha o risco medido separado",
@@ -589,7 +589,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"\"Uma vez por ano é suficiente\"\". Qual é a correção?",
+    "enunciado": "Sobre Programa de segurança e plano de maturidade: um colega afirma que \"Uma vez por ano é suficiente\". Qual é a correção?",
     "alternativas": [
       "Escreva cada linha com dono, custo, métrica e data",
       "Revise o perfil atual e os planos em ciclo trimestral",

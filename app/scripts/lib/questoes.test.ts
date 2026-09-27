@@ -253,6 +253,127 @@ describe('derivarBanco', () => {
     expect(a).toBe(b)
   })
 
+  describe('o enunciado', () => {
+    /** Quatro linhas do MESMO tema: uma vira gabarito do item e as outras, os distratores. */
+    function comEquivocos(equivocos: string[]) {
+      return conteudo({
+        errosComuns: equivocos.map((equivoco, i) => ({
+          equivoco,
+          porque: `p${i}`,
+          correto: `Correção ${i}, com o detalhe que a explica`,
+        })),
+      })
+    }
+
+    it('nao repete as aspas que a celula ja traz do material', () => {
+      // Linha real de `13-ofensiva-pentest#TEMA-01#E01` (frase inteira entre aspas) e de
+      // `10-operacoes-soc#TEMA-02#E01` (termo entre aspas no meio da celula): as duas saiam
+      // como `""...""` e `..."registrar" com "ter log""`, porque a moldura do enunciado cita.
+      const itens = derivarBanco(
+        comEquivocos([
+          '"Pentest é a forma mais completa de achar vulnerabilidade"',
+          'Confundir "registrar" com "ter log"',
+          'Supor que log basta',
+          'Tratar plantão como detalhe',
+        ]),
+      ).porArea['01-fundamentos']!
+
+      expect(itens[0]!.enunciado).toContain(
+        '"Pentest é a forma mais completa de achar vulnerabilidade". Qual é a correção?',
+      )
+      expect(itens[1]!.enunciado).toContain('"Confundir registrar com ter log". Qual é a correção?')
+      // A citacao da moldura e a unica do enunciado: aspas duplas nao voltam por nenhum dos
+      // dois lados, e a celula continua legivel.
+      for (const q of itens) {
+        expect(q.enunciado).not.toContain('""')
+        expect(q.enunciado.match(/"/g) ?? []).toHaveLength(2)
+      }
+    })
+
+    it('usa moldura neutra quando a celula nao tem sujeito', () => {
+      // `10-operacoes-soc#TEMA-06#E01`: `um colega afirma que "Automatizar primeiro a ação mais
+      // visível, como isolar máquina"` não é oração — a prescrição não completa "afirma que".
+      const itens = derivarBanco(
+        comEquivocos([
+          'Automatizar primeiro a ação mais visível, como isolar máquina',
+          'Tratar automação como projeto de ferramenta',
+          'Manter regras e playbooks sem controle de versão',
+          'Revisar cobertura uma vez por ano',
+        ]),
+      ).porArea['01-fundamentos']!
+
+      const primeiro = itens[0]!
+      expect(primeiro.enunciado).not.toContain('um colega afirma que')
+      expect(primeiro.enunciado).toContain(
+        'é comum ouvir o seguinte: "Automatizar primeiro a ação mais visível, como isolar máquina".',
+      )
+      expect(primeiro.enunciado).toContain('Qual é a correção?')
+    })
+
+    it('desconta o adverbio que abre a prescricao negada', () => {
+      // `10-operacoes-soc#TEMA-03#E04` é `Não registrar a versão do framework usada`: a mesma
+      // prescrição sem sujeito, agora negada. Sem descontar o advérbio, a célula voltava para a
+      // moldura de afirmação e o enunciado quebrava. `Não treinamos modelo` continua afirmação.
+      const itens = derivarBanco(
+        comEquivocos([
+          'Não registrar a versão do framework usada',
+          'Só bloquear o domínio sem medir o efeito',
+          'Backup resolve integridade',
+          'Evidência é papelada',
+        ]),
+      ).porArea['01-fundamentos']!
+
+      expect(itens[0]!.enunciado).toContain(
+        'é comum ouvir o seguinte: "Não registrar a versão do framework usada"',
+      )
+      expect(itens[1]!.enunciado).toContain(
+        'é comum ouvir o seguinte: "Só bloquear o domínio sem medir o efeito"',
+      )
+      // O advérbio não transforma oração em prescrição: quem tem sujeito e verbo fica onde estava.
+      expect(itens[2]!.enunciado).toContain('um colega afirma que "Backup resolve integridade"')
+    })
+
+    it('mantem a moldura de afirmacao quando a celula tem sujeito', () => {
+      // O outro lado da mesma regra: a maioria das linhas do material afirma algo, e nelas o
+      // enunciado não pode mudar — mudar derrubaria o selo de revisão sem defeito nenhum.
+      const itens = derivarBanco(
+        comEquivocos([
+          'Antivírus é preventivo ou detectivo',
+          'Backup resolve integridade',
+          'Controle aprovado é controle operante',
+          'Evidência é papelada',
+        ]),
+      ).porArea['01-fundamentos']!
+
+      expect(itens[0]!.enunciado).toBe(
+        'Sobre Segurança da informação: um colega afirma que "Antivírus é preventivo ou detectivo". ' +
+          'Qual é a correção?',
+      )
+    })
+
+    it('troca substantivo por infinitivo: o custo do falso positivo e de tom', () => {
+      // `Delegar operação é delegar responsabilidade` tem sujeito — a oração infinitiva — e era
+      // gramatical na moldura antiga. Separá-la de `Automatizar primeiro a ação visível` exigiria
+      // análise sintática, que o gerador não faz: a regra olha o primeiro token e as duas caem na
+      // moldura neutra. Como ali a frase é citada e não afirmada, a frase inteira continua
+      // correta; o que se perde é tom. `Cluster`, `tier`, `insider` e `qualquer` são substantivos
+      // e ficam de fora da regra.
+      const itens = derivarBanco(
+        comEquivocos([
+          'Delegar operação é delegar responsabilidade',
+          'Cluster gerenciado transfere toda a segurança da carga ao provedor',
+          'Tier do CSF é nota de maturidade',
+          'Qualquer modo do AES entrega autenticação',
+        ]),
+      ).porArea['01-fundamentos']!
+
+      expect(itens[0]!.enunciado).toContain('é comum ouvir o seguinte: "Delegar operação')
+      for (const q of [itens[1]!, itens[2]!, itens[3]!]) {
+        expect(q.enunciado).toContain('um colega afirma que')
+      }
+    })
+  })
+
   // A recuperação ativa e o checkpoint continuam no material e na tela, mas não viram item:
   // a pergunta deles é aberta ("cite...", "explique por que..."), e nenhuma alternativa é "a
   // resposta" — o gabarito só se reconhece pela forma da frase. Decisão do dono.

@@ -49,7 +49,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O que é segurança da informação e o que o CISO governa: um colega afirma que \"NOT APPLICABLE significa \"sem risco\"\". Qual é a correção?",
+    "enunciado": "Sobre O que é segurança da informação e o que o CISO governa: um colega afirma que \"NOT APPLICABLE significa sem risco\". Qual é a correção?",
     "alternativas": [
       "Segurança da informação é o mesmo que segurança de TI",
       "A política de segurança descreve o que a TI faz",
@@ -91,10 +91,10 @@
     "status": "verificado",
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"Confidencialidade é sempre o eixo mais importante\". Qual é a correção?",
     "alternativas": [
-      "Integridade exige controle de alteração e registro de auditoria, além de restauração",
+      "Os três eixos são independentes — nível alto em um não implica nem compensa o outro",
       "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la",
-      "Cada objetivo recebe nível próprio, com justificativa própria",
-      "Cem mil registros de baixo impacto podem continuar LOW; um único registro com risco de vida pode ser HIGH"
+      "Integridade exige controle de alteração e registro de auditoria, além de restauração",
+      "O nível do objetivo é o mais alto entre os tipos de informação que ele carrega, sem média"
     ],
     "correta": 1,
     "justificativa": "Em sistemas de controle industrial, o exemplo do próprio FIPS 199 mostra confidencialidade NOT APPLICABLE com integridade e disponibilidade HIGH"
@@ -108,16 +108,16 @@
       "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.199.pdf",
       "tipo": "primaria"
     },
-    "status": "pendente",
+    "status": "verificado",
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"Alta disponibilidade implica alta integridade\". Qual é a correção?",
     "alternativas": [
-      "High water mark por objetivo, sem compensação entre eixos",
-      "A média dos tipos de informação dá o nível do sistema",
-      "Cada objetivo recebe nível próprio, com justificativa própria",
-      "Confidencialidade é sempre o eixo mais importante"
+      "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la",
+      "Integridade exige controle de alteração e registro de auditoria, além de restauração",
+      "Os três eixos são independentes — nível alto em um não implica nem compensa o outro",
+      "O nível do objetivo é o mais alto entre os tipos de informação que ele carrega, sem média"
     ],
     "correta": 2,
-    "justificativa": "São medidas separadas; um serviço redundante pode entregar dado corrompido com total disponibilidade"
+    "justificativa": "Um serviço redundante pode entregar dado corrompido com disponibilidade total: o eixo em que o risco se realiza é outro"
   },
   {
     "id": "00-guia-basico#TEMA-02#E03",
@@ -131,9 +131,9 @@
     "status": "verificado",
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"Volume de dados define o nível\". Qual é a correção?",
     "alternativas": [
+      "O nível do objetivo é o mais alto entre os tipos de informação que ele carrega, sem média",
       "Integridade exige controle de alteração e registro de auditoria, além de restauração",
-      "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la",
-      "Cada objetivo recebe nível próprio, com justificativa própria",
+      "Os três eixos são independentes — nível alto em um não implica nem compensa o outro",
       "Cem mil registros de baixo impacto podem continuar LOW; um único registro com risco de vida pode ser HIGH"
     ],
     "correta": 3,
@@ -151,13 +151,13 @@
     "status": "verificado",
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"A média dos tipos de informação dá o nível do sistema\". Qual é a correção?",
     "alternativas": [
-      "High water mark por objetivo, sem compensação entre eixos",
-      "Cada objetivo recebe nível próprio, com justificativa própria",
-      "Confidencialidade é sempre o eixo mais importante",
-      "Alta disponibilidade implica alta integridade"
+      "O nível do objetivo é o mais alto entre os tipos de informação que ele carrega, sem média",
+      "Integridade exige controle de alteração e registro de auditoria, além de restauração",
+      "Os três eixos são independentes — nível alto em um não implica nem compensa o outro",
+      "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la"
     ],
     "correta": 0,
-    "justificativa": "O FIPS 199 usa o valor mais alto por objetivo, não média"
+    "justificativa": "A média esconde o tipo de informação que mais pesa: um único tipo HIGH entre sete LOW não perde impacto por estar em minoria"
   },
   {
     "id": "00-guia-basico#TEMA-02#E05",
@@ -171,10 +171,10 @@
     "status": "verificado",
     "enunciado": "Sobre A tríade CIA na prática: um colega afirma que \"Backup resolve integridade\". Qual é a correção?",
     "alternativas": [
-      "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la",
+      "Os três eixos são independentes — nível alto em um não implica nem compensa o outro",
       "Integridade exige controle de alteração e registro de auditoria, além de restauração",
-      "Cem mil registros de baixo impacto podem continuar LOW; um único registro com risco de vida pode ser HIGH",
-      "Cada objetivo recebe nível próprio, com justificativa própria"
+      "O eixo decisivo depende do processo; alterar leitura de sensor é pior do que lê-la",
+      "O nível do objetivo é o mais alto entre os tipos de informação que ele carrega, sem média"
     ],
     "correta": 1,
     "justificativa": "Não repúdio e autenticidade fazem parte da integridade; restauração não prova quem alterou nem quando"
@@ -369,7 +369,7 @@
       "tipo": "primaria"
     },
     "status": "verificado",
-    "enunciado": "Sobre O mandato do CISO: o que a lei e o mercado esperam: um colega afirma que \"Delegar operação é delegar responsabilidade\". Qual é a correção?",
+    "enunciado": "Sobre O mandato do CISO: o que a lei e o mercado esperam: é comum ouvir o seguinte: \"Delegar operação é delegar responsabilidade\". Qual é a correção?",
     "alternativas": [
       "A designação formal é o que transforma função em mandato",
       "NIST CSF e ISO/IEC 27001 obrigam a empresa brasileira",
@@ -389,7 +389,7 @@
       "tipo": "academica"
     },
     "status": "verificado",
-    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Começar pela ferramenta\". Qual é a correção?",
+    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: é comum ouvir o seguinte: \"Começar pela ferramenta\". Qual é a correção?",
     "alternativas": [
       "Nos primeiros 90 dias, produza leitura da organização; compra vem depois",
       "Decida com o vocabulário mínimo e registre a decisão como provisória",
@@ -409,7 +409,7 @@
       "tipo": "academica"
     },
     "status": "verificado",
-    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Estudar tudo antes de decidir\". Qual é a correção?",
+    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: é comum ouvir o seguinte: \"Estudar tudo antes de decidir\". Qual é a correção?",
     "alternativas": [
       "Nos primeiros 90 dias, produza leitura da organização; compra vem depois",
       "Decida com o vocabulário mínimo e registre a decisão como provisória",
@@ -429,7 +429,7 @@
       "tipo": "academica"
     },
     "status": "verificado",
-    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Ler sem responder às perguntas\". Qual é a correção?",
+    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: é comum ouvir o seguinte: \"Ler sem responder às perguntas\". Qual é a correção?",
     "alternativas": [
       "Decida com o vocabulário mínimo e registre a decisão como provisória",
       "Coloque marcos e prazos regulatórios na mesma página",
@@ -449,7 +449,7 @@
       "tipo": "academica"
     },
     "status": "verificado",
-    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Agenda sem prazo externo no calendário\". Qual é a correção?",
+    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: é comum ouvir o seguinte: \"Deixar o prazo externo fora do calendário\". Qual é a correção?",
     "alternativas": [
       "Nomeie quem cobra cada marco, além de quem executa",
       "Responda à seção de recuperação ativa antes de ver o gabarito",
@@ -469,12 +469,12 @@
       "tipo": "academica"
     },
     "status": "verificado",
-    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: um colega afirma que \"Marco sem pessoa que cobra\". Qual é a correção?",
+    "enunciado": "Sobre Como usar este roadmap e a trilha dos primeiros 90 dias: é comum ouvir o seguinte: \"Definir marco sem nomear quem cobra\". Qual é a correção?",
     "alternativas": [
       "Nomeie quem cobra cada marco, além de quem executa",
       "Coloque marcos e prazos regulatórios na mesma página",
-      "Responda à seção de recuperação ativa antes de ver o gabarito",
-      "Agenda sem prazo externo no calendário"
+      "Deixar o prazo externo fora do calendário",
+      "Responda à seção de recuperação ativa antes de ver o gabarito"
     ],
     "correta": 0,
     "justificativa": "Marco sem cobrança vira lista de intenções e o atraso é descoberto no dia 90"

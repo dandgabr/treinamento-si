@@ -141,7 +141,7 @@ Explique o tema em três frases, sem consultar o texto. Depois ligue a algo que 
 |---|---|---|
 | Comprar SIEM para "ter um SOC" | a ferramenta não define dono, horário nem autoridade; o alerta sem decisão apenas acumula | escolher o modelo primeiro e dimensionar a ferramenta pela cobertura e pelo volume que ele exige |
 | Tratar plantão como detalhe operacional | sem plantão real, o prazo de notificação começa a correr com todo mundo dormindo | horário de cobertura é decisão de risco, com consequência contratual e regulatória |
-| Supor que nível de analista é padrão normativo | a escada de níveis de analista é convenção de mercado; NAO CONFIRMADO em fonte oficial uma definição normativa desses níveis nas fontes verificadas nesta execução | o que as fontes verificadas exigem é coordenador de incidente designado e caminho de escalonamento documentado |
+| Supor que nível de analista é padrão normativo | as fontes verificadas não definem escada de níveis de analista; tratá-la como norma faz a organização olhar para o degrau de carreira em vez da autoridade que precisa estar escrita | o que as fontes verificadas exigem é coordenador de incidente designado e caminho de escalonamento documentado |
 | Contratar monitoramento esperando transferir responsabilidade | o provedor complementa a capacidade e não assume a decisão sobre o próprio ativo | escrever o que o provedor pode fazer sozinho e o que volta para o cadastro interno de decisão |
 
 ## 10. Recuperação ativa

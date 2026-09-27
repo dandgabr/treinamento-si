@@ -3,7 +3,9 @@
 // blocos Mermaid ficam como texto (renderizados em runtime pelo mermaid.js).
 //
 // Uso: npm run build:content
-// Variavel opcional: ROADMAP_CONTENT_DIR (aponta para outro diretorio de conteudo)
+// Variaveis opcionais: ROADMAP_CONTENT_DIR (aponta para outro diretorio de conteudo) e
+// ROADMAP_CONTENT_FILE (outro destino). As duas existem para o gate poder ser exercitado num
+// diretorio temporario, sem tocar no material do repositorio.
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -13,7 +15,9 @@ import { gerarConteudo } from './lib/gerar-conteudo'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const APP_DIR = path.resolve(__dirname, '..')
 const CONTENT_DIR = process.env.ROADMAP_CONTENT_DIR ?? path.resolve(APP_DIR, '..', 'conteudo')
-const OUT_FILE = path.resolve(APP_DIR, 'src', 'content', 'generated', 'content.json')
+const OUT_FILE =
+  process.env.ROADMAP_CONTENT_FILE ??
+  path.resolve(APP_DIR, 'src', 'content', 'generated', 'content.json')
 
 const conteudo = gerarConteudo(CONTENT_DIR)
 
