@@ -87,8 +87,8 @@ export function BlocoDiagnostico({
       <div className="diagnostico-resultado">
         {resumo.resultado === null ? (
           <p className="resumo-detalhe" role="status">
-            {julgados} de {total} itens julgados. O ponto de entrada aparece quando os {total}{' '}
-            estiverem.
+            {julgados} de {total} itens julgados. A tabela abaixo é a do material; a faixa
+            alcançada só é lida e destacada com os {total} julgados.
           </p>
         ) : (
           <p className="ponto-de-entrada" role="status">
@@ -137,7 +137,11 @@ function idDaFase(indice: number): string {
 }
 
 /**
- * A frase das duas condicoes do marco, a mesma no bloco da area e na linha de retomada.
+ * A frase do marco, a mesma no bloco da area e na linha de retomada.
+ *
+ * Sem contagem de condicoes: a secao 7 das trilhas declara mais de uma, e um numero escrito aqui
+ * envelheceria se a trilha (ou o app) passar a exigir a terceira. A frase nomeia as condicoes sem
+ * dizer quantas sao.
  *
  * O checkpoint e o criterio vem de `marcoDaArea`, que os le do guia da area: a trilha nao copia
  * limiar nenhum, e as duas telas que mostram o marco dizem a mesma coisa.
@@ -244,7 +248,13 @@ function AreaDoChecklist({
         <span className="area-retomada-condicao">{estadoDoMarco(marco)}</span>
       </p>
       <p className="area-retomada-onde">
-        <button type="button" onClick={() => irParaSecao(checklistEm.id)}>
+        {/* A mesma forma dos outros botoes de acao do app: sem classe o navegador desenharia o
+            botao padrao dele, que no tema escuro destoa da tela inteira. */}
+        <button
+          type="button"
+          className="botao-secundario"
+          onClick={() => irParaSecao(checklistEm.id)}
+        >
           Checklist da fase {checklistEm.rotulo}
         </button>
         {': a fase que estuda a área, onde ficam as caixas dos artefatos dela.'}
@@ -256,7 +266,7 @@ function AreaDoChecklist({
 /**
  * Checklist da trilha: as fases da secao 3, com o marco de cada area.
  *
- * O marco so fecha com as DUAS condicoes que a secao 7 da trilha declara: o checkpoint da area no
+ * O marco so fecha com as condicoes que a secao 7 da trilha declara: o checkpoint da area no
  * criterio que o proprio guia declara e o artefato da secao 8 produzido. O criterio nao e copiado
  * para ca — quem responde por ele e o guia, pela mesma leitura que a tela da area usa.
  *
@@ -277,9 +287,9 @@ export function ChecklistDaTrilha({ trilha }: { trilha: Trilha }) {
         Checklist da trilha
       </h2>
       <p className="dica">
-        O marco de cada área fecha com as duas condições que a seção 7 desta trilha declara: o
-        checkpoint no critério do próprio guia e o artefato da seção 8 produzido. As atividades
-        listadas são as do guia da área, com o pré-requisito técnico que o material declara.
+        O marco de cada área fecha com as condições que a seção 7 desta trilha declara: o checkpoint
+        no critério do próprio guia e o artefato da seção 8 produzido. As atividades listadas são as
+        do guia da área, com o pré-requisito técnico que o material declara.
       </p>
       {trilha.fases.map((fase, indice) => {
         const marco = marcoDaFase(fase, content.areas, progresso)
@@ -303,7 +313,7 @@ export function ChecklistDaTrilha({ trilha }: { trilha: Trilha }) {
                 ? 'Esta fase não é ligada a uma área na seção 3 da trilha: o marco é o que o material declara ao lado.'
                 : marco.cumprido
                   ? `Marco da fase cumprido: as ${marco.marcos.length} áreas com checkpoint aprovado e artefato produzido.`
-                  : `Marco da fase pendente: ${marco.cumpridas} de ${marco.marcos.length} áreas cumpriram as duas condições.`}
+                  : `Marco da fase pendente: ${marco.cumpridas} de ${marco.marcos.length} áreas cumpriram as condições.`}
             </p>
             {areas.length ? (
               <ul className="lista-areas-fase">

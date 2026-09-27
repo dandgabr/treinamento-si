@@ -3,8 +3,9 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
-import type { Conteudo, Tema } from '../../src/domain/types'
+import type { Tema } from '../../src/domain/types'
 import { gerarComRelatorio, gerarConteudo } from './gerar-conteudo'
+import { htmlsDoConteudo, htmlsDoTema } from './htmls-do-conteudo'
 import { declaracoesMortas, hrefsRelativos } from './links-material'
 import { validar } from './validar-content'
 
@@ -13,16 +14,7 @@ const MATERIAL = path.resolve(AQUI, '..', '..', '..', 'conteudo')
 
 /** O HTML inteiro de um tema, na ordem em que a tela o mostra. */
 function htmlDoTema(tema: Tema | undefined): string {
-  return [tema?.intro, ...(tema?.secoes.map((s) => s.html) ?? [])].join('\n')
-}
-
-/** Todo o HTML do conteudo gerado, que e o que o portao varre. */
-function htmlDoConteudo(c: Conteudo): string[] {
-  return [
-    ...c.areas.flatMap((a) => [a.guia.intro, ...a.guia.secoes.map((s) => s.html)]),
-    ...Object.values(c.temas).flatMap((t) => [t.intro, ...t.secoes.map((s) => s.html)]),
-    ...c.paginas.flatMap((p) => [p.intro, ...p.secoes.map((s) => s.html)]),
-  ]
+  return tema ? htmlsDoTema(tema).join('\n') : ''
 }
 
 describe('gerarConteudo', () => {
@@ -65,7 +57,10 @@ describe.skipIf(!fs.existsSync(MATERIAL))('contrato com o material real', () => 
 
   it('não deixa nenhum href relativo no HTML gerado', () => {
     // A conta que a fase 6 veio fechar: 1328 hrefs relativos viravam link morto no arquivo unico.
-    expect(htmlDoConteudo(gerado().conteudo).flatMap(hrefsRelativos)).toEqual([])
+    // A varredura e a MESMA lista de campos que o portao usa (`htmls-do-conteudo.ts`), o que
+    // inclui o HTML do pre-teste diagnostico das trilhas — fora de `intro`/`secoes`.
+    expect(htmlsDoConteudo(gerado().conteudo).flatMap(hrefsRelativos)).toEqual([])
+    expect(htmlsDoConteudo(gerado().conteudo).length).toBeGreaterThan(200)
   })
 
   it('troca as duas grafias do mesmo tema pela mesma rota', () => {
@@ -116,18 +111,13 @@ describe.skipIf(!fs.existsSync(MATERIAL))('contrato com o material real', () => 
         geradas.add(href)
       }
     }
-    for (const area of conteudo.areas) {
-      colher(area.guia.intro)
-      area.guia.secoes.forEach((s) => colher(s.html))
-    }
-    for (const tema of Object.values(conteudo.temas)) {
-      colher(tema.intro)
-      tema.secoes.forEach((s) => colher(s.html))
-    }
-    for (const pagina of conteudo.paginas) {
-      colher(pagina.intro)
-      pagina.secoes.forEach((s) => colher(s.html))
-    }
+    // A mesma lista de campos que o portao varre: guia, tema, pagina e o bloco de diagnostico da
+    // trilha — que e onde os links do material para a area de origem aparecem.
+    for (const html of htmlsDoConteudo(conteudo)) colher(html)
+    // A varredura de fato visita o HTML da trilha: sem esta prova, uma lista de campos que
+    // perdesse `trilha.diagnostico.itens[].origemHtml` continuaria verde aqui.
+    const daTrilha = conteudo.paginas.find((p) => p.slug === '91-trilhas/plano-90-dias')?.trilha
+    expect(htmlsDoConteudo(conteudo)).toContain(daTrilha?.diagnostico?.itens[0]?.origemHtml)
     expect(invalidas).toEqual([])
     expect(geradas.size).toBeGreaterThan(100)
     // A forma com `#` nao e rota que o app resolva: fica registrado aqui, e nao so na prosa.

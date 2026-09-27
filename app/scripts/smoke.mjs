@@ -19,6 +19,10 @@ import { promisify } from 'node:util'
 import { JSDOM } from 'jsdom'
 import { chromium } from 'playwright'
 import { fontesMaisNovas } from './lib/frescor.mjs'
+// A MESMA regra de rota que o portao do build usa (`validar-content.ts` importa este modulo):
+// enquanto a gramatica vivia nos dois arquivos, o primeiro ajuste em um deles reprovava o que o
+// outro aceitava — e a divergencia só aparecia na tela.
+import { ehHrefDeRota, rotasDoConteudo } from './lib/rotas-app.mjs'
 
 const execFileAsync = promisify(execFile)
 
@@ -283,65 +287,22 @@ function conteudo() {
   return conteudoCache
 }
 
-function decodificar(parte) {
-  try {
-    return decodeURIComponent(parte)
-  } catch {
-    return parte
-  }
-}
-
-/**
- * O slug de uma pagina a partir da rota inteira, ou `null` quando nao ha nenhuma.
- *
- * O slug pode ter mais de um segmento (`91-trilhas/plano-90-dias`), entao o ancora viaja como
- * ULTIMO segmento e a pagina e o prefixo conhecido mais longo — a mesma leitura de
- * `separarAncora` (`src/ui/useRota.ts`). Sem isto, o endereco de um termo do glossario
- * (`#/pagina/glossario/termo-tls`) seria lido como um slug `glossario/termo-tls`, que nao
- * existe, e o teste reprovaria justamente o link que a fase 6 veio acrescentar.
- */
-function slugDePagina(partes, slugs) {
-  const inteiro = partes.slice(1).join('/')
-  if (slugs.has(inteiro)) return inteiro
-  for (let corte = partes.length - 1; corte >= 2; corte--) {
-    // So um segmento depois do slug: dois nao formam ancora de nada.
-    if (partes.length - corte !== 1) continue
-    const prefixo = partes.slice(1, corte).join('/')
-    if (slugs.has(prefixo)) return prefixo
-  }
-  return null
-}
-
 /**
  * Confere que todo link interno da pagina aponta para uma rota que existe no
  * conteudo. O smoke navega digitando a URL, entao sem isto um href quebrado em toda
  * a aplicacao passaria batido — foi exatamente o caso do `#` do ref indo cru para a
  * URL, que so apareceu quando alguem clicou.
+ *
+ * A regra e a de `scripts/lib/rotas-app.mjs`, compartilhada com o portao do build: o `#4-temas`
+ * (a grafia de ancora do GitHub, que nao e rota do app) e o `#` nu reprovam aqui E no build, e
+ * nao so nas rotas que este arquivo visita. Quem le a rota — o slug de pagina em mais de um
+ * segmento, a secao como ultimo segmento, os tres escopos do quiz — e aquele modulo.
  */
 function hrefsInvalidos(d) {
-  const c = conteudo()
-  const areas = new Set(c.areas.map((a) => a.areaId))
-  const temas = new Set(Object.keys(c.temas))
-  const slugs = new Set(c.paginas.map((p) => p.slug))
-  const invalidos = []
-  for (const ancora of d.querySelectorAll('a[href^="#"]')) {
-    const href = ancora.getAttribute('href') ?? ''
-    if (href === '#' || href === '#/') continue
-    const partes = href.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodificar)
-    const ok =
-      (partes[0] === 'area' && areas.has(partes[1])) ||
-      (partes[0] === 'tema' && temas.has(`${partes[1]}#${partes[2]}`)) ||
-      (partes[0] === 'pagina' && slugDePagina(partes, slugs) !== null) ||
-      // O quiz tem tres rotas — `#/quiz`, `#/quiz/<areaId>` e `#/quiz/<areaId>/<temaId>` — e
-      // as tres sao visitadas pela matriz. Sem esta linha, o link do painel e o botao
-      // "Praticar este tema" seriam reprovados por apontarem para rotas que existem.
-      (partes[0] === 'quiz' &&
-        (partes.length === 1 ||
-          (partes.length === 2 && areas.has(partes[1])) ||
-          (partes.length === 3 && temas.has(`${partes[1]}#${partes[2]}`))))
-    if (!ok) invalidos.push(href)
-  }
-  return invalidos
+  const rotas = rotasDoConteudo(conteudo())
+  return [...d.querySelectorAll('a[href^="#"]')]
+    .map((ancora) => ancora.getAttribute('href') ?? '')
+    .filter((href) => !ehHrefDeRota(href, rotas))
 }
 
 /**
@@ -751,6 +712,127 @@ for (const { nome, rota } of rotasDaMatriz()) {
       ['um unico h1', d.querySelectorAll('h1').length, 1],
       ['sem erro de rota', RE_ROTA_VAZIA.test(textoSemScripts(d)), false],
       ['sem aviso de erro', d.querySelectorAll('.aviso-erro').length, 0],
+      ['links internos resolvem (invalidos)', hrefsInvalidos(d).length, 0],
+    ],
+  })
+}
+
+/**
+ * As atividades da secao 8 de um guia, como `atividadesDoGuia` (`src/domain/trilha.ts`) as le.
+ *
+ * Aqui isso e MEDICAO do `content.json`, e nao uma copia da tela: o numero medido e a expectativa
+ * contra a qual o DOM e conferido, e e essa separacao que faz a asserção valer.
+ */
+function atividadesDoGuia(guia) {
+  const tabela = guia?.atividades
+  if (!tabela) return []
+  const chave = (texto) =>
+    texto
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim()
+  const iTexto = tabela.cabecalho.findIndex((c) => chave(c) === 'atividade')
+  if (iTexto < 0) return []
+  return tabela.linhas.filter((linha) => (linha[iTexto] ?? '').trim())
+}
+
+/**
+ * O checklist de uma area na tela: a fase que o contem — o `id` do cabecalho (`fase-N`, o mesmo
+ * que `Trilha.idDaFase` escreve) — e quantas caixas de artefato ele traz. `null` quando a area nao
+ * tem bloco nenhum, para que o bloco ausente apareca na comparacao em vez de contar zero.
+ *
+ * A fase importa: mover as caixas para outra fase (a regressao que troca "primeira que liga a
+ * area" por "ultima") mantem as contagens de `.area-marco` e de caixas iguais — o que muda e onde
+ * elas moram, e e isso que esta leitura fixa.
+ */
+function checklistDaArea(d, areaId) {
+  const bloco = [...d.querySelectorAll('.area-marco')].find(
+    (li) => li.querySelector(`a[href="#/area/${areaId}"]`) !== null,
+  )
+  if (!bloco) return null
+  return {
+    fase: bloco.closest('.fase')?.querySelector('h3')?.id ?? '',
+    caixas: bloco.querySelectorAll('input[type=checkbox]').length,
+  }
+}
+
+/**
+ * Uma trilha por cenario: a matriz de `pagina <slug>` so confere `>400` caracteres em `main`, um
+ * `h1` e a ausencia de erro de rota — uma regressao que devolvesse `trilha.fases = []` passaria
+ * nos quatro cenarios. Aqui o DOM e conferido contra o que o `content.json` diz daquela trilha, e
+ * todo numero esperado sai do proprio arquivo: as fases da secao 3, os dez itens do pre-teste, as
+ * tres faixas de acertos e as caixas de artefato das areas que a trilha liga.
+ *
+ * As expectativas sao calculadas AQUI, e nao lidas da tela: `faseDeEstudoDasAreas`
+ * (`src/domain/trilha.ts`) responde onde cada area ganha caixa — a PRIMEIRA fase que a liga — e
+ * esta e a mesma regra escrita de novo, de proposito, para que uma divergencia entre as duas
+ * apareca como contagem diferente.
+ */
+for (const pagina of conteudo().paginas.filter((p) => p.trilha)) {
+  const { diagnostico, fases } = pagina.trilha
+  const itens = diagnostico?.itens.length ?? 0
+  const faixas = diagnostico?.faixas.length ?? 0
+  const porArea = new Map(conteudo().areas.map((a) => [a.areaId, a]))
+  const donas = new Map()
+  fases.forEach((fase, indice) => {
+    for (const areaId of fase.areas) if (!donas.has(areaId)) donas.set(areaId, indice)
+  })
+  const retomadas = fases.reduce(
+    (soma, fase, indice) => soma + fase.areas.filter((a) => donas.get(a) !== indice).length,
+    0,
+  )
+  // Uma linha por area do checklist, com a fase dona e a contagem de caixas: assim a comparação
+  // diz QUAL area mudou de lugar, e não só que o total mudou.
+  const checklistEsperado = [...donas.entries()]
+    .map(
+      ([areaId, dona]) =>
+        `${areaId}=fase-${dona + 1}+${atividadesDoGuia(porArea.get(areaId)?.guia).length}`,
+    )
+    .join(' | ')
+  const checklistDoDom = (d) =>
+    [...donas.keys()]
+      .map((areaId) => {
+        const checklist = checklistDaArea(d, areaId)
+        return `${areaId}=${checklist ? `${checklist.fase}+${checklist.caixas}` : 'sem checklist'}`
+      })
+      .join(' | ')
+
+  cenarios.push({
+    nome: `trilha ${pagina.slug}`,
+    rota: `#/pagina/${pagina.slug}`,
+    url: `${BASE}#/pagina/${pagina.slug}`,
+    checar: (d) => [
+      // As guardas do proprio conteudo: sem elas, uma trilha que o gerador devolvesse vazia
+      // deixaria as contagens abaixo em `0 === 0` e o cenario passaria por ausencia.
+      ['o conteudo da trilha tem fases', fases.length > 0, true],
+      ['o conteudo da trilha tem itens de pre-teste', itens > 0, true],
+      ['o conteudo da trilha tem faixas de acertos', faixas > 0, true],
+      // A secao 3 do material: uma `<div class="fase">` por linha da tabela de fases.
+      ['fases da secao 3 renderizadas', d.querySelectorAll('.fase').length, fases.length],
+      // O bloco do pre-teste, com um item por item do material e a tabela das faixas.
+      [
+        'bloco do pre-teste com um item por item do material',
+        d.querySelectorAll('.lista-diagnostico > li').length,
+        itens,
+      ],
+      [
+        'tabela de faixas com uma linha por faixa do material',
+        d.querySelectorAll('.tabela-diagnostico tbody tr').length,
+        faixas,
+      ],
+      // As caixas de artefato: uma lista por area, NA FASE QUE ESTUDA A AREA, com uma caixa por
+      // atividade da secao 8 do guia dela. Cada area entra na comparacao pelo proprio id, com a
+      // fase dona e a contagem ao lado, entao a area que perder o checklist ou for para a fase
+      // errada aparece nomeada em vez de sumir dentro de um total.
+      ['checklists de artefato nas fases que estudam a area', d.querySelectorAll('.area-marco').length, donas.size],
+      [
+        'cada checklist na fase dona, com uma caixa por atividade do guia',
+        checklistDoDom(d),
+        checklistEsperado,
+      ],
+      // A fase que so retoma a area mostra o marco e o caminho de volta, sem repetir a caixa.
+      ['areas retomadas fora da fase dona', d.querySelectorAll('.area-retomada').length, retomadas],
       ['links internos resolvem (invalidos)', hrefsInvalidos(d).length, 0],
     ],
   })

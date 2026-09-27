@@ -1,12 +1,14 @@
 // A leitura das trilhas: ponto de entrada do diagnostico, artefatos da secao 8 e marcos.
 
-import { describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it } from 'vitest'
+import { carregar, content } from '../infrastructure/content/repository'
 import { areaFake, guiaFake } from './testes/fixtures'
 import { progressoVazio, registrarArtefato, registrarCheckpoint, registrarDiagnostico } from './progresso'
-import type { FaixaDoDiagnostico, Tabela, Trilha } from './types'
+import type { FaixaDoDiagnostico, FaseDaTrilha, Tabela, Trilha } from './types'
 import {
   atividadesDoGuia,
   chaveDoArtefato,
+  faseDeEstudoDasAreas,
   marcoDaArea,
   marcoDaFase,
   pontoDeEntrada,
@@ -288,5 +290,83 @@ describe('marcoDaFase', () => {
       progressoVazio(),
     )
     expect(fase.marcos.map((m) => m.areaId)).toEqual(['01-fundamentos'])
+  })
+})
+
+describe('faseDeEstudoDasAreas', () => {
+  const fase = (rotulo: string, areas: string[]): FaseDaTrilha => ({
+    rotulo,
+    periodo: '1 a 6',
+    areas,
+    marco: 'marco do material',
+  })
+
+  it('dá o checklist à primeira fase que liga a área', () => {
+    // A caixa do artefato é uma só por área (`chaveDoArtefato`: área + número da atividade), então
+    // a lista da seção 8 mora na fase que ESTUDA a área — a primeira que a seção 3 liga a ela.
+    const mapa = faseDeEstudoDasAreas([
+      fase('1 Vocabulário e cargo', ['00-guia-basico', '01-fundamentos']),
+      fase('2 Governança e contexto', ['01-fundamentos']),
+      fase('3 Base técnica', ['04-identidade-acesso']),
+    ])
+    expect([...mapa]).toEqual([
+      ['00-guia-basico', 0],
+      ['01-fundamentos', 0],
+      ['04-identidade-acesso', 2],
+    ])
+  })
+
+  it('não dá o checklist à fase que apenas retoma a área', () => {
+    // A retomada mostra o estado do marco e o caminho de volta para a lista. Se a dona fosse a
+    // última fase que liga a área, a mesma caixa apareceria duas vezes com o mesmo nome acessível
+    // e o mesmo estado por trás.
+    const mapa = faseDeEstudoDasAreas([
+      fase('1 Vocabulário e cargo', ['00-guia-basico']),
+      fase('6 Segunda passagem', ['00-guia-basico', '01-fundamentos']),
+    ])
+    expect(mapa.get('00-guia-basico')).toBe(0)
+    expect(mapa.get('00-guia-basico')).not.toBe(1)
+    // A área que só aparece na segunda passagem é dela: a primeira passagem não a estudou.
+    expect(mapa.get('01-fundamentos')).toBe(1)
+  })
+
+  it('área ligada a uma única fase tem o índice dela', () => {
+    expect([...faseDeEstudoDasAreas([fase('A', []), fase('B', ['17-lideranca-ciso'])])]).toEqual([
+      ['17-lideranca-ciso', 1],
+    ])
+  })
+
+  it('fase que não liga área nenhuma não entra no mapa', () => {
+    // O Bloco F do plano de 24 meses não nomeia área: o marco é o texto do material, e não há
+    // checklist para pendurar nele.
+    expect([...faseDeEstudoDasAreas([fase('F Certificação', [])])]).toEqual([])
+  })
+
+  it('devolve mapa vazio para trilha sem fases', () => {
+    expect([...faseDeEstudoDasAreas([])]).toEqual([])
+  })
+})
+
+describe('faseDeEstudoDasAreas no plano de 90 dias do material', () => {
+  beforeAll(async () => {
+    await carregar()
+  })
+
+  it('dá a dona do checklist a 00-guia-basico à PRIMEIRA fase que a liga', () => {
+    // O caso real que decidiu a regra: o plano de 90 dias abre `00-guia-basico` na fase 0 e volta
+    // a ela na fase 1. A dona é a fase 0 — a que ESTUDA a área; a fase 1 mostra o estado do marco
+    // e o caminho de volta. É uma decisão, e ela fica fixada aqui: mudar a decisão é mudar este
+    // teste (e a tela muda junto, porque quem desenha é `ChecklistDaTrilha`).
+    const fases = content.paginas.find((p) => p.slug === '91-trilhas/plano-90-dias')?.trilha?.fases
+    expect(fases).toBeDefined()
+    expect(fases!.length).toBeGreaterThanOrEqual(5)
+    // As duas primeiras fases ligam a MESMA área, e é isso que torna o caso interessante.
+    expect(fases![0]?.areas).toEqual(['00-guia-basico'])
+    expect(fases![1]?.areas).toEqual(['00-guia-basico'])
+
+    const mapa = faseDeEstudoDasAreas(fases!)
+    expect(mapa.get('00-guia-basico')).toBe(0)
+    expect(mapa.get('01-fundamentos')).toBe(2)
+    expect(mapa.size).toBe(4)
   })
 })

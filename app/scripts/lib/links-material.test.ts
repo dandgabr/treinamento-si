@@ -9,11 +9,13 @@ import os from 'node:os'
 import path from 'node:path'
 import { afterAll, describe, expect, it } from 'vitest'
 import type { Conteudo } from '../../src/domain/types'
+import { htmlsDoConteudo } from './htmls-do-conteudo'
 import type { DestinoDeLink } from './markdown'
 import { gerarComRelatorio } from './gerar-conteudo'
 import {
   DECLARADOS_SEM_ROTA,
   declaracoesMortas,
+  hrefsDeFragmento,
   hrefsRelativos,
   montarMapa,
   novoRelatorio,
@@ -276,6 +278,67 @@ describe('resolverDeLinks', () => {
     expect(r.erros).toEqual([])
   })
 
+  it('aceita o fragmento que ja e rota do app, sem mexer nele', () => {
+    // Contraprova da regra seguinte: o fragmento legitimo (a rota que o app resolve) continua
+    // passando — sem ela, uma guarda que reprovasse TODO `#…` ficaria verde.
+    for (const href of [
+      '#/area/01-fundamentos',
+      '#/area/01-fundamentos/secao-4',
+      '#/tema/02-outra/TEMA-01',
+      '#/pagina/glossario',
+      '#/',
+    ]) {
+      const { destino, r } = resolver('01-fundamentos/TEMA-01-um.md', href)
+      expect(destino, href).toEqual({ acao: 'manter' })
+      expect(r.erros, href).toEqual([])
+      expect(r.intactos, href).toBe(1)
+    }
+  })
+
+  it('reprova o fragmento puro, que nao e rota do app', () => {
+    // `#4-temas` e a grafia de ancora do GitHub — o material a escreve junto do arquivo
+    // (`README.md#4-temas`), e sozinha ela nao leva a lugar nenhum: `analisar` a le como rota
+    // "desconhecida" e a tela inteira cai em "Rota nao reconhecida".
+    const { destino, r } = resolver('01-fundamentos/TEMA-01-um.md', '#4-temas')
+    expect(destino).toEqual({ acao: 'manter' })
+    expect(r.erros.join('\n')).toContain('nao e rota do app')
+    // `#` nu tambem nao abre tela nenhuma.
+    expect(resolver('01-fundamentos/TEMA-01-um.md', '#').r.erros.join('\n')).toContain(
+      'nao e rota do app',
+    )
+  })
+
+  it('reprova o fragmento de rota que o app nao tem', () => {
+    // A rota existe na forma (`#/area/…`), mas a area nao: sem esta conferencia, o build aceitaria
+    // um link que so o smoke de uma tela especifica pegaria.
+    const { r } = resolver('01-fundamentos/TEMA-01-um.md', '#/area/99-inexistente')
+    expect(r.erros.join('\n')).toContain('nao e rota do app')
+    expect(resolver('01-fundamentos/TEMA-01-um.md', '#/pagina/sumiu').r.erros.join('\n')).toContain(
+      'nao e rota do app',
+    )
+  })
+
+  it('reprova a ancora ambigua quando duas secoes tem o mesmo cabecalho', () => {
+    // Dois `## 4. Temas` no mesmo documento caem na MESMA ancora do GitHub, e nao ha como saber
+    // para qual das duas o material apontava: escolher uma mandaria o leitor para a secao errada
+    // metade das vezes.
+    const repetido = material()
+    const mapa = montarMapa({
+      ...repetido,
+      areas: [
+        { areaId: '01-fundamentos', guia: `${GUIA}\n\n## 4. Temas\nTexto repetido.`, temas: [] },
+      ],
+    })
+    const r = novoRelatorio()
+    const destino = resolverDeLinks(mapa, '01-fundamentos/TEMA-01-um.md', r)(
+      'README.md#4-temas',
+      'temas',
+    )
+    expect(destino).toEqual({ acao: 'manter' })
+    expect(r.erros.join('\n')).toContain('alcanca as secoes 4 e 4')
+    expect(r.paraRota).toBe(0)
+  })
+
   it('nao muda o link que sai da raiz do material', () => {
     expect(resolverCaminho('01-fundamentos/README.md', '../../fora-do-material.md')).toBeNull()
     expect(resolver('01-fundamentos/README.md', '../../fora-do-material.md').destino).toEqual({
@@ -311,6 +374,15 @@ describe('hrefsRelativos', () => {
 
   it('nao acusa HTML sem href relativo nenhum', () => {
     expect(hrefsRelativos('<p>texto</p><a href="#/pagina/glossario">g</a>')).toEqual([])
+  })
+})
+
+describe('hrefsDeFragmento', () => {
+  it('lista todo href com #, inclusive o que nao e rota', () => {
+    const html =
+      '<a href="#/tema/01-fundamentos/TEMA-02">b</a> <a href="#4-temas">c</a> ' +
+      '<a href="TEMA-02-dois.md">a</a> <a href="https://exemplo/1">d</a>'
+    expect(hrefsDeFragmento(html)).toEqual(['#/tema/01-fundamentos/TEMA-02', '#4-temas'])
   })
 })
 
@@ -370,19 +442,11 @@ escrever('README.md', '# Home\n\n[guia](./01-fundamentos/README.md)')
 escrever('glossario.md', '# Glossário')
 escrever('CONTRIBUTING.md', '# Como contribuir')
 
-/** O HTML inteiro do conteudo gerado, como o portao o varre. */
-function htmlDoConteudo(conteudo: Conteudo): string[] {
-  return [
-    ...conteudo.areas.flatMap((a) => [a.guia.intro, ...a.guia.secoes.map((s) => s.html)]),
-    ...Object.values(conteudo.temas).flatMap((t) => [t.intro, ...t.secoes.map((s) => s.html)]),
-    ...conteudo.paginas.flatMap((p) => [p.intro, ...p.secoes.map((s) => s.html)]),
-  ]
-}
-
 describe('geracao do material em disco', () => {
   it('troca cada link pela rota do alvo e nao deixa href relativo no HTML', () => {
     const { conteudo } = comTema2()
-    expect(htmlDoConteudo(conteudo).flatMap(hrefsRelativos)).toEqual([])
+    // A lista de campos e a mesma do portao (`htmls-do-conteudo.ts`), trilha incluida.
+    expect(htmlsDoConteudo(conteudo).flatMap(hrefsRelativos)).toEqual([])
   })
 
   it('respeita o destino de cada link: rota, texto ou intacto', () => {
@@ -442,5 +506,17 @@ describe('geracao do material em disco', () => {
     expect(hrefsRelativos(conteudo.temas['01-fundamentos#TEMA-02']?.intro ?? '')).toEqual([
       './anexos/nota.md',
     ])
+  })
+
+  it('reprova o fragmento puro escrito no material, e deixa o defeito visivel no HTML', () => {
+    // A mutacao e no MATERIAL, e nao no codigo: `#4-temas` sozinho e a forma curta da ancora que o
+    // material escreve junto do arquivo. O resolvedor o mantem (nao ha rota para onde trocar), o
+    // href continua no HTML, e o relatorio acusa — e e essa acusacao que o portao faz build falhar.
+    const { conteudo, links } = comTema2(`${TEMA2}\n\n[temas](#4-temas)`)
+    expect(links.erros.join('\n')).toContain('nao e rota do app')
+    const html = conteudo.temas['01-fundamentos#TEMA-02']?.intro ?? ''
+    expect(hrefsDeFragmento(html)).toEqual(['#4-temas'])
+    // O href nao virou caminho relativo: sao duas regras, e cada uma acusa o seu defeito.
+    expect(hrefsRelativos(html)).toEqual([])
   })
 })

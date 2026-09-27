@@ -15,7 +15,7 @@
     <!-- A folha do app chega junto com o bundle. Esta regra pinta a tela de carregamento na
          cor certa antes disso, entao repete os DOIS fundos de `--fundo` e os tres valores de
          `data-theme` que o App escreve: sem a segunda parte, quem escolheu "escuro" num
-         sistema claro veria a tela clara e o app escuro logo depois — e o bundle tem 8,6 MB,
+         sistema claro veria a tela clara e o app escuro logo depois — e o bundle tem 7,86 MiB,
          ou seja, "logo depois" nao e instantaneo. -->
     <style>
       html {
@@ -35,8 +35,9 @@
     <title>Roadmap CISO — estudo interativo</title>
   </head>
   <body>
-    <!-- Placeholder: o bundle tem 7,6 MB e leva um instante para montar. Sem isto, quem
-         abre por duplo clique encara tela branca e pode achar que o arquivo quebrou. -->
+    <!-- Placeholder: o bundle tem 7,86 MiB (medido no `dist/index.html`) e leva um instante para
+         montar. Sem isto, quem abre por duplo clique encara tela branca e pode achar que o
+         arquivo quebrou. -->
     <div id="root">
       <p style="font: 16px system-ui; padding: 2rem; margin: 0">Carregando o roadmap…</p>
     </div>

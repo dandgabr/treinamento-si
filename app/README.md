@@ -78,8 +78,8 @@ em outra máquina, aponte o binário pela variável `CHROME_BIN`.
 
 ## O que sai do build
 
-A build inteira vira um arquivo: `app/dist/index.html`, com **7,84 MiB** (8.222.126 bytes) na última
-execução. A medição anterior, de antes de o banco entrar inline, era 7,6 MB — os 18 arquivos do banco
+A build inteira vira um arquivo: `app/dist/index.html`, com **7,86 MiB** (8.237.917 bytes), medido em
+**2026-09-27**. A medição anterior, de antes de o banco entrar inline, era 7,6 MB — os 18 arquivos do banco
 viajam dentro desse arquivo. Ele abre por `file://`, roda offline e não pede nada instalado na
 máquina de quem vai estudar. Esse é o formato inteiro do produto, e é o motivo de
 `inlineDynamicImports` estar ligado no `vite.config.ts`: o Mermaid carrega os tipos de diagrama por
@@ -146,7 +146,7 @@ quebraria. Então o desktop, que não tem essa restrição, ganha o build dividi
 | Conteúdo | inline no JavaScript (3,89 MB) | `conteudo.json` ao lado (3,71 MiB) |
 | Banco de questões | inline no JavaScript, junto com o conteúdo | `questoes.json` ao lado (543.668 bytes, 0,52 MiB) |
 | Diagramas | todos inlinados (3,4 MB) | só o `flowchart`; 35 chunks de outros tipos são descartados |
-| Script no arranque | **7,84 MiB** para o V8 analisar | **935 kB** (957.699 bytes) |
+| Script no arranque | **7,86 MiB** (8.237.917 bytes, medido em 2026-09-27) para o V8 analisar | **952,7 kB** (975.596 bytes) |
 | CSP | `<meta>` no HTML, com `'unsafe-inline'` | cabeçalho, `script-src 'self'` |
 | Quem usa | launcher (`dist/Roadmap-CISO-Interativo/`) | empacotado pelo electron-builder |
 
@@ -170,7 +170,7 @@ verdade: se o corte levar algo necessário, o teste falha em vez de o app aparec
 | AppImage | **104,0 MiB** (109.006.365 bytes) — O7, medido **antes do banco** entrar no pacote |
 | `app.asar` | 4,89 MiB (5.124.818 bytes): o `conteudo.json`, os 27 assets que sobraram e o `main`/`preload` — medido **antes do banco** |
 | `questoes.json` | 543.668 bytes (0,52 MiB): o banco de múltipla escolha, que agora viaja dentro do asar — eram 791.357 bytes antes de as questões discursivas saírem |
-| `dist-desktop/index.html` + assets | 935 kB (957.699 bytes) de JavaScript no arranque, contra 7,84 MiB inlinados |
+| `dist-desktop/index.html` + assets | 952,7 kB (975.596 bytes) de JavaScript no arranque, contra 7,86 MiB (8.237.917 bytes) inlinados |
 | Pasta desempacotada | 267 MiB — o binário do Electron sozinho tem 177,7 MiB — medido **antes do banco** |
 
 **O banco entrou no pacote depois destas medições.** A lista de `files` do `electron-builder.yml`
@@ -363,7 +363,7 @@ Esta é a tabela — e a coluna "medido" é a que diz o que ainda falta, não a 
 |---|---|---|---|
 | O1 arranque | — | **sim: 1ª pintura 338 ms, DOMContentLoaded 296 ms** | `npm run medir` |
 | O2 sem tela branca (`show:false` + `ready-to-show`) | sim | sim: o aviso "Carregando o roadmap…" sai quando a carga termina | `medir`, `main.tsx` |
-| O3 bundle dividido | **sim** | sim: 935 kB de script no arranque, contra 7,84 MiB inlinados | `vite.desktop.config.ts` |
+| O3 bundle dividido | **sim** | sim: 952,7 kB (975.596 bytes) de script no arranque, contra 7,86 MiB (8.237.917 bytes) inlinados | `vite.desktop.config.ts` |
 | O4 só o `flowchart` do Mermaid | **sim** | sim: 35 chunks de outros diagramas removidos; desenhar puxa 8 | `vite.desktop.config.ts`, `medir` |
 | O5 memória após navegações | — | sim: heap de 11 MB na primeira tela, 16 MB com o diagrama | `medir` |
 | O6 diagramas por tela | — | sim: 1 por tema | `medir` |
@@ -494,8 +494,11 @@ completo é das trilhas — e é por isso que o D+90 mora à parte, em `INTERVAL
 diferente de `rebaixamentos`: aquele conta a vida toda, e duas falhas separadas por um acerto não
 mandam o tema para releitura. O que o app faz é **anunciar** — a fila de hoje marca "releitura
 completa antes desta passagem" —, e a escada de rebaixamento **não** muda por causa disso, por
-decisão do dono. Não há trava exigindo a marca antes da passagem seguinte: o material não descreve
-essa etapa, e inventá-la seria escrever o que ele não escreveu.
+decisão do dono. Não há trava exigindo a marca antes da passagem seguinte: o material **descreve**
+essa etapa — a §6 do plano de 12 meses manda o tema para releitura completa "contada na conta da
+seção 3.3", e a §3.3 tabela o destino ("voltam a D+7 no mês seguinte"). Ou seja: **o material manda a
+terceira passagem em D+7 e o app decidiu não agendar**; a divergência fica nomeada aqui, em vez de
+negada.
 
 O campo é **aditivo**, e a `VERSAO_PROGRESSO` continua **1**. Subir a versão faria o app já
 distribuído **descartar o progresso inteiro** — o normalizador joga fora versão que não conhece — e
@@ -534,17 +537,26 @@ escreve. Medido no `content.json`: as três trilhas saem com **10 itens e 3 faix
 **Artefatos e marcos.** O checklist percorre as fases da §3 — todas com rótulo, período e "Marco de
 saída" do material — e a coluna "Áreas (ordem_estudo)" é resolvida contra as áreas que existem; a
 célula que diz "todas" vale pelas áreas do conteúdo, e a fase de segunda passagem do plano de 12
-meses e do de 24 sai com as **18** ligadas a ela. Cada área da fase lista as atividades da **§8 do
-guia dela** (medido: **100 atividades nos 18 guias**, das quais **43** declaram "nenhum" pré-requisito
-técnico), com uma caixa por artefato e a data da produção ao lado. O **marco exige as duas
-condições** que a §7 da trilha declara: o checkpoint da área aprovado no critério que o próprio guia
-publica — lido por `dominioDaArea`, nunca copiado para a trilha — **e** o artefato da §8 produzido.
+meses e do de 24 sai com as **18** ligadas a ela. A lista da **§8 do guia** e as caixas aparecem
+**uma vez por área**: na primeira fase que a §3 liga a ela (`faseDeEstudoDasAreas`). As fases que a
+retomam — e as 18 áreas pertencem a duas fases nos planos de 12 e 24 meses — não repetem a lista:
+mostram o estado do marco e um botão de volta para a fase que estuda a área. Medido: dos **77 pares
+(área, fase)** das três trilhas, **37** não listam a §8 na fase em que a área reaparece, e a lista
+cobre os outros **40** — um por área distinta de cada trilha (18 + 18 + 4). As atividades são as da
+§8 do guia (medido: **100 atividades nos 18 guias**, das quais **43** declaram "nenhum" pré-requisito
+técnico), com uma caixa por artefato e a data da produção ao lado. O **marco exige** o checkpoint da
+área aprovado no critério que o próprio guia publica — lido por `dominioDaArea`, nunca copiado para a
+trilha — **e** o artefato da §8 produzido. A **contagem** de condições não é afirmada: a §7 do plano
+de 12 meses e a da trilha de 90 dias declaram **duas**, e a do plano de 24 declara **três**, sendo a
+terceira o laboratório do Bloco E — que o app **não** modela, por decisão do arquiteto de 2026-09-27
+(ver "Pendências conhecidas").
 Fase que a §3 não liga a área nenhuma (o Bloco F do plano de 24 meses) nunca fica "cumprida": o marco
 dela é o texto do material, e o app não inventa a ligação para poder marcar.
 
-**Tarefa por intervalo.** A fila de hoje mostra, para cada tema vencido, a tarefa lida da coluna "O
-que fazer" da §11 daquele tema — "Responder à seção 10 sem reler" no D+1, "Explicar o tema em 3
-frases…" no D+7 —, com o "se errar" da mesma linha ao lado. O intervalo que **não tem linha
+**Tarefa por intervalo.** A fila de hoje mostra, para cada tema vencido, só o **"o que fazer"** lido
+da coluna da §11 daquele tema — "Responder à seção 10 sem reler" no D+1, "Explicar o tema em 3
+frases…" no D+7. O "se errar" da mesma linha **não** aparece na fila: ele só é escrito na tela do
+tema, no bloco `TarefaDaPassagem` ("O que fazer nesta passagem"). O intervalo que **não tem linha
 tabelada** — o D+3 do rebaixamento e o D+90 do degrau final — não empresta a tarefa de outro
 intervalo: a tela diz que não há tarefa ali e devolve o caminho da seção 10, que é a recuperação
 ativa. Medido: as tabelas da §11 dos **109 temas** têm exatamente D+1, D+7 e D+30 — nenhum tema
@@ -741,7 +753,7 @@ que já fechou continua aqui, com a razão registrada, para o estado não se per
 | As páginas longas ganharam sumário com âncoras (o mapa de relações é a maior); o que segue aberto é o menu: as 6 páginas de `99-fontes/` aparecem para o aluno, mas são a trilha de QA do mantenedor | 6 |
 | Sobre o JSON: **253 kB (6,6% do `content.json`) são HTML duplicado** das seções 3 e 10 dos temas — a tela remonta os dois blocos de `preTeste`/`recuperacao`, e o que só existe no HTML é boilerplate que o app reescreve, não prosa órfã. O `errosComuns` (144.591 bytes, 608 linhas) **saiu desta linha**: virou item de quiz, com as três colunas na tela, uma por linha de tabela. E há 3,4 MB de bundle do Mermaid para 69 diagramas que são todos `flowchart` | 6 |
 | O contrato de rótulo do Mermaid era triplicado, e uma das cópias já estava para trás. Agora tem uma fonte só: o bloco `contrato-mermaid: {...}` da §7 do `conteudo/CONTRIBUTING.md`, lido pelo verificador do material e por `app/scripts/lib/contrato-mermaid.ts`, que falha alto em vez de cair num padrão embutido. A prosa da §7 tem de concordar com o bloco, e nenhuma ficha pode manter cópia. Fechada | — |
-| O contrato de re-render do Mermaid continua na `key` do React, repetida em `ThemeView`, `AreaView` e `Blocos`, e o laço de seções segue triplicado | 6 |
+| O contrato de re-render do Mermaid continua na `key` do React: são **7** remontagens por `key` que carrega o tema, em **5** arquivos (`App`, `AreaView`, `Blocos`, `Glossario` e `ThemeView`), e **4** chamadas a `renderizarMermaid` — as três telas de conteúdo mais `App.tsx`, que o inventário anterior não nomeava. O laço de seções segue **triplicado** (`ThemeView`, `AreaView`, `Blocos`); a fase 6 **não** criou um quarto laço, mas acrescentou **três** pontos de `Html` fora do contrato em `src/ui/Trilha.tsx` | 6 |
 | **O verificador do material fechou os pontos cegos.** `conteudo/scripts/verificar-repo.py` roda os nove sincronizadores em `--check` e exige a linha de conclusão `CHECK <script> <n>` de cada um (sem ela, erro); reprova o léxico da §5 como **erro** (o `&` continua permitido — `ATT&CK` na área 12 prova); confere as cinco fichas de `templates/` contra o esquema do `FRONTMATTER.md` e confere o próprio `CONTRIBUTING` nos dois sentidos — o que ele promete existe e o que existe está documentado. Ele assina o material com sha256 antes e depois, então `--check` não pode escrever. Roda de dentro de `conteudo/`, e o repositório não tem `scripts/` na raiz. Fechada | — |
 | O desktop carrega um **Chromium 130, fora de linha** (Electron 33). O `npm audit` acusa 1 crítica e 13 altas, e a leitura correta é: as de `tar`, `node-gyp` e `app-builder-lib` são de ferramenta de build e não entram no pacote (o `asar list` prova: 4 arquivos, zero `node_modules`); mas o **`electron` é dependência direta e o runtime está embarcado**, com 33 advisories que tocam justamente o que a casca anuncia — *context isolation bypass* (`GHSA-h7rp-cf8h-j98x`), *sandboxed iframe allow-popups bypass* (`GHSA-9f4c-93c8-jc8g`) e *ASAR integrity bypass* (`GHSA-vmqv-hx8q-j7mg`), este último **não mitigado no Linux**, onde a integridade do asar não é verificada. Subir de major e declarar cadência de patch | 7 |
 | O `.desktop` do AppImage abre com `--no-sandbox` (padrão do electron-builder), então a via do menu de aplicativos roda sem o sandbox do Chromium. Decidido manter, para o app não abortar em distros que restringem user namespaces. **Testar em Ubuntu 24.04 antes de distribuir** e reabrir a decisão, ou trazer de volta um `.deb`/`.rpm`, onde o auxiliar pode ser 4755 | 7 |
@@ -755,3 +767,8 @@ que já fechou continua aqui, com a razão registrada, para o estado não se per
 | Os smokes dependem de `google-chrome-stable` no PATH e de sessão gráfica para o Electron; nada disso está em CI, porque CI não existe | 7 |
 | **O pré-teste diagnóstico e os artefatos têm teste no domínio e na tela das trilhas, mas não na fila de hoje.** Medido: o redutor e o normalizador do progresso (`registrarDiagnostico`, `registrarArtefato`, `normalizarDiagnosticos`, `normalizarArtefatos`) somam 8 casos em `src/domain/progresso.test.ts`, e as duas telas das trilhas, 7 casos em `src/ui/Trilha.test.tsx`. O que **não** tem teste de componente é a `TarefaDaPassagem` e o ramo "sem tarefa tabelada" da fila, em `src/ui/Progresso.tsx`: ali só a camada de aplicação (`filaComTarefas`) é exercitada, e não o que a tela escreve — no `smoke`, a fila é conferida apenas vazia ("fila vazia no inicio"). É o que ficou pela metade quando o agente que implementou o pré-teste e os artefatos parou no limite de turnos | 6 |
 | **A revisão da fase 6 com os agentes não foi feita.** O código desta fase tem teste e passa pelos dois gates, mas não passou pela revisão adversarial que as fases anteriores tiveram — a de segurança, a de testes, a de frontend e a de UI/UX, que é de onde saíram as pendências de acessibilidade, de foco e de alvo de toque das fases anteriores | 6 |
+| **A varredura da fase 6 foi feita, e pegou um defeito de entrega: as telas novas foram entregues sem CSS.** No commit `5e0d460`, `src/ui/Trilha.tsx` e `src/ui/Progresso.tsx` entraram com **26 + 6** classes novas sem nenhuma regra em `src/styles.css` (26 no primeiro arquivo e 6 no segundo; contando `veredito`, que já existia antes, o segundo fica com 7) — e `git show --numstat --format= 5e0d460 -- app/src/styles.css` é **vazio**: o `styles.css` não foi tocado no commit. O efeito medido é que **"marco cumprido" não difere visualmente de "marco pendente"**: o JSX emite `class="selo selo-cumprido"` num caso e `class="selo"` no outro, `.selo` tem regra (linha 198 do CSS do commit) e `.selo-cumprido` não. É defeito de **entrega e não de conteúdo**, e nenhum portão o pegaria: teste e smoke passam com classe sem regra, porque nenhum dos dois casa `className` com seletor. Foi pego depois do commit, numa **varredura com agentes** que leu cada `className` das duas telas contra o `styles.css`. A correção está em andamento no diretório de trabalho e ainda **não commitada** — pelo que "26 + 6" é o número do commit, e não do arquivo de agora. **Aberto** | 6 |
+| **O smoke não assere o pré-teste diagnóstico nem o checklist de artefatos.** O cenário `trilha com diagrama` (`scripts/smoke.mjs`) confere título, número de seções, o SVG do Mermaid e os links internos, e nada de `.bloco-diagnostico` nem de `.checklist-trilha`. Um defeito de render numa das telas novas passa pelo `npm run smoke` sem quebrar nenhuma asserção. **Aberto**, em correção por outro agente | 6 |
+| **A conferência de `href` relativo não percorre `pagina.trilha.*`.** O `htmlDoConteudo` dos testes (`gerar-conteudo.test.ts` e `links-material.test.ts`) varre `guia.intro`/`guia.secoes`, `tema.intro`/`tema.secoes` e `pagina.intro`/`pagina.secoes`, mas **não** os **12** campos de HTML de `pagina.trilha`: `diagnostico.introHtml`, os dez `itens[].origemHtml` e `diagnostico.notaHtml`. Um `href` relativo que sobrevivesse ali não seria reprovado pelo gate. **Aberto**, em correção por outro agente | 6 |
+| **A `faseDeEstudoDasAreas` não tem teste próprio.** A função decide em que fase mora o checklist de cada área e é exercitada só de forma indireta pela tela, em `src/ui/Trilha.test.tsx`; `src/domain/trilha.test.ts` não tem caso para ela — e é ela que sustenta a regra "uma lista por área" do "Artefatos e marcos". **Aberto**, em correção por outro agente | 6 |
+| **Terceira condição do marco no plano de 24 meses — decisão do arquiteto (2026-09-27): não modelar.** A §7 do plano de 24 meses declara **três** condições por bloco, e a terceira é "no Bloco E, o laboratório correspondente concluído com dado real. Sem L1 e L2, o Bloco F não começa"; as §7 dos planos de 90 dias e de 12 meses declaram **duas**. O app modela as **duas condições por área** (checkpoint + artefato), e a §2.2 até oferece os cinco laboratórios numa tabela legível (coluna "#", L1–L5), mas **não** liga laboratório a bloco: essa ligação só existe em prosa na coluna "Marco de saída" da §3 ("Laboratório L1 concluído" no Bloco D, "Laboratórios L2 e L3" no E, "Laboratórios L4 e L5" no G), e a §7 ainda a repete divergindo — "o laboratório correspondente", no singular, contra L2 e L3 da §3, e "L1 e L2" como portão do Bloco F, contra L1 no D e L2/L3 no E. Decisão: **(B)** não modelar a terceira condição e o app **deixar de afirmar a contagem** — a tela passa a dizer "as condições que a seção 7 desta trilha declara", sem o "duas", e a omissão fica registrada aqui. Para **(A)** ser possível, o material precisaria de: (1) uma ligação laboratório→bloco legível por código (uma coluna em §2.2 ou §3, porque hoje só há a prosa do "Marco de saída"); (2) uma §7 de 24 meses que concorde com a §3 — hoje ela nomeia "o laboratório correspondente" no singular e toma "L1 e L2" como portão do Bloco F, contra a atribuição da §3. Quem implementar: a contagem estava afirmada em **quatro** pontos de `src/ui/Trilha.tsx` no commit `5e0d460` — dois comentários e duas frases visíveis (a `dica` do `ChecklistDaTrilha` e a linha do `fase-estado`). No diretório de trabalho, **ainda não commitado**, medido em 2026-09-27, os quatro já saíram: as frases passam a dizer "as condições que a seção 7 desta trilha declara", sem o número. **Decisão tomada em 2026-09-27; falta o commit.** | 6 |

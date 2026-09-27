@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import type { Area, Conteudo, Guia, Nivel, Pagina, Tema } from '../../src/domain/types'
+import type {
+  Area,
+  Conteudo,
+  DiagnosticoDaTrilha,
+  Guia,
+  Nivel,
+  Pagina,
+  Tema,
+  Trilha,
+} from '../../src/domain/types'
 import { LEXICO, TOTAL_AREAS, TOTAL_PAGINAS, TOTAL_TEMAS, validar } from './validar-content'
 
 const REF = '01-fundamentos#TEMA-01'
@@ -91,6 +100,28 @@ interface Alvo {
   area: Area
   guia: Guia
   pagina: Pagina
+}
+
+/**
+ * Uma trilha de fixture, com o bloco de diagnostico e sem fases.
+ *
+ * O HTML do bloco mora FORA de `pagina.secoes` (a extracao o tira de la), e por isso e o campo que
+ * um gate que so varre `intro` + `secoes` nao visita.
+ */
+function trilhaFake(diagnostico: Partial<DiagnosticoDaTrilha> = {}): Trilha {
+  return {
+    diagnostico: {
+      secao: 1,
+      titulo: '1.1 Pré-teste diagnóstico',
+      introHtml: '<p>Dez itens, dos checkpoints das áreas iniciais.</p>',
+      itens: [{ numero: '1', origemHtml: '<a href="#/area/01-fundamentos">01</a>, item 1' }],
+      cabecalhoDasFaixas: ['Acertos', 'Ponto de entrada'],
+      faixas: [{ rotulo: '0 a 3', de: 0, ate: 3, pontoDeEntrada: 'Fase 1 pelo TEMA-01' }],
+      notaHtml: '<p>Quem já percorreu o plano entra na Fase 2.</p>',
+      ...diagnostico,
+    },
+    fases: [],
+  }
 }
 
 type Mutacao = (a: Alvo) => void
@@ -291,6 +322,65 @@ const casos: Array<[string, Mutacao, string]> = [
     (a) => void (a.tema.secoes[0]!.html = '<p><a href="../91-trilhas/">trilhas</a></p>'),
     'href relativo no HTML gerado',
   ],
+
+  // O HTML do pré-teste diagnóstico da trilha não está em `intro` nem em `secoes` (o
+  // `extrairTrilha` tira a região da seção e a guarda no bloco): era o ponto cego em que o link
+  // relativo do material sobrevivia à varredura inteira. Um caso por campo, porque são três
+  // campos diferentes (`introHtml`, `itens[].origemHtml` e `notaHtml`).
+  [
+    'acusa href relativo na abertura do pré-teste da trilha',
+    (a) => void (a.pagina.trilha = trilhaFake({ introHtml: '<a href="../templates/RELACOES-TEMAS.md">ficha</a>' })),
+    'href relativo no HTML gerado (../templates/RELACOES-TEMAS.md)',
+  ],
+  [
+    'acusa href relativo na origem de um item do pré-teste da trilha',
+    (a) =>
+      void (a.pagina.trilha = trilhaFake({
+        itens: [
+          { numero: '1', origemHtml: '<a href="../../templates/RELACOES-TEMAS.md">ficha</a>' },
+        ],
+      })),
+    'href relativo no HTML gerado (../../templates/RELACOES-TEMAS.md)',
+  ],
+  [
+    'acusa href relativo na nota do pré-teste da trilha',
+    (a) => void (a.pagina.trilha = trilhaFake({ notaHtml: '<a href="./templates/INDICE-TEMAS.md">índice</a>' })),
+    'href relativo no HTML gerado (./templates/INDICE-TEMAS.md)',
+  ],
+
+  // O fragmento: `#4-temas` é a grafia de âncora do GitHub, que o material escreve junto do
+  // arquivo. Sozinha ela não é rota, e a tela inteira responde "Rota não reconhecida".
+  [
+    'acusa fragmento que não é rota no HTML do tema',
+    (a) => void (a.tema.intro = '<p><a href="#4-temas">temas</a></p>'),
+    'href de fragmento que nao e rota do app (#4-temas)',
+  ],
+  [
+    'acusa `#` nu, que não abre tela nenhuma',
+    (a) => void (a.tema.intro = '<p><a href="#">topo</a></p>'),
+    'href de fragmento que nao e rota do app (#)',
+  ],
+  [
+    'acusa fragmento de rota que o app não tem',
+    (a) => void (a.pagina.intro = '<p><a href="#/area/99-inexistente">área</a></p>'),
+    'href de fragmento que nao e rota do app (#/area/99-inexistente)',
+  ],
+  [
+    'acusa fragmento de rota que o app não tem dentro da trilha',
+    (a) =>
+      void (a.pagina.trilha = trilhaFake({
+        notaHtml: '<p><a href="#/pagina/91-trilhas/plano-sumido">plano</a></p>',
+      })),
+    'href de fragmento que nao e rota do app (#/pagina/91-trilhas/plano-sumido)',
+  ],
+
+  // A prosa da trilha também é prosa do material: quando a região do diagnóstico vivia dentro da
+  // seção, o léxico a varria; a extração a tirou de `secoes` e a varredura foi junto.
+  [
+    'acusa léxico proibido na nota do pré-teste da trilha',
+    (a) => void (a.pagina.trilha = trilhaFake({ notaHtml: '<p>Vale destacar o plano.</p>' })),
+    'lexico proibido',
+  ],
 ]
 
 describe('validar', () => {
@@ -329,14 +419,33 @@ describe('validar', () => {
   })
 
   it('não acusa a rota do app nem o link externo', () => {
-    // A regra é contra o href RELATIVO: rota (`#/...`) e `http(s)` continuam valendo — sem esta
-    // prova, a asserção acima passaria com a regra reprovando todo link da tela.
+    // A regra é contra o href RELATIVO e contra o fragmento que não é rota: a rota que o app
+    // resolve (`#/...`) e o `http(s)` continuam valendo — sem esta prova, uma regra que
+    // reprovasse todo link da tela ficaria verde. As rotas são as DESTA fixture, e não de outro
+    // conteúdo: elas mesmas passam pela conferência de rota existente.
     const texto = problemas((a) => {
       a.tema.intro =
-        '<p><a href="#/tema/01-fundamentos/TEMA-02">tema</a> ' +
+        '<p><a href="#/tema/01-fundamentos/TEMA-01">tema</a> ' +
         '<a href="#/area/01-fundamentos/secao-4">seção</a> ' +
-        '<a href="#/pagina/99-fontes/indice-fontes">índice</a> ' +
+        '<a href="#/pagina/glossario">glossário</a> ' +
+        '<a href="#/">painel</a> ' +
         '<a href="https://exemplo/1">fonte</a> <a href="mailto:alguem@exemplo">contato</a></p>'
+    })
+    expect(texto).toBe('')
+  })
+
+  it('não acusa o fragmento que já é rota dentro do HTML da trilha', () => {
+    // O outro lado da cobertura nova: o bloco do pré-teste traz o link do material para a área,
+    // e ele é rota — a regra tem de deixá-lo passar.
+    const texto = problemas((a) => {
+      a.pagina.trilha = trilhaFake({
+        introHtml: '<p>Dez itens.</p>',
+        itens: [
+          { numero: '1', origemHtml: '<a href="#/area/01-fundamentos">01</a>, item 1' },
+          { numero: '2', origemHtml: '<a href="#/area/01-fundamentos/secao-4">01, seção 4</a>' },
+        ],
+        notaHtml: '<p>Veja o <a href="#/pagina/glossario">glossário</a>.</p>',
+      })
     })
     expect(texto).toBe('')
   })

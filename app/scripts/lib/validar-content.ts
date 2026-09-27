@@ -7,7 +7,9 @@ import { interpretarCriterio } from '../../src/domain/criterio'
 import { SEQUENCIA_DIAS } from '../../src/domain/srs'
 import type { Area, Conteudo, Fonte, Guia, Pagina, Secao, Tema } from '../../src/domain/types'
 import { lerContratoMermaid } from './contrato-mermaid'
-import { hrefsRelativos } from './links-material'
+import { htmlsDaPagina, htmlsDoGuia, htmlsDoTema } from './htmls-do-conteudo'
+import { hrefsDeFragmento, hrefsRelativos } from './links-material'
+import { ehHrefDeRota, rotasDoConteudo, type RotasDoApp } from './rotas-app.mjs'
 
 /** Sequencia que o escalonador do app implementa hoje. */
 const SEQUENCIA_PADRAO: readonly number[] = SEQUENCIA_DIAS
@@ -108,7 +110,7 @@ function checarFontes(onde: string, fontes: Fonte[], erros: string[]): void {
 }
 
 /**
- * Nenhum href relativo pode sobrar no HTML gerado.
+ * Nenhum href do HTML gerado pode apontar para lugar nenhum.
  *
  * Um caminho relativo (`TEMA-02-triade-cia.md`, `../01-fundamentos/README.md`) so abre no disco de
  * quem clonou o repositorio; no arquivo unico aberto por `file://` — que e como o app chega a quem
@@ -118,18 +120,37 @@ function checarFontes(onde: string, fontes: Fonte[], erros: string[]): void {
  *
  * Link declarado sem rota tambem nao passa: ele vira texto na geracao, e um href relativo so
  * sobrevive se ninguem o resolveu.
+ *
+ * O fragmento tem a mesma cobranca, por outro motivo: `#4-temas` (a grafia de ancora do GitHub)
+ * nao e rota do app, e a tela inteira cai em "Rota nao reconhecida" no primeiro clique. O
+ * conjunto de rotas vem do proprio conteudo, e a gramatica e a mesma que o smoke usa
+ * (`rotas-app.mjs`).
  */
-function checarLinks(onde: string, htmls: string[], erros: string[]): void {
+function checarLinks(onde: string, htmls: string[], rotas: RotasDoApp, erros: string[]): void {
   for (const html of htmls) {
     for (const href of hrefsRelativos(html)) {
       erros.push(
         `${onde}: href relativo no HTML gerado (${href}) — link do material que nao virou rota do app`,
       )
     }
+    for (const href of hrefsDeFragmento(html)) {
+      if (!ehHrefDeRota(href, rotas)) {
+        erros.push(
+          `${onde}: href de fragmento que nao e rota do app (${href}) — a tela responde ` +
+            `"Rota nao reconhecida"`,
+        )
+      }
+    }
   }
 }
 
-function validarTema(chave: string, t: Tema, refs: Set<string>, erros: string[]): void {
+function validarTema(
+  chave: string,
+  t: Tema,
+  refs: Set<string>,
+  rotas: RotasDoApp,
+  erros: string[],
+): void {
   const onde = chave
   // O progresso e gravado sob `ref`, e a chave do mapa e o `ref`: divergir faz o usuario
   // marcar "acertei" e o painel mostrar zero firmes, sem erro nenhum na tela.
@@ -153,7 +174,7 @@ function validarTema(chave: string, t: Tema, refs: Set<string>, erros: string[])
   }
 
   checarSecoes(onde, t.secoes, erros, true)
-  checarLinks(onde, [t.intro, ...t.secoes.map((s) => s.html)], erros)
+  checarLinks(onde, htmlsDoTema(t), rotas, erros)
 
   if (t.preTeste.length < 1) erros.push(`${onde}: sem pre-teste`)
   for (const q of t.preTeste) if (!q.pergunta) erros.push(`${onde}: item de pre-teste vazio`)
@@ -197,7 +218,7 @@ function validarTema(chave: string, t: Tema, refs: Set<string>, erros: string[])
   }
 }
 
-function validarArea(a: Area, refs: Set<string>, erros: string[]): void {
+function validarArea(a: Area, refs: Set<string>, rotas: RotasDoApp, erros: string[]): void {
   if (!a.areaNome) erros.push(`${a.areaId}: area_nome vazio`)
   if (!Number.isFinite(a.ordemEstudo)) erros.push(`${a.areaId}: ordem_estudo invalida`)
   if (!NIVEIS.has(a.nivel)) erros.push(`${a.areaId}: nivel invalido (${a.nivel})`)
@@ -217,10 +238,10 @@ function validarArea(a: Area, refs: Set<string>, erros: string[]): void {
   checarFontes(a.areaId, a.fontes, erros)
   checarMermaid(a.areaId, g.mermaid, erros)
   checarSecoes(a.areaId, g.secoes, erros, true)
-  checarLinks(a.areaId, [g.intro, ...g.secoes.map((s) => s.html)], erros)
+  checarLinks(a.areaId, htmlsDoGuia(g), rotas, erros)
   // O guia tambem e prosa: ficava de fora da varredura de lexico que temas e paginas
   // recebiam, embora o README prometesse o contrario.
-  checarLexico(a.areaId, texto([g.intro, ...g.secoes.map((s) => s.html)]), erros)
+  checarLexico(a.areaId, texto(htmlsDoGuia(g)), erros)
   if (g.checkpoint.length < 1) erros.push(`${a.areaId}: guia sem checkpoint`)
   for (const q of g.checkpoint) {
     if (!q.pergunta) erros.push(`${a.areaId}: checkpoint com item sem pergunta`)
@@ -234,7 +255,7 @@ function validarArea(a: Area, refs: Set<string>, erros: string[]): void {
   }
 }
 
-function validarPagina(p: Pagina, erros: string[]): void {
+function validarPagina(p: Pagina, rotas: RotasDoApp, erros: string[]): void {
   // Sem exigir >= 1 secao: glossario e mapa-relacoes usam `## Titulo` sem numero e
   // caem inteiros no intro.
   if (!p.slug) erros.push(`pagina sem slug`)
@@ -243,7 +264,9 @@ function validarPagina(p: Pagina, erros: string[]): void {
   if (!GRUPOS_DE_PAGINA.has(p.grupo)) erros.push(`${p.slug}: grupo desconhecido (${p.grupo})`)
   checarMermaid(p.slug, p.mermaid, erros)
   checarSecoes(p.slug, p.secoes, erros, false)
-  checarLinks(p.slug, [p.intro, ...p.secoes.map((s) => s.html)], erros)
+  // `htmlsDaPagina` inclui o HTML do bloco de diagnostico da trilha, que sai das secoes na
+  // extracao (`extrair-trilha.ts`) e por isso nao esta em `secoes` nenhuma.
+  checarLinks(p.slug, htmlsDaPagina(p), rotas, erros)
 }
 
 export interface TotaisEsperados {
@@ -296,6 +319,10 @@ export function validar(
 
   const refs = new Set(Object.keys(c.temas))
 
+  // As rotas que ESTE conteudo alcanca, para conferir cada href de fragmento: a mesma leitura do
+  // smoke (`scripts/lib/rotas-app.mjs`), agora no build.
+  const rotas = rotasDoConteudo(c)
+
   // A ordem de estudo e a sequencia que a fila de hoje percorre. Ref a mais, a menos ou
   // repetida faz a fila pular tema ou listar o mesmo duas vezes.
   const vistos = new Set<string>()
@@ -309,8 +336,8 @@ export function validar(
   }
 
   for (const [ref, t] of Object.entries(c.temas)) {
-    validarTema(ref, t, refs, erros)
-    checarLexico(ref, texto([t.intro, ...t.secoes.map((s) => s.html)]), erros)
+    validarTema(ref, t, refs, rotas, erros)
+    checarLexico(ref, texto(htmlsDoTema(t)), erros)
   }
 
   const areaIds = new Set(c.areas.map((a) => a.areaId))
@@ -320,11 +347,13 @@ export function validar(
     }
   }
 
-  for (const a of c.areas) validarArea(a, refs, erros)
+  for (const a of c.areas) validarArea(a, refs, rotas, erros)
 
   for (const p of c.paginas) {
-    validarPagina(p, erros)
-    checarLexico(p.slug, texto([p.intro, ...p.secoes.map((s) => s.html)]), erros)
+    validarPagina(p, rotas, erros)
+    // A prosa da trilha tambem passa pelo lexico: enquanto a regiao do diagnostico vivia dentro
+    // da secao ela era varrida aqui, e a extracao nao pode ter tirado isso da cobertura.
+    checarLexico(p.slug, texto(htmlsDaPagina(p)), erros)
   }
 
   return erros

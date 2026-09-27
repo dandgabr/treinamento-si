@@ -90,8 +90,8 @@ export function VereditoRecuperacao({ refTema }: { refTema: string }) {
       {registrado === null ? (
         <>
           <p className="dica">
-            Responda sem consultar o texto. Errar rebaixa o intervalo: o tema volta pela metade do
-            prazo.
+            Responda sem consultar o texto. Errar rebaixa o intervalo: o D+90 volta a D+30, o D+30
+            a D+7, o D+7 a D+3 e o D+1 continua em D+1.
           </p>
           <div className="veredito-botoes">
             <button className="botao-secundario" onClick={() => registrarRecuperacao(refTema, true)}>
@@ -259,7 +259,7 @@ export function ResumoProgresso() {
         <span className="resumo-rotulo">Dias com estudo</span>
         <strong>{semDados ? '—' : diasComEstudo(progresso)}</strong>
         <span className="resumo-detalhe">
-          um dia conta quando há leitura, pré-teste, recuperação ou checkpoint.
+          um dia conta quando alguma atividade de estudo é registrada.
         </span>
       </div>
 

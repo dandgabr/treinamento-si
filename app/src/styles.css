@@ -266,7 +266,8 @@ h3 {
 }
 
 .lista-areas .indice,
-.lista-temas .indice {
+.lista-temas .indice,
+.lista-diagnostico .indice {
   font-variant-numeric: tabular-nums;
   color: var(--texto-suave);
   font-size: 0.85rem;
@@ -855,6 +856,49 @@ html:has(.diagrama.ampliado) {
   white-space: nowrap;
 }
 
+/* O intervalo devido ao lado da data: os dois sao o mesmo dado (quando a passagem volta),
+   e a data de cobranca e a que ordena a fila. */
+.resumo-intervalo {
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* A tarefa da passagem ocupa a linha inteira abaixo do tema: ela e o exercicio que o
+   intervalo pede, e nao mais um dado ao lado do titulo. */
+.resumo-tarefa {
+  flex-basis: 100%;
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+}
+
+/* O intervalo que a secao 11 de nenhum tema tabela — o D+3 do rebaixamento e o D+90 do
+   degrau final — diz o que e e devolve o caminho da secao 10. Tom de apoio: nao ha erro,
+   so um intervalo fora da tabela. */
+.resumo-tarefa.sem-tarefa,
+.tarefa-da-passagem.sem-tarefa {
+  color: var(--texto-suave);
+}
+
+/* O que fazer nesta passagem, sob o titulo da recuperacao ativa: e acao do app encostada
+   no fim da secao 10, e a caixa a separa do texto do material. */
+.tarefa-da-passagem {
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.7rem 1rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+}
+
+/* O veredito e a acao do app que segue a secao 10, e nao mais material: a linha acima
+   fecha a secao e abre o bloco. A classe ja existia no JSX (`secao veredito`) sem regra. */
+.veredito {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--borda);
+  padding-top: 1.25rem;
+}
+
 .acoes-progresso {
   grid-column: 1 / -1;
   display: flex;
@@ -1015,8 +1059,12 @@ html:has(.diagrama.ampliado) {
   margin: 0;
 }
 
-/* Selo de estado, nao de alarme: mesma linguagem do selo de nivel, em amarelo de aviso. */
-.selo-revisao {
+/* Selo de estado, nao de alarme: mesma linguagem do selo de nivel, em amarelo de aviso.
+   O nome chegou duplicado na fase 6 — o quiz emite `selo-revisao` (item ainda nao revisado
+   por gente) e a fila de hoje emite `selo-releitura` (duas passagens falhas seguidas) para o
+   mesmo recado de estado. Os dois nomes ficam nesta regra, em vez de uma cor para cada um. */
+.selo-revisao,
+.selo-releitura {
   border-color: color-mix(in srgb, var(--alerta) 45%, var(--borda));
   color: var(--alerta);
 }
@@ -1034,12 +1082,223 @@ a.botao-secundario {
   margin: 0;
 }
 
+/* -------------------------------------------------------------------- trilhas */
+
+/* As duas telas das trilhas — o pre-teste diagnostico e o checklist das fases. As duas
+   chegaram sem folha: as listas saiam com o marcador e o recuo padrao do navegador, os
+   blocos nao se separavam da prosa do material e o selo do marco cumprido nao tinha regra,
+   entao "marco cumprido" e "marco pendente" ficavam identicos na tela. O que esta aqui reusa
+   o que o app ja tem — a linha das listas de indice, o selo do cabecalho, a tabela do
+   material e as variaveis de tema — em vez de um sistema visual paralelo. */
+
+/* Os dois blocos que o app enxerta no material ganham um traco de topo no acento: e o que
+   os separa da prosa em volta, que e do material. */
+.bloco-diagnostico,
+.checklist-trilha {
+  border-top: 2px solid color-mix(in srgb, var(--acento) 35%, var(--borda));
+  padding-top: 1.25rem;
+}
+
+.lista-diagnostico,
+.lista-artefatos,
+.lista-areas-fase {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Uma linha por item do diagnostico, no mesmo desenho da lista de temas. */
+.lista-diagnostico > li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+/* O rotulo da coluna do material ("Acertei:") acompanha a altura dos botoes ao lado. */
+.veredicto-rotulo {
+  align-self: center;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
+
+.diagnostico-resultado {
+  margin-top: 1.25rem;
+}
+
+/* A leitura do ponto de entrada e o que a tela existe para entregar: por isso ocupa a caixa
+   de destaque do app, e nao um paragrafo como os outros. */
+.ponto-de-entrada {
+  background: var(--acento-suave);
+  border-radius: var(--raio);
+  padding: 0.75rem 1rem;
+  margin: 0 0 1rem;
+}
+
+/* A faixa ("0 a 3") e o que se le primeiro na linha, e nao pode quebrar em duas. */
+.tabela-diagnostico th {
+  white-space: nowrap;
+}
+
+/* A regua da faixa alcancada pinta a celula e engrossa a linha: so a cor nao diria qual
+   faixa respondeu a quem nao distingue verde de cinza. O `:is(.secao, .intro) tbody
+   tr:nth-child(odd)` pinta a linha impar, entao o seletor precisa ser mais especifico. */
+.secao .tabela-diagnostico tr.alcancada th,
+.secao .tabela-diagnostico tr.alcancada td {
+  background: var(--acento-suave);
+  font-weight: 600;
+}
+
+/* Uma caixa por artefato da secao 8 do guia: a atividade, o pre-requisito tecnico do
+   material e a data da producao, na mesma linha divisoria das outras listas. */
+.lista-artefatos .artefato {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.75rem;
+  padding: 0.5rem 0.4rem 0.5rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.lista-artefatos .artefato label {
+  /* O alvo de toque e a linha inteira da caixa, e nao o quadrado do checkbox. */
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1 1 100%;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.lista-artefatos .artefato input {
+  flex: none;
+  margin: 0;
+  accent-color: var(--acento);
+}
+
+.artefato-texto {
+  flex: 1;
+}
+
+.artefato-pre-requisito,
+.artefato-data {
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+}
+
+.artefato-data {
+  white-space: nowrap;
+}
+
+/* O artefato produzido leva a data no acento: o mesmo sinal do selo do marco, do outro
+   lado da mesma condicao. */
+.lista-artefatos .artefato[data-produzido='true'] .artefato-data {
+  color: var(--acento);
+}
+
+/* Uma fase da secao 3: o rotulo, o "Marco de saida" do material, o estado e as areas. */
+.fase {
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.9rem 1rem;
+  margin: 1.25rem 0;
+}
+
+/* A fase que fechou todas as areas leva a borda no acento; a pendente fica neutra. */
+.fase[data-cumprida='true'] {
+  border-color: color-mix(in srgb, var(--acento) 45%, var(--borda));
+}
+
+.fase > h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+}
+
+.fase-rotulo {
+  flex: 1;
+}
+
+.fase-marco {
+  color: var(--texto-suave);
+  font-size: 0.92rem;
+  margin: 0 0 0.4rem;
+}
+
+.fase-estado {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* O marco de cada area da fase. A linha de cima separa a primeira do "Marco de saida" do
+   material; as demais se separam pela propria borda. */
+.lista-areas-fase > li {
+  border-top: 1px solid var(--borda);
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+}
+
+/* A borda esquerda reserva o espaco do estado nos dois casos, para a area cumprida nao
+   deslocar o texto em relacao a pendente — ela so troca de cor. */
+.area-marco,
+.area-retomada {
+  border-left: 3px solid transparent;
+  padding-left: 0.6rem;
+}
+
+.area-marco[data-cumprido='true'],
+.area-retomada[data-cumprido='true'] {
+  border-left-color: var(--acento);
+}
+
+.area-marco-nome,
+.area-retomada-nome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 0.35rem;
+}
+
+.area-marco-condicao,
+.area-retomada-condicao {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
+
+.area-marco-condicao {
+  margin: 0 0 0.35rem;
+}
+
+/* A linha de retomada: o estado do mesmo marco e o caminho ate a lista de artefatos. */
+.area-retomada-onde {
+  margin: 0 0 0.25rem;
+  font-size: 0.88rem;
+  color: var(--texto-suave);
+}
+
+/* O selo do marco, no acento: sem esta regra "marco cumprido" e "marco pendente" saiam
+   identicos — o estado que a linha do checklist existe para mostrar nao chegava ao leitor.
+   A forma e a do selo de nivel, que ja existe. */
+.selo-cumprido {
+  border-color: color-mix(in srgb, var(--acento) 45%, var(--borda));
+  color: var(--acento);
+}
+
+/* A etapa final da trilha (o consolidado que volta em D+90) e um marco, e nao um alarme:
+   a mesma borda do selo de nivel, e o texto ainda neutro. */
+.selo-etapa-final {
+  border-color: color-mix(in srgb, var(--acento) 45%, var(--borda));
+}
+
 @media (max-width: 480px) {
   /* 48 px onde o ponteiro e o dedo. Vale para todo controle com alvo proprio: os 44 px
      valem no ponteiro fino, e o `.alternativa` (o rotulo inteiro do radio) ja vinha assim. */
   .alternativa,
   .botao-secundario,
   .busca-glossario input,
+  .lista-artefatos .artefato label,
   .nivel,
   .pular {
     min-height: 48px;

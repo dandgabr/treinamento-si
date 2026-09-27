@@ -16,6 +16,7 @@
 
 import matter from 'gray-matter'
 import { ancorasDeSecao, type DestinoDeLink, type ResolverDeLink } from './markdown'
+import { ehHrefDeRota, type RotasDoApp } from './rotas-app.mjs'
 
 /** Separador do fragmento de ancora na rota do app (`#/area/01-fundamentos/secao-4`). */
 export function idDaSecao(numero: number): string {
@@ -103,6 +104,8 @@ export interface MapaDoMaterial {
   ancoras: Map<string, Map<string, number[]>>
   /** Tudo o que existe no material: pastas e arquivos `.md`. */
   existentes: Set<string>
+  /** As rotas que este material alcanca, para conferir um href de fragmento que chega pronto. */
+  rotasConhecidas: RotasDoApp
 }
 
 const declarado = new Set(DECLARADOS_SEM_ROTA.map((d) => d.caminho))
@@ -126,11 +129,15 @@ export function montarMapa(material: MaterialDoDisco): MapaDoMaterial {
   const rotas = new Map<string, string>()
   const ancoras = new Map<string, Map<string, number[]>>()
   const existentes = new Set<string>([...material.diretorios, ...material.arquivos])
+  const areas = new Set<string>()
+  const temas = new Set<string>()
+  const paginas: string[] = []
 
   for (const area of material.areas) {
     const guia = `${area.areaId}/README.md`
     rotas.set(guia, `#/area/${area.areaId}`)
     ancoras.set(guia, ancorasDeSecao(area.guia))
+    areas.add(area.areaId)
     for (const tema of area.temas) {
       // Sem `tema_id` legivel nao ha rota: o tema fica sem destino e o portao reprova o link que
       // apontar para ele — melhor do que inventar `#/tema/<area>/<nome-do-arquivo>` e mandar o
@@ -139,18 +146,20 @@ export function montarMapa(material: MaterialDoDisco): MapaDoMaterial {
       if (temaId) {
         rotas.set(tema.caminho, `#/tema/${area.areaId}/${temaId}`)
         ancoras.set(tema.caminho, ancorasDeSecao(tema.texto))
+        temas.add(`${area.areaId}#${temaId}`)
       }
     }
   }
   for (const pagina of material.paginas) {
     rotas.set(pagina.caminho, `#/pagina/${pagina.slug}`)
+    paginas.push(pagina.slug)
   }
   for (const diretorio of material.diretorios) {
     const rota = rotas.get(`${diretorio}/README.md`)
     if (rota) rotas.set(diretorio, rota)
   }
 
-  return { rotas, ancoras, existentes }
+  return { rotas, ancoras, existentes, rotasConhecidas: { areas, temas, paginas } }
 }
 
 // ------------------------------------------------------------------ resolucao do link
@@ -190,9 +199,28 @@ export function resolverDeLinks(
     const caminhoBruto = corte >= 0 ? href.slice(0, corte) : href
     const ancoraBruta = corte >= 0 ? href.slice(corte + 1) : ''
 
-    // Ancora pura (`#secao-3`), absoluto (`/x.md`) e externo (`https://`, `mailto:`): o material
-    // nao usa os dois primeiros, e o terceiro e decisao de quem escreve — nao passam por aqui.
-    if (!caminhoBruto || caminhoBruto.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(caminhoBruto)) {
+    // Fragmento puro (`#/pagina/glossario`, `#4-temas`): o alvo nao e um arquivo do material, e
+    // sim uma rota que ja veio pronta. Nao ha o que trocar — ha o que CONFERIR, e e aqui que a
+    // conferencia acontece, porque o material pode escrever o fragmento com a grafia de ancora do
+    // GitHub (`README.md#4-temas` e o jeito canonico; a forma curta `#4-temas` conviveria com
+    // ele). O `#4-temas` que sobrevive derruba a tela inteira: `analisar` le o fragmento como
+    // rota `desconhecida` e o app responde "Rota nao reconhecida". Um `#/…` de rota que o app nao
+    // tem tambem reprova — o portao nao pode depender do smoke ter visitado aquela tela.
+    if (!caminhoBruto) {
+      if (!ehHrefDeRota(href, mapa.rotasConhecidas)) {
+        relatorio.erros.push(
+          `${origem}: o link "${href}" e um fragmento que nao e rota do app (todo href com "#" ` +
+            `tem de ser "#/" ou "#/<area|tema|pagina|quiz>/…"; a ancora de cabecalho se escreve ` +
+            `junto do arquivo — "README.md#4-temas" — e nao sozinha)`,
+        )
+      }
+      relatorio.intactos++
+      return { acao: 'manter' }
+    }
+
+    // Absoluto (`/x.md`) e externo (`https://`, `mailto:`): o material nao usa o primeiro, e o
+    // segundo e decisao de quem escreve — nenhum dos dois passa pelo mapa.
+    if (caminhoBruto.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(caminhoBruto)) {
       relatorio.intactos++
       return { acao: 'manter' }
     }
@@ -335,6 +363,9 @@ const RE_HREF = /href="([^"]*)"/g
  * Um `href` relativo so abre no disco de quem clonou o repositorio: no arquivo unico (`file://`)
  * e no app empacotado ele nao leva a lugar nenhum. Depois da troca nao deve sobrar nenhum, e o
  * portao cobra isso do HTML — e nao do mapa, que ja disse o que pretendia fazer.
+ *
+ * Fragmento (`#…`) nao entra nesta lista: ele nao e caminho de arquivo, e quem responde por ele e
+ * `hrefsDeFragmento`, que pergunta se a rota existe.
  */
 export function hrefsRelativos(html: string): string[] {
   const achados: string[] = []
@@ -342,6 +373,24 @@ export function hrefsRelativos(html: string): string[] {
     const href = match[1] ?? ''
     if (!href || href.startsWith('#') || /^[a-z][a-z0-9+.-]*:/i.test(href)) continue
     achados.push(href)
+  }
+  return achados
+}
+
+/**
+ * Hrefs de fragmento (`#…`) do HTML, na ordem em que aparecem.
+ *
+ * Todo `#` do app e uma rota (`#/area/01-fundamentos`, `#/pagina/glossario/termo-tls`). A grafia
+ * de ancora do GitHub — `#4-temas`, que o material escreve junto do arquivo em
+ * `README.md#4-temas` — nao e rota: fora do arquivo de origem ela derruba a tela inteira com
+ * "Rota nao reconhecida". Extrair aqui e conferir com `ehHrefDeRota` (`rotas-app.mjs`) evita que
+ * a varredura do HTML e a do smoke discordem sobre o que e um href valido.
+ */
+export function hrefsDeFragmento(html: string): string[] {
+  const achados: string[] = []
+  for (const match of html.matchAll(RE_HREF)) {
+    const href = match[1] ?? ''
+    if (href.startsWith('#')) achados.push(href)
   }
   return achados
 }

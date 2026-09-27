@@ -259,6 +259,40 @@ describe('extrairTrilha', () => {
     expect(extraida.trilha.diagnostico).toBeNull()
     expect(extraida.trilha.fases).toHaveLength(2)
   })
+
+  it('fica com o PRIMEIRO bloco de pré-teste quando a página traz dois', () => {
+    // Uma revisão do material pode deixar duas regiões de pré-teste na mesma página (uma seção
+    // repetida por engano, ou o bloco de uma trilha anterior que ninguém removeu). O ponto de
+    // entrada é UM só, e é o da primeira seção — `if (lido && !diagnostico)` é o que garante
+    // isso: sem o `!diagnostico`, o segundo bloco sobrescreveria o primeiro, e a página passaria a
+    // mostrar os dez itens da seção de baixo mantendo o título da seção de cima.
+    const segundaRegiao = SECAO_COM_DIAGNOSTICO.replace(
+      '<h3>1.1 Pré-teste diagnóstico</h3>',
+      '<h3>1.2 Pré-teste diagnóstico</h3>',
+    ).replace('<p>Dez itens, dos checkpoints das áreas iniciais.</p>', '<p>Cópia da região.</p>')
+
+    const extraida = extrairTrilha(
+      pagina([
+        { numero: 1, titulo: 'Perfil e ponto de partida', html: SECAO_COM_DIAGNOSTICO },
+        { numero: 2, titulo: 'Perfil repetido', html: segundaRegiao },
+        { numero: 3, titulo: 'Fases e marcos', html: SECAO_DAS_FASES },
+      ]),
+      AREAS,
+    )!
+
+    expect(extraida.trilha.diagnostico?.secao).toBe(1)
+    expect(extraida.trilha.diagnostico?.titulo).toBe('1.1 Pré-teste diagnóstico')
+    expect(extraida.trilha.diagnostico?.introHtml).toContain('Dez itens')
+    expect(extraida.trilha.diagnostico?.itens).toHaveLength(2)
+    expect(extraida.trilha.diagnostico?.notaHtml).toContain('plano de 90 dias')
+    // A tabela de fases continua sendo lida junto do diagnóstico, e não em vez dele.
+    expect(extraida.trilha.fases).toHaveLength(2)
+    // As duas regiões saem das seções: nenhuma delas fica na tela como HTML tratado, e os itens
+    // não aparecem duas vezes (nem com clique, nem sem).
+    expect(extraida.secoes[0]?.html).not.toContain('Pré-teste diagnóstico')
+    expect(extraida.secoes[1]?.html).not.toContain('Pré-teste diagnóstico')
+    expect(extraida.secoes[2]?.html).toContain('Marco de saída')
+  })
 })
 
 describe('o conteúdo gerado das três trilhas', () => {
