@@ -327,6 +327,33 @@ de 33.4.11 para 44.4.5, e o Chromium que ele embarca é maior. Não é o conteú
 `content.json` e o bundle do renderer são os mesmos. Como o pacote é saída, o que vale como prova de
 origem é a soma conferida contra o arquivo que se baixou, não o número decorado.
 
+### O portátil do Windows (o alvo que esta máquina produz sem Windows)
+
+| | Valor |
+|---|---|
+| arquivo | `instalador/Roadmap CISO 0.1.0.exe` |
+| tamanho | **109,708,048 bytes** (104.6 MiB) |
+| SHA-256 | `3d0ab3723a1fdaf3e9e7651c084eb3e80ddc8739daa582fd98b0948d628666af` |
+| construído com | `electron-builder --win portable`, **sem wine** (o PE é editado por `resedit`, em JS puro) e com as sete fuses aplicadas |
+| exercitado sob | **Proton** (`Proton - Experimental`), não num Windows |
+
+O app **rodou de verdade** sob Proton, e a prova é do tipo mais forte: o CDP em `127.0.0.1:9222`
+respondeu em 12 s identificando `Electron/44.4.5` e `app://bundle/index.html`; o DOM trazia
+"18 áreas · 109 temas · 102 itens de checkpoint", que bate com o `content.json`, e 41 links internos; o
+quiz foi respondido com cliques reais e o `progresso.json` foi gravado no
+`drive_c/users/<usuário>/AppData/Roaming/roadmap-ciso-app/`, devolvido igual ao recarregar a página —
+main, renderer, ponte e disco, ponta a ponta, no artefato do Windows.
+
+**O que isso não prova**, e está dito para não ser lido além: que o **instalador NSIS** instale,
+desinstale e crie atalho (ele foi construído, com um `wine` falso apontando para o Proton — o NSIS exige
+wine num único passo, extrair o `__uninstaller.exe`, e o toosel `wine: 1.0.1` do `electron-builder` não
+sobe no Fedora 44); que rode **num Windows de verdade** (foi wine/Proton); e **nada** sobre assinatura
+de código — o log de empacotamento diz `signing is skipped`, então o SmartScreen vai avisar quem baixar.
+
+O `npm run release` **recusa** enquanto houver artefato da mesma versão em `instalador/` — é o guarda que
+impede sobrescrever uma release publicada em silêncio. Para publicar outra, suba a versão em
+`package.json` ou mova o artefato para fora da pasta.
+
 ### O AppImage que estava no disco antes (medido, e depois sobrescrito)
 
 | | Valor |
