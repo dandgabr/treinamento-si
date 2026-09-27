@@ -116,6 +116,79 @@ export interface Pagina {
   intro: string
   secoes: Secao[]
   mermaid: string[]
+  /**
+   * O que a pagina traz de estruturado para o app, quando ela e uma trilha de estudo.
+   *
+   * Opcional porque quem monta `Pagina` do Markdown (o parser de build) nao a conhece: quem
+   * preenche e `extrairTrilha`, chamada pelo gerador depois do parse. Fora das tres trilhas,
+   * vale `null`.
+   */
+  trilha?: Trilha | null
+}
+
+/**
+ * Um item do pre-teste diagnostico da trilha: a coluna "Origem do item" do material, com o
+ * link ja resolvido para a rota do app. O texto do item e o do material — o app nao escreve
+ * item nenhum.
+ */
+export interface ItemDoDiagnostico {
+  /** A numeracao da coluna "#", como o material escreve. */
+  numero: string
+  /** A celula "Origem do item", com a marcacao do material (o link para a area). */
+  origemHtml: string
+}
+
+/** Uma linha da tabela "Acertos | Ponto de entrada" do material. */
+export interface FaixaDoDiagnostico {
+  /** A celula "Acertos" como o material escreve ("0 a 3", "4 a 7", "8 a 10"). */
+  rotulo: string
+  /** Limite inferior de acertos, lido do rotulo ("0 a 3"). */
+  de: number
+  /** Limite superior de acertos, lido do rotulo ("0 a 3"). */
+  ate: number
+  /** A coluna "Ponto de entrada", texto do material. */
+  pontoDeEntrada: string
+}
+
+/**
+ * O `### 1.1 Pre-teste diagnostico` da trilha, estruturado.
+ *
+ * A regiao sai do HTML da secao e vira bloco interativo: `titulo`, `introHtml` e `notaHtml` sao
+ * pedacos do proprio material, guardados na ordem em que aparecem, para a tela nao repetir nem
+ * perder nada do que ele escreve em volta das duas tabelas.
+ */
+export interface DiagnosticoDaTrilha {
+  /** Secao do material onde o bloco estava, para a tela recoloca-lo no lugar dele. */
+  secao: number
+  /** O titulo que o material da ao bloco ("1.1 Pre-teste diagnostico"). */
+  titulo: string
+  /** O que o material escreve entre o titulo e a tabela dos itens. */
+  introHtml: string
+  itens: ItemDoDiagnostico[]
+  /** O cabecalho da tabela das faixas, como o material o escreve. */
+  cabecalhoDasFaixas: string[]
+  faixas: FaixaDoDiagnostico[]
+  /** O que o material escreve depois das duas tabelas. */
+  notaHtml: string
+}
+
+/**
+ * Uma fase da trilha, da tabela "Fases e marcos" da secao 3 ("Bloco", nos planos de 24 meses).
+ * O rotulo, o periodo e o marco sao do material; `areas` sai da coluna "Areas (ordem_estudo)",
+ * resolvida contra as areas que existem no conteudo — inclusive a celula "todas", que expande
+ * para todas elas.
+ */
+export interface FaseDaTrilha {
+  rotulo: string
+  periodo: string
+  areas: string[]
+  marco: string
+}
+
+/** O que uma trilha traz de estruturado: o diagnostico de entrada e as fases com seus marcos. */
+export interface Trilha {
+  diagnostico: DiagnosticoDaTrilha | null
+  fases: FaseDaTrilha[]
 }
 
 export interface Conteudo {

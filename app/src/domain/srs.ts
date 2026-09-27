@@ -14,6 +14,12 @@
 // `revisao_inicial_dias` do frontmatter de cada tema (`[1, 7, 30]` nos 109), e o gate
 // (`scripts/lib/validar-content.ts`) compara os dois: mexer no array reprova o build. O tema
 // declara os intervalos que sugere; o calendario completo e das trilhas.
+//
+// Consolidar nao e sair da fila para sempre: e cumprir a escada e voltar pelo degrau final a
+// cada `INTERVALO_ALEM_DIAS` contados da ultima passagem (`proximaCobranca`). Quem consolidou
+// quando a escada terminava em D+30 tem a mesma volta — e por isso ela e calculada da data da
+// ultima passagem, que o proprio estado guarda, e nao de um campo que so os arquivos novos
+// teriam.
 
 /** Sequencia declarada no frontmatter de cada tema (`revisao_inicial_dias`). */
 export const SEQUENCIA_DIAS = [1, 7, 30] as const
@@ -52,7 +58,15 @@ export interface EstadoRevisao {
    * releitura completa.
    */
   falhasSeguidas: number
-  /** true quando passou pelo ultimo intervalo sem errar. Sai da fila ativa. */
+  /**
+   * true quando passou pelo ultimo intervalo sem errar: o tema cumpriu a escada.
+   *
+   * Nao e "sai da fila para sempre". O material manda a Fase 6 rever todos os temas em
+   * "D+90 e além" (`plano-12-meses.md`, secao 6), entao o tema consolidado volta a cada
+   * `INTERVALO_ALEM_DIAS` a contar da ultima passagem — ver `proximaCobranca`. A distincao
+   * importa para quem consolidou sob a regra antiga, que terminava a escada em D+30: aquele
+   * estado tem de voltar para a etapa final como qualquer outro.
+   */
   consolidado: boolean
 }
 
@@ -99,13 +113,17 @@ export function registrarRevisao(
   acertou: boolean,
   agora: Date,
 ): EstadoRevisao {
-  const intervalo = proximoIntervalo(estado.intervaloDias, acertou)
-  const passagens = estado.passagens + 1
-  const falhasSeguidas = acertou ? 0 : estado.falhasSeguidas + 1
+  // Passagem de um tema ja consolidado: ela E o degrau final. O estado pode ter vindo de um
+  // arquivo gravado quando a escada terminava em D+30, e ali `intervaloDias` guarda 30 — sem
+  // esta leitura, o acerto na etapa final apenas reagendaria D+90 em vez de consolidar de novo.
+  const base = estado.consolidado ? reagendarDegrauFinal(estado) : estado
+  const intervalo = proximoIntervalo(base.intervaloDias, acertou)
+  const passagens = base.passagens + 1
+  const falhasSeguidas = acertou ? 0 : base.falhasSeguidas + 1
 
   if (intervalo === null) {
     return {
-      ...estado,
+      ...base,
       intervaloDias: ULTIMO_INTERVALO_DIAS,
       proximaRevisao: somarDias(agora, ULTIMO_INTERVALO_DIAS).toISOString(),
       passagens,
@@ -115,13 +133,55 @@ export function registrarRevisao(
   }
 
   return {
-    ref: estado.ref,
+    ref: base.ref,
     intervaloDias: intervalo,
     proximaRevisao: somarDias(agora, intervalo).toISOString(),
-    rebaixamentos: estado.rebaixamentos + (acertou ? 0 : 1),
+    rebaixamentos: base.rebaixamentos + (acertou ? 0 : 1),
     passagens,
     falhasSeguidas,
     consolidado: false,
+  }
+}
+
+/**
+ * O dia em que a ultima passagem foi registrada.
+ *
+ * `registrarRevisao` grava `proximaRevisao` como a passagem MAIS o intervalo escolhido nela, e
+ * escreve os dois campos na mesma linha: a subtracao devolve o dia do veredito. E dai que sai a
+ * data de retorno de quem consolidou antes de o D+90 entrar na escada, sem campo novo e sem
+ * tocar no arquivo de quem ja estudava.
+ */
+export function ultimaPassagem(estado: EstadoRevisao): Date {
+  return somarDias(new Date(estado.proximaRevisao), -estado.intervaloDias)
+}
+
+/** O intervalo que a proxima passagem cobra. O consolidado volta pelo degrau final. */
+export function intervaloDaCobranca(estado: EstadoRevisao): number {
+  return estado.consolidado ? ULTIMO_INTERVALO_DIAS : estado.intervaloDias
+}
+
+/**
+ * Quando o tema volta a ser cobrado.
+ *
+ * Na escada, e a propria `proximaRevisao`. Depois de consolidado, e a ultima passagem mais o
+ * degrau final: o material manda rever todos os temas em "D+90 e além" (secao 6 das trilhas) e
+ * nao ha intervalo declarado depois dele, entao a cobranca seguinte e sempre o mesmo degrau
+ * contado da passagem anterior. O estado que consolidou em D+30 sob a regra antiga volta aqui
+ * tambem — e a unica forma de ele nao ficar fora da etapa final para sempre.
+ */
+export function proximaCobranca(estado: EstadoRevisao): Date {
+  if (!estado.consolidado) return new Date(estado.proximaRevisao)
+  return somarDias(ultimaPassagem(estado), intervaloDaCobranca(estado))
+}
+
+/** Estado consolidado posto no degrau final, com a data de ultima passagem que ele ja tem. */
+function reagendarDegrauFinal(estado: EstadoRevisao): EstadoRevisao {
+  const intervaloDias = intervaloDaCobranca(estado)
+  if (estado.intervaloDias === intervaloDias) return estado
+  return {
+    ...estado,
+    intervaloDias,
+    proximaRevisao: somarDias(ultimaPassagem(estado), intervaloDias).toISOString(),
   }
 }
 
@@ -135,16 +195,23 @@ export function precisaReleituraCompleta(estado: EstadoRevisao): boolean {
   return estado.falhasSeguidas >= FALHAS_PARA_RELEITURA
 }
 
+/**
+ * Vencido e o tema cuja cobranca ja chegou — inclusive o consolidado, que volta pelo degrau
+ * final. Antes, `consolidado` significava "nunca mais aparece", e um tema que terminava a
+ * escada em D+30 sob a regra antiga ficava fora da etapa final das trilhas para sempre.
+ */
 export function estaVencido(estado: EstadoRevisao, agora: Date): boolean {
-  if (estado.consolidado) return false
-  return new Date(estado.proximaRevisao).getTime() <= agora.getTime()
+  return proximaCobranca(estado).getTime() <= agora.getTime()
 }
 
 /** Fila de hoje: vencidos, do mais atrasado para o mais recente. */
 export function filaDeHoje(estados: EstadoRevisao[], agora: Date): EstadoRevisao[] {
   return estados
     .filter((e) => estaVencido(e, agora))
-    .sort((a, b) => new Date(a.proximaRevisao).getTime() - new Date(b.proximaRevisao).getTime())
+    // A ordem sai da cobranca, e nao de `proximaRevisao`: no tema consolidado as duas datas
+    // divergem quando o arquivo veio da regra antiga, e o mais atrasado e o que tem a cobranca
+    // mais antiga.
+    .sort((a, b) => proximaCobranca(a).getTime() - proximaCobranca(b).getTime())
 }
 
 // ------------------------------------------------------------------- tarefa do intervalo

@@ -14,6 +14,7 @@ import {
   SEQUENCIA_DIAS,
   tarefaDoIntervalo,
   ULTIMO_INTERVALO_DIAS,
+  ultimaPassagem,
 } from './srs'
 
 const AGORA = new Date('2026-03-10T12:00:00.000Z')
@@ -139,6 +140,46 @@ describe('registrarRevisao', () => {
     expect(e.consolidado).toBe(true)
     expect(e.falhasSeguidas).toBe(0)
   })
+
+  it('consolida de novo no acerto da etapa final de um tema que consolidou em D+30', () => {
+    // O arquivo antigo guardou o intervalo de quando a escada terminava em D+30: a passagem que
+    // chega agora é a etapa final, e o acerto consolida em vez de abrir um D+90 na escada.
+    const antigo = estadoFake({
+      intervaloDias: 30,
+      proximaRevisao: '2026-03-05T12:00:00.000Z',
+      consolidado: true,
+      passagens: 3,
+    })
+    const e = registrarRevisao(antigo, true, AGORA)
+    expect(e.consolidado).toBe(true)
+    expect(e.intervaloDias).toBe(INTERVALO_ALEM_DIAS)
+    expect(e.proximaRevisao).toBe('2026-06-08T12:00:00.000Z')
+    expect(e.passagens).toBe(4)
+    expect(e.rebaixamentos).toBe(0)
+  })
+
+  it('rebaixa para D+30 o tema consolidado que erra na etapa final', () => {
+    // "D+90 | D+90 | ok / revisar | avançar / repetir em D+30" (seção 6 das trilhas).
+    const antigo = estadoFake({ intervaloDias: 30, consolidado: true, passagens: 4 })
+    const e = registrarRevisao(antigo, false, AGORA)
+    expect(e.consolidado).toBe(false)
+    expect(e.intervaloDias).toBe(30)
+    expect(e.proximaRevisao).toBe('2026-04-09T12:00:00.000Z')
+    expect(e.rebaixamentos).toBe(1)
+    expect(e.falhasSeguidas).toBe(1)
+  })
+
+  it('não reescreve a data do consolidado que já está no degrau final', () => {
+    // O estado que consolidou pelo app novo guarda exatamente a última passagem mais 90: ler de
+    // novo não pode empurrar a data para a frente a cada passagem.
+    const atual = estadoFake({
+      intervaloDias: 90,
+      proximaRevisao: '2026-06-08T12:00:00.000Z',
+      consolidado: true,
+    })
+    const e = registrarRevisao(atual, true, AGORA)
+    expect(e.proximaRevisao).toBe('2026-06-08T12:00:00.000Z')
+  })
 })
 
 describe('precisaReleituraCompleta', () => {
@@ -182,9 +223,33 @@ describe('estaVencido', () => {
     expect(estaVencido(estadoFake({ proximaRevisao: '2026-03-10T12:00:01.000Z' }), AGORA)).toBe(false)
   })
 
-  it('nunca vence um tema consolidado', () => {
-    const e = estadoFake({ consolidado: true, proximaRevisao: '2020-01-01T00:00:00.000Z' })
-    expect(estaVencido(e, AGORA)).toBe(false)
+  it('não vence o tema consolidado dentro do prazo do degrau final', () => {
+    // Consolidado em 10/03 (a última passagem), com o degrau final vencendo em 08/06: em 10/04
+    // ainda não é hora — nem mesmo na data que o arquivo antigo mostraria, e que era o intervalo
+    // de 30 dias gravado quando a escada terminava em D+30.
+    const doArquivoAntigo = estadoFake({
+      intervaloDias: 30,
+      proximaRevisao: '2026-04-09T12:00:00.000Z',
+      consolidado: true,
+    })
+    expect(estaVencido(doArquivoAntigo, AGORA)).toBe(false)
+    expect(estaVencido(doArquivoAntigo, new Date('2026-04-10T12:00:00.000Z'))).toBe(false)
+    expect(estaVencido(doArquivoAntigo, new Date('2026-06-08T12:00:00.000Z'))).toBe(true)
+  })
+
+  it('vence o tema consolidado quando o degrau final chega', () => {
+    // Fase 6 das trilhas: todos os temas voltam em "D+90 e além". O acerto que consolidou não
+    // pode deixar o tema fora da fila para sempre.
+    const consolidado = estadoFake({
+      intervaloDias: 30,
+      proximaRevisao: '2026-03-05T12:00:00.000Z',
+      consolidado: true,
+    })
+    // Última passagem = 03/02 (05/03 menos os 30 dias que o estado guardou); o degrau final vence
+    // 90 dias depois, em 04/05.
+    expect(ultimaPassagem(consolidado).toISOString()).toBe('2026-02-03T12:00:00.000Z')
+    expect(estaVencido(consolidado, new Date('2026-05-03T12:00:00.000Z'))).toBe(false)
+    expect(estaVencido(consolidado, new Date('2026-05-04T12:00:00.000Z'))).toBe(true)
   })
 })
 

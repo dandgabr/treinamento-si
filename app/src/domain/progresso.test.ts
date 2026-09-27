@@ -11,6 +11,8 @@ import {
   registrarCheckpoint,
   registrarConfianca,
   registrarDiaAtivo,
+  registrarDiagnostico,
+  registrarArtefato,
   registrarQuestao,
   registrarRecuperacao,
   resultadoDoCheckpoint,
@@ -243,6 +245,117 @@ describe('dia local', () => {
   })
 })
 
+describe('diagnóstico da trilha e artefatos da seção 8', () => {
+  const SLUG = '91-trilhas/plano-12-meses'
+  const CHAVE = '01-fundamentos#3'
+
+  it('registra o veredito por item, em ordem, sem duplicar o índice', () => {
+    let p = registrarDiagnostico(progressoVazio(), SLUG, 4, true, HOJE)
+    p = registrarDiagnostico(p, SLUG, 0, false, HOJE)
+    expect(p.diagnosticos[SLUG]).toEqual([
+      { indice: 0, acertou: false },
+      { indice: 4, acertou: true },
+    ])
+    // O mesmo item respondido de novo fica com o último veredito, e não com dois registros.
+    p = registrarDiagnostico(p, SLUG, 4, false, HOJE)
+    expect(p.diagnosticos[SLUG]).toEqual([
+      { indice: 0, acertou: false },
+      { indice: 4, acertou: false },
+    ])
+  })
+
+  it('não cria estado novo quando o veredito é o mesmo', () => {
+    const p = registrarDiagnostico(progressoVazio(), SLUG, 1, true, HOJE)
+    // A mesma referência é o que o store usa para não gravar e não re-renderizar à toa.
+    expect(registrarDiagnostico(p, SLUG, 1, true, HOJE)).toBe(p)
+  })
+
+  it('recusa índice que não descreve item e slug perigoso', () => {
+    const p = progressoVazio()
+    expect(registrarDiagnostico(p, SLUG, -1, true, HOJE)).toBe(p)
+    expect(registrarDiagnostico(p, SLUG, 1.5, true, HOJE)).toBe(p)
+    expect(registrarDiagnostico(p, '', 0, true, HOJE)).toBe(p)
+    expect(registrarDiagnostico(p, '__proto__', 0, true, HOJE)).toBe(p)
+  })
+
+  it('marca o artefato com o dia da produção, e desmarcar limpa a data', () => {
+    const marcado = registrarArtefato(progressoVazio(), CHAVE, true, HOJE)
+    expect(marcado.artefatos[CHAVE]).toEqual({ produzido: true, data: '2026-03-10' })
+    const desmarcado = registrarArtefato(marcado, CHAVE, false, new Date('2026-03-12T12:00:00.000Z'))
+    // A data não sobrevive ao "não produzido": guardada, ela diria que o artefato foi produzido
+    // num registro que afirma o contrário.
+    expect(desmarcado.artefatos[CHAVE]).toEqual({ produzido: false, data: '' })
+    expect(registrarArtefato(desmarcado, CHAVE, false, HOJE)).toBe(desmarcado)
+  })
+
+  it('recusa chave vazia, sem criar estado novo', () => {
+    const p = progressoVazio()
+    expect(registrarArtefato(p, '', true, HOJE)).toBe(p)
+    expect(registrarArtefato(p, '__proto__', true, HOJE)).toBe(p)
+  })
+
+  it('preserva diagnóstico e artefatos, ida e volta pelo JSON', () => {
+    let p = registrarDiagnostico(progressoVazio(), SLUG, 2, false, HOJE)
+    p = registrarArtefato(p, CHAVE, true, HOJE)
+    const volta = normalizarProgresso(JSON.parse(JSON.stringify(p)), HOJE)
+    expect(volta).toEqual(p)
+  })
+
+  it('saneia o diagnóstico gravado: item sem veredito booleano e índice repetido', () => {
+    const p = normalizarProgresso(
+      {
+        versao: VERSAO_PROGRESSO,
+        temas: {},
+        checkpoints: {},
+        diasAtivos: [],
+        diagnosticos: {
+          [SLUG]: [
+            { indice: 3, acertou: true },
+            { indice: 3, acertou: false },
+            { indice: 1, acertou: 'sim' },
+            { indice: -2, acertou: true },
+            { indice: 1e999, acertou: true },
+            'nada',
+          ],
+          '__proto__': [{ indice: 0, acertou: true }],
+          vazia: [],
+        },
+      },
+      HOJE,
+    )
+    // O índice repetido fica com o último veredito: contado duas vezes, o mesmo item inflaria os
+    // acertos do diagnóstico.
+    expect(p.diagnosticos[SLUG]).toEqual([{ indice: 3, acertou: false }])
+    expect(Object.keys(p.diagnosticos)).toEqual([SLUG])
+  })
+
+  it('saneia o artefato gravado: sem "produzido" booleano e com data solta', () => {
+    const p = normalizarProgresso(
+      {
+        versao: VERSAO_PROGRESSO,
+        temas: {},
+        checkpoints: {},
+        diasAtivos: [],
+        artefatos: {
+          '01-fundamentos#1': { produzido: true, data: '2026-03-10' },
+          // Data fora do calendário: fica vazia, como nos dias ativos.
+          '01-fundamentos#2': { produzido: true, data: '2026-13-99' },
+          '01-fundamentos#3': { produzido: false, data: '2026-03-10' },
+          '01-fundamentos#4': { data: '2026-03-10' },
+          '01-fundamentos#5': { produzido: true },
+        },
+      },
+      HOJE,
+    )
+    expect(p.artefatos).toEqual({
+      '01-fundamentos#1': { produzido: true, data: '2026-03-10' },
+      '01-fundamentos#2': { produzido: true, data: '' },
+      '01-fundamentos#3': { produzido: false, data: '' },
+      '01-fundamentos#5': { produzido: true, data: '' },
+    })
+  })
+})
+
 describe('normalizarProgresso', () => {
   it('devolve vazio para entrada ausente', () => {
     expect(normalizarProgresso(null, HOJE)).toEqual(progressoVazio())
@@ -294,6 +407,10 @@ describe('normalizarProgresso', () => {
     expect(p.checkpoints['01-fundamentos']).toEqual({ acertos: 4, total: 5 })
     expect(p.questoes[ITEM]).toEqual({ acertos: 1, erros: 1, ultima: '2026-03-09T10:00:00.000Z' })
     expect(p.diasAtivos).toEqual(['2026-03-08', '2026-03-09'])
+    // Os campos desta fase (diagnóstico das trilhas e artefatos da seção 8) também são aditivos:
+    // o arquivo de ontem carrega com os dois vazios, que é o mesmo que "ainda não respondido".
+    expect(p.diagnosticos).toEqual({})
+    expect(p.artefatos).toEqual({})
     expect(pareceProgresso(antigo)).toBe(true)
   })
 

@@ -17,6 +17,7 @@ import { renderizarMermaid } from './mermaid'
 import { ResumoProgresso } from './Progresso'
 import { Quiz } from './Quiz'
 import { ThemeView } from './ThemeView'
+import { BlocoDiagnostico, ChecklistDaTrilha } from './Trilha'
 import { focarConteudo, irParaSecao, linkQuiz, useRota, type Rota } from './useRota'
 
 const CHAVE_TEMA = 'roadmap:tema'
@@ -186,9 +187,14 @@ function PaginaConteudo({ pagina, escuro }: { pagina: Pagina; escuro: boolean })
   // cabecalhos de la dentro sao o sumario e as ancoras que a tela tem.
   const cabecalhos = useCabecalhos(pagina.intro, 'intro')
   const porSecao = pagina.secoes.length > 0
+  // As trilhas trazem o diagnostico e as fases de forma estruturada (`extrairTrilha`, no build).
+  const trilha = pagina.trilha ?? null
   const itens: ItemDeSumario[] = porSecao
     ? pagina.secoes.map((s) => ({ id: idDaSecao(s.numero), numero: s.numero, texto: s.titulo }))
     : cabecalhos.itens
+  // O checklist da trilha e bloco do app, e nao secao do material: sem uma entrada no indice ele
+  // ficaria no fim da pagina sem caminho ate ele.
+  if (trilha?.fases.length) itens.push({ id: 'checklist-da-trilha', texto: 'Checklist da trilha' })
   // Pagina de referencia com tabela de verbetes (o glossario): ela ganha indice por area,
   // busca e um endereco por termo. As outras seguem no HTML tratado, como sempre.
   const glossario = useMemo(
@@ -214,7 +220,19 @@ function PaginaConteudo({ pagina, escuro }: { pagina: Pagina; escuro: boolean })
         <>
           {itens.length >= MIN_ITENS_SUMARIO_PAGINA ? <Sumario itens={itens} /> : null}
           <Html key={`intro-${escuro}`} className="intro" html={porSecao ? pagina.intro : cabecalhos.html} />
-          <Secoes secoes={pagina.secoes} escuro={escuro} />
+          <Secoes
+            secoes={pagina.secoes}
+            escuro={escuro}
+            depoisDaSecao={
+              trilha?.diagnostico
+                ? {
+                    numero: trilha.diagnostico.secao,
+                    conteudo: <BlocoDiagnostico slug={pagina.slug} trilha={trilha} />,
+                  }
+                : undefined
+            }
+          />
+          {trilha?.fases.length ? <ChecklistDaTrilha trilha={trilha} /> : null}
         </>
       )}
     </Principal>
@@ -252,10 +270,11 @@ export function App() {
   useEffect(() => {
     const mudou = rotaInicial.current !== rota
     rotaInicial.current = rota
-    // Rota de pagina que termina num alvo (`#/pagina/glossario/termo-tls`): o foco e a rolagem
-    // sao do alvo, e nao do topo da tela — quem abre o endereco de um termo quer o termo. Vale
-    // tambem na montagem, que e o caso do link compartilhado aberto direto.
-    const ancora = rota.nome === 'pagina' ? rota.ancora : null
+    // Rota que termina num alvo (`#/pagina/glossario/termo-tls`, `#/tema/<area>/<tema>/secao-10`):
+    // o foco e a rolagem sao do alvo, e nao do topo da tela — quem abre o endereco de um termo
+    // quer o termo, e quem vem da fila de hoje quer a secao 10 do tema. Vale tambem na montagem,
+    // que e o caso do link compartilhado aberto direto.
+    const ancora = rota.nome === 'pagina' || rota.nome === 'tema' ? rota.ancora : null
     if (ancora !== null && irParaSecao(ancora)) return
     if (mudou) focarConteudo()
   }, [rota])

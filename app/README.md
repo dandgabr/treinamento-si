@@ -11,6 +11,10 @@ A tela inicial é o painel, com as 18 áreas na ordem de `ordem_estudo`. Cada li
 todo o resto: guia da área, temas, glossário, mapa de relações, as 3 trilhas (90 dias, 12 meses, 24
 meses), certificações por fornecedor, o índice de fontes e o quiz de múltipla escolha.
 
+Duas dessas telas leem o material de um jeito próprio, e cada uma tem a seção dela abaixo: o
+**glossário** é navegável por termo (`#/pagina/glossario/termo-triade-cia`) e as **trilhas** trazem
+o pré-teste diagnóstico com veredito por item e o checklist de artefatos da §8 de cada guia.
+
 Um tema abre com o pré-teste de calibração de confiança, de 1 a 5, e depois as seções na numeração
 do arquivo original. A recuperação ativa esconde o gabarito atrás do botão "Revelar resposta". No
 rodapé, links para o tema anterior e o seguinte. O botão do topo troca claro por escuro, e a escolha
@@ -444,10 +448,11 @@ porque essa diferença importa para julgar o resultado.
 
 | Módulo | O que decide | Origem |
 |---|---|---|
-| `srs.ts` | intervalos D+1, D+7 e D+30; acerto avança, erro rebaixa (30→7, 7→3, 1→1) | **do material**: §11 de cada tema e §5.2 do TEMA-05 de 00 |
+| `srs.ts` | intervalos D+1, D+7, D+30 e o degrau das trilhas em D+90; acerto avança, erro rebaixa (90→30, 30→7, 7→3, 1→1) | **do material**: §11 de cada tema, §5.2 do TEMA-05 de 00 e a §6 das duas trilhas |
 | `criterio.ts` | lê o critério de aprovação que o guia publica em prosa | **do material**: campo `criterio` de cada guia (`4 dos 5`, `80%`) |
 | `progresso.ts` | estado do estudo, dias com estudo e a escala de confiança do pré-teste | **decisão daqui** — o material não descreve formato de estado |
 | `dominio.ts` | tema "firme" = última recuperação ativa acertada sem consulta | **decisão daqui** |
+| `trilha.ts` | o ponto de entrada do pré-teste diagnóstico, o artefato da §8 do guia e o marco de cada fase (checkpoint aprovado **e** artefato produzido) | **do material**: §1.1 e §3 das trilhas, §8 e §9 dos guias |
 
 **Não há XP, nível, faixa nem sequência de dias.** Houve, e saiu: a seção 8 do
 `conteudo/CONTRIBUTING.md` pede "marcos e autoavaliação; sem gamificação artificial", e todo insumo
@@ -469,6 +474,37 @@ rebaixamento e formato do registro —, o app guarda o **estado em runtime**, e 
 `revisao_inicial_dias` diferente da sequência implementada, para o app não mentir sobre o intervalo
 lido do material.
 
+### A escada de revisão termina em D+90
+
+A escada do app terminava em D+30, e o acerto ali tirava o tema da fila. As duas trilhas tabelam um
+degrau a mais — "D+90 | ok / revisar | avançar / repetir em D+30", na §6 do plano de 12 meses e na do
+de 24 —, e é ele que entrou: `D+1 → D+7 → D+30 → D+90`, com o erro em D+90 voltando a **D+30**. Como
+o material manda rever todos os temas em "D+90 e além", o tema consolidado **não sai da fila para
+sempre**: ele volta pela etapa final a cada 90 dias contados da última passagem. É por isso que a
+data de retorno é calculada da passagem — subtraindo o intervalo que o próprio estado guardou — e não
+de um campo novo, e é por isso que um arquivo que consolidou sob a regra antiga também volta: sem
+isso, aquele tema ficaria fora da etapa final das trilhas pelo resto da vida.
+
+O `SEQUENCIA_DIAS` do domínio **não mudou**, e é de propósito: aquele array espelha o
+`revisao_inicial_dias` do frontmatter dos 109 temas (`[1, 7, 30]`) e o gate compara os dois, então
+acrescentar o 90 ali reprovaria o build. O tema declara os intervalos que sugere; o calendário
+completo é das trilhas — e é por isso que o D+90 mora à parte, em `INTERVALO_ALEM_DIAS`.
+
+**Duas passagens falhas seguidas** passaram a ser contadas (`revisao.falhasSeguidas`), o que é coisa
+diferente de `rebaixamentos`: aquele conta a vida toda, e duas falhas separadas por um acerto não
+mandam o tema para releitura. O que o app faz é **anunciar** — a fila de hoje marca "releitura
+completa antes desta passagem" —, e a escada de rebaixamento **não** muda por causa disso, por
+decisão do dono. Não há trava exigindo a marca antes da passagem seguinte: o material não descreve
+essa etapa, e inventá-la seria escrever o que ele não escreveu.
+
+O campo é **aditivo**, e a `VERSAO_PROGRESSO` continua **1**. Subir a versão faria o app já
+distribuído **descartar o progresso inteiro** — o normalizador joga fora versão que não conhece — e
+obrigaria a migrar todo arquivo em disco antes disso. É o mesmo precedente de `questoes`, que entrou
+na v1 sem mudança de número. O valor neutro do campo novo é zero, e o efeito colateral fica
+declarado: um tema que já tinha duas falhas seguidas antes de o campo existir só entra em releitura
+completa após a próxima falha — supor "sim" faria o app exigir releitura de um tema que talvez tenha
+acabado de acertar.
+
 O XP era **derivado**, o que continua valendo para o que ficou: a mesma função sobre o mesmo estado
 devolve sempre o mesmo resultado. O veredito da recuperação é registrado uma vez por passagem;
 repetir o clique não avança a escada — a passagem seguinte se abre de forma explícita.
@@ -476,6 +512,78 @@ repetir o clique não avança a escada — a passagem seguinte se abre de forma 
 `app/scripts/lib/` guarda o parser e o gate como funções puras, para serem testados com fixtures
 pequenos. `gerar-conteudo.test.ts` fecha o contrato: parseia o material real e exige `validar()`
 vazio com os totais 18/109/22.
+
+## As trilhas de estudo
+
+As três trilhas (`91-trilhas/`) descrevem o plano — cadência, fases, marcos e pré-teste — e duas
+coisas delas existem só como texto no material: o **pré-teste diagnóstico** da §1.1 e a **tabela de
+fases** da §3. `application/extrair-trilha.ts` lê as duas no build, do HTML que o gerador acabou de
+produzir, e é por isso que ele aproveita os links já resolvidos para rota — essa informação não
+existe mais no Markdown cru. O que sai de lá é `pagina.trilha`, e as seções seguem com a região do
+diagnóstico **retirada**, porque ela volta como bloco interativo no mesmo lugar: manter as duas
+versões na tela mostraria os mesmos dez itens duas vezes, um deles sem clique.
+
+**Diagnóstico por item.** O pré-teste das três trilhas traz dez itens com veredito "Acertei: sim/não"
+por item, o rótulo da própria coluna do material, e o **ponto de entrada** aparece só quando os dez
+estão julgados — com metade das respostas, o número de acertos descreveria uma prova que ninguém
+terminou. A faixa é lida da tabela do material ("0 a 3", "4 a 7", "8 a 10"); quando nenhuma delas
+cobre o total de acertos, o app não diz nada, em vez de estender a tabela do material. O texto do
+item, a abertura e a nota em volta são do material e viajam com o bloco, na ordem em que ele os
+escreve. Medido no `content.json`: as três trilhas saem com **10 itens e 3 faixas** cada.
+
+**Artefatos e marcos.** O checklist percorre as fases da §3 — todas com rótulo, período e "Marco de
+saída" do material — e a coluna "Áreas (ordem_estudo)" é resolvida contra as áreas que existem; a
+célula que diz "todas" vale pelas áreas do conteúdo, e a fase de segunda passagem do plano de 12
+meses e do de 24 sai com as **18** ligadas a ela. Cada área da fase lista as atividades da **§8 do
+guia dela** (medido: **100 atividades nos 18 guias**, das quais **43** declaram "nenhum" pré-requisito
+técnico), com uma caixa por artefato e a data da produção ao lado. O **marco exige as duas
+condições** que a §7 da trilha declara: o checkpoint da área aprovado no critério que o próprio guia
+publica — lido por `dominioDaArea`, nunca copiado para a trilha — **e** o artefato da §8 produzido.
+Fase que a §3 não liga a área nenhuma (o Bloco F do plano de 24 meses) nunca fica "cumprida": o marco
+dela é o texto do material, e o app não inventa a ligação para poder marcar.
+
+**Tarefa por intervalo.** A fila de hoje mostra, para cada tema vencido, a tarefa lida da coluna "O
+que fazer" da §11 daquele tema — "Responder à seção 10 sem reler" no D+1, "Explicar o tema em 3
+frases…" no D+7 —, com o "se errar" da mesma linha ao lado. O intervalo que **não tem linha
+tabelada** — o D+3 do rebaixamento e o D+90 do degrau final — não empresta a tarefa de outro
+intervalo: a tela diz que não há tarefa ali e devolve o caminho da seção 10, que é a recuperação
+ativa. Medido: as tabelas da §11 dos **109 temas** têm exatamente D+1, D+7 e D+30 — nenhum tema
+tabela D+3 nem D+90.
+
+**O estado é do app, e é aditivo.** Os vereditos do diagnóstico ficam em `diagnosticos[slug]`, por
+índice do material, e os artefatos em `artefatos[areaId#N]`, com o dia local da produção — que é
+limpo ao desmarcar, para o registro não dizer que algo foi produzido no dia em que alguém percebeu
+que não existe.
+
+## Glossário navegável por termo
+
+`glossario.md` usa `## Título` sem número, então ele cai inteiro no `intro` da página — e é ali que
+estão as duas tabelas de verbetes: **Termos** (7 colunas, 59 linhas) e **Siglas** (4 colunas, 19
+linhas), **78 verbetes** ao todo. A prosa em volta continua HTML, no lugar dela; quem vira React são
+as duas tabelas.
+
+Cada verbete ganha um `id` (o termo sem acento, sem maiúscula e com hífen no que não é letra:
+`tríade CIA` vira `termo-triade-cia`), o `id` vira o **endereço daquele termo** e o primeiro `id` de
+cada grupo vira **âncora**: `#/pagina/glossario/termo-triade-cia`. O endereço por termo não precisou
+de gramática nova — ele usa a mesma âncora como último segmento que o material já usava para as
+seções (`#/area/01-fundamentos/secao-4`) —, e a primeira célula é o link do próprio termo, que é o
+que deixa o endereço à mão e viaja junto do texto copiado. Termo e sigla com o mesmo texto ("TLS" nas
+duas tabelas) não colidem: o prefixo separa.
+
+O **índice** segue o sumário das outras telas (botões que movem foco e rolagem, sem mudar a rota) e
+tem **uma entrada por área de origem**, e não por letra inicial: a tabela de termos não está em ordem
+alfabética — ela segue o material, que agrupa os verbetes por tema —, então um índice por letra
+mandaria "S" para o primeiro verbete do arquivo a começar com S, que é "segurança da informação", e
+não para "sigilo". A tabela de siglas não tem coluna de área, e a entrada dela é a própria tabela.
+A busca ignora acento e maiúscula (`NFD` separa a letra do sinal e o intervalo `U+0300`–`U+036F` é o
+bloco dos acentos), exige que todas as palavras digitadas apareçam — "trust zero" acha "zero trust" —
+e a contagem que ela atualiza é uma região `role="status"`, que é o que o leitor de tela ouve a cada
+tecla.
+
+Medido: **23 asserções** no cenário `glossario (navegavel por termo)` do `npm run smoke`, sobre os
+78 verbetes do material — a lista começa inteira, a busca encolhe e volta, o termo que não existe
+esvazia a lista com aviso, o índice cai em verbete (e não em título), e o endereço de um termo aberto
+direto muda a rota, leva o foco e rola até ele, abaixo do cabeçalho fixo.
 
 ## Do Markdown para o JSON
 
@@ -491,6 +599,39 @@ Arquivo gerado, não editável à mão; cada `build:content` o sobrescreve por i
 
 Nenhuma seção do Markdown é reescrita pelo app. Corrigir um parágrafo significa corrigir em
 `conteudo/` e regerar o JSON. O Markdown é a fonte única da verdade e o app é leitor, não autor.
+
+### Os links do material viram rota
+
+**O material não muda.** Quem lê no GitHub ou no disco continua vendo `TEMA-02-triade-cia.md` e
+`../01-fundamentos/TEMA-01-*.md`: referência cruzada por caminho de arquivo é decisão editorial, e
+trocar isso na origem quebraria quem lê o repositório. A tradução acontece **na geração do
+`content.json`**, uma vez, onde o gate consegue conferir o resultado. O mapa
+`caminho relativo → rota do app` sai do mesmo material que o parser lê, e o caminho do link é
+normalizado contra a pasta do documento de origem — por isso `TEMA-02-triade-cia.md` e
+`../00-guia-basico/TEMA-02-triade-cia.md` dão a mesma rota. A pasta com `README.md` herda a rota dele,
+que é como o material cita `[91-trilhas/](../91-trilhas/)`.
+
+Medido no `content.json`: **0 `href` relativo** no HTML gerado, contra **1328** antes. Deste total,
+**1196 viraram rota** do app (`#/area/…`, `#/tema/…`, `#/pagina/…`) e **132 ficaram declarados sem
+rota** — o texto fica, a marca de link sai. Os **586** externos (e os que saem do material) seguem
+intactos. O total de `href` caiu de **1914** para **1782**: a diferença são exatamente os 132 que
+viraram texto.
+
+**A âncora viaja como último segmento da rota.** O material escreve `README.md#4-temas`, com o slug
+do cabeçalho como o GitHub o monta; o app endereça seção por número. Como o fragmento da URL pertence
+à rota, a âncora entra depois dela — `#/area/01-fundamentos/secao-4` —, que é a mesma gramática do
+endereço de um termo do glossário. Um `#` a mais não serve: ele não é delimitador de segmento, e
+`#/area/x#secao-4` viraria o `areaId` `x#secao-4`, ou seja, "área não encontrada". O material de hoje
+tem **uma** âncora assim.
+
+**O que não tem rota está declarado num lugar só** (`scripts/lib/links-material.ts`,
+`DECLARADOS_SEM_ROTA`), com o motivo ao lado — quatro entradas: `CONTRIBUTING.md` (regra de autoria
+do material), `templates/` (pasta das fichas de autoria, citada como pasta),
+`templates/RELACOES-TEMAS.md` (formato do bloco de relações) e `templates/INDICE-TEMAS.md` (numeração
+canônica dos temas). Um link declarado cujo texto **não nomeia** o arquivo de destino reprova: sem
+`href`, o leitor do app perderia para onde a referência aponta. E o `99-fontes/` **não** entra nesta
+lista, apesar de ser trilha de QA do mantenedor: ele tem tela no app, e declará-lo seria esconder uma
+tela que existe — lá existe rota, e o que não existe é a leitura.
 
 `conteudo/` está versionado, então um clone já traz o material inteiro e o `build:content` roda
 direto. O que não vai para o controle de versão é o derivado: `app/src/content/generated/` e
@@ -528,7 +669,13 @@ totais do JSON gerado. Depois percorre cada tema e cada guia. Erra o build quem:
 - deixar `meta.geradoEm` fora do formato ISO, ou `ordem_estudo` com ref a mais, a menos ou repetida;
 - publicar fonte sem título, área sem ancoragem, ou rótulo de Mermaid com `<`, `>`, `"`, `(`, `)` ou
   `#` — os mesmos caracteres que o verificador do material recusa, porque os dois leem o mesmo
-  contrato: o bloco `contrato-mermaid` da §7 do `conteudo/CONTRIBUTING.md`.
+  contrato: o bloco `contrato-mermaid` da §7 do `conteudo/CONTRIBUTING.md`;
+- sobrar **`href` relativo no HTML gerado**: alvo que não tem rota no app, alvo que não existe no
+  material, ou uma troca que não passou pelo mapa. Esta é a conferência do **resultado**, e não da
+  intenção — um campo de HTML novo que escape da troca, ou um resolvedor que deixe de ser passado,
+  reprova aqui, e não no mapa que já disse o que pretendia fazer;
+- a lista de declarações sem rota ter uma entrada que **ninguém mais linka**: declaração morta
+  reprova, para a lista não virar depósito de caminhos que o material já não cita.
 
 O gate imprime `verificado: 18 areas, 109 temas, 22 paginas` quando passa. Quando falha, lista cada
 erro e sai com código 1, o que derruba o `npm run build` antes de o Vite entrar em ação.
@@ -579,11 +726,12 @@ que já fechou continua aqui, com a razão registrada, para o estado não se per
 | **O quiz tem escopo por área e por tema**: `#/quiz` (todas as áreas), `#/quiz/<areaId>` e `#/quiz/<areaId>/<temaId>`, com o botão "Praticar este tema" na página do tema. As três rotas entram na matriz do `smoke` e nos `hrefsInvalidos`. Fechada | — |
 | **As duas CSPs restantes não são pendência, são consequência.** O `<meta>` do build de navegador e o cabeçalho do `launcher/servidor.py` aceitam `script-src 'unsafe-inline'` porque os dois servem **um arquivo único com script inline** — o formato que `file://` exige. Não há como apertá-las sem dividir o bundle, e dividir quebraria o duplo clique. O desktop, que pode dividir, já roda em `'self'`. Fechada | — |
 | **S2, S4, S6, S7, S9 e S10 saíram da lista**: as seis são medidas em `scripts/smoke-desktop.mjs`, em 18 asserções novas com prova de falsificabilidade por mutação. A tabela do §16.3 ficou inteira no que dependia de teste. Fechada | — |
-| Os 1328 links relativos (`../README.md`, `TEMA-*.md`) ficam mortos no arquivo único: precisam ser reescritos para as rotas do app. Os 586 externos abrem normalmente | 6 |
-| Regras do material ainda não implementadas: "duas passagens falhas seguidas mandam para releitura completa" (`plano-12-meses.md`), revisão além de D+90, a tarefa concreta de cada intervalo, a coluna "Artefato produzido" do registro e o diagnóstico por item (hoje é um booleano por tema) | 6 |
+| **Os links do material viraram rota, e o HTML gerado ficou sem `href` relativo nenhum.** Os 1328 relativos de antes viraram **0**: 1196 chegaram ao app como rota e 132 ficaram declarados sem rota (o texto fica, o `<a>` sai). Os 586 externos seguem intactos. O portão reprova link novo sem rota e declaração morta. Fechada — os números e a lista estão em "Os links do material viram rota" | — |
+| **As regras do material desta lista entraram.** A escada da revisão termina em **D+90** e o tema consolidado volta pela etapa final a cada 90 dias ("D+90 e além"); a tarefa de cada intervalo sai da coluna "O que fazer" da §11 do próprio tema; o registro guarda o **artefato da §8** de cada guia com a data da produção; e o **diagnóstico por item** existe no pré-teste das trilhas — dez itens com veredito por item e o ponto de entrada lido da tabela do material. As duas passagens falhas seguidas passaram a ser contadas: elas marcam "releitura completa antes desta passagem" na fila de hoje e **não** mudam a escada de rebaixamento, por decisão do dono — a releitura é anunciada, não imposta. Fechada | — |
 | O **escopo do critério na trilha de 90 dias** (`plano-90-dias.md` §7 recomenda que só os itens 1 e 2 de 02 contem) não é aplicado pelo app, que usa o critério do guia inteiro. O dono do critério já está declarado (`CONTRIBUTING` §3: o guia da área); falta decidir se a trilha é recomendação de escopo ou régua própria | 6 |
-| `glossario.md` e `mapa-relacoes.md` usam `## Título` sem número e caem inteiros no `intro`, sem seções; o glossário não é navegável por termo | 6 |
-| A fila de hoje é clicável, mas só lista os cinco primeiros: falta paginar ou abrir a lista inteira | 6 |
+| **O glossário passou a ser navegável por termo**: endereço próprio por verbete (`#/pagina/glossario/termo-triade-cia`), índice no padrão de sumário das outras telas e filtro que ignora acento e maiúscula. Medido: 78 verbetes do material (59 termos e 19 siglas) e **23 asserções** no cenário `glossario (navegavel por termo)` do `npm run smoke`. O índice é **por área de origem**, e não por letra, porque a tabela de termos segue a ordem do material e não a alfabética — a razão está registrada em "Glossário navegável por termo". Fechada | — |
+| `glossario.md` e `mapa-relacoes.md` continuam sem `## N.` — o material deles usa `## Título` sem número —, então os dois caem inteiros no `intro`. O que a tela ganha são os cabeçalhos como âncoras de sumário (o mapa de relações é a página mais longa; medido: 0 seções e 58.410 bytes de `intro` nele, contra 0 seções e 38.335 bytes no glossário). Reescrever essa estrutura é do material, e não do app | 6 |
+| **A fila de hoje abre inteira.** Ela mostra os cinco primeiros e o botão "Ver os N vencidos" (`aria-expanded`/`aria-controls`) abre a lista toda; sem nada vencido, ela diz "nada vencido em D+1, D+7, D+30 ou D+90". Fechada | — |
 | Os vereditos por item do checkpoint vivem em `useState`: o total persiste, mas após recarregar os botões voltam em branco, com o texto dizendo "último resultado registrado" | 6 |
 | **`npm run dev` funciona**: a CSP saiu do `index.html` e é injetada por plugin do Vite só no build (`apply: 'build'`), então o `<script src>` do dev não é bloqueado. Fechada | — |
 | **Diagramas: botão "Ampliar" e `aria-label` no SVG** entregues (`src/ui/mermaid.ts`), e o cabeçalho das tabelas longas ficou `position: sticky` (`src/styles.css`). Fechada | — |
@@ -601,7 +749,9 @@ que já fechou continua aqui, com a razão registrada, para o estado não se per
 | SBOM e soma de verificação por release; o `package-lock.json` já cobre electron, electron-builder e playwright | 7 |
 | **A camada de interface tem teste de componente**: `@testing-library` + `jsdom` num segundo projeto do Vitest (`vitest.config.ts`), e `src/ui/Progresso.test.tsx` exercita exportar e importar **pelo componente** — inclusive importar inválido sem sobrescrever o progresso e a ponte que rejeita. Fechada | — |
 | O caminho de exportar/importar **do navegador** (Blob, `<input type=file>`, corte de 1 MB no arquivo escolhido) não tem teste; o cancelamento do diálogo deixa a promise pendente | 6 |
-| O gate é um subconjunto do `conteudo/scripts/verificar-repo.py`: ainda não confere `<details>` do gabarito, links internos entre arquivos, formato de datas e coerência da tabela de tempos | 6 |
+| O gate é um subconjunto do `conteudo/scripts/verificar-repo.py`: ainda não confere `<details>` do gabarito, formato de datas e coerência da tabela de tempos. **Links internos saíram desta linha**: o `check:content` confere os alvos dos links do material (que existam, que tenham rota ou declaração) e o HTML gerado (nenhum `href` relativo). O que ele ainda não confere é o **destino** da rota — se `#/tema/a/TEMA-01` abre uma tela —, e isso é papel do `smoke`, que percorre a matriz de rotas | 6 |
 | **A via da pasta com atalho tem portão**: `npm run smoke:pasta` monta a pasta, sobe o `servidor.py` numa porta efêmera, confere 200/421/404/501 e a CSP pelo fio, e encerra no `finally`. Entrou no `npm run verificar`. Fechada | — |
 | O `.gitattributes` promete CRLF para `*.bat`, mas o arquivo no repositório está em LF — a conversão de verdade é a do `empacotar.mjs`, e ela **não pode ser removida** achando que o git resolve | 6 |
 | Os smokes dependem de `google-chrome-stable` no PATH e de sessão gráfica para o Electron; nada disso está em CI, porque CI não existe | 7 |
+| **O pré-teste diagnóstico e os artefatos têm teste no domínio e na tela das trilhas, mas não na fila de hoje.** Medido: o redutor e o normalizador do progresso (`registrarDiagnostico`, `registrarArtefato`, `normalizarDiagnosticos`, `normalizarArtefatos`) somam 8 casos em `src/domain/progresso.test.ts`, e as duas telas das trilhas, 7 casos em `src/ui/Trilha.test.tsx`. O que **não** tem teste de componente é a `TarefaDaPassagem` e o ramo "sem tarefa tabelada" da fila, em `src/ui/Progresso.tsx`: ali só a camada de aplicação (`filaComTarefas`) é exercitada, e não o que a tela escreve — no `smoke`, a fila é conferida apenas vazia ("fila vazia no inicio"). É o que ficou pela metade quando o agente que implementou o pré-teste e os artefatos parou no limite de turnos | 6 |
+| **A revisão da fase 6 com os agentes não foi feita.** O código desta fase tem teste e passa pelos dois gates, mas não passou pela revisão adversarial que as fases anteriores tiveram — a de segurança, a de testes, a de frontend e a de UI/UX, que é de onde saíram as pendências de acessibilidade, de foco e de alvo de toque das fases anteriores | 6 |

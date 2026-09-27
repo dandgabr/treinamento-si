@@ -1,4 +1,5 @@
 import {
+  Fragment,
   useEffect,
   useId,
   useMemo,
@@ -53,15 +54,21 @@ export function idDaSecao(numero: number): string {
  *
  * O `id` e o `tabIndex` do titulo existem para o sumario: o botao de la move o foco e a
  * rolagem para este `h2`.
+ *
+ * `depoisDaSecao` encaixa um bloco do app imediatamente depois de uma secao do material. E como
+ * o diagnostico da trilha volta para dentro do `1.1` de onde a extracao o tirou: o material
+ * escreve o bloco no meio da secao 1, e a tela o devolve no mesmo lugar.
  */
 export function Secoes({
   secoes,
   excluir = [],
   escuro,
+  depoisDaSecao,
 }: {
   secoes: Secao[]
   excluir?: number[]
   escuro: boolean
+  depoisDaSecao?: { numero: number; conteudo: ReactNode }
 }) {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -78,12 +85,15 @@ export function Secoes({
           // reinjeta o HTML original e o Mermaid volta a ter material para renderizar.
           // Sem isso ele pula o no (ja marcado com data-processed) e o diagrama
           // mantem as cores do tema anterior.
-          <section key={`${s.numero}-${escuro}`} className="secao">
-            <h2 id={idDaSecao(s.numero)} tabIndex={-1}>
-              <span className="secao-num">{s.numero}.</span> {s.titulo}
-            </h2>
-            <Html html={s.html} />
-          </section>
+          <Fragment key={`${s.numero}-${escuro}`}>
+            <section className="secao">
+              <h2 id={idDaSecao(s.numero)} tabIndex={-1}>
+                <span className="secao-num">{s.numero}.</span> {s.titulo}
+              </h2>
+              <Html html={s.html} />
+            </section>
+            {depoisDaSecao?.numero === s.numero ? depoisDaSecao.conteudo : null}
+          </Fragment>
         ))}
     </div>
   )
@@ -178,8 +188,11 @@ export function BlocoQA({
   }
 
   return (
-    <section className="secao bloco-qa" id={id}>
-      <h2 tabIndex={id === undefined ? undefined : -1}>{titulo}</h2>
+    <section className="secao bloco-qa">
+      {/* O `id` fica no `h2`, como nas secoes do material: e ele que recebe o foco quando o
+          sumario ou um link de "volta a secao 10" leva o leitor ate aqui. Num `<section>` sem
+          `tabindex` o foco nao entra, e a rolagem aconteceria sozinha. */}
+      <h2 id={id} tabIndex={id === undefined ? undefined : -1}>{titulo}</h2>
       <p className="dica">Responda antes de revelar o gabarito.</p>
       <ol className="lista-qa">
         {pares.map((par, i) => {

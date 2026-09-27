@@ -43,6 +43,27 @@ export interface RegistroDeQuestao {
   ultima: string
 }
 
+/**
+ * Veredito de um item do pre-teste diagnostico de uma trilha, na ordem do material. Item nao
+ * julgado nao entra na lista: "nao respondi" e "errei" sao estados diferentes, e o resumo do
+ * diagnostico so existe com os dez julgados.
+ */
+export interface RespostaDiagnostico {
+  indice: number
+  acertou: boolean
+}
+
+/**
+ * O artefato da secao 8 de um guia. A trilha pede o estado por artefato — produzido e a data
+ * (secao 8 do plano de 12 meses tem a coluna "Artefato produzido", e a secao 3.2, o artefato da
+ * area). `data` e o dia local em que a producao foi marcada, e fica vazio quando o artefato foi
+ * marcado como nao produzido.
+ */
+export interface RegistroArtefato {
+  produzido: boolean
+  data: string
+}
+
 export interface Progresso {
   versao: typeof VERSAO_PROGRESSO
   temas: Record<string, TemaProgresso>
@@ -51,25 +72,37 @@ export interface Progresso {
   questoes: Record<string, RegistroDeQuestao>
   /** Dias (AAAA-MM-DD) com ao menos uma atividade. Base do streak. */
   diasAtivos: string[]
+  /** Slug da trilha -> vereditos do pre-teste diagnostico dela. */
+  diagnosticos: Record<string, RespostaDiagnostico[]>
+  /** Chave `areaId#N` (N da secao 8 do guia da area) -> artefato produzido e quando. */
+  artefatos: Record<string, RegistroArtefato>
 }
 
 /**
  * Versao do formato gravado.
  *
- * O campo novo desta fase (`temas[ref].revisao.falhasSeguidas`, a contagem de passagens falhas
- * seguidas que decide a releitura completa) entra SEM mudar a versao, e o precedente e do
- * proprio arquivo: foi assim que `questoes` entrou na v1 (ver `pareceProgresso`). A regra que
- * sustenta isso e que o campo e aditivo — um arquivo gravado antes dele continua legivel, e o
- * normalizador preenche o que falta com o valor neutro (zero falhas seguidas). Uma versao nova
- * aqui teria dois custos: `normalizarProgresso` DESCARTA versao desconhecida, entao todo
- * arquivo em disco precisaria de migracao (e o app que ainda nao migrasse perderia o estudo), e
- * a versao faz parte do que se exporta — quem revisou o formato da exportacao precisa saber
- * disso antes de o numero mudar.
+ * Os campos que esta fase acrescentou (`temas[ref].revisao.falhasSeguidas`, o veredito por item
+ * do diagnostico das trilhas e o artefato da secao 8 dos guias) entram SEM mudar a versao, e o
+ * precedente e do proprio arquivo: foi assim que `questoes` entrou na v1 (ver `pareceProgresso`).
+ * A regra que sustenta isso e que o campo e aditivo — um arquivo gravado antes dele continua
+ * legivel, e o normalizador preenche o que falta com o valor neutro (zero falhas seguidas, mapa
+ * vazio de diagnosticos e de artefatos). Uma versao nova aqui teria dois custos:
+ * `normalizarProgresso` DESCARTA versao desconhecida, entao todo arquivo em disco precisaria de
+ * migracao (e o app que ainda nao migrasse perderia o estudo), e a versao faz parte do que se
+ * exporta — quem revisou o formato da exportacao precisa saber disso antes de o numero mudar.
  */
 export const VERSAO_PROGRESSO = 1
 
 export function progressoVazio(): Progresso {
-  return { versao: VERSAO_PROGRESSO, temas: {}, checkpoints: {}, questoes: {}, diasAtivos: [] }
+  return {
+    versao: VERSAO_PROGRESSO,
+    temas: {},
+    checkpoints: {},
+    questoes: {},
+    diasAtivos: [],
+    diagnosticos: {},
+    artefatos: {},
+  }
 }
 
 export function temaVazio(ref: string, agora: Date): TemaProgresso {
@@ -187,6 +220,48 @@ export function registrarCheckpoint(
     { ...p, checkpoints: { ...p.checkpoints, [areaId]: { acertos, total } } },
     agora,
   )
+}
+
+/**
+ * Registra o veredito de um item do pre-teste diagnostico de uma trilha.
+ *
+ * Mesma idempotencia de `registrarConfianca`: repetir o mesmo veredito nao cria estado novo (o
+ * store depende disso para nao gravar e nao re-renderizar a toa). Indice negativo nao descreve
+ * item nenhum e e recusado, como o id vazio em `registrarQuestao`.
+ */
+export function registrarDiagnostico(
+  p: Progresso,
+  slug: string,
+  indice: number,
+  acertou: boolean,
+  agora: Date,
+): Progresso {
+  if (!slug || CHAVES_RECUSADAS.has(slug) || !Number.isInteger(indice) || indice < 0) return p
+  const atual = p.diagnosticos[slug] ?? []
+  if (atual.find((r) => r.indice === indice)?.acertou === acertou) return p
+  const outros = atual.filter((r) => r.indice !== indice)
+  const respostas = [...outros, { indice, acertou }].sort((a, b) => a.indice - b.indice)
+  return registrarDiaAtivo({ ...p, diagnosticos: { ...p.diagnosticos, [slug]: respostas } }, agora)
+}
+
+/**
+ * Marca o artefato da secao 8 de um guia como produzido (ou desmarca).
+ *
+ * A data e o dia local da marcacao, e nao a ultima vez que o estado foi tocado: desmarcar limpa
+ * a data, para o registro nao dizer que um artefato foi produzido no dia em que alguem percebeu
+ * que ele nao existe. Chave vazia nao vira campo do estado — o normalizador a recusaria, e
+ * gravar dado que o proximo carregamento joga fora faz a tela mostrar o que some ao reabrir.
+ */
+export function registrarArtefato(
+  p: Progresso,
+  chave: string,
+  produzido: boolean,
+  agora: Date,
+): Progresso {
+  if (!chave || CHAVES_RECUSADAS.has(chave)) return p
+  if (p.artefatos[chave]?.produzido === produzido) return p
+  const registro: RegistroArtefato = { produzido, data: produzido ? diaIso(agora) : '' }
+  return registrarDiaAtivo({ ...p, artefatos: { ...p.artefatos, [chave]: registro } }, agora)
 }
 
 /**
@@ -362,6 +437,53 @@ function normalizarQuestoes(valor: unknown): Record<string, RegistroDeQuestao> {
 }
 
 /**
+ * Vereditos do diagnostico das trilhas. Indice inteiro nao negativo e veredito booleano: item
+ * repetido fica com o ultimo valor lido, em vez de a lista ficar com dois vereditos para o mesmo
+ * item — o resumo conta acertos, e contaria o mesmo item duas vezes.
+ */
+function normalizarDiagnosticos(valor: unknown): Record<string, RespostaDiagnostico[]> {
+  const out: Record<string, RespostaDiagnostico[]> = {}
+  if (!valor || typeof valor !== 'object') return out
+  for (const [slug, bruto] of Object.entries(valor as Record<string, unknown>)) {
+    if (!slug || CHAVES_RECUSADAS.has(slug) || !Array.isArray(bruto)) continue
+    const porIndice = new Map<number, boolean>()
+    for (const item of bruto) {
+      if (!item || typeof item !== 'object') continue
+      const r = item as Record<string, unknown>
+      if (typeof r.acertou !== 'boolean') continue
+      if (!numeroFinito(r.indice) || !Number.isInteger(r.indice)) continue
+      porIndice.set(r.indice, r.acertou)
+    }
+    if (!porIndice.size) continue
+    out[slug] = [...porIndice]
+      .map(([indice, acertou]) => ({ indice, acertou }))
+      .sort((a, b) => a.indice - b.indice)
+  }
+  return out
+}
+
+/**
+ * Artefatos da secao 8 dos guias. `produzido` tem de ser booleano, e a data, um dia de calendario
+ * — a mesma guarda dos dias ativos, porque a tela mostra essa data ao lado do artefato. Entrada
+ * sem informacao nenhuma (`produzido: false`, sem data) fica: e a marca de "nao produzido", que e
+ * uma resposta do estudante e nao sobra.
+ */
+function normalizarArtefatos(valor: unknown): Record<string, RegistroArtefato> {
+  const out: Record<string, RegistroArtefato> = {}
+  if (!valor || typeof valor !== 'object') return out
+  for (const [chave, bruto] of Object.entries(valor as Record<string, unknown>)) {
+    if (!chave || CHAVES_RECUSADAS.has(chave) || !bruto || typeof bruto !== 'object') continue
+    const r = bruto as Record<string, unknown>
+    if (typeof r.produzido !== 'boolean') continue
+    // Data so faz sentido com o artefato produzido: guardada solta, ela diria que algo foi
+    // produzido num registro que afirma o contrario.
+    const data = r.produzido === true && ehDataIso(r.data) ? r.data : ''
+    out[chave] = { produzido: r.produzido, data }
+  }
+  return out
+}
+
+/**
  * Diz se o valor tem a forma de um progresso desta versao, sem normalizar. Serve para a
  * importacao recusar um arquivo estranho ANTES de substituir o que existe: o
  * normalizador descarta versao desconhecida, o que e certo para ler dado velho e errado
@@ -372,8 +494,8 @@ export function pareceProgresso(valor: unknown): boolean {
   const bruto = valor as Record<string, unknown>
   // `questoes` nao entra na conferencia de proposito: um arquivo exportado antes do quiz nao
   // tem o campo e continua sendo um progresso desta versao — o normalizador o preenche vazio.
-  // Exigir o campo recusaria o backup de quem estudou ate ontem. `revisao.falhasSeguidas`
-  // segue a mesma regra, um nivel abaixo.
+  // Exigir o campo recusaria o backup de quem estudou ate ontem. `revisao.falhasSeguidas`,
+  // `diagnosticos` e `artefatos` seguem a mesma regra, um nivel abaixo ou ao lado.
   return (
     bruto.versao === VERSAO_PROGRESSO &&
     !!bruto.temas &&
@@ -385,13 +507,15 @@ export function pareceProgresso(valor: unknown): boolean {
 /**
  * Versao desconhecida e descartada em vez de migrada as cegas.
  *
- * Nao ha passo de migracao porque nao ha versao nova: o unico campo que esta fase acrescentou
- * (`revisao.falhasSeguidas`) e aditivo, e um arquivo gravado antes dele carrega igual — o
- * normalizador poe zero no que falta. A escolha do valor neutro e declarada: a v1 nao guarda o
- * resultado de cada passagem, entao nao ha como saber se as duas ultimas falharam, e supor
- * "sim" faria o app exigir releitura completa de um tema que talvez tenha acabado de acertar.
- * O efeito colateral e o mesmo de antes do campo: um tema que ja tinha duas falhas seguidas so
- * entra em releitura completa apos a proxima falha.
+ * Nao ha passo de migracao porque nao ha versao nova: os campos que estas fases acrescentaram
+ * (`revisao.falhasSeguidas`, `diagnosticos`, `artefatos`) sao aditivos, e um arquivo gravado antes
+ * deles carrega igual — o normalizador poe o valor neutro no que falta (zero falhas seguidas,
+ * mapas vazios). A escolha do valor neutro e declarada: a v1 nao guarda o resultado de cada
+ * passagem, entao nao ha como saber se as duas ultimas falharam, e supor "sim" faria o app exigir
+ * releitura completa de um tema que talvez tenha acabado de acertar. O efeito colateral e o mesmo
+ * de antes do campo: um tema que ja tinha duas falhas seguidas so entra em releitura completa
+ * apos a proxima falha. O diagnostico e o artefato seguem a mesma politica: vazio quer dizer
+ * "ainda nao respondido", que e exatamente o que o app mostra para quem nunca abriu a trilha.
  */
 export function normalizarProgresso(valor: unknown, agora: Date): Progresso {
   const vazio = progressoVazio()
@@ -406,5 +530,7 @@ export function normalizarProgresso(valor: unknown, agora: Date): Progresso {
     diasAtivos: Array.isArray(bruto.diasAtivos)
       ? [...new Set(bruto.diasAtivos.filter(ehDataIso))].sort()
       : [],
+    diagnosticos: normalizarDiagnosticos(bruto.diagnosticos),
+    artefatos: normalizarArtefatos(bruto.artefatos),
   }
 }

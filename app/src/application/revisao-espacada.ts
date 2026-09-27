@@ -16,7 +16,9 @@
 
 import { filaDoProgresso, type Progresso } from '../domain/progresso'
 import {
+  intervaloDaCobranca,
   precisaReleituraCompleta,
+  proximaCobranca,
   tarefaDoIntervalo,
   type TarefaDoIntervalo,
 } from '../domain/srs'
@@ -25,7 +27,8 @@ import type { Ref, Tabela, Tema } from '../domain/types'
 /** A seção 11 é "Revisão espaçada" nos 109 temas — o número é o contrato do material. */
 export const SECAO_REVISAO_ESPACADA = 11
 
-const RE_TABELA = /<table\b[^>]*>([\s\S]*?)<\/table>/i
+/** Global: `matchAll` devolve o corpo de cada tabela, na ordem do HTML. */
+const RE_TABELA_GLOBAL = /<table\b[^>]*>([\s\S]*?)<\/table>/gi
 const RE_LINHA = /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi
 const RE_CELULA = /<t[hd]\b[^>]*>([\s\S]*?)<\/t[hd]>/gi
 const RE_ENTIDADE = /&(#[0-9]+|[a-zA-Z]+);/g
@@ -58,24 +61,27 @@ export function textoDaCelula(html: string): string {
 }
 
 /**
- * A primeira tabela de um HTML, na forma que o resto do app já usa (`Tabela`): cabeçalho e
- * linhas. Devolve `null` quando não há tabela, quando ela só tem o cabeçalho ou quando nenhuma
- * linha fecha com ele — uma tabela sem linha utilizável não descreve intervalo algum, e
- * devolver a casca vazia só empurraria a checagem para quem chama.
+ * Todas as tabelas utilizáveis de um HTML, na ordem em que aparecem.
  *
- * A primeira linha é o cabeçalho, e linha cujo número de células não fecha com o cabeçalho é
- * descartada em vez de virar registro torto.
+ * A primeira linha de cada tabela é o cabeçalho, e linha cujo número de células não fecha com
+ * ele é descartada em vez de virar registro torto. Tabela sem nenhuma linha utilizável fica
+ * fora: devolver a casca vazia só empurraria a checagem para quem chama.
  */
+export function tabelas(html: string): Tabela[] {
+  return [...html.matchAll(RE_TABELA_GLOBAL)].flatMap((casado) => {
+    const linhas = [...(casado[1] ?? '').matchAll(RE_LINHA)].map((linha) =>
+      [...(linha[1] ?? '').matchAll(RE_CELULA)].map((celula) => textoDaCelula(celula[1] ?? '')),
+    )
+    const [cabecalho, ...resto] = linhas
+    if (!cabecalho?.length) return []
+    const uteis = resto.filter((l) => l.length === cabecalho.length)
+    return uteis.length ? [{ cabecalho, linhas: uteis }] : []
+  })
+}
+
+/** A primeira tabela de um HTML, na forma que o resto do app já usa (`Tabela`). */
 export function primeiraTabela(html: string): Tabela | null {
-  const corpo = RE_TABELA.exec(html)?.[1]
-  if (!corpo) return null
-  const linhas = [...corpo.matchAll(RE_LINHA)].map((linha) =>
-    [...(linha[1] ?? '').matchAll(RE_CELULA)].map((celula) => textoDaCelula(celula[1] ?? '')),
-  )
-  const [cabecalho, ...resto] = linhas
-  if (!cabecalho?.length) return null
-  const uteis = resto.filter((l) => l.length === cabecalho.length)
-  return uteis.length ? { cabecalho, linhas: uteis } : null
+  return tabelas(html)[0] ?? null
 }
 
 /** "D+7" vira 7. Qualquer outro rótulo (e "D+0") não vira intervalo. */
@@ -112,13 +118,17 @@ export function tarefaDoTema(tema: Tema, intervaloDias: number): TarefaDoInterva
 export interface ItemDaFila {
   ref: Ref
   titulo: string
+  /** O intervalo que esta passagem cobra. No consolidado é o degrau final (D+90). */
   intervaloDias: number
-  proximaRevisao: string
+  /** A data da cobrança, que é a data que a tela mostra. */
+  cobranca: string
   passagens: number
   rebaixamentos: number
   falhasSeguidas: number
   /** Duas passagens falhas seguidas: o material manda o tema para releitura completa. */
   releituraCompleta: boolean
+  /** true quando o item entrou na fila pela etapa final, depois de cumprir a escada. */
+  consolidado: boolean
   /** O que fazer neste intervalo, pela seção 11 do tema. `null` quando não há linha para ele. */
   tarefa: TarefaDoIntervalo | null
 }
@@ -136,16 +146,20 @@ export function filaComTarefas(
 ): ItemDaFila[] {
   return filaDoProgresso(progresso, agora).map((estado) => {
     const tema = temas[estado.ref]
+    // O intervalo que a passagem cobra, e não o que o arquivo guardou: um tema que consolidou
+    // quando a escada terminava em D+30 tem de aparecer como a passagem de D+90 que ele é.
+    const intervaloDias = intervaloDaCobranca(estado)
     return {
       ref: estado.ref,
       titulo: tema?.titulo ?? estado.ref,
-      intervaloDias: estado.intervaloDias,
-      proximaRevisao: estado.proximaRevisao,
+      intervaloDias,
+      cobranca: proximaCobranca(estado).toISOString(),
       passagens: estado.passagens,
       rebaixamentos: estado.rebaixamentos,
       falhasSeguidas: estado.falhasSeguidas,
       releituraCompleta: precisaReleituraCompleta(estado),
-      tarefa: tema ? tarefaDoTema(tema, estado.intervaloDias) : null,
+      consolidado: estado.consolidado,
+      tarefa: tema ? tarefaDoTema(tema, intervaloDias) : null,
     }
   })
 }

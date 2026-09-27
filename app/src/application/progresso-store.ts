@@ -18,8 +18,10 @@ import {
   normalizarProgresso,
   pareceProgresso,
   progressoVazio,
+  registrarArtefato as aplicarArtefato,
   registrarCheckpoint as aplicarCheckpoint,
   registrarConfianca as aplicarConfianca,
+  registrarDiagnostico as aplicarDiagnostico,
   registrarQuestao as aplicarQuestao,
   registrarRecuperacao as aplicarRecuperacao,
   type Confianca,
@@ -222,6 +224,25 @@ export function registrarCheckpoint(
 /** Resposta de um item do quiz: acumula o placar do item e marca o dia do estudo. */
 export function registrarQuestao(id: string, acertou: boolean, agora: Date = new Date()): void {
   publicar((p) => aplicarQuestao(p, id, acertou, agora))
+}
+
+/** Veredito de um item do pre-teste diagnostico de uma trilha (slug da pagina). */
+export function registrarDiagnostico(
+  slug: string,
+  indice: number,
+  acertou: boolean,
+  agora: Date = new Date(),
+): void {
+  publicar((p) => aplicarDiagnostico(p, slug, indice, acertou, agora))
+}
+
+/** Marca (ou desmarca) o artefato da secao 8 de um guia, pelo id da area e o numero da atividade. */
+export function registrarArtefato(
+  chave: string,
+  produzido: boolean,
+  agora: Date = new Date(),
+): void {
+  publicar((p) => aplicarArtefato(p, chave, produzido, agora))
 }
 
 /** Abre a proxima passagem de recuperacao de um tema. */

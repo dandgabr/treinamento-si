@@ -11,6 +11,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
 import type { Area, Conteudo, Nivel, Pagina, Ref, Tema } from '../../src/domain/types'
+import { extrairTrilha } from '../../src/application/extrair-trilha'
 import {
   montarMapa,
   novoRelatorio,
@@ -159,9 +160,15 @@ export function gerarComRelatorio(contentDir: string): Geracao {
     [...a.temas].sort((x, y) => x.localeCompare(y, 'pt-BR', { numeric: true })),
   )
 
-  const paginas: Pagina[] = material.paginas.map((p) =>
-    parsePaginaDeTexto(p.texto, p.grupo, p.slug, resolvedorDe(p.caminho)),
-  )
+  const paginas: Pagina[] = material.paginas.map((p) => {
+    const pagina = parsePaginaDeTexto(p.texto, p.grupo, p.slug, resolvedorDe(p.caminho))
+    // As trilhas trazem o pre-teste diagnostico e a tabela de fases como texto; `extrairTrilha`
+    // os le do HTML ja com os links resolvidos e devolve as secoes sem a regiao do diagnostico
+    // (ela vira bloco interativo na tela). Qualquer outra pagina sai daqui com `trilha: null`.
+    const extraida = extrairTrilha(pagina, areas.map((a) => a.areaId))
+    if (!extraida) return { ...pagina, trilha: null }
+    return { ...pagina, secoes: extraida.secoes, trilha: extraida.trilha }
+  })
 
   return {
     conteudo: {

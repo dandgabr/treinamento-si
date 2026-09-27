@@ -107,15 +107,21 @@ describe('AcoesDeProgresso — exportar', () => {
     )
     expect(registro.exportados).toHaveLength(1)
     const exportado = registro.exportados[0] as Record<string, unknown>
-    // A forma é a do progresso desta versão, e não um recorte do que a tela mostra.
+    // A forma é a do progresso desta versão, e não um recorte do que a tela mostra. `diagnosticos`
+    // e `artefatos` são campos aditivos desta fase: entram no arquivo exportado (e por isso
+    // aparecem aqui), e um arquivo gravado antes deles carrega igual, com os dois vazios.
     expect(Object.keys(exportado).sort()).toEqual([
+      'artefatos',
       'checkpoints',
+      'diagnosticos',
       'diasAtivos',
       'questoes',
       'temas',
       'versao',
     ])
     expect(exportado.versao).toBe(1)
+    expect(exportado.diagnosticos).toEqual({})
+    expect(exportado.artefatos).toEqual({})
     expect(exportado.temas).toMatchObject({
       '01-fundamentos#TEMA-01': { recuperacaoOk: true },
     })

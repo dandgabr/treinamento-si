@@ -4,7 +4,9 @@ import { content } from '../infrastructure/content/repository'
 export type Rota =
   | { nome: 'home' }
   | { nome: 'area'; areaId: string }
-  | { nome: 'tema'; ref: string }
+  // `ancora` e o id de um alvo DENTRO da tela (a secao 10 do tema, um verbete do glossario),
+  // quando a rota termina nele.
+  | { nome: 'tema'; ref: string; ancora: string | null }
   // `slug` pode ter mais de um segmento (`91-trilhas/plano-90-dias`); `ancora` e o id de um
   // alvo DENTRO da pagina (o termo do glossario), quando a rota termina nele.
   | { nome: 'pagina'; slug: string; ancora: string | null }
@@ -65,7 +67,8 @@ function analisar(hash: string, slugs: readonly string[]): Rota {
     })
   if (!partes.length) return { nome: 'home' }
   if (partes[0] === 'area' && partes[1]) return { nome: 'area', areaId: partes[1] }
-  if (partes[0] === 'tema' && partes[1] && partes[2]) return { nome: 'tema', ref: `${partes[1]}#${partes[2]}` }
+  if (partes[0] === 'tema' && partes[1] && partes[2])
+    return { nome: 'tema', ref: `${partes[1]}#${partes[2]}`, ancora: partes[3] ?? null }
   if (partes[0] === 'pagina' && partes[1]) {
     const { slug, ancora } = separarAncora(partes.slice(1), slugs)
     return { nome: 'pagina', slug, ancora }
@@ -142,10 +145,15 @@ export function focarConteudo(rolar = false): void {
  *
  * O `#` do ref nao pode ir cru para a URL: ele encerraria o fragmento e a rota viraria
  * "desconhecida".
+ *
+ * `ancora` leva a um alvo dentro da tela (o id de um elemento), e serve ao caminho de volta:
+ * a fila de hoje manda para a seção 10 do tema quando o intervalo devido não tem tarefa tabelada
+ * na seção 11 dele. Sem alvo, o endereço é o da tela.
  */
-export function linkTema(ref: string): string {
+export function linkTema(ref: string, ancora?: string): string {
   const [areaId, parte] = ref.split('#')
-  return `#/tema/${areaId}/${parte}`
+  const base = `#/tema/${areaId}/${parte}`
+  return ancora ? `${base}/${ancora}` : base
 }
 
 /** Monta o href do quiz: com tema, o do tema; com area, o da area; sem, o de todas. */

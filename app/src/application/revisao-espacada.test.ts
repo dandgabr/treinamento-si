@@ -241,6 +241,36 @@ describe('filaComTarefas', () => {
     expect(fila[0]?.releituraCompleta).toBe(false)
   })
 
+  it('mostra o tema consolidado como a etapa final em D+90, sem tarefa tabelada', () => {
+    // O arquivo antigo consolidou em D+30 e guardou o intervalo de então; a passagem que a fila
+    // cobra agora é o degrau final das trilhas, e a seção 11 não tabela esse intervalo.
+    const fila = filaComTarefas(
+      comTema(REF, {
+        intervaloDias: 30,
+        consolidado: true,
+        proximaRevisao: '2026-03-05T12:00:00.000Z',
+      }),
+      TEMAS,
+      new Date('2026-05-04T12:00:00.000Z'),
+    )
+    expect(fila).toHaveLength(1)
+    expect(fila[0]?.intervaloDias).toBe(90)
+    expect(fila[0]?.consolidado).toBe(true)
+    expect(fila[0]?.tarefa).toBeNull()
+    // A data que a tela mostra é a da cobrança (última passagem + 90), e não a que o arquivo
+    // guardou quando a escada terminava em D+30.
+    expect(fila[0]?.cobranca).toBe('2026-05-04T12:00:00.000Z')
+  })
+
+  it('não lista o tema consolidado antes do degrau final', () => {
+    const fila = filaComTarefas(
+      comTema(REF, { intervaloDias: 30, consolidado: true, proximaRevisao: '2026-04-09T12:00:00.000Z' }),
+      TEMAS,
+      AGORA,
+    )
+    expect(fila).toEqual([])
+  })
+
   it('ordena do mais atrasado para o mais recente', () => {
     const progresso = comTema(REF, { proximaRevisao: '2026-03-05T12:00:00.000Z' })
     const dois = {

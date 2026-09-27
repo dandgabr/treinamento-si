@@ -3,8 +3,10 @@ import { content } from '../infrastructure/content/repository'
 import { ponte } from '../infrastructure/storage/ponte'
 import { aprovouNoCriterio, interpretarCriterio } from '../domain/criterio'
 import { dominioDaArea } from '../domain/dominio'
-import { diasComEstudo, filaDoProgresso, resultadoDoCheckpoint } from '../domain/progresso'
+import { diasComEstudo, resultadoDoCheckpoint } from '../domain/progresso'
+import { intervaloDaCobranca, intervaloInicial } from '../domain/srs'
 import type { Area } from '../domain/types'
+import { filaComTarefas, tarefaDoTema } from '../application/revisao-espacada'
 import {
   abrirPassagem,
   exportar,
@@ -20,13 +22,52 @@ import {
   useProgresso,
   type Aviso,
 } from '../application/progresso-store'
-import { BlocoQA } from './Blocos'
-import { linkTema } from './useRota'
+import { BlocoQA, idDaSecao } from './Blocos'
+import { irParaSecao, linkTema } from './useRota'
 
 const FORMATO_DATA = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
 
 function dataCurta(iso: string): string {
   return FORMATO_DATA.format(new Date(iso))
+}
+
+/**
+ * O que fazer nesta passagem, pela seção 11 do próprio tema.
+ *
+ * O intervalo sem linha na tabela devolve `null` — o caso dos rebaixados (D+3) e do degrau final
+ * das trilhas (D+90), que a seção 11 de nenhum dos 109 temas tabela. Nesse caso o app NÃO
+ * empresta a tarefa de outro intervalo: mostra que não há tarefa para este intervalo e devolve o
+ * caminho da seção 10, que é a recuperação ativa do tema.
+ */
+export function TarefaDaPassagem({ refTema }: { refTema: string }) {
+  const progresso = useProgresso()
+  const tema = content.temas[refTema]
+  const revisao = progresso.temas[refTema]?.revisao
+  const intervaloDias = revisao ? intervaloDaCobranca(revisao) : intervaloInicial()
+  const tarefa = tema ? tarefaDoTema(tema, intervaloDias) : null
+
+  return (
+    <p className={tarefa ? 'tarefa-da-passagem' : 'tarefa-da-passagem sem-tarefa'}>
+      {tarefa ? (
+        <>
+          <strong>O que fazer nesta passagem (D+{tarefa.intervaloDias}):</strong> {tarefa.oQueFazer}
+          {tarefa.seErrar ? ` Se errar: ${tarefa.seErrar}.` : ''}
+        </>
+      ) : (
+        <>
+          Não há tarefa tabelada para este intervalo (D+{intervaloDias}): a seção 11 do tema tabela
+          D+1, D+7 e D+30. A passagem aqui é a recuperação ativa.{' '}
+          <button
+            type="button"
+            className="botao-secundario"
+            onClick={() => irParaSecao(idDaSecao(10))}
+          >
+            Ir para a seção 10
+          </button>
+        </>
+      )}
+    </p>
+  )
 }
 
 /**
@@ -40,10 +81,12 @@ export function VereditoRecuperacao({ refTema }: { refTema: string }) {
   const progresso = useProgresso()
   const tema = progresso.temas[refTema]
   const registrado = tema?.recuperacaoOk ?? null
+  const intervaloDias = tema ? intervaloDaCobranca(tema.revisao) : intervaloInicial()
 
   return (
     <section className="secao veredito">
       <h3>Como foi nesta passagem?</h3>
+      <TarefaDaPassagem refTema={refTema} />
       {registrado === null ? (
         <>
           <p className="dica">
@@ -72,7 +115,9 @@ export function VereditoRecuperacao({ refTema }: { refTema: string }) {
       {tema ? (
         <p className="proxima-revisao" role="status">
           {tema.revisao.consolidado
-            ? 'Tema consolidado: sai da fila de revisão.'
+            ? // O consolidado não sai da fila para sempre: ele volta pela etapa final em D+90,
+              // contada da passagem que acabou de consolidar (seção 6 das trilhas).
+              `Tema consolidado: a escada está cumprida e a próxima passagem é a etapa final, em D+${intervaloDias} — ${dataCurta(tema.revisao.proximaRevisao)}.`
             : `Próxima revisão em D+${tema.revisao.intervaloDias} — ${dataCurta(tema.revisao.proximaRevisao)}.`}
           {tema.revisao.passagens > 0 ? ` Passagens: ${tema.revisao.passagens}.` : ''}
           {tema.revisao.rebaixamentos > 0 ? ` Rebaixamentos: ${tema.revisao.rebaixamentos}.` : ''}
@@ -125,7 +170,9 @@ export function ResumoProgresso() {
   // estado vazio e o nao lido sao indistinguiveis. Com a leitura falhando e pior — os zeros
   // diriam que nao ha nada quando o que ha e um arquivo que nao conseguimos abrir.
   const semDados = !carregado || erroDeCarga !== null
-  const fila = semDados ? [] : filaDoProgresso(progresso, agora)
+  // A fila traz a TAREFA de cada intervalo, lida da secao 11 do proprio tema: dizer a data e
+  // esconder o exercicio, e o exercicio e o que a passagem pede.
+  const fila = semDados ? [] : filaComTarefas(progresso, content.temas, agora)
   const dominios = semDados ? [] : content.areas.map((a) => dominioDaArea(a, progresso))
   const totalTemas = content.meta.totais.temas
   const firmes = dominios.reduce((n, d) => n + d.firmes, 0)
@@ -144,15 +191,37 @@ export function ResumoProgresso() {
         <strong>{semDados ? '—' : fila.length === 0 ? 'nada vencido' : `${fila.length} tema(s)`}</strong>
         {!semDados && fila.length ? (
           <ul className="resumo-fila" id={idFila}>
-            {visiveis.map((e) => (
-              <li key={e.ref}>
-                <a href={linkTema(e.ref)}>{content.temas[e.ref]?.titulo ?? e.ref}</a>
-                <span className="resumo-data">{dataCurta(e.proximaRevisao)}</span>
+            {visiveis.map((item) => (
+              <li key={item.ref} data-releitura={item.releituraCompleta}>
+                <a href={linkTema(item.ref)}>{item.titulo}</a>
+                <span className="resumo-intervalo">D+{item.intervaloDias}</span>
+                <span className="resumo-data">{dataCurta(item.cobranca)}</span>
+                {/* Duas passagens falhas seguidas mandam o tema para releitura completa antes
+                    desta passagem: dizer isso aqui e o que evita a fila virar um lembrete de
+                    data. */}
+                {item.releituraCompleta ? (
+                  <span className="selo selo-releitura">releitura completa antes desta passagem</span>
+                ) : null}
+                {item.consolidado ? (
+                  <span className="selo selo-etapa-final">etapa final da trilha</span>
+                ) : null}
+                {item.tarefa ? (
+                  <span className="resumo-tarefa">{item.tarefa.oQueFazer}</span>
+                ) : (
+                  // Intervalo sem linha na secao 11 do tema (os rebaixados e o D+90): o app nao
+                  // empresta a tarefa de outro intervalo — diz que nao ha tarefa e leva de volta
+                  // a secao 10, que e a recuperacao ativa do tema.
+                  <span className="resumo-tarefa sem-tarefa">
+                    Sem tarefa tabelada para este intervalo: a seção 11 do tema tabela D+1, D+7 e
+                    D+30.{' '}
+                    <a href={linkTema(item.ref, idDaSecao(10))}>Voltar à seção 10 do tema</a>
+                  </span>
+                )}
               </li>
             ))}
           </ul>
         ) : semDados ? null : (
-          <span className="resumo-detalhe">nada vencido em D+1, D+7 ou D+30.</span>
+          <span className="resumo-detalhe">nada vencido em D+1, D+7, D+30 ou D+90.</span>
         )}
         {/* O botao so existe quando ha o que abrir: com cinco ou menos, a lista ja e inteira. */}
         {fila.length > FILA_VISIVEL ? (
