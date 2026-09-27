@@ -20,7 +20,7 @@
 
 import { cleanup, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
 import { tarefaDoTema } from '../application/revisao-espacada'
 import { atividadesDoGuia } from '../domain/trilha'
 import type { Conteudo } from '../domain/types'
@@ -97,6 +97,13 @@ function escapar(texto: string): string {
 }
 
 afterEach(cleanup)
+
+// O `jsdom` não implementa `scrollIntoView`, e o caminho de volta da retomada (`irParaSecao`) rola
+// até a fase que estuda a área. O stub não afrouxa nada: o que o teste verifica é o FOCO, que o
+// `jsdom` faz de verdade — o alvo do foco é o id da fase, e é ele que diz se o caminho está certo.
+beforeAll(() => {
+  Element.prototype.scrollIntoView = () => {}
+})
 
 describe('diagnóstico da trilha', () => {
   it('mostra os dez itens do material, com "Acertei: sim/não" em cada um', async () => {
@@ -288,6 +295,197 @@ describe('checklist da trilha', () => {
     )
     // O selo do marco aparece uma vez: só a fase que ESTUDA a área lista os artefatos e o selo.
     expect(container.querySelectorAll('.selo-cumprido')).toHaveLength(1)
+  })
+
+  it('só cumpre a fase quando TODAS as áreas dela têm o checkpoint e o artefato', async () => {
+    // O plano de 12 meses liga MAIS DE UMA área por fase da primeira passagem — é onde o marco da
+    // fase se prova como o de todas elas, e não o da primeira que fecha. As duas condições são por
+    // área: falta uma de cada vez, a fase continua pendente.
+    const { store, ChecklistDaTrilha, conteudo } = await montar()
+    const trilha = trilhaDaPagina(conteudo)
+    const { container } = render(<ChecklistDaTrilha trilha={trilha} />)
+    const usuario = userEvent.setup()
+
+    const areas = trilha.fases[0]!.areas.map((id) => conteudo.areas.find((a) => a.areaId === id)!)
+    expect(areas.length).toBeGreaterThan(1)
+    const fase0 = container.querySelectorAll('.fase')[0]!
+    expect(fase0.querySelectorAll('.area-marco')).toHaveLength(areas.length)
+    expect(fase0.getAttribute('data-cumprida')).toBe('false')
+    expect(fase0.querySelector('.fase-estado')!.textContent).toContain(`0 de ${areas.length}`)
+
+    // Só o checkpoint das áreas, sem artefato nenhum: uma condição de cada duas, e a fase não fecha.
+    for (const area of areas) {
+      const total = area.guia.checkpoint.length
+      store.registrarCheckpoint(area.areaId, total, total)
+    }
+    await waitFor(() =>
+      expect(fase0.querySelector('.area-marco-condicao')!.textContent).toContain(
+        'aprovado no critério declarado',
+      ),
+    )
+    expect(fase0.getAttribute('data-cumprida')).toBe('false')
+    expect(fase0.querySelectorAll('.area-marco[data-cumprido="true"]')).toHaveLength(0)
+    expect(fase0.querySelector('.fase-estado')!.textContent).toContain(`0 de ${areas.length}`)
+
+    // O artefato de cada área: as duas condições valem por área, e a fase fecha com a última.
+    for (const area of areas) {
+      const primeira = atividadesDoGuia(area.guia)[0]!
+      await usuario.click(screen.getByRole('checkbox', { name: new RegExp(escapar(primeira.texto)) }))
+    }
+    await waitFor(() => expect(fase0.getAttribute('data-cumprida')).toBe('true'))
+    expect(fase0.querySelectorAll('.area-marco[data-cumprido="true"]')).toHaveLength(areas.length)
+    expect(fase0.querySelector('.fase-estado')!.textContent).toContain('Marco da fase cumprido')
+    // A fase cumprida é UMA: a segunda passagem retoma as mesmas áreas, mas o marco dela é das 18.
+    expect(container.querySelectorAll('.fase[data-cumprida="true"]')).toHaveLength(1)
+    expect(container.querySelectorAll('.fase[data-cumprida="false"]')).toHaveLength(trilha.fases.length - 1)
+
+    // Desmarcar o artefato de UMA área reabre a fase: o marco da fase é o de todas elas.
+    const ultima = atividadesDoGuia(areas[areas.length - 1]!.guia)[0]!
+    await usuario.click(screen.getByRole('checkbox', { name: new RegExp(escapar(ultima.texto)) }))
+    await waitFor(() => expect(fase0.getAttribute('data-cumprida')).toBe('false'))
+    expect(fase0.querySelectorAll('.area-marco[data-cumprido="true"]')).toHaveLength(areas.length - 1)
+    expect(fase0.querySelector('.fase-estado')!.textContent).toContain(
+      `${areas.length - 1} de ${areas.length}`,
+    )
+  })
+
+  it('não cumpre a fase só com os artefatos: sem o checkpoint de cada área o marco não fecha', async () => {
+    // A outra metade da regra: com o artefato produzido e o checkpoint ainda não respondido,
+    // NENHUMA área cumpriu — o artefato sozinho não é o marco, nem da área nem da fase.
+    const { ChecklistDaTrilha, conteudo } = await montar()
+    const trilha = trilhaDaPagina(conteudo)
+    const { container } = render(<ChecklistDaTrilha trilha={trilha} />)
+    const usuario = userEvent.setup()
+
+    const areas = trilha.fases[0]!.areas.map((id) => conteudo.areas.find((a) => a.areaId === id)!)
+    for (const area of areas) {
+      const primeira = atividadesDoGuia(area.guia)[0]!
+      await usuario.click(screen.getByRole('checkbox', { name: new RegExp(escapar(primeira.texto)) }))
+    }
+    const fase0 = container.querySelectorAll('.fase')[0]!
+    await waitFor(() =>
+      expect(fase0.querySelectorAll('.artefato[data-produzido="true"]')).toHaveLength(areas.length),
+    )
+    expect(fase0.getAttribute('data-cumprida')).toBe('false')
+    expect(fase0.querySelectorAll('.area-marco[data-cumprido="true"]')).toHaveLength(0)
+    for (const marco of fase0.querySelectorAll('.area-marco')) {
+      expect(marco.querySelector('.selo-cumprido')).toBeNull()
+      expect(marco.querySelector('.area-marco-condicao')!.textContent).toContain(
+        'Checkpoint: ainda não respondido',
+      )
+    }
+    expect(fase0.querySelector('.fase-estado')!.textContent).toContain(`0 de ${areas.length}`)
+  })
+
+  it('a fase que retoma traz o estado do marco e o caminho de volta, sem repetir as caixas', async () => {
+    // O plano de 12 meses religa as dezoito áreas na última fase. Ali ninguém ESTUDA: a retomada
+    // traz o estado do marco — as duas condições que a fase precisa ver — e o caminho de volta para
+    // a fase que estuda a área, onde ficam as caixas. O estado do artefato é um só (`área#número`),
+    // então repetir a lista faria a mesma pergunta duas vezes, com o mesmo nome acessível.
+    const { ChecklistDaTrilha, conteudo } = await montar()
+    const trilha = trilhaDaPagina(conteudo)
+    const { container } = render(<ChecklistDaTrilha trilha={trilha} />)
+    const usuario = userEvent.setup()
+
+    const areas = [...new Set(trilha.fases.flatMap((f) => f.areas))]
+    const dona = new Map<string, number>()
+    trilha.fases.forEach((fase, i) => {
+      for (const id of fase.areas) if (!dona.has(id)) dona.set(id, i)
+    })
+    const artefatos = (id: string) =>
+      atividadesDoGuia(conteudo.areas.find((a) => a.areaId === id)!.guia)
+
+    const ultima = container.querySelectorAll('.fase')[trilha.fases.length - 1]!
+    const retomadas = [...ultima.querySelectorAll('.area-retomada')]
+    expect(retomadas).toHaveLength(areas.length)
+    expect(ultima.querySelectorAll('.area-marco')).toHaveLength(0)
+    expect(ultima.querySelectorAll('input[type=checkbox]')).toHaveLength(0)
+
+    // Uma caixa por artefato, todas na fase que estuda a área: nenhuma pergunta repetida.
+    const caixas = [...container.querySelectorAll<HTMLInputElement>('input[type=checkbox]')]
+    const esperado = areas.reduce((soma, id) => soma + artefatos(id).length, 0)
+    expect(caixas).toHaveLength(esperado)
+    expect(new Set(caixas.map((c) => c.closest('label')!.textContent)).size).toBe(esperado)
+    for (const retomada of retomadas) {
+      expect(within(retomada as HTMLElement).queryAllByRole('checkbox')).toHaveLength(0)
+      expect(retomada.querySelector('.lista-artefatos')).toBeNull()
+      expect(retomada.querySelector('.artefato')).toBeNull()
+    }
+
+    // Duas áreas de fases de estudo diferentes, para o caminho não passar por um id fixo.
+    for (const id of [AREA, '02-governanca-risco-compliance']) {
+      const retomada = retomadas.find((r) => r.querySelector(`a[href="#/area/${id}"]`)) as HTMLElement
+      if (!retomada) throw new Error(`a segunda passagem não retoma ${id}`)
+      const i = dona.get(id)!
+      expect(i).toBeLessThan(trilha.fases.length - 1)
+      const estudante = container.querySelectorAll('.fase')[i]!
+      // O estado do marco é o MESMO dos dois lados: a frase do estado tem um dono só.
+      const bloco = estudante.querySelector(`.area-marco a[href="#/area/${id}"]`)!.closest('.area-marco')!
+      expect(retomada.querySelector('.area-retomada-condicao')!.textContent).toBe(
+        bloco.querySelector('.area-marco-condicao')!.textContent,
+      )
+      expect(retomada.querySelector('.area-retomada-condicao')!.textContent).toContain(
+        `Artefatos produzidos: 0 de ${artefatos(id).length}`,
+      )
+      // O botão nomeia a fase que estuda a área, e leva o FOCO até ela — a fase que traz as caixas.
+      const botao = within(retomada).getByRole('button')
+      expect(botao.textContent).toBe(`Checklist da fase ${trilha.fases[i]!.rotulo}`)
+      await usuario.click(botao)
+      const alvo = (document.activeElement as HTMLElement).closest('.fase')!
+      expect(alvo.querySelector('.fase-rotulo')!.textContent).toBe(trilha.fases[i]!.rotulo)
+      expect(alvo.querySelector(`.area-marco a[href="#/area/${id}"]`)).toBeTruthy()
+      expect(within(alvo as HTMLElement).queryAllByRole('checkbox').length).toBeGreaterThan(0)
+    }
+  })
+
+  it('o marco retomado cumpre com as duas condições e volta a pendente ao desmarcar', async () => {
+    const { store, ChecklistDaTrilha, conteudo } = await montar()
+    const trilha = trilhaDaPagina(conteudo)
+    const { container } = render(<ChecklistDaTrilha trilha={trilha} />)
+    const usuario = userEvent.setup()
+
+    const area = conteudo.areas.find((a) => a.areaId === AREA)!
+    const primeira = atividadesDoGuia(area.guia)[0]!
+    const estudante = container.querySelectorAll('.fase')[trilha.fases.findIndex((f) => f.areas.includes(AREA))]!
+    const retomada = [...container.querySelectorAll('.area-retomada')].find((r) =>
+      r.querySelector(`a[href="#/area/${AREA}"]`),
+    ) as HTMLElement
+
+    const caixa = screen.getByRole('checkbox', { name: new RegExp(escapar(primeira.texto)) }) as HTMLInputElement
+    // Desmarcado: o artefato se declara assim, e o marco retomado também.
+    expect(caixa.checked).toBe(false)
+    expect(estudante.querySelector('.artefato[data-produzido="false"]')).toBeTruthy()
+    expect(retomada.getAttribute('data-cumprido')).toBe('false')
+
+    // Só o artefato produzido: uma condição de duas, e o marco retomado continua pendente.
+    await usuario.click(caixa)
+    await waitFor(() =>
+      expect(retomada.querySelector('.area-retomada-condicao')!.textContent).toContain(
+        `Artefatos produzidos: 1 de ${atividadesDoGuia(area.guia).length}`,
+      ),
+    )
+    expect(retomada.querySelector('.area-retomada-condicao')!.textContent).toContain(
+      'Checkpoint: ainda não respondido',
+    )
+    expect(retomada.getAttribute('data-cumprido')).toBe('false')
+    // Marcado uma vez só: a retomada não repete a caixa nem a data de produção.
+    expect(estudante.querySelectorAll('.artefato[data-produzido="true"]')).toHaveLength(1)
+    expect(container.querySelectorAll('.artefato[data-produzido="true"]')).toHaveLength(1)
+    expect(retomada.textContent).not.toContain('Produzido em')
+
+    // O checkpoint da área, no critério do próprio guia: as duas condições, e o marco fecha.
+    const total = area.guia.checkpoint.length
+    store.registrarCheckpoint(AREA, total, total)
+    await waitFor(() => expect(retomada.getAttribute('data-cumprido')).toBe('true'))
+    expect(retomada.querySelector('.area-retomada-condicao')!.textContent).toContain(
+      'Checkpoint: aprovado no critério declarado',
+    )
+
+    // Desmarcar tira a condição e o marco retomado volta a pendente.
+    await usuario.click(caixa)
+    await waitFor(() => expect(retomada.getAttribute('data-cumprido')).toBe('false'))
+    expect(estudante.querySelector('.artefato[data-produzido="false"]')).toBeTruthy()
+    expect(container.querySelectorAll('.artefato[data-produzido="true"]')).toHaveLength(0)
   })
 })
 

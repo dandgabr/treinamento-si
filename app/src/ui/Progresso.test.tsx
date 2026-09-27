@@ -7,10 +7,17 @@
 //
 // O store resolve o provedor e dispara a carga UMA vez, na importação. Por isso cada teste
 // reseta os módulos e reimporta o componente e o store, com o provedor já no lugar.
+//
+// O bloco final cobre a FILA DE HOJE e a tarefa da passagem, que vivem no mesmo arquivo
+// (`ResumoProgresso`, `TarefaDaPassagem`). Ali o conteúdo é o de verdade — o mesmo
+// `content.json` que a tela lê, carregado por `carregar()` —, porque a fila mostra a coluna
+// "O que fazer" da seção 11 de cada tema: sem o material carregado não há tarefa para cobrar.
 
 import { cleanup, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { tarefaDoTema, tarefasDaRevisao } from '../application/revisao-espacada'
+import type { Conteudo } from '../domain/types'
 import type { Persistencia } from '../infrastructure/storage/persistencia'
 
 // O Mermaid depende de medição de layout, que o jsdom não faz — e nada de exportar/importar
@@ -84,6 +91,44 @@ async function montar(provedor: Persistencia) {
   const { AcoesDeProgresso } = await import('./Progresso')
   await store.quandoCarregado()
   return { store, AcoesDeProgresso }
+}
+
+/** O tema cuja seção 11 tabela D+1, D+7 e D+30 — o caso com tarefa declarada. */
+const TEMA = '01-fundamentos#TEMA-01'
+
+/**
+ * Uma data de passagem bem no passado: a cobrança seguinte já nasceu vencida e o tema entra na
+ * fila de hoje sem depender do relógio da máquina.
+ */
+const PASSADO = new Date(Date.now() - 40 * 24 * 60 * 60 * 1000)
+
+interface Painel {
+  store: typeof import('../application/progresso-store')
+  TarefaDaPassagem: typeof import('./Progresso').TarefaDaPassagem
+  ResumoProgresso: typeof import('./Progresso').ResumoProgresso
+  conteudo: Conteudo
+}
+
+/**
+ * O store de verdade, com o provedor trocado e o conteúdo de verdade carregado: a fila lê a
+ * coluna "O que fazer" da seção 11 do material, e sem ele nenhum tema teria tarefa.
+ */
+async function montarPainel(): Promise<Painel> {
+  compartilhado.provedor = provedorDeTeste(novoRegistro())
+  vi.resetModules()
+  const repositorio = await import('../infrastructure/content/repository')
+  await repositorio.carregar()
+  const store = await import('../application/progresso-store')
+  await store.quandoCarregado()
+  const { TarefaDaPassagem, ResumoProgresso } = await import('./Progresso')
+  return { store, TarefaDaPassagem, ResumoProgresso, conteudo: repositorio.content }
+}
+
+/** A única linha da fila de hoje. */
+function linhaDaFila(container: HTMLElement): HTMLElement {
+  const linhas = container.querySelectorAll<HTMLElement>('.resumo-fila li')
+  expect(linhas).toHaveLength(1)
+  return linhas[0]!
 }
 
 afterEach(() => {
@@ -235,5 +280,111 @@ describe('AcoesDeProgresso — importar', () => {
     expect(aviso?.tipo).toBe('erro')
     expect(Object.keys(store.instantaneo().estado.temas)).toEqual([])
     expect(registro.gravados).toHaveLength(0)
+  })
+})
+
+describe('TarefaDaPassagem — o que fazer do intervalo', () => {
+  it('mostra na tela o "o que fazer" e o "se errar" que a seção 11 do tema declara', async () => {
+    const { store, TarefaDaPassagem, conteudo } = await montarPainel()
+    // Uma passagem errada em D+1: o D+1 continua D+1 (a tabela não o rebaixa) e a passagem
+    // seguinte já venceu — é ela que a tela está cobrando.
+    store.registrarRecuperacao(TEMA, false, PASSADO)
+    const tarefa = tarefaDoTema(conteudo.temas[TEMA]!, 1)
+    expect(tarefa).toBeTruthy()
+    expect(tarefa!.oQueFazer).toBeTruthy()
+    expect(tarefa!.seErrar).toBeTruthy()
+
+    const { container } = render(<TarefaDaPassagem refTema={TEMA} />)
+
+    // A asserção é sobre o TEXTO do material, e não sobre a classe do parágrafo: o corpo do
+    // componente pode virar `return null` sem que classe nenhuma deixe de existir.
+    expect(screen.getByText('O que fazer nesta passagem (D+1):')).toBeTruthy()
+    expect(container.textContent).toContain(tarefa!.oQueFazer)
+    expect(container.textContent).toContain(tarefa!.seErrar)
+  })
+})
+
+describe('fila de hoje — intervalo com tarefa tabelada', () => {
+  it('mostra a tarefa que a seção 11 do tema declara, e não só a data', async () => {
+    const { store, ResumoProgresso, conteudo } = await montarPainel()
+    // Uma falha em D+1 mantém o intervalo em D+1, que a seção 11 tabela.
+    store.registrarRecuperacao(TEMA, false, PASSADO)
+
+    const { container } = render(<ResumoProgresso />)
+    const linha = linhaDaFila(container)
+    expect(linha.querySelector('.resumo-intervalo')!.textContent).toBe('D+1')
+    expect(linha.textContent).toContain(conteudo.temas[TEMA]!.titulo)
+    const tarefa = tarefaDoTema(conteudo.temas[TEMA]!, 1)!
+    expect(tarefa.oQueFazer).toBeTruthy()
+    // O exercício da passagem está na fila; a data sozinha esconderia o que fazer.
+    expect(linha.textContent).toContain(tarefa.oQueFazer)
+  })
+})
+
+describe('fila de hoje — intervalo sem linha na seção 11', () => {
+  it('diz que não há tarefa para este intervalo e leva de volta à seção 10, sem emprestar tarefa', async () => {
+    const { store, ResumoProgresso, conteudo } = await montarPainel()
+    const tema = conteudo.temas[TEMA]!
+    // Acerto leva a D+7; o erro seguinte rebaixa para D+3, que a seção 11 de nenhum tema tabela
+    // (e é a mesma decisão que o degrau final D+90 cobra).
+    store.registrarRecuperacao(TEMA, true, PASSADO)
+    store.abrirPassagem(TEMA)
+    store.registrarRecuperacao(TEMA, false, PASSADO)
+
+    const { container } = render(<ResumoProgresso />)
+    const linha = linhaDaFila(container)
+    expect(linha.querySelector('.resumo-intervalo')!.textContent).toBe('D+3')
+    expect(linha.textContent).toContain('Sem tarefa tabelada para este intervalo')
+    // O caminho de volta é a recuperação ativa do PRÓPRIO tema.
+    const volta = linha.querySelector('a[href="#/tema/01-fundamentos/TEMA-01/secao-10"]')
+    expect(volta).toBeTruthy()
+    expect(volta!.textContent).toContain('Voltar à seção 10 do tema')
+
+    // E não empresta a tarefa de outro intervalo do tema: nenhuma das linhas da seção 11
+    // (D+1, D+7, D+30) aparece nesta linha da fila.
+    const outras = tarefasDaRevisao(tema).filter((t) => t.intervaloDias !== 3)
+    expect(outras.length).toBeGreaterThan(0)
+    for (const outra of outras) {
+      expect(linha.textContent).not.toContain(outra.oQueFazer)
+    }
+  })
+})
+
+describe('fila de hoje — data-releitura', () => {
+  it('marca a releitura completa depois de duas passagens falhas seguidas', async () => {
+    const { store, ResumoProgresso } = await montarPainel()
+    store.registrarRecuperacao(TEMA, true, PASSADO)
+    store.abrirPassagem(TEMA)
+    store.registrarRecuperacao(TEMA, false, PASSADO)
+    store.abrirPassagem(TEMA)
+    store.registrarRecuperacao(TEMA, false, PASSADO)
+    expect(store.instantaneo().estado.temas[TEMA]!.revisao.falhasSeguidas).toBe(2)
+
+    const { container } = render(<ResumoProgresso />)
+    const linha = linhaDaFila(container)
+    // O atributo é o que a folha de estilo e o teste leem: sem ele a marca da releitura
+    // completa some da linha sem que nada mais mude.
+    expect(linha.getAttribute('data-releitura')).toBe('true')
+  })
+
+  it('não marca a releitura completa com uma falha só', async () => {
+    const { store, ResumoProgresso } = await montarPainel()
+    store.registrarRecuperacao(TEMA, false, PASSADO)
+    expect(store.instantaneo().estado.temas[TEMA]!.revisao.falhasSeguidas).toBe(1)
+
+    const { container } = render(<ResumoProgresso />)
+    const linha = linhaDaFila(container)
+    // Um tema vencido e sem releitura devida: o atributo diz isso, e não fica só ausente.
+    expect(linha.getAttribute('data-releitura')).toBe('false')
+  })
+})
+
+describe('fila de hoje — a frase dos intervalos', () => {
+  it('lista o D+90 entre os intervalos cobertos quando não há nada vencido', async () => {
+    // Nenhum tema no progresso: a fila está vazia e a tela declara quais intervalos ela cobre.
+    const { ResumoProgresso } = await montarPainel()
+    render(<ResumoProgresso />)
+
+    expect(screen.getByText('nada vencido em D+1, D+7, D+30 ou D+90.')).toBeTruthy()
   })
 })
