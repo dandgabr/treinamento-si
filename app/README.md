@@ -325,15 +325,22 @@ Refazer o pacote muda o hash, e é por isso que ele não é versionado: publica-
 A diferença de tamanho para o pacote de 26/09 é compressão entre builds, não conteúdo — o que vale
 como prova de origem é a soma conferida contra o arquivo que se baixou.
 
-### O AppImage que estava no disco antes (guardado em `anteriores/`, medido, não copiado)
+### O AppImage que estava no disco antes (medido, e depois sobrescrito)
 
 | | Valor |
 |---|---|
-| arquivo | `instalador/anteriores/Roadmap CISO-0.1.0.AppImage` (guardado com o par intacto) |
+| arquivo | `instalador/Roadmap CISO-0.1.0.AppImage`, na época — **este arquivo não existe mais** |
 | tamanho | **109.137.711 bytes** (104,1 MiB) |
 | SHA-256 | `cbebd26b69ae50f41af585b126fa0270838ed22e091cf21c953781c0fc366997` |
 | data do arquivo | 2026-09-26 22:45:41 (-03:00) |
-| medido em | 2026-09-27, no disco desta máquina |
+| medido em | 2026-09-27, no disco desta máquina, antes de ser sobrescrito |
+
+**Este pacote saiu de disco, e o erro foi meu.** Ao guardar na mesma pasta o par construído a partir
+de um commit temporário, os nomes dos arquivos eram idênticos aos dele — e `mv`, na mesma partição,
+renomeia e **sobrescreve em silêncio**. O que sobrou em `instalador/anteriores/` é o par do commit
+temporário (`092e0ec6287726cb3aaef710e8e0976583733775178e3a3c614d00f158833820`, 109.100.595 bytes),
+esse com o `.sha256` ainda conferindo. A medição acima continua valendo como registro do que
+existiu, **não** como algo que se possa baixar hoje.
 
 **Este pacote não é do código de hoje, e a conta é esta.** O trabalho da fase 6 está nos commits de
 27/09 — 03:08 (`79bea35`, links do material virando rota e glossário navegável), 13:38 (`e178217`,
