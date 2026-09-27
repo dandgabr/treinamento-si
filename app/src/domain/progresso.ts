@@ -53,6 +53,19 @@ export interface Progresso {
   diasAtivos: string[]
 }
 
+/**
+ * Versao do formato gravado.
+ *
+ * O campo novo desta fase (`temas[ref].revisao.falhasSeguidas`, a contagem de passagens falhas
+ * seguidas que decide a releitura completa) entra SEM mudar a versao, e o precedente e do
+ * proprio arquivo: foi assim que `questoes` entrou na v1 (ver `pareceProgresso`). A regra que
+ * sustenta isso e que o campo e aditivo — um arquivo gravado antes dele continua legivel, e o
+ * normalizador preenche o que falta com o valor neutro (zero falhas seguidas). Uma versao nova
+ * aqui teria dois custos: `normalizarProgresso` DESCARTA versao desconhecida, entao todo
+ * arquivo em disco precisaria de migracao (e o app que ainda nao migrasse perderia o estudo), e
+ * a versao faz parte do que se exporta — quem revisou o formato da exportacao precisa saber
+ * disso antes de o numero mudar.
+ */
 export const VERSAO_PROGRESSO = 1
 
 export function progressoVazio(): Progresso {
@@ -268,12 +281,16 @@ function normalizarRevisao(valor: unknown, ref: string, agora: Date): EstadoRevi
   if (intervalo === null || quando === null) return padrao
   const brutoRebaixamentos = r.rebaixamentos
   const brutoPassagens = r.passagens
+  // Ausente (arquivo da v1) vale zero, e nao um palpite tirado de `rebaixamentos`: aquele
+  // conta a vida toda, e inferir dali inventaria duas falhas seguidas que talvez nao existam.
+  const brutoFalhasSeguidas = r.falhasSeguidas
   return {
     ref,
     intervaloDias: intervalo,
     proximaRevisao: quando,
     rebaixamentos: numeroFinito(brutoRebaixamentos) ? Math.floor(brutoRebaixamentos) : 0,
     passagens: numeroFinito(brutoPassagens) ? Math.floor(brutoPassagens) : 0,
+    falhasSeguidas: numeroFinito(brutoFalhasSeguidas) ? Math.floor(brutoFalhasSeguidas) : 0,
     consolidado: r.consolidado === true,
   }
 }
@@ -355,7 +372,8 @@ export function pareceProgresso(valor: unknown): boolean {
   const bruto = valor as Record<string, unknown>
   // `questoes` nao entra na conferencia de proposito: um arquivo exportado antes do quiz nao
   // tem o campo e continua sendo um progresso desta versao — o normalizador o preenche vazio.
-  // Exigir o campo recusaria o backup de quem estudou ate ontem.
+  // Exigir o campo recusaria o backup de quem estudou ate ontem. `revisao.falhasSeguidas`
+  // segue a mesma regra, um nivel abaixo.
   return (
     bruto.versao === VERSAO_PROGRESSO &&
     !!bruto.temas &&
@@ -364,7 +382,17 @@ export function pareceProgresso(valor: unknown): boolean {
   )
 }
 
-/** Versao desconhecida e descartada em vez de migrada as cegas. */
+/**
+ * Versao desconhecida e descartada em vez de migrada as cegas.
+ *
+ * Nao ha passo de migracao porque nao ha versao nova: o unico campo que esta fase acrescentou
+ * (`revisao.falhasSeguidas`) e aditivo, e um arquivo gravado antes dele carrega igual — o
+ * normalizador poe zero no que falta. A escolha do valor neutro e declarada: a v1 nao guarda o
+ * resultado de cada passagem, entao nao ha como saber se as duas ultimas falharam, e supor
+ * "sim" faria o app exigir releitura completa de um tema que talvez tenha acabado de acertar.
+ * O efeito colateral e o mesmo de antes do campo: um tema que ja tinha duas falhas seguidas so
+ * entra em releitura completa apos a proxima falha.
+ */
 export function normalizarProgresso(valor: unknown, agora: Date): Progresso {
   const vazio = progressoVazio()
   if (!valor || typeof valor !== 'object') return vazio

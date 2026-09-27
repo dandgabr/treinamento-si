@@ -262,6 +262,35 @@ const casos: Array<[string, Mutacao, string]> = [
     (a) => void (a.c.ordemEstudo = [REF, REF]),
     'ordem_estudo com ref repetido',
   ],
+
+  // O link relativo e o defeito que a fase dos links veio remover: no arquivo unico servido por
+  // `file://` ele nao abre. A troca por rota acontece na geracao, e o gate cobra o RESULTADO —
+  // qualquer campo de HTML que escape dela reprova.
+  [
+    'acusa href relativo de .md sobrando na seção do tema',
+    (a) => void (a.tema.secoes[0]!.html = '<p><a href="TEMA-02-triade-cia.md">tema</a></p>'),
+    'href relativo no HTML gerado (TEMA-02-triade-cia.md)',
+  ],
+  [
+    'acusa href relativo de .md sobrando no intro do tema',
+    (a) => void (a.tema.intro = '<p><a href="../01-fundamentos/README.md">guia</a></p>'),
+    'href relativo no HTML gerado',
+  ],
+  [
+    'acusa href relativo de .md sobrando no guia da área',
+    (a) => void (a.guia.secoes[0]!.html = '<p><a href="../README.md">home</a></p>'),
+    'href relativo no HTML gerado',
+  ],
+  [
+    'acusa href relativo de .md sobrando no intro da página',
+    (a) => void (a.pagina.intro = '<p><a href="./templates/RELACOES-TEMAS.md">ficha</a></p>'),
+    'href relativo no HTML gerado',
+  ],
+  [
+    'acusa href relativo que não é de .md sobrando no HTML',
+    (a) => void (a.tema.secoes[0]!.html = '<p><a href="../91-trilhas/">trilhas</a></p>'),
+    'href relativo no HTML gerado',
+  ],
 ]
 
 describe('validar', () => {
@@ -295,6 +324,19 @@ describe('validar', () => {
     // geraria falso positivo.
     const texto = problemas((a) => {
       a.tema.intro = '<p class="vale destacar">texto limpo</p>'
+    })
+    expect(texto).toBe('')
+  })
+
+  it('não acusa a rota do app nem o link externo', () => {
+    // A regra é contra o href RELATIVO: rota (`#/...`) e `http(s)` continuam valendo — sem esta
+    // prova, a asserção acima passaria com a regra reprovando todo link da tela.
+    const texto = problemas((a) => {
+      a.tema.intro =
+        '<p><a href="#/tema/01-fundamentos/TEMA-02">tema</a> ' +
+        '<a href="#/area/01-fundamentos/secao-4">seção</a> ' +
+        '<a href="#/pagina/99-fontes/indice-fontes">índice</a> ' +
+        '<a href="https://exemplo/1">fonte</a> <a href="mailto:alguem@exemplo">contato</a></p>'
     })
     expect(texto).toBe('')
   })

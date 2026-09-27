@@ -1,17 +1,54 @@
 import { useEffect, useMemo, useState } from 'react'
+import { content } from '../infrastructure/content/repository'
 
 export type Rota =
   | { nome: 'home' }
   | { nome: 'area'; areaId: string }
   | { nome: 'tema'; ref: string }
-  | { nome: 'pagina'; slug: string }
+  // `slug` pode ter mais de um segmento (`91-trilhas/plano-90-dias`); `ancora` e o id de um
+  // alvo DENTRO da pagina (o termo do glossario), quando a rota termina nele.
+  | { nome: 'pagina'; slug: string; ancora: string | null }
   // `areaId` nulo e o quiz de todas as areas; `areaId` com `temaId` nulo e o da area
   // inteira; com os dois, o de um tema. E a mesma tela nos tres casos, e por isso nao ha uma
   // rota propria para cada escopo.
   | { nome: 'quiz'; areaId: string | null; temaId: string | null }
   | { nome: 'desconhecida' }
 
-function analisar(hash: string): Rota {
+/**
+ * Separa o slug da pagina do ancora dela.
+ *
+ * O slug de uma pagina pode ter mais de um segmento (`91-trilhas/plano-90-dias`), entao o
+ * ancora nao pode ser simplesmente "o segundo segmento": ele e o ULTIMO, e so quando o que vem
+ * antes dele e um slug conhecido. `#/pagina/glossario` e o glossario inteiro;
+ * `#/pagina/glossario/termo-tls` e o mesmo glossario aberto no verbete `termo-tls`, que leva o
+ * id do elemento na tela. E a mesma ancora como ultimo segmento que o material ja usa para as
+ * secoes (`#/area/01-fundamentos/secao-4`), entao o endereco de um termo nao precisou de
+ * gramatica nova.
+ *
+ * O slug exato ganha do prefixo: se um dia existir uma pagina `a/b` e outra `a`, `#/pagina/a/b`
+ * e a pagina `a/b`, e nao a `a` com um ancora `b`.
+ */
+export function separarAncora(
+  partes: string[],
+  slugs: readonly string[],
+): { slug: string; ancora: string | null } {
+  const inteiro = partes.join('/')
+  if (slugs.includes(inteiro)) return { slug: inteiro, ancora: null }
+  // Do prefixo mais longo para o mais curto: `#/pagina/91-trilhas/plano-90-dias/secao-2` tem de
+  // casar o slug de dois segmentos, e nao o de um.
+  for (let corte = partes.length - 1; corte >= 1; corte--) {
+    const prefixo = partes.slice(0, corte).join('/')
+    if (!slugs.includes(prefixo)) continue
+    const resto = partes.slice(corte)
+    // Um segmento so depois do slug. Dois nao formam ancora de nada: nao e rota de pagina, e a
+    // tela diz "pagina nao encontrada" como dizia antes de existir ancora.
+    if (resto.length === 1 && resto[0]) return { slug: prefixo, ancora: resto[0] }
+    break
+  }
+  return { slug: inteiro, ancora: null }
+}
+
+function analisar(hash: string, slugs: readonly string[]): Rota {
   const limpo = hash.replace(/^#\/?/, '')
   // Um "%" solto na URL (por exemplo "#/pagina/100%") faz decodeURIComponent lancar
   // URIError dentro do render e derruba a app inteira. Decodifica por parte, com
@@ -29,7 +66,10 @@ function analisar(hash: string): Rota {
   if (!partes.length) return { nome: 'home' }
   if (partes[0] === 'area' && partes[1]) return { nome: 'area', areaId: partes[1] }
   if (partes[0] === 'tema' && partes[1] && partes[2]) return { nome: 'tema', ref: `${partes[1]}#${partes[2]}` }
-  if (partes[0] === 'pagina' && partes[1]) return { nome: 'pagina', slug: partes.slice(1).join('/') }
+  if (partes[0] === 'pagina' && partes[1]) {
+    const { slug, ancora } = separarAncora(partes.slice(1), slugs)
+    return { nome: 'pagina', slug, ancora }
+  }
   // Sem area, `#/quiz` e o quiz geral; `#/quiz/<areaId>`, o da area; `#/quiz/<areaId>/<temaId>`,
   // o do tema. Nada mais e lido da rota: escopo inexistente e resolvido na tela, que sabe
   // dizer "area nao encontrada" e "tema nao encontrado".
@@ -49,7 +89,9 @@ export function useRota(): Rota {
   // Estavel entre renders: sem o memo, cada render devolve um objeto novo e efeitos
   // que dependem de `rota` (como o scroll para o topo) disparam a cada tecla, a cada
   // troca de tema e a cada clique — o leitor perde a posicao no meio do texto.
-  return useMemo(() => analisar(hash), [hash])
+  // Os slugs vem do conteudo ja carregado (`carregar()`, em `main.tsx`, roda antes da primeira
+  // renderizacao): e por eles que `#/pagina/glossario/termo-tls` acha a pagina e o ancora.
+  return useMemo(() => analisar(hash, content.paginas.map((p) => p.slug)), [hash])
 }
 
 export function irPara(hash: string): void {
@@ -57,17 +99,23 @@ export function irPara(hash: string): void {
 }
 
 /**
- * Leva a rolagem E o foco para um cabecalho do material.
+ * Leva a rolagem E o foco para um alvo dentro da tela (um cabecalho do material, um verbete do
+ * glossario).
  *
- * O alvo fica no `id` do cabecalho, e nao na URL: o fragmento pertence a rota, e uma ancora
+ * O alvo fica no `id` do elemento, e nao na URL: o fragmento pertence a rota, e uma ancora
  * de verdade viraria a rota "desconhecida". O foco vai junto porque rolar sem focar deixaria
  * quem usa leitor de tela no ponto antigo, lendo o que ja passou.
+ *
+ * Devolve se achou o alvo: a rota com ancora (`#/pagina/glossario/termo-tls`) precisa saber se
+ * ha para onde levar o foco, e um endereco que nao existe na tela nao pode deixar o foco no
+ * link que a pessoa acabou de clicar.
  */
-export function irParaSecao(id: string): void {
+export function irParaSecao(id: string): boolean {
   const alvo = document.getElementById(id)
-  if (!alvo) return
+  if (!alvo) return false
   alvo.focus({ preventScroll: true })
   alvo.scrollIntoView({ block: 'start' })
+  return true
 }
 
 /**

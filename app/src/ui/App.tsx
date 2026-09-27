@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { content, erroConteudo } from '../infrastructure/content/repository'
 import { gravarTexto, lerTexto } from '../infrastructure/storage/local'
 import type { Pagina } from '../domain/types'
@@ -12,11 +12,12 @@ import {
   useCabecalhos,
   type ItemDeSumario,
 } from './Blocos'
+import { Glossario, lerGlossario } from './Glossario'
 import { renderizarMermaid } from './mermaid'
 import { ResumoProgresso } from './Progresso'
 import { Quiz } from './Quiz'
 import { ThemeView } from './ThemeView'
-import { focarConteudo, linkQuiz, useRota, type Rota } from './useRota'
+import { focarConteudo, irParaSecao, linkQuiz, useRota, type Rota } from './useRota'
 
 const CHAVE_TEMA = 'roadmap:tema'
 const NOME_DO_APP = 'Roadmap CISO'
@@ -99,10 +100,11 @@ function Home() {
       <section className="secao">
         <h2>Praticar</h2>
         <p className="dica">
-          Múltipla escolha derivada das tabelas de erros comuns, da recuperação ativa dos temas e dos
-          checkpoints dos guias: uma questão por vez, com acerto ou erro, justificativa, fonte e o
-          caminho de volta ao material de origem. O item que ainda não passou por revisão humana
-          aparece marcado.
+          Múltipla escolha derivada das tabelas de erros comuns dos temas: uma questão por vez, com
+          acerto ou erro, justificativa, fonte e o caminho de volta ao material de origem. A
+          recuperação ativa dos temas e o checkpoint dos guias não entram aqui — os dois seguem no
+          material e na tela, com o gabarito sob demanda. O item que ainda não passou por revisão
+          humana aparece marcado.
         </p>
         <p className="acoes-tema">
           <a className="botao-secundario" href={linkQuiz()}>
@@ -187,6 +189,12 @@ function PaginaConteudo({ pagina, escuro }: { pagina: Pagina; escuro: boolean })
   const itens: ItemDeSumario[] = porSecao
     ? pagina.secoes.map((s) => ({ id: idDaSecao(s.numero), numero: s.numero, texto: s.titulo }))
     : cabecalhos.itens
+  // Pagina de referencia com tabela de verbetes (o glossario): ela ganha indice por area,
+  // busca e um endereco por termo. As outras seguem no HTML tratado, como sempre.
+  const glossario = useMemo(
+    () => (porSecao ? null : lerGlossario(cabecalhos.html, pagina.slug)),
+    [porSecao, cabecalhos.html, pagina.slug],
+  )
 
   useEffect(() => {
     if (containerRef.current) void renderizarMermaid(containerRef.current, escuro)
@@ -200,9 +208,15 @@ function PaginaConteudo({ pagina, escuro }: { pagina: Pagina; escuro: boolean })
       <header className="cabecalho-tema">
         <h1>{pagina.titulo}</h1>
       </header>
-      {itens.length >= MIN_ITENS_SUMARIO_PAGINA ? <Sumario itens={itens} /> : null}
-      <Html key={`intro-${escuro}`} className="intro" html={porSecao ? pagina.intro : cabecalhos.html} />
-      <Secoes secoes={pagina.secoes} escuro={escuro} />
+      {glossario ? (
+        <Glossario estrutura={glossario} escuro={escuro} />
+      ) : (
+        <>
+          {itens.length >= MIN_ITENS_SUMARIO_PAGINA ? <Sumario itens={itens} /> : null}
+          <Html key={`intro-${escuro}`} className="intro" html={porSecao ? pagina.intro : cabecalhos.html} />
+          <Secoes secoes={pagina.secoes} escuro={escuro} />
+        </>
+      )}
     </Principal>
   )
 }
@@ -236,9 +250,14 @@ export function App() {
   // Troca de rota: o foco vai para o conteudo novo. Sem isto quem usa leitor de tela
   // continua no cabecalho da tela anterior, e o primeiro TAB da a volta pela navegacao.
   useEffect(() => {
-    if (rotaInicial.current === rota) return
+    const mudou = rotaInicial.current !== rota
     rotaInicial.current = rota
-    focarConteudo()
+    // Rota de pagina que termina num alvo (`#/pagina/glossario/termo-tls`): o foco e a rolagem
+    // sao do alvo, e nao do topo da tela — quem abre o endereco de um termo quer o termo. Vale
+    // tambem na montagem, que e o caso do link compartilhado aberto direto.
+    const ancora = rota.nome === 'pagina' ? rota.ancora : null
+    if (ancora !== null && irParaSecao(ancora)) return
+    if (mudou) focarConteudo()
   }, [rota])
 
   function trocarTema(): void {

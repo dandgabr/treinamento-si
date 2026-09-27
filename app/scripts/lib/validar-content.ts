@@ -7,6 +7,7 @@ import { interpretarCriterio } from '../../src/domain/criterio'
 import { SEQUENCIA_DIAS } from '../../src/domain/srs'
 import type { Area, Conteudo, Fonte, Guia, Pagina, Secao, Tema } from '../../src/domain/types'
 import { lerContratoMermaid } from './contrato-mermaid'
+import { hrefsRelativos } from './links-material'
 
 /** Sequencia que o escalonador do app implementa hoje. */
 const SEQUENCIA_PADRAO: readonly number[] = SEQUENCIA_DIAS
@@ -106,6 +107,28 @@ function checarFontes(onde: string, fontes: Fonte[], erros: string[]): void {
   }
 }
 
+/**
+ * Nenhum href relativo pode sobrar no HTML gerado.
+ *
+ * Um caminho relativo (`TEMA-02-triade-cia.md`, `../01-fundamentos/README.md`) so abre no disco de
+ * quem clonou o repositorio; no arquivo unico aberto por `file://` — que e como o app chega a quem
+ * estuda — ele nao leva a lugar nenhum. A troca por rota acontece na geracao, uma vez
+ * (`links-material.ts`); esta regra cobra o RESULTADO, e nao a intencao: campo de HTML novo que
+ * escape da troca, ou um resolvedor que deixe de ser passado, reprova aqui.
+ *
+ * Link declarado sem rota tambem nao passa: ele vira texto na geracao, e um href relativo so
+ * sobrevive se ninguem o resolveu.
+ */
+function checarLinks(onde: string, htmls: string[], erros: string[]): void {
+  for (const html of htmls) {
+    for (const href of hrefsRelativos(html)) {
+      erros.push(
+        `${onde}: href relativo no HTML gerado (${href}) — link do material que nao virou rota do app`,
+      )
+    }
+  }
+}
+
 function validarTema(chave: string, t: Tema, refs: Set<string>, erros: string[]): void {
   const onde = chave
   // O progresso e gravado sob `ref`, e a chave do mapa e o `ref`: divergir faz o usuario
@@ -130,6 +153,7 @@ function validarTema(chave: string, t: Tema, refs: Set<string>, erros: string[])
   }
 
   checarSecoes(onde, t.secoes, erros, true)
+  checarLinks(onde, [t.intro, ...t.secoes.map((s) => s.html)], erros)
 
   if (t.preTeste.length < 1) erros.push(`${onde}: sem pre-teste`)
   for (const q of t.preTeste) if (!q.pergunta) erros.push(`${onde}: item de pre-teste vazio`)
@@ -193,6 +217,7 @@ function validarArea(a: Area, refs: Set<string>, erros: string[]): void {
   checarFontes(a.areaId, a.fontes, erros)
   checarMermaid(a.areaId, g.mermaid, erros)
   checarSecoes(a.areaId, g.secoes, erros, true)
+  checarLinks(a.areaId, [g.intro, ...g.secoes.map((s) => s.html)], erros)
   // O guia tambem e prosa: ficava de fora da varredura de lexico que temas e paginas
   // recebiam, embora o README prometesse o contrario.
   checarLexico(a.areaId, texto([g.intro, ...g.secoes.map((s) => s.html)]), erros)
@@ -218,6 +243,7 @@ function validarPagina(p: Pagina, erros: string[]): void {
   if (!GRUPOS_DE_PAGINA.has(p.grupo)) erros.push(`${p.slug}: grupo desconhecido (${p.grupo})`)
   checarMermaid(p.slug, p.mermaid, erros)
   checarSecoes(p.slug, p.secoes, erros, false)
+  checarLinks(p.slug, [p.intro, ...p.secoes.map((s) => s.html)], erros)
 }
 
 export interface TotaisEsperados {

@@ -65,7 +65,7 @@ interface Revisao {
  * Ele e calculado do proprio arquivo, e nao gravado num campo novo: o arquivo versionado e o
  * registro do que a pessoa revisou, entao comparar o que esta nele com o derivado agora ja
  * responde "o texto mudou?". Um campo a mais por item seria uma segunda copia do mesmo texto,
- * que pode divergir do que se le — e 955 itens reescritos para guardar um hash que se
+ * que pode divergir do que se le — e o banco inteiro reescrito para guardar um hash que se
  * recalcula em microssegundos.
  */
 function revisoesAnteriores(areaId: string): Map<string, Revisao> {

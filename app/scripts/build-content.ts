@@ -2,6 +2,10 @@
 // Nada e reescrito: as secoes viram HTML, as questoes ja existentes sao extraidas e os
 // blocos Mermaid ficam como texto (renderizados em runtime pelo mermaid.js).
 //
+// Os links relativos do material viram rota do app AQUI, na geracao: o material continua
+// escrevendo caminho de arquivo (quem le no GitHub nao perde a referencia cruzada) e quem le no
+// app recebe `#/area/...`, `#/tema/...` ou `#/pagina/...`. Ver scripts/lib/links-material.ts.
+//
 // Uso: npm run build:content
 // Variaveis opcionais: ROADMAP_CONTENT_DIR (aponta para outro diretorio de conteudo) e
 // ROADMAP_CONTENT_FILE (outro destino). As duas existem para o gate poder ser exercitado num
@@ -10,7 +14,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { gerarConteudo } from './lib/gerar-conteudo'
+import { gerarComRelatorio } from './lib/gerar-conteudo'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const APP_DIR = path.resolve(__dirname, '..')
@@ -19,7 +23,7 @@ const OUT_FILE =
   process.env.ROADMAP_CONTENT_FILE ??
   path.resolve(APP_DIR, 'src', 'content', 'generated', 'content.json')
 
-const conteudo = gerarConteudo(CONTENT_DIR)
+const { conteudo, links } = gerarComRelatorio(CONTENT_DIR)
 
 fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true })
 fs.writeFileSync(OUT_FILE, JSON.stringify(conteudo), 'utf-8')
@@ -29,3 +33,8 @@ console.log(
   `content.json gerado: ${conteudo.meta.totais.areas} areas, ` +
     `${conteudo.meta.totais.temas} temas, ${conteudo.meta.totais.paginas} paginas (${kb} KB)`,
 )
+console.log(
+  `links: ${links.paraRota} viraram rota do app, ${links.comoTexto} ficaram declarados sem rota ` +
+    `(so o texto), ${links.intactos} externos ou fora do material — ${links.erros.length} defeito(s)`,
+)
+

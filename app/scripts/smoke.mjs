@@ -177,6 +177,39 @@ const cenarios = [
     ],
   },
   {
+    nome: 'glossario por termo',
+    // O endereco de um termo e a mesma pagina com o id do verbete no fim da rota (`termo-tls` e
+    // o `id` da linha de "TLS" na tabela de termos). A tela tem de abrir o glossario inteiro —
+    // e nao "Pagina nao encontrada" — com o indice, a busca e aquele verbete no lugar dele.
+    rota: '#/pagina/glossario/termo-tls',
+    url: `${BASE}#/pagina/glossario/termo-tls`,
+    checar: (d) => [
+      ['titulo', d.querySelector('h1')?.textContent, 'Glossário'],
+      ['o verbete enderecado existe', d.querySelector('#termo-tls') !== null, true],
+      [
+        'o verbete traz o proprio endereco no link',
+        d.querySelector('#termo-tls a[href="#/pagina/glossario/termo-tls"]') !== null,
+        true,
+      ],
+      ['indice por area', d.querySelectorAll('.sumario button').length >= 10, true],
+      ['busca com rotulo de verdade', d.querySelector('.busca-glossario label')?.textContent, 'Buscar termo'],
+      ['contagem anunciada no aria-live', d.querySelector('.busca-contagem')?.getAttribute('role'), 'status'],
+      ['links de termo na pagina', d.querySelectorAll('a[href^="#/pagina/glossario/"]').length >= 40, true],
+      // O par acima diz que existem links; este diz que todos eles acham o alvo AQUI — o id do
+      // ultimo segmento tem de ser o id de uma linha desta tela. Com zero links ele passaria, e
+      // e por isso que os dois andam juntos.
+      [
+        'todo link de termo acha o verbete',
+        [...d.querySelectorAll('a[href^="#/pagina/glossario/"]')].filter(
+          (a) => d.getElementById((a.getAttribute('href') ?? '').split('/').pop()) === null,
+        ).length,
+        0,
+      ],
+      ['links internos resolvem (invalidos)', hrefsInvalidos(d).length, 0],
+      ['sem erro de rota', RE_ROTA_VAZIA.test(textoSemScripts(d)), false],
+    ],
+  },
+  {
     nome: 'rota malformada',
     rota: '#/pagina/100%',
     url: `${BASE}#/pagina/100%`,
@@ -259,6 +292,27 @@ function decodificar(parte) {
 }
 
 /**
+ * O slug de uma pagina a partir da rota inteira, ou `null` quando nao ha nenhuma.
+ *
+ * O slug pode ter mais de um segmento (`91-trilhas/plano-90-dias`), entao o ancora viaja como
+ * ULTIMO segmento e a pagina e o prefixo conhecido mais longo — a mesma leitura de
+ * `separarAncora` (`src/ui/useRota.ts`). Sem isto, o endereco de um termo do glossario
+ * (`#/pagina/glossario/termo-tls`) seria lido como um slug `glossario/termo-tls`, que nao
+ * existe, e o teste reprovaria justamente o link que a fase 6 veio acrescentar.
+ */
+function slugDePagina(partes, slugs) {
+  const inteiro = partes.slice(1).join('/')
+  if (slugs.has(inteiro)) return inteiro
+  for (let corte = partes.length - 1; corte >= 2; corte--) {
+    // So um segmento depois do slug: dois nao formam ancora de nada.
+    if (partes.length - corte !== 1) continue
+    const prefixo = partes.slice(1, corte).join('/')
+    if (slugs.has(prefixo)) return prefixo
+  }
+  return null
+}
+
+/**
  * Confere que todo link interno da pagina aponta para uma rota que existe no
  * conteudo. O smoke navega digitando a URL, entao sem isto um href quebrado em toda
  * a aplicacao passaria batido — foi exatamente o caso do `#` do ref indo cru para a
@@ -277,7 +331,7 @@ function hrefsInvalidos(d) {
     const ok =
       (partes[0] === 'area' && areas.has(partes[1])) ||
       (partes[0] === 'tema' && temas.has(`${partes[1]}#${partes[2]}`)) ||
-      (partes[0] === 'pagina' && slugs.has(partes.slice(1).join('/'))) ||
+      (partes[0] === 'pagina' && slugDePagina(partes, slugs) !== null) ||
       // O quiz tem tres rotas — `#/quiz`, `#/quiz/<areaId>` e `#/quiz/<areaId>/<temaId>` — e
       // as tres sao visitadas pela matriz. Sem esta linha, o link do painel e o botao
       // "Praticar este tema" seriam reprovados por apontarem para rotas que existem.
@@ -507,6 +561,181 @@ async function cenarioDoQuizRespondido() {
   return falhas
 }
 
+/**
+ * O contrato do glossario navegavel por termo.
+ *
+ * O `--dump-dom` fotografa a pagina parada: o que ele nao alcanca e a busca (que so existe
+ * depois de teclar), o foco de quem clica num termo e a rolagem que traz o verbete para a tela.
+ * Aqui o Chrome e aberto pelo Playwright e o caminho e feito de verdade: digitar, limpar,
+ * clicar no indice, clicar no termo, abrir o endereco de um termo direto.
+ *
+ * O numero de verbetes vem do proprio DOM, e nao de uma constante: o material pode ganhar
+ * termos sem quebrar o teste. O que ele fixa e o contrato — filtrar tira o que nao casa, nao
+ * casar avisa, e o endereco de um termo muda a rota e leva o foco e a rolagem ate ele.
+ */
+async function cenarioDoGlossario() {
+  const nome = 'glossario (navegavel por termo)'
+  const falhas = []
+  /** Mesma forma dos cenarios da matriz, para o relatorio final nao ter dois formatos. */
+  const conferir = (rotulo, obtido, esperado) => {
+    const ok = obtido === esperado
+    console.log(`${ok ? 'OK   ' : 'FALHA'} ${nome} :: ${rotulo} = ${JSON.stringify(obtido)}`)
+    if (!ok) falhas.push([nome, rotulo, `esperado ${JSON.stringify(esperado)}`])
+  }
+  /** Espera o foco chegar num verbete; sem o prazo, um defeito de foco travaria o laco. */
+  const esperarFocoNoVerbete = (alvo) =>
+    alvo
+      .waitForFunction(() => document.activeElement?.classList.contains('verbete'), null, {
+        timeout: 5000,
+      })
+      .catch(() => {})
+
+  const navegador = await chromium.launch({
+    ...(CHROME.includes('/') ? { executablePath: CHROME } : { channel: 'chrome' }),
+    headless: true,
+    args: ['--no-sandbox', '--disable-gpu'],
+  })
+
+  try {
+    const pagina = await navegador.newPage()
+    const busca = pagina.getByLabel('Buscar termo')
+    await pagina.goto(`${BASE}#/pagina/glossario`)
+    await busca.waitFor()
+
+    const todos = await pagina.locator('.verbete').count()
+    conferir('a lista comeca inteira', todos > 40, true)
+
+    // --- busca que acha e some com o resto
+    await busca.fill('zero trust')
+    const filtrado = await pagina.evaluate(() => ({
+      verbetes: document.querySelectorAll('.verbete').length,
+      contagem: document.querySelector('.busca-contagem')?.textContent ?? '',
+      alvo: document.querySelector('#termo-zero-trust') !== null,
+      outro: document.querySelector('#termo-bia') !== null,
+      papel: document.querySelector('.busca-contagem')?.getAttribute('role') ?? '',
+    }))
+    conferir('a busca acha o termo', filtrado.alvo, true)
+    conferir('a busca encolhe a lista', filtrado.verbetes > 0 && filtrado.verbetes < todos, true)
+    conferir('o que nao casa sai do DOM', filtrado.outro, false)
+    const numeros = /^(\d+) de (\d+) termos e siglas$/.exec(filtrado.contagem)
+    conferir('a contagem fala do filtro e do total', numeros?.slice(1).join(','), `${filtrado.verbetes},${todos}`)
+    // Sem `role="status"` a contagem muda em silencio para quem usa leitor de tela.
+    conferir('a contagem e anunciada', filtrado.papel, 'status')
+
+    // --- acento e maiuscula nao mudam a busca (o material e escrito em portugues)
+    await busca.fill('TRÍADE')
+    conferir('a busca acha com acento e maiuscula', await pagina.locator('#termo-triade-cia').count(), 1)
+    await busca.fill('triade')
+    conferir('a busca acha sem acento', await pagina.locator('#termo-triade-cia').count(), 1)
+
+    // --- termo que nao existe: a tela diz isso, e a lista some
+    await busca.fill('zzz-nao-existe')
+    const vazio = await pagina.evaluate(() => ({
+      verbetes: document.querySelectorAll('.verbete').length,
+      contagem: document.querySelector('.busca-contagem')?.textContent ?? '',
+    }))
+    conferir('sem resultado, a lista fica vazia', vazio.verbetes, 0)
+    conferir(
+      'sem resultado, a tela diz isso',
+      vazio.contagem.startsWith('Nenhum termo bate com “zzz-nao-existe”'),
+      true,
+    )
+
+    await pagina.getByRole('button', { name: 'Limpar busca' }).click()
+    const limpo = await pagina.evaluate(() => ({
+      verbetes: document.querySelectorAll('.verbete').length,
+      contagem: document.querySelector('.busca-contagem')?.textContent ?? '',
+    }))
+    conferir('limpar traz a lista de volta', limpo.verbetes, todos)
+    conferir('a contagem volta ao total', limpo.contagem, `${todos} termos e siglas`)
+
+    // --- o indice por area leva a um termo, sem mexer na rota
+    const indice = await pagina.evaluate(() => {
+      const antes = location.hash
+      const alvos = [...document.querySelectorAll('.sumario button')].map((botao) => {
+        botao.click()
+        return document.activeElement?.id ?? ''
+      })
+      return { antes, depois: location.hash, alvos }
+    })
+    conferir('o indice tem uma entrada por area', indice.alvos.length >= 10, true)
+    // Item de indice que nao acha o alvo deixa o foco no proprio botao, que nao tem id. A
+    // comparacao e pelo texto porque `conferir` compara com `===`, e duas listas nunca sao iguais.
+    conferir('todo item do indice acha o alvo', indice.alvos.filter((id) => !id).join(','), '')
+    conferir(
+      'os itens por area caem num termo',
+      indice.alvos.filter((id) => id.startsWith('termo-')).length >= 5,
+      true,
+    )
+    conferir('o indice nao muda a rota', indice.depois, indice.antes)
+
+    // --- clicar num termo muda a rota e leva o foco ate ele
+    const primeiro = await pagina.evaluate(() => {
+      const link = document.querySelector('.verbete a')
+      return { id: link?.closest('tr')?.id ?? '', href: link?.getAttribute('href') ?? '' }
+    })
+    conferir('o primeiro verbete tem endereco proprio', primeiro.href, `#/pagina/glossario/${primeiro.id}`)
+    await pagina.locator('.verbete a').first().click()
+    await esperarFocoNoVerbete(pagina)
+    const clique = await pagina.evaluate(() => ({
+      rota: location.hash,
+      foco: document.activeElement?.tagName === 'TR' ? (document.activeElement.id ?? '') : '',
+    }))
+    conferir('clicar num termo muda a rota', clique.rota, primeiro.href)
+    conferir('e o foco vai para o termo, nao para o topo', clique.foco, primeiro.id)
+
+    // --- o endereco de um termo, aberto direto (o link compartilhado), ja chega nele
+    const ultimo = await pagina.evaluate(() => {
+      const linhas = [...document.querySelectorAll('.verbete')]
+      return linhas[linhas.length - 1]?.id ?? ''
+    })
+    const nova = await navegador.newPage()
+    await nova.goto(`${BASE}#/pagina/glossario/${ultimo}`)
+    await nova.waitForSelector('.verbete')
+    await esperarFocoNoVerbete(nova)
+    const direto = await nova.evaluate(() => {
+      const foco = document.activeElement
+      const caixa = foco?.getBoundingClientRect()
+      return {
+        foco: foco?.tagName === 'TR' ? (foco.id ?? '') : '',
+        topo: Math.round(caixa?.top ?? -1),
+        janela: window.innerHeight,
+      }
+    })
+    conferir('o endereco do termo abre no termo', direto.foco, ultimo)
+    // O cabecalho do app e fixo e tem 52 px (`--altura-topo`): o verbete tem de aparecer ABAIXO
+    // dele. Sem a rolagem, o ultimo verbete de 78 ficaria a milhares de pixels dali.
+    conferir(
+      'o termo esta a vista, abaixo do cabecalho fixo',
+      direto.topo >= 52 && direto.topo < direto.janela,
+      true,
+    )
+    // O titulo da janela e o da pagina, nao o do termo: o endereco muda a posicao, nao a tela.
+    conferir('o titulo da janela nomeia a pagina', await nova.title(), 'Glossário · Roadmap CISO')
+    await nova.close()
+
+    // --- rota de pagina SEM termo no fim: o foco volta para o conteudo, como sempre foi. Sem
+    // esta prova, "melhorar" o foco do endereco de um termo poderia ter matado o foco da troca
+    // de rota comum.
+    await pagina.evaluate(() => {
+      location.hash = '#/pagina/glossario'
+    })
+    await pagina
+      .waitForFunction(() => document.activeElement?.tagName === 'MAIN', null, { timeout: 5000 })
+      .catch(() => {})
+    conferir(
+      'sem termo no endereco, o foco vai para o conteudo',
+      await pagina.evaluate(() => document.activeElement?.tagName ?? ''),
+      'MAIN',
+    )
+  } catch (erro) {
+    falhas.push([nome, 'interacao falhou', String(erro).slice(0, 200)])
+  } finally {
+    await navegador.close()
+  }
+  return falhas
+}
+
 // A matriz entra depois das declaracoes: `conteudo()` le `conteudoCache`, declarado
 // depois das tabelas, e chamar antes da inicializacao daria ReferenceError.
 for (const { nome, rota } of rotasDaMatriz()) {
@@ -580,6 +809,7 @@ async function main() {
   // Depois dos dumps: a rodada respondida precisa do navegador vivo e de um Chrome so, entao
   // ela roda sozinha, no fim, sem disputar os slots do lote.
   falhas.push(...(await cenarioDoQuizRespondido()))
+  falhas.push(...(await cenarioDoGlossario()))
 
   if (falhas.length) {
     console.error(`\n${falhas.length} falha(s):`)
@@ -587,7 +817,9 @@ async function main() {
     console.error(`\nReproduza uma rota com:\n  ${CHROME} --headless=new --virtual-time-budget=15000 --dump-dom "${BASE}#/..."`)
     process.exit(1)
   }
-  console.log(`\n${cenarios.length} cenarios + rodadas respondidas no navegador, 0 falhas`)
+  console.log(
+    `\n${cenarios.length} cenarios + quiz respondido e glossario navegavel no navegador, 0 falhas`,
+  )
 }
 
 await main()

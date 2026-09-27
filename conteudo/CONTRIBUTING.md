@@ -143,9 +143,10 @@ conexões com outros temas → certificações e leitura → fontes verificadas.
 - **Conferir o render no GitHub e no Obsidian** antes de commitar.
 
 <!-- O bloco abaixo é a forma legível por máquina das regras acima, e é a única cópia delas:
-     `scripts/verificar-repo.py` e o gate do app (`app/scripts/lib/validar-content.ts`) leem
-     daqui. O verificador confere que a prosa desta seção concorda com o bloco — se um dos dois
-     mudar sozinho, a verificação reprova em vez de deixar as duas versões conviverem. -->
+     `scripts/verificar-repo.py` e o gate do app (`app/scripts/lib/contrato-mermaid.ts`, que
+     `app/scripts/lib/validar-content.ts` importa) leem daqui. O verificador confere que a prosa
+     desta seção concorda com o bloco — se um dos dois mudar sozinho, a verificação reprova em vez
+     de deixar as duas versões conviverem. -->
 <!-- contrato-mermaid: {"rotulos_proibidos": ["<", ">", "\"", "(", ")", "#"], "ids_proibidos": ["end"], "diretivas_proibidas": ["%%{init"], "recursos_proibidos": ["click"]} -->
 
 ## 8. Andragogia aplicada (Knowles)

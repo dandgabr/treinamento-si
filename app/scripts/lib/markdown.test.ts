@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
+  ancorasDeSecao,
   extrairMermaid,
   extrairQA,
   fatiarSecoes,
@@ -8,6 +9,9 @@ import {
   parseTabela,
   parseTemaDeTexto,
   renderSeguro,
+  slugDeAncora,
+  type DestinoDeLink,
+  type ResolverDeLink,
 } from './markdown'
 
 const FRONTMATTER = (temaId: string) => `---
@@ -236,6 +240,134 @@ describe('renderSeguro', () => {
     const html = renderSeguro('<details><summary>Ver</summary>\n\nresposta\n\n</details>')
     expect(html).toContain('<details>')
     expect(html).toContain('<summary>')
+  })
+})
+
+// `markdown.ts` nao conhece rota: ele pergunta o que fazer com cada link e obedece. Quem
+// responde e `links-material.ts`, na geracao. Estes testes fixam a fronteira entre os dois — a
+// parte que, se quebrar, faz o portao reprovar o HTML (e nao o mapa).
+describe('resolver de links', () => {
+  const rota = (href: string): DestinoDeLink => ({ acao: 'trocar', href })
+
+  it('sem resolvedor, o link fica como o material escreveu', () => {
+    // E o comportamento antigo, e o que os testes de parse abaixo usam: sem resolvedor, nada muda.
+    expect(renderSeguro('[tema](TEMA-02-dois.md)')).toContain('href="TEMA-02-dois.md"')
+  })
+
+  it('troca o href pelo destino que o resolvedor devolve, sem tocar no resto do link', () => {
+    const html = renderSeguro('[tema](TEMA-02-dois.md)', (href) =>
+      href === 'TEMA-02-dois.md' ? rota('#/tema/01-fundamentos/TEMA-02') : { acao: 'manter' },
+    )
+    expect(html).toContain('href="#/tema/01-fundamentos/TEMA-02"')
+    expect(html).not.toContain('href="TEMA-02-dois.md"')
+    expect(html).toContain('<a href="#/tema/01-fundamentos/TEMA-02">tema</a>')
+  })
+
+  it('com `manter`, o link continua relativo — e o portao tem por onde reprovar', () => {
+    // O gerador sempre passa um resolvedor; o `manter` dele e o que deixa o href relativo no HTML
+    // e dispara a regra do `validar`. Sem este caminho, um alvo sem rota sumiria em silencio.
+    const html = renderSeguro('[sumiu](./TEMA-99-sumiu.md)', () => ({ acao: 'manter' }))
+    expect(html).toContain('href="./TEMA-99-sumiu.md"')
+  })
+
+  it('com `texto`, tira a marca de link e preserva o texto — que e a unica pista do destino', () => {
+    const html = renderSeguro(
+      '[templates/RELACOES-TEMAS.md](../templates/RELACOES-TEMAS.md)',
+      () => ({ acao: 'texto' }),
+    )
+    expect(html).toContain('templates/RELACOES-TEMAS.md')
+    expect(html).not.toContain('<a')
+    expect(html).not.toContain('../templates/RELACOES-TEMAS.md')
+  })
+
+  it('preserva a marcacao interna do link que vira texto', () => {
+    // O href sai; o que estava dentro do `<a>` fica. Apagar o conteudo seria perder a referencia.
+    const html = renderSeguro('[**Regras** de autoria](CONTRIBUTING.md)', () => ({ acao: 'texto' }))
+    expect(html).toContain('<strong>Regras</strong> de autoria')
+  })
+
+  it('entrega href e texto visivel ao resolvedor', () => {
+    const vistos: Array<[string, string]> = []
+    const resolver: ResolverDeLink = (href, texto) => {
+      vistos.push([href, texto])
+      return { acao: 'manter' }
+    }
+    renderSeguro(
+      '[templates/RELACOES-TEMAS.md](../templates/RELACOES-TEMAS.md) e [`x.md`](x.md)',
+      resolver,
+    )
+    // O texto do `code_inline` entra: e assim que o material cita um caminho dentro do rotulo.
+    expect(vistos).toEqual([
+      ['../templates/RELACOES-TEMAS.md', 'templates/RELACOES-TEMAS.md'],
+      ['x.md', 'x.md'],
+    ])
+  })
+
+  it('nao desalinha a pilha de links entre links do mesmo bloco', () => {
+    // A pilha do renderer e por abertura/fechamento: o primeiro link vira texto (sem `<a>`) e o
+    // segundo vira rota. Se um `link_close` casasse com a abertura errada, o segundo sumiria.
+    const html = renderSeguro(
+      '[templates/RELACOES-TEMAS.md](../templates/RELACOES-TEMAS.md) e [tema](TEMA-02.md)',
+      (href) =>
+        href.endsWith('RELACOES-TEMAS.md') ? { acao: 'texto' } : rota('#/tema/01-fundamentos/TEMA-02'),
+    )
+    expect(html).toContain('templates/RELACOES-TEMAS.md e')
+    expect(html.match(/<a /g)).toHaveLength(1)
+    expect(html).toContain('href="#/tema/01-fundamentos/TEMA-02"')
+  })
+
+  it('nao desalinha a pilha entre renders: um bloco com link nao contamina o proximo', () => {
+    renderSeguro('[ficha](../templates/RELACOES-TEMAS.md)', () => ({ acao: 'texto' }))
+    const depois = renderSeguro('[tema](TEMA-02.md)', () => rota('#/tema/01-fundamentos/TEMA-02'))
+    expect(depois).toContain('<a href="#/tema/01-fundamentos/TEMA-02">tema</a>')
+  })
+
+  it('a troca acontece antes da sanitizacao: o DOMPurify continua sendo a ultima fronteira', () => {
+    // O href e escrito pelo resolvedor, e nao pelo material: se ele trouxer esquema ativo, o
+    // build tem de cair aqui, e nao publicar um link executavel.
+    expect(() =>
+      renderSeguro('[tema](TEMA-02.md)', () => rota('javascript:alert(1)')),
+    ).toThrow(/removeu conteudo/)
+  })
+
+  it('link externo nao passa pelo resolvedor quando ele responde `manter`', () => {
+    const html = renderSeguro('[fonte](https://exemplo/1)', () => ({ acao: 'manter' }))
+    expect(html).toContain('href="https://exemplo/1"')
+  })
+})
+
+describe('slugDeAncora e ancorasDeSecao', () => {
+  it('monta o slug do cabecalho como o material e o GitHub o escrevem', () => {
+    // `README.md#4-temas` e o endereco que o material usa; o cabecalho e `## 4. Temas`.
+    expect(slugDeAncora('4. Temas')).toBe('4-temas')
+    expect(slugDeAncora('5. Pré-requisitos')).toBe('5-pré-requisitos')
+    expect(slugDeAncora('1. Introdução')).toBe('1-introdução')
+    expect(slugDeAncora('2. O que é e o que não é')).toBe('2-o-que-é-e-o-que-não-é')
+  })
+
+  it('traduz cada `## N.` para a ancora e guarda o numero da secao do app', () => {
+    const ancoras = ancorasDeSecao('## 1. Introdução\nTexto.\n\n## 4. Temas\nTexto.\n\n## 9. Perguntas')
+    expect(ancoras.get('1-introdução')).toEqual([1])
+    expect(ancoras.get('4-temas')).toEqual([4])
+    // A sessao do app e `secao-N`, com o N do proprio cabecalho.
+    expect(ancoras.get('9-perguntas')).toEqual([9])
+  })
+
+  it('ignora o cabecalho que nao tem numero de secao', () => {
+    const ancoras = ancorasDeSecao('# Titulo\n\n## Sem numero\n\n### 4. Fundo demais')
+    expect(ancoras.size).toBe(0)
+  })
+
+  it('nao le cabecalho de dentro do frontmatter', () => {
+    const ancoras = ancorasDeSecao('---\ntitulo: "x"\n---\n\n## 4. Temas\nTexto.')
+    expect([...ancoras.keys()]).toEqual(['4-temas'])
+  })
+
+  it('duas secoes com o mesmo cabecalho caem na mesma ancora, e a lista denuncia', () => {
+    // O valor e uma lista justamente para isto: o portao prefere reprovar uma ancora ambigua a
+    // escolher uma das duas secoes.
+    const ancoras = ancorasDeSecao('## 4. Temas\nA.\n\n## 4. Temas\nB.')
+    expect(ancoras.get('4-temas')).toEqual([4, 4])
   })
 })
 

@@ -28,6 +28,10 @@ except ImportError:  # pragma: no cover
     sys.exit("PyYAML ausente. Instale com: pip install pyyaml")
 
 RAIZ = Path(__file__).resolve().parent.parent
+# O repositorio inteiro, um nivel acima de `RAIZ` (= `conteudo/`): o app fica ao lado do
+# material, e o gate dele vive em `app/scripts/`. Caminho do app montado a partir de `RAIZ`
+# aponta para `conteudo/app/`, que nao existe — foi assim que aquele lado ficou fora do scan.
+REPO = RAIZ.parent
 CONTRIBUTING = RAIZ / "CONTRIBUTING.md"
 PASTA_TEMPLATES = RAIZ / "templates"
 FRONTMATTER_MD = PASTA_TEMPLATES / "FRONTMATTER.md"
@@ -81,6 +85,9 @@ SINAIS_DO_SINCRONIZADOR = {"DIVERGE", "ERRO", "FALHA", "CONFLITO", "TETO", "ESPE
 # rodar offline. O que ele deriva (`status-links.md`) e foto da rede, nao do material.
 
 RE_CONTRATO_MERMAID = re.compile(r"<!--\s*contrato-mermaid:\s*(\{.*?\})\s*-->", re.S)
+# Um caractere proibido de rotulo escrito entre aspas: a prosa da secao 7 cita com crase, e a
+# lista reimplementada dentro de um gate viraria um array de aspas. A marca aceita as duas formas.
+RE_CARACTERE_CITADO = re.compile(r"['\"`](\W)['\"`]")
 
 erros: list[str] = []
 avisos: list[str] = []
@@ -588,6 +595,20 @@ def checa_contributing() -> None:
             )
 
 
+def caminho_relativo(p: Path) -> str:
+    """Caminho do arquivo na mensagem: relativo ao material e, fora dele, ao repositorio.
+
+    Esta conferencia alcanca `app/scripts/`, que vive FORA de `RAIZ` — um `relative_to(RAIZ)`
+    cravado estouraria (ValueError) justo quando o scan do app voltasse a rodar.
+    """
+    for base in (RAIZ, REPO):
+        try:
+            return str(p.relative_to(base))
+        except ValueError:
+            continue
+    return str(p)
+
+
 def checa_fonte_unica_do_contrato(contrato: dict) -> None:
     """O contrato do Mermaid tem um dono so: nenhuma ficha nem script mantem copia da lista.
 
@@ -598,14 +619,24 @@ def checa_fonte_unica_do_contrato(contrato: dict) -> None:
     if not proibidos:
         return
     alvos = sorted(PASTA_TEMPLATES.glob("*.md")) + sorted((RAIZ / "scripts").glob("*.py"))
-    if (RAIZ / "app" / "scripts").exists():
-        alvos += sorted((RAIZ / "app" / "scripts").rglob("*.ts"))
+    # A pasta do app e `REPO / "app" / "scripts"`, e nao `RAIZ / "app" / "scripts"` (= `conteudo/app`).
+    # O segundo caminho nao existe, entao o `if` que o guardava sumia com o scan em silencio — e a
+    # copia nao conferida era justamente a que o app usa. Ausencia e ERRO agora: sem a pasta, a
+    # regra da fonte unica nao tem como ser conferida deste lado.
+    pasta_app = REPO / "app" / "scripts"
+    if pasta_app.is_dir():
+        alvos += sorted(pasta_app.rglob("*.ts"))
+    else:
+        erros.append(
+            f"{caminho_relativo(pasta_app)}: ausente — é onde vive a cópia do contrato do Mermaid "
+            f"lida pelo app; sem ela a fonte única não pode ser conferida deste lado"
+        )
     for arq in alvos:
         for i, linha in enumerate(arq.read_text(encoding="utf-8").splitlines(), 1):
-            marca = set(re.findall(r"`(\W)`", linha))
+            marca = set(RE_CARACTERE_CITADO.findall(linha))
             if len(marca & proibidos) >= 3:
                 erros.append(
-                    f"{arq.relative_to(RAIZ)}:{i}: lista de caracteres proibidos em rótulo Mermaid "
+                    f"{caminho_relativo(arq)}:{i}: lista de caracteres proibidos em rótulo Mermaid "
                     f"repetida fora do CONTRIBUTING §7 — aponte para a §7 em vez de manter uma cópia"
                 )
 

@@ -11,7 +11,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { Conteudo } from '../src/domain/types'
-import { gerarConteudo } from './lib/gerar-conteudo'
+import { gerarComRelatorio } from './lib/gerar-conteudo'
+import { declaracoesMortas } from './lib/links-material'
 import { validar } from './lib/validar-content'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -48,7 +49,7 @@ function canonico(valor: unknown): string {
 // O arquivo tem de ser o que o material deriva AGORA. Validar so o que esta em disco deixava
 // passar material editado sem `npm run build:content`: o gate conferia um retrato velho contra
 // ele mesmo e dizia "verificado". `geradoEm` fica de fora — e relogio, muda a cada geracao.
-const derivadoAgora = gerarConteudo(CONTENT_DIR)
+const { conteudo: derivadoAgora, links } = gerarComRelatorio(CONTENT_DIR)
 const semRelogio = (c: Conteudo): string => canonico({ ...c, meta: { ...c.meta, geradoEm: '' } })
 if (semRelogio(derivadoAgora) !== semRelogio(conteudo)) {
   erros.push(
@@ -56,6 +57,12 @@ if (semRelogio(derivadoAgora) !== semRelogio(conteudo)) {
       `geração — rode \`npm run build:content\` e confira de novo`,
   )
 }
+
+// Os links sao conferidos no MATERIAL de agora, e nao no HTML em disco: um link sem rota, um alvo
+// que nao existe e uma declaracao sem uso sao defeitos do material, e reprovam mesmo que o
+// content.json esteja fresco. O `validar` acima cobra o outro lado — que o HTML gerado nao tenha
+// sobrado com href relativo nenhum.
+erros.push(...links.erros, ...declaracoesMortas(links))
 
 // O veredito sai depois da conta: anunciar "verificado" antes de olhar os erros
 // fazia um build reprovado dizer que estava tudo bem e depois listar falhas.
@@ -67,4 +74,8 @@ if (erros.length) {
 console.log(
   `verificado: ${conteudo.meta.totais.areas} areas, ${conteudo.meta.totais.temas} temas, ` +
     `${conteudo.meta.totais.paginas} paginas — 0 erro(s)`,
+)
+console.log(
+  `links do material: ${links.paraRota} viraram rota do app, ${links.comoTexto} declarados sem rota ` +
+    `(0 href relativo no HTML), ${links.intactos} externos`,
 )

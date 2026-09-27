@@ -4,7 +4,7 @@
 // fixtures pequenos: `parseTemaDeTexto` recebe a string do arquivo, nunca um caminho.
 
 import matter from 'gray-matter'
-import MarkdownIt from 'markdown-it'
+import MarkdownIt, { type Token } from 'markdown-it'
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 import type {
@@ -23,6 +23,68 @@ import type {
 } from '../../src/domain/types'
 
 const md = new MarkdownIt({ html: true, linkify: false, typographer: false })
+
+/**
+ * O que fazer com um link do material ao virar HTML.
+ *
+ * `markdown.ts` nao sabe de rota: ele so pergunta, para cada link, se ele deve apontar para outro
+ * lugar (`trocar`), perder a marca de link (`texto`) ou ficar exatamente como o material escreveu
+ * (`manter`). Quem responde e `links-material.ts`, na geracao do content.json. O texto visivel vai
+ * junto porque e ele que fica no lugar do link quando a marca sai.
+ *
+ * Sem resolvedor — o padrao — todo link fica como veio. E o caminho que os testes usam; o gerador
+ * sempre passa um resolvedor, e o portao reprova o href relativo que sobrar no HTML.
+ */
+export type DestinoDeLink =
+  | { acao: 'trocar'; href: string }
+  | { acao: 'texto' }
+  | { acao: 'manter' }
+
+export type ResolverDeLink = (href: string, texto: string) => DestinoDeLink
+
+interface AmbienteDeLinks {
+  resolver?: ResolverDeLink
+}
+
+// Pilha de `link_open` abertos: `link_close` nao sabe a que abertura pertence, e link dentro de
+// link nao existe no Markdown — um booleano por abertura basta. Zerada a cada render, para um
+// erro no meio de um bloco (a sanitizacao lanca) nao desalinhar o proximo.
+const desembrulhar: boolean[] = []
+
+/** O texto visivel de um link: os `text` entre a abertura e o fechamento correspondente. */
+function textoDoLink(tokens: Token[], abertura: number): string {
+  const partes: string[] = []
+  let fundo = 0
+  for (let i = abertura + 1; i < tokens.length; i++) {
+    const token = tokens[i]
+    if (!token) break
+    if (token.type === 'link_open') fundo++
+    else if (token.type === 'link_close') {
+      if (fundo === 0) break
+      fundo--
+    } else if (token.type === 'text' || token.type === 'code_inline') partes.push(token.content)
+  }
+  return partes.join('')
+}
+
+// A troca acontece no token, ANTES da sanitizacao: o DOMPurify continua sendo a ultima fronteira,
+// e o que ele recusar continua derrubando o build em vez de limpar em silencio.
+md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+  const token = tokens[idx]
+  const href = token?.attrGet('href')
+  const destino = href
+    ? (env as AmbienteDeLinks).resolver?.(href, textoDoLink(tokens, idx))
+    : undefined
+  if (destino?.acao === 'trocar') token?.attrSet('href', destino.href)
+  const semLink = destino?.acao === 'texto'
+  desembrulhar.push(semLink)
+  return token && !semLink ? self.renderToken(tokens, idx, options) : ''
+}
+
+md.renderer.rules.link_close = (tokens, idx, options, _env, self) => {
+  return desembrulhar.pop() ? '' : self.renderToken(tokens, idx, options)
+}
+
 
 // O HTML e gerado a partir de Markdown do proprio repositorio, mas o bundle e
 // distribuido como arquivo unico e persiste para todo mundo que abrir o app: vale
@@ -72,8 +134,9 @@ function descreverRemovidos(): string {
 }
 
 /** Markdown -> HTML sanitizado. Lanca se a sanitizacao remover qualquer conteudo. */
-export function renderSeguro(markdown: string): string {
-  const bruto = md.render(markdown)
+export function renderSeguro(markdown: string, resolver?: ResolverDeLink): string {
+  desembrulhar.length = 0
+  const bruto = md.render(markdown, { resolver } satisfies AmbienteDeLinks)
   const limpo = DOM_PURIFY.sanitize(bruto, {
     ALLOWED_TAGS: TAGS_PERMITIDAS,
     ALLOWED_ATTR: ATRIBUTOS_PERMITIDOS,
@@ -123,6 +186,37 @@ export interface SecaoCrua {
 }
 
 const RE_SECAO = /^##\s+(\d+)\.\s+(.+)$/gm
+
+/**
+ * Ancora de cabecalho como o material e o GitHub a escrevem: minusculas, sem pontuacao, espacos
+ * viram `-`. `## 4. Temas` vira `4-temas` — o endereco que o material usa em `README.md#4-temas`.
+ */
+export function slugDeAncora(cabecalho: string): string {
+  return cabecalho
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s-]/gu, '')
+    .trim()
+    .replace(/\s+/g, '-')
+}
+
+/**
+ * Ancora do material -> numeros de secao que ela alcanca, num documento.
+ *
+ * O numero e o `## N.` do proprio cabecalho, que e o que a tela usa como id (`secao-N`): a
+ * ancora do GitHub e o id do app sao o mesmo endereco escrito de duas formas, e este mapa e a
+ * traducao. Duas secoes com o mesmo texto caem na mesma ancora, e por isso o valor e uma lista:
+ * o gate prefere reprovar uma ancora ambigua a escolher uma das duas.
+ */
+export function ancorasDeSecao(texto: string): Map<string, number[]> {
+  const { content } = matter(texto)
+  const ancoras = new Map<string, number[]>()
+  for (const marca of content.matchAll(RE_SECAO)) {
+    const numero = Number(marca[1] ?? 0)
+    const slug = slugDeAncora(`${numero}. ${(marca[2] ?? '').trim()}`)
+    ancoras.set(slug, [...(ancoras.get(slug) ?? []), numero])
+  }
+  return ancoras
+}
 
 /** Fatia o corpo pelos cabecalhos `## N. Titulo`. */
 export function fatiarSecoes(corpo: string): { intro: string; secoes: SecaoCrua[] } {
@@ -255,12 +349,15 @@ export function normalizarRelacoes(v: unknown): Relacoes {
   return base
 }
 
-function render(secoesCruas: SecaoCrua[]): { secoes: Secao[]; mermaid: string[] } {
+function render(
+  secoesCruas: SecaoCrua[],
+  resolver?: ResolverDeLink,
+): { secoes: Secao[]; mermaid: string[] } {
   const mermaid: string[] = []
   const secoes: Secao[] = secoesCruas.map((s) => {
     const { texto, blocos } = extrairMermaid(s.raw)
     mermaid.push(...blocos)
-    return { numero: s.numero, titulo: s.titulo, html: renderSeguro(texto) }
+    return { numero: s.numero, titulo: s.titulo, html: renderSeguro(texto, resolver) }
   })
   return { secoes, mermaid }
 }
@@ -274,17 +371,17 @@ export function secaoTexto(secoes: SecaoCrua[], numero: number): string {
  * O app ja exibe esse titulo a partir do frontmatter, entao o `<h1>` e removido para
  * nao duplicar o cabecalho (e nao dar dois h1 por pagina).
  */
-export function renderIntro(introCru: string): string {
-  const html = renderSeguro(extrairMermaid(introCru).texto)
+export function renderIntro(introCru: string, resolver?: ResolverDeLink): string {
+  const html = renderSeguro(extrairMermaid(introCru).texto, resolver)
   return html.replace(/^\s*<h1>[\s\S]*?<\/h1>\s*/, '')
 }
 
 // ---------------------------------------------------------------- documentos
 
-export function parseTemaDeTexto(texto: string, areaId: string): Tema {
+export function parseTemaDeTexto(texto: string, areaId: string, resolver?: ResolverDeLink): Tema {
   const { data, content } = matter(texto)
   const { intro: introCru, secoes: cruas } = fatiarSecoes(content)
-  const { secoes, mermaid } = render(cruas)
+  const { secoes, mermaid } = render(cruas, resolver)
 
   const preTeste = itensNumerados(secaoTexto(cruas, 3)).map((p) => ({
     pergunta: limparConfianca(p),
@@ -317,7 +414,7 @@ export function parseTemaDeTexto(texto: string, areaId: string): Tema {
       : [],
     proximaRevisao: data.proxima_revisao ? String(data.proxima_revisao) : null,
     statusVerificacao: String(data.status_verificacao ?? 'rascunho'),
-    intro: renderIntro(introCru),
+    intro: renderIntro(introCru, resolver),
     secoes,
     preTeste,
     recuperacao,
@@ -326,14 +423,14 @@ export function parseTemaDeTexto(texto: string, areaId: string): Tema {
   }
 }
 
-export function parseGuiaDeTexto(texto: string, areaId: string): Guia {
+export function parseGuiaDeTexto(texto: string, areaId: string, resolver?: ResolverDeLink): Guia {
   const { content } = matter(texto)
   const { intro: introCru, secoes: cruas } = fatiarSecoes(content)
-  const { secoes, mermaid } = render(cruas)
+  const { secoes, mermaid } = render(cruas, resolver)
   const { pares: checkpoint, criterio } = extrairQA(secaoTexto(cruas, 9))
   return {
     areaId,
-    intro: renderIntro(introCru),
+    intro: renderIntro(introCru, resolver),
     secoes,
     checkpoint,
     criterio,
@@ -344,16 +441,21 @@ export function parseGuiaDeTexto(texto: string, areaId: string): Guia {
   }
 }
 
-export function parsePaginaDeTexto(texto: string, grupo: string, slug: string): Pagina {
+export function parsePaginaDeTexto(
+  texto: string,
+  grupo: string,
+  slug: string,
+  resolver?: ResolverDeLink,
+): Pagina {
   const { data, content } = matter(texto)
   const { intro: introCru, secoes: cruas } = fatiarSecoes(content)
-  const { secoes, mermaid } = render(cruas)
+  const { secoes, mermaid } = render(cruas, resolver)
   const tituloMatch = content.match(/^#\s+(.+)$/m)
   return {
     slug,
     titulo: tituloMatch ? (tituloMatch[1] ?? '').trim() : String(data.escopo ?? slug),
     grupo,
-    intro: renderIntro(introCru),
+    intro: renderIntro(introCru, resolver),
     secoes,
     mermaid,
   }

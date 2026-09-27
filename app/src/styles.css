@@ -674,6 +674,68 @@ html:has(.diagrama.ampliado) {
   font-variant-numeric: tabular-nums;
 }
 
+/* ------------------------------------------------------------------ glossario */
+
+/* Busca do glossario, logo abaixo do indice. O rotulo e um `<label>` de verdade: o campo
+   filtra as duas tabelas de verbetes, e quem chega de leitor de tela precisa saber o que ele
+   faz antes de digitar. */
+.busca-glossario {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0 0;
+}
+
+.busca-glossario label {
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.busca-glossario input {
+  flex: 1 1 16rem;
+  max-width: 100%;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--texto);
+  background: var(--fundo-alt);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 0.5rem 0.6rem;
+  /* Campo de texto tambem e alvo de toque, como o seletor do quiz. */
+  min-height: 44px;
+}
+
+/* A contagem ocupa a linha inteira: e ela que diz quantos verbetes sobraram, e o
+   `role="status"` a anuncia a cada tecla. */
+.busca-contagem {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+/* Nenhum verbete bate com a busca: a frase muda de cor, e nao so de texto, para nao passar
+   como mais uma linha de contagem. */
+.busca-vazia {
+  color: var(--alerta);
+}
+
+/* O verbete enderecado pela rota recebe o foco por codigo, e nao por clique: o `:focus-visible`
+   nao pinta nesse caminho, e sem marca propria quem abre o link compartilhado nao ve em que
+   linha caiu, no meio de 78. */
+.verbete:focus {
+  background: var(--acento-suave);
+  outline: 2px solid var(--acento);
+  outline-offset: -2px;
+}
+
+/* `irParaSecao` rola ate o verbete: sem isto o cabecalho fixo cobriria justamente a linha que
+   a pessoa pediu (mesmo cuidado que os cabecalhos do material ja tem). */
+.verbete {
+  scroll-margin-top: calc(var(--altura-topo) + 0.5rem);
+}
+
 /* ---------------------------------------------------------------- progresso */
 
 .resumo {
@@ -977,6 +1039,7 @@ a.botao-secundario {
      valem no ponteiro fino, e o `.alternativa` (o rotulo inteiro do radio) ja vinha assim. */
   .alternativa,
   .botao-secundario,
+  .busca-glossario input,
   .nivel,
   .pular {
     min-height: 48px;

@@ -15,7 +15,9 @@ import {
   registrarRecuperacao,
   resultadoDoCheckpoint,
   temaVazio,
+  VERSAO_PROGRESSO,
 } from './progresso'
+import { precisaReleituraCompleta } from './srs'
 
 const HOJE = new Date('2026-03-10T12:00:00.000Z')
 const REF = 'a#TEMA-01'
@@ -98,6 +100,24 @@ describe('redutores', () => {
     expect(t?.lido).toBe(true)
     expect(t?.revisao.intervaloDias).toBe(7)
     expect(t?.revisao.passagens).toBe(1)
+    expect(t?.revisao.falhasSeguidas).toBe(0)
+  })
+
+  it('duas passagens falhas seguidas aparecem no estado (releitura completa)', () => {
+    let p = registrarRecuperacao(progressoVazio(), REF, false, HOJE)
+    expect(p.temas[REF]?.revisao.falhasSeguidas).toBe(1)
+    expect(precisaReleituraCompleta(p.temas[REF]!.revisao)).toBe(false)
+
+    p = abrirPassagem(p, REF, HOJE)
+    p = registrarRecuperacao(p, REF, false, HOJE)
+    expect(p.temas[REF]?.revisao.falhasSeguidas).toBe(2)
+    expect(precisaReleituraCompleta(p.temas[REF]!.revisao)).toBe(true)
+
+    // Um acerto depois disso zera a contagem de seguidas.
+    p = abrirPassagem(p, REF, HOJE)
+    p = registrarRecuperacao(p, REF, true, HOJE)
+    expect(p.temas[REF]?.revisao.falhasSeguidas).toBe(0)
+    expect(precisaReleituraCompleta(p.temas[REF]!.revisao)).toBe(false)
   })
 
   it('registrarRecuperacao no erro rebaixa o intervalo', () => {
@@ -234,6 +254,110 @@ describe('normalizarProgresso', () => {
     expect(normalizarProgresso({ versao: 99, temas: { [REF]: { lido: true } } }, HOJE)).toEqual(
       progressoVazio(),
     )
+  })
+
+  it('aceita arquivo gravado antes do campo de falhas seguidas, sem mudar de versão', () => {
+    // O campo é aditivo: o arquivo de ontem continua sendo um progresso desta versão, e o
+    // normalizador preenche o que falta. Um campo novo não muda o significado de nada que já
+    // estava gravado, então a versão não muda junto.
+    const antigo: unknown = {
+      versao: VERSAO_PROGRESSO,
+      temas: {
+        [REF]: {
+          ref: REF,
+          lido: true,
+          preTeste: [{ indice: 0, confianca: 4 }],
+          recuperacaoOk: false,
+          // Sem `falhasSeguidas`: é o campo que esta fase acrescentou.
+          revisao: {
+            intervaloDias: 30,
+            proximaRevisao: '2026-04-09T12:00:00.000Z',
+            rebaixamentos: 1,
+            passagens: 2,
+          },
+        },
+      },
+      checkpoints: { '01-fundamentos': { acertos: 4, total: 5 } },
+      questoes: { [ITEM]: { acertos: 1, erros: 1, ultima: '2026-03-09T10:00:00.000Z' } },
+      diasAtivos: ['2026-03-08', '2026-03-09'],
+    }
+    const p = normalizarProgresso(antigo, HOJE)
+
+    const t = p.temas[REF]!
+    expect(t.lido).toBe(true)
+    expect(t.preTeste).toEqual([{ indice: 0, confianca: 4 }])
+    expect(t.recuperacaoOk).toBe(false)
+    expect(t.revisao.intervaloDias).toBe(30)
+    expect(t.revisao.proximaRevisao).toBe('2026-04-09T12:00:00.000Z')
+    expect(t.revisao.rebaixamentos).toBe(1)
+    expect(t.revisao.passagens).toBe(2)
+    expect(p.checkpoints['01-fundamentos']).toEqual({ acertos: 4, total: 5 })
+    expect(p.questoes[ITEM]).toEqual({ acertos: 1, erros: 1, ultima: '2026-03-09T10:00:00.000Z' })
+    expect(p.diasAtivos).toEqual(['2026-03-08', '2026-03-09'])
+    expect(pareceProgresso(antigo)).toBe(true)
+  })
+
+  it('não inventa releitura pendente ao carregar um arquivo sem o campo novo', () => {
+    // O arquivo antigo não guarda o resultado de cada passagem, então não há como saber se as
+    // duas últimas falharam. Inferir de `rebaixamentos` (que conta a vida toda) faria o app
+    // exigir releitura completa de um tema que talvez tenha acertado a última passagem.
+    const p = normalizarProgresso(
+      {
+        versao: VERSAO_PROGRESSO,
+        temas: {
+          [REF]: {
+            ref: REF,
+            revisao: {
+              intervaloDias: 7,
+              proximaRevisao: '2026-03-17T12:00:00.000Z',
+              rebaixamentos: 3,
+              passagens: 5,
+            },
+          },
+        },
+        checkpoints: {},
+        diasAtivos: [],
+      },
+      HOJE,
+    )
+    expect(p.temas[REF]?.revisao.falhasSeguidas).toBe(0)
+    expect(precisaReleituraCompleta(p.temas[REF]!.revisao)).toBe(false)
+  })
+
+  it('preserva a contagem de falhas seguidas, ida e volta pelo JSON', () => {
+    let p = registrarRecuperacao(progressoVazio(), REF, false, HOJE)
+    p = abrirPassagem(p, REF, HOJE)
+    p = registrarRecuperacao(p, REF, false, HOJE)
+    const volta = normalizarProgresso(JSON.parse(JSON.stringify(p)), HOJE)
+    expect(volta).toEqual(p)
+    expect(volta.temas[REF]?.revisao.falhasSeguidas).toBe(2)
+  })
+
+  it('descarta falhas seguidas sem número utilizável', () => {
+    const p = normalizarProgresso(
+      {
+        versao: VERSAO_PROGRESSO,
+        temas: {
+          [REF]: {
+            revisao: {
+              intervaloDias: 7,
+              proximaRevisao: '2026-03-17T12:00:00.000Z',
+              falhasSeguidas: 1e999,
+            },
+          },
+        },
+        checkpoints: {},
+        diasAtivos: [],
+      },
+      HOJE,
+    )
+    expect(p.temas[REF]?.revisao.falhasSeguidas).toBe(0)
+  })
+
+  it('mantém a versão do formato em 1', () => {
+    // A exportação carrega este número, e o teste de componente que confere a forma do arquivo
+    // exportado o fixa em 1. Um campo aditivo não é motivo para mexer nele.
+    expect(VERSAO_PROGRESSO).toBe(1)
   })
 
   it('preserva um estado válido, ida e volta pelo JSON', () => {

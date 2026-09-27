@@ -52,6 +52,7 @@ export function estadoFake(over: Partial<EstadoRevisao> = {}): EstadoRevisao {
     proximaRevisao: '2026-03-11T12:00:00.000Z',
     rebaixamentos: 0,
     passagens: 0,
+    falhasSeguidas: 0,
     consolidado: false,
     ...over,
   }
