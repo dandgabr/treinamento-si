@@ -15,7 +15,7 @@
     "check:content": "tsx scripts/check-content.ts",
     "dev": "npm run build:content && vite",
     "build": "npm run preparar:conteudo && npm run typecheck && vite build",
-    "build:desktop": "npm run typecheck && vite build --config vite.desktop.config.ts",
+    "build:desktop": "npm run check:questions && npm run typecheck && vite build --config vite.desktop.config.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
