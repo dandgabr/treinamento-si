@@ -3,7 +3,7 @@
 
 import type { Area } from './types'
 import { aprovouNoCriterio, interpretarCriterio } from './criterio'
-import type { Progresso } from './progresso'
+import { resultadoRegistradoDoCheckpoint, type Progresso } from './progresso'
 
 export interface DominioArea {
   areaId: string
@@ -25,9 +25,11 @@ function temaFirme(progresso: Progresso, ref: string): boolean {
 export function dominioDaArea(area: Area, progresso: Progresso): DominioArea {
   const totalTemas = area.temas.length
   const firmes = area.temas.filter((ref) => temaFirme(progresso, ref)).length
-  const resultado = progresso.checkpoints[area.areaId]
-  const alvo = interpretarCriterio(area.guia.criterio)
   const totalItens = area.guia.checkpoint.length
+  // O resultado vem do veredito por item quando ele fecha o checkpoint; o placar do arquivo
+  // antigo so responde quando nao ha veredito (ver `resultadoRegistradoDoCheckpoint`).
+  const resultado = resultadoRegistradoDoCheckpoint(progresso, area.areaId, totalItens)
+  const alvo = interpretarCriterio(area.guia.criterio)
 
   return {
     areaId: area.areaId,

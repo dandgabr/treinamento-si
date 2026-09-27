@@ -52,6 +52,18 @@ function provedorDeTeste(): Persistencia {
   }
 }
 
+/**
+ * Fecha o checkpoint de uma área com todos os itens acertados — o veredito é por item, e o placar
+ * do critério sai dele.
+ */
+function aprovarCheckpoint(
+  store: typeof import('../application/progresso-store'),
+  areaId: string,
+  total: number,
+): void {
+  for (let i = 0; i < total; i++) store.registrarVeredictoDeCheckpoint(areaId, i, true, total)
+}
+
 interface Ambiente {
   store: typeof import('../application/progresso-store')
   BlocoDiagnostico: typeof import('./Trilha').BlocoDiagnostico
@@ -228,7 +240,7 @@ describe('checklist da trilha', () => {
 
     // Agora o checkpoint da área, no critério do guia: as condições estão satisfeitas.
     const total = area.guia.checkpoint.length
-    store.registrarCheckpoint(AREA, total, total)
+    aprovarCheckpoint(store, AREA, total)
     await screen.findByText(/marco cumprido/)
     expect(container.querySelector('.area-marco')!.getAttribute('data-cumprido')).toBe('true')
     // O selo mudou de estado, e não só de texto: é a classe que a folha pinta.
@@ -243,7 +255,7 @@ describe('checklist da trilha', () => {
 
     const area = conteudo.areas.find((a) => a.areaId === AREA)!
     const total = area.guia.checkpoint.length
-    store.registrarCheckpoint(AREA, total, total)
+    aprovarCheckpoint(store, AREA, total)
     const primeira = area.guia.atividades!.linhas[0]!
     const caixa = screen.getByRole('checkbox', { name: new RegExp(escapar(primeira[1]!)) })
 
@@ -271,7 +283,7 @@ describe('checklist da trilha', () => {
     // Só o checkpoint: o artefato falta, e o marco da fase não fecha.
     const area = conteudo.areas.find((a) => a.areaId === AREA)!
     const total = area.guia.checkpoint.length
-    store.registrarCheckpoint(area.areaId, total, total)
+    aprovarCheckpoint(store, area.areaId, total)
     // A área já aparece com o checkpoint aprovado — é o sinal de que a tela re-renderizou.
     await waitFor(() =>
       expect(container.querySelector('.area-marco-condicao')!.textContent).toContain(
@@ -316,7 +328,7 @@ describe('checklist da trilha', () => {
     // Só o checkpoint das áreas, sem artefato nenhum: uma condição de cada duas, e a fase não fecha.
     for (const area of areas) {
       const total = area.guia.checkpoint.length
-      store.registrarCheckpoint(area.areaId, total, total)
+      aprovarCheckpoint(store, area.areaId, total)
     }
     await waitFor(() =>
       expect(fase0.querySelector('.area-marco-condicao')!.textContent).toContain(
@@ -475,7 +487,7 @@ describe('checklist da trilha', () => {
 
     // O checkpoint da área, no critério do próprio guia: as duas condições, e o marco fecha.
     const total = area.guia.checkpoint.length
-    store.registrarCheckpoint(AREA, total, total)
+    aprovarCheckpoint(store, AREA, total)
     await waitFor(() => expect(retomada.getAttribute('data-cumprido')).toBe('true'))
     expect(retomada.querySelector('.area-retomada-condicao')!.textContent).toContain(
       'Checkpoint: aprovado no critério declarado',

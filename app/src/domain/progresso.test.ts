@@ -8,16 +8,19 @@ import {
   normalizarProgresso,
   pareceProgresso,
   progressoVazio,
-  registrarCheckpoint,
   registrarConfianca,
   registrarDiaAtivo,
   registrarDiagnostico,
   registrarArtefato,
   registrarQuestao,
   registrarRecuperacao,
+  registrarRespostaDeCheckpoint,
   resultadoDoCheckpoint,
+  resultadoRegistradoDoCheckpoint,
   temaVazio,
+  veredictosDoCheckpoint,
   VERSAO_PROGRESSO,
+  type Progresso,
 } from './progresso'
 import { precisaReleituraCompleta } from './srs'
 
@@ -134,11 +137,18 @@ describe('redutores', () => {
     expect(p.temas[REF]?.revisao.rebaixamentos).toBe(1)
   })
 
-  it('registrarCheckpoint sobrescreve o resultado da área', () => {
-    let p = registrarCheckpoint(progressoVazio(), '01-fundamentos', 3, 5, HOJE)
-    expect(p.checkpoints['01-fundamentos']).toEqual({ acertos: 3, total: 5 })
-    p = registrarCheckpoint(p, '01-fundamentos', 5, 5, HOJE)
-    expect(p.checkpoints['01-fundamentos']).toEqual({ acertos: 5, total: 5 })
+  it('registrarRespostaDeCheckpoint guarda o veredito por item, na ordem do material', () => {
+    let p = registrarRespostaDeCheckpoint(progressoVazio(), '01-fundamentos', 3, false, 5, HOJE)
+    p = registrarRespostaDeCheckpoint(p, '01-fundamentos', 1, true, 5, HOJE)
+    expect(p.checkpoints['01-fundamentos']).toEqual({
+      itens: [
+        { indice: 1, acertou: true },
+        { indice: 3, acertou: false },
+      ],
+      placarAntigo: null,
+    })
+    // Registrar o veredito é atividade de estudo: o dia entra, como no quiz e na recuperação.
+    expect(p.diasAtivos).toEqual(['2026-03-10'])
   })
 
   it('registrarQuestao acumula o placar do item e marca o dia', () => {
@@ -209,8 +219,8 @@ describe('redutores', () => {
     expect(marcarLido(base, REF, HOJE)).toBe(base)
     const comConfianca = registrarConfianca(base, REF, 0, 3, HOJE)
     expect(registrarConfianca(comConfianca, REF, 0, 3, HOJE)).toBe(comConfianca)
-    const comCheckpoint = registrarCheckpoint(base, 'a', 4, 5, HOJE)
-    expect(registrarCheckpoint(comCheckpoint, 'a', 4, 5, HOJE)).toBe(comCheckpoint)
+    const comCheckpoint = registrarRespostaDeCheckpoint(base, 'a', 0, true, 5, HOJE)
+    expect(registrarRespostaDeCheckpoint(comCheckpoint, 'a', 0, true, 5, HOJE)).toBe(comCheckpoint)
     // Registrar é sempre mudança (o placar anda); o mesmo-referência vale para o id recusado.
     expect(registrarQuestao(base, '', true, HOJE)).toBe(base)
   })
@@ -225,6 +235,157 @@ describe('resultadoDoCheckpoint', () => {
   it('conta os acertos quando todos foram julgados', () => {
     expect(resultadoDoCheckpoint([true, false, true])).toEqual({ acertos: 2, total: 3 })
     expect(resultadoDoCheckpoint([false, false])).toEqual({ acertos: 0, total: 2 })
+  })
+})
+
+describe('checkpoint da área: o veredito por item e o placar derivado', () => {
+  const AREA = '01-fundamentos'
+
+  /** Um progresso com `acertos` dos 5 itens julgados, na ordem do material. */
+  function comVereditos(acertos: number, total = 5): Progresso {
+    let p = progressoVazio()
+    for (let i = 0; i < total; i++) {
+      p = registrarRespostaDeCheckpoint(p, AREA, i, i < acertos, total, HOJE)
+    }
+    return p
+  }
+
+  /** O que o arquivo antigo gravava: só o placar, sem veredito nenhum por item. */
+  function comPlacarAntigo(acertos: number, total = 5): Progresso {
+    return normalizarProgresso(
+      { versao: 1, temas: {}, checkpoints: { [AREA]: { acertos, total } }, diasAtivos: [] },
+      HOJE,
+    )
+  }
+
+  it('põe null no que não foi julgado, na ordem do material', () => {
+    let p = registrarRespostaDeCheckpoint(progressoVazio(), AREA, 2, true, 5, HOJE)
+    p = registrarRespostaDeCheckpoint(p, AREA, 4, false, 5, HOJE)
+    expect(veredictosDoCheckpoint(p, AREA, 5)).toEqual([null, null, true, null, false])
+    // Guia com um item a mais: o que não foi julgado aparece como não julgado, e o índice
+    // guardado não desloca os outros.
+    expect(veredictosDoCheckpoint(p, AREA, 6)).toEqual([null, null, true, null, false, null])
+    // Área sem registro nenhum não tem veredito — e não uma lista de "errei".
+    expect(veredictosDoCheckpoint(progressoVazio(), AREA, 3)).toEqual([null, null, null])
+  })
+
+  it('o placar é derivado dos vereditos, e só existe com o julgamento fechado', () => {
+    // Julgamento em curso: dois itens de cinco, e ainda não há resultado — um parcial seria lido
+    // como reprovação pelo critério.
+    let meio = registrarRespostaDeCheckpoint(progressoVazio(), AREA, 0, true, 5, HOJE)
+    meio = registrarRespostaDeCheckpoint(meio, AREA, 1, false, 5, HOJE)
+    expect(resultadoRegistradoDoCheckpoint(meio, AREA, 5)).toBeNull()
+    expect(resultadoRegistradoDoCheckpoint(progressoVazio(), AREA, 5)).toBeNull()
+    const fechado = comVereditos(4)
+    expect(resultadoRegistradoDoCheckpoint(fechado, AREA, 5)).toEqual({ acertos: 4, total: 5 })
+    // O guia ganhou um item: a conta reabre, e o resultado só volta com os seis julgados.
+    expect(resultadoRegistradoDoCheckpoint(fechado, AREA, 6)).toBeNull()
+  })
+
+  it('não cria estado novo quando o veredito é o mesmo, e recusa índice que não descreve item', () => {
+    const p = comVereditos(5)
+    expect(registrarRespostaDeCheckpoint(p, AREA, 2, true, 5, HOJE)).toBe(p)
+    expect(registrarRespostaDeCheckpoint(p, AREA, -1, true, 5, HOJE)).toBe(p)
+    expect(registrarRespostaDeCheckpoint(p, AREA, 1.5, true, 5, HOJE)).toBe(p)
+    // O guia tem cinco itens: o sexto índice não descreve item nenhum do material.
+    expect(registrarRespostaDeCheckpoint(p, AREA, 5, true, 5, HOJE)).toBe(p)
+    expect(registrarRespostaDeCheckpoint(p, '', 0, true, 5, HOJE)).toBe(p)
+    expect(registrarRespostaDeCheckpoint(p, '__proto__', 0, true, 5, HOJE)).toBe(p)
+    expect(Object.getPrototypeOf(p.checkpoints)).toBe(Object.prototype)
+  })
+
+  it('veredito de índice fora do guia não fecha a conta do julgamento', () => {
+    // Guia encolheu, ou arquivo editado à mão: o índice 7 não descreve item de um guia de 5, e quem
+    // lê o veredito por item procura 0..4. Fechar a conta por "quantidade de vereditos" diria que o
+    // julgamento fechou e jogaria fora o placar antigo com item do material por julgar.
+    const comIndiceEstranho = comPlacarAntigo(4)
+    const p: Progresso = {
+      ...comIndiceEstranho,
+      checkpoints: {
+        [AREA]: {
+          itens: [{ indice: 7, acertou: true }],
+          placarAntigo: { acertos: 4, total: 5 },
+        },
+      },
+    }
+    expect(veredictosDoCheckpoint(p, AREA, 5)).toEqual([null, null, null, null, null])
+    expect(resultadoRegistradoDoCheckpoint(p, AREA, 5)).toEqual({ acertos: 4, total: 5 })
+  })
+
+  it('o item julgado de novo fica com o último veredito, sem virar dois registros', () => {
+    let p = comVereditos(5)
+    p = registrarRespostaDeCheckpoint(p, AREA, 0, false, 5, HOJE)
+    expect(p.checkpoints[AREA]?.itens).toEqual([
+      { indice: 0, acertou: false },
+      { indice: 1, acertou: true },
+      { indice: 2, acertou: true },
+      { indice: 3, acertou: true },
+      { indice: 4, acertou: true },
+    ])
+    expect(resultadoRegistradoDoCheckpoint(p, AREA, 5)).toEqual({ acertos: 4, total: 5 })
+  })
+
+  it('o placar do arquivo antigo responde enquanto o julgamento por item não fecha', () => {
+    const antigo = comPlacarAntigo(4)
+    expect(antigo.checkpoints[AREA]).toEqual({
+      itens: [],
+      placarAntigo: { acertos: 4, total: 5 },
+    })
+    expect(resultadoRegistradoDoCheckpoint(antigo, AREA, 5)).toEqual({ acertos: 4, total: 5 })
+
+    // Julgamento em CURSO: o placar antigo fica. Um clique não pode revogar a aprovação de quem
+    // já tinha fechado o checkpoint — ela sai da tela, da contagem por área e do marco da trilha.
+    const pelaMetade = registrarRespostaDeCheckpoint(antigo, AREA, 0, false, 5, HOJE)
+    expect(pelaMetade.checkpoints[AREA]?.placarAntigo).toEqual({ acertos: 4, total: 5 })
+    expect(resultadoRegistradoDoCheckpoint(pelaMetade, AREA, 5)).toEqual({ acertos: 4, total: 5 })
+
+    // Fechado o julgamento, o placar antigo sai e o resultado passa a ser o dos vereditos: um
+    // valor só para ler, e não dois dizendo coisas diferentes.
+    let fechado = pelaMetade
+    for (const i of [1, 2, 3, 4]) {
+      fechado = registrarRespostaDeCheckpoint(fechado, AREA, i, true, 5, HOJE)
+    }
+    expect(fechado.checkpoints[AREA]?.placarAntigo).toBeNull()
+    expect(resultadoRegistradoDoCheckpoint(fechado, AREA, 5)).toEqual({ acertos: 4, total: 5 })
+  })
+
+  it('preserva o veredito por item, ida e volta pelo JSON', () => {
+    const p = comVereditos(4)
+    expect(normalizarProgresso(JSON.parse(JSON.stringify(p)), HOJE)).toEqual(p)
+  })
+
+  it('saneia o checkpoint gravado: o veredito por item vence o placar que vier junto', () => {
+    const p = normalizarProgresso(
+      {
+        versao: 1,
+        temas: {},
+        diasAtivos: [],
+        checkpoints: {
+          // Placar ao lado do veredito: sobra de arquivo editado à mão, e ficaria dizendo outra
+          // coisa que não a soma dos vereditos. O índice repetido fica com o último veredito.
+          a: {
+            acertos: 9,
+            total: 5,
+            itens: [
+              { indice: 1, acertou: true },
+              { indice: 1, acertou: false },
+              { indice: 0, acertou: 'sim' },
+              { indice: -1, acertou: true },
+            ],
+          },
+          b: { itens: 'nada' },
+          c: { acertos: 2, total: 5 },
+          __proto__: { acertos: 9, total: 9 },
+        },
+      },
+      HOJE,
+    )
+    expect(p.checkpoints.a).toEqual({ itens: [{ indice: 1, acertou: false }], placarAntigo: null })
+    // Entrada que não descreve nada não vira área no estado.
+    expect(p.checkpoints.b).toBeUndefined()
+    expect(p.checkpoints.c).toEqual({ itens: [], placarAntigo: { acertos: 2, total: 5 } })
+    expect(Object.keys(p.checkpoints).sort()).toEqual(['a', 'c'])
+    expect(Object.getPrototypeOf(p.checkpoints)).toBe(Object.prototype)
   })
 })
 
@@ -390,6 +551,9 @@ describe('normalizarProgresso', () => {
           },
         },
       },
+      // Sem o veredito por item, que esta fase acrescentou: o checkpoint do arquivo antigo é só
+      // o placar, e é ele que fica (`placarAntigo`) — inventar a marca de cada item diria que o
+      // estudante julgou itens que ninguém julgou.
       checkpoints: { '01-fundamentos': { acertos: 4, total: 5 } },
       questoes: { [ITEM]: { acertos: 1, erros: 1, ultima: '2026-03-09T10:00:00.000Z' } },
       diasAtivos: ['2026-03-08', '2026-03-09'],
@@ -404,7 +568,10 @@ describe('normalizarProgresso', () => {
     expect(t.revisao.proximaRevisao).toBe('2026-04-09T12:00:00.000Z')
     expect(t.revisao.rebaixamentos).toBe(1)
     expect(t.revisao.passagens).toBe(2)
-    expect(p.checkpoints['01-fundamentos']).toEqual({ acertos: 4, total: 5 })
+    expect(p.checkpoints['01-fundamentos']).toEqual({
+      itens: [],
+      placarAntigo: { acertos: 4, total: 5 },
+    })
     expect(p.questoes[ITEM]).toEqual({ acertos: 1, erros: 1, ultima: '2026-03-09T10:00:00.000Z' })
     expect(p.diasAtivos).toEqual(['2026-03-08', '2026-03-09'])
     // Os campos desta fase (diagnóstico das trilhas e artefatos da seção 8) também são aditivos:
@@ -480,10 +647,15 @@ describe('normalizarProgresso', () => {
   it('preserva um estado válido, ida e volta pelo JSON', () => {
     let p = registrarConfianca(progressoVazio(), REF, 0, 4, HOJE)
     p = registrarRecuperacao(p, REF, true, HOJE)
-    p = registrarCheckpoint(p, '01-fundamentos', 4, 5, HOJE)
+    p = registrarRespostaDeCheckpoint(p, '01-fundamentos', 0, true, 5, HOJE)
+    p = registrarRespostaDeCheckpoint(p, '01-fundamentos', 3, false, 5, HOJE)
     p = registrarQuestao(p, ITEM, false, HOJE)
     const volta = normalizarProgresso(JSON.parse(JSON.stringify(p)), HOJE)
     expect(volta).toEqual(p)
+    expect(volta.checkpoints['01-fundamentos']?.itens).toEqual([
+      { indice: 0, acertou: true },
+      { indice: 3, acertou: false },
+    ])
   })
 
   it('aceita arquivo da versão 1 gravado antes do quiz, sem o campo de questões', () => {
@@ -682,7 +854,9 @@ describe('normalizarProgresso', () => {
     for (const dias of [1, 7, 30, 90]) expect(comIntervalo(dias)).toBe(dias)
   })
 
-  it('recusa checkpoint com acertos maior que o total ou fracionário', () => {
+  it('recusa placar antigo com acertos maior que o total ou fracionário', () => {
+    // É o placar do arquivo gravado antes do veredito por item, e ele passa pelo mesmo saneamento
+    // de antes: resultado impossível concederia o selo de aprovação por um dado que não existe.
     const p = normalizarProgresso(
       {
         versao: 1,
@@ -699,6 +873,7 @@ describe('normalizarProgresso', () => {
       HOJE,
     )
     expect(Object.keys(p.checkpoints)).toEqual(['e'])
+    expect(p.checkpoints.e).toEqual({ itens: [], placarAntigo: { acertos: 4, total: 5 } })
   })
 
   it('deduplica e ordena os dias ativos', () => {

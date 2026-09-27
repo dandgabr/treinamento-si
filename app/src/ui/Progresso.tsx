@@ -3,7 +3,7 @@ import { content } from '../infrastructure/content/repository'
 import { ponte } from '../infrastructure/storage/ponte'
 import { aprovouNoCriterio, interpretarCriterio } from '../domain/criterio'
 import { dominioDaArea } from '../domain/dominio'
-import { diasComEstudo, resultadoDoCheckpoint } from '../domain/progresso'
+import { diasComEstudo, resultadoRegistradoDoCheckpoint, veredictosDoCheckpoint } from '../domain/progresso'
 import { intervaloDaCobranca, intervaloInicial } from '../domain/srs'
 import type { Area } from '../domain/types'
 import { filaComTarefas, tarefaDoTema } from '../application/revisao-espacada'
@@ -14,7 +14,7 @@ import {
   marcarLido,
   ondeFicaOProgresso,
   recomecarComConfirmacao,
-  registrarCheckpoint,
+  registrarVeredictoDeCheckpoint,
   registrarRecuperacao,
   useCarregado,
   useErroDeCarga,
@@ -361,11 +361,13 @@ function Versao() {
 /**
  * Checkpoint da area: veredito por item, e o total e o que conta para o criterio.
  *
- * O que o progresso guarda e o PLACAR (acertos e total); a marca de cada item e da passagem
- * que esta na tela. Por isso o texto abaixo separa as duas coisas: sem isso, quem recarrega
- * a pagina ve os botoes em branco logo depois de ler "resultado gravado" e conclui que o app
- * perdeu o que ele respondeu. Nada muda no formato do progresso — o campo por item nao
- * existe no estado, e um formato paralelo so criaria duas verdades para o mesmo dado.
+ * O veredito de cada item e GRAVADO, um a um, no progresso — como o diagnostico das trilhas. Antes
+ * ele vivia em `useState` e sumia ao recarregar a pagina: o placar persistia, e a tela dizia
+ * "ultimo resultado gravado" ao lado de botoes em branco.
+ *
+ * O placar nao virou um segundo dado guardado: com os vereditos no estado ele passa a ser DERIVADO
+ * (`resultadoRegistradoDoCheckpoint`), e a unica copia que sobra e a do arquivo gravado antes deste
+ * campo, que nao tem veredito de onde tirar o resultado.
  */
 export function CheckpointArea({
   areaId,
@@ -378,23 +380,15 @@ export function CheckpointArea({
   id?: string
 }) {
   const progresso = useProgresso()
-  const [veredictos, setVeredictos] = useState<(boolean | null)[]>(() =>
-    area.guia.checkpoint.map(() => null),
-  )
-  const resultado = resultadoDoCheckpoint(veredictos)
-  const acertos = resultado?.acertos ?? null
-  const total = resultado?.total ?? null
-
-  useEffect(() => {
-    // Grava so quando todos os itens foram julgados: um parcial seria lido como
-    // reprovacao pelo criterio. Depende de valores primitivos, entao nao redispara.
-    if (acertos !== null && total !== null) registrarCheckpoint(areaId, acertos, total)
-  }, [areaId, acertos, total])
-
-  const guardado = progresso.checkpoints[areaId]
+  const total = area.guia.checkpoint.length
+  const veredictos = veredictosDoCheckpoint(progresso, areaId, total)
+  const registrado = resultadoRegistradoDoCheckpoint(progresso, areaId, total)
+  // O placar do arquivo antigo so aparece quando e ele que responde: e o caso em que os botoes
+  // voltam em branco, e o unico em que a tela precisa dizer por que.
+  const placarAntigo = progresso.checkpoints[areaId]?.placarAntigo ?? null
   const alvo = interpretarCriterio(area.guia.criterio)
-  const aprovado = guardado
-    ? aprovouNoCriterio(alvo, guardado.acertos, area.guia.checkpoint.length || guardado.total)
+  const aprovado = registrado
+    ? aprovouNoCriterio(alvo, registrado.acertos, total || registrado.total)
     : null
   const julgados = veredictos.filter((v) => v !== null).length
 
@@ -407,13 +401,12 @@ export function CheckpointArea({
         id={id}
         veredictoPorItem={{
           obter: (i) => veredictos[i] ?? null,
-          definir: (i, acertou) =>
-            setVeredictos((atual) => atual.map((v, j) => (j === i ? acertou : v))),
+          definir: (i, acertou) => registrarVeredictoDeCheckpoint(areaId, i, acertou, total),
         }}
       />
       <p className="dominio-checkpoint" role="status">
-        {guardado
-          ? `Último resultado gravado: ${guardado.acertos} de ${guardado.total}${
+        {registrado
+          ? `Último resultado gravado: ${registrado.acertos} de ${registrado.total}${
               aprovado === null
                 ? '.'
                 : aprovado
@@ -422,12 +415,18 @@ export function CheckpointArea({
             }`
           : 'Nenhum checkpoint registrado nesta área.'}
       </p>
-      {/* Só faz sentido dizer isto no caso em que a tela contradiz o dado guardado: placar
-          registrado e nenhuma marca na tela. */}
-      {guardado && julgados === 0 ? (
+      {/* Julgamento em curso: os itens marcados ja estao no progresso, e o que falta e o ultimo
+          item — sem esta linha, quem marcou 4 de 5 e reabriu a pagina nao saberia quantos faltam,
+          porque o placar so existe com o julgamento fechado. */}
+      {julgados > 0 && julgados < total ? (
         <p className="dominio-checkpoint">
-          Fica guardado o placar, e não a marca de cada item: por isso os botões voltam em branco
-          ao reabrir. Julgar os itens de novo regrava o resultado.
+          {julgados} de {total} itens julgados. Julgar os {total} registra o resultado.
+        </p>
+      ) : null}
+      {placarAntigo ? (
+        <p className="dominio-checkpoint">
+          Este resultado foi gravado antes de o app guardar a marca de cada item: por isso os botões
+          vêm em branco. Julgar os itens de novo passa a guardar a marca de cada um.
         </p>
       ) : null}
     </>

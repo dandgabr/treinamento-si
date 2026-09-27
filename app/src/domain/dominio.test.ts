@@ -1,13 +1,27 @@
 import { describe, expect, it } from 'vitest'
 import { dominioDaArea } from './dominio'
+import { progressoVazio, registrarRespostaDeCheckpoint, type Progresso } from './progresso'
 import { areaFake, guiaFake, progressoFake, temaFake } from './testes/fixtures'
 
 const REF_A = 'x#TEMA-01'
 const REF_B = 'x#TEMA-02'
 const AREA = areaFake({ areaId: 'x', areaNome: 'X', temas: [REF_A, REF_B] })
+const HOJE = new Date('2026-03-10T12:00:00.000Z')
 
-function comCheckpoint(areaId: string, acertos: number, total = 5) {
-  return progressoFake({ checkpoints: { [areaId]: { acertos, total } } })
+/** O checkpoint da área fechado com `acertos` dos 5 itens do guia, item a item. */
+function comCheckpoint(areaId: string, acertos: number, total = 5): Progresso {
+  let p = progressoVazio()
+  for (let i = 0; i < total; i++) {
+    p = registrarRespostaDeCheckpoint(p, areaId, i, i < acertos, total, HOJE)
+  }
+  return p
+}
+
+/** O placar do arquivo antigo, sem veredito por item: o caminho de quem já respondia antes. */
+function comPlacarAntigo(areaId: string, acertos: number, total = 5): Progresso {
+  return progressoFake({
+    checkpoints: { [areaId]: { itens: [], placarAntigo: { acertos, total } } },
+  })
 }
 
 describe('dominioDaArea', () => {
@@ -47,6 +61,18 @@ describe('dominioDaArea', () => {
   it('não quebra em área sem temas', () => {
     const area = areaFake({ temas: [] })
     expect(dominioDaArea(area, progressoFake()).totalTemas).toBe(0)
+  })
+
+  it('o placar do arquivo antigo (sem veredito por item) continua valendo', () => {
+    expect(dominioDaArea(AREA, comPlacarAntigo('x', 4)).checkpointAprovado).toBe(true)
+    expect(dominioDaArea(AREA, comPlacarAntigo('x', 3)).checkpointAprovado).toBe(false)
+  })
+
+  it('um julgamento pela metade não revoga a aprovação já registrada', () => {
+    // O placar antigo fica enquanto o julgamento por item não fecha: um clique não pode tirar a
+    // aprovação da área (e o marco da trilha com ela).
+    const parcial = registrarRespostaDeCheckpoint(comPlacarAntigo('x', 4), 'x', 0, false, 5, HOJE)
+    expect(dominioDaArea(AREA, parcial).checkpointAprovado).toBe(true)
   })
 
   it('não mistura áreas diferentes', () => {

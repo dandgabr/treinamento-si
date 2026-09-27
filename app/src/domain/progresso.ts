@@ -33,6 +33,12 @@ export interface TemaProgresso {
   revisao: EstadoRevisao
 }
 
+/**
+ * Placar de um checkpoint: quantos itens foram julgados e quantos desses foram acertados. E o que
+ * o criterio do guia le — e ele e DERIVADO dos vereditos por item (`resultadoDoCheckpoint`), nao
+ * um dado guardado ao lado deles. A unica copia gravada esta em `CheckpointDaArea.placarAntigo`,
+ * e so existe em arquivo anterior ao veredito por item.
+ */
 export interface ResultadoCheckpoint {
   acertos: number
   total: number
@@ -50,13 +56,31 @@ export interface RegistroDeQuestao {
 }
 
 /**
- * Veredito de um item do pre-teste diagnostico de uma trilha, na ordem do material. Item nao
- * julgado nao entra na lista: "nao respondi" e "errei" sao estados diferentes, e o resumo do
- * diagnostico so existe com os dez julgados.
+ * Veredito de um item julgado, na ordem do material. Item nao julgado nao entra na lista: "nao
+ * respondi" e "errei" sao estados diferentes. A mesma forma serve ao pre-teste diagnostico de uma
+ * trilha (`diagnosticos`) e ao checkpoint da secao 9 de um guia (`checkpoints`) — nos dois o indice
+ * e o do material, e quem le procura por ele.
  */
-export interface RespostaDiagnostico {
+export interface RespostaDeItem {
   indice: number
   acertou: boolean
+}
+
+/**
+ * O checkpoint da secao 9 do guia de uma area.
+ *
+ * O que se grava e o veredito de cada item julgado (`itens`), e o placar e DERIVADO dele
+ * (`resultadoRegistradoDoCheckpoint`): guardar o total junto seria manter duas verdades para o
+ * mesmo dado, como no diagnostico das trilhas.
+ *
+ * `placarAntigo` e a excecao que o arquivo ANTIGO obriga: a v1 gravava so o placar, item a item
+ * nao existia, e descarta-lo ao carregar apagaria a aprovacao de quem ja fechou o checkpoint —
+ * nao ha veredito de onde tirar esse resultado de volta. Ele nao concorre com `itens`: existe
+ * enquanto o julgamento por item NAO fecha, e sai do registro na mesma escrita que o fecha.
+ */
+export interface CheckpointDaArea {
+  itens: RespostaDeItem[]
+  placarAntigo: ResultadoCheckpoint | null
 }
 
 /**
@@ -73,13 +97,14 @@ export interface RegistroArtefato {
 export interface Progresso {
   versao: typeof VERSAO_PROGRESSO
   temas: Record<string, TemaProgresso>
-  checkpoints: Record<string, ResultadoCheckpoint>
+  /** Area id -> checkpoint da secao 9 do guia dela, com o veredito por item. */
+  checkpoints: Record<string, CheckpointDaArea>
   /** Id do item do banco de questoes -> respostas dadas nele. */
   questoes: Record<string, RegistroDeQuestao>
   /** Dias (AAAA-MM-DD) com ao menos uma atividade. Base do streak. */
   diasAtivos: string[]
   /** Slug da trilha -> vereditos do pre-teste diagnostico dela. */
-  diagnosticos: Record<string, RespostaDiagnostico[]>
+  diagnosticos: Record<string, RespostaDeItem[]>
   /** Chave `areaId#N` (N da secao 8 do guia da area) -> artefato produzido e quando. */
   artefatos: Record<string, RegistroArtefato>
 }
@@ -88,11 +113,14 @@ export interface Progresso {
  * Versao do formato gravado.
  *
  * Os campos que esta fase acrescentou (`temas[ref].revisao.falhasSeguidas`, o veredito por item
- * do diagnostico das trilhas e o artefato da secao 8 dos guias) entram SEM mudar a versao, e o
- * precedente e do proprio arquivo: foi assim que `questoes` entrou na v1 (ver `pareceProgresso`).
- * A regra que sustenta isso e que o campo e aditivo — um arquivo gravado antes dele continua
- * legivel, e o normalizador preenche o que falta com o valor neutro (zero falhas seguidas, mapa
- * vazio de diagnosticos e de artefatos). Uma versao nova aqui teria dois custos:
+ * do diagnostico das trilhas, o artefato da secao 8 dos guias e o veredito por item do checkpoint
+ * das areas) entram SEM mudar a versao, e o precedente e do proprio arquivo: foi assim que
+ * `questoes` entrou na v1 (ver `pareceProgresso`). A regra que sustenta isso e que o campo e
+ * aditivo — um arquivo gravado antes dele continua legivel, e o normalizador preenche o que falta
+ * com o valor neutro (zero falhas seguidas, mapa vazio de diagnosticos e de artefatos, nenhum
+ * veredito por item). O que nao pode e o valor neutro INVENTAR dado: o checkpoint que veio do
+ * arquivo antigo so tem o placar, entao e ele que fica (`placarAntigo`) em vez de um veredito por
+ * item que ninguem julgou. Uma versao nova aqui teria dois custos:
  * `normalizarProgresso` DESCARTA versao desconhecida, entao todo arquivo em disco precisaria de
  * migracao (e o app que ainda nao migrasse perderia o estudo), e a versao faz parte do que se
  * exporta — quem revisou o formato da exportacao precisa saber disso antes de o numero mudar.
@@ -213,17 +241,54 @@ export function abrirPassagem(p: Progresso, ref: string, agora: Date): Progresso
   return comTema(p, ref, agora, (t) => (t.recuperacaoOk === null ? t : { ...t, recuperacaoOk: null }))
 }
 
-export function registrarCheckpoint(
+/**
+ * Registra o veredito de um item do checkpoint da secao 9 de um guia.
+ *
+ * Mesma idempotencia de `registrarDiagnostico`: repetir o mesmo veredito nao cria estado novo (o
+ * store depende disso para nao gravar e nao re-renderizar a toa), e indice que nao descreve item do
+ * guia — negativo, fracionario ou alem dos `totalItens` — e recusado.
+ *
+ * `totalItens` e quantos itens o guia tem hoje — e ele que diz se o julgamento FECHOU, e fechar e
+ * o que tira `placarAntigo` do registro: dali em diante o placar e derivado dos vereditos, e
+ * manter os dois seria duas verdades para o mesmo resultado. Com o julgamento em CURSO o placar
+ * antigo fica: um julgamento pela metade nao pode revogar a aprovacao de quem ja tinha fechado o
+ * checkpoint (ela some da tela, da contagem por area e do marco da trilha ate o fecho).
+ */
+export function registrarRespostaDeCheckpoint(
   p: Progresso,
   areaId: string,
-  acertos: number,
-  total: number,
+  indice: number,
+  acertou: boolean,
+  totalItens: number,
   agora: Date,
 ): Progresso {
+  if (
+    !areaId ||
+    CHAVES_RECUSADAS.has(areaId) ||
+    !Number.isInteger(indice) ||
+    indice < 0 ||
+    indice >= totalItens
+  ) {
+    return p
+  }
   const atual = p.checkpoints[areaId]
-  if (atual && atual.acertos === acertos && atual.total === total) return p
+  const itens = atual?.itens ?? []
+  if (itens.find((r) => r.indice === indice)?.acertou === acertou) return p
+  const outros = itens.filter((r) => r.indice !== indice)
+  const proximos = [...outros, { indice, acertou }].sort((a, b) => a.indice - b.indice)
+  // "Fechado" e o que `veredictosDoCheckpoint` le como todos julgados: um veredito por indice do
+  // guia, sem buraco. Contar vereditos nao serve — um indice fora do guia, que so um arquivo de
+  // fora traz, faria a conta fechar com item do material por julgar e jogaria fora o placar antigo.
+  const julgados = new Set(proximos.filter((r) => r.indice < totalItens).map((r) => r.indice))
+  const fechou = totalItens > 0 && julgados.size >= totalItens
   return registrarDiaAtivo(
-    { ...p, checkpoints: { ...p.checkpoints, [areaId]: { acertos, total } } },
+    {
+      ...p,
+      checkpoints: {
+        ...p.checkpoints,
+        [areaId]: { itens: proximos, placarAntigo: fechou ? null : (atual?.placarAntigo ?? null) },
+      },
+    },
     agora,
   )
 }
@@ -302,6 +367,46 @@ export function resultadoDoCheckpoint(
   if (!veredictos.length) return null
   if (veredictos.some((v) => v === null)) return null
   return { acertos: veredictos.filter((v) => v === true).length, total: veredictos.length }
+}
+
+/**
+ * Os vereditos do checkpoint de uma area, um por item do guia, na ordem dele.
+ *
+ * Mesmo contrato do diagnostico das trilhas (`veredictosDoDiagnostico`): item nao julgado vale
+ * `null` — "nao julguei" e "errei" nao podem virar o mesmo estado — e a resposta guardada e
+ * procurada pelo indice do material, entao item novo num guia revisado aparece como nao julgado em
+ * vez de deslocar os outros.
+ */
+export function veredictosDoCheckpoint(
+  progresso: Progresso,
+  areaId: string,
+  totalItens: number,
+): (boolean | null)[] {
+  const itens = progresso.checkpoints[areaId]?.itens ?? []
+  const porIndice = new Map(itens.map((r) => [r.indice, r.acertou]))
+  return Array.from({ length: totalItens }, (_, i) => porIndice.get(i) ?? null)
+}
+
+/**
+ * O resultado REGISTRADO do checkpoint de uma area.
+ *
+ * Com o veredito por item, o placar e derivado dele — e so existe quando todos os itens do guia
+ * foram julgados, como no diagnostico das trilhas. `placarAntigo` responde so quando nao ha
+ * veredito de onde derivar: e o placar do arquivo gravado antes deste campo, a unica copia que
+ * existe daquele resultado. Os dois nao concorrem — o redutor limpa o placar antigo na escrita que
+ * fecha o julgamento —, entao ha um valor so para ler.
+ */
+export function resultadoRegistradoDoCheckpoint(
+  progresso: Progresso,
+  areaId: string,
+  totalItens: number,
+): ResultadoCheckpoint | null {
+  const registro = progresso.checkpoints[areaId]
+  if (!registro) return null
+  return (
+    resultadoDoCheckpoint(veredictosDoCheckpoint(progresso, areaId, totalItens)) ??
+    registro.placarAntigo
+  )
 }
 
 /** Temas vencidos, do mais atrasado para o mais recente. */
@@ -436,20 +541,32 @@ function normalizarTemas(valor: unknown, agora: Date): Record<string, TemaProgre
   return out
 }
 
-function normalizarCheckpoints(valor: unknown): Record<string, ResultadoCheckpoint> {
-  const out: Record<string, ResultadoCheckpoint> = {}
+/**
+ * O checkpoint da secao 9 de uma area, campo a campo.
+ *
+ * O veredito por item manda: achado ele, o placar que viesse junto nao entra — sobra de arquivo
+ * gravado por uma versao que guardava os dois, ou editado a mao, e ficaria dizendo outra coisa que
+ * nao a soma dos vereditos, que e o que a tela e o criterio leem. Sem veredito, o que resta e o
+ * placar do arquivo antigo (o mesmo saneamento de numero de antes: fracionario, nao finito,
+ * negativo ou com acertos > total nao descreve resultado nenhum).
+ */
+function normalizarCheckpoints(valor: unknown): Record<string, CheckpointDaArea> {
+  const out: Record<string, CheckpointDaArea> = {}
   if (!valor || typeof valor !== 'object') return out
   for (const [areaId, bruto] of Object.entries(valor as Record<string, unknown>)) {
     if (!areaId || CHAVES_RECUSADAS.has(areaId) || !bruto || typeof bruto !== 'object') continue
     const r = bruto as Record<string, unknown>
+    const itens = normalizarRespostas(r.itens)
+    if (itens.length) {
+      out[areaId] = { itens, placarAntigo: null }
+      continue
+    }
     const acertos = r.acertos
     const total = r.total
-    // Resultado sem sentido (fracionario, negativo, acertos > total) concederia XP e
-    // selo de aprovacao por um dado que nao existe.
     if (!numeroFinito(acertos) || !numeroFinito(total)) continue
     if (!Number.isInteger(acertos) || !Number.isInteger(total)) continue
     if (total <= 0 || acertos > total) continue
-    out[areaId] = { acertos, total }
+    out[areaId] = { itens: [], placarAntigo: { acertos, total } }
   }
   return out
 }
@@ -477,27 +594,37 @@ function normalizarQuestoes(valor: unknown): Record<string, RegistroDeQuestao> {
 }
 
 /**
- * Vereditos do diagnostico das trilhas. Indice inteiro nao negativo e veredito booleano: item
- * repetido fica com o ultimo valor lido, em vez de a lista ficar com dois vereditos para o mesmo
- * item — o resumo conta acertos, e contaria o mesmo item duas vezes.
+ * Uma lista de vereditos por item vinda de fora, na forma que o estado usa.
+ *
+ * Indice inteiro nao negativo e veredito booleano: item repetido fica com o ultimo valor lido, em
+ * vez de a lista ficar com dois vereditos para o mesmo item — quem conta acertos contaria o mesmo
+ * item duas vezes. A mesma leitura serve ao diagnostico das trilhas e ao checkpoint das areas: a
+ * forma e uma so.
  */
-function normalizarDiagnosticos(valor: unknown): Record<string, RespostaDiagnostico[]> {
-  const out: Record<string, RespostaDiagnostico[]> = {}
+function normalizarRespostas(valor: unknown): RespostaDeItem[] {
+  if (!Array.isArray(valor)) return []
+  const porIndice = new Map<number, boolean>()
+  for (const item of valor) {
+    if (!item || typeof item !== 'object') continue
+    const r = item as Record<string, unknown>
+    if (typeof r.acertou !== 'boolean') continue
+    if (!numeroFinito(r.indice) || !Number.isInteger(r.indice)) continue
+    porIndice.set(r.indice, r.acertou)
+  }
+  return [...porIndice]
+    .map(([indice, acertou]) => ({ indice, acertou }))
+    .sort((a, b) => a.indice - b.indice)
+}
+
+/** Vereditos do diagnostico das trilhas: slug -> itens julgados, na ordem do material. */
+function normalizarDiagnosticos(valor: unknown): Record<string, RespostaDeItem[]> {
+  const out: Record<string, RespostaDeItem[]> = {}
   if (!valor || typeof valor !== 'object') return out
   for (const [slug, bruto] of Object.entries(valor as Record<string, unknown>)) {
     if (!slug || CHAVES_RECUSADAS.has(slug) || !Array.isArray(bruto)) continue
-    const porIndice = new Map<number, boolean>()
-    for (const item of bruto) {
-      if (!item || typeof item !== 'object') continue
-      const r = item as Record<string, unknown>
-      if (typeof r.acertou !== 'boolean') continue
-      if (!numeroFinito(r.indice) || !Number.isInteger(r.indice)) continue
-      porIndice.set(r.indice, r.acertou)
-    }
-    if (!porIndice.size) continue
-    out[slug] = [...porIndice]
-      .map(([indice, acertou]) => ({ indice, acertou }))
-      .sort((a, b) => a.indice - b.indice)
+    const respostas = normalizarRespostas(bruto)
+    if (!respostas.length) continue
+    out[slug] = respostas
   }
   return out
 }
@@ -535,7 +662,8 @@ export function pareceProgresso(valor: unknown): boolean {
   // `questoes` nao entra na conferencia de proposito: um arquivo exportado antes do quiz nao
   // tem o campo e continua sendo um progresso desta versao — o normalizador o preenche vazio.
   // Exigir o campo recusaria o backup de quem estudou ate ontem. `revisao.falhasSeguidas`,
-  // `diagnosticos` e `artefatos` seguem a mesma regra, um nivel abaixo ou ao lado.
+  // `diagnosticos`, `artefatos` e o veredito por item do checkpoint seguem a mesma regra, um
+  // nivel abaixo ou ao lado.
   return (
     bruto.versao === VERSAO_PROGRESSO &&
     !!bruto.temas &&
@@ -548,14 +676,17 @@ export function pareceProgresso(valor: unknown): boolean {
  * Versao desconhecida e descartada em vez de migrada as cegas.
  *
  * Nao ha passo de migracao porque nao ha versao nova: os campos que estas fases acrescentaram
- * (`revisao.falhasSeguidas`, `diagnosticos`, `artefatos`) sao aditivos, e um arquivo gravado antes
- * deles carrega igual — o normalizador poe o valor neutro no que falta (zero falhas seguidas,
- * mapas vazios). A escolha do valor neutro e declarada: a v1 nao guarda o resultado de cada
- * passagem, entao nao ha como saber se as duas ultimas falharam, e supor "sim" faria o app exigir
+ * (`revisao.falhasSeguidas`, `diagnosticos`, `artefatos`, o veredito por item do checkpoint) sao
+ * aditivos, e um arquivo gravado antes deles carrega igual — o normalizador poe o valor neutro no
+ * que falta (zero falhas seguidas, mapas vazios, nenhum veredito). A escolha do valor neutro e
+ * declarada: a v1 nao guarda o resultado de cada passagem, entao nao ha como saber se as duas
+ * ultimas falharam, e supor "sim" faria o app exigir
  * releitura completa de um tema que talvez tenha acabado de acertar. O efeito colateral e o mesmo
  * de antes do campo: um tema que ja tinha duas falhas seguidas so entra em releitura completa
  * apos a proxima falha. O diagnostico e o artefato seguem a mesma politica: vazio quer dizer
- * "ainda nao respondido", que e exatamente o que o app mostra para quem nunca abriu a trilha.
+ * "ainda nao respondido", que e exatamente o que o app mostra para quem nunca abriu a trilha. E o
+ * checkpoint do arquivo antigo nao tem veredito nenhum, entao o normalizador nao inventa marca:
+ * fica com o placar que estava la (`placarAntigo`), que e a unica copia daquele resultado.
  */
 export function normalizarProgresso(valor: unknown, agora: Date): Progresso {
   const vazio = progressoVazio()

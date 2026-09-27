@@ -47,6 +47,7 @@ navegador atual, para abrir o resultado.
 | `npm run typecheck` | roda o `tsc --noEmit`; o Vite apaga tipos sem conferi-los, então isto precisa existir separado |
 | `npm run verificar` | **o portão do dia a dia**: build, build do Electron, testes, os três smokes do código (navegador, desktop e pasta) e o verificador do material — **não empacota nem testa o pacote** |
 | `npm run verificar:pacote` | empacota e roda o smoke do pacote — o portão de quem vai distribuir |
+| `npm run release` | **o portão de quem publica**: exige a árvore limpa e o `verificar` verde, empacota para o sistema em que roda e grava ao lado do artefato o `.sha256` — o passo a passo e as recusas estão em "Publicação" |
 | `npm run smoke` | abre o artefato por `file://` num Chrome headless e confere o DOM renderizado em **107 cenários**, mais o quiz respondido e o glossário navegável |
 | `npm run build:electron` | compila o processo principal e o preload para `dist-electron/` |
 | `npm run desktop` | build completo e abre o aplicativo desktop |
@@ -175,19 +176,19 @@ verdade: se o corte levar algo necessário, o teste falha em vez de o app aparec
 `npm run distribuir:linux` produz `instalador/Roadmap CISO-0.1.0.AppImage`. O alvo é o
 `electron-builder.yml`, e o endurecimento do binário é um `afterPack` (`scripts/fuses.mjs`).
 
-| O que | Medido em 2026-09-26, Linux x64, Electron 33.4.11 |
+| O que | Medido em 2026-09-27, Linux x64, Electron 33.4.11, no pacote da release |
 |---|---|
-| AppImage | **104,0 MiB** (109.006.365 bytes) — O7, medido **antes do banco** entrar no pacote |
-| `app.asar` | 4,89 MiB (5.124.818 bytes): o `conteudo.json`, os 27 assets que sobraram e o `main`/`preload` — medido **antes do banco** |
-| `questoes.json` | 543.668 bytes (0,52 MiB): o banco de múltipla escolha, que agora viaja dentro do asar — eram 791.357 bytes antes de as questões discursivas saírem |
-| `dist-desktop/index.html` + assets | 953,3 kB (976.188 bytes) de JavaScript no arranque, contra 7,86 MiB (8.241.528 bytes) inlinados — remedido em 2026-09-27 |
-| Pasta desempacotada | 267 MiB — o binário do Electron sozinho tem 177,7 MiB — medido **antes do banco** |
+| AppImage | **104,0 MiB** (109.100.595 bytes) — O7 |
+| `app.asar` | 5,46 MiB (5.726.389 bytes): o `conteudo.json`, o `questoes.json`, os 29 arquivos de `dist-desktop/` e o `main`/`preload` |
+| `questoes.json` | 543.668 bytes (0,52 MiB): o banco de múltipla escolha, que viaja dentro do asar — eram 791.357 bytes antes de as questões discursivas saírem |
+| `dist-desktop/index.html` + assets | 953,3 kB (976.161 bytes) de JavaScript no arranque, contra 7,86 MiB (8.241.528 bytes) inlinados |
+| Pasta desempacotada | 268 MiB — o binário do Electron sozinho tem 177,7 MiB (186.312.608 bytes) |
 
-**O banco entrou no pacote depois destas medições.** A lista de `files` do `electron-builder.yml`
-inclui `dist-desktop/**/*`, e é lá que o `questoes.json` é gravado: o asar de agora é maior que os
-4,89 MiB da tabela, e o AppImage também. As três linhas marcadas esperam o próximo
-`npm run distribuir:<sistema>` para virarem número medido de novo — até então, o que está escrito
-nelas é história, não estado.
+**Estas cinco linhas são da release de 2026-09-27**, e não mais da build de 26/09: as três que
+antes diziam "medido **antes do banco**" ficaram velhas quando o banco de múltipla escolha entrou no
+pacote (a lista de `files` inclui `dist-desktop/**/*`, e é lá que o `questoes.json` é gravado), e
+esperavam um `distribuir`. O `npm run release` desta fase foi esse `distribuir` — o passo a passo e
+o hash do artefato estão em "Publicação".
 
 As unidades são as mesmas em todas as linhas (MiB, com os bytes ao lado) porque misturar decimal
 com binário produz uma contradição visível: 7,6 MB contra 7,3 MB para o mesmo arquivo faz a asar
@@ -195,7 +196,7 @@ parecer menor que o `index.html` que ela contém. O AppImage quase não mudou co
 104,0 MiB — porque o que ele carrega é o Electron; o ganho está no `asar` (7,3 → 4,9 MiB) e, acima
 de tudo, no que o V8 precisa analisar antes da primeira tela.
 
-Os 104,0 MiB são quase todos o Electron. O que é nosso é 4,89 MiB, e o desenho do pacote é o que
+Os 104,0 MiB são quase todos o Electron. O que é nosso é 5,46 MiB, e o desenho do pacote é o que
 mantém isso: a lista de `files` é explícita e termina com `!node_modules/**`. Sem essa linha, o
 electron-builder arrasta a árvore de produção inteira — 7480 dos 7487 arquivos do pacote, 137 MB
 dos 139 MB do AppImage anterior — mesmo com o React e o Mermaid já dentro do bundle inline de
@@ -246,6 +247,190 @@ registrada nas pendências; quem quiser o sandbox hoje roda o arquivo do AppImag
 dele. Sem esse arquivo ele usa o ícone do Electron — que é o que aparecia no instalador. A pasta se
 chama `build/` porque esse é o `buildResources` padrão da ferramenta; convive com `dist/`,
 `dist-electron/` e `instalador/`, que são saída, e ela não é.
+
+## Publicação
+
+Publicar são **duas** coisas, e a fase 7 do plano entregou uma e declarou a outra. A **release
+versionada com soma de verificação** está feita, com o comando `npm run release`. A **assinatura e
+notarização** está declarada e não feita: cada uma exige uma peça que esta máquina não tem
+(certificado, um Mac, uma conta de desenvolvedor), e configuração de assinatura que ninguém
+consegue testar é uma promessa que o primeiro usuário descobre ser falsa. As duas estão abaixo, com
+o que cada passo exige e com a consequência prática de não fazer cada uma.
+
+### Release versionada: `npm run release`
+
+O comando faz o que uma release precisa e nada além: exige a árvore limpa, exige o
+`npm run verificar` verde, empacota para o sistema em que está rodando e grava ao lado do artefato
+o arquivo de soma. Cada portão tem uma recusa própria, com mensagem dizendo o que fazer.
+
+| Portão, nesta ordem | Recusa quando | O que a mensagem diz |
+|---|---|---|
+| árvore limpa, antes de verificar | o `git status --porcelain` tem qualquer linha (modificada, encenada ou não rastreada) | o que está pendente, e que a release sai de um commit |
+| artefato da versão | já existe arquivo com o número da versão em `instalador/` | se é pacote de teste (mover ou apagar) ou release publicada, com soma ao lado (subir a versão) |
+| `npm run verificar` | qualquer etapa do portão do dia a dia falha | que a release não publica código que não passa no próprio portão |
+| árvore limpa, depois de verificar | a verificação sujou o repositório | que o gerador do banco gravou algo novo e isso tem de ser commitado antes |
+| árvore limpa, depois de empacotar | o repositório mudou durante o empacotamento | que o `distribuir` recompila a partir de `src/`, então o artefato seria de código que o portão não viu — e a soma **não** é gravada |
+| nome × soma × versão | o `.sha256` aponta para outro nome, outro tamanho ou outra versão | que não se publique: um checksum que aponta para outro nome dá uma conferência falsa |
+
+A ordem é do mais barato para o mais caro — recusar em segundos é melhor que recusar depois de
+quase três minutos de verificação (medido: **2m42s** em 2026-09-27, nesta máquina). O segundo portão
+é o que impede a perda silenciosa: o `electron-builder` reescreve o AppImage no lugar, então
+empacotar por cima apagaria a única cópia conferível da release anterior sem avisar ninguém. A
+conferência depois de empacotar não é repetição da anterior: `distribuir` recompila o bundle a
+partir de `src/`, e um repositório que mudasse no meio do caminho produziria um pacote conferível —
+com soma e tudo — feito de código que nunca passou no portão.
+
+O que sai da execução é o par que se publica:
+
+```
+instalador/Roadmap CISO-<versão>.AppImage
+instalador/Roadmap CISO-<versão>.AppImage.sha256
+```
+
+O arquivo de soma é o do `sha256sum`, e as linhas de comentário existem porque o formato não tem
+onde guardar a versão e o tamanho — nele, tudo o que vem depois dos dois espaços é o nome do
+arquivo, e uma coluna a mais faria a conferência procurar um arquivo chamado
+`Roadmap CISO-0.1.0.AppImage  109100595`. Com `#`, o `sha256sum -c` ignora o comentário e confere a
+soma:
+
+```
+# release 0.1.0 — Roadmap CISO
+# arquivo: Roadmap CISO-0.1.0.AppImage
+# tamanho: 109100595 bytes
+# gerado em: 2026-09-27T18:08:16.446Z
+# confira com: sha256sum -c "Roadmap CISO-0.1.0.AppImage.sha256"
+092e0ec6287726cb3aaef710e8e0976583733775178e3a3c614d00f158833820  Roadmap CISO-0.1.0.AppImage
+```
+
+Quem baixa roda `sha256sum -c "Roadmap CISO-0.1.0.AppImage.sha256"` com o artefato ao lado e recebe
+`SUCESSO`. A versão sai de `package.json` **e de nenhum outro lugar**: ela não é digitada no script
+nem no `electron-builder.yml`, o nome do artefato tem de contê-la, e o script relê o arquivo de
+soma depois de gravar para conferir que o nome, o tamanho e o resumo são os do artefato que acabou
+de sair. `app/instalador/` está no `.gitignore`, então o par viaja como **anexo da release**, não
+como commit — refazer o pacote muda o hash, e um hash versionado seria mentira no dia seguinte.
+
+### O AppImage que estava no disco antes desta fase (medido, não copiado)
+
+| | Valor |
+|---|---|
+| arquivo | `instalador/Roadmap CISO-0.1.0.AppImage` |
+| tamanho | **109.137.711 bytes** (104,1 MiB) |
+| SHA-256 | `cbebd26b69ae50f41af585b126fa0270838ed22e091cf21c953781c0fc366997` |
+| data do arquivo | 2026-09-26 22:45:41 (-03:00) |
+| medido em | 2026-09-27, no disco desta máquina |
+
+**Este pacote não é do código de hoje, e a conta é esta.** O trabalho da fase 6 está nos commits de
+27/09 — 03:08 (`79bea35`, links do material virando rota e glossário navegável), 13:38 (`e178217`,
+o CSS das telas novas) e 14:48 (`68b6e6a`) —, e o arquivo é de 26/09 às 22:45, anterior a todos.
+Medido com a mesma regra de frescor que os smokes usam (`scripts/lib/frescor.mjs`): **82 arquivos de
+fonte do app são mais novos que o pacote**, 31 deles `.ts`/`.tsx` em `src/`. Ninguém reconstruiu o
+AppImage depois da fase 6 — e por isso este README não podia afirmar que o artefato publicado
+correspondia ao código de hoje. A tabela de "Empacotamento" acima também tinha três linhas marcadas
+como medidas "antes do banco" esperando um `distribuir`: a release abaixo é esse `distribuir`, e as
+três foram remedidas depois dela.
+
+### A release desta fase
+
+| | Valor |
+|---|---|
+| versão | 0.1.0, de `package.json` |
+| artefato | `instalador/Roadmap CISO-0.1.0.AppImage` |
+| tamanho | **109.100.595 bytes** (104,0 MiB) |
+| SHA-256 | `092e0ec6287726cb3aaef710e8e0976583733775178e3a3c614d00f158833820` |
+| soma | `instalador/Roadmap CISO-0.1.0.AppImage.sha256` |
+| conferida com | `sha256sum -c "Roadmap CISO-0.1.0.AppImage.sha256"` → `SUCESSO` |
+| de onde saiu | um checkout limpo e vazio de alterações — a release sai de um commit, e o portão não abre exceção para árvore suja |
+| medido em | 2026-09-27, no `instalador/` desta árvore |
+
+Este pacote é o primeiro artefato do disco reconstruído desde a fase 6, e sai do mesmo `src/`,
+`electron/` e `conteudo/` do commit `68b6e6a`: a fase 7 só acrescentou este script, uma linha do
+`package.json` e este README, e nada disso entra no `asar` além do próprio `package.json`. A
+diferença para o pacote anterior está no tamanho (109.137.711 contra 109.100.595 bytes) e no hash —
+as três linhas do pacote de 26/09 esperavam este passo, e estão remedidas acima. O pacote antigo
+**não foi apagado**: ele está em `instalador/anteriores/`, com o mesmo hash da tabela, para quem
+quiser conferir a medição em vez de acreditar nela.
+
+O `npm run smoke:pacote` rodou sobre este pacote (as 20 asserções de *fuses*, `asar`, protocolo e
+progresso em arquivo passaram) — o artefato da release abre e grava progresso, e não é só um arquivo
+com o tamanho certo.
+
+### Assinatura e notarização: o que falta, e o que cada passo exige
+
+O §16.2 do plano (item S14) e a §13 condicionam isto a "se o app for distribuído a terceiros". Esta
+máquina não produz nenhuma das duas assinaturas, então o `electron-builder.yml` continua **sem
+configuração de assinatura** (`mac.identity: null`, `publish: null`) — de propósito, e nada aqui foi
+executado: é caminho **declarado**, não caminho **testado**. O que está feito é o AppImage do Linux,
+com os sete fuses, o `asar` conferido e a soma de verificação acima.
+
+#### Windows: NSIS e portátil
+
+**O que falta:** certificado de assinatura de código.
+
+1. **Certificado**, emitido por uma CA depois de validar a identidade de quem publica, com cobrança
+   anual. Desde 2023 a chave privada de um certificado OV/EV não pode viver em arquivo: ela fica num
+   token ou HSM (FIPS 140-2 nível 2 ou equivalente), e é isso que se compra. **Exige:** identidade
+   validada e pagamento.
+2. **Máquina de build.** O alvo NSIS precisa de `wine` no Linux (`dnf install wine` / `apt install
+   wine`) ou de um Windows com o repositório. **Exige:** uma das duas — nesta máquina não há nenhuma.
+3. **Ligar o certificado ao electron-builder**, no bloco `win:` (`certificateFile`,
+   `certificatePassword`, `publisherName` e, nas versões mais novas, `signtoolOptions`).
+   **Exige:** o certificado do passo 1 — e confirme os nomes na versão instalada antes de editar,
+   porque eles mudam entre majors.
+4. **Conferir o artefato, não a configuração.** No Linux:
+   `osslsigncode verify -in "instalador/Roadmap CISO Setup 0.1.0.exe"`; no Windows,
+   `signtool verify /pa /v` no arquivo do instalador. **Esperado:** o nome do editor, não "Editor
+   desconhecido".
+5. **Republicar a soma.** O `.exe` assinado é outro arquivo: `npm run release` roda de novo na
+   máquina que assinou e grava o `.sha256` dele.
+
+**Consequência prática de publicar sem assinar.** O Windows mostra o aviso do Microsoft Defender
+SmartScreen — "O Windows protegeu o seu PC" — com o editor como **Editor desconhecido**; para abrir,
+a pessoa precisa clicar em "Mais informações" e depois em "Executar assim mesmo". Um binário sem
+assinatura não acumula reputação, e boa parte das políticas corporativas bloqueia executável não
+assinado por padrão. Para o público deste app — quem responde pela segurança da informação numa
+empresa —, esse é justamente o caso comum, e o aviso é indistinguível do de um arquivo malicioso.
+
+#### macOS: `.dmg` e `.zip`
+
+**O que falta:** um Mac, uma conta de desenvolvedor e a notarização.
+
+1. **Conta** no Apple Developer Program (o `~US$99/ano` da §16.2 do plano) e um certificado
+   "Developer ID Application" no chaveiro do Mac que vai construir. **Exige:** a conta e a
+   identidade verificada pela Apple.
+2. **Máquina.** Um Mac: o `.dmg` não se monta de fora, e `codesign`/`notarytool` são ferramentas do
+   sistema. **Exige:** um Mac — nesta máquina não há.
+3. **Construir com a identidade** (`npm run distribuir:mac`, com `mac.identity` apontando para o
+   certificado) e **notarizar**: o electron-builder notariza quando o bloco de notarização está
+   configurado, e a Apple aceita chave de API ou senha de app. **Exige:** conta e certificado.
+4. **Grampear o recibo** no arquivo: `xcrun stapler staple "instalador/Roadmap CISO-0.1.0.dmg"`.
+   Sem isso, quem estiver offline não consegue validar a notarização. **Exige:** a notarização do
+   passo 3.
+5. **Conferir em outro Mac**, com o arquivo **baixado** (com a marca de quarentena):
+   `spctl --assess --type open --verbose=4 "Roadmap CISO.app"` deve responder `accepted` com
+   `source=Notarized Developer ID`, e o duplo clique tem de abrir sem "abrir mesmo assim". O
+   `fuses.mjs` já re-assina o binário de forma ad-hoc, e isso **não** é assinatura de distribuição:
+   serve só para o `.dmg` de desenvolvimento abrir.
+
+**Consequência prática de publicar sem assinar.** O Gatekeeper bloqueia: "não é possível abrir
+porque o desenvolvedor não pode ser verificado" (nas versões recentes, com a oferta de mover o
+arquivo para o Lixo). A saída é abrir pelo menu de contexto com "Abrir" ou liberar em Ajustes →
+Privacidade e Segurança → "Abrir assim mesmo". Como a marca de quarentena vem do download, o aviso
+não desaparece com o tempo: ele volta a cada arquivo novo.
+
+#### Linux: não há assinatura a fazer
+
+O AppImage não passa por portão de aceitação como o SmartScreen ou o Gatekeeper, e não há
+certificado para comprar. **Consequência prática:** quem recebe o arquivo não vê aviso nenhum — e
+também não tem prova de origem. A soma de verificação é a única garantia oferecida, e ela diz que o
+arquivo chegou inteiro: vindo o pacote de um espelho de terceiro, o `.sha256` só ajuda se for
+comparado com o da origem oficial. O `.desktop` que o AppImage distribui abre com `--no-sandbox`
+(veja "Pendências conhecidas"); assinar não mudaria isso.
+
+#### A soma de verificação não é um SBOM
+
+A §16.2 do plano separa as duas coisas, e a assinatura também não resolve a segunda: os fuses e o
+`.sha256` provam a **integridade** do que foi empacotado, não o **inventário** do que está dentro. O
+SBOM continua pendente, e o `package-lock.json` já cobre a matéria-prima dele.
 
 ## Banco de múltipla escolha
 
@@ -377,7 +562,7 @@ Esta é a tabela — e a coluna "medido" é a que diz o que ainda falta, não a 
 | O4 só o `flowchart` do Mermaid | **sim** | sim: 35 chunks de outros diagramas removidos; desenhar puxa 8 | `vite.desktop.config.ts`, `medir` |
 | O5 memória após navegações | — | sim: heap de 11 MB na primeira tela, 16 MB com o diagrama | `medir` |
 | O6 diagramas por tela | — | sim: 1 por tema | `medir` |
-| O7 tamanho do instalador | — | sim: AppImage 104,0 MiB (109.006.365 bytes) — medição de antes do banco, a repetir no próximo `distribuir` | acima |
+| O7 tamanho do instalador | **sim** | sim: AppImage 104,0 MiB (109.100.595 bytes), medido no pacote da release de 2026-09-27 | `npm run release`, "Empacotamento" |
 | O8 decisão sobre XP/nível/sequência | — | sim (removidos, com o motivo) | `progresso.test.ts` |
 | S1 prefs endurecidas | sim | parcial: `allowRunningInsecureContent` não é assertado | `smoke-desktop.mjs` |
 | S2 ponte por allowlist | sim | sim | `smoke-desktop.mjs` |
@@ -392,7 +577,7 @@ Esta é a tabela — e a coluna "medido" é a que diz o que ainda falta, não a 
 | S11 fuses e integridade do asar | sim | sim | `fuses.mjs`, `smoke-pacote.mjs` |
 | S12 travessia e host bloqueados | sim | sim | `smoke-desktop.mjs`, `smoke-pacote.mjs` |
 | S13 cadência de patch do Electron | decisão registrada | — | pendências, fase 7 |
-| S14 assinatura | decisão registrada | — | pendências, fase 7 |
+| S14 assinatura | **declarado, não feito** | — (esta máquina não tem certificado, `wine` nem Mac) | seção "Publicação" |
 
 Os números saem de `npm run medir`, no aplicativo **empacotado**, e não de um build de
 desenvolvimento — é ele que a pessoa recebe. O que ainda falta são as medições que exigem uso
@@ -799,7 +984,8 @@ que já fechou continua aqui, com a razão registrada, para o estado não se per
 | O desktop carrega um **Chromium 130, fora de linha** (Electron 33). O `npm audit` acusa 1 crítica e 13 altas, e a leitura correta é: as de `tar`, `node-gyp` e `app-builder-lib` são de ferramenta de build e não entram no pacote (o `asar list` prova: 4 arquivos, zero `node_modules`); mas o **`electron` é dependência direta e o runtime está embarcado**, com 33 advisories que tocam justamente o que a casca anuncia — *context isolation bypass* (`GHSA-h7rp-cf8h-j98x`), *sandboxed iframe allow-popups bypass* (`GHSA-9f4c-93c8-jc8g`) e *ASAR integrity bypass* (`GHSA-vmqv-hx8q-j7mg`), este último **não mitigado no Linux**, onde a integridade do asar não é verificada. Subir de major e declarar cadência de patch | 7 |
 | O `.desktop` do AppImage abre com `--no-sandbox` (padrão do electron-builder), então a via do menu de aplicativos roda sem o sandbox do Chromium. Decidido manter, para o app não abortar em distros que restringem user namespaces. **Testar em Ubuntu 24.04 antes de distribuir** e reabrir a decisão, ou trazer de volta um `.deb`/`.rpm`, onde o auxiliar pode ser 4755 | 7 |
 | O desktop só foi exercitado no Linux. Falta abrir num Windows e num macOS de verdade | 7 |
-| SBOM e soma de verificação por release; o `package-lock.json` já cobre electron, electron-builder e playwright | 7 |
+| **Assinatura e notarização seguem pendentes, e a fase 7 escolheu declará-las em vez de as inventar.** Esta máquina não tem certificado de assinatura, `wine` nem Mac, então o `electron-builder.yml` continua **sem** configuração de assinatura (`identity: null`), de propósito — configuração que ninguém consegue testar é promessa que o primeiro usuário descobre falsa. O caminho de cada uma (o que o passo exige, como conferir, e o que o usuário final vê quando o pacote vai sem assinatura) está em "Publicação" | 7 |
+| **Soma de verificação por release: feita** — `npm run release` exige árvore limpa e `verificar` verde, empacota e grava o `.sha256` ao lado do artefato, com os números medidos na seção "Publicação". **SBOM continua pendente**, e é outra coisa: a soma prova a integridade do que foi empacotado, o inventário prova o que está dentro. O `package-lock.json` já cobre electron, electron-builder e playwright | 7 |
 | **A camada de interface tem teste de componente**: `@testing-library` + `jsdom` num segundo projeto do Vitest (`vitest.config.ts`), e `src/ui/Progresso.test.tsx` exercita exportar e importar **pelo componente** — inclusive importar inválido sem sobrescrever o progresso e a ponte que rejeita. Fechada | — |
 | O caminho de exportar/importar **do navegador** (Blob, `<input type=file>`, corte de 1 MB no arquivo escolhido) não tem teste; o cancelamento do diálogo deixa a promise pendente | 6 |
 | O gate é um subconjunto do `conteudo/scripts/verificar-repo.py`: ainda não confere `<details>` do gabarito, formato de datas e coerência da tabela de tempos. **Links internos saíram desta linha**: o `check:content` confere os alvos dos links do material (que existam, que tenham rota ou declaração) e o HTML gerado (nenhum `href` relativo). O que ele ainda não confere é o **destino** da rota — se `#/tema/a/TEMA-01` abre uma tela —, e isso é papel do `smoke`, que percorre a matriz de rotas | 6 |

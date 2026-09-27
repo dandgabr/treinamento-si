@@ -30,6 +30,7 @@
     "distribuir:mac": "npm run preparar:conteudo && npm run build:desktop && npm run build:electron && electron-builder --mac --publish never",
     "verificar": "npm run build && npm run build:desktop && npm run build:electron && npm test && npm run smoke && npm run smoke:desktop && npm run smoke:pasta && python3 ../conteudo/scripts/verificar-repo.py",
     "verificar:pacote": "npm run distribuir && npm run smoke:pacote",
+    "release": "node scripts/release.mjs",
     "empacotar": "npm run build && node scripts/empacotar.mjs",
     "build:electron": "vite build --config vite.electron.config.ts",
     "desktop": "npm run preparar:conteudo && npm run build:desktop && npm run build:electron && electron .",

@@ -19,11 +19,11 @@ import {
   pareceProgresso,
   progressoVazio,
   registrarArtefato as aplicarArtefato,
-  registrarCheckpoint as aplicarCheckpoint,
   registrarConfianca as aplicarConfianca,
   registrarDiagnostico as aplicarDiagnostico,
   registrarQuestao as aplicarQuestao,
   registrarRecuperacao as aplicarRecuperacao,
+  registrarRespostaDeCheckpoint as aplicarRespostaDeCheckpoint,
   type Confianca,
   type Progresso,
 } from '../domain/progresso'
@@ -228,13 +228,20 @@ export function registrarRecuperacao(
   publicar((p) => aplicarRecuperacao(p, ref, acertou, agora))
 }
 
-export function registrarCheckpoint(
+/**
+ * Veredito de um item do checkpoint da secao 9 do guia de uma area.
+ *
+ * `totalItens` e quantos itens o guia tem hoje: e ele que diz ao redutor se o julgamento FECHOU —
+ * e fechar e o que dispensa o placar do arquivo antigo, que passa a ser derivado dos vereditos.
+ */
+export function registrarVeredictoDeCheckpoint(
   areaId: string,
-  acertos: number,
-  total: number,
+  indice: number,
+  acertou: boolean,
+  totalItens: number,
   agora: Date = new Date(),
 ): void {
-  publicar((p) => aplicarCheckpoint(p, areaId, acertos, total, agora))
+  publicar((p) => aplicarRespostaDeCheckpoint(p, areaId, indice, acertou, totalItens, agora))
 }
 
 /** Resposta de um item do quiz: acumula o placar do item e marca o dia do estudo. */

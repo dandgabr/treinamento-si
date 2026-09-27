@@ -3,7 +3,7 @@
 import { beforeAll, describe, expect, it } from 'vitest'
 import { carregar, content } from '../infrastructure/content/repository'
 import { areaFake, guiaFake } from './testes/fixtures'
-import { progressoVazio, registrarArtefato, registrarCheckpoint, registrarDiagnostico } from './progresso'
+import { progressoVazio, registrarArtefato, registrarDiagnostico, registrarRespostaDeCheckpoint, type Progresso } from './progresso'
 import type { FaixaDoDiagnostico, FaseDaTrilha, Tabela, Trilha } from './types'
 import {
   atividadesDoGuia,
@@ -18,6 +18,18 @@ import {
 
 const AGORA = new Date('2026-03-10T12:00:00.000Z')
 const SLUG = '91-trilhas/plano-12-meses'
+
+/**
+ * O checkpoint de uma area fechado com `acertos` dos itens: o veredito e por item — o placar que
+ * o criterio le e derivado dele.
+ */
+function comCheckpoint(p: Progresso, areaId: string, acertos: number, total = 5): Progresso {
+  let proximo = p
+  for (let i = 0; i < total; i++) {
+    proximo = registrarRespostaDeCheckpoint(proximo, areaId, i, i < acertos, total, AGORA)
+  }
+  return proximo
+}
 
 /** As tres faixas que o material escreve, palavra por palavra. */
 const FAIXAS: FaixaDoDiagnostico[] = [
@@ -198,7 +210,7 @@ describe('marcoDaArea', () => {
   const area = areaFake({ guia })
 
   it('só cumpre com o checkpoint aprovado E o artefato produzido', () => {
-    const soCheckpoint = registrarCheckpoint(progressoVazio(), '01-fundamentos', 4, 5, AGORA)
+    const soCheckpoint = comCheckpoint(progressoVazio(), '01-fundamentos', 4)
     const soArtefato = registrarArtefato(progressoVazio(), chaveDoArtefato('01-fundamentos', '1'), true, AGORA)
     expect(marcoDaArea(area, soCheckpoint).cumprido).toBe(false)
     expect(marcoDaArea(area, soCheckpoint).produzidos).toBe(0)
@@ -214,7 +226,7 @@ describe('marcoDaArea', () => {
   })
 
   it('não cumpre com o checkpoint reprovado, mesmo com artefato produzido', () => {
-    let p = registrarCheckpoint(progressoVazio(), '01-fundamentos', 3, 5, AGORA)
+    let p = comCheckpoint(progressoVazio(), '01-fundamentos', 3)
     p = registrarArtefato(p, chaveDoArtefato('01-fundamentos', '1'), true, AGORA)
     const marco = marcoDaArea(area, p)
     expect(marco.checkpointAprovado).toBe(false)
@@ -240,7 +252,7 @@ describe('marcoDaFase', () => {
 
   it('só cumpre quando todas as áreas da fase cumprem', () => {
     const comArtefato = (areaId: string) => {
-      let p = registrarCheckpoint(progressoVazio(), areaId, 4, 5, AGORA)
+      let p = comCheckpoint(progressoVazio(), areaId, 4)
       p = registrarArtefato(p, chaveDoArtefato(areaId, '1'), true, AGORA)
       return p
     }
@@ -260,11 +272,7 @@ describe('marcoDaFase', () => {
     expect(umaSo.cumprido).toBe(false)
 
     const asDuas = {
-      ...comArtefato('01-fundamentos'),
-      checkpoints: {
-        '01-fundamentos': { acertos: 4, total: 5 },
-        '00-guia-basico': { acertos: 4, total: 5 },
-      },
+      ...comCheckpoint(comArtefato('01-fundamentos'), '00-guia-basico', 4),
       artefatos: {
         [chaveDoArtefato('01-fundamentos', '1')]: { produzido: true, data: '2026-03-10' },
         [chaveDoArtefato('00-guia-basico', '1')]: { produzido: true, data: '2026-03-10' },
