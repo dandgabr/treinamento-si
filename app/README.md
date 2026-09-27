@@ -31,7 +31,7 @@ navegador atual, para abrir o resultado.
 |---|---|
 | `npm install` | instala as dependências. Leia a nota sobre `omit=dev` abaixo antes de rodar. |
 | `npm run build:content` | lê `conteudo/` e regrava `app/src/content/generated/content.json` |
-| `npm run check:content` | valida o JSON já gerado e falha o processo quando algo falta |
+| `npm run check:content` | regera o `content.json` a partir de `conteudo/`, compara com o que está em disco e falha o processo quando o material mudou depois da última geração ou quando algo falta |
 | `npm run build:questions` | deriva o banco de múltipla escolha do JSON e regrava um arquivo por área em `app/src/content/questions/`, trazendo de volta o `status` de revisão — e derrubando-o quando o texto do item muda |
 | `npm run check:questions` | valida o banco já gravado e falha o processo quando algum item não fecha |
 | `npm test` | roda a suíte do Vitest: parser, gate, banco de questões e motor pedagógico |
@@ -41,36 +41,40 @@ navegador atual, para abrir o resultado.
 | `npm run preparar:conteudo` | lê `conteudo/`, valida o JSON gerado, gera o banco de questões e roda o gate dele — roda uma vez por verificação |
 | `npm run medir` | mede O1, O2, O4, O5 e O6 no aplicativo empacotado |
 | `npm run typecheck` | roda o `tsc --noEmit`; o Vite apaga tipos sem conferi-los, então isto precisa existir separado |
-| `npm run verificar` | **o portão do dia a dia**: build, build do Electron, testes, os dois smokes do código e o verificador do material — **não empacota nem testa o pacote** |
+| `npm run verificar` | **o portão do dia a dia**: build, build do Electron, testes, os três smokes do código (navegador, desktop e pasta) e o verificador do material — **não empacota nem testa o pacote** |
 | `npm run verificar:pacote` | empacota e roda o smoke do pacote — o portão de quem vai distribuir |
 | `npm run smoke` | abre o artefato por `file://` num Chrome headless e confere o DOM renderizado |
 | `npm run build:electron` | compila o processo principal e o preload para `dist-electron/` |
 | `npm run desktop` | build completo e abre o aplicativo desktop |
-| `npm run smoke:desktop` | abre a janela de verdade e confere a casca, o protocolo, o progresso em arquivo e o bloqueio de navegação |
+| `npm run smoke:desktop` | abre a janela de verdade e confere a casca, o protocolo, a ponte com lista fechada de canais, as permissões negadas, a ausência de requisição de rede, o progresso em arquivo e o bloqueio de navegação |
 | `npm run distribuir:<sistema>` | empacota com o `electron-builder`: AppImage, NSIS ou `.dmg`/`.zip` |
 | `npm run smoke:pacote` | abre o **app empacotado** por CDP e confere os fuses, o asar e o progresso |
 | `npm run empacotar` | monta a pasta que vai para quem estuda: `dist/Roadmap-CISO-Interativo/` (roda o `build` antes) |
 | `npm run test:watch` | a suíte em modo observador |
 | `npm run preview` | sobe o Vite servindo o `dist/` para inspeção |
 
-A ordem tem uma dependência real: `check:content` lê o JSON em disco, então sozinho ele não adianta
-nada. Vale o mesmo para o par do banco: `check:questions` lê o que `build:questions` gravou, e o
-`build` do app chama os quatro na ordem certa. O `dev` também não vigia `conteudo/`. Editou um tema
-com o servidor no ar? Rode `npm run build:content` de novo e a página recarrega com o texto novo — e
-`npm run build:questions` se o tema tinha tabela de erros comuns, que é de onde saem todos os itens,
-porque o quiz continua servindo o banco anterior até o gerador rodar.
+A ordem tem uma dependência real: os dois gates leem o que está em disco e nenhum grava. O
+`check:content` regera o material e reprova o arquivo que ficou para trás, então sozinho ele já
+acusa um tema editado sem `npm run build:content`; o `check:questions` confere o banco contra a
+derivação de agora. Quem grava é `build:content` e `build:questions`, e o `build` do app chama os
+quatro na ordem certa. Os dois gates aceitam `ROADMAP_CONTENT_FILE`, `ROADMAP_CONTENT_DIR` e
+`ROADMAP_QUESTIONS_DIR`, para serem exercitados num diretório temporário sem tocar no material. O
+`dev` também não vigia `conteudo/`. Editou um tema com o servidor no ar? Rode `npm run build:content`
+de novo e a página recarrega com o texto novo — e `npm run build:questions` se o tema tinha tabela
+de erros comuns, que é de onde saem todos os itens, porque o quiz continua servindo o banco anterior
+até o gerador rodar.
 
-**Os três smokes conferem o frescor do artefato antes de rodar.** Eles comparam a data de
-`dist/index.html` e de `dist-electron/main.cjs` com a da fonte mais nova; se o binário for anterior,
-o teste falha dizendo o que rodar, em vez de medir código que não está lá. Isso não é teoria: o smoke
-do desktop passou verde contra um `main.cjs` compilado antes das correções de segurança da casca, e
-as asserções de travessia, host e CSP — que existem hoje — só foram exercitadas de verdade depois de
-recompilar. Por isso o `smoke` exige o build feito antes e o Chrome instalado; em outra máquina,
-aponte o binário pela variável `CHROME_BIN`.
+**Todos os smokes conferem o frescor do artefato antes de rodar.** Cada um compara a data do que ele
+abre (`dist/index.html`, `dist-electron/main.cjs` ou o `app.asar`) com a da fonte mais nova; se o
+binário for anterior, o teste falha dizendo o que rodar, em vez de medir código que não está lá. Isso
+não é teoria: o smoke do desktop passou verde contra um `main.cjs` compilado antes das correções de
+segurança da casca, e as asserções de travessia, host e CSP — que existem hoje — só foram exercitadas
+de verdade depois de recompilar. Por isso o `smoke` exige o build feito antes e o Chrome instalado;
+em outra máquina, aponte o binário pela variável `CHROME_BIN`.
 
 ## O que sai do build
 
-A build inteira vira um arquivo: `app/dist/index.html`, com **8,17 MiB** (8.569.173 bytes) na última
+A build inteira vira um arquivo: `app/dist/index.html`, com **7,84 MiB** (8.222.126 bytes) na última
 execução. A medição anterior, de antes de o banco entrar inline, era 7,6 MB — os 18 arquivos do banco
 viajam dentro desse arquivo. Ele abre por `file://`, roda offline e não pede nada instalado na
 máquina de quem vai estudar. Esse é o formato inteiro do produto, e é o motivo de
@@ -113,7 +117,14 @@ sistema — e só `http(s)`. O caminho que serve os arquivos tem trava explícit
 
 O `npm run smoke:desktop` prova isso numa janela de verdade: abre, confere as preferências
 endurecidas, navega até um tema, renderiza o diagrama, escreve o progresso no arquivo, tenta sair
-para `file://` e é bloqueado, fecha e **reabre** com o estado no lugar. E exercita o protocolo pelo
+para `file://` e é bloqueado, fecha e **reabre** com o estado no lugar. Também exercita, com 18
+asserções, o que antes só existia por inspeção: a ponte expõe só a lista fechada de canais (nenhum
+`ipcRenderer` cru), `window.open` devolve `null` e nenhuma janela nova nasce, o que cruza a ponte é
+recusado quando não é objeto e cortado por tamanho antes do `JSON.parse`, nos dois sentidos da
+leitura e da escrita, as permissões são negadas nas duas checagens (a do pedido e a da consulta) e
+nenhuma requisição do renderer chega a um servidor local — esta última com controle positivo, porque
+"nada chegou" passaria também por ausência de tentativa. Cada uma tem prova de falsificabilidade por
+mutação: desligada a proteção de propósito, a asserção reprova. E exercita o protocolo pelo
 processo principal, que é o único lugar de onde dá para conferir: `app://bundle/index.html` responde
 200 com a CSP no cabeçalho, a travessia codificada (`%2e%2e`) responde 404 e um host diferente de
 `bundle` também — do renderer não daria, porque a própria CSP tem `connect-src 'none'` e barraria o
@@ -128,10 +139,10 @@ quebraria. Então o desktop, que não tem essa restrição, ganha o build dividi
 | | `npm run build` (navegador) | `npm run build:desktop` (desktop) |
 |---|---|---|
 | Saída | `dist/index.html`, um arquivo | `dist-desktop/`, uma pasta |
-| Conteúdo | inline no JavaScript (3,8 MB) | `conteudo.json` ao lado (3,70 MiB) |
-| Banco de questões | inline no JavaScript, junto com o conteúdo | `questoes.json` ao lado (542.512 bytes, 0,52 MiB) |
+| Conteúdo | inline no JavaScript (3,89 MB) | `conteudo.json` ao lado (3,71 MiB) |
+| Banco de questões | inline no JavaScript, junto com o conteúdo | `questoes.json` ao lado (543.668 bytes, 0,52 MiB) |
 | Diagramas | todos inlinados (3,4 MB) | só o `flowchart`; 35 chunks de outros tipos são descartados |
-| Script no arranque | **8,17 MiB** para o V8 analisar | **927 kB** (949.138 bytes) |
+| Script no arranque | **7,84 MiB** para o V8 analisar | **935 kB** (957.699 bytes) |
 | CSP | `<meta>` no HTML, com `'unsafe-inline'` | cabeçalho, `script-src 'self'` |
 | Quem usa | launcher (`dist/Roadmap-CISO-Interativo/`) | empacotado pelo electron-builder |
 
@@ -154,8 +165,8 @@ verdade: se o corte levar algo necessário, o teste falha em vez de o app aparec
 |---|---|
 | AppImage | **104,0 MiB** (109.006.365 bytes) — O7, medido **antes do banco** entrar no pacote |
 | `app.asar` | 4,89 MiB (5.124.818 bytes): o `conteudo.json`, os 27 assets que sobraram e o `main`/`preload` — medido **antes do banco** |
-| `questoes.json` | 542.512 bytes (0,52 MiB): o banco de múltipla escolha, que agora viaja dentro do asar — eram 791.357 bytes antes de as questões discursivas saírem |
-| `dist-desktop/index.html` + assets | 927 kB (949.138 bytes) de JavaScript no arranque, contra 8,17 MiB inlinados |
+| `questoes.json` | 543.668 bytes (0,52 MiB): o banco de múltipla escolha, que agora viaja dentro do asar — eram 791.357 bytes antes de as questões discursivas saírem |
+| `dist-desktop/index.html` + assets | 935 kB (957.699 bytes) de JavaScript no arranque, contra 7,84 MiB inlinados |
 | Pasta desempacotada | 267 MiB — o binário do Electron sozinho tem 177,7 MiB — medido **antes do banco** |
 
 **O banco entrou no pacote depois destas medições.** A lista de `files` do `electron-builder.yml`
@@ -226,11 +237,22 @@ chama `build/` porque esse é o `buildResources` padrão da ferramenta; convive 
 
 `npm run build:questions` deriva o banco do material já verificado e grava um arquivo por área em
 `src/content/questions/`. São **608 itens em 18 áreas**, e nenhum deles é prosa nova: todos saem da
-**tabela de erros comuns** de um tema. O banco tem uma origem só.
+**tabela de erros comuns** de um tema. O banco tem uma origem só, e a revisão item a item está
+completa: **608/608 `verificado`**, nenhum `pendente`, nenhum `rascunho`.
 
 | Origem | Itens | De onde sai |
 |---|---|---|
 | `erro-comum` | 608 | Cada linha da tabela de erros comuns de um tema: o `correto` é o gabarito, a justificativa é o `porque`, e os distratores saem das outras linhas do **mesmo tema** — as duas colunas, `equivoco` e `correto` |
+
+No domínio, a origem é um tipo de um valor só: `OrigemDaQuestao` é `'erro-comum'`, e o gate recusa
+qualquer outra — a lista fechada guarda a porta contra a origem que saiu.
+
+O enunciado sai de uma moldura fixa, e a moldura teve de ser corrigida no gerador: onde a célula do
+material já trazia aspas, elas saíam duplicadas na tela; e onde a célula é prescrição sem sujeito
+("Automatizar primeiro a ação mais visível"), a frase ficava agramatical. Agora o gerador tira as
+aspas da célula ao citá-la e troca a moldura por `é comum ouvir o seguinte: "…"` quando a célula
+abre com verbo no infinitivo — a mesma pergunta no fim, "Qual é a correção?", porque o que o item
+pede é a correção do equívoco.
 
 **As perguntas discursivas do material não entram no banco, por decisão do dono.** Os pares de
 recuperação ativa do tema e os itens de checkpoint do guia da área tinham origem própria
@@ -285,17 +307,21 @@ a correta fosse sempre a primeira, acertar não mediria nada.
 
 ### A tela de Quiz
 
-`#/quiz` é o quiz de todas as áreas; `#/quiz/<areaId>`, o de uma. O escopo também se troca no
-seletor do topo, sem sair da tela. Cada rodada sorteia 10 itens com semente determinística: a lista
-não se remexe quando a resposta é gravada, e a ordem põe primeiro o que nunca foi respondido, depois
-o que mais errou.
+`#/quiz` é o quiz de todas as áreas; `#/quiz/<areaId>`, o de uma; `#/quiz/<areaId>/<temaId>`, o de um
+tema. O escopo também se troca no seletor do topo, sem sair da tela, e o botão "Praticar este tema",
+no fim de cada tema, abre a rodada dele. Cada rodada sorteia 10 itens com semente determinística: a
+lista não se remexe quando a resposta é gravada, e a ordem põe primeiro o que nunca foi respondido,
+depois o que mais errou.
 
 Responder é marcar uma alternativa e confirmar. Depois disso a questão trava, e o veredito traz o
 acerto ou o erro, a alternativa correta, a justificativa do material — todo item do banco tem uma,
-porque é o `porque` da linha da tabela —, a fonte com link e a volta ao tema de origem. O item que
-ainda não passou por revisão humana leva selo: **não revisado** para `rascunho`, **em revisão** para
+porque é o `porque` da linha da tabela —, a fonte com link e a volta ao tema de origem. O `ref` de
+todo item é de tema (`area#TEMA-NN`): a convenção `#GUIA`, que servia ao item de checkpoint, saiu do
+`linkTema` junto com as discursivas, e não há item de guia para linkar. O item que ainda não passou
+por revisão humana leva selo: **não revisado** para `rascunho`, **em revisão** para
 `pendente`. `verificado` não leva nada — marcar todo item apagaria a diferença entre o revisado e o
-resto.
+resto. Hoje nenhum item leva selo, porque os 608 estão `verificado`; o mecanismo continua no lugar
+para o dia em que uma linha do material mudar: o item volta a `rascunho` e o selo aparece sozinho.
 
 **O quiz não mexe no domínio nem na fila de revisão.** O que ele grava é o resultado do item
 (acertos, erros e a última resposta) e o dia como dia com estudo. Errar no quiz não rebaixa assunto
@@ -333,40 +359,48 @@ Esta é a tabela — e a coluna "medido" é a que diz o que ainda falta, não a 
 |---|---|---|---|
 | O1 arranque | — | **sim: 1ª pintura 338 ms, DOMContentLoaded 296 ms** | `npm run medir` |
 | O2 sem tela branca (`show:false` + `ready-to-show`) | sim | sim: o aviso "Carregando o roadmap…" sai quando a carga termina | `medir`, `main.tsx` |
-| O3 bundle dividido | **sim** | sim: 927 kB de script no arranque, contra 8,17 MiB inlinados | `vite.desktop.config.ts` |
+| O3 bundle dividido | **sim** | sim: 935 kB de script no arranque, contra 7,84 MiB inlinados | `vite.desktop.config.ts` |
 | O4 só o `flowchart` do Mermaid | **sim** | sim: 35 chunks de outros diagramas removidos; desenhar puxa 8 | `vite.desktop.config.ts`, `medir` |
 | O5 memória após navegações | — | sim: heap de 11 MB na primeira tela, 16 MB com o diagrama | `medir` |
 | O6 diagramas por tela | — | sim: 1 por tema | `medir` |
 | O7 tamanho do instalador | — | sim: AppImage 104,0 MiB (109.006.365 bytes) — medição de antes do banco, a repetir no próximo `distribuir` | acima |
 | O8 decisão sobre XP/nível/sequência | — | sim (removidos, com o motivo) | `progresso.test.ts` |
 | S1 prefs endurecidas | sim | parcial: `allowRunningInsecureContent` não é assertado | `smoke-desktop.mjs` |
-| S2 ponte por allowlist | sim | **não** | `electron/preload.ts` |
+| S2 ponte por allowlist | sim | sim | `smoke-desktop.mjs` |
 | S3 link externo só `http(s)` | sim | sim | `smoke-desktop.mjs` |
-| S4 sem `webview`/janela nova | sim | **não** (sem asserção) | `electron/main.ts` |
+| S4 sem `webview`/janela nova | sim | sim | `smoke-desktop.mjs` |
 | S5 CSP como cabeçalho | sim | sim — e o desktop passou a `script-src 'self'`, sem `unsafe-inline` | `smoke-desktop.mjs` |
-| S6 o que cruza a ponte passa pelo normalizador | sim | **não** | `main.ts` só recusa o que não é objeto; o normalizador roda no renderer |
-| S7 corte antes do `JSON.parse` | sim | **não** | `main.ts` e `electron/progresso.ts` |
+| S6 o que cruza a ponte passa pelo normalizador | sim | sim — recusa e corte nos dois sentidos da ponte (escrita e leitura) | `smoke-desktop.mjs` |
+| S7 corte antes do `JSON.parse` | sim | sim — teto de 1 MB, provado com um arquivo válido acima dele | `smoke-desktop.mjs` |
 | S8 importação com esquema e cópia campo a campo | sim | sim | `progresso.test.ts`, `persistencia.test.ts` |
-| S9 nenhuma requisição de rede | sim (`connect-src 'self'`, que é `app://`) | **não** (sem interceptor) | `main.ts` |
-| S10 permissões negadas | sim | **não** (sem asserção) | `main.ts` |
+| S9 nenhuma requisição de rede | sim (`connect-src 'self'`, que é `app://`) | sim, com controle positivo (servidor local que responde) | `smoke-desktop.mjs` |
+| S10 permissões negadas | sim | sim — a checagem do pedido e a da consulta | `smoke-desktop.mjs` |
 | S11 fuses e integridade do asar | sim | sim | `fuses.mjs`, `smoke-pacote.mjs` |
 | S12 travessia e host bloqueados | sim | sim | `smoke-desktop.mjs`, `smoke-pacote.mjs` |
 | S13 cadência de patch do Electron | decisão registrada | — | pendências, fase 7 |
 | S14 assinatura | decisão registrada | — | pendências, fase 7 |
 
 Os números saem de `npm run medir`, no aplicativo **empacotado**, e não de um build de
-desenvolvimento — é ele que a pessoa recebe. Faltam as medições que exigem uso prolongado
-(memória depois de 20 navegações, por exemplo) e as asserções de S2, S4, S6, S7, S9 e S10,
-todas implementadas no código mas não exercitadas por teste.
+desenvolvimento — é ele que a pessoa recebe. O que ainda falta são as medições que exigem uso
+prolongado (memória depois de 20 navegações, por exemplo).
+
+As seis asserções de segurança que faltavam saíram da lista: S2, S4, S6, S7, S9 e S10 são medidas em
+`scripts/smoke-desktop.mjs`, em 18 asserções novas, e cada uma tem prova de falsificabilidade por
+mutação — desligada a proteção de propósito, a asserção reprova. A de S9 precisou de controle
+positivo: um servidor local que responde, alcançado pelo próprio teste antes de o renderer tentar o
+mesmo endereço; sem ele, "nenhuma requisição chegou" passaria por ausência de tentativa.
 
 O banco de múltipla escolha não tem linha nesta tabela porque não tem item aqui para medir: a §16.3
 é do desktop, e a fase 5 é da §13 do plano. O que ela produziu tem portão próprio
 (`check:questions`), teste próprio (domínio, gerador e gate do banco) e um lugar próprio para as
 contas que ainda faltam — as pendências.
 
-A via da pasta com atalho (`npm run empacotar`) **não tem portão automático nenhum**: nem o
-`verificar` nem teste algum sobe o `servidor.py`. É a única via de entrega sem verificação, e está
-registrada nas pendências.
+A via da pasta com atalho (`npm run empacotar`) **tem portão automático**: o `npm run smoke:pasta`
+monta a pasta, sobe o `servidor.py` numa porta efêmera (a 4173 de produção nunca é ocupada), confere
+200 em `/` e em `/index.html`, 404 para os caminhos que não sejam o arquivo único, 501 num POST, 421
+com `Host` estranho, a CSP vinda no cabeçalho e o `index.html` da pasta byte a byte igual ao do
+build — e encerra o processo no `finally`, conferindo que a porta voltou a ficar livre. Ele entrou no
+`npm run verificar`.
 
 ## Como o app chega a quem estuda
 
@@ -452,7 +486,7 @@ DOMPurify, com `details` e `summary` liberados porque é isso que faz o gabarito
 Dali saem o pré-teste (seção 3), a recuperação ativa (seção 10), a tabela de erros comuns (seção 9),
 o checkpoint do guia e as tabelas de objetivos, temas e atividades.
 
-O resultado é `app/src/content/generated/content.json`: 18 áreas, 109 temas, 22 páginas, 3,8 MB.
+O resultado é `app/src/content/generated/content.json`: 18 áreas, 109 temas, 22 páginas, 3,89 MB.
 Arquivo gerado, não editável à mão; cada `build:content` o sobrescreve por inteiro.
 
 Nenhuma seção do Markdown é reescrita pelo app. Corrigir um parágrafo significa corrigir em
@@ -467,10 +501,13 @@ sobreviver à próxima regeração. Dentro de `conteudo/` há dois diretórios d
 
 ## O que reprova o build
 
-`app/scripts/check-content.ts` guarda dois números fixos no código, 18 e 109, e compara com os
+`app/scripts/check-content.ts` guarda três números fixos no código, 18, 109 e 22, e compara com os
 totais do JSON gerado. Depois percorre cada tema e cada guia. Erra o build quem:
 
-- tiver contagem de áreas ou de temas diferente de 18 e 109, ou `meta.totais` divergente dos dados;
+- tiver contagem de áreas, de temas ou de páginas diferente de 18, 109 e 22, ou `meta.totais`
+  divergente dos dados;
+- chegar com o `content.json` de antes do material: o gate regera o conteúdo a partir de `conteudo/`
+  e compara, então editar um tema sem `npm run build:content` reprova;
 - perder o bloco "Por que isso importa" (a ancoragem no cargo do CISO);
 - perder a seção "Recuperação ativa", ou ficar com menos de 2 itens nela;
 - publicar item de recuperação sem gabarito, ou seção sem HTML;
@@ -490,7 +527,8 @@ totais do JSON gerado. Depois percorre cada tema e cada guia. Erra o build quem:
 - repetir o número de uma seção, ou publicar página com `grupo` desconhecido (some da navegação);
 - deixar `meta.geradoEm` fora do formato ISO, ou `ordem_estudo` com ref a mais, a menos ou repetida;
 - publicar fonte sem título, área sem ancoragem, ou rótulo de Mermaid com `<`, `>`, `"`, `(`, `)` ou
-  `#` — os mesmos caracteres que o verificador do material recusa.
+  `#` — os mesmos caracteres que o verificador do material recusa, porque os dois leem o mesmo
+  contrato: o bloco `contrato-mermaid` da §7 do `conteudo/CONTRIBUTING.md`.
 
 O gate imprime `verificado: 18 areas, 109 temas, 22 paginas` quando passa. Quando falha, lista cada
 erro e sai com código 1, o que derruba o `npm run build` antes de o Vite entrar em ação.
@@ -527,8 +565,8 @@ compartilham progresso direto: o **arquivo exportado** é a ponte.
 
 ## Pendências conhecidas
 
-Levantadas nas revisões de segurança, de testes, de frontend e de UI/UX, ainda em aberto, com a fase
-em que entram.
+Levantadas nas revisões de segurança, de testes, de frontend e de UI/UX, com a fase em que entram. O
+que já fechou continua aqui, com a razão registrada, para o estado não se perder.
 
 | Pendência | Fase |
 |---|---|
@@ -537,32 +575,33 @@ em que entram.
 | **Viés de comprimento do gabarito**: a alternativa correta é a mais longa em 175 dos 608 itens (28,8%), na medição do banco de agora. Era 79,4% enquanto só os `equivoco` da tabela eram candidatos a distrator — curtos, contra um `correto` que explica; a escolha passou a incluir as duas colunas do tema. Falta decidir se o patamar de agora é aceitável, porque é assimetria das colunas do material e não defeito de código | 5 |
 | **As perguntas discursivas saíram do banco, por decisão do dono.** A recuperação ativa do tema (seção 10) e o checkpoint do guia da área (seção 9) **continuam inteiros no material e na tela**, com veredito — são o exercício principal de cada um —, e não viram item: a pergunta é aberta, e nenhuma alternativa seria "a resposta". O banco ficou com 608 itens, todos da tabela de erros comuns. Fechada — o que ficou de fora está dito em "Banco de múltipla escolha" | — |
 | **As fontes herdadas pelo banco não têm data de acesso**: o `CONTRIBUTING` §4 exige URL **e** data, e o item carrega título, URL e tipo. Enquanto a herança não trouxer `acessadoEm`, o item não fecha a auditoria de citação sozinho | 5 |
-| **A revisão humana não é contada**: o banco de 608 itens está em `verificado` (605) ou `pendente` (3), o procedimento de promoção está na seção "Como promover um item", e o gate aceita qualquer um dos três status — não há onde ver quantos itens ainda faltam conferir | 5 |
-| **O quiz não tem escopo por tema**: a §11 do plano pede "por tema e por área", e existem `#/quiz` (todas as áreas) e `#/quiz/<areaId>` | 5 |
+| **A revisão humana fechou: 608/608 `verificado`**, nenhum `pendente`, nenhum `rascunho`. O procedimento de promoção continua na seção "Como promover um item" e o gate segue aceitando os três status; o que não existe é onde contar os que faltam, porque não falta nenhum. Fechada | — |
+| **O quiz tem escopo por área e por tema**: `#/quiz` (todas as áreas), `#/quiz/<areaId>` e `#/quiz/<areaId>/<temaId>`, com o botão "Praticar este tema" na página do tema. As três rotas entram na matriz do `smoke` e nos `hrefsInvalidos`. Fechada | — |
 | **As duas CSPs restantes não são pendência, são consequência.** O `<meta>` do build de navegador e o cabeçalho do `launcher/servidor.py` aceitam `script-src 'unsafe-inline'` porque os dois servem **um arquivo único com script inline** — o formato que `file://` exige. Não há como apertá-las sem dividir o bundle, e dividir quebraria o duplo clique. O desktop, que pode dividir, já roda em `'self'`. Fechada | — |
-| **S2, S4, S6, S7, S9 e S10 estão implementados e não têm asserção.** É o que falta para a tabela do §16.3 ficar inteira | 6 |
+| **S2, S4, S6, S7, S9 e S10 saíram da lista**: as seis são medidas em `scripts/smoke-desktop.mjs`, em 18 asserções novas com prova de falsificabilidade por mutação. A tabela do §16.3 ficou inteira no que dependia de teste. Fechada | — |
 | Os 1328 links relativos (`../README.md`, `TEMA-*.md`) ficam mortos no arquivo único: precisam ser reescritos para as rotas do app. Os 586 externos abrem normalmente | 6 |
 | Regras do material ainda não implementadas: "duas passagens falhas seguidas mandam para releitura completa" (`plano-12-meses.md`), revisão além de D+90, a tarefa concreta de cada intervalo, a coluna "Artefato produzido" do registro e o diagnóstico por item (hoje é um booleano por tema) | 6 |
 | O **escopo do critério na trilha de 90 dias** (`plano-90-dias.md` §7 recomenda que só os itens 1 e 2 de 02 contem) não é aplicado pelo app, que usa o critério do guia inteiro. O dono do critério já está declarado (`CONTRIBUTING` §3: o guia da área); falta decidir se a trilha é recomendação de escopo ou régua própria | 6 |
 | `glossario.md` e `mapa-relacoes.md` usam `## Título` sem número e caem inteiros no `intro`, sem seções; o glossário não é navegável por termo | 6 |
 | A fila de hoje é clicável, mas só lista os cinco primeiros: falta paginar ou abrir a lista inteira | 6 |
 | Os vereditos por item do checkpoint vivem em `useState`: o total persiste, mas após recarregar os botões voltam em branco, com o texto dizendo "último resultado registrado" | 6 |
-| `npm run dev` não funciona: a CSP do `index.html` bloqueia o `<script src>` que o Vite injeta. O `<meta>` precisa ser injetado só no build | 6 |
-| Diagramas: falta um botão de ampliar (o fluxograma tem ~3000 px e rola na horizontal) e `aria-label` no SVG. Cabeçalho de tabela longa sem `position: sticky` | 6 |
-| Escala de confiança do pré-teste: alvos de 29 px, sem rótulo nas pontas (o que é 1 e o que é 5) e 25 paradas de tabulação no bloco | 6 |
-| Acessibilidade: `document.title` fixo em todas as rotas, foco não vai para o `main` na troca de rota, falta link "pular para o conteúdo" e alvos de 44 px no celular | 6 |
-| Tema escuro não segue `prefers-color-scheme` e a primeira tela pisca branca enquanto o bundle monta | 6 |
-| Páginas de 35 mil px (mapa de relações) sem sumário ou âncoras; as 6 páginas de `99-fontes/` aparecem no menu do aluno, mas são a trilha de QA do mantenedor | 6 |
-| Sobre o JSON: o HTML das seções 3 e 10 dos temas (~0,25 MB) e o campo `errosComuns` nunca chegam à tela; e há 3,4 MB de bundle do Mermaid para 69 diagramas que são todos `flowchart` | 6 |
-| O contrato de re-render do Mermaid mora na `key` do React, repetido em três arquivos, e o laço de seções também está triplicado | 6 |
-| O verificador do material dá verde quando um sincronizador falha, trata o léxico apenas como aviso e não valida `templates/` nem `CONTRIBUTING.md` | 6 |
+| **`npm run dev` funciona**: a CSP saiu do `index.html` e é injetada por plugin do Vite só no build (`apply: 'build'`), então o `<script src>` do dev não é bloqueado. Fechada | — |
+| **Diagramas: botão "Ampliar" e `aria-label` no SVG** entregues (`src/ui/mermaid.ts`), e o cabeçalho das tabelas longas ficou `position: sticky` (`src/styles.css`). Fechada | — |
+| **Escala de confiança do pré-teste**: as pontas ganharam rótulo ("chutei" e "certeza"), os alvos têm 44 px (48 px no dedo) e o `tabIndex` virou itinerante — 5 paradas no bloco, uma por item, em vez de 25. Fechada | — |
+| **Acessibilidade**: `document.title` por rota, foco no `main` na troca de rota, link "pular para o conteúdo" como primeiro alvo de tabulação e alvos de 44 px (48 px no celular). Fechada | — |
+| **Tema escuro segue `prefers-color-scheme`** no modo "sistema" (`data-theme="auto"` + `light-dark()`), e a tela de carregamento pinta a cor certa antes do bundle. Fechada | — |
+| As páginas longas ganharam sumário com âncoras (o mapa de relações é a maior); o que segue aberto é o menu: as 6 páginas de `99-fontes/` aparecem para o aluno, mas são a trilha de QA do mantenedor | 6 |
+| Sobre o JSON: **253 kB (6,6% do `content.json`) são HTML duplicado** das seções 3 e 10 dos temas — a tela remonta os dois blocos de `preTeste`/`recuperacao`, e o que só existe no HTML é boilerplate que o app reescreve, não prosa órfã. O `errosComuns` (144.591 bytes, 608 linhas) **saiu desta linha**: virou item de quiz, com as três colunas na tela, uma por linha de tabela. E há 3,4 MB de bundle do Mermaid para 69 diagramas que são todos `flowchart` | 6 |
+| O contrato de rótulo do Mermaid era triplicado, e uma das cópias já estava para trás. Agora tem uma fonte só: o bloco `contrato-mermaid: {...}` da §7 do `conteudo/CONTRIBUTING.md`, lido pelo verificador do material e por `app/scripts/lib/contrato-mermaid.ts`, que falha alto em vez de cair num padrão embutido. A prosa da §7 tem de concordar com o bloco, e nenhuma ficha pode manter cópia. Fechada | — |
+| O contrato de re-render do Mermaid continua na `key` do React, repetida em `ThemeView`, `AreaView` e `Blocos`, e o laço de seções segue triplicado | 6 |
+| **O verificador do material fechou os pontos cegos.** `conteudo/scripts/verificar-repo.py` roda os nove sincronizadores em `--check` e exige a linha de conclusão `CHECK <script> <n>` de cada um (sem ela, erro); reprova o léxico da §5 como **erro** (o `&` continua permitido — `ATT&CK` na área 12 prova); confere as cinco fichas de `templates/` contra o esquema do `FRONTMATTER.md` e confere o próprio `CONTRIBUTING` nos dois sentidos — o que ele promete existe e o que existe está documentado. Ele assina o material com sha256 antes e depois, então `--check` não pode escrever. Roda de dentro de `conteudo/`, e o repositório não tem `scripts/` na raiz. Fechada | — |
 | O desktop carrega um **Chromium 130, fora de linha** (Electron 33). O `npm audit` acusa 1 crítica e 13 altas, e a leitura correta é: as de `tar`, `node-gyp` e `app-builder-lib` são de ferramenta de build e não entram no pacote (o `asar list` prova: 4 arquivos, zero `node_modules`); mas o **`electron` é dependência direta e o runtime está embarcado**, com 33 advisories que tocam justamente o que a casca anuncia — *context isolation bypass* (`GHSA-h7rp-cf8h-j98x`), *sandboxed iframe allow-popups bypass* (`GHSA-9f4c-93c8-jc8g`) e *ASAR integrity bypass* (`GHSA-vmqv-hx8q-j7mg`), este último **não mitigado no Linux**, onde a integridade do asar não é verificada. Subir de major e declarar cadência de patch | 7 |
 | O `.desktop` do AppImage abre com `--no-sandbox` (padrão do electron-builder), então a via do menu de aplicativos roda sem o sandbox do Chromium. Decidido manter, para o app não abortar em distros que restringem user namespaces. **Testar em Ubuntu 24.04 antes de distribuir** e reabrir a decisão, ou trazer de volta um `.deb`/`.rpm`, onde o auxiliar pode ser 4755 | 7 |
 | O desktop só foi exercitado no Linux. Falta abrir num Windows e num macOS de verdade | 7 |
 | SBOM e soma de verificação por release; o `package-lock.json` já cobre electron, electron-builder e playwright | 7 |
-| A camada de interface não tem teste de componente (`@testing-library` não está instalado): exportar, importar e recomeçar só são exercitados pelo store e pelo smoke. Um `AcoesDeProgresso` com ponte que rejeita fecharia o aviso de falha de gravação | 6 |
+| **A camada de interface tem teste de componente**: `@testing-library` + `jsdom` num segundo projeto do Vitest (`vitest.config.ts`), e `src/ui/Progresso.test.tsx` exercita exportar e importar **pelo componente** — inclusive importar inválido sem sobrescrever o progresso e a ponte que rejeita. Fechada | — |
 | O caminho de exportar/importar **do navegador** (Blob, `<input type=file>`, corte de 1 MB no arquivo escolhido) não tem teste; o cancelamento do diálogo deixa a promise pendente | 6 |
-| O gate é um subconjunto do `verificar-repo.py`: ainda não confere `<details>` do gabarito, links internos entre arquivos, formato de datas e coerência da tabela de tempos | 6 |
-| A **via da pasta com atalho não tem portão automático**: nada sobe o `servidor.py` num teste, então um `smoke:pasta` (200 em `/`, 421 com `Host` estranho, 404 em qualquer outro caminho, e o `index.html` respondendo) fecharia a única via de entrega sem verificação | 6 |
+| O gate é um subconjunto do `conteudo/scripts/verificar-repo.py`: ainda não confere `<details>` do gabarito, links internos entre arquivos, formato de datas e coerência da tabela de tempos | 6 |
+| **A via da pasta com atalho tem portão**: `npm run smoke:pasta` monta a pasta, sobe o `servidor.py` numa porta efêmera, confere 200/421/404/501 e a CSP pelo fio, e encerra no `finally`. Entrou no `npm run verificar`. Fechada | — |
 | O `.gitattributes` promete CRLF para `*.bat`, mas o arquivo no repositório está em LF — a conversão de verdade é a do `empacotar.mjs`, e ela **não pode ser removida** achando que o git resolve | 6 |
 | Os smokes dependem de `google-chrome-stable` no PATH e de sessão gráfica para o Electron; nada disso está em CI, porque CI não existe | 7 |
