@@ -21,11 +21,19 @@
 //      o resto da página continuava na árvore de acessibilidade — a afirmação era uma frase só. As
 //      quatro partes da afirmação (foco preso, Esc, foco de volta, resto inerte) estão aqui, e a
 //      saída do quadro que o React remonta tem prova própria: o `inert` não pode ficar na página.
+//
+//   3. o quadro ampliado abria num CANTO da figura, com barra de rolagem: `definirAmpliado` só dava
+//      `flex: 1; overflow: auto` ao `.mermaid`, e o SVG ficava no tamanho natural (~3000 px de
+//      largura, porque `useMaxWidth: false` é deliberado na coluna de texto, onde a legibilidade
+//      ganha). Ampliado, isso é abrir nos primeiros 25% do desenho com uma barra embaixo. O encaixe,
+//      os controles de zoom (com o nível anunciado), o arrasto com o ponteiro e o deslocamento pelo
+//      teclado têm prova aqui — e a conta do encaixe é função pura (`escalaParaCaber`) justamente
+//      porque o jsdom não mede layout: os números entram injetados (`medir`), não desenhados.
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { carregar, content } from '../infrastructure/content/repository'
 import { ancorarCabecalhos } from './Blocos'
-import { prepararDiagramas } from './mermaid'
+import { escalaParaCaber, prepararDiagramas } from './mermaid'
 
 // O pacote de verdade não é carregado: quem desenha não é o que este teste mede, e a biblioteca
 // inteira num teste que não a exercita é custo sem prova.
@@ -40,11 +48,22 @@ function svgDesenhado(): SVGSVGElement {
   return svg
 }
 
+/**
+ * O desenho do fluxograma de verdade: `viewBox` de ~3000 px de largura, como o Mermaid o deixa com
+ * `useMaxWidth: false` (e SEM atributo `width`/`height` — é o caso em que o tamanho natural sai só
+ * das coordenadas, que o fechamento tem de devolver como estava).
+ */
+function svgDoFluxograma(): SVGSVGElement {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+  svg.setAttribute('viewBox', '0 0 3000 1200')
+  return svg
+}
+
 /** O nó `.mermaid` como o Mermaid o deixa depois de desenhar: o próprio div com um `<svg>` dentro. */
-function diagramaDesenhado(): HTMLElement {
+function diagramaDesenhado(svg: SVGSVGElement = svgDesenhado()): HTMLElement {
   const no = document.createElement('div')
   no.className = 'mermaid'
-  no.append(svgDesenhado())
+  no.append(svg)
   return no
 }
 
@@ -85,11 +104,72 @@ function quadros(no: HTMLElement): HTMLElement[] {
   return [...no.querySelectorAll<HTMLElement>('.diagrama')]
 }
 
-/** O botão de ampliar de um quadro. */
+/** O botão de ampliar/fechar de um quadro — o único `button` FILHO de `.diagrama-acoes`: os do
+ * zoom moram no grupo `.diagrama-zoom`, que só existe enquanto o quadro está ampliado. */
 function botaoDe(quadro: HTMLElement): HTMLButtonElement {
-  const botao = quadro.querySelector('button')
+  const botao = quadro.querySelector<HTMLButtonElement>(':scope > .diagrama-acoes > button')
   if (!botao) throw new Error('o quadro do diagrama ficou sem botão')
   return botao
+}
+
+/** O contêiner que rola do quadro: é ele que ganha `diagrama-pan` e que o arrasto desloca. */
+function desenhoDe(quadro: HTMLElement): HTMLElement {
+  const desenho = quadro.querySelector<HTMLElement>('.mermaid')
+  if (!desenho) throw new Error('o quadro do diagrama ficou sem o contêiner que rola')
+  return desenho
+}
+
+/** Os textos visíveis dos controles do zoom — a ordem é a da tela. */
+const MENOS = '−'
+const MAIS = '+'
+const CABER = 'Caber'
+
+/** Os três controles do zoom, na ordem em que estão na faixa de ações. */
+function controlesDeZoom(quadro: HTMLElement): HTMLButtonElement[] {
+  return [...quadro.querySelectorAll<HTMLButtonElement>('.diagrama-zoom button')]
+}
+
+/** Um controle do zoom pelo texto visível. */
+function zoomDe(quadro: HTMLElement, texto: string): HTMLButtonElement {
+  const botao = controlesDeZoom(quadro).find((candidato) => candidato.textContent === texto)
+  if (!botao) throw new Error(`o quadro ampliado ficou sem o controle de zoom "${texto}"`)
+  return botao
+}
+
+/** O nível do zoom como texto. Um quadro ampliado SEM nível é defeito, e não ausência a tolerar. */
+function nivelDe(quadro: HTMLElement): HTMLElement {
+  const nivel = quadro.querySelector<HTMLElement>('.zoom-nivel')
+  if (!nivel) throw new Error('o quadro ampliado ficou sem o nível do zoom')
+  return nivel
+}
+
+/** O tamanho que o quadro deu ao SVG, em pixels — é por ele que o zoom é aplicado. */
+function tamanhoAplicado(quadro: HTMLElement): { largura: number; altura: number } {
+  const svg = quadro.querySelector('svg')
+  return {
+    largura: Number(svg?.getAttribute('width')),
+    altura: Number(svg?.getAttribute('height')),
+  }
+}
+
+/**
+ * Dá medida ao contêiner que rola, que o jsdom não calcula (tudo ali mede 0).
+ *
+ * É o que permite injetar os números do encaixe sem layout de verdade: sem isto a conta cai na
+ * janela do jsdom (1024×768), e um `viewBox` de 10 px encaixaria em 100% por acidente.
+ */
+function medir(desenho: HTMLElement, largura: number, altura: number): void {
+  Object.defineProperty(desenho, 'clientWidth', { value: largura, configurable: true })
+  Object.defineProperty(desenho, 'clientHeight', { value: altura, configurable: true })
+}
+
+/** Um arrasto como o navegador o entrega ao contêiner: `pointerdown`, `pointermove` e `pointerup`. */
+function arrastar(desenho: HTMLElement, de: { x: number; y: number }, ate: { x: number; y: number }): void {
+  desenho.dispatchEvent(
+    new MouseEvent('pointerdown', { bubbles: true, button: 0, clientX: de.x, clientY: de.y }),
+  )
+  desenho.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: ate.x, clientY: ate.y }))
+  desenho.dispatchEvent(new MouseEvent('pointerup', { bubbles: true }))
 }
 
 /** O nome acessível do desenho. */
@@ -277,8 +357,9 @@ describe('prepararDiagramas — o quadro ampliado', () => {
     botaoDe(primeiro!).click()
 
     const botao = botaoDe(primeiro!)
-    const desenho = primeiro!.querySelector<HTMLElement>('.mermaid')
-    expect(desenho).toBeTruthy()
+    const desenho = desenhoDe(primeiro!)
+    const controles = controlesDeZoom(primeiro!)
+    expect(controles.map((controle) => controle.textContent)).toEqual([MENOS, MAIS, CABER])
 
     // O estado medido: com o foco fora do quadro (o "Ampliar" do diagrama seguinte), o TAB levava
     // o leitor para um controle que a tela nem mostra, e o Esc deixava de fechar o quadro aberto.
@@ -286,15 +367,22 @@ describe('prepararDiagramas — o quadro ampliado', () => {
     const comTab = teclar('Tab')
 
     expect(comTab.defaultPrevented).toBe(true)
-    expect(document.activeElement).toBe(botao)
+    // O foco volta para o quadro — e para o PRIMEIRO controle dele na ordem da tela, que é o "−"
+    // do zoom: o laço entra pela faixa de ações, como qualquer leitura de cima para baixo.
+    expect(document.activeElement).toBe(controles[0])
     expect(primeiro!.classList.contains('ampliado')).toBe(true)
 
-    // Dentro do quadro o TAB cicla entre o botão e o desenho (que ampliado é a área que rola, e por
-    // isso ganha `tabindex=0`: o teclado desloca a figura com as setas), e dá a volta.
+    // Dentro do quadro o TAB cicla entre TODOS os controles dele — os três do zoom, o de fechar e o
+    // desenho (que ampliado é a área que rola, e por isso ganha `tabindex=0`: um contêiner focável
+    // com rolagem rola com as setas por comportamento nativo do navegador, e é o MESMO
+    // `scrollLeft`/`scrollTop` que o arrasto move) — e dá a volta nos dois sentidos.
+    const naOrdem = [...controles, botao, desenho]
+    for (const destino of naOrdem.slice(1)) {
+      teclar('Tab')
+      expect(document.activeElement).toBe(destino)
+    }
     teclar('Tab')
-    expect(document.activeElement).toBe(desenho)
-    teclar('Tab')
-    expect(document.activeElement).toBe(botao)
+    expect(document.activeElement).toBe(controles[0])
     const comShiftTab = teclar('Tab', { shift: true })
     expect(comShiftTab.defaultPrevented).toBe(true)
     expect(document.activeElement).toBe(desenho)
@@ -306,7 +394,7 @@ describe('prepararDiagramas — o quadro ampliado', () => {
     expect(primeiro!.classList.contains('ampliado')).toBe(false)
     expect(document.activeElement).toBe(botao)
     // Fechado, o desenho deixa de ser parada de tabulação.
-    expect(desenho?.hasAttribute('tabindex')).toBe(false)
+    expect(desenho.hasAttribute('tabindex')).toBe(false)
   })
 
   it('deixa um quadro ampliado por vez, cada um com o próprio nome', () => {
@@ -411,5 +499,311 @@ describe('prepararDiagramas — o quadro ampliado', () => {
     expect(outro!.classList.contains('ampliado')).toBe(true)
     teclar('Escape')
     expect(outro!.classList.contains('ampliado')).toBe(false)
+  })
+})
+
+describe('escalaParaCaber — a conta do encaixe, com números injetados', () => {
+  it('limita pela largura quando é a largura que aperta', () => {
+    // 3000 px de desenho numa caixa de 750: o ajuste pela largura (0,25) é o menor dos dois.
+    expect(escalaParaCaber(3000, 1200, 750, 800)).toBe(0.25)
+  })
+
+  it('limita pela altura quando é a altura que aperta', () => {
+    expect(escalaParaCaber(1000, 2000, 900, 500)).toBe(0.25)
+  })
+
+  it('não amplia acima de 1: figura pequena não vira borrão só porque há espaço', () => {
+    expect(escalaParaCaber(200, 100, 4000, 3000)).toBe(1)
+  })
+
+  it('respeita o piso do zoom: encaixe abaixo de 0,2 não é um nível que o "+" alcance', () => {
+    // 3000 px numa caixa de 300 pediriam 0,1 — abaixo do piso dos controles. O encaixe para em
+    // 0,2, e o que não couber continua sendo rolagem, como era antes de existir zoom.
+    expect(escalaParaCaber(3000, 1200, 300, 300)).toBe(0.2)
+  })
+
+  it('sem medida de layout devolve 1 — encolher por um número que não existe seria pior', () => {
+    // É o caso do jsdom, e o do contêiner que ainda não tem layout no primeiro quadro depois de
+    // abrir: 1 e não 0 (um desenho de tamanho zero seria invisível), e não 0,2 (um encolhimento
+    // decidido por medida nenhuma).
+    expect(escalaParaCaber(3000, 1200, 0, 0)).toBe(1)
+  })
+})
+
+describe('prepararDiagramas — zoom e deslocamento do quadro ampliado', () => {
+  /** Uma tela com um diagrama do tamanho do fluxograma de verdade, dentro de uma seção. */
+  function telaDoFluxograma(): { quadro: HTMLElement; desenho: HTMLElement } {
+    const container = raiz(secao('5. Conteúdo', diagramaDesenhado(svgDoFluxograma())))
+    prepararDiagramas(container)
+    const quadro = quadros(container)[0]!
+    return { quadro, desenho: desenhoDe(quadro) }
+  }
+
+  it('abre ENCAIXADO: a figura inteira na janela, e não num canto', () => {
+    const { quadro, desenho } = telaDoFluxograma()
+    medir(desenho, 750, 800)
+
+    botaoDe(quadro).click()
+
+    // O estado medido: com o SVG no tamanho natural (~3000 px) dentro de um quadro que rola, o que
+    // aparecia era o canto superior esquerdo com barra de rolagem. Encaixado, o desenho ocupa 0,25
+    // do natural — os 750 px da caixa — e a rolagem não tem para onde ir.
+    expect(tamanhoAplicado(quadro)).toEqual({ largura: 750, altura: 300 })
+    expect(nivelDe(quadro).textContent).toBe('25%')
+    // O contêiner que rola passa a ser o do arrasto (a folha põe nele o cursor e o `touch-action`).
+    expect(desenho.classList.contains('diagrama-pan')).toBe(true)
+    expect(desenho.scrollLeft).toBe(0)
+    expect(desenho.scrollTop).toBe(0)
+  })
+
+  it('dá zoom no passo de 1,25 e mostra o nível — nos dois sentidos', () => {
+    const { quadro, desenho } = telaDoFluxograma()
+    medir(desenho, 750, 800)
+    botaoDe(quadro).click()
+
+    // A escala entra pela largura/altura do SVG em PIXELS (3000 × 0,3125), e não por
+    // `transform: scale`: é isso que faz a área de rolagem crescer de verdade.
+    zoomDe(quadro, MAIS).click()
+    expect(tamanhoAplicado(quadro)).toEqual({ largura: 937.5, altura: 375 })
+    expect(nivelDe(quadro).textContent).toBe('31%')
+
+    zoomDe(quadro, MENOS).click()
+    expect(tamanhoAplicado(quadro)).toEqual({ largura: 750, altura: 300 })
+    expect(nivelDe(quadro).textContent).toBe('25%')
+
+    // Os três controles com nome próprio e ação no nome (o texto visível está DENTRO dele, WCAG
+    // 2.5.3, "rótulo no nome"): dois botões de glifo sem nome seriam dois botões mudos.
+    const controles = controlesDeZoom(quadro)
+    expect(controles.map((controle) => controle.getAttribute('aria-label'))).toEqual([
+      '− Diminuir o zoom',
+      '+ Aumentar o zoom',
+      'Caber na janela',
+    ])
+    for (const controle of controles) {
+      expect(controle.getAttribute('aria-label')).toContain(controle.textContent ?? '')
+    }
+  })
+
+  it('o zoom para no teto de 4 e no piso de 0,2', () => {
+    const { quadro, desenho } = telaDoFluxograma()
+    medir(desenho, 750, 800)
+    botaoDe(quadro).click()
+
+    // O teto: 4× o natural. O botão continua clicável e para de mexer na escala — e o nível diz
+    // isso a quem clica, em vez de deixar o clique parecer quebrado.
+    for (let i = 0; i < 20; i += 1) zoomDe(quadro, MAIS).click()
+    expect(nivelDe(quadro).textContent).toBe('400%')
+    expect(tamanhoAplicado(quadro)).toEqual({ largura: 12000, altura: 4800 })
+
+    // O piso: 0,2×, onde o rótulo do fluxograma ainda é legível.
+    for (let i = 0; i < 20; i += 1) zoomDe(quadro, MENOS).click()
+    expect(nivelDe(quadro).textContent).toBe('20%')
+    expect(tamanhoAplicado(quadro).largura).toBe(600)
+    // Dois cliques no piso não mudam nada: o limite é um ponto de parada, e não um valor que a
+    // escala continua atravessando por baixo.
+    zoomDe(quadro, MENOS).click()
+    expect(nivelDe(quadro).textContent).toBe('20%')
+  })
+
+  it('anuncia o nível: o texto do zoom é estado, e vive numa região viva', () => {
+    const { quadro, desenho } = telaDoFluxograma()
+    medir(desenho, 750, 800)
+    botaoDe(quadro).click()
+
+    const nivel = nivelDe(quadro)
+    // A mudança que ninguém vê: quem usa leitor de tela não recebe o texto que apareceu na tela.
+    // `role=status` (leitura educada, não interruptiva) + `aria-atomic`: o nível inteiro é lido a
+    // cada mudança, e não o pedaço que mudou de um texto que já estava lá.
+    expect(nivel.getAttribute('role')).toBe('status')
+    expect(nivel.getAttribute('aria-live')).toBe('polite')
+    expect(nivel.getAttribute('aria-atomic')).toBe('true')
+    expect(nivel.textContent).toBe('25%')
+
+    zoomDe(quadro, MAIS).click()
+
+    // O MESMO nó, com o texto novo: é a mudança de texto de uma região viva que o leitor anuncia.
+    expect(nivelDe(quadro)).toBe(nivel)
+    expect(nivel.textContent).toBe('31%')
+  })
+
+  it('Caber volta ao encaixe — inclusive depois de arrastar', () => {
+    const { quadro, desenho } = telaDoFluxograma()
+    medir(desenho, 750, 800)
+    botaoDe(quadro).click()
+    zoomDe(quadro, MAIS).click()
+    zoomDe(quadro, MAIS).click()
+    // O zoom ancora no CENTRO do que está visível, então a rolagem não está em 0 depois de
+    // ampliar: o arrasto anda a partir dali, e o que se mede é o que ele acrescentou.
+    const antesDoArrasto = desenho.scrollLeft
+    expect(antesDoArrasto).toBeGreaterThan(0)
+    arrastar(desenho, { x: 300, y: 200 }, { x: 120, y: 60 })
+    expect(desenho.scrollLeft).toBe(antesDoArrasto + 180)
+
+    zoomDe(quadro, CABER).click()
+
+    expect(tamanhoAplicado(quadro)).toEqual({ largura: 750, altura: 300 })
+    expect(nivelDe(quadro).textContent).toBe('25%')
+    // O deslocamento volta ao início junto: "caber" com a rolagem onde o arrasto a deixou deixaria
+    // a figura fora do campo de visão que o encaixe acabou de calcular.
+    expect(desenho.scrollLeft).toBe(0)
+    expect(desenho.scrollTop).toBe(0)
+  })
+
+  it('move pelo diagrama: o arrasto desloca a rolagem, e a solta devolve o cursor', () => {
+    const { quadro, desenho } = telaDoFluxograma()
+    medir(desenho, 750, 800)
+    botaoDe(quadro).click()
+
+    desenho.dispatchEvent(
+      new MouseEvent('pointerdown', { bubbles: true, button: 0, clientX: 100, clientY: 50 }),
+    )
+    // O cursor de "pegar" é da folha, pela classe; o arrasto em curso é este estado.
+    expect(desenho.classList.contains('arrastando')).toBe(true)
+
+    desenho.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 60, clientY: 30 }))
+    // Puxar para a esquerda/cima mostra o que está à direita/abaixo: o dedo "pega" o desenho e o
+    // leva junto, então a rolagem anda ao CONTRÁRIO do ponteiro.
+    expect(desenho.scrollLeft).toBe(40)
+    expect(desenho.scrollTop).toBe(20)
+
+    desenho.dispatchEvent(new MouseEvent('pointerup', { bubbles: true }))
+    expect(desenho.classList.contains('arrastando')).toBe(false)
+    // Soltar a mão não devolve a figura ao início, e o ponteiro solto não desloca mais nada.
+    expect(desenho.scrollLeft).toBe(40)
+    desenho.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 10, clientY: 10 }))
+    expect(desenho.scrollLeft).toBe(40)
+    expect(desenho.scrollTop).toBe(20)
+  })
+
+  it('o botão direito e a visão inline não arrastam nem mostram os controles', () => {
+    const { quadro, desenho } = telaDoFluxograma()
+    medir(desenho, 750, 800)
+
+    // Inline, a rolagem é a da coluna de texto e o ponteiro continua servindo para selecionar
+    // texto: nada de arrasto, nada de escala, nada de controles, nenhum atributo nosso no SVG.
+    desenho.dispatchEvent(
+      new MouseEvent('pointerdown', { bubbles: true, button: 0, clientX: 100, clientY: 50 }),
+    )
+    desenho.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 60, clientY: 30 }))
+    expect(desenho.classList.contains('arrastando')).toBe(false)
+    expect(desenho.scrollLeft).toBe(0)
+    expect(desenho.classList.contains('diagrama-pan')).toBe(false)
+    expect(quadro.querySelector('.diagrama-zoom')).toBeNull()
+    expect(quadro.querySelector('svg')?.hasAttribute('width')).toBe(false)
+    // O único controle do bloco segue sendo o de ampliar.
+    expect([...quadro.querySelectorAll('button')].map((botao) => botao.textContent)).toEqual([
+      'Ampliar',
+    ])
+
+    botaoDe(quadro).click()
+
+    // Ampliado, o botão direito abre o menu do navegador e o do meio cola/rola: nenhum dos dois é
+    // um arrasto, e nenhum deles pode deixar o cursor de "pegar" preso no quadro.
+    desenho.dispatchEvent(
+      new MouseEvent('pointerdown', { bubbles: true, button: 2, clientX: 100, clientY: 50 }),
+    )
+    desenho.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 60, clientY: 30 }))
+    expect(desenho.classList.contains('arrastando')).toBe(false)
+    expect(desenho.scrollLeft).toBe(0)
+  })
+
+  it('reencaixa quando a janela muda de tamanho — e só enquanto não houve zoom', () => {
+    const { quadro, desenho } = telaDoFluxograma()
+    medir(desenho, 750, 800)
+    botaoDe(quadro).click()
+    expect(nivelDe(quadro).textContent).toBe('25%')
+
+    // A janela cresce (rotação de tela, janela arrastada, o painel do celular que sai da frente): a
+    // figura inteira continua à vista, no encaixe novo.
+    medir(desenho, 1500, 1200)
+    window.dispatchEvent(new Event('resize'))
+    expect(nivelDe(quadro).textContent).toBe('50%')
+    expect(tamanhoAplicado(quadro).largura).toBe(1500)
+
+    // Com o usuário no comando do zoom, o redimensionamento NÃO desfaz a escolha dele: quem
+    // ampliou para ler um rótulo perderia a leitura a cada mexida no tamanho da janela.
+    zoomDe(quadro, MAIS).click()
+    expect(nivelDe(quadro).textContent).toBe('63%')
+    medir(desenho, 3000, 2000)
+    window.dispatchEvent(new Event('resize'))
+    expect(nivelDe(quadro).textContent).toBe('63%')
+    expect(tamanhoAplicado(quadro).largura).toBe(1875)
+
+    // E o `Caber` volta a seguir a janela: é ele que devolve o quadro ao encaixe.
+    zoomDe(quadro, CABER).click()
+    expect(nivelDe(quadro).textContent).toBe('100%')
+    expect(tamanhoAplicado(quadro).largura).toBe(3000)
+
+    // Fechado, o redimensionamento não pode mais mexer em quadro nenhum.
+    teclar('Escape')
+    medir(desenho, 375, 400)
+    window.dispatchEvent(new Event('resize'))
+    expect(quadro.querySelector('svg')?.hasAttribute('width')).toBe(false)
+  })
+
+  it('não escala um desenho SEM tamanho natural: abriria com `width="0"`', () => {
+    // Um SVG sem `width`/`height` e sem `viewBox` não tem tamanho natural nenhum. Medir 0 e
+    // multiplicar por 1 escreveria `width="0" height="0"` — a figura sumiria da tela, que é pior do
+    // que não ter zoom. O quadro abre com o botão de fechar e o desenho como veio.
+    const semMedida = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    const container = raiz(secao('5. Conteúdo', diagramaDesenhado(semMedida)))
+    prepararDiagramas(container)
+    const quadro = quadros(container)[0]!
+
+    botaoDe(quadro).click()
+
+    expect(quadro.classList.contains('ampliado')).toBe(true)
+    expect(semMedida.hasAttribute('width')).toBe(false)
+    expect(semMedida.hasAttribute('height')).toBe(false)
+    expect(quadro.querySelector('.diagrama-zoom')).toBeNull()
+    expect(desenhoDe(quadro).classList.contains('diagrama-pan')).toBe(false)
+  })
+
+  it('fecha limpo: nada da escala nem do arrasto sobra para a visão inline nem para o próximo quadro', () => {
+    // Dois diagramas do tamanho real, um em cada seção, como o material tem de verdade.
+    const container = raiz(
+      secao('4. Temas', diagramaDesenhado(svgDoFluxograma())),
+      secao('5. Conteúdo', diagramaDesenhado(svgDoFluxograma())),
+    )
+    prepararDiagramas(container)
+    const [primeiro, segundo] = quadros(container)
+    const desenhoDoPrimeiro = desenhoDe(primeiro!)
+    medir(desenhoDoPrimeiro, 750, 800)
+
+    botaoDe(primeiro!).click()
+    zoomDe(primeiro!, MAIS).click()
+    const antesDoArrasto = desenhoDoPrimeiro.scrollLeft
+    arrastar(desenhoDoPrimeiro, { x: 300, y: 200 }, { x: 120, y: 60 })
+    // O estado de partida, medido: com o quadro aberto, tudo isso está lá.
+    expect(tamanhoAplicado(primeiro!).largura).toBe(937.5)
+    expect(desenhoDoPrimeiro.scrollLeft).toBe(antesDoArrasto + 180)
+    expect(desenhoDoPrimeiro.classList.contains('diagrama-pan')).toBe(true)
+
+    teclar('Escape')
+
+    // A visão inline depende do tamanho NATURAL (é a legibilidade da coluna de texto que dita o
+    // `useMaxWidth: false`): o `width`/`height` que o zoom escreveu sai, e o SVG volta a não ter
+    // atributo nenhum — exatamente como o Mermaid o deixou.
+    expect(primeiro!.querySelector('svg')?.hasAttribute('width')).toBe(false)
+    expect(primeiro!.querySelector('svg')?.hasAttribute('height')).toBe(false)
+    expect(desenhoDoPrimeiro.classList.contains('diagrama-pan')).toBe(false)
+    expect(desenhoDoPrimeiro.classList.contains('arrastando')).toBe(false)
+    expect(desenhoDoPrimeiro.scrollLeft).toBe(0)
+    expect(desenhoDoPrimeiro.scrollTop).toBe(0)
+    expect(primeiro!.querySelector('.diagrama-zoom')).toBeNull()
+    expect(primeiro!.querySelector('.zoom-nivel')).toBeNull()
+
+    // O próximo quadro começa do encaixe DELE, e não do zoom do anterior: escala e deslocamento
+    // vivem no quadro que os pediu, e não numa variável de módulo.
+    medir(desenhoDe(segundo!), 750, 800)
+    botaoDe(segundo!).click()
+    expect(nivelDe(segundo!).textContent).toBe('25%')
+    expect(tamanhoAplicado(segundo!).largura).toBe(750)
+    teclar('Escape')
+
+    // E reabrir o primeiro recomeça do encaixe dele.
+    botaoDe(primeiro!).click()
+    expect(nivelDe(primeiro!).textContent).toBe('25%')
+    expect(desenhoDoPrimeiro.scrollLeft).toBe(0)
   })
 })

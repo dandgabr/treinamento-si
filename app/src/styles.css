@@ -120,6 +120,41 @@ a {
   letter-spacing: 0.01em;
 }
 
+/* Voltar, Avancar e Menu moram na barra fixa, antes do tema: sao controles de meio de leitura,
+   e nao de entrada. Eles encolhem antes de o cabecalho virar duas linhas, porque o texto
+   visivel e o nome acessivel do botao — quem navega por comando de voz diz o que le, e um
+   icone no lugar da palavra quebraria isso (WCAG 2.5.3). */
+.topo-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.topo-navegacao {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.topo-navegacao .botao-secundario {
+  padding: 0.3rem 0.7rem;
+}
+
+/* Com os tres botoes novos, a barra passa a quebrar em duas linhas nas telas estreitas — e
+   `--altura-topo` e quem desloca o cabecalho de tabela e o alvo do `scroll-margin-top`. Se ela
+   ficasse em 3.25rem, um titulo alcancado por rolagem ficaria escondido atras da barra.
+   Medido no navegador (`medir-topo.cjs`, largura por largura): duas linhas ate 500 px, uma linha
+   a partir de 520 px; e a altura das duas linhas e 95,39 px aqui e 103,39 px ate 480 px, porque a
+   media query daquela faixa aumenta o alvo de toque dos botoes. Se um rotulo mudar de tamanho,
+   remeca — e o unico jeito de estes numeros nao virarem mentira. */
+@media (max-width: 519px) {
+  :root {
+    --altura-topo: 6rem;
+  }
+}
+
 .conteudo {
   width: min(100% - 2.5rem, var(--largura));
   margin: 0 auto;
@@ -619,6 +654,49 @@ html:has(.diagrama.ampliado) {
 .diagrama.ampliado .mermaid {
   flex: 1;
   overflow: auto;
+  /* A escala do zoom entra pela largura e altura do SVG, em pixels (nao por `transform`), entao
+     a area rolavel cresce de verdade e o deslocamento continua sendo rolagem — que e o que o
+     arrasto do ponteiro e as setas do teclado movem. O `flex: none` no SVG e obrigatorio: como
+     item flex ele encolheria para caber, que e exatamente o que o zoom acabou de definir. */
+  display: flex;
+}
+
+.diagrama.ampliado .mermaid svg {
+  flex: none;
+  /* `margin: auto` centra a figura quando ela cabe DENTRO da caixa e, diferente de
+     `justify-content: center` no pai, nao deixa o canto de cima inalcancavel quando ela nao
+     cabe (o `auto` respeita o transbordo; o `center` o engole). */
+  margin: auto;
+}
+
+/* O quadro ampliado e a superficie de mover: o cursor diz o que o ponteiro faz, e durante o
+   gesto o texto nao entra na selecao (a selecao atrapalha o arrasto e sobrevive a ele). */
+.diagrama-pan {
+  cursor: grab;
+}
+
+.diagrama-pan.arrastando {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* Os controles de zoom: a escala em numero fica `role="status"`, porque o nivel e estado — quem
+   nao ve o desenho mudar de tamanho precisa ouvir que ele mudou. A largura minima em `ch` para o
+   numero nao empurrar os botoes ao sair de "100%" para "25%". */
+.diagrama-zoom {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  /* Empurra o zoom para a esquerda e deixa o abrir/fechar sozinho na direita. */
+  margin-right: auto;
+}
+
+.zoom-nivel {
+  min-width: 4ch;
+  text-align: center;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--texto);
 }
 
 /* ---------------------------------------------------------------------- sumario */
@@ -1295,6 +1373,12 @@ a.botao-secundario {
 }
 
 @media (max-width: 480px) {
+  /* A barra quebrou em duas linhas e o alvo de toque aqui e 48 px: e 103,39 px de altura real,
+     medidos. Vale o mesmo aviso do bloco de 519 px: e medida, nao estimativa. */
+  :root {
+    --altura-topo: 6.5rem;
+  }
+
   /* 48 px onde o ponteiro e o dedo. Vale para todo controle com alvo proprio: os 44 px
      valem no ponteiro fino, e o `.alternativa` (o rotulo inteiro do radio) ja vinha assim. */
   .alternativa,

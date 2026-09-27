@@ -1013,6 +1013,39 @@ defesa existia no store e nunca ligava no desktop. O `importar()` segue a mesma 
 `proximaRevisao`: uma data no limite do `Date` fazia o clique de "Acertei sem consultar" lançar
 `RangeError: Invalid time value`.
 
+## Navegação e diagramas
+
+**Voltar, Avançar e Menu** ficam na barra fixa, antes do botão de tema. O rastro de navegação é da
+aplicação (`src/ui/navegacao.ts`, com a parte pura separada para poder ser testada): a rota mora no
+hash, então `history.back()`/`forward()` voltam e avançam de verdade, e o rastro — atualizado a cada
+`hashchange`, reconhecendo quando o hash novo é o vizinho do rastro — é quem sabe se há para onde ir.
+Os três botões nascem inertes e só habilitam quando há destino; navegar depois de voltar **descarta o
+futuro**, como o próprio histórico faz. O rótulo visível está contido no nome acessível (WCAG 2.5.3),
+para quem navega por comando de voz dizer o que lê.
+
+**O diagrama ampliado cabe na janela.** Antes ele abria no tamanho natural (~3000 px de largura, o
+`useMaxWidth: false` que a coluna de texto exige para o texto não virar 2 px) e o resultado era abrir
+num canto da figura, com barra de rolagem. Agora o encaixe é calculado na abertura —
+`min(largura/largura natural, altura/altura natural, 1)`, sem ampliar acima de 100% — e o quadro traz
+`−`, `+`, `Caber` e o nível em texto, com o nível anunciado (`role="status"`, `aria-live`), porque o
+tamanho é estado. A escala entra pela **largura e altura do SVG em pixels**, e não por `transform`: a
+área rolável cresce de verdade, e por isso o deslocamento continua sendo rolagem — que é o que o
+arrasto do ponteiro e as setas do teclado movem. Limites de 20% a 400%; `Caber` volta ao encaixe;
+redimensionar a janela reencaixa **só enquanto o nível ainda é o do encaixe**, para não apagar o zoom
+de quem ampliou para ler. Fechar devolve o SVG ao que o Mermaid deixou e não deixa escala, deslocamento
+nem `inert` para trás.
+
+Medido no navegador de verdade (Chromium, `file://`), em 28 conferências: os três botões com o
+`disabled` certo em cada passo de uma volta completa; o encaixe abrindo em **84%** num diagrama largo
+(1094 px na caixa, sem transbordo em nenhum eixo); o `+` levando a 105% e o `Caber` de volta a 84%; o
+arrasto movendo o desenho (111 px de rolagem) e a página de trás travada enquanto o quadro está aberto;
+e o `Esc` fechando com a página inteira de volta ao alcance.
+
+A barra fixa ganhou três controles, e nas telas estreitas ela **quebra em duas linhas**: `--altura-topo`
+— que desloca o cabeçalho de tabela e o alvo do `scroll-margin-top` — passou a acompanhar as duas
+faixas, com a altura medida em cada uma (104 px até 480, 96 px até 519, 52 px acima disso). Sem isso,
+um título alcançado por rolagem ficaria escondido atrás da barra no celular.
+
 ## Pendências conhecidas
 
 Levantadas nas revisões de segurança, de testes, de frontend e de UI/UX, com a fase em que entram. O
@@ -1079,3 +1112,4 @@ que já fechou continua aqui, com a razão registrada, para o estado não se per
 | **O `proton run` não propaga o código de saída do filho** (`proton run cmd /C "exit 7"` → 0), então todo `EXIT=0` por essa via atesta só que o Proton saiu — uma desinstalação falhou **em silêncio** por isso. O que vale como prova na validação do desktop é o CDP e o arquivo em disco, não o código de retorno | 7 |
 | **Ubuntu 24.04/AppArmor segue não medido.** O AppImage passou a subir sem `--no-sandbox` (o sandbox do renderer entra nesta máquina, `Seccomp: 2`) e o *fail-safe* do AppRun cobre quem não tiver user namespaces — mas a restrição real é do AppArmor do Ubuntu, e medir exige a outra distro | 7 |
 | **O nome local dos artefatos tem espaço, e o GitHub pontua.** O `productName` é "Roadmap CISO", então o `electron-builder` gera `Roadmap CISO-0.1.0.AppImage` e `Roadmap CISO 0.1.0.exe`; no anexo da release eles viram `Roadmap.CISO-0.1.0.AppImage` e `Roadmap.CISO.0.1.0.exe`. Na v0.1.0 os `.sha256` publicados foram refeitos com os nomes do GitHub e conferidos baixando de volta, mas o certo é o nome local já nascer sem espaço: declarar `artifactName` (com hífen) no `linux`, no `win` e no `nsis` do `electron-builder.yml`. Uma linha por alvo, e vale para a próxima versão | 7 |
+| **Em telas de 320 px a página rola 3 px na horizontal** (medido: `scrollWidth` 323 contra 320 de janela). É anterior a esta rodada — medi antes de mexer na barra —, e vale o registro para não ser atribuído aos botões novos. A causa provável é a largura mínima de algum conteúdo tabular do material; o conserto é do CSS do conteúdo, não da barra | 6 |

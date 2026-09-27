@@ -136,6 +136,19 @@ async function irParaRota(hash: string): Promise<void> {
   })
 }
 
+/**
+ * O aviso que o navegador dá depois de o APP mexer no hash.
+ *
+ * O jsdom não dispara `hashchange` ao atribuir `location.hash` (o navegador dispara): quando quem
+ * trocou o endereço foi um controle do app (o "Menu", por exemplo), o aviso tem de ser dado à mão
+ * aqui — sem reatribuir o hash, que empilharia uma entrada a mais no histórico do teste.
+ */
+async function anunciarHash(): Promise<void> {
+  await act(async () => {
+    window.dispatchEvent(new Event('hashchange'))
+  })
+}
+
 const AREA = '01-fundamentos'
 /** O número da seção 4 do guia: é ele que `README.md#4-temas` endereça. */
 const SECAO = 4
@@ -495,5 +508,175 @@ describe('as rotas do app', () => {
     await abrir('#/', { preservarTema: true })
     expect(botaoDoTema().textContent).toBe('Tema: claro')
     expect(document.documentElement.dataset.theme).toBe('claro')
+  })
+})
+
+/**
+ * Os três controles de navegação da barra do topo (Voltar, Avançar, Menu).
+ *
+ * O que se mede aqui não é o rastro (a lógica dele tem prova própria, `navegacao.test.tsx`), e sim
+ * a BARRA: os três botões existem, estão onde o pedido diz, e cada um está inerte exatamente
+ * quando não há para onde ir. O `disabled` é a resposta que o estado do app dá — e é o que o
+ * navegador e o leitor de tela leem; um `aria-disabled` que deixasse o botão clicável seria o
+ * estado anunciado sem ser o estado.
+ *
+ * Quem anda de verdade é o HISTÓRICO do navegador: o teste faz a volta completa (Menu -> Voltar ->
+ * Avançar) e confere o endereço a cada passo. É essa volta que separa `history.back()` de
+ * reatribuir o hash — o segundo empurra uma entrada nova, e o "Avançar" seguinte não teria para
+ * onde ir (é o que a mutação do relatório mostra).
+ *
+ * A montagem no meio do app (link compartilhado para um tema) é um estado próprio, e tem teste
+ * próprio: o rastro começa ali, e não há para onde voltar DENTRO do app.
+ */
+describe('botões de navegação do topo', () => {
+  /** A barra onde os três vivem: o `div.topo-navegacao` dentro do `div.topo-acoes`. */
+  function barra(): HTMLElement {
+    const achada = document.querySelector<HTMLElement>('.topo-acoes .topo-navegacao')
+    expect(achada).toBeTruthy()
+    return achada as HTMLElement
+  }
+
+  /** Um dos três, pelo nome acessível que ele publica. */
+  function botao(nomeAcessivel: string): HTMLButtonElement {
+    const achado = [...barra().querySelectorAll<HTMLButtonElement>('button')].find(
+      (b) => b.getAttribute('aria-label') === nomeAcessivel,
+    )
+    expect(achado).toBeTruthy()
+    return achado as HTMLButtonElement
+  }
+
+  const VOLTAR = 'Voltar para a tela anterior'
+  const AVANCAR = 'Avançar para a próxima tela'
+  const MENU = 'Ir para o menu principal'
+  const ROTA_DO_TEMA = rotaDoTema(TEMA)
+
+  it('os três estão na barra, antes do tema, com o rótulo visível dentro do nome acessível', async () => {
+    await abrir('#/')
+
+    // A ordem da barra: os três de navegação primeiro, o tema por último (ele troca a aparência da
+    // tela, e não a tela). Os quatro são os únicos controles do `topo-acoes`.
+    const acoes = document.querySelector('.topo-acoes')
+    expect(acoes).toBeTruthy()
+    const naBarra = [...(acoes?.querySelectorAll<HTMLButtonElement>('button') ?? [])].map(
+      (b) => b.textContent,
+    )
+    expect(naBarra).toEqual(['Voltar', 'Avançar', 'Menu', 'Tema: sistema'])
+    expect([...barra().querySelectorAll('button')]).toHaveLength(3)
+
+    for (const b of [...barra().querySelectorAll<HTMLButtonElement>('button')]) {
+      expect(b.getAttribute('type')).toBe('button')
+      expect(b.classList.contains('botao-secundario')).toBe(true)
+      // WCAG 2.5.3: quem usa comando de voz diz o que lê na tela, e o controle responde. O nome
+      // acessível CONTÉM o rótulo visível (e não o substitui).
+      expect((b.getAttribute('aria-label') ?? '').toLowerCase()).toContain(
+        (b.textContent ?? '').toLowerCase(),
+      )
+    }
+
+    // No menu, e ainda sem ter ido a lugar nenhum: os três estão inertes. O "Menu" também — já
+    // estamos nele, e um "ir para o menu" daqui não levaria a lugar nenhum.
+    expect(barra().querySelectorAll('button:disabled')).toHaveLength(3)
+    expect(botao(VOLTAR).disabled).toBe(true)
+    expect(botao(AVANCAR).disabled).toBe(true)
+    expect(botao(MENU).disabled).toBe(true)
+    // O estado é o `disabled` de verdade: um `aria-disabled` aqui anunciaria o estado sem o aplicar.
+    expect(botao(VOLTAR).getAttribute('aria-disabled')).toBeNull()
+    expect(botao(AVANCAR).getAttribute('aria-disabled')).toBeNull()
+  })
+
+  it('na abertura por link compartilhado, não há para onde voltar dentro do app', async () => {
+    // Quem abre o endereço de um tema cai no meio do app: o rastro começa ali. Voltar e Avançar
+    // inertes é a promessa correta (o navegador pode ter páginas antes, mas elas não são o app) —
+    // e o Menu é o caminho de volta que sobra.
+    await abrir(ROTA_DO_TEMA)
+
+    expect(botao(VOLTAR).disabled).toBe(true)
+    expect(botao(AVANCAR).disabled).toBe(true)
+    expect(botao(MENU).disabled).toBe(false)
+  })
+
+  it('a navegação seguinte habilita o Voltar e deixa o Avançar para quando houver futuro', async () => {
+    await abrir('#/')
+    await irParaRota(`#/area/${AREA}`)
+
+    expect(botao(VOLTAR).disabled).toBe(false)
+    expect(botao(AVANCAR).disabled).toBe(true)
+    expect(botao(MENU).disabled).toBe(false)
+  })
+
+  it('o Menu leva ao painel, e Voltar/Avançar andam no histórico do navegador', async () => {
+    const conteudo = await abrir(ROTA_DO_TEMA)
+    const tituloDoTema = conteudo.temas[TEMA]?.titulo ?? ''
+    expect(tituloDoTema).not.toBe('')
+
+    await act(async () => botao(MENU).click())
+    // O clique trocou o endereço...
+    expect(window.location.hash).toBe('#/')
+    // ...e o jsdom não avisa (o navegador avisa): o `hashchange` é dado à mão, como em `irParaRota`.
+    await anunciarHash()
+    expect(document.querySelector('h1')?.textContent).toBe('Roadmap CISO')
+    expect(document.title).toBe('Painel · Roadmap CISO')
+    expect(botao(VOLTAR).disabled).toBe(false)
+    expect(botao(AVANCAR).disabled).toBe(true)
+    expect(botao(MENU).disabled).toBe(true)
+
+    // Voltar: o botão usa o histórico do NAVEGADOR, e não a reatribuição do hash. Com a
+    // reatribuição, a entrada nova empilhada aqui não teria futuro — e o passo seguinte (Avançar)
+    // não teria para onde ir.
+    //
+    // O `history.back()` do jsdom sai numa fila (`setTimeout(0)` até a URL e mais um até os
+    // eventos, em `SessionHistory.js`; no navegador o clique anda na hora). Por isso a espera é
+    // pelo EFEITO na tela — a tela do tema —, e não por um tick: o `waitFor` já envolve a espera no
+    // `act` do React, então os `hashchange` que chegam no meio dela são aplicados.
+    await act(async () => botao(VOLTAR).click())
+    await waitFor(() =>
+      expect(document.querySelector('.cabecalho-tema h1')?.textContent).toBe(tituloDoTema),
+    )
+    expect(window.location.hash).toBe(ROTA_DO_TEMA)
+    // O tema era a rota da MONTAGEM: voltar até ele esgota o que há para trás dentro do app.
+    expect(botao(VOLTAR).disabled).toBe(true)
+    expect(botao(AVANCAR).disabled).toBe(false)
+    expect(botao(MENU).disabled).toBe(false)
+
+    // E o Avançar devolve o painel: é a entrada que o "Voltar" deixou atrás, e não uma nova.
+    await act(async () => botao(AVANCAR).click())
+    await waitFor(() => expect(document.querySelector('h1')?.textContent).toBe('Roadmap CISO'))
+    expect(window.location.hash).toBe('#/')
+    expect(botao(VOLTAR).disabled).toBe(false)
+    expect(botao(AVANCAR).disabled).toBe(true)
+    expect(botao(MENU).disabled).toBe(true)
+  })
+
+  it('o clique em Voltar move o foco para a tela nova, como qualquer troca de rota', async () => {
+    const conteudo = await abrir(ROTA_DO_TEMA)
+    await irParaRota('#/')
+    // O tema, pelo título do próprio material: é ele que a tela tem de estar mostrando depois do
+    // "Voltar" (a asserção do foco sozinha não distinguiria a tela nova da antiga).
+    const tituloDoTema = conteudo.temas[TEMA]?.titulo ?? ''
+    expect(tituloDoTema).not.toBe('')
+
+    const rolou = vi.spyOn(window, 'scrollTo')
+    rolou.mockClear()
+    await act(async () => botao(VOLTAR).click())
+    // A travessia do jsdom é enfileirada (ver o teste do Menu): a espera é pela tela do tema.
+    await waitFor(() =>
+      expect(document.querySelector('.cabecalho-tema h1')?.textContent).toBe(tituloDoTema),
+    )
+
+    // O foco sai do botão e vai para o `main` da tela nova — o mesmo efeito de qualquer troca de
+    // rota, e sem exceção para os botões da barra. Deixá-lo no botão seria pior do que parece: ele
+    // acaba de ficar INERTE (o tema da montagem esgotou o "para trás"), e um controle desabilitado
+    // com o foco é um foco que o navegador devolve ao `body` — quem usa leitor de tela ficaria sem
+    // ponto nenhum.
+    const principal = document.querySelector('main')
+    expect(principal?.textContent).toContain(tituloDoTema)
+    expect(document.activeElement).toBe(principal)
+    expect(botao(VOLTAR).disabled).toBe(true)
+
+    // E os outros dois efeitos da rota continuam valendo na troca de tela: o título da aba e a
+    // rolagem ao topo.
+    expect(document.title).toBe(`${tituloDoTema} · Roadmap CISO`)
+    expect(rolou).toHaveBeenCalledWith(0, 0)
+    rolou.mockRestore()
   })
 })

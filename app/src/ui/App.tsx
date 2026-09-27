@@ -15,6 +15,7 @@ import {
 } from './Blocos'
 import { Glossario, lerGlossario } from './Glossario'
 import { renderizarMermaid } from './mermaid'
+import { useNavegacao } from './navegacao'
 import { ResumoProgresso } from './Progresso'
 import { Quiz } from './Quiz'
 import { ThemeView } from './ThemeView'
@@ -246,6 +247,10 @@ function PaginaConteudo({ pagina, escuro }: { pagina: Pagina; escuro: boolean })
 
 export function App() {
   const rota = useRota()
+  // Voltar/avancar/menu: o rastro de onde o app ja passou (`navegacao.ts`). Os botoes vivem no
+  // topo, fora do `main`, e por isso nao herdam o foco da troca de rota — quem o move e o efeito
+  // de `rota` abaixo, como em qualquer outra navegacao.
+  const navegacao = useNavegacao()
   const [tema, setTema] = useState<ModoTema>(temaGuardado)
   const sistemaEscuro = useSistemaEscuro()
   // O Mermaid escolhe o tema do diagrama em JavaScript, e nao pela folha: ele precisa do
@@ -308,6 +313,40 @@ export function App() {
           Roadmap CISO
         </a>
         <div className="topo-acoes">
+          {/* Os tres controles de navegacao, antes do tema (que troca de aparencia, nao de tela).
+              O rotulo visivel esta CONTIDO no nome acessivel ("Voltar" em "Voltar para a tela
+              anterior"): quem usa comando de voz diz o que le (WCAG 2.5.3). Quem anuncia que nao
+              ha para onde ir e o `disabled` de verdade — com o botao inerte, e nao um
+              `aria-disabled` que o deixaria clicavel dizendo o contrario. */}
+          <div className="topo-navegacao">
+            <button
+              type="button"
+              className="botao-secundario"
+              onClick={navegacao.voltar}
+              disabled={!navegacao.podeVoltar}
+              aria-label="Voltar para a tela anterior"
+            >
+              Voltar
+            </button>
+            <button
+              type="button"
+              className="botao-secundario"
+              onClick={navegacao.avancar}
+              disabled={!navegacao.podeAvancar}
+              aria-label="Avançar para a próxima tela"
+            >
+              Avançar
+            </button>
+            <button
+              type="button"
+              className="botao-secundario"
+              onClick={navegacao.irParaMenu}
+              disabled={!navegacao.podeIrParaMenu}
+              aria-label="Ir para o menu principal"
+            >
+              Menu
+            </button>
+          </div>
           <button
             className="botao-secundario"
             onClick={trocarTema}
