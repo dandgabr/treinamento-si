@@ -538,7 +538,9 @@ h3 {
 }
 
 /* Alvo do sumario: rolar ate um cabecalho coberto pelo `.topo` esconderia o proprio titulo
-   que a pessoa acabou de pedir. */
+   que a pessoa acabou de pedir. O `id` de toda ancora do material vive no cabecalho — inclusive
+   no `h2` do pre-teste, que era a unica ancora com o `id` no `<section>` —, e o alvo que nao e
+   cabecalho (a linha do verbete do glossario) tem a regua dele mais abaixo, em `.verbete`. */
 :is(.secao, .intro) :is(h2, h3) {
   scroll-margin-top: calc(var(--altura-topo) + 0.5rem);
 }

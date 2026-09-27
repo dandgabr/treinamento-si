@@ -83,6 +83,27 @@ function materialDeOrigem(questao: Questao): { href: string; nome: string; rotul
   }
 }
 
+/**
+ * O endereco da fonte, quando ele pode virar link — e so quando e `http(s)`.
+ *
+ * `fonte.url` e dado de conteudo, e a tela o punha cru no `href`. Medido no React 19.3: o
+ * `javascript:` o proprio React neutraliza, mas `data:text/html,…` passa inteiro para o
+ * atributo (o navegador bloqueia navegacao de topo para `data:`, entao hoje e link morto, e nao
+ * execucao — o buraco fica aberto para o dia em que o esquema for outro). A porta fica aqui, no
+ * RENDER: o que nao for `http(s)` vira texto — o banco de hoje tem 608 itens e todos os 608 sao
+ * `https`, entao nada do material perde o link. A conferencia do conteudo e do gate de build, e
+ * nao desta funcao; ela e a ultima linha, nao a unica. Sem base de resolucao de proposito: uma
+ * URL relativa (que so existe em JSON editado a mao) nao descreve fonte de material nenhuma.
+ */
+function hrefDaFonte(url: string): string | null {
+  try {
+    const alvo = new URL(url.trim())
+    return alvo.protocol === 'https:' || alvo.protocol === 'http:' ? alvo.href : null
+  } catch {
+    return null
+  }
+}
+
 /** A semente da proxima rodada nao pode repetir: ela entra na `key` que remonta a rodada. */
 function proximaSemente(atual: number): number {
   return Math.max(Date.now(), atual + 1)
@@ -421,6 +442,7 @@ function Rodada({
   const textoCorreto = questao.alternativas[questao.correta]
   const rotulo = rotuloDeRevisao(questao.status)
   const deOnde = materialDeOrigem(questao)
+  const hrefFonte = hrefDaFonte(questao.fonte.url)
 
   // `const` com arrow, e nao `function`: o `questao` que o `if` acima estreitou continua
   // estreitado dentro de uma closure criada depois dele, mas nao dentro de uma funcao
@@ -536,7 +558,14 @@ function Rodada({
             ) : null}
             <p className="fonte-questao">
               <strong>Fonte:</strong>{' '}
-              <a href={questao.fonte.url}>{questao.fonte.titulo}</a> ({questao.fonte.tipo})
+              {/* Fonte que nao e `http(s)` fica em texto: o `href` e do material, e o material
+                  nao decide o que a tela navega (ver `hrefDaFonte`). */}
+              {hrefFonte ? (
+                <a href={hrefFonte}>{questao.fonte.titulo}</a>
+              ) : (
+                <span>{questao.fonte.titulo}</span>
+              )}{' '}
+              ({questao.fonte.tipo})
             </p>
             <p className="volta-ao-tema">
               O item saiu do {deOnde.rotulo} <a href={deOnde.href}>{deOnde.nome}</a>

@@ -52,6 +52,14 @@ SECOES_EXIGIDAS = [
     ("Fontes verificadas", "rastreabilidade de fonte"),
 ]
 ARQUIVOS_SEM_FRONTMATTER = {"99-fontes/registro-verificacao.md"}
+# O registro e o dono da conferencia (CONTRIBUTING §4.5): a linha "Fonte" de cada conferencia diz
+# contra que URL o texto foi auditado. E dele que sai o amparo da promocao a `verificado` — sem
+# consulta-lo, o `status_verificacao` nao tem contra o que ser conferido.
+REGISTRO_VERIFICACAO = RAIZ / "99-fontes" / "registro-verificacao.md"
+# URL inteira, e nao substring: `.../term/risk` nao pode cobrir `.../term/risk_tolerance`. O
+# `\s|)·` para antes dos separadores de celula e da lista de fontes (`·`), e o `rstrip` tira a
+# pontuacao de fim de frase que cola na URL quando ela aparece em prosa.
+RE_URL_REGISTRO = re.compile(r"https?://[^\s|)·\]\"'<>]+")
 
 # Ampersand nao entra em lista nenhuma: `ATT&CK` e rotulo legitimo no material (area 12) e a
 # secao 7 do CONTRIBUTING nao o proibe. O que o material proibe e `< > " ( ) #` em rotulo, mais
@@ -138,6 +146,41 @@ def arquivos_conteudo() -> list[Path]:
     return [a for a in alvos if a.exists()]
 
 
+def urls_do_registro() -> set[str]:
+    """URLs citadas na linha "Fonte" do registro de verificacao.
+
+    O §4.8 do CONTRIBUTING manda a auditoria de citacao comparar o texto com as URLs citadas, e o
+    §4.5 guarda essa conferencia no registro — data, URL e o que foi confirmado. O conjunto destas
+    URLs e, por isso, o amparo com que uma promocao a `verificado` pode ser conferida.
+    """
+    if not REGISTRO_VERIFICACAO.exists():
+        return set()
+    texto = REGISTRO_VERIFICACAO.read_text(encoding="utf-8")
+    return {m.group(0).rstrip(".,;:") for m in RE_URL_REGISTRO.finditer(texto)}
+
+
+def fontes_sem_amparo(fm: dict) -> str | None:
+    """O que falta para a promocao a `verificado` ter amparo; `None` quando ela ja esta coberta.
+
+    A regua: cada URL que o documento cita em `fontes` tem de estar entre as fontes conferidas no
+    registro. Conferir so uma delas deixaria passar um documento cujas demais afirmacoes normativas
+    ninguem auditou; nao declarar fonte nenhuma tambem nao e amparo — passar por ausencia seria
+    aprovar o que nenhuma linha do registro cobre.
+    """
+    urls = [
+        str(f.get("url"))
+        for f in (fm.get("fontes") or [])
+        if isinstance(f, dict) and f.get("url")
+    ]
+    if not urls:
+        return " — o documento nao declara nenhuma fonte em `fontes`"
+    registradas = urls_do_registro()
+    faltando = [u for u in urls if u not in registradas]
+    if not faltando:
+        return None
+    return f" — fora do registro: {'; '.join(faltando)}"
+
+
 def checa_frontmatter(p: Path, txt: str) -> dict | None:
     rel = str(p.relative_to(RAIZ))
     m = RE_FM.match(txt)
@@ -159,7 +202,19 @@ def checa_frontmatter(p: Path, txt: str) -> dict | None:
     if st is not None and st not in STATUS:
         erros.append(f"{rel}: status_verificacao invalido ({st!r})")
     if fm.get("status_verificacao") == "verificado":
-        avisos.append(f"{rel}: marcado como verificado antes da auditoria de citacao")
+        # A promocao a `verificado` NAO e defeito por si: so e quando ela nao tem amparo no
+        # registro. Antes o codigo reprovava TODO arquivo `verificado` sem consultar o registro —
+        # a mensagem nomeava uma condicao (a conferencia registrada) que o codigo nao testava, e
+        # quem fizesse a auditoria de citacao que o §4.8 exige e promovesse o arquivo legitimamente
+        # travava a verificacao inteira. Agora a causa e conferida: a promocao passa quando cada
+        # fonte citada esta conferida no registro, e reprova quando nao esta.
+        sem_amparo = fontes_sem_amparo(fm)
+        if sem_amparo is not None:
+            erros.append(
+                f"{rel}: marcado como verificado antes da auditoria de citacao{sem_amparo} — o "
+                f"status so sobe depois de a conferencia estar registrada em "
+                f"99-fontes/registro-verificacao.md (CONTRIBUTING §4.8)"
+            )
     for chave in ("atualizado_em", "revisar_ate"):
         valor = fm.get(chave)
         if isinstance(valor, str) and not re.match(r'^"?\d{4}-\d{2}-\d{2}"?$', valor):
@@ -310,29 +365,81 @@ def frontmatter_de(caminho: Path) -> dict:
         return {}
 
 
+def chave_de_coluna(texto: str) -> str:
+    """Chave de comparacao de cabecalho: sem acento, sem maiuscula e sem espaco nas pontas."""
+    return re.sub(r"[\u0300-\u036f]", "", texto).strip().lower()
+
+
+def tabela_de_tempos(texto: str) -> tuple[int, int, list[list[str]]] | None:
+    """A tabela de temas da §4 do guia: (indice de `tema_id`, indice de `Tempo`, linhas de dados).
+
+    A tabela e localizada pelo CABECALHO, e nao por um `| TEMA-01 |` solto no arquivo. O guia cita
+    tema em outras tabelas — o mapa de relacoes escreve `| TEMA-01 | nao_confundir_com | …`, e o
+    bloco de atividades lista `TEMA-01` na ultima coluna — e o casamento por substring encontrava
+    uma dessas linhas antes da §4: a conferencia de tempo comparava com a coluna errada (a linha do
+    mapa tem 4 celulas, e o `len(celulas) >= 5` a descartava em silencio) e, pior, achava que o
+    tema estava na §4 quando ele so aparecia no mapa. Devolve `None` quando a §4 nao existe ou nao
+    tem a tabela.
+    """
+    linhas = linhas_da_tabela(secao(texto, r"^4\."))
+    if not linhas:
+        return None
+    cabecalho = [chave_de_coluna(c) for c in linhas[0]]
+    if "tema_id" not in cabecalho:
+        return None
+    i_tempo = next((i for i, c in enumerate(cabecalho) if c.startswith("tempo")), None)
+    if i_tempo is None:
+        return None
+    return cabecalho.index("tema_id"), i_tempo, linhas[1:]
+
+
 def checa_tempos() -> None:
     """A tabela de temas do guia (§4) tem de reproduzir o `tempo_estimado` de cada tema.
 
     Defeito real: dois agentes editaram em paralelo e o guia ficou anunciando 45-55 min para
     temas que passaram a declarar 40-45. Sem esta checagem, ninguem veria.
+
+    A linha AUSENTE e erro, e nao "nada a conferir": o laco so olhava as linhas que casavam, entao
+    apagar a linha do tema na §4 (ou renomear o `tema_id` so na tabela) sumia com o tempo
+    divergente e o verificador saia 0 erros — o tema desaparecia do plano que o aluno le, e a
+    unica checagem de tempo do repositorio ficava sem alvo.
     """
     for pasta in sorted(p for p in RAIZ.glob("[0-9][0-9]-*") if p.is_dir()):
         guia = pasta / "README.md"
         if not guia.exists() or pasta.name in {"90-certificacoes", "91-trilhas", "99-fontes"}:
             continue
         texto = guia.read_text(encoding="utf-8")
+        rel = guia.relative_to(RAIZ)
+        tabela = tabela_de_tempos(texto)
+        if tabela is None:
+            erros.append(
+                f"{rel}: tabela de temas da §4 ausente ou sem as colunas `tema_id`/`Tempo` — e a "
+                f"tabela que o aluno le para saber o que vem e quanto custa, e o tempo declarado "
+                f"por cada tema so tem contra o que ser conferido nela"
+            )
+            continue
+        i_tema, i_tempo, linhas = tabela
         for arq in sorted(pasta.glob("TEMA-*.md")):
             fm = frontmatter_de(arq)
             tid, tempo = fm.get("tema_id"), str(fm.get("tempo_estimado", ""))
             if not tid or not tempo:
                 continue
-            for linha in texto.splitlines():
-                if not linha.startswith("| ") or f"| {tid} |" not in linha:
-                    continue
-                celulas = [c.strip() for c in linha.strip("|").split("|")]
-                if len(celulas) >= 5 and celulas[4] != tempo:
+            achadas = [c for c in linhas if len(c) > i_tema and c[i_tema].strip() == tid]
+            if not achadas:
+                erros.append(
+                    f"{rel}: {tid} nao aparece na tabela de temas da §4 — o tema fica fora do plano "
+                    f"que o aluno le, e o tempo dele ({tempo}) nao tem contra o que ser conferido"
+                )
+                continue
+            for celulas in achadas:
+                if len(celulas) <= i_tempo:
                     erros.append(
-                        f"{guia.relative_to(RAIZ)}: {tid} anuncia '{celulas[4]}' na §4, "
+                        f"{rel}: a linha de {tid} na §4 nao tem a coluna `Tempo` — o tempo declarado "
+                        f"({tempo}) fica sem contra o que ser conferido"
+                    )
+                elif celulas[i_tempo] != tempo:
+                    erros.append(
+                        f"{rel}: {tid} anuncia '{celulas[i_tempo]}' na §4, "
                         f"mas o tema declara '{tempo}'"
                     )
 

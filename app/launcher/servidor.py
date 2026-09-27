@@ -26,6 +26,16 @@ CSP = (
     "img-src data:; font-src data:; connect-src 'none'; object-src 'none'; "
     "base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
 )
+# Os cabecalhos que o 200 sempre mandou e que o caminho de erro nao mandava. Ficam numa lista so
+# porque agora os quatro valem nas duas respostas: `send_error` respondia 404/421 sem CSP nem
+# `nosniff`, entao a pagina de erro do proprio servidor era servida sem politica de conteudo
+# nenhuma — justamente na resposta que qualquer host de fora pode provocar.
+CABECALHOS_DE_SEGURO = (
+    ("X-Content-Type-Options", "nosniff"),
+    ("Cache-Control", "no-store"),
+    ("Referrer-Policy", "no-referrer"),
+    ("Content-Security-Policy", CSP),
+)
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
@@ -39,27 +49,45 @@ class Handler(http.server.BaseHTTPRequestHandler):
         # Sem ruido na janela do usuario; o banner e impresso uma vez, no inicio.
         pass
 
+    def _erro(self, codigo: int, mensagem: str) -> None:
+        """Resposta de erro com os MESMOS cabecalhos de seguranca do 200.
+
+        `send_error` do `BaseHTTPRequestHandler` so manda `Content-Type` e `Connection`, entao o
+        404 de caminho desconhecido e o 421 de Host estranho saiam sem `Content-Security-Policy` e
+        sem `X-Content-Type-Options`: a resposta que qualquer origem de fora consegue provocar era
+        a unica sem as travas. O corpo continua sendo a mensagem em texto, e agora o navegador a
+        exibe sob a mesma politica do app.
+        """
+        corpo = f"{codigo} {mensagem}\n".encode("utf-8")
+        self.send_response(codigo, mensagem)
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.send_header("Content-Length", str(len(corpo)))
+        for nome, valor in CABECALHOS_DE_SEGURO:
+            self.send_header(nome, valor)
+        self.end_headers()
+        # `HEAD` nao tem corpo: escrever aqui seria corpo em resposta a `do_HEAD`.
+        if self.command != "HEAD":
+            self.wfile.write(corpo)
+
     def _responder(self, enviar_corpo: bool) -> None:
         if self.headers.get("Host") not in HOSTS_ACEITOS:
-            self.send_error(421, "Host nao reconhecido")
+            self._erro(421, "Host nao reconhecido")
             return
         if self.path.split("?")[0] not in ("/", "/index.html"):
-            self.send_error(404, "Nao encontrado")
+            self._erro(404, "Nao encontrado")
             return
         try:
             with open(ARQUIVO, "rb") as arquivo:
                 corpo = arquivo.read()
         except OSError:
-            self.send_error(500, "index.html ilegivel")
+            self._erro(500, "index.html ilegivel")
             return
 
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
         self.send_header("Content-Length", str(len(corpo)))
-        self.send_header("X-Content-Type-Options", "nosniff")
-        self.send_header("Cache-Control", "no-store")
-        self.send_header("Referrer-Policy", "no-referrer")
-        self.send_header("Content-Security-Policy", CSP)
+        for nome, valor in CABECALHOS_DE_SEGURO:
+            self.send_header(nome, valor)
         self.end_headers()
         if enviar_corpo:
             self.wfile.write(corpo)

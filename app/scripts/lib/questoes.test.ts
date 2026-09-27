@@ -411,6 +411,57 @@ describe('derivarBanco', () => {
   })
 })
 
+// O material é editado por várias mãos: o que a derivação faz com o tema incompleto é o que separa
+// "o item chegou com a procedência certa" de "o item chegou com `undefined` na tela".
+describe('derivarBanco com o material incompleto', () => {
+  it('cai na primeira fonte declarada quando nenhuma é rastreável', () => {
+    // `find` procura a fonte rastreável (com url E tipo); sem nenhuma, a primeira declarada é a
+    // procedência disponível — o item não pode ficar sem título de fonte. `TipoFonte` é união
+    // fechada, então `tipo` nunca é vazio no tipo; o que falta aqui é a URL, e sem ela a fonte
+    // não é rastreável por mais que o tipo venha preenchido.
+    const c = conteudo({ fontes: [{ titulo: 'Só o título', url: '', tipo: 'secundaria' }] })
+    const itens = derivarBanco(c).porArea[AREA]!
+    expect(itens).toHaveLength(4)
+    expect(itens.every((q) => q.fonte.titulo === 'Só o título')).toBe(true)
+  })
+
+  it('devolve a fonte vazia quando o tema não declara nenhuma', () => {
+    // Tema sem fontes não pode virar `undefined` no item: a forma é a mesma, com campos vazios.
+    const c = conteudo({ fontes: [] })
+    const itens = derivarBanco(c).porArea[AREA]!
+    expect(itens[0]?.fonte).toEqual({ titulo: '', url: '', tipo: '' })
+  })
+
+  it('não deriva item de tema sem a tabela de erros comuns', () => {
+    // `errosComuns` AUSENTE (e não apenas vazio) é o tema que ainda não tem a §9: sem o par
+    // (o que se erra -> o que é correto) não há item — e a leitura não pode estourar com o
+    // `flatMap` de `undefined`.
+    const c = conteudo()
+    c.temas[REF] = { ...tema(), errosComuns: undefined as unknown as Tema['errosComuns'] }
+    expect(derivarBanco(c).porArea[AREA]).toEqual([])
+  })
+
+  it('ignora a ref da ordem de estudo sem tema, e o tema que nenhuma área lista', () => {
+    const c = conteudo()
+    // A ordem de estudo aponta para um ref que não existe no mapa de temas.
+    c.ordemEstudo.push('99-futuro#TEMA-01')
+    // E um tema que existe no mapa, mas que nenhuma área lista em `temas`: o item não teria área
+    // onde morar, e a contagem por área passaria a mentir.
+    c.temas['03-orfao#TEMA-09'] = {
+      ...tema(),
+      ref: '03-orfao#TEMA-09',
+      areaId: '03-orfao',
+      temaId: 'TEMA-09',
+    }
+    c.ordemEstudo.push('03-orfao#TEMA-09')
+
+    const banco = derivarBanco(c)
+    expect(Object.keys(banco.porArea).sort()).toEqual([AREA, '02-grc'])
+    // Duas áreas com quatro linhas de erro comum cada: os dois casos acima não somam nada.
+    expect(banco.total).toBe(8)
+  })
+})
+
 describe('validarBanco', () => {
   it('aprova o banco derivado do proprio conteudo', () => {
     const c = conteudo()
@@ -505,6 +556,37 @@ describe('validarBanco', () => {
     const c = conteudo()
     const itens = Array.from({ length: 30 }, (_, i) => item({ id: `${REF}#E${i}`, correta: 0 }))
     expect(validarBanco(bancoCom(itens), c).join('\n')).toContain('gabarito concentrado')
+  })
+
+  it('acusa o gabarito concentrado fora da primeira posicao', () => {
+    // O outro lado da fração: 30 itens com a correta NUNCA na primeira posição também deixam o
+    // acerto previsível — bastaria não marcar a letra A.
+    const c = conteudo()
+    const itens = Array.from({ length: 30 }, (_, i) => item({ id: `${REF}#E${i}`, correta: 1 }))
+    expect(validarBanco(bancoCom(itens), c).join('\n')).toContain('gabarito concentrado')
+  })
+
+  it('acusa o item derivado de uma área que o banco não tem', () => {
+    // O arquivo em disco só tem a primeira área: os itens que o material deriva de `02-grc`
+    // sumiram do banco, e o aluno perderia o quiz daquela área em silêncio.
+    const c = conteudo()
+    const banco = derivarBanco(c)
+    delete banco.porArea['02-grc']
+    const problemas = validarBanco(banco, c).join('\n')
+    expect(problemas).toContain('o material deriva este item e o banco nao o tem')
+  })
+
+  it('acusa o item cujo campo de fonte não tem a forma do derivado', () => {
+    // `fonte` ausente no item em disco: a assinatura compara campo a campo, e `null` no lugar do
+    // título não pode passar como igual ao que o material deriva.
+    const c = conteudo()
+    const banco = derivarBanco(c)
+    banco.porArea[AREA]![0]!.fonte = undefined as never
+
+    const problemas = validarBanco(banco, c).join('\n')
+    expect(problemas).toContain('sem fonte')
+    expect(problemas).toContain('banco adulterado')
+    expect(problemas).toContain('conteudo diferente do que o material deriva')
   })
 
   // A revisao humana escreve o `status`; todo o resto tem de vir do material. Sem esta

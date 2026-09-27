@@ -140,6 +140,15 @@ describe('resumoDoDiagnostico', () => {
     for (let i = 0; i < 10; i++) p = registrarDiagnostico(p, SLUG, i, true, AGORA)
     expect(resumoDoDiagnostico(trilhaFake(), p, '91-trilhas/plano-90-dias').resultado).toBeNull()
   })
+
+  it('lê uma trilha sem bloco de diagnóstico como "nada a julgar"', () => {
+    // Trilha que trouxe só as fases: sem itens não há veredito nem resultado, e a leitura não pode
+    // estourar por causa do bloco ausente.
+    const resumo = resumoDoDiagnostico({ diagnostico: null, fases: [] }, progressoVazio(), SLUG)
+    expect(resumo.veredictos).toEqual([])
+    expect(resumo.resultado).toBeNull()
+    expect(resumo.faixa).toBeNull()
+  })
 })
 
 describe('atividadesDoGuia', () => {
@@ -197,6 +206,44 @@ describe('atividadesDoGuia', () => {
     expect(
       atividadesDoGuia(guiaFake({ atividades: tabelaDeAtividades([['1', 'x']], ['#', 'Outra']) })),
     ).toEqual([])
+  })
+
+  it('descarta a linha mais curta que as colunas, e deixa o pré-requisito vazio quando falta a célula', () => {
+    // Linha torta do content.json: sem o texto da atividade a linha sai; sem a célula do
+    // pré-requisito, o campo fica vazio — o texto da vizinha não serve de pré-requisito.
+    const guia = guiaFake({
+      atividades: tabelaDeAtividades([
+        ['1'],
+        ['2', 'Montar inventário de ativos.', 'd', 'nenhum'],
+        ['3', 'Linha sem a última célula'],
+      ]),
+    })
+    const atividades = atividadesDoGuia(guia)
+    expect(atividades.map((a) => a.texto)).toEqual([
+      'Montar inventário de ativos.',
+      'Linha sem a última célula',
+    ])
+    expect(atividades.map((a) => a.preRequisito)).toEqual(['nenhum', ''])
+  })
+
+  it('usa a posição como número e vazio como pré-requisito quando as colunas faltam', () => {
+    // Tabela da §8 sem a coluna "#" e sem "Pré-requisito técnico": o número vira a posição da
+    // linha, e o pré-requisito fica vazio. Nenhuma das duas leituras pode pegar a célula da
+    // vizinha — e "vazio" não é "nenhum" (o artefato não fica sem pré-requisito por acidente).
+    const semColunas = guiaFake({
+      atividades: { cabecalho: ['Atividade'], linhas: [['Fazer algo.'], ['Fazer outra coisa.']] },
+    })
+    const atividades = atividadesDoGuia(semColunas)
+    expect(atividades.map((a) => a.numero)).toEqual(['1', '2'])
+    expect(atividades.map((a) => a.preRequisito)).toEqual(['', ''])
+    expect(atividades.map((a) => a.semPreRequisitoTecnico)).toEqual([false, false])
+
+    // Coluna "#" DEPOIS da "Atividade": a linha mais curta que ela cai na posição, e não em
+    // `undefined`.
+    const numeroDepois = guiaFake({
+      atividades: { cabecalho: ['Atividade', '#'], linhas: [['Fazer algo.']] },
+    })
+    expect(atividadesDoGuia(numeroDepois)[0]?.numero).toBe('1')
   })
 })
 

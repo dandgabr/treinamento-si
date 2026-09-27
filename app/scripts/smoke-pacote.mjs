@@ -19,7 +19,7 @@ import { execFile } from 'node:child_process'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { promisify } from 'node:util'
 import { FuseState, FuseV1Options, getCurrentFuseWire } from '@electron/fuses'
 import { listPackage } from '@electron/asar'
@@ -57,8 +57,68 @@ function pastaDesempacotada() {
   return candidatas[0].caminho
 }
 
-const pasta = pastaDesempacotada()
-const binario = binarioEm(pasta, process.platform)
+/**
+ * As fontes que o pacote carrega de verdade: as entradas de primeiro nivel da listagem do
+ * proprio `app.asar` (`/dist-desktop/...`, `/dist-electron/...`, `/package.json`).
+ *
+ * `dist/` (a build do navegador, que se abre por `file://`) e `build/` (icones, lidos na
+ * hora de empacotar) ficam FORA do asar: compara-los acusava de velho um pacote que nao
+ * deveria nada a eles. E o pior era a omissao — sem `dist-desktop/`, que entra e leva o
+ * `index.html` que o app abre, um asar mais velho que o build que ele contem passava. A
+ * lista sai da propria listagem para nao envelhecer junto com o `electron-builder.yml`.
+ */
+function fontesDoPacote(entradas, app) {
+  const nomes = new Set()
+  for (const caminho of entradas) {
+    const primeiro = caminho.split('/')[1]
+    if (primeiro) nomes.add(primeiro)
+  }
+  return [...nomes].map((nome) => ({ nome, caminho: path.join(app, nome) }))
+}
+
+/**
+ * O que esta errado no pacote, em uma lista — vazia com ele em dia:
+ *
+ * - fonte que entra no asar e nao esta nesta arvore (o pacote saiu de um checkout que nao e
+ *   este, e nao ha o que comparar);
+ * - fonte do asar mais nova que o proprio asar (o pacote medido nao e o build daqui).
+ */
+function fontesAtrasadas(asar, app) {
+  let entradas
+  try {
+    entradas = listPackage(asar)
+  } catch (erro) {
+    return [`nao consegui ler o asar: ${String(erro.message ?? erro).split('\n')[0]}`]
+  }
+  const fontes = fontesDoPacote(entradas, app)
+  const ausentes = fontes
+    .filter((fonte) => !fs.existsSync(fonte.caminho))
+    .map((fonte) => `${fonte.nome} (esta no asar e nao esta na arvore)`)
+  const presentes = fontes.filter((fonte) => fs.existsSync(fonte.caminho)).map((f) => f.caminho)
+  return [...ausentes, ...fontesMaisNovas(asar, presentes)]
+}
+
+/**
+ * O AppImage mais novo de `instalador/`, ou null.
+ *
+ * Antes era `readdirSync(SAIDA).find(nome => nome.endsWith('.AppImage'))`: a PRIMEIRA entrada
+ * na ordem do sistema de arquivos, que nao e a mais nova — com dois AppImages na pasta, as
+ * conferencias do `.desktop` podiam sair de um pacote de teste, ou de um release antigo. A
+ * escolha e pela data, como a `pastaDesempacotada()` faz logo acima.
+ */
+function appImageMaisNovo(saida) {
+  if (!fs.existsSync(saida)) return null
+  const candidatos = fs
+    .readdirSync(saida, { withFileTypes: true })
+    .filter((entrada) => entrada.isFile() && entrada.name.endsWith('.AppImage'))
+    .map((entrada) => {
+      const caminho = path.join(saida, entrada.name)
+      return { caminho, quando: fs.statSync(caminho).mtimeMs }
+    })
+    .sort((a, b) => b.quando - a.quando)
+  return candidatos.length ? candidatos[0].caminho : null
+}
+
 const falhas = []
 
 function conferir(nome, obtido, esperado) {
@@ -68,22 +128,24 @@ function conferir(nome, obtido, esperado) {
 }
 
 async function main() {
+  const pasta = pastaDesempacotada()
+  const binario = binarioEm(pasta, process.platform)
   console.log(`Pacote: ${path.relative(APP, binario)}\n`)
 
   // Os outros dois smokes conferem frescor e este nao conferia: o asar ficou tres horas
   // mais velho que o `dist/index.html` e o teste abriria, feliz, um build antigo. O
   // `app.asar` tem data de empacotamento, entao a comparacao de data funciona.
+  //
+  // A lista de fontes sai do proprio asar (veja `fontesAtrasadas`): comparar contra `dist/`
+  // e `build/` — que nao entram no arquivo — acusava um pacote atual, e nao olhar
+  // `dist-desktop/`, que entra, deixava passar um pacote mais velho que o build que ele
+  // carrega.
   const asar = path.join(pasta, 'resources', 'app.asar')
-  const atrasados = fontesMaisNovas(asar, [
-    path.join(APP, 'dist'),
-    path.join(APP, 'dist-electron'),
-    path.join(APP, 'build'),
-    path.join(APP, 'package.json'),
-    path.join(APP, 'electron-builder.yml'),
-  ])
+  const atrasados = fontesAtrasadas(asar, APP)
   if (atrasados.length) {
     console.error(
-      `Artefato desatualizado.\nMais novo que ele: ${atrasados.join(', ')}\n` +
+      `Artefato desatualizado.\n` +
+        `Mais novo que ele, ou faltando na arvore: ${atrasados.join(', ')}\n` +
         'Rode antes: npm run distribuir',
     )
     process.exit(1)
@@ -125,6 +187,49 @@ async function main() {
     )
   }
 
+  // O `.desktop` que o AppImage distribui é o que o menu de aplicativos usa depois de
+  // integrar. Ele não pode pedir depurador: o fuse bloqueia `--inspect`, mas
+  // `--remote-debugging-port` não tem fuse nenhum e passaria. (Sobre o `--no-sandbox` que
+  // o electron-builder põe por padrão e que o menu herda, veja o README.)
+  //
+  // Esta conferencia vem ANTES da dos fuses de proposito: `getCurrentFuseWire` lança quando o
+  // binario nao e um Electron de verdade, e um throw no meio do `main` aborta tudo o que vem
+  // depois. O que le o pacote fica antes do passo que pode estourar, para uma falha de leitura
+  // de fuses nao esconder o resto do relatorio.
+  const appImage = appImageMaisNovo(SAIDA)
+  if (!appImage) {
+    // Sem AppImage nao ha `.desktop` para ler, e sem esta linha as conferencias de baixo
+    // simplesmente nao rodavam: bastava renomear o AppImage para o smoke sair com 0 falhas.
+    // No Linux o alvo do electron-builder e so o AppImage, entao a ausencia reprova. Nas
+    // outras plataformas o `.desktop` nao existe por natureza: o relatorio diz o que NAO foi
+    // conferido, em vez de deixar a ausencia ambigua.
+    if (process.platform === 'linux') {
+      conferir('ha AppImage para ler o .desktop', appImage !== null, true)
+    } else {
+      console.log('----  .desktop do AppImage: nao se aplica fora do Linux, nao conferido')
+    }
+  } else {
+    const extraido = fs.mkdtempSync(path.join(os.tmpdir(), 'roadmap-appimage-'))
+    try {
+      await execFileAsync(appImage, ['--appimage-extract', '*.desktop'], {
+        cwd: extraido,
+      })
+      const raiz = path.join(extraido, 'squashfs-root')
+      const nome = fs.existsSync(raiz) ? fs.readdirSync(raiz).find((n) => n.endsWith('.desktop')) : null
+      // Explicito, e nao implicito no resultado: sem esta linha, `linha` vazia passaria nas
+      // duas conferencias de baixo (nao tem `Exec=AppRun` nem flag de depurador) e o teste
+      // diria OK para um `.desktop` que nem foi extraido.
+      conferir('o AppImage traz um .desktop', Boolean(nome), true)
+      const linha = nome
+        ? (fs.readFileSync(path.join(raiz, nome), 'utf8').split('\n').find((l) => l.startsWith('Exec=')) ?? '')
+        : ''
+      conferir('.desktop traz Exec=AppRun', linha.startsWith('Exec=AppRun'), true)
+      conferir('.desktop sem flag de depurador', /--inspect|--remote-debugging-port/.test(linha), false)
+    } finally {
+      fs.rmSync(extraido, { recursive: true, force: true })
+    }
+  }
+
   // Os fuses sao o endurecimento prometido no README. `getCurrentFuseWire` devolve o
   // estado como numero (`FuseState.ENABLE` = 49, `DISABLE` = 48).
   const fuses = await getCurrentFuseWire(binario)
@@ -161,29 +266,6 @@ async function main() {
     fuses[FuseV1Options.EnableCookieEncryption],
     FuseState.ENABLE,
   )
-
-  // O `.desktop` que o AppImage distribui é o que o menu de aplicativos usa depois de
-  // integrar. Ele não pode pedir depurador: o fuse bloqueia `--inspect`, mas
-  // `--remote-debugging-port` não tem fuse nenhum e passaria. (Sobre o `--no-sandbox` que
-  // o electron-builder põe por padrão e que o menu herda, veja o README.)
-  const appImage = fs.readdirSync(SAIDA).find((nome) => nome.endsWith('.AppImage'))
-  if (appImage) {
-    const extraido = fs.mkdtempSync(path.join(os.tmpdir(), 'roadmap-appimage-'))
-    try {
-      await execFileAsync(path.join(SAIDA, appImage), ['--appimage-extract', '*.desktop'], {
-        cwd: extraido,
-      })
-      const raiz = path.join(extraido, 'squashfs-root')
-      const nome = fs.existsSync(raiz) ? fs.readdirSync(raiz).find((n) => n.endsWith('.desktop')) : null
-      const linha = nome
-        ? (fs.readFileSync(path.join(raiz, nome), 'utf8').split('\n').find((l) => l.startsWith('Exec=')) ?? '')
-        : ''
-      conferir('.desktop traz Exec=AppRun', linha.startsWith('Exec=AppRun'), true)
-      conferir('.desktop sem flag de depurador', /--inspect|--remote-debugging-port/.test(linha), false)
-    } finally {
-      fs.rmSync(extraido, { recursive: true, force: true })
-    }
-  }
 
   // Abre como qualquer usuario abriria, com a porta de depuracao para podermos olhar.
   const { janela, encerrar, dados } = await abrirApp(binario)
@@ -235,17 +317,27 @@ async function main() {
 /** Fechado pelo `abrirApp`; guardado aqui para o `finally` la de baixo alcancar. */
 let encerrarApp = () => Promise.resolve()
 
-try {
-  await main()
-} catch (erro) {
-  falhas.push(String(erro).split('\n')[0])
-} finally {
-  await encerrarApp()
-}
+/**
+ * So roda quando este arquivo e o processo. Importar o modulo (um teste, por exemplo) nao
+ * pode listar o `instalador/`, sair com 1 nem abrir o aplicativo: o smoke inteiro e efeito
+ * colateral, e ele so vale quando alguem pediu para rodar.
+ */
+const ehPontoDeEntrada =
+  Boolean(process.argv[1]) && import.meta.url === pathToFileURL(process.argv[1]).href
 
-if (falhas.length) {
-  console.error(`\n${falhas.length} falha(s):`)
-  for (const f of falhas) console.error(`  - ${f}`)
-  process.exit(1)
+if (ehPontoDeEntrada) {
+  try {
+    await main()
+  } catch (erro) {
+    falhas.push(String(erro).split('\n')[0])
+  } finally {
+    await encerrarApp()
+  }
+
+  if (falhas.length) {
+    console.error(`\n${falhas.length} falha(s):`)
+    for (const f of falhas) console.error(`  - ${f}`)
+    process.exit(1)
+  }
+  console.log('\n0 falhas')
 }
-console.log('\n0 falhas')

@@ -11,7 +11,7 @@
 import { beforeAll, describe, expect, it } from 'vitest'
 import { carregar, content } from '../infrastructure/content/repository'
 import type { Pagina, Secao } from '../domain/types'
-import { areasDaCelula, extrairTrilha, lerDiagnostico, limitesDoRotulo, tabelaDasFases } from './extrair-trilha'
+import { areasDaCelula, extrairTrilha, lerDiagnostico, limitesDoRotulo, tabelaDasFases, tabelasCruas } from './extrair-trilha'
 
 const AREAS = ['00-guia-basico', '01-fundamentos', '17-lideranca-ciso', '02-governanca-risco-compliance']
 
@@ -157,6 +157,29 @@ describe('areasDaCelula', () => {
     expect(
       areasDaCelula('<a href="#/area/02-governanca-risco-compliance">02 GRC</a>, TEMA-01 e TEMA-03', AREAS),
     ).toEqual(['02-governanca-risco-compliance'])
+  })
+
+  it('não lê a contagem de temas ("17 temas") como a área 17', () => {
+    // A célula do plano lista a área e a contagem de temas depois dela. Casar dois dígitos em
+    // qualquer lugar do texto fazia o "17" (o número de temas) virar a área 17, e a fase ganhava
+    // uma área a mais.
+    expect(
+      areasDaCelula('<a href="#/area/01-fundamentos">01 Fundamentos</a>, 17 temas', AREAS),
+    ).toEqual(['01-fundamentos'])
+    // E sem o link, "17 temas" não nomeia área nenhuma: o código tem de ser o item inteiro.
+    expect(areasDaCelula('01 Fundamentos, 17 temas', AREAS)).toEqual([])
+  })
+
+  it('lê a célula real da fase do plano de 90 dias', () => {
+    // Fase 1: o link da área mais a contagem de temas ("5 temas"). O número não inventa área.
+    expect(
+      areasDaCelula('<a href="#/area/00-guia-basico">00 Guia básico do CISO</a>, 5 temas', AREAS),
+    ).toEqual(['00-guia-basico'])
+  })
+
+  it('lê a lista de códigos separada por "e"', () => {
+    // A forma dos planos de 12 e 24 meses usa vírgula; a conjunção "e" é o mesmo item de lista.
+    expect(areasDaCelula('00 e 01', AREAS)).toEqual(['00-guia-basico', '01-fundamentos'])
   })
 
   it('"todas" vale pelas áreas do conteúdo', () => {
@@ -342,5 +365,108 @@ describe('o conteúdo gerado das três trilhas', () => {
       if (SLUGS.includes(p.slug)) continue
       expect(p.trilha ?? null, p.slug).toBeNull()
     }
+  })
+})
+
+// ------------------------------------------------------------------ tabelas cruas
+
+describe('tabelasCruas', () => {
+  it('deixa de fora a tabela sem cabeçalho e a que não tem nenhuma linha inteira', () => {
+    // `<table>` sem `<tr>`, ou com um `<tr>` sem célula nenhuma, não tem cabeçalho: sem coluna não
+    // há registro. E a linha cujo número de células não fecha com o cabeçalho é descartada — sem
+    // nenhuma linha inteira, a tabela sai em vez de virar registro torto.
+    expect(tabelasCruas('<table></table>')).toEqual([])
+    expect(tabelasCruas('<table><tr></tr><tr><td>1</td></tr></table>')).toEqual([])
+    expect(tabelasCruas('<table><tr><th>a</th><th>b</th></tr><tr><td>1</td></tr></table>')).toEqual([])
+  })
+
+  it('preserva a marcação das células e a posição de cada tabela', () => {
+    // O link da coluna "Área" mora na célula: a leitura do HTML não pode tê-lo removido, senão a
+    // fase perde a ligação com a área.
+    const tabelas = tabelasCruas('texto<table><tr><th>#</th></tr><tr><td><a href="#/x">1</a></td></tr></table>')
+    expect(tabelas).toHaveLength(1)
+    expect(tabelas[0]?.linhas).toEqual([['<a href="#/x">1</a>']])
+    expect(tabelas[0]?.inicio).toBe(5)
+  })
+})
+
+describe('ramos de tabela incompleta do material', () => {
+  it('numera o item pela posição quando a tabela não tem a coluna "#"', () => {
+    // A coluna "#" é do material e pode faltar numa revisão: sem ela, a posição da linha é o
+    // número do item — o que não pode acontecer é o item ficar sem número.
+    const semNumero = `<h3>1.1 Pré-teste diagnóstico</h3>
+<p>Dez itens.</p>
+<table>
+<thead><tr><th>Origem do item</th><th>Acertei</th></tr></thead>
+<tbody>
+<tr><td><a href="#/area/00-guia-basico">00</a>, item 1</td><td>sim/não</td></tr>
+<tr><td><a href="#/area/01-fundamentos">01</a>, item 2</td><td>sim/não</td></tr>
+</tbody>
+</table>`
+    const lido = lerDiagnostico({ numero: 1, titulo: 'Perfil', html: semNumero })
+    expect(lido?.diagnostico.itens.map((i) => i.numero)).toEqual(['1', '2'])
+  })
+
+  it('devolve null quando todas as linhas de item são vazias', () => {
+    // Sem a coluna "Origem do item" preenchida não há o texto que o estudante lê: o bloco inteiro
+    // sai, em vez de virar um diagnóstico de itens em branco.
+    const html = `<h3>1.1 Pré-teste diagnóstico</h3>
+<table>
+<thead><tr><th>#</th><th>Origem do item</th></tr></thead>
+<tbody><tr><td>1</td><td></td></tr></tbody>
+</table>`
+    expect(lerDiagnostico({ numero: 1, titulo: 'Perfil', html })).toBeNull()
+  })
+
+  it('descarta a faixa cujo rótulo não é intervalo ou cujo ponto de entrada está vazio', () => {
+    // O rótulo é do material: "8 ou mais" não é uma faixa (o parser não inventa limite) e, sem o
+    // texto do ponto de entrada, a linha não diz aonde os acertos levam.
+    const html = `<h3>1.1 Pré-teste diagnóstico</h3>
+<table>
+<thead><tr><th>#</th><th>Origem do item</th></tr></thead>
+<tbody><tr><td>1</td><td><a href="#/area/00-guia-basico">00</a>, item 1</td></tr></tbody>
+</table>
+<table>
+<thead><tr><th>Acertos</th><th>Ponto de entrada</th></tr></thead>
+<tbody>
+<tr><td>8 ou mais</td><td>Fase 1</td></tr>
+<tr><td>0 a 3</td><td></td></tr>
+<tr><td>4 a 7</td><td>Fase 1 pelo TEMA-01</td></tr>
+</tbody>
+</table>`
+    const lido = lerDiagnostico({ numero: 1, titulo: 'Perfil', html })
+    expect(lido?.diagnostico.faixas.map((f) => f.rotulo)).toEqual(['4 a 7'])
+    expect(lido?.diagnostico.cabecalhoDasFaixas).toEqual(['Acertos', 'Ponto de entrada'])
+  })
+
+  it('devolve período vazio quando a tabela de fases não tem a coluna de semanas ou meses', () => {
+    // O período é uma coluna do material: sem ela ("Semanas"/"Meses"), a fase continua legível e
+    // só o período sai vazio — o campo não pode pegar o texto da vizinha.
+    const html = `<table>
+<thead><tr><th>Fase</th><th>Áreas (ordem_estudo)</th><th>Marco de saída</th></tr></thead>
+<tbody><tr><td>1 Vocabulário</td><td>00, 01</td><td>checkpoint de 00</td></tr></tbody>
+</table>`
+    const extraida = extrairTrilha(pagina([{ numero: 3, titulo: 'Fases', html }]), AREAS)
+    expect(extraida?.trilha.fases).toEqual([
+      {
+        rotulo: '1 Vocabulário',
+        periodo: '',
+        areas: ['00-guia-basico', '01-fundamentos'],
+        marco: 'checkpoint de 00',
+      },
+    ])
+  })
+
+  it('descarta a linha da tabela de fases sem rótulo', () => {
+    // A fase sem rótulo não tem nome para a tela: a linha sai em vez de aparecer em branco.
+    const html = `<table>
+<thead><tr><th>Fase</th><th>Semanas</th><th>Áreas (ordem_estudo)</th><th>Marco de saída</th></tr></thead>
+<tbody>
+<tr><td></td><td>1 a 6</td><td>00</td><td>m</td></tr>
+<tr><td>1 Vocabulário</td><td>1 a 6</td><td>00</td><td>m</td></tr>
+</tbody>
+</table>`
+    const extraida = extrairTrilha(pagina([{ numero: 3, titulo: 'Fases', html }]), AREAS)
+    expect(extraida?.trilha.fases.map((f) => f.rotulo)).toEqual(['1 Vocabulário'])
   })
 })

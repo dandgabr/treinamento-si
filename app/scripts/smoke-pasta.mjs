@@ -321,6 +321,37 @@ async function main() {
       (await pedir(porta, '/', { host: '127.0.0.1:9999' })).status,
       421,
     )
+
+    // Os cabecalhos de seguranca tambem nas respostas de ERRO.
+    //
+    // O 404 e o 421 sao as respostas que qualquer origem de fora consegue provocar, e eram
+    // justamente as unicas sem politica nenhuma: `send_error` do `BaseHTTPRequestHandler` so manda
+    // `Content-Type` e `Connection`, entao o corpo da pagina de erro do proprio servidor era
+    // exibido sob nenhuma travas. Assercao sobre os CABECALHOS (o `status` ja tem a dele acima), e
+    // a CSP e a mesma do 200: se o caminho de erro voltar a responder por `send_error`, estas
+    // linhas reprovam.
+    const respostasDeErro = [
+      ['404 (caminho inexistente)', await pedir(porta, '/qualquer-coisa')],
+      ['421 (Host de fora)', await pedir(porta, '/', { host: 'evil.example' })],
+    ]
+    for (const [rotulo, resposta] of respostasDeErro) {
+      conferir(
+        `GET ${rotulo} manda a CSP no cabecalho`,
+        (resposta.cabecalhos['content-security-policy'] ?? '').includes("default-src 'none'"),
+        true,
+      )
+      conferir(
+        `GET ${rotulo} nao deixa o navegador adivinhar o tipo`,
+        resposta.cabecalhos['x-content-type-options'],
+        'nosniff',
+      )
+      conferir(`GET ${rotulo} nao guarda cache`, resposta.cabecalhos['cache-control'], 'no-store')
+      conferir(
+        `GET ${rotulo} nao vaza o endereco de origem`,
+        resposta.cabecalhos['referrer-policy'],
+        'no-referrer',
+      )
+    }
   } catch (erro) {
     falhas.push(`servidor: ${String(erro).slice(0, 300)}`)
   } finally {

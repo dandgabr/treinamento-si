@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { content } from '../infrastructure/content/repository'
-import { Html, idDaSecao, Principal, Sumario, type ItemDeSumario } from './Blocos'
+import { Html, chaveDoMaterial, idDaSecao, Principal, Sumario, type ItemDeSumario } from './Blocos'
 import { renderizarMermaid } from './mermaid'
 import { CheckpointArea, SituacaoDaArea } from './Progresso'
 import { linkTema } from './useRota'
@@ -52,7 +52,11 @@ export function AreaView({ areaId, escuro }: { areaId: string; escuro: boolean }
       {itens.length >= MIN_ITENS_SUMARIO ? <Sumario itens={itens} /> : null}
 
       {area.guia.intro ? (
-        <Html key={`intro-${escuro}`} className="intro" html={area.guia.intro} />
+        <Html
+          key={chaveDoMaterial('intro', area.guia.intro, escuro)}
+          className="intro"
+          html={area.guia.intro}
+        />
       ) : null}
 
       <section className="secao">
@@ -80,7 +84,7 @@ export function AreaView({ areaId, escuro }: { areaId: string; escuro: boolean }
         if (s.numero === 9)
           return <CheckpointArea key={area.areaId} areaId={area.areaId} area={area} id={idDaSecao(9)} />
         return (
-          <section key={`${s.numero}-${escuro}`} className="secao">
+          <section key={chaveDoMaterial(String(s.numero), s.html, escuro)} className="secao">
             <h2 id={idDaSecao(s.numero)} tabIndex={-1}>
               <span className="secao-num">{s.numero}.</span> {s.titulo}
             </h2>

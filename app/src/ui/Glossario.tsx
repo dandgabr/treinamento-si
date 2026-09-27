@@ -1,6 +1,6 @@
 import { useId, useState, type ReactElement } from 'react'
 import { content } from '../infrastructure/content/repository'
-import { Html, Sumario, type ItemDeSumario } from './Blocos'
+import { Html, Sumario, chaveDoMaterial, type ItemDeSumario } from './Blocos'
 
 /**
  * Glossario navegavel por termo.
@@ -384,6 +384,14 @@ export function Glossario({ estrutura, escuro }: { estrutura: GlossarioLido; esc
    */
   const filtrando = palavras.length > 0
   const vazio = filtrando && achados === 0
+  /**
+   * Filtro que nao filtrou nada: a consulta casa com TODOS os verbetes — medido, "e" casa com os
+   * 78, porque a busca e por pedaco de palavra e "e" esta em todos eles. O botao de limpar
+   * continua fazendo sentido (ha consulta digitada), mas "78 de 78 termos e siglas" ao lado
+   * dele anunciava um filtro que nao tirou ninguem da lista: as duas metades se contradiziam de
+   * novo, agora do outro lado. O que a regiao anuncia e o fato, e nao a fracao.
+   */
+  const casouComTudo = filtrando && achados === total && total > 0
 
   return (
     <>
@@ -412,15 +420,22 @@ export function Glossario({ estrutura, escuro }: { estrutura: GlossarioLido; esc
             ? `${total} termos e siglas`
             : vazio
               ? `Nenhum termo bate com “${busca.trim()}”. O acento e a maiúscula não mudam a busca.`
-              : `${achados} de ${total} termos e siglas`}
+              : casouComTudo
+                ? `Todos os ${total} termos e siglas continuam na lista: “${busca.trim()}” não deixou nenhum de fora.`
+                : `${achados} de ${total} termos e siglas`}
         </p>
       </div>
 
       {blocos.map((bloco) =>
         bloco.tipo === 'material' ? (
-          // Key com o tema: ao trocar claro/escuro o React remonta o trecho, reinjeta o HTML
-          // original e o Mermaid volta a ter material para desenhar (mesma razao das secoes).
-          <Html key={`${bloco.chave}-${escuro}`} className="intro" html={bloco.html} />
+          // Key com o tema SO quando o trecho tem diagrama: ao trocar claro/escuro o React
+          // remonta o trecho, reinjeta o HTML original e o Mermaid volta a ter material para
+          // desenhar (mesma razao e mesma regua das secoes, em `chaveDoMaterial`).
+          <Html
+            key={chaveDoMaterial(bloco.chave, bloco.html, escuro)}
+            className="intro"
+            html={bloco.html}
+          />
         ) : (
           <Tabela key={bloco.chave} tabela={bloco} slug={estrutura.slug} />
         ),

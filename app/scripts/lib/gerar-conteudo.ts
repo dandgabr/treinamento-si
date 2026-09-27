@@ -21,7 +21,7 @@ import {
   type PaginaDoDisco,
   type RelatorioDeLinks,
 } from './links-material'
-import { normalizarFontes, parseGuiaDeTexto, parsePaginaDeTexto, parseTemaDeTexto } from './markdown'
+import { normalizarFontes, idsDoDocumento, parseGuiaDeTexto, parsePaginaDeTexto, parseTemaDeTexto } from './markdown'
 
 // Areas sao as pastas 00..17; 90/91/99 sao catalogos (certificacoes, trilhas, fontes).
 const ehArea = (nome: string): boolean => /^\d{2}-/.test(nome) && !/^9\d-/.test(nome)
@@ -124,8 +124,11 @@ export function gerarComRelatorio(contentDir: string): Geracao {
   const mapa = montarMapa(material)
   const links = novoRelatorio()
   // O resolvedor e por documento: o mesmo `TEMA-01.md` significa arquivos diferentes em areas
-  // diferentes, e so o caminho de origem diz contra qual pasta resolver.
-  const resolvedorDe = (origem: string) => resolverDeLinks(mapa, origem, links)
+  // diferentes, e so o caminho de origem diz contra qual pasta resolver. Os `id` do documento vao
+  // junto porque o fragmento de ancora da propria pagina (`#nota`) so e defeito quando nenhum
+  // `id` dele responde pelo alvo.
+  const resolvedorDe = (origem: string, texto: string) =>
+    resolverDeLinks(mapa, origem, links, idsDoDocumento(texto))
 
   const areas: Area[] = []
   const temas: Record<Ref, Tema> = {}
@@ -134,7 +137,12 @@ export function gerarComRelatorio(contentDir: string): Geracao {
     const { data } = matter(area.guia)
     const refs: Ref[] = []
     for (const arquivo of area.temas) {
-      const tema = parseTemaDeTexto(arquivo.texto, area.areaId, resolvedorDe(arquivo.caminho))
+      const tema = parseTemaDeTexto(
+        arquivo.texto,
+        area.areaId,
+        resolvedorDe(arquivo.caminho, arquivo.texto),
+        idsDoDocumento(arquivo.texto),
+      )
       temas[tema.ref] = tema
       refs.push(tema.ref)
     }
@@ -150,7 +158,12 @@ export function gerarComRelatorio(contentDir: string): Geracao {
       temas: refs,
       fontes: normalizarFontes(data.fontes),
       statusVerificacao: String(data.status_verificacao ?? 'rascunho'),
-      guia: parseGuiaDeTexto(area.guia, area.areaId, resolvedorDe(`${area.areaId}/README.md`)),
+      guia: parseGuiaDeTexto(
+        area.guia,
+        area.areaId,
+        resolvedorDe(`${area.areaId}/README.md`, area.guia),
+        idsDoDocumento(area.guia),
+      ),
     })
   }
 
@@ -161,7 +174,13 @@ export function gerarComRelatorio(contentDir: string): Geracao {
   )
 
   const paginas: Pagina[] = material.paginas.map((p) => {
-    const pagina = parsePaginaDeTexto(p.texto, p.grupo, p.slug, resolvedorDe(p.caminho))
+    const pagina = parsePaginaDeTexto(
+      p.texto,
+      p.grupo,
+      p.slug,
+      resolvedorDe(p.caminho, p.texto),
+      idsDoDocumento(p.texto),
+    )
     // As trilhas trazem o pre-teste diagnostico e a tabela de fases como texto; `extrairTrilha`
     // os le do HTML ja com os links resolvidos e devolve as secoes sem a regiao do diagnostico
     // (ela vira bloco interativo na tela). Qualquer outra pagina sai daqui com `trilha: null`.

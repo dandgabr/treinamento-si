@@ -1,7 +1,16 @@
 import { Fragment, useEffect, useMemo, useRef } from 'react'
 import { content } from '../infrastructure/content/repository'
 import type { Tema } from '../domain/types'
-import { BlocoQA, Html, idDaSecao, PreTeste, Principal, Sumario, type ItemDeSumario } from './Blocos'
+import {
+  BlocoQA,
+  Html,
+  chaveDoMaterial,
+  idDaSecao,
+  PreTeste,
+  Principal,
+  Sumario,
+  type ItemDeSumario,
+} from './Blocos'
 import { renderizarMermaid } from './mermaid'
 import { BotaoLido, VereditoRecuperacao } from './Progresso'
 import { irPara, linkQuiz, linkTema } from './useRota'
@@ -90,7 +99,13 @@ export function ThemeView({ refTema, escuro }: { refTema: string; escuro: boolea
 
       {itens.length >= MIN_ITENS_SUMARIO ? <Sumario itens={itens} /> : null}
 
-      {tema.intro ? <Html key={`intro-${escuro}`} className="intro" html={tema.intro} /> : null}
+      {tema.intro ? (
+        <Html
+          key={chaveDoMaterial('intro', tema.intro, escuro)}
+          className="intro"
+          html={tema.intro}
+        />
+      ) : null}
 
       {secoes.map((s) => {
         if (s.numero === 3)
@@ -109,7 +124,7 @@ export function ThemeView({ refTema, escuro }: { refTema: string; escuro: boolea
             </Fragment>
           )
         return (
-          <section key={`${s.numero}-${escuro}`} className="secao">
+          <section key={chaveDoMaterial(String(s.numero), s.html, escuro)} className="secao">
             <h2 id={idDaSecao(s.numero)} tabIndex={-1}>
               <span className="secao-num">{s.numero}.</span> {s.titulo}
             </h2>

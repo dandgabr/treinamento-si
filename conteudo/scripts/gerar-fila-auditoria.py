@@ -43,13 +43,29 @@ def sem_data(texto: str) -> str:
 
 
 def dominios_bloqueados() -> set[str]:
-    """Le os dominios marcados como bloqueio no relatorio de links."""
+    """Le os dominios marcados como bloqueio no relatorio de links.
+
+    Falha alto quando o relatorio ou a secao nao estao onde a leitura procura, em vez de devolver
+    um conjunto vazio: "dominio que bloqueia automacao" e o sinal de MAIOR peso da fila (3 pontos
+    por fonte), e a ausencia da secao o zerava em silencio. A fila sairia reordenada — as fontes
+    que so um humano consegue abrir ficariam no fim — e o passo que gera a fila diria que esta tudo
+    em dia. Secao ausente nao e "nenhum dominio bloqueado": e a regra que nao pode ser conferida.
+    """
     if not STATUS_LINKS.exists():
-        return set()
+        raise SystemExit(
+            f"ERRO  {STATUS_LINKS.relative_to(RAIZ)}: ausente — e o relatorio do "
+            f"`scripts/checar-links.py`, de onde saem os dominios que bloqueiam automacao; sem ele "
+            f"o sinal de maior peso da fila de auditoria nao existe"
+        )
     txt = STATUS_LINKS.read_text(encoding="utf-8")
     m = re.search(r"## Bloqueio a cliente automatizado.*?(?=\n## |\Z)", txt, re.S)
     if not m:
-        return set()
+        raise SystemExit(
+            f"ERRO  {STATUS_LINKS.relative_to(RAIZ)}: sem a secao '## Bloqueio a cliente "
+            f"automatizado' — restaure-a (quem a escreve e o `scripts/checar-links.py`) em vez de "
+            f"tratar a ausencia como 'nenhum dominio bloqueado': as fontes que exigem navegador "
+            f"sairiam da fila sem que ninguem note"
+        )
     return {re.sub(r"^https?://(www\.)?", "", u).split("/")[0]
             for u in re.findall(r"<(https?://[^>]+)>", m.group(0))}
 

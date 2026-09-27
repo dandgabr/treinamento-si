@@ -68,6 +68,14 @@ describe('dominioDaArea', () => {
     expect(dominioDaArea(AREA, comPlacarAntigo('x', 3)).checkpointAprovado).toBe(false)
   })
 
+  it('usa o total do próprio placar quando o guia não tem itens de checkpoint', () => {
+    // `guia.checkpoint.length` é 0 e o resultado vem do placar do arquivo antigo: é o total do
+    // PRÓPRIO placar que o critério lê — "0 de 0" não descreveria resultado nenhum.
+    const area = areaFake({ areaId: 'x', temas: [], guia: guiaFake({ checkpoint: [] }) })
+    expect(dominioDaArea(area, comPlacarAntigo('x', 4)).checkpointAprovado).toBe(true)
+    expect(dominioDaArea(area, comPlacarAntigo('x', 3)).checkpointAprovado).toBe(false)
+  })
+
   it('um julgamento pela metade não revoga a aprovação já registrada', () => {
     // O placar antigo fica enquanto o julgamento por item não fecha: um clique não pode tirar a
     // aprovação da área (e o marco da trilha com ela).

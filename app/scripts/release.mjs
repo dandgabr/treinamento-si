@@ -9,9 +9,11 @@
  * `sha256sum -c` le.
  *
  * A versao sai de `package.json` e de lugar nenhum mais. Nome do artefato, arquivo de soma
- * e versao tem de concordar, e o script confere os tres depois de gravar: um release que
- * gera `Roadmap CISO-0.1.0.AppImage` com um checksum apontando para outro nome e pior que
- * nao ter checksum, porque da a confianca de uma conferencia que nao aconteceu.
+ * e versao tem de concordar, e o script confere os tres depois de gravar — RELENDO o
+ * artefato do disco, porque a conferencia e do que ficou gravado e nao do que passou pela
+ * memoria: um release que gera `Roadmap CISO-0.1.0.AppImage` com um checksum apontando para
+ * outro nome, ou somando um arquivo que ja nao e aquele, e pior que nao ter checksum, porque
+ * da a confianca de uma conferencia que nao aconteceu.
  *
  * O script prefere recusar a publicar. Arvore suja, portao vermelho e artefato de mesmo
  * nome ja no disco sao recusas com mensagem dizendo o que fazer — empacotar por cima
@@ -234,12 +236,20 @@ function lerSoma(arquivo) {
 }
 
 /**
- * Confere que nome do artefato, arquivo de soma e versao concordam. E o ultimo portao antes
- * de dizer "release pronto": se falhar, o artefato continua no disco mas ninguem foi
- * avisado de que ele esta publicavel — que e o estado seguro.
+ * Confere que nome do artefato, arquivo de soma e versao concordam — e que a soma gravada
+ * fecha com o arquivo que ESTA no disco.
+ *
+ * A releitura e o ponto: comparar a soma com o hash que este processo tinha na memoria
+ * conferia a intencao, e nao o resultado. Um artefato alterado entre o hash e a conferencia
+ * (outro processo escrevendo no arquivo, uma copia interrompida) sairia com um `.sha256` que
+ * nao confere — a confianca de uma conferencia que nao aconteceu, que e o pior estado
+ * possivel para quem publica. Devolve o tamanho e o resumo lidos do disco: e o que o
+ * relatorio anuncia.
  */
-function conferirConcordancia(artefato, arquivoSoma, hash, tamanho) {
+async function conferirConcordancia(artefato, arquivoSoma) {
   const lido = lerSoma(arquivoSoma)
+  const tamanho = fs.statSync(artefato).size
+  const hash = await somar(artefato)
   const problemas = []
   if (lido.erro) problemas.push(lido.erro)
   else {
@@ -257,7 +267,7 @@ function conferirConcordancia(artefato, arquivoSoma, hash, tamanho) {
   if (!fs.readFileSync(arquivoSoma, 'utf8').includes(versao)) {
     problemas.push(`a soma nao registra a versao ${versao}`)
   }
-  if (!problemas.length) return
+  if (!problemas.length) return { hash, tamanho }
   recusar('o nome, a soma e a versao nao concordam', [
     `artefato: ${path.relative(RAIZ, artefato)}`,
     `soma: ${path.relative(RAIZ, arquivoSoma)}`,
@@ -330,14 +340,20 @@ const quando = new Date().toISOString()
 const linhas = [`\nrelease ${versao}`]
 for (const nome of novos) {
   const caminho = path.join(SAIDA, nome)
-  const tamanho = fs.statSync(caminho).size
-  const hash = await somar(caminho)
-  const arquivoSoma = escreverSoma({ caminho, nome, tamanho, hash, quando })
-  conferirConcordancia(caminho, arquivoSoma, hash, tamanho)
+  // O par sai daqui; a conferencia dele e a RELEITURA logo abaixo, e o relatorio imprime o
+  // que a releitura achou no disco — e nao o que este processo somou de memoria.
+  const arquivoSoma = escreverSoma({
+    caminho,
+    nome,
+    tamanho: fs.statSync(caminho).size,
+    hash: await somar(caminho),
+    quando,
+  })
+  const conferido = await conferirConcordancia(caminho, arquivoSoma)
   linhas.push(
     `  artefato  ${path.relative(RAIZ, caminho)}`,
-    `  tamanho   ${tamanho} bytes (${(tamanho / 1024 / 1024).toFixed(1)} MiB)`,
-    `  sha256    ${hash}`,
+    `  tamanho   ${conferido.tamanho} bytes (${(conferido.tamanho / 1024 / 1024).toFixed(1)} MiB)`,
+    `  sha256    ${conferido.hash}`,
     `  soma      ${path.relative(RAIZ, arquivoSoma)}`,
     `  confira   sha256sum -c "${path.basename(arquivoSoma)}"  (com o artefato ao lado)`,
   )

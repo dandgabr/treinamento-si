@@ -125,6 +125,18 @@ describe('pareceBanco', () => {
       expect(pareceBanco({ [AREA_A]: [questao({ origem: origem as never })] })).toBe(false)
     }
   })
+
+  it('recusa item cuja fonte não é objeto', () => {
+    // O banco vem de JSON externo: `fonte` como texto ou nulo não tem título, url nem tipo para
+    // ler, e a tela não pode desenhar `undefined` como procedência.
+    expect(pareceBanco({ [AREA_A]: [questao({ fonte: 'x' as never })] })).toBe(false)
+    expect(pareceBanco({ [AREA_A]: [questao({ fonte: null as never })] })).toBe(false)
+  })
+
+  it('recusa item cujas alternativas não são lista', () => {
+    // Fora de lista, `alternativas.length` e o índice do gabarito não descrevem nada.
+    expect(pareceBanco({ [AREA_A]: [questao({ alternativas: 'nada' as never })] })).toBe(false)
+  })
 })
 
 describe('questoesDe', () => {
@@ -165,6 +177,15 @@ describe('questoesDe', () => {
       `${REF_A}#E02`,
       `${REF_B}#E01`,
     ])
+  })
+
+  it('não estoura com a chave própria que não guarda lista', () => {
+    // O banco vem de JSON externo: `Object.hasOwn` acha a chave, mas o valor pode não ser lista.
+    // Melhor devolver lista vazia do que um `TypeError` na tela.
+    const b = { a: undefined, b: [questao()] } as unknown as Banco
+    expect(questoesDe(b, 'a')).toEqual([])
+    // E "todas as áreas" ignora a chave sem lista em vez de estourar no espalhamento.
+    expect(ids(questoesDe(b))).toEqual([ITEM])
   })
 })
 

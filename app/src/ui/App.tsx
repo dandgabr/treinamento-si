@@ -5,6 +5,7 @@ import type { Pagina } from '../domain/types'
 import { AreaView } from './AreaView'
 import {
   Html,
+  chaveDoMaterial,
   idDaSecao,
   Principal,
   Secoes,
@@ -219,7 +220,11 @@ function PaginaConteudo({ pagina, escuro }: { pagina: Pagina; escuro: boolean })
       ) : (
         <>
           {itens.length >= MIN_ITENS_SUMARIO_PAGINA ? <Sumario itens={itens} /> : null}
-          <Html key={`intro-${escuro}`} className="intro" html={porSecao ? pagina.intro : cabecalhos.html} />
+          <Html
+            key={chaveDoMaterial('intro', porSecao ? pagina.intro : cabecalhos.html, escuro)}
+            className="intro"
+            html={porSecao ? pagina.intro : cabecalhos.html}
+          />
           <Secoes
             secoes={pagina.secoes}
             escuro={escuro}

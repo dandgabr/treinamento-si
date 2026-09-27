@@ -16,7 +16,14 @@ vi.mock('../infrastructure/storage/persistencia', () => ({
 
 const AGORA = new Date('2026-03-10T12:00:00.000Z')
 
-/** Um estado como o que estaria no disco: um tema ja estudado e um dia registrado. */
+/**
+ * Um estado como o que estaria no disco: um tema já estudado, com uma revisão agendada de
+ * verdade, e um dia registrado.
+ *
+ * A revisão vem no lugar certo — dentro de `revisao`, e não solta no nível do tema. Fora do
+ * objeto, o normalizador a descarta (`normalizarRevisao` recebe `undefined` e devolve o estado
+ * inicial), e o teste passaria sem provar que uma revisão real sobrevive à carga.
+ */
 function estadoDoDisco(): unknown {
   return {
     versao: 1,
@@ -26,7 +33,15 @@ function estadoDoDisco(): unknown {
         lido: true,
         preTeste: {},
         recuperacaoOk: true,
-        proximaRevisao: '2026-03-17T12:00:00.000Z',
+        revisao: {
+          ref: 'a#TEMA-01',
+          intervaloDias: 7,
+          proximaRevisao: '2026-03-17T12:00:00.000Z',
+          rebaixamentos: 1,
+          passagens: 2,
+          falhasSeguidas: 0,
+          consolidado: false,
+        },
       },
     },
     checkpoints: {},
@@ -102,6 +117,14 @@ describe('progresso-store', () => {
     const { estado } = store.instantaneo()
     expect(Object.keys(estado.temas).sort()).toEqual(['a#TEMA-01', 'a#TEMA-02'])
     expect(estado.temas['a#TEMA-01']?.recuperacaoOk).toBe(true)
+    // E a revisão do disco sobreviveu à carga — o fixture a traz dentro de `revisao`, e não solta
+    // no nível do tema: sem isso o normalizador a descartaria e esta asserção não provaria nada.
+    expect(estado.temas['a#TEMA-01']?.revisao).toMatchObject({
+      intervaloDias: 7,
+      proximaRevisao: '2026-03-17T12:00:00.000Z',
+      rebaixamentos: 1,
+      passagens: 2,
+    })
     expect(estado.diasAtivos).toEqual(['2026-03-09', '2026-03-10'])
     // E a gravação única já contém o histórico inteiro.
     expect(registro.gravados).toHaveLength(1)
@@ -406,5 +429,69 @@ describe('progresso-store', () => {
 
     expect(registro.gravados).toHaveLength(0)
     expect(Object.keys(store.instantaneo().estado.questoes)).toEqual([])
+  })
+
+  it('expõe as ações do estudo: cada uma encadeia o redutor do domínio', async () => {
+    // A fiação entre a tela e o domínio: um nome trocado aqui passaria por todos os testes de
+    // `src/domain/progresso.ts`, que exercitam o redutor direto e não a ponte.
+    const { provedor, registro } = provedorDeTeste({
+      leitura: () => Promise.resolve(estadoDoDisco()),
+    })
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    // A abertura zera o veredito da passagem anterior; o registro seguinte grava o novo. A ordem
+    // importa: `registrarRecuperacao` é no-op enquanto houver veredito em aberto.
+    store.abrirPassagem('a#TEMA-01', AGORA)
+    store.registrarRecuperacao('a#TEMA-01', false, AGORA)
+    store.registrarConfianca('a#TEMA-01', 0, 4, AGORA)
+    store.registrarVeredictoDeCheckpoint('01-fundamentos', 0, true, 5, AGORA)
+    store.registrarDiagnostico('91-trilhas/plano-12-meses', 0, true, AGORA)
+    store.registrarArtefato('01-fundamentos#1', true, AGORA)
+    await store.aguardarGravacoes()
+
+    const { estado } = store.instantaneo()
+    expect(estado.temas['a#TEMA-01']?.preTeste).toEqual([{ indice: 0, confianca: 4 }])
+    expect(estado.temas['a#TEMA-01']?.recuperacaoOk).toBe(false)
+    expect(estado.checkpoints['01-fundamentos']?.itens).toEqual([{ indice: 0, acertou: true }])
+    expect(estado.diagnosticos['91-trilhas/plano-12-meses']).toEqual([{ indice: 0, acertou: true }])
+    expect(estado.artefatos['01-fundamentos#1']?.produzido).toBe(true)
+    // Cada ação é uma gravação: no disco o estado não fica esperando o fim da sessão.
+    expect(registro.gravados).toHaveLength(6)
+  })
+
+  it('traduz o resultado do provedor ao exportar: erro sem mensagem, ok sem caminho e cancelado', async () => {
+    const { provedor } = provedorDeTeste()
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    // `erro` sem mensagem usa o texto padrão — nunca "undefined" na tela.
+    provedor.exportar = async () => ({ estado: 'erro' })
+    await expect(store.exportar()).resolves.toEqual({ tipo: 'erro', texto: 'Não consegui exportar.' })
+
+    // No navegador não há caminho escolhido: a resposta é neutra, não um erro.
+    provedor.exportar = async () => ({ estado: 'ok' })
+    await expect(store.exportar()).resolves.toEqual({ tipo: 'ok', texto: 'Progresso exportado.' })
+
+    // Cancelar o diálogo não é erro nem sucesso: a tela não mostra aviso nenhum.
+    provedor.exportar = async () => ({ estado: 'cancelado' })
+    await expect(store.exportar()).resolves.toBeNull()
+  })
+
+  it('traduz o resultado do provedor ao importar: cancelado e erro', async () => {
+    const { provedor, registro } = provedorDeTeste()
+    const store = await carregarStore(provedor)
+    await store.quandoCarregado()
+
+    provedor.importar = async () => ({ estado: 'cancelado' })
+    await expect(store.importar()).resolves.toBeNull()
+
+    provedor.importar = async () => ({ estado: 'erro', mensagem: 'O arquivo passa de 1 MB.' })
+    await expect(store.importar()).resolves.toEqual({
+      tipo: 'erro',
+      texto: 'O arquivo passa de 1 MB.',
+    })
+    // Nem cancelar nem recusar o arquivo tocam no que está guardado.
+    expect(registro.gravados).toHaveLength(0)
   })
 })

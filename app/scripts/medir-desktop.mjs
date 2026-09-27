@@ -6,13 +6,16 @@
  * ele que a pessoa recebe. As checagens O1, O2, O4, O5 e O6 do plano saem daqui — e sem
  * numero medido o plano manda nao contar o item como feito.
  *
- * Uso: npm run build:desktop && npm run smoke:desktop && npm run medir
+ * Uso: npm run distribuir && npm run medir   (o `medir` exige o pacote em `instalador/` e
+ * recusa medir quando as fontes da arvore sao mais novas que ele)
  */
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+import { listPackage } from '@electron/asar'
 import { abrirApp } from './lib/app-empacotado.mjs'
 import { binarioEm } from './lib/binario.mjs'
+import { fontesMaisNovas } from './lib/frescor.mjs'
 
 const AQUI = path.dirname(fileURLToPath(import.meta.url))
 const APP = path.resolve(AQUI, '..')
@@ -53,11 +56,71 @@ function declaradoNoHtml() {
   })
 }
 
+/**
+ * As fontes que o pacote carrega de verdade: as entradas de primeiro nivel da listagem do
+ * proprio `app.asar` (`/dist-desktop/...`, `/dist-electron/...`, `/package.json`).
+ *
+ * `dist/` e `build/` NAO entram no asar — compara-los recusava um pacote atual — e
+ * `dist-desktop/`, que entra, tem de entrar na comparacao: e dele que saem o `index.html`,
+ * o `conteudo.json` e os chunks que o O4 anuncia. A lista sai do proprio asar para nao
+ * envelhecer junto com o `electron-builder.yml`.
+ */
+function fontesDoPacote(entradas, app) {
+  const nomes = new Set()
+  for (const caminho of entradas) {
+    const primeiro = caminho.split('/')[1]
+    if (primeiro) nomes.add(primeiro)
+  }
+  return [...nomes].map((nome) => ({ nome, caminho: path.join(app, nome) }))
+}
+
+/**
+ * O que esta errado no pacote, em uma lista — vazia com ele em dia:
+ *
+ * - fonte que entra no asar e nao esta nesta arvore (o pacote saiu de um checkout que nao e
+ *   este, e nao ha o que comparar);
+ * - fonte do asar mais nova que o proprio asar (o pacote medido nao e o build daqui).
+ */
+function fontesAtrasadas(asar, app) {
+  let entradas
+  try {
+    entradas = listPackage(asar)
+  } catch (erro) {
+    return [`nao consegui ler o asar: ${String(erro.message ?? erro).split('\n')[0]}`]
+  }
+  const fontes = fontesDoPacote(entradas, app)
+  const ausentes = fontes
+    .filter((fonte) => !fs.existsSync(fonte.caminho))
+    .map((fonte) => `${fonte.nome} (esta no asar e nao esta na arvore)`)
+  const presentes = fontes.filter((fonte) => fs.existsSync(fonte.caminho)).map((f) => f.caminho)
+  return [...ausentes, ...fontesMaisNovas(asar, presentes)]
+}
+
 const TEMA_COM_DIAGRAMA = '#/tema/01-fundamentos/TEMA-01'
 
 async function main() {
   const pasta = pastaDesempacotada()
   const binario = binarioEm(pasta, process.platform)
+
+  // Esta medicao tem DUAS origens, e e isso que o portao protege: o O1/O5/O6 saem do binario
+  // empacotado que acabou de abrir, e o O4 sai do `dist-desktop/` da ARVORE (o HTML que ele
+  // declara carregar, o `conteudo.json`). Com as fontes mais novas que o asar, o relatorio
+  // mede dois builds ao mesmo tempo e anuncia o numero de um pacote que ninguem recebeu —
+  // exatamente o que aconteceu com um `dist-desktop` mais novo que o asar ai dentro. Recusa,
+  // como os outros scripts de artefato fazem.
+  const asar = path.join(pasta, 'resources', 'app.asar')
+  const atrasadas = fontesAtrasadas(asar, APP)
+  if (atrasadas.length) {
+    console.error(
+      `Artefato desatualizado.\n` +
+        `O pacote em ${path.relative(APP, pasta)} e mais velho que, ou a arvore nao tem:\n` +
+        atrasadas.map((fonte) => `  - ${fonte}`).join('\n') +
+        '\n\nO O4 sai do dist-desktop/ da arvore e o O1/O5/O6 do binario: medir agora misturaria\n' +
+        'dois builds. Rode antes: npm run distribuir',
+    )
+    process.exit(1)
+  }
+
   const { janela, encerrar } = await abrirApp(binario)
 
   // O `performance` nao registra recurso de esquema proprio (`app://`), entao a lista de
@@ -124,4 +187,11 @@ async function main() {
   }
 }
 
-await main()
+/**
+ * So roda quando este arquivo e o processo. Importar o modulo (um teste, por exemplo) nao
+ * pode listar o `instalador/`, sair com 1 nem abrir o aplicativo.
+ */
+const ehPontoDeEntrada =
+  Boolean(process.argv[1]) && import.meta.url === pathToFileURL(process.argv[1]).href
+
+if (ehPontoDeEntrada) await main()

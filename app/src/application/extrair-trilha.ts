@@ -40,8 +40,14 @@ const RE_LINHA = /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi
 const RE_CELULA = /<t[hd]\b[^>]*>([\s\S]*?)<\/t[hd]>/gi
 const RE_H3 = /<h3\b[^>]*>([\s\S]*?)<\/h3>/gi
 const RE_LINK_DE_AREA = /href="#\/area\/([^"#]+)"/gi
-/** Codigo de area (`00`, `01`, ..., `17`) solto no texto: nem `TEMA-01` nem `1.1` casam. */
-const RE_CODIGO_DE_AREA = /(?<![\w-])(\d{2})(?![\w-])/g
+/**
+ * Separadores das listas de areas do material ("00, 01, 17", "00 e 01").
+ *
+ * A celula de areas e uma LISTA: o codigo e um item inteiro ("00"), nao um numero solto no meio
+ * de uma frase. Sem esta ancora, um `\d{2}` em qualquer lugar do texto casava — "17 temas" virava
+ * a area 17 e a fase ganhava uma area a mais.
+ */
+const SEPARADOR_DE_LISTA = /\s*(?:,|;|→|\be\b)\s*/
 
 /**
  * Comparacao de cabecalho e de titulo: sem acento, sem maiuscula e sem espaco nas pontas. As
@@ -105,6 +111,11 @@ export function limitesDoRotulo(rotulo: string): { de: number; ate: number } | n
  * Celula que nao nomeia area nenhuma (o Bloco F do plano de 24 meses: "revisao dirigida pelas
  * areas da credencial escolhida") devolve lista vazia — a trilha nao liga aquela fase a area, e
  * inventar a ligacao seria escrever o que o material nao escreveu.
+ *
+ * O codigo solto so vale como ITEM da lista (a celula inteira e o codigo, ou ele esta entre
+ * separadores): casar dois digitos em qualquer posicao fazia "17 temas" — o numero de temas do
+ * material — virar a area 17, e a fase ganhava uma area a mais. E o codigo precisa existir no
+ * conteudo: um numero que nao descreve area nenhuma nao inventa ligacao.
  */
 export function areasDaCelula(celula: string, areasDoConteudo: readonly string[]): string[] {
   const texto = textoDaCelula(celula)
@@ -116,9 +127,9 @@ export function areasDaCelula(celula: string, areasDoConteudo: readonly string[]
     const id = casado[1]
     if (id && areasDoConteudo.includes(id)) achadas.push(id)
   }
-  for (const casado of texto.matchAll(RE_CODIGO_DE_AREA)) {
-    const codigo = casado[1]
-    const area = areasDoConteudo.find((a) => a.startsWith(`${codigo}-`))
+  for (const parte of texto.split(SEPARADOR_DE_LISTA)) {
+    if (!/^\d{2}$/.test(parte)) continue
+    const area = areasDoConteudo.find((a) => a.startsWith(`${parte}-`))
     if (area) achadas.push(area)
   }
   return [...new Set(achadas)]

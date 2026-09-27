@@ -50,6 +50,35 @@ export function idDaSecao(numero: number): string {
 }
 
 /**
+ * O HTML do material tem um diagrama Mermaid?
+ *
+ * A pergunta e sobre a `key` (abaixo), e nao sobre o desenho: quem desenha e `renderizarMermaid`.
+ * E `class="mermaid"` no atributo, e nao a palavra solta, porque o material FALA de Mermaid em
+ * prosa e em bloco de codigo — e ai as aspas vem escapadas (`&quot;`), entao o atributo e o unico
+ * lugar onde o casamento vale. Ler o DOM (`querySelector('.mermaid')`) seria mais exato e custaria
+ * um `DOMParser` por trecho a cada render, sobre 3,8 MB de material.
+ */
+export function temDiagrama(html: string): boolean {
+  return /class="[^"]*\bmermaid\b/.test(html)
+}
+
+/**
+ * A `key` de um trecho de material: o tema entra nela SO quando ha diagrama para redesenhar.
+ *
+ * O Mermaid marca cada no com `data-processed` e pula os ja processados, entao trocar claro/escuro
+ * exige HTML novo — e quem garante isso e o React, remontando o trecho. Medido: em 80 das 149
+ * vistas do material nao ha diagrama nenhum, e nelas a remontagem nao servia para nada; o que ela
+ * fazia era jogar fora o DOM que estava na tela, com o efeito medido no foco — o `activeElement`
+ * caia para o `body` e o proximo TAB recomecava do "Pular para o conteudo", a cada anoitecer.
+ *
+ * Sem diagrama, a `key` nao muda com o tema e o trecho sobrevive; com diagrama, ela muda e o
+ * Mermaid ganha de novo o texto original do diagrama. Uma regua so para as duas pontas.
+ */
+export function chaveDoMaterial(chave: string, html: string, escuro: boolean): string {
+  return temDiagrama(html) ? `${chave}-${escuro}` : chave
+}
+
+/**
  * Renderiza uma lista de secoes na ordem do material.
  *
  * O `id` e o `tabIndex` do titulo existem para o sumario: o botao de la move o foco e a
@@ -81,11 +110,10 @@ export function Secoes({
   return (
     <div ref={ref}>
       {secoes.map((s) => (
-        // A key inclui o tema: ao trocar claro/escuro o React remonta a secao,
-        // reinjeta o HTML original e o Mermaid volta a ter material para renderizar.
-        // Sem isso ele pula o no (ja marcado com data-processed) e o diagrama
-        // mantem as cores do tema anterior.
-        <Fragment key={`${s.numero}-${escuro}`}>
+        // A key so inclui o tema onde ha diagrama: e o Mermaid que precisa de HTML novo para
+        // redesenhar, e onde nao ha diagrama a remontagem so custa o DOM da tela (ver
+        // `chaveDoMaterial`).
+        <Fragment key={chaveDoMaterial(String(s.numero), s.html, escuro)}>
           <section className="secao">
             <h2 id={idDaSecao(s.numero)} tabIndex={-1}>
               <span className="secao-num">{s.numero}.</span> {s.titulo}
@@ -363,8 +391,14 @@ export function PreTeste({
   )
 
   return (
-    <section className="secao bloco-pre-teste" id={id}>
-      <h2 tabIndex={id === undefined ? undefined : -1}>
+    <section className="secao bloco-pre-teste">
+      {/* O `id` fica no `h2`, como em `Secoes` e em `BlocoQA`: e ele que recebe o foco quando o
+          sumario ou um endereco (`#/tema/<area>/<tema>/secao-3`) levam ate aqui. Com o `id` no
+          `<section>` e o `tabIndex` no `<h2>` de dentro, `irParaSecao` achava o section, o
+          `focus()` era no-op em elemento nao focavel e a funcao devolvia `true` — o foco ficava
+          onde estava (o botao do sumario) e o `focarConteudo()` de recuo era pulado. Era a unica
+          ancora torta do app: as outras 13 secoes do tema punham `id` e `tabIndex` no mesmo no. */}
+      <h2 id={id} tabIndex={id === undefined ? undefined : -1}>
         <span className="secao-num">3.</span> Pré-teste
       </h2>
       <p className="dica">

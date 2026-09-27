@@ -5,7 +5,7 @@
 
 import { interpretarCriterio } from '../../src/domain/criterio'
 import { SEQUENCIA_DIAS } from '../../src/domain/srs'
-import type { Area, Conteudo, Fonte, Guia, Pagina, Secao, Tema } from '../../src/domain/types'
+import type { Area, Conteudo, Fonte, Guia, Pagina, Secao, Tabela, Tema } from '../../src/domain/types'
 import { lerContratoMermaid } from './contrato-mermaid'
 import { htmlsDaPagina, htmlsDoGuia, htmlsDoTema } from './htmls-do-conteudo'
 import { hrefsDeFragmento, hrefsRelativos } from './links-material'
@@ -102,10 +102,131 @@ function checarMermaid(onde: string, diagramas: string[], erros: string[]): void
   }
 }
 
+/** Entidades que o HTML serializado usa no texto de um bloco: `&lt;` esconde o `<` do rotulo. */
+const ENTIDADES = new Map([
+  ['&lt;', '<'],
+  ['&gt;', '>'],
+  ['&quot;', '"'],
+  ['&#39;', "'"],
+  ['&apos;', "'"],
+  ['&amp;', '&'],
+])
+
+function desescaparHtml(texto: string): string {
+  return texto.replace(/&(?:lt|gt|quot|#39|apos|amp);/g, (entidade) => ENTIDADES.get(entidade) ?? entidade)
+}
+
+/** O conteudo de cada bloco `.mermaid` de um HTML — a MESMA pergunta que `Blocos.temDiagrama` faz. */
+function conteudosMermaid(html: string): string[] {
+  const achados: string[] = []
+  for (const m of html.matchAll(/class="[^"]*\bmermaid\b[^"]*"[^>]*>([\s\S]*?)<\/div>/g)) {
+    achados.push(desescaparHtml(m[1] ?? ''))
+  }
+  return achados
+}
+
+/**
+ * O contrato do Mermaid tambem alcanca quem o runtime de fato desenha.
+ *
+ * `checarMermaid` (acima) so ve os blocos que a cerca ```` ```mermaid ```` produziu — a lista
+ * `mermaid` do documento. O runtime, porem, seleciona `.mermaid` no HTML (`mermaid.ts`,
+ * `querySelectorAll('.mermaid')`): um `<div class="mermaid">graph TD; A[< e #]</div>` escrito em
+ * PROSA atende a mesma selecao e nunca passava pela conferencia, embora o diagrama quebrado chegue
+ * ao aluno. Aqui o contrato e cobrado do HTML — a fonte que o app de fato le — e o bloco vindo da
+ * cerca fica de fora da segunda passada (o texto dele ja foi conferido na lista).
+ */
+function checarMermaidDoHtml(onde: string, htmls: string[], jaConferidos: string[], erros: string[]): void {
+  const vistos = new Set(jaConferidos)
+  for (const html of htmls) {
+    const ineditos = conteudosMermaid(html).filter((bloco) => !vistos.has(bloco))
+    if (ineditos.length) checarMermaid(onde, ineditos, erros)
+  }
+}
+
 /** Fonte sem titulo nao e rastreavel: o leitor ve a URL sem saber o que vai encontrar. */
 function checarFontes(onde: string, fontes: Fonte[], erros: string[]): void {
   for (const f of fontes) {
     if (!f.titulo) erros.push(`${onde}: fonte sem titulo (${f.url || 'sem url'})`)
+    // O esquema da URL e a defesa na fronteira: `javascript:` e `data:text/html` num `href` so
+    // nao executam porque o React bloqueia, e essa decisao nao pode morar numa biblioteca. A
+    // fonte da questao ja era cobrada assim (`validarBanco`); a do tema e da area nao eram, e a
+    // URL podia ser publicada intacta no content.json. So a URL declarada entra: campo vazio e
+    // "sem url", nao esquema errado.
+    if (f.url && !/^https?:\/\//.test(f.url)) {
+      erros.push(
+        `${onde}: fonte com esquema nao permitido (${f.url.slice(0, 40)}) — a URL vira href na ` +
+          `tela: use http(s)`,
+      )
+    }
+  }
+}
+
+/** Chave de comparacao de cabecalho: sem acento, sem maiuscula e sem espaco nas pontas. */
+function chaveDeColuna(texto: string): string {
+  return texto
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+}
+
+function colunaDe(tabela: Tabela, chave: string): number {
+  return tabela.cabecalho.findIndex((c) => chaveDeColuna(c) === chave)
+}
+
+/**
+ * As tres tabelas do guia que a TELA le — e que o portao nao conferia.
+ *
+ * O portao validava o titulo da secao e o html, mas nao o que a tela le delas: `tabelaTemas` (§4),
+ * `objetivos` (§2) e `atividades` (§8). Apagar `## 8. Atividades praticas e laboratorios` de um
+ * guia deixava `guia.atividades = null`, e `Trilha.tsx` troca o checklist inteiro de artefatos por
+ * uma frase — o aluno perde a lista sem que portao nenhum acuse (o smoke compara com o MESMO
+ * content.json, entao `0 === 0`). A §4 entra por inteiro porque e a tabela que o aluno le para
+ * saber o que vem e quanto custa: tema sem linha nela desaparece do plano, e a regra do tempo
+ * (a que compara com `tempo_estimado`) ficaria sem alvo.
+ */
+function checarTabelasDoGuia(onde: string, g: Guia, temaIds: string[], erros: string[]): void {
+  const temas = g.tabelaTemas
+  if (!temas) {
+    erros.push(
+      `${onde}: guia sem a tabela de temas da §4 — e a tabela que o aluno le para saber o que ` +
+        `vem e quanto custa cada tema`,
+    )
+  } else {
+    if (!temas.linhas.length) erros.push(`${onde}: tabela de temas da §4 sem linha nenhuma`)
+    const iTema = colunaDe(temas, 'tema_id')
+    if (iTema < 0) {
+      erros.push(`${onde}: tabela da §4 sem a coluna "tema_id" — nao ha como ligar a linha ao tema`)
+    } else {
+      const listados = new Set(temas.linhas.map((l) => (l[iTema] ?? '').trim()))
+      const faltam = temaIds.filter((id) => !listados.has(id))
+      if (faltam.length) {
+        erros.push(
+          `${onde}: tabela da §4 sem linha para ${faltam.join(', ')} — o tema nao aparece no plano ` +
+            `que o aluno le`,
+        )
+      }
+    }
+  }
+
+  const obrigatorias = [
+    ['objetivos', 2, 'objetivo', 'os objetivos de aprendizagem da area'],
+    ['atividades', 8, 'atividade', 'o checklist de artefatos da trilha (Trilha.tsx)'],
+  ] as const
+  for (const [campo, secao, coluna, paraQue] of obrigatorias) {
+    const tabela: Tabela | null = campo === 'objetivos' ? g.objetivos : g.atividades
+    const rotulo = `§${secao} (${campo})`
+    if (!tabela) {
+      erros.push(`${onde}: guia sem a tabela da ${rotulo} — ela e ${paraQue}`)
+      continue
+    }
+    if (!tabela.linhas.length) erros.push(`${onde}: tabela da ${rotulo} sem linha nenhuma`)
+    if (colunaDe(tabela, coluna) < 0) {
+      erros.push(
+        `${onde}: tabela da ${rotulo} sem a coluna "${coluna}" — e por ela que a tela le a ` +
+          `tabela; sem isso a lista aparece vazia`,
+      )
+    }
   }
 }
 
@@ -125,8 +246,22 @@ function checarFontes(onde: string, fontes: Fonte[], erros: string[]): void {
  * nao e rota do app, e a tela inteira cai em "Rota nao reconhecida" no primeiro clique. O
  * conjunto de rotas vem do proprio conteudo, e a gramatica e a mesma que o smoke usa
  * (`rotas-app.mjs`).
+ *
+ * A ancora da PROPRIA pagina e a excecao legitima: `[nota](#nota)` com `<p id="nota">` vira
+ * `#material-nota` na geracao (`religarAncorasDoMaterial`, o prefixo que impede um `id` do material
+ * de sombrear as ancoras do app) e alcanca o alvo na mesma tela. O que decide nao e o formato do
+ * href, e sim o `id` existir no HTML deste documento — era essa a metade que faltava: o portao
+ * reprovava o prefixo que a propria geracao injetou, e o caso legitimo nunca construia.
+ *
+ * O caractere de controle bidirecional entra aqui porque o defeito e do `href`: com U+202E o
+ * endereco real fica escondido atras de outro na barra de status.
  */
 function checarLinks(onde: string, htmls: string[], rotas: RotasDoApp, erros: string[]): void {
+  // Os `id` que este documento expoe, para reconhecer a ancora intra-pagina.
+  const ids = new Set<string>()
+  for (const html of htmls) {
+    for (const m of html.matchAll(/\bid="([^"]*)"/g)) ids.add(m[1] ?? '')
+  }
   for (const html of htmls) {
     for (const href of hrefsRelativos(html)) {
       erros.push(
@@ -134,10 +269,22 @@ function checarLinks(onde: string, htmls: string[], rotas: RotasDoApp, erros: st
       )
     }
     for (const href of hrefsDeFragmento(html)) {
-      if (!ehHrefDeRota(href, rotas)) {
+      if (ehHrefDeRota(href, rotas)) continue
+      // `#material-nota` (religado) ou `#nota` (o alvo declarado no documento): o par id/href da
+      // propria pagina. O id vem do material e chega aqui com o prefixo da geracao.
+      if (ids.has(href.slice(1))) continue
+      erros.push(
+        `${onde}: href de fragmento que nao e rota do app (${href}) — a tela responde ` +
+          `"Rota nao reconhecida"`,
+      )
+    }
+    for (const m of html.matchAll(/href\s*=\s*"([^"]*)"/g)) {
+      const controle = /[\u061C\u200E\u200F\u202A-\u202E\u2066-\u2069]/.exec(m[1] ?? '')
+      if (controle) {
+        const ponto = (controle[0].codePointAt(0) ?? 0).toString(16).toUpperCase().padStart(4, '0')
         erros.push(
-          `${onde}: href de fragmento que nao e rota do app (${href}) — a tela responde ` +
-            `"Rota nao reconhecida"`,
+          `${onde}: href com caractere de controle bidirecional (U+${ponto}) — a barra de status ` +
+            `mostraria um endereco e o clique iria para outro`,
         )
       }
     }
@@ -191,6 +338,9 @@ function validarTema(
   else if (!t.fontes.some((f) => f.url && f.tipo)) erros.push(`${onde}: fontes sem url/tipo`)
   checarFontes(onde, t.fontes, erros)
   checarMermaid(onde, t.mermaid, erros)
+  // E o contrato cobrado do HTML: um `.mermaid` escrito em prosa nao passa pela cerca, mas o
+  // runtime o desenha igual (`querySelectorAll('.mermaid')`).
+  checarMermaidDoHtml(onde, htmlsDoTema(t), t.mermaid, erros)
 
   if (t.errosComuns.length < 1) erros.push(`${onde}: sem tabela de erros comuns`)
 
@@ -237,8 +387,15 @@ function validarArea(a: Area, refs: Set<string>, rotas: RotasDoApp, erros: strin
   if (g.areaId !== a.areaId) erros.push(`${a.areaId}: guia com area_id divergente (${g.areaId})`)
   checarFontes(a.areaId, a.fontes, erros)
   checarMermaid(a.areaId, g.mermaid, erros)
+  checarMermaidDoHtml(a.areaId, htmlsDoGuia(g), g.mermaid, erros)
   checarSecoes(a.areaId, g.secoes, erros, true)
   checarLinks(a.areaId, htmlsDoGuia(g), rotas, erros)
+  checarTabelasDoGuia(
+    a.areaId,
+    g,
+    a.temas.map((ref) => ref.slice(ref.indexOf('#') + 1)),
+    erros,
+  )
   // O guia tambem e prosa: ficava de fora da varredura de lexico que temas e paginas
   // recebiam, embora o README prometesse o contrario.
   checarLexico(a.areaId, texto(htmlsDoGuia(g)), erros)
@@ -263,6 +420,7 @@ function validarPagina(p: Pagina, rotas: RotasDoApp, erros: string[]): void {
   // O menu do aluno agrupa por `grupo`; um valor desconhecido some da navegacao.
   if (!GRUPOS_DE_PAGINA.has(p.grupo)) erros.push(`${p.slug}: grupo desconhecido (${p.grupo})`)
   checarMermaid(p.slug, p.mermaid, erros)
+  checarMermaidDoHtml(p.slug, htmlsDaPagina(p), p.mermaid, erros)
   checarSecoes(p.slug, p.secoes, erros, false)
   // `htmlsDaPagina` inclui o HTML do bloco de diagnostico da trilha, que sai das secoes na
   // extracao (`extrair-trilha.ts`) e por isso nao esta em `secoes` nenhuma.

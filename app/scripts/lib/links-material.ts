@@ -188,11 +188,19 @@ export function novoRelatorio(): RelatorioDeLinks {
  * o mapa: e o que faz duas grafias do mesmo alvo darem a mesma rota. Onde nao ha resolucao, o
  * link fica como o material escreveu e o defeito entra no relatorio — o portao reprova o href
  * relativo que sobrar no HTML, entao nada passa em silencio.
+ *
+ * `idsDaPagina` sao os `id` que ESTE documento declara (`idsDoDocumento`, em `markdown.ts`). Um
+ * fragmento que nao e rota (`#nota`, e nao `#/…`) tem dois destinos possiveis: a ancora da propria
+ * pagina — que existe quando o `id` esta declarado aqui, e que a religacao das ancoras alcanca —
+ * e a grafia de ancora do GitHub (`#4-temas`), que nao leva a lugar nenhum. Sem esta lista, o
+ * resolvedor reprovava as duas, e o caso legitimo (`[nota](#nota)` com `<p id="nota">`) nunca
+ * construia: o portao cobrava o resultado de uma religacao que ele mesmo recusava.
  */
 export function resolverDeLinks(
   mapa: MapaDoMaterial,
   origem: string,
   relatorio: RelatorioDeLinks,
+  idsDaPagina: ReadonlySet<string> = new Set(),
 ): ResolverDeLink {
   return (href: string, texto: string): DestinoDeLink => {
     const corte = href.indexOf('#')
@@ -207,10 +215,19 @@ export function resolverDeLinks(
     // rota `desconhecida` e o app responde "Rota nao reconhecida". Um `#/…` de rota que o app nao
     // tem tambem reprova — o portao nao pode depender do smoke ter visitado aquela tela.
     if (!caminhoBruto) {
+      // Ancora da propria pagina (`#nota`): o `id` declarado NESTE documento responde por ela, e
+      // a religacao (`religarAncorasDoMaterial`) troca o par id/href pelo mesmo prefixo. Nao ha
+      // defeito — o alvo existe na mesma tela.
+      const alvoLocal = decodificar(href.replace(/^#/, ''))
+      if (!href.startsWith('#/') && alvoLocal && idsDaPagina.has(alvoLocal)) {
+        relatorio.intactos++
+        return { acao: 'manter' }
+      }
       if (!ehHrefDeRota(href, mapa.rotasConhecidas)) {
         relatorio.erros.push(
-          `${origem}: o link "${href}" e um fragmento que nao e rota do app (todo href com "#" ` +
-            `tem de ser "#/" ou "#/<area|tema|pagina|quiz>/…"; a ancora de cabecalho se escreve ` +
+          `${origem}: o link "${href}" e um fragmento que nao e rota do app e nao alcanca nenhum ` +
+            `id deste documento (todo href com "#" tem de ser "#/" ou "#/<area|tema|pagina|` +
+            `quiz>/…", ou a ancora de um id declarado aqui; a ancora de cabecalho se escreve ` +
             `junto do arquivo — "README.md#4-temas" — e nao sozinha)`,
         )
       }

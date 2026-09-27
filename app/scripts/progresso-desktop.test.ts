@@ -3,6 +3,11 @@
 // testes cobrem a decisao que faltava nessa fronteira — o que e recusado, o que e "primeira vez"
 // e o que e erro — e a medida do teto, que era feita em duas unidades diferentes.
 //
+// A abertura que NAO bloqueia (`FLAGS_LEITURA`, com `O_NONBLOCK`) tambem e provada aqui, e com um
+// FIFO de verdade: um diretorio e o `/dev/zero` nao bloqueiam no `open`, entao os dois casos
+// antigos de "arquivo nao comum" passavam com a flag removida — a flag que existe para nao
+// pendurar a abertura ficava sem prova justamente onde ela importa.
+//
 // O `electron` e trocado por um duble porque `app.getPath('userData')` so existe dentro do
 // aplicativo; a pasta de dados e um temporario proprio deste teste.
 //
@@ -10,6 +15,7 @@
 // abre num teste, entao a leitura do caminho escolhido so e alcancavel por chamada direta.
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
@@ -49,6 +55,45 @@ function comPrazo<T>(promessa: Promise<T>, ms: number): Promise<T> {
     }),
   ])
 }
+
+/**
+ * Um FIFO de verdade dentro da pasta do teste (que o `afterEach` remove inteira, tubo junto).
+ *
+ * Devolve `null` quando esta maquina nao tem `mkfifo` — o Windows nao tem FIFO nenhum. Quem chama
+ * PULA o caso, e o `skipIf` aparece no relatorio: um caso que some em silencio nao prova nada.
+ */
+function criarFifo(nome: string): string | null {
+  const caminho = path.join(raiz, nome)
+  try {
+    execFileSync('mkfifo', [caminho], { stdio: 'ignore' })
+    return caminho
+  } catch {
+    return null
+  }
+}
+
+/**
+ * O caminho do FIFO criado, conferido: se o `mkfifo` tivesse criado outra coisa (ou nada), o caso
+ * nao estaria medindo o `open` de um tubo, e valeria nada.
+ */
+function conferirQueEFifo(caminho: string | null): string {
+  if (!caminho) throw new Error('esta maquina nao tem mkfifo: o caso do FIFO nao pode rodar')
+  expect(fs.statSync(caminho).isFIFO()).toBe(true)
+  return caminho
+}
+
+/** Ha `mkfifo` nesta maquina? Conferido uma vez, com um FIFO de verdade numa pasta temporaria. */
+const TEM_MKFIFO = (() => {
+  const pasta = fs.mkdtempSync(path.join(os.tmpdir(), 'probe-fifo-'))
+  try {
+    execFileSync('mkfifo', [path.join(pasta, 'tubo')], { stdio: 'ignore' })
+    return true
+  } catch {
+    return false
+  } finally {
+    fs.rmSync(pasta, { recursive: true, force: true })
+  }
+})()
 
 describe('teto de 1 MB', () => {
   // 600 mil caracteres acentuados: o `length` passa (600 mil unidades de codigo) e o tamanho em
@@ -176,4 +221,45 @@ describe('lerImportado', () => {
       mensagem: 'O arquivo não é um JSON válido.',
     })
   })
+})
+
+describe('a abertura que não bloqueia (O_NONBLOCK), com um FIFO de verdade', () => {
+  /**
+   * O prazo de cada caso. Sem a flag o `open` de um FIFO sem escritor NUNCA responde, entao o caso
+   * tem de FALHAR pelo prazo — e nao travar a suite esperando para sempre. Um diretorio e o
+   * `/dev/zero` (os casos antigos de "arquivo nao comum") nao bloqueiam no `open`: com eles, tirar
+   * `O_NONBLOCK` de `FLAGS_LEITURA` deixava o arquivo inteiro verde.
+   */
+  const PRAZO = 3000
+
+  it.skipIf(!TEM_MKFIFO)(
+    'lerProgresso responde quando o progresso guardado é um FIFO sem escritor',
+    async () => {
+      // Medido no processo principal: sem a flag ele ficava parado no `anon_pipe_read` — o painel
+      // em "carregando o progresso", o `app.close()` sem voltar e o processo vivo aos 625 s (morto
+      // so com `kill -9`). O tubo nao tem escritor nenhum, entao `open(caminho, 'r')` espera um
+      // para sempre; com a flag a abertura responde na hora e o `fstat` do descritor recusa o que
+      // nao e arquivo comum.
+      const fifo = conferirQueEFifo(criarFifo('progresso.json'))
+
+      await expect(comPrazo(lerProgresso(), PRAZO)).rejects.toThrow('não é um arquivo comum')
+      expect(fifo).toBe(caminhoDoProgresso())
+    },
+    10_000,
+  )
+
+  it.skipIf(!TEM_MKFIFO)(
+    'lerImportado responde quando o arquivo escolhido é um FIFO sem escritor',
+    async () => {
+      // O mesmo na importacao, onde o `open` acontecia ANTES do `fstat` que recusa FIFO: o handler
+      // do IPC ficava sem resposta, e a tela, sem retorno nenhum.
+      const fifo = conferirQueEFifo(criarFifo('importado.json'))
+
+      expect(await comPrazo(lerImportado(fifo), PRAZO)).toEqual({
+        estado: 'erro',
+        mensagem: 'O arquivo não é um arquivo comum.',
+      })
+    },
+    10_000,
+  )
 })

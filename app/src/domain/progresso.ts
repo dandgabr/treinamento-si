@@ -3,8 +3,10 @@
 
 import {
   criarEstado,
+  DEMOTAO,
   filaDeHoje,
   registrarRevisao,
+  SEQUENCIA_DIAS,
   ULTIMO_INTERVALO_DIAS,
   type EstadoRevisao,
 } from './srs'
@@ -182,10 +184,13 @@ function comTema(
   agora: Date,
   alterar: (t: TemaProgresso) => TemaProgresso,
 ): Progresso {
-  const existente = p.temas[ref]
-  const atual = existente ?? temaVazio(ref, agora)
+  const atual = p.temas[ref] ?? temaVazio(ref, agora)
   const proximo = alterar(atual)
-  if (proximo === atual && existente) return p
+  // Nada mudou: devolve o estado anterior intacto. A guarda vale TAMBEM para o tema novo — sem
+  // ela, um redutor que e no-op sobre o tema vazio (como `abrirPassagem`, cujo veredito ja e
+  // `null`) CRIARIA o tema, inflando `diasComEstudo` com uma passagem que nao existiu. O tema so
+  // nasce quando o redutor muda algo nele.
+  if (proximo === atual) return p
   return registrarDiaAtivo({ ...p, temas: { ...p.temas, [ref]: proximo } }, agora)
 }
 
@@ -201,6 +206,11 @@ export function registrarConfianca(
   confianca: Confianca,
   agora: Date,
 ): Progresso {
+  // Mesma régua dos vizinhos (`registrarDiagnostico`, `registrarRespostaDeCheckpoint`): índice
+  // que não descreve item — negativo ou fracionário — é recusado, e chave perigosa não vira campo
+  // do estado. Antes `1.5` era gravado e o próximo carregamento o descartava (a tela perdia o
+  // item), enquanto `-3` sobrevivia.
+  if (!ref || CHAVES_RECUSADAS.has(ref) || !Number.isInteger(indice) || indice < 0) return p
   return comTema(p, ref, agora, (t) => {
     if (t.preTeste.find((r) => r.indice === indice)?.confianca === confianca) return t
     const outros = t.preTeste.filter((r) => r.indice !== indice)
@@ -451,14 +461,20 @@ function ehDataIso(v: unknown): v is string {
 const CHAVES_RECUSADAS = new Set(['__proto__', 'constructor', 'prototype'])
 
 /**
- * Teto de sanidade do intervalo agendado: o ultimo degrau da escada (`ULTIMO_INTERVALO_DIAS`).
+ * Os intervalos que a escada de revisao de fato produz.
  *
- * Nao e um numero solto de "dez anos": a escada do app so agenda 1, 7, 30 e 90 — o acerto sobe
- * por esses degraus, o erro so rebaixa e o consolidado para em 90 —, entao um intervalo maior
- * nao descreve estudo nenhum. O D+3000 vinha de arquivo de fora e esconderia o tema da fila por
- * oito anos; o teto o recusa como recusa o intervalo negativo ou nao finito.
+ * Nao basta ser inteiro em (0, 90]: o escalonador so agenda estes degraus — a sequencia do tema
+ * (`SEQUENCIA_DIAS`: 1, 7, 30), o degrau das trilhas (`ULTIMO_INTERVALO_DIAS`: 90) e os
+ * rebaixamentos por erro (`DEMOTAO`: 1, 3, 7, 30) —, entao 2, 31, 45 ou 89 nao descrevem estudo
+ * nenhum. O `45` de um arquivo de fora sobrevivia a carga e a tela dizia "D+45" sem tarefa
+ * tabelada; recusado, o tema volta ao estado inicial, como o D+3000. Os degraus legitimos passam
+ * um a um (o D+3 do rebaixamento, inclusive).
  */
-const TETO_DIAS = ULTIMO_INTERVALO_DIAS
+const INTERVALOS_DA_ESCADA = new Set<number>([
+  ...SEQUENCIA_DIAS,
+  ...Object.values(DEMOTAO),
+  ULTIMO_INTERVALO_DIAS,
+])
 
 /**
  * Folga da janela de sanidade da data agendada, em dias em volta de "agora".
@@ -488,13 +504,11 @@ function normalizarRevisao(valor: unknown, ref: string, agora: Date): EstadoRevi
   const brutoIntervalo = r.intervaloDias
   // Mesma regua dos contadores vizinhos (`rebaixamentos`, `passagens`, `falhasSeguidas`): so
   // inteiro. Antes bastava finito e positivo, e um `1e-300` de arquivo de fora passava e virava
-  // "Próxima revisão em D+1e-300" na tela; `1.5` tambem. O `> 0` continua barrando o zero, e o
-  // teto (`ULTIMO_INTERVALO_DIAS`) barra o D+3000 — valores que o escalonador nunca produz, e
-  // por isso recusados em vez de adivinhados: o tema volta ao estado inicial.
+  // "Próxima revisão em D+1e-300" na tela; `1.5` tambem. Agora so os degraus que o escalonador
+  // produz entram: 2, 31 ou 45 nao descrevem estudo nenhum, e o tema volta ao estado inicial em
+  // vez de a tela mostrar "D+45" sem tarefa tabelada.
   const intervalo =
-    numeroFinito(brutoIntervalo, TETO_DIAS) &&
-    Number.isInteger(brutoIntervalo) &&
-    brutoIntervalo > 0
+    typeof brutoIntervalo === 'number' && INTERVALOS_DA_ESCADA.has(brutoIntervalo)
       ? brutoIntervalo
       : null
   const quando = dataPlausivel(r.proximaRevisao, agora) ? r.proximaRevisao : null

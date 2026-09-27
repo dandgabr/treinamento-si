@@ -80,3 +80,27 @@ linux:
   target:
     - target: AppImage
       arch: [x64]
+
+  # O sandbox do Chromium no Linux — o que foi MEDIDO nesta máquina, e o que dá para fazer sem
+  # quebrar o AppImage.
+  #
+  # `stat -c '%a' instalador/linux-unpacked/chrome-sandbox` dá 755, e o binário DENTRO do AppImage
+  # também: o squashfs não sustenta setuid (o ponto de montagem é FUSE, `nosuid`) e o auxiliar
+  # precisaria de dono root + 4755 para valer — um AppImage de usuário não consegue nenhum dos
+  # dois. Forçar o 4755 sem o dono root é pior que não fazer nada: o Chromium ABORTA quando o
+  # auxiliar parece setuid e não está configurado.
+  #
+  # Sem o auxiliar, o Chromium cai no sandbox de user namespace — que funciona onde os namespaces
+  # não privilegiados existem (medido: sem `--no-sandbox`, o log traz `Activated seccomp-bpf
+  # sandbox for process type: renderer`). O que estraga é o `.desktop` gerado: com o toolset
+  # legado do AppImage (o padrão, `toolsets.appimage` ausente), o `AppImageTarget` põe
+  # `Exec=AppRun --no-sandbox %U` fixo — e o AppRun nem chega a fazer a própria conferência
+  # (`unshare -Ur true`, que existe no template dele para acrescentar a flag SÓ quando os
+  # namespaces faltam). Medido no `.desktop` extraído do AppImage: `Exec=AppRun --no-sandbox %U`.
+  #
+  # A alavanca, se a decisão for reaberta: `appImage: { executableArgs: [] }` — o `.desktop`
+  # vira `Exec=AppRun %U` e a escolha volta para o tempo de execução, com o fail-safe do AppRun
+  # (distro sem user namespaces continua abrindo, com a flag). NÃO foi feito nesta rodada: a
+  # Pendência 7 do README manda medir em Ubuntu 24.04/AppArmor antes de mexer, e essa distro não
+  # existe aqui. O conserto definitivo continua sendo `.deb`/`.rpm`, onde a instalação aplica dono
+  # root + 4755 no auxiliar (bloqueado pelo `fpm` sem `libcrypt.so.1` no Fedora 44 — ver acima).

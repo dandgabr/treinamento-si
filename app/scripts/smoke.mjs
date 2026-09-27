@@ -18,6 +18,9 @@ import { fileURLToPath } from 'node:url'
 import { promisify } from 'node:util'
 import { JSDOM } from 'jsdom'
 import { chromium } from 'playwright'
+// A expectativa de diagrama sai do HTML do documento — e nao da lista `mermaid` — pelo mesmo
+// motivo que o resto da matriz sai do conteudo: a extracao nao registra o diagrama do intro.
+import { conferirDiagramas, diagramasDoDocumento, SELETOR_DESENHO } from './lib/diagramas-do-conteudo.mjs'
 import { fontesMaisNovas } from './lib/frescor.mjs'
 // A MESMA regra de rota que o portao do build usa (`validar-content.ts` importa este modulo):
 // enquanto a gramatica vivia nos dois arquivos, o primeiro ajuste em um deles reprovava o que o
@@ -84,7 +87,10 @@ const cenarios = [
       ['um unico h1', d.querySelectorAll('h1').length, 1],
       ['intro exibido', (d.querySelector('.intro')?.textContent ?? '').includes('Três escopos'), true],
       ['secoes renderizadas', d.querySelectorAll('.secao').length > 5, true],
-      ['diagrama mermaid', d.querySelectorAll('.mermaid svg').length >= 1, true],
+      // `SELETOR_DESENHO` e nao `.mermaid svg`: o Mermaid desenha uma CAIXA DE ERRO (um `svg` com
+      // `aria-roledescription="error"`) quando o texto nao interpreta, e `>= 1` ficava verdadeiro
+      // com o aluno vendo "Syntax error in text" no lugar do diagrama.
+      ['diagrama mermaid', d.querySelectorAll(SELETOR_DESENHO).length >= 1, true],
       ['pre-teste renderizado', d.querySelectorAll('.bloco-pre-teste').length, 1],
       [
         'botoes de confianca por item',
@@ -157,7 +163,7 @@ const cenarios = [
       ],
       ['veredictos por item existem', d.querySelectorAll('.bloco-qa .veredicto-item').length > 0, true],
       ['criterio visivel', texto(d, 'main').includes('Critério para seguir adiante'), true],
-      ['diagrama do guia', d.querySelectorAll('.mermaid svg').length >= 1, true],
+      ['diagrama do guia', d.querySelectorAll(SELETOR_DESENHO).length >= 1, true],
       [
         'situacao da area com a regua',
         texto(d, '.situacao').includes('firme é o tema cuja última recuperação'),
@@ -231,7 +237,7 @@ const cenarios = [
     checar: (d) => [
       ['titulo', d.querySelector('h1')?.textContent, 'Plano de estudo — 90 dias'],
       ['secoes renderizadas', d.querySelectorAll('.secao').length >= 6, true],
-      ['diagrama mermaid', d.querySelectorAll('.mermaid svg').length >= 1, true],
+      ['diagrama mermaid', d.querySelectorAll(SELETOR_DESENHO).length >= 1, true],
       ['links internos resolvem (invalidos)', hrefsInvalidos(d).length, 0],
     ],
   },
@@ -241,6 +247,9 @@ const cenarios = [
  * Uma rota por area, uma por pagina e um tema por area, tiradas do proprio conteudo.
  * O smoke antigo visitava 7 rotas de ~150: um defeito de render especifico de um tema
  * so aparecia se alguem escolhesse aquela rota a mao.
+ *
+ * Cada rota leva junto quantos diagramas Mermaid o documento dela tem de mostrar: e a expectativa
+ * com que a matriz confere o `svg` desenhado (`conferirDiagramas`).
  */
 function rotasDaMatriz() {
   const c = conteudo()
@@ -249,18 +258,28 @@ function rotasDaMatriz() {
   // por isso o defeito de foco ao avancar questao (o foco caia no `body`) so apareceu numa
   // revisao manual. Os tres escopos entram: `#/quiz` (todas as areas), `#/quiz/<areaId>` e
   // `#/quiz/<areaId>/<temaId>`.
-  rotas.push({ nome: 'quiz', rota: '#/quiz' })
+  rotas.push({ nome: 'quiz', rota: '#/quiz', diagramas: 0 })
   for (const a of c.areas) {
-    rotas.push({ nome: `area ${a.areaId}`, rota: `#/area/${a.areaId}` })
-    rotas.push({ nome: `quiz ${a.areaId}`, rota: `#/quiz/${a.areaId}` })
+    rotas.push({ nome: `area ${a.areaId}`, rota: `#/area/${a.areaId}`, diagramas: diagramasDoDocumento(a.guia) })
+    rotas.push({ nome: `quiz ${a.areaId}`, rota: `#/quiz/${a.areaId}`, diagramas: 0 })
     const primeiro = (a.temas ?? [])[0]
     if (primeiro) {
       const [areaId, temaId] = primeiro.split('#')
-      rotas.push({ nome: `tema ${primeiro}`, rota: `#/tema/${areaId}/${temaId}` })
-      rotas.push({ nome: `quiz do tema ${primeiro}`, rota: `#/quiz/${areaId}/${temaId}` })
+      rotas.push({
+        nome: `tema ${primeiro}`,
+        rota: `#/tema/${areaId}/${temaId}`,
+        diagramas: diagramasDoDocumento(c.temas[primeiro]),
+      })
+      rotas.push({ nome: `quiz do tema ${primeiro}`, rota: `#/quiz/${areaId}/${temaId}`, diagramas: 0 })
     }
   }
-  for (const p of c.paginas) rotas.push({ nome: `pagina ${p.slug}`, rota: `#/pagina/${p.slug}` })
+  for (const p of c.paginas) {
+    rotas.push({
+      nome: `pagina ${p.slug}`,
+      rota: `#/pagina/${p.slug}`,
+      diagramas: diagramasDoDocumento(p),
+    })
+  }
   return rotas
 }
 
@@ -699,7 +718,7 @@ async function cenarioDoGlossario() {
 
 // A matriz entra depois das declaracoes: `conteudo()` le `conteudoCache`, declarado
 // depois das tabelas, e chamar antes da inicializacao daria ReferenceError.
-for (const { nome, rota } of rotasDaMatriz()) {
+for (const { nome, rota, diagramas } of rotasDaMatriz()) {
   cenarios.push({
     nome,
     rota,
@@ -713,6 +732,11 @@ for (const { nome, rota } of rotasDaMatriz()) {
       ['sem erro de rota', RE_ROTA_VAZIA.test(textoSemScripts(d)), false],
       ['sem aviso de erro', d.querySelectorAll('.aviso-erro').length, 0],
       ['links internos resolvem (invalidos)', hrefsInvalidos(d).length, 0],
+      // O diagrama por rota: `mermaid.run` roda com `suppressErrors: true`, entao o diagrama
+      // quebrado NAO deixa `svg` nem aviso — o div fica com o texto cru na tela. Sem esta
+      // asserção, so tres rotas provavam um `svg`, e as outras 70 nao distinguiam "desenhou" de
+      // "nao desenhou". A expectativa sai do HTML do proprio documento (`diagramas`).
+      ...conferirDiagramas(d, diagramas),
     ],
   })
 }
@@ -808,6 +832,18 @@ for (const pagina of conteudo().paginas.filter((p) => p.trilha)) {
       ['o conteudo da trilha tem fases', fases.length > 0, true],
       ['o conteudo da trilha tem itens de pre-teste', itens > 0, true],
       ['o conteudo da trilha tem faixas de acertos', faixas > 0, true],
+      // A mesma guarda para as duas pontas do checklist: uma trilha cujas fases nao ligassem area
+      // nenhuma, ou um guia que perdesse a tabela da §8, zerava os DOIS lados da comparacao de
+      // caixas (`checklistDoDom` contra `checklistEsperado`) e o cenario passava sem conferir
+      // checklist nenhum — o aluno perderia a lista de artefatos em silencio. O portao do
+      // content.json cobra a tabela; aqui a leitura e do conteudo que a matriz usa, e nomeia a
+      // area que perdeu o checklist.
+      ['o conteudo da trilha liga areas as fases', donas.size > 0, true],
+      [
+        'as areas do checklist declaram atividades no material',
+        [...donas.keys()].filter((areaId) => !atividadesDoGuia(porArea.get(areaId)?.guia).length).join(', '),
+        '',
+      ],
       // A secao 3 do material: uma `<div class="fase">` por linha da tabela de fases.
       ['fases da secao 3 renderizadas', d.querySelectorAll('.fase').length, fases.length],
       // O bloco do pre-teste, com um item por item do material e a tabela das faixas.

@@ -279,6 +279,26 @@ describe('a tela', () => {
     }
   })
 
+  it('quando a consulta casa com todo o material, diz isso em vez de "N de N"', async () => {
+    render(<Glossario estrutura={ler()} escuro={false} />)
+    const campo = screen.getByLabelText('Buscar termo')
+    const total = document.querySelectorAll('.verbete').length
+    expect(total).toBeGreaterThan(0)
+
+    // "e" é uma letra que TODO verbete contém — o casamento é por pedaço de palavra, e é decisão
+    // pinada no teste "acha por pedaço de palavra" (não é para "consertar"). Aqui o botão de limpar
+    // aparece (há consulta digitada) e a lista não encolhe: a contagem dizia "78 de 78 termos e
+    // siglas", que é um filtro que não filtrou nada anunciado como se tivesse — a contradição com o
+    // botão, de novo, só que do outro lado.
+    await userEvent.type(campo, 'e')
+
+    expect(document.querySelectorAll('.verbete').length).toBe(total)
+    expect(screen.getByRole('button', { name: 'Limpar busca' })).toBeTruthy()
+    expect(contagem()).toBe(
+      `Todos os ${total} termos e siglas continuam na lista: “e” não deixou nenhum de fora.`,
+    )
+  })
+
   it('quando nada casa, avisa em vez de mostrar uma lista vazia em silêncio', async () => {
     render(<Glossario estrutura={ler()} escuro={false} />)
     const total = document.querySelectorAll('.verbete').length

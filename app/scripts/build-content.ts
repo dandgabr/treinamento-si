@@ -25,6 +25,20 @@ const OUT_FILE =
 
 const { conteudo, links } = gerarComRelatorio(CONTENT_DIR)
 
+// Defeito de link PARA o build, e nao so para o `check:content`.
+//
+// `npm run dev` e `build:content && vite`, sem a conferencia: enquanto o defeito so era impresso
+// aqui, o link morto (um `href` protocol-relative em HTML cru, um fragmento que nao e rota)
+// chegava a tela de quem rodava o dev. O codigo de saida e o unico sinal que o `&&` do npm le.
+if (links.erros.length) {
+  for (const defeito of links.erros) console.error(`DEFEITO  ${defeito}`)
+  console.error(
+    `\n${links.erros.length} defeito(s) de link no material — o content.json NAO foi regravado. ` +
+      `O app nao monta href que nao seja rota, ancora da propria pagina ou endereco externo.`,
+  )
+  process.exit(1)
+}
+
 fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true })
 fs.writeFileSync(OUT_FILE, JSON.stringify(conteudo), 'utf-8')
 

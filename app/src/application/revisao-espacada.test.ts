@@ -107,6 +107,32 @@ describe('textoDaCelula', () => {
     expect(textoDaCelula('linha\n   quebrada')).toBe('linha quebrada')
     expect(textoDaCelula('&#xZZ;')).toBe('&#xZZ;')
   })
+
+  it('decodifica a entidade numérica decimal', () => {
+    expect(textoDaCelula('&#65;')).toBe('A')
+    expect(textoDaCelula('A &amp; B &#233; C')).toBe('A & B é C')
+  })
+
+  it('decodifica a entidade numérica hexadecimal', () => {
+    // A forma hexadecimal (`&#x27;`) não era lida: ficava literal e não casava com o texto que a
+    // célula descreve, em silêncio.
+    expect(textoDaCelula('&#x27;')).toBe("'")
+    expect(textoDaCelula('&#X41;')).toBe('A')
+  })
+
+  it('não estoura com ponto de código fora do Unicode e mantém a entidade literal', () => {
+    // `&#1114112;` é maior que U+10FFFF: `String.fromCodePoint` lançava `RangeError: Invalid code
+    // point` e derrubava a extração da §11 inteira, em vez de degradar.
+    expect(() => textoDaCelula('&#1114112;')).not.toThrow()
+    expect(textoDaCelula('&#1114112;')).toBe('&#1114112;')
+    expect(textoDaCelula('antes &#99; depois')).toBe('antes c depois')
+  })
+
+  it('mantém literal a entidade nomeada que não conhece', () => {
+    // A tabela cobre só as entidades que o HTML do material usa: uma entidade fora dela fica
+    // literal, em vez de virar string vazia e apagar o trecho da célula.
+    expect(textoDaCelula('A &foo; B')).toBe('A &foo; B')
+  })
 })
 
 describe('primeiraTabela', () => {
@@ -128,6 +154,13 @@ describe('primeiraTabela', () => {
     // Linha com número de células diferente do cabeçalho é descartada, e sem nenhuma linha
     // válida não há tabela.
     expect(primeiraTabela('<table><tr><th>a</th><th>b</th></tr><tr><td>1</td></tr></table>')).toBeNull()
+  })
+
+  it('devolve null com a tabela sem cabeçalho ou sem linha nenhuma', () => {
+    // `<table>` vazio, ou com `<tr>` sem célula, não tem cabeçalho; sem coluna não há registro, e
+    // a casca vazia empurraria a checagem para quem chama.
+    expect(primeiraTabela('<table></table>')).toBeNull()
+    expect(primeiraTabela('<table><tr></tr><tr><td>1</td></tr></table>')).toBeNull()
   })
 })
 
@@ -175,6 +208,22 @@ describe('tarefasDaRevisao', () => {
       temaDeConteudo({ secoes: [{ numero: 11, titulo: 'Revisão espaçada', html }] }),
     )
     expect(tarefas.map((t) => t.intervaloDias)).toEqual([1])
+  })
+
+  it('lê a tabela da §11 que não tem a coluna "Se errar"', () => {
+    // A terceira coluna é do material e pode faltar numa revisão: a tarefa continua valendo com o
+    // "se errar" vazio, em vez de a linha sair ou o campo pegar o texto da coluna vizinha.
+    const html =
+      '<table><tr><th>Intervalo</th><th>O que fazer</th></tr>' +
+      '<tr><td>D+1</td><td>Responder à seção 10 sem reler</td></tr>' +
+      '<tr><td>D+7</td><td>Explicar o tema em 3 frases</td></tr></table>'
+    const tarefas = tarefasDaRevisao(
+      temaDeConteudo({ secoes: [{ numero: 11, titulo: 'Revisão espaçada', html }] }),
+    )
+    expect(tarefas).toEqual([
+      { intervaloDias: 1, oQueFazer: 'Responder à seção 10 sem reler', seErrar: '' },
+      { intervaloDias: 7, oQueFazer: 'Explicar o tema em 3 frases', seErrar: '' },
+    ])
   })
 })
 
@@ -226,7 +275,9 @@ describe('filaComTarefas', () => {
       AGORA,
     )
     expect(fila[0]?.releituraCompleta).toBe(true)
-    expect(fila[0]?.falhasSeguidas).toBe(2)
+    // O item não carrega mais `falhasSeguidas`/`passagens`/`rebaixamentos`: a tela lia o estado
+    // pela revisão do próprio tema (`tema.revisao.*`), e o único campo derivado dela que a fila
+    // expõe é `releituraCompleta`, já conferido acima.
     // O intervalo rebaixado (D+3) não tem tarefa tabelada: o item continua na fila, sem
     // exercício declarado.
     expect(fila[0]?.tarefa).toBeNull()
@@ -293,5 +344,21 @@ describe('filaComTarefas', () => {
     )
     expect(fila[0]?.titulo).toBe('a#TEMA-09')
     expect(fila[0]?.tarefa).toBeNull()
+  })
+
+  it('o item da fila não carrega campos de revisão que ninguém lê', () => {
+    // `passagens`, `rebaixamentos` e `falhasSeguidas` eram produzidos aqui e não tinham leitor: a
+    // tela mostra o placar pela revisão do PRÓPRIO tema (`tema.revisao.*`), e da revisão o item só
+    // expõe o que a fila decide (`releituraCompleta`). Reproduzi-los seria manter um segundo
+    // contrato sem consumidor.
+    const fila = filaComTarefas(
+      comTema(REF, { intervaloDias: 3, falhasSeguidas: 2, rebaixamentos: 2, passagens: 3, proximaRevisao: '2026-03-10T11:00:00.000Z' }),
+      TEMAS,
+      AGORA,
+    )
+    const item = fila[0]!
+    expect(item).not.toHaveProperty('passagens')
+    expect(item).not.toHaveProperty('rebaixamentos')
+    expect(item).not.toHaveProperty('falhasSeguidas')
   })
 })

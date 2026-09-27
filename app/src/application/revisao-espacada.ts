@@ -31,7 +31,7 @@ export const SECAO_REVISAO_ESPACADA = 11
 const RE_TABELA_GLOBAL = /<table\b[^>]*>([\s\S]*?)<\/table>/gi
 const RE_LINHA = /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi
 const RE_CELULA = /<t[hd]\b[^>]*>([\s\S]*?)<\/t[hd]>/gi
-const RE_ENTIDADE = /&(#[0-9]+|[a-zA-Z]+);/g
+const RE_ENTIDADE = /&(#[0-9]+|#[xX][0-9a-fA-F]+|[a-zA-Z]+);/g
 
 const ENTIDADES: Record<string, string> = {
   amp: '&',
@@ -51,8 +51,17 @@ export function textoDaCelula(html: string): string {
     .replace(/<[^>]*>/g, '')
     .replace(RE_ENTIDADE, (todo, codigo: string) => {
       if (codigo.startsWith('#')) {
-        const ponto = Number(codigo.slice(1))
-        return Number.isFinite(ponto) ? String.fromCodePoint(ponto) : todo
+        // Decimal (`&#65;`) e hexadecimal (`&#x27;`), as duas formas do HTML. O decimal era a
+        // unica lida: `&#x27;` ficava literal e nao casava com o texto, em silencio.
+        const hexadecimal = codigo[1] === 'x' || codigo[1] === 'X'
+        const ponto = hexadecimal
+          ? Number.parseInt(codigo.slice(2), 16)
+          : Number(codigo.slice(1))
+        // Ponto de codigo fora de U+0000..U+10FFFF nao existe: `String.fromCodePoint` lancaria
+        // `RangeError` e derrubaria a leitura da secao INTEIRA (`&#1114112;`, maior que 0x10FFFF).
+        // A entidade desconhecida fica literal, como qualquer outra que nao saibamos resolver.
+        if (!Number.isInteger(ponto) || ponto < 0 || ponto > 0x10ffff) return todo
+        return String.fromCodePoint(ponto)
       }
       return ENTIDADES[codigo] ?? todo
     })
@@ -122,9 +131,6 @@ export interface ItemDaFila {
   intervaloDias: number
   /** A data da cobrança, que é a data que a tela mostra. */
   cobranca: string
-  passagens: number
-  rebaixamentos: number
-  falhasSeguidas: number
   /** Duas passagens falhas seguidas: o material manda o tema para releitura completa. */
   releituraCompleta: boolean
   /** true quando o item entrou na fila pela etapa final, depois de cumprir a escada. */
@@ -154,9 +160,6 @@ export function filaComTarefas(
       titulo: tema?.titulo ?? estado.ref,
       intervaloDias,
       cobranca: proximaCobranca(estado).toISOString(),
-      passagens: estado.passagens,
-      rebaixamentos: estado.rebaixamentos,
-      falhasSeguidas: estado.falhasSeguidas,
       releituraCompleta: precisaReleituraCompleta(estado),
       consolidado: estado.consolidado,
       tarefa: tema ? tarefaDoTema(tema, intervaloDias) : null,

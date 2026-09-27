@@ -7,7 +7,15 @@
 import { app, BrowserWindow, Menu, dialog, ipcMain, protocol, shell } from 'electron'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { apagarProgresso, gravarProgresso, lerImportado, lerProgresso } from './progresso'
+import {
+  apagarProgresso,
+  FLAGS_LEITURA,
+  gravarProgresso,
+  lerImportado,
+  lerProgresso,
+  MENSAGEM_GRANDE,
+  serializarConferido,
+} from './progresso'
 
 // O desktop usa o build proprio (`vite.desktop.config.ts`), com arquivos separados: o
 // conteudo e um JSON ao lado do HTML e os diagramas sao chunks. O build do navegador
@@ -15,7 +23,14 @@ import { apagarProgresso, gravarProgresso, lerImportado, lerProgresso } from './
 const RENDERER = path.join(__dirname, '..', 'dist-desktop')
 const ESQUEMA = 'app'
 const ORIGEM = `${ESQUEMA}://bundle`
-const DESENVOLVIMENTO = process.env.ROADMAP_DEV === '1'
+// Desenvolvimento exige DUAS coisas: a variavel de ambiente E nao estar empacotado.
+//
+// So a variavel — que era o caso — deixava o item de menu "Ferramentas de desenvolvedor"
+// aparecer no binario de PRODUCAO: uma variavel de ambiente comum, que fuse nenhum protege,
+// reabria a superficie que os fuses fecham (o DevTools le e escreve tudo o que a janela tem, e
+// da acesso ao `require` do processo de renderizacao quando ele nao esta em sandbox). `app.isPackaged`
+// e o que o empacotamento controla, e nao o ambiente de quem abre o aplicativo.
+const DESENVOLVIMENTO = process.env.ROADMAP_DEV === '1' && !app.isPackaged
 
 // O bundle dividido liberou o aperto que o arquivo unico impedia: sem script inline nao ha
 // por que aceitar 'unsafe-inline', e `connect-src 'self'` basta para o `conteudo.json` —
@@ -122,17 +137,34 @@ function registrarProtocolo(): void {
       if (real !== raiz && !real.startsWith(raiz + path.sep)) {
         return new Response('nao encontrado', { status: 404 })
       }
-      const corpo = await fs.readFile(real)
-      return new Response(corpo, {
-        headers: {
-          // O tipo vem do caminho REAL: se um nome do build for um symlink para outro arquivo
-          // do build, o que se serve e o alvo, e o `nosniff` abaixo nao perdoa o rotulo errado.
-          'Content-Type': TIPOS[path.extname(real)] ?? 'application/octet-stream',
-          'Content-Security-Policy': CSP,
-          'X-Content-Type-Options': 'nosniff',
-          'Cache-Control': 'no-store',
-        },
-      })
+      // Abrir e LER pelo mesmo descritor, conferindo o que ele e antes de ler.
+      //
+      // `fs.readFile(real)` sobre um FIFO com nome permitido dentro do build
+      // (`dist-desktop/assets/tubo.js`, por exemplo) NUNCA resolve: a requisição fica pendurada
+      // para sempre e o handler sem resposta — medido. Com `O_NONBLOCK` a abertura responde, e o
+      // `fstat` no descritor diz que não é um arquivo comum: 404, e o pedido termina.
+      //
+      // A conferência é no descritor, e não no caminho, pelo mesmo motivo do `lerImportado`: o
+      // caminho pode ser trocado por symlink entre uma consulta e outra.
+      const arquivo = await fs.open(real, FLAGS_LEITURA)
+      try {
+        if (!(await arquivo.stat()).isFile()) {
+          return new Response('nao encontrado', { status: 404 })
+        }
+        const corpo = await arquivo.readFile()
+        return new Response(corpo, {
+          headers: {
+            // O tipo vem do caminho REAL: se um nome do build for um symlink para outro arquivo
+            // do build, o que se serve e o alvo, e o `nosniff` abaixo nao perdoa o rotulo errado.
+            'Content-Type': TIPOS[path.extname(real)] ?? 'application/octet-stream',
+            'Content-Security-Policy': CSP,
+            'X-Content-Type-Options': 'nosniff',
+            'Cache-Control': 'no-store',
+          },
+        })
+      } finally {
+        await arquivo.close()
+      }
     } catch {
       // URL malformada (`app://bundle/%` dispara URIError no decode) e arquivo ausente
       // caem aqui, em vez de rejeitar a promise do handler.
@@ -243,18 +275,95 @@ function criarJanela(): BrowserWindow {
   return janela
 }
 
-function registrarCanais(): void {
-  ipcMain.handle('app:versao', () => app.getVersion())
+/**
+ * Diz se quem mandou a mensagem e o quadro principal da NOSSA janela, servido pelo `app://bundle`.
+ *
+ * Sem esta conferencia, qualquer `webContents` que um dia exista neste processo fala com todos os
+ * canais: hoje ha uma janela e nenhum conteudo remoto, mas a superficie nasce no dia em que houver
+ * um segundo `webContents` (uma janela nova, um `webview` que alguem religue, um iframe de
+ * conteudo de terceiro). Quem confere a origem pelo lado de QUEM RECEBE nao depende de todas as
+ * outras travas continuarem certas.
+ *
+ * `senderFrame` (e nao `sender`): o `sender` e o `webContents` inteiro, e um quadro dentro dele
+ * passaria por qualquer conferencia feita sobre o `webContents`. `parent === null` exige o quadro
+ * principal — um iframe tambem esta dentro do nosso `webContents`, e nao e a tela do aplicativo.
+ */
+function origemAutorizada(evento: Electron.IpcMainInvokeEvent): boolean {
+  try {
+    const quadro = evento.senderFrame
+    // `null` quando o quadro ja foi destruido. O acesso a `senderFrame` de um quadro destruido
+    // estoura em vez de devolver `null`, e por isso a leitura esta dentro do `try`.
+    if (!quadro || quadro.parent !== null) return false
+    const url = new URL(quadro.url)
+    // A mesma origem que o `loadURL` usa e que a CSP nomeia: `app://bundle`. O caminho e o hash
+    // da rota mudam; a origem, nao.
+    return url.protocol === `${ESQUEMA}:` && url.host === 'bundle'
+  } catch {
+    return false
+  }
+}
 
-  ipcMain.handle('progresso:ler', () => lerProgresso())
-  ipcMain.handle('progresso:gravar', async (_evento, valor: unknown) => {
-    // O renderer e validado la (normalizador); aqui so se recusa o que nem objeto e.
-    if (!valor || typeof valor !== 'object') throw new Error('progresso invalido')
+/** A conferencia minima de forma, a MESMA para gravar e para exportar. */
+function conferirFormaDoProgresso(valor: unknown): void {
+  // O renderer normaliza campo a campo antes de mandar (`src/domain/progresso.ts`); aqui so se
+  // recusa o que nem objeto e.
+  if (!valor || typeof valor !== 'object') throw new Error('progresso invalido')
+}
+
+/**
+ * Registra um canal do IPC passando pela conferencia do remetente.
+ *
+ * Todos os canais entram por aqui, e nao por `ipcMain.handle` direto: a conferencia de origem
+ * deixa de ser uma linha que cada handler novo precisa lembrar de escrever — um canal registrado
+ * sem ela seria indistinguivel dos outros na leitura.
+ */
+function canal(
+  nome: string,
+  acao: (evento: Electron.IpcMainInvokeEvent, valor?: unknown) => unknown,
+): void {
+  ipcMain.handle(nome, async (evento, valor?: unknown) => {
+    if (!origemAutorizada(evento)) throw new Error('origem nao autorizada')
+    return await acao(evento, valor)
+  })
+}
+
+/**
+ * Registra os canais do IPC no `ipcMain`.
+ *
+ * Exportada para o teste (`scripts/protocolo-app.test.ts`): enquanto ela era privada, o duble do
+ * `ipcMain.handle` engolia a funcao registrada e o CORPO de cada handler — a conferencia de origem
+ * e o teto do exportar — nunca rodava em teste nenhum. Com a exportacao, o teste chama o handler
+ * de verdade, com o `senderFrame` que monta. Nada mais muda: quem chama continua sendo o
+ * `app.whenReady()`.
+ */
+export function registrarCanais(): void {
+  canal('app:versao', () => app.getVersion())
+
+  canal('progresso:ler', () => lerProgresso())
+  canal('progresso:gravar', async (_evento, valor) => {
+    conferirFormaDoProgresso(valor)
     await gravarProgresso(valor)
   })
-  ipcMain.handle('progresso:apagar', () => apagarProgresso())
+  canal('progresso:apagar', () => apagarProgresso())
 
-  ipcMain.handle('progresso:exportar', async (_evento, valor: unknown) => {
+  canal('progresso:exportar', async (_evento, valor) => {
+    // A mesma conferencia minima de forma do `gravar`: aqui o valor vai direto para o disco, sem
+    // passar por normalizador nenhum (o do renderer fica la). Antes esta porta escrevia o que
+    // recebesse — inclusive o que nao e um progresso.
+    conferirFormaDoProgresso(valor)
+    // O teto e conferido ANTES do dialogo, e sobre o texto indentado que vai ser escrito: nao
+    // adianta pedir um caminho para, no fim, recusar o conteudo — e o arquivo exportado acima do
+    // teto e um arquivo que o `importar` recusa (importar e gravar tem o mesmo teto). Mesmo teto
+    // e mesma mensagem do `gravar`, pela mesma funcao.
+    let texto: string
+    try {
+      texto = serializarConferido(valor, 2)
+    } catch (erro) {
+      return {
+        estado: 'erro',
+        mensagem: erro instanceof Error ? erro.message : MENSAGEM_GRANDE,
+      } as const
+    }
     const janela = BrowserWindow.getAllWindows()[0]
     if (!janela) return { estado: 'cancelado' } as const
     const escolha = await dialog.showSaveDialog(janela, {
@@ -264,14 +373,14 @@ function registrarCanais(): void {
     })
     if (escolha.canceled || !escolha.filePath) return { estado: 'cancelado' } as const
     try {
-      await fs.writeFile(escolha.filePath, JSON.stringify(valor, null, 2), 'utf8')
+      await fs.writeFile(escolha.filePath, texto, 'utf8')
       return { estado: 'ok', caminho: escolha.filePath } as const
     } catch {
       return { estado: 'erro', mensagem: 'Não consegui gravar nesse arquivo.' } as const
     }
   })
 
-  ipcMain.handle('progresso:importar', async () => {
+  canal('progresso:importar', async () => {
     const janela = BrowserWindow.getAllWindows()[0]
     if (!janela) return { estado: 'cancelado' } as const
     const escolha = await dialog.showOpenDialog(janela, {

@@ -308,6 +308,28 @@ describe('resolverDeLinks', () => {
     )
   })
 
+  it('aceita a ancora da propria pagina quando o documento declara o `id`', () => {
+    // `[nota](#nota)` com `<p id="nota">`: o alvo e um `id` DESTE documento, e a religacao
+    // (`religarAncorasDoMaterial`) troca os dois pelo mesmo prefixo. Sem esta leitura, o resolvedor
+    // reprovava o par e a religacao o aceitava — a contradicao em que o caso legitimo nunca
+    // construia.
+    const r = novoRelatorio()
+    const destino = resolverDeLinks(MAPA, '01-fundamentos/TEMA-01-um.md', r, new Set(['nota']))(
+      '#nota',
+      'ir para a nota',
+    )
+    expect(destino).toEqual({ acao: 'manter' })
+    expect(r.erros).toEqual([])
+    expect(r.intactos).toBe(1)
+    // E so o alvo declarado: outro `#…` continua reprovando, com o mesmo relatorio.
+    const outro = resolverDeLinks(MAPA, '01-fundamentos/TEMA-01-um.md', r, new Set(['nota']))(
+      '#sumiu',
+      'outro',
+    )
+    expect(outro).toEqual({ acao: 'manter' })
+    expect(r.erros.join('\n')).toContain('nao e rota do app')
+  })
+
   it('reprova o fragmento de rota que o app nao tem', () => {
     // A rota existe na forma (`#/area/…`), mas a area nao: sem esta conferencia, o build aceitaria
     // um link que so o smoke de uma tela especifica pegaria.
@@ -562,5 +584,24 @@ describe('geracao do material em disco', () => {
     expect(hrefsDeFragmento(html)).toEqual(['#4-temas'])
     // O href nao virou caminho relativo: sao duas regras, e cada uma acusa o seu defeito.
     expect(hrefsRelativos(html)).toEqual([])
+  })
+
+  it('constroi a ancora da propria pagina, com o alvo em outra secao', () => {
+    // O caso que o portao e a religacao se contradiziam: `[nota](#nota)` com `<p id="nota">`. O
+    // link esta no intro e o alvo na secao 2 — a tela monta os dois na MESMA pagina, entao o par
+    // tem de sair alinhado (id e href com o mesmo prefixo) e sem defeito no relatorio.
+    const comSecoes =
+      `${TEMA2}\n\n## 1. Objetivo\n\n[ir para a nota](#nota)\n\n## 2. Nota\n\n<p id="nota">aviso do material</p>`
+    const { conteudo, links } = comTema2(comSecoes)
+
+    expect(links.erros).toEqual([])
+    const tema = conteudo.temas['01-fundamentos#TEMA-02']
+    const html = [tema?.intro, ...(tema?.secoes.map((s) => s.html) ?? [])].join('\n')
+    expect(html).toContain('href="#material-nota"')
+    expect(html).toContain('id="material-nota"')
+    // E o `id` do material nao sobrevive sem o prefixo — e ele que o mantem fora do caminho das
+    // ancoras do app (`secao-N`, `checklist-da-trilha`).
+    expect(html).not.toContain('id="nota"')
+    expect(htmlsDoConteudo(conteudo).flatMap(hrefsRelativos)).toEqual([])
   })
 })

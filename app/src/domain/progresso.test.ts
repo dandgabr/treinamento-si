@@ -98,6 +98,21 @@ describe('redutores', () => {
     ])
   })
 
+  it('registrarConfianca recusa índice que não descreve item, como os vizinhos', () => {
+    // `registrarDiagnostico` e `registrarRespostaDeCheckpoint` exigem inteiro ≥ 0; este não exigia
+    // nada: `1.5` era gravado e o próximo carregamento o descartava (a tela perdia o item),
+    // enquanto `-3` sobrevivia.
+    const base = progressoVazio()
+    expect(registrarConfianca(base, REF, 1.5, 3, HOJE)).toBe(base)
+    expect(registrarConfianca(base, REF, -3, 3, HOJE)).toBe(base)
+    expect(registrarConfianca(base, REF, NaN, 3, HOJE)).toBe(base)
+    expect(registrarConfianca(base, '__proto__', 0, 3, HOJE)).toBe(base)
+    expect(Object.keys(base.temas)).toEqual([])
+    // O índice legítimo continua aceito: o tema nasce com o item do pré-teste.
+    const p = registrarConfianca(base, REF, 0, 3, HOJE)
+    expect(p.temas[REF]?.preTeste).toEqual([{ indice: 0, confianca: 3 }])
+  })
+
   it('registrarRecuperacao grava o veredito, marca lido e avança a revisão', () => {
     const p = registrarRecuperacao(progressoVazio(), REF, true, HOJE)
     const t = p.temas[REF]
@@ -212,6 +227,22 @@ describe('redutores', () => {
     p = registrarRecuperacao(p, REF, false, HOJE)
     expect(p.temas[REF]?.recuperacaoOk).toBe(false)
     expect(p.temas[REF]?.revisao.passagens).toBe(2)
+  })
+
+  it('abrirPassagem não cria tema-fantasma quando o tema ainda não existe', () => {
+    // O redutor é no-op sobre o tema vazio (o veredito já é `null`), então o tema não pode nascer
+    // — antes, `existente` falsy furava o curto-circuito e a abertura criava o tema e inflava
+    // `diasComEstudo`. Não alcançável pela UI hoje (o botão só aparece depois do veredito), mas a
+    // função não podia depender disso.
+    const base = progressoVazio()
+    expect(abrirPassagem(base, 'x#TEMA-99', HOJE)).toBe(base)
+    expect(Object.keys(base.temas)).toEqual([])
+    expect(base.diasAtivos).toEqual([])
+
+    // O caminho vivo continua igual: com o veredito registrado, abrir a passagem limpa o veredito.
+    let p = registrarRecuperacao(base, REF, true, HOJE)
+    p = abrirPassagem(p, REF, HOJE)
+    expect(p.temas[REF]?.recuperacaoOk).toBeNull()
   })
 
   it('não cria estado novo quando nada muda', () => {
@@ -850,8 +881,14 @@ describe('normalizarProgresso', () => {
     expect(comIntervalo(1e-300)).toBe(1)
     expect(comIntervalo(3000)).toBe(1)
 
-    // Os degraus que a escada de fato usa continuam aceitos, um a um.
-    for (const dias of [1, 7, 30, 90]) expect(comIntervalo(dias)).toBe(dias)
+    // Inteiros em (0, 90] que NÃO são degraus da escada: o `45` sobrevivia à carga e a tela
+    // dizia "D+45" sem tarefa tabelada. Recusados, como o D+3000 — não normalizados para o
+    // degrau mais próximo, que adivinharia um agendamento que o arquivo não descreve.
+    for (const dias of [2, 31, 45, 89]) expect(comIntervalo(dias)).toBe(1)
+
+    // Os degraus que a escada de fato usa continuam aceitos, um a um: a sequência do tema
+    // (1, 7, 30), o D+3 do rebaixamento por erro e o degrau final das trilhas (90).
+    for (const dias of [1, 3, 7, 30, 90]) expect(comIntervalo(dias)).toBe(dias)
   })
 
   it('recusa placar antigo com acertos maior que o total ou fracionário', () => {
@@ -882,5 +919,88 @@ describe('normalizarProgresso', () => {
       HOJE,
     )
     expect(p.diasAtivos).toEqual(['2026-03-10', '2026-03-11'])
+  })
+
+  it('trata os mapas de topo que não são objeto como vazios', () => {
+    // Os campos vêm de JSON externo: `temas`, `checkpoints`, `diagnosticos` e `artefatos` como
+    // string não têm chave nenhuma para ler, e a carga não pode estourar por causa disso.
+    const p = normalizarProgresso(
+      {
+        versao: VERSAO_PROGRESSO,
+        temas: 'nada',
+        checkpoints: 'nada',
+        diagnosticos: 'nada',
+        artefatos: 'nada',
+        diasAtivos: 'nada',
+      },
+      HOJE,
+    )
+    expect(p.temas).toEqual({})
+    expect(p.checkpoints).toEqual({})
+    expect(p.diagnosticos).toEqual({})
+    expect(p.artefatos).toEqual({})
+    // `diasAtivos` que não é lista não vira lista: os dias de estudo ficam em zero.
+    expect(p.diasAtivos).toEqual([])
+  })
+
+  it('trata o mapa de topo nulo como vazio, e não como ausente', () => {
+    const p = normalizarProgresso(
+      { versao: VERSAO_PROGRESSO, temas: null, checkpoints: null, diagnosticos: null, artefatos: null, diasAtivos: null },
+      HOJE,
+    )
+    expect([p.temas, p.checkpoints, p.diagnosticos, p.artefatos, p.diasAtivos]).toEqual([{}, {}, {}, {}, []])
+  })
+
+  it('saneia os diagnósticos das trilhas: chave perigosa, chave vazia e valor que não é lista', () => {
+    // O mapa vem do JSON: `__proto__` trocaria o protótipo, a chave vazia não nomeia trilha
+    // nenhuma e o valor que não é lista não tem item. O que sobra é o veredito válido — e o
+    // índice repetido fica com o último valor, para não contar o mesmo item duas vezes.
+    const entrada: unknown = JSON.parse(
+      '{"versao":1,"temas":{},"checkpoints":{},"diasAtivos":[],' +
+        '"diagnosticos":{"":"vazio","__proto__":[{"indice":0,"acertou":true}],' +
+        '"ok":"nada","bom":[{"indice":2,"acertou":true},{"indice":2,"acertou":false},{"indice":"x","acertou":true}]}}',
+    )
+    const p = normalizarProgresso(entrada, HOJE)
+    expect(Object.getPrototypeOf(p.diagnosticos)).toBe(Object.prototype)
+    expect(Object.keys(p.diagnosticos)).toEqual(['bom'])
+    expect(p.diagnosticos.bom).toEqual([{ indice: 2, acertou: false }])
+  })
+
+  it('saneia os artefatos: chave perigosa, chave vazia e registro que não é objeto', () => {
+    const entrada: unknown = JSON.parse(
+      '{"versao":1,"temas":{},"checkpoints":{},"diasAtivos":[],' +
+        '"artefatos":{"":"vazio","__proto__":{"produzido":true},"ok":"nada",' +
+        '"bom":{"produzido":true,"data":"2026-03-10"}}}',
+    )
+    const p = normalizarProgresso(entrada, HOJE)
+    expect(Object.getPrototypeOf(p.artefatos)).toBe(Object.prototype)
+    expect(Object.keys(p.artefatos)).toEqual(['bom'])
+    expect(p.artefatos.bom).toEqual({ produzido: true, data: '2026-03-10' })
+  })
+
+  it('reconstrói a revisão quando a data agendada não é string', () => {
+    // `proximaRevisao` numérica vem de arquivo editado à mão: sem string não há `Date.parse`, e o
+    // tema volta ao estado inicial em vez de a tela mostrar uma data inventada.
+    const p = normalizarProgresso(
+      {
+        versao: 1,
+        temas: { [REF]: { revisao: { intervaloDias: 7, proximaRevisao: 1774000000000 } } },
+        checkpoints: {},
+        diasAtivos: [],
+      },
+      HOJE,
+    )
+    expect(p.temas[REF]?.revisao.intervaloDias).toBe(1)
+    expect(p.temas[REF]?.revisao.proximaRevisao).toBe('2026-03-11T12:00:00.000Z')
+  })
+
+  it('recusa o valor que não tem a forma de um progresso', () => {
+    // `pareceProgresso` é a fronteira da importação: só um objeto com versão desta e um mapa de
+    // temas passa; texto, nulo, lista e `temas` como lista não substituem o que existe.
+    expect(pareceProgresso('texto')).toBe(false)
+    expect(pareceProgresso(null)).toBe(false)
+    expect(pareceProgresso([])).toBe(false)
+    expect(pareceProgresso({ versao: 1, temas: [] })).toBe(false)
+    expect(pareceProgresso({ versao: 1, temas: {} })).toBe(true)
   })
 })
