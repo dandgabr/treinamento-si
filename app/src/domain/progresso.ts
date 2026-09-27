@@ -1,7 +1,13 @@
 // Estado do estudo: o formato que o app persiste — no armazenamento do navegador ou num
 // arquivo, conforme a via — e as operacoes puras sobre ele.
 
-import { criarEstado, filaDeHoje, registrarRevisao, type EstadoRevisao } from './srs'
+import {
+  criarEstado,
+  filaDeHoje,
+  registrarRevisao,
+  ULTIMO_INTERVALO_DIAS,
+  type EstadoRevisao,
+} from './srs'
 
 /** Escala de confianca do pre-teste. Fonte unica: o tipo e derivado dela. */
 export const NIVEIS_CONFIANCA = [1, 2, 3, 4, 5] as const
@@ -339,8 +345,15 @@ function ehDataIso(v: unknown): v is string {
 // chaves vem de fora, elas sao recusadas antes de qualquer atribuicao.
 const CHAVES_RECUSADAS = new Set(['__proto__', 'constructor', 'prototype'])
 
-/** Teto de sanidade para o intervalo agendado. */
-const TETO_DIAS = 3650
+/**
+ * Teto de sanidade do intervalo agendado: o ultimo degrau da escada (`ULTIMO_INTERVALO_DIAS`).
+ *
+ * Nao e um numero solto de "dez anos": a escada do app so agenda 1, 7, 30 e 90 — o acerto sobe
+ * por esses degraus, o erro so rebaixa e o consolidado para em 90 —, entao um intervalo maior
+ * nao descreve estudo nenhum. O D+3000 vinha de arquivo de fora e esconderia o tema da fila por
+ * oito anos; o teto o recusa como recusa o intervalo negativo ou nao finito.
+ */
+const TETO_DIAS = ULTIMO_INTERVALO_DIAS
 
 /**
  * Folga da janela de sanidade da data agendada, em dias em volta de "agora".
@@ -368,8 +381,17 @@ function normalizarRevisao(valor: unknown, ref: string, agora: Date): EstadoRevi
   if (!valor || typeof valor !== 'object') return padrao
   const r = valor as Record<string, unknown>
   const brutoIntervalo = r.intervaloDias
+  // Mesma regua dos contadores vizinhos (`rebaixamentos`, `passagens`, `falhasSeguidas`): so
+  // inteiro. Antes bastava finito e positivo, e um `1e-300` de arquivo de fora passava e virava
+  // "Próxima revisão em D+1e-300" na tela; `1.5` tambem. O `> 0` continua barrando o zero, e o
+  // teto (`ULTIMO_INTERVALO_DIAS`) barra o D+3000 — valores que o escalonador nunca produz, e
+  // por isso recusados em vez de adivinhados: o tema volta ao estado inicial.
   const intervalo =
-    numeroFinito(brutoIntervalo, TETO_DIAS) && brutoIntervalo > 0 ? brutoIntervalo : null
+    numeroFinito(brutoIntervalo, TETO_DIAS) &&
+    Number.isInteger(brutoIntervalo) &&
+    brutoIntervalo > 0
+      ? brutoIntervalo
+      : null
   const quando = dataPlausivel(r.proximaRevisao, agora) ? r.proximaRevisao : null
   if (intervalo === null || quando === null) return padrao
   const brutoRebaixamentos = r.rebaixamentos

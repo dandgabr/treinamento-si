@@ -654,6 +654,34 @@ describe('normalizarProgresso', () => {
     expect(p.checkpoints).toEqual({})
   })
 
+  it('recusa intervalo fracionário ou fora da escada, mantendo os degraus legítimos', () => {
+    // Faltava aqui a régua dos contadores vizinhos (`rebaixamentos`, `passagens`,
+    // `falhasSeguidas`): `intervaloDias` só exigia finito e positivo. Um arquivo com `1e-300`
+    // era aceito e a tela mostrava "Próxima revisão em D+1e-300", com a fila caindo no ramo
+    // "não há tarefa tabelada"; `1.5` e `3000` também passavam.
+    const comIntervalo = (intervaloDias: unknown): number | undefined =>
+      normalizarProgresso(
+        {
+          versao: VERSAO_PROGRESSO,
+          temas: {
+            [REF]: { revisao: { intervaloDias, proximaRevisao: '2026-03-17T12:00:00.000Z' } },
+          },
+          checkpoints: {},
+          diasAtivos: [],
+        },
+        HOJE,
+      ).temas[REF]?.revisao.intervaloDias
+
+    // Não-inteiro (a prova medida) e absurdo (D+3000, que a escada do app nunca agenda — só 1, 7,
+    // 30 e 90): o tema volta ao estado inicial, e não a um intervalo adivinhado.
+    expect(comIntervalo(1.5)).toBe(1)
+    expect(comIntervalo(1e-300)).toBe(1)
+    expect(comIntervalo(3000)).toBe(1)
+
+    // Os degraus que a escada de fato usa continuam aceitos, um a um.
+    for (const dias of [1, 7, 30, 90]) expect(comIntervalo(dias)).toBe(dias)
+  })
+
   it('recusa checkpoint com acertos maior que o total ou fracionário', () => {
     const p = normalizarProgresso(
       {

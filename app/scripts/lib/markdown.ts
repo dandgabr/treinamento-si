@@ -96,7 +96,70 @@ md.renderer.rules.link_close = (tokens, idx, options, _env, self) => {
 // O cast isola a unica conversao insegura (o DOMWindow do jsdom satisfaz o WindowLike
 // exigido pelo DOMPurify, mas os tipos nao declaram isso).
 type JanelaDOMPurify = Parameters<typeof createDOMPurify>[0]
-const DOM_PURIFY = createDOMPurify(new JSDOM('').window as unknown as JanelaDOMPurify)
+const JANELA = new JSDOM('')
+const DOM_PURIFY = createDOMPurify(JANELA.window as unknown as JanelaDOMPurify)
+
+/**
+ * Prefixo de todo `id` que vem do material — e do href de ancora que aponta para ele.
+ *
+ * O `id` do material sobrevive a sanitizacao, e `document.getElementById` devolve o PRIMEIRO
+ * elemento na ordem da arvore. Sem o prefixo, um `id="secao-10"` num `<div>` do material posto
+ * antes da secao 10 faz o "Ir para a secao 10" da fila e o item do sumario focarem o TEXTO do
+ * material; um `id="checklist-da-trilha"` desvia o indice da trilha. As ancoras do app
+ * (`secao-N`, `checklist-da-trilha`, `fase-N`) sao o endereco de alvos DENTRO da tela, e um `id`
+ * vindo de fora nao pode toma-las.
+ *
+ * O mecanismo e reescrever o `id` do material AQUI, no ponto unico por onde todo o HTML do
+ * material passa antes de chegar ao DOM (`renderSeguro`), em vez de prefixar os `id` do app: os
+ * do app vivem espalhados (`Blocos.tsx`, `Trilha.tsx`) e, pior, sao a gramatica da ROTA — o
+ * `secao-N` viaja como ultimo segmento de `#/area/<areaId>/secao-4`, escrita em `links-material.ts`
+ * e conferida por `rotas-app.mjs`. Prefixar o material e uma linha e vale para qualquer tag que o
+ * material venha a usar.
+ *
+ * O href de ancora da MESMA pagina anda junto: `[nota](#nota)` aponta para o `id` `nota`, que
+ * vira `material-nota`, e o par precisa continuar casando. O href de ROTA (`#/…`) NAO se toca: ele
+ * ja e o endereco de uma tela, resolvido na geracao, e reescreve-lo quebraria toda a navegacao
+ * interna do app.
+ */
+export const PREFIXO_ID_MATERIAL = 'material-'
+
+DOM_PURIFY.addHook('afterSanitizeAttributes', (no: Element) => {
+  const id = no.getAttribute('id')
+  if (id) no.setAttribute('id', `${PREFIXO_ID_MATERIAL}${id}`)
+})
+
+/**
+ * O href de ancora da MESMA pagina precisa andar junto com o `id` que ele endereça.
+ *
+ * `[nota](#nota)` aponta para o `id` `nota`, que o hook acima virou `material-nota`: sem religar,
+ * a ancora do proprio material pararia de alcancar o alvo. So o href cujo ALVO existe mesmo no
+ * bloco e reescrito. Um `#4-temas` solto — a grafia de ancora do GitHub, que o material escreve
+ * junto do arquivo — nao tem `id` para onde ir e fica como veio: quem o reprova por nao ser rota
+ * e o portao, e o defeito tem de continuar visivel para a varredura (o teste de `links-material`
+ * fixa exatamente isso). O href de ROTA (`#/…`) nunca se toca — ele ja e o endereco de uma tela,
+ * resolvido na geracao, e reescreve-lo quebraria toda a navegacao interna do app.
+ *
+ * O portao nao muda de veredito: um `#nota` reescrito para `#material-nota` continua nao sendo
+ * rota do app e reprova igual. A religacao existe para nao quebrar o que ja funcionava no
+ * navegador entre a geracao e a conferencia.
+ */
+function religarAncorasDoMaterial(html: string): string {
+  // Sem fragmento de ancora local (o caso do material de hoje, que so usa rota `#/…`), nem parses.
+  if (!/href="#[^/"]/.test(html)) return html
+  const doc = JANELA.window.document.implementation.createHTMLDocument()
+  doc.body.innerHTML = html
+  const ids = new Set(Array.from(doc.body.querySelectorAll('[id]')).map((no) => no.id))
+  let mudou = false
+  for (const link of Array.from(doc.body.querySelectorAll('a[href]'))) {
+    const href = link.getAttribute('href') ?? ''
+    if (!href.startsWith('#') || href.startsWith('#/')) continue
+    const alvo = `${PREFIXO_ID_MATERIAL}${href.slice(1)}`
+    if (!ids.has(alvo)) continue
+    link.setAttribute('href', `#${alvo}`)
+    mudou = true
+  }
+  return mudou ? doc.body.innerHTML : html
+}
 
 export const TAGS_PERMITIDAS = [
   'a', 'blockquote', 'br', 'code', 'details', 'div', 'em',
@@ -148,12 +211,15 @@ export function renderSeguro(markdown: string, resolver?: ResolverDeLink): strin
   // texto visivel nao bastava: um bloco que e so `<meta>`, `<base>` ou `<link>` nao tem
   // texto nenhum, entao saia vazio E o build passava. A comparacao e do HTML: se havia
   // markup e nao sobrou nada, o conteudo sumiu.
-  const perdeuTudo = bruto.trim() !== '' && limpo.trim() === ''
+  // O `id` do material sai prefixado (hook acima) e o href de ancora local e religado antes de
+  // devolver — e o que impede um `id="secao-10"` do material de sombrear a secao 10 do app.
+  const html = religarAncorasDoMaterial(limpo)
+  const perdeuTudo = bruto.trim() !== '' && html.trim() === ''
   if (removidosRelevantes().length || perdeuTudo) {
     const detalhe = descreverRemovidos() || 'todo o conteudo do bloco'
     throw new Error(`sanitizacao removeu conteudo; revise o Markdown antes de publicar: ${detalhe}`)
   }
-  return limpo
+  return html
 }
 
 // ---------------------------------------------------------------- utilitarios

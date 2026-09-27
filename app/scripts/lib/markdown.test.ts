@@ -1,3 +1,4 @@
+import { JSDOM } from 'jsdom'
 import { describe, expect, it } from 'vitest'
 import {
   ancorasDeSecao,
@@ -8,6 +9,7 @@ import {
   limparConfianca,
   parseTabela,
   parseTemaDeTexto,
+  PREFIXO_ID_MATERIAL,
   renderSeguro,
   slugDeAncora,
   type DestinoDeLink,
@@ -240,6 +242,60 @@ describe('renderSeguro', () => {
     const html = renderSeguro('<details><summary>Ver</summary>\n\nresposta\n\n</details>')
     expect(html).toContain('<details>')
     expect(html).toContain('<summary>')
+  })
+})
+
+// O `id` do material sobrevive a sanitizacao e `document.getElementById` devolve o PRIMEIRO
+// elemento na ordem da arvore. Sem o prefixo, um `id="secao-10"` num `<div>` do material posto
+// antes da secao 10 faz o "Ir para a secao 10" da fila focar o TEXTO do material. Estes testes
+// montam o documento na mesma ordem da tela (material antes do alvo do app) e perguntam ao DOM,
+// nao a string: e a ordem da arvore que decide quem `getElementById` devolve.
+describe('ancoras: o id do material não sombreia as do app', () => {
+  it('prefixa o id do material, para a seção do app continuar sendo o alvo', () => {
+    const material = renderSeguro('<div id="secao-10">texto do material</div>')
+    const dom = new JSDOM(
+      `<body>${material}<h2 id="secao-10" tabindex="-1">10. Recuperação ativa</h2></body>`,
+    )
+    const alvo = dom.window.document.getElementById('secao-10')
+    expect(alvo?.tagName).toBe('H2')
+    expect(alvo?.textContent).toContain('Recuperação ativa')
+    // O id do material continua no documento — só que fora do caminho do app.
+    expect(
+      dom.window.document.getElementById(`${PREFIXO_ID_MATERIAL}secao-10`)?.textContent,
+    ).toBe('texto do material')
+  })
+
+  it('não deixa o material desviar o índice do checklist da trilha', () => {
+    const material = renderSeguro('<div id="checklist-da-trilha">isca do material</div>')
+    const dom = new JSDOM(
+      `<body>${material}<h2 id="checklist-da-trilha" tabindex="-1">Checklist da trilha</h2></body>`,
+    )
+    const alvo = dom.window.document.getElementById('checklist-da-trilha')
+    expect(alvo?.tagName).toBe('H2')
+    expect(alvo?.textContent).toBe('Checklist da trilha')
+  })
+
+  it('mantém o id legítimo do material alcançável pela âncora da própria página', () => {
+    // O par `href="#nota"` / `id="nota"` anda junto: os dois ganham o MESMO prefixo, então o
+    // link de âncora dentro da mesma página continua levando ao alvo do material.
+    const html = renderSeguro('<div id="nota">aviso do material</div>\n\n[ir para a nota](#nota)')
+    expect(html).toContain(`id="${PREFIXO_ID_MATERIAL}nota"`)
+    expect(html).toContain(`href="#${PREFIXO_ID_MATERIAL}nota"`)
+
+    const dom = new JSDOM(`<body>${html}</body>`)
+    const href = dom.window.document.querySelector('a')?.getAttribute('href') ?? ''
+    expect(dom.window.document.getElementById(href.slice(1))?.textContent).toBe('aviso do material')
+  })
+
+  it('não toca no href de rota do app, que já é o endereço de uma tela', () => {
+    // Contraprova: prefixar TODO `#…` quebraria a navegação inteira do app — a rota resolvida na
+    // geração (`#/area/…`) tem de ficar exatamente como veio.
+    const html = renderSeguro('[seção 4](README.md#4-temas)', () => ({
+      acao: 'trocar',
+      href: '#/area/01-fundamentos/secao-4',
+    }))
+    expect(html).toContain('href="#/area/01-fundamentos/secao-4"')
+    expect(html).not.toContain(`href="#${PREFIXO_ID_MATERIAL}`)
   })
 })
 

@@ -38,7 +38,7 @@ navegador atual, para abrir o resultado.
 | `npm run check:content` | regera o `content.json` a partir de `conteudo/`, compara com o que está em disco e falha o processo quando o material mudou depois da última geração ou quando algo falta |
 | `npm run build:questions` | deriva o banco de múltipla escolha do JSON e regrava um arquivo por área em `app/src/content/questions/`, trazendo de volta o `status` de revisão — e derrubando-o quando o texto do item muda |
 | `npm run check:questions` | valida o banco já gravado e falha o processo quando algum item não fecha |
-| `npm test` | roda a suíte do Vitest: parser, gate, banco de questões e motor pedagógico |
+| `npm test` | roda a suíte do Vitest, **510 testes** na árvore de 2026-09-27: parser, gate, banco de questões e motor pedagógico |
 | `npm run dev` | roda `build:content` e sobe o Vite com recarga automática |
 | `npm run build` | gera o conteúdo e produz o build do navegador, em arquivo único |
 | `npm run build:desktop` | produz o build do desktop em `dist-desktop/` (usa o conteúdo já gerado) |
@@ -47,7 +47,7 @@ navegador atual, para abrir o resultado.
 | `npm run typecheck` | roda o `tsc --noEmit`; o Vite apaga tipos sem conferi-los, então isto precisa existir separado |
 | `npm run verificar` | **o portão do dia a dia**: build, build do Electron, testes, os três smokes do código (navegador, desktop e pasta) e o verificador do material — **não empacota nem testa o pacote** |
 | `npm run verificar:pacote` | empacota e roda o smoke do pacote — o portão de quem vai distribuir |
-| `npm run smoke` | abre o artefato por `file://` num Chrome headless e confere o DOM renderizado |
+| `npm run smoke` | abre o artefato por `file://` num Chrome headless e confere o DOM renderizado em **107 cenários**, mais o quiz respondido e o glossário navegável |
 | `npm run build:electron` | compila o processo principal e o preload para `dist-electron/` |
 | `npm run desktop` | build completo e abre o aplicativo desktop |
 | `npm run smoke:desktop` | abre a janela de verdade e confere a casca, o protocolo, a ponte com lista fechada de canais, as permissões negadas, a ausência de requisição de rede, o progresso em arquivo e o bloqueio de navegação |
@@ -78,7 +78,7 @@ em outra máquina, aponte o binário pela variável `CHROME_BIN`.
 
 ## O que sai do build
 
-A build inteira vira um arquivo: `app/dist/index.html`, com **7,86 MiB** (8.237.917 bytes), medido em
+A build inteira vira um arquivo: `app/dist/index.html`, com **7,86 MiB** (8.241.528 bytes), medido em
 **2026-09-27**. A medição anterior, de antes de o banco entrar inline, era 7,6 MB — os 18 arquivos do banco
 viajam dentro desse arquivo. Ele abre por `file://`, roda offline e não pede nada instalado na
 máquina de quem vai estudar. Esse é o formato inteiro do produto, e é o motivo de
@@ -121,14 +121,19 @@ sistema — e só `http(s)`. O caminho que serve os arquivos tem trava explícit
 
 O `npm run smoke:desktop` prova isso numa janela de verdade: abre, confere as preferências
 endurecidas, navega até um tema, renderiza o diagrama, escreve o progresso no arquivo, tenta sair
-para `file://` e é bloqueado, fecha e **reabre** com o estado no lugar. Também exercita, com 18
+para `file://` e é bloqueado, fecha e **reabre** com o estado no lugar. Também exercita, com 50
 asserções, o que antes só existia por inspeção: a ponte expõe só a lista fechada de canais (nenhum
 `ipcRenderer` cru), `window.open` devolve `null` e nenhuma janela nova nasce, o que cruza a ponte é
 recusado quando não é objeto e cortado por tamanho antes do `JSON.parse`, nos dois sentidos da
 leitura e da escrita, as permissões são negadas nas duas checagens (a do pedido e a da consulta) e
 nenhuma requisição do renderer chega a um servidor local — esta última com controle positivo, porque
 "nada chegou" passaria também por ausência de tentativa. Cada uma tem prova de falsificabilidade por
-mutação: desligada a proteção de propósito, a asserção reprova. E exercita o protocolo pelo
+mutação: desligada a proteção de propósito, a asserção reprova. O teto do progresso aparece nas duas
+pontas e nas duas medidas: a gravação recusa o payload que passa em unidades de código e estoura em
+bytes, e a leitura trata arquivo acima do teto **ou** truncado como erro — não como "primeira vez
+aqui" —, de modo que o clique que gravaria não sobrescreve o que não foi possível ler. O import que
+**efetivamente grava** também entrou: o `showOpenDialog` responde com um arquivo de verdade e a
+resposta "Progresso importado." só sai depois do disco. E exercita o protocolo pelo
 processo principal, que é o único lugar de onde dá para conferir: `app://bundle/index.html` responde
 200 com a CSP no cabeçalho, a travessia codificada (`%2e%2e`) responde 404 e um host diferente de
 `bundle` também — do renderer não daria, porque a própria CSP tem `connect-src 'none'` e barraria o
@@ -143,12 +148,17 @@ quebraria. Então o desktop, que não tem essa restrição, ganha o build dividi
 | | `npm run build` (navegador) | `npm run build:desktop` (desktop) |
 |---|---|---|
 | Saída | `dist/index.html`, um arquivo | `dist-desktop/`, uma pasta |
-| Conteúdo | inline no JavaScript (3,89 MB) | `conteudo.json` ao lado (3,71 MiB) |
+| Conteúdo | inline no JavaScript (3.891.053 bytes, 3,71 MiB) | `conteudo.json` ao lado — o mesmo JSON, 3.891.053 bytes (3,71 MiB) |
 | Banco de questões | inline no JavaScript, junto com o conteúdo | `questoes.json` ao lado (543.668 bytes, 0,52 MiB) |
 | Diagramas | todos inlinados (3,4 MB) | só o `flowchart`; 35 chunks de outros tipos são descartados |
-| Script no arranque | **7,86 MiB** (8.237.917 bytes, medido em 2026-09-27) para o V8 analisar | **952,7 kB** (975.596 bytes) |
+| Script no arranque | **7,86 MiB** (8.241.528 bytes, medido em 2026-09-27) para o V8 analisar | **953,3 kB** (976.188 bytes, medido em 2026-09-27) |
 | CSP | `<meta>` no HTML, com `'unsafe-inline'` | cabeçalho, `script-src 'self'` |
 | Quem usa | launcher (`dist/Roadmap-CISO-Interativo/`) | empacotado pelo electron-builder |
+
+Os números desta tabela foram medidos em **2026-09-27**, nos artefatos de agora: `dist/index.html`, o
+`assets/index-*.js` do arranque em `dist-desktop/`, o `conteudo.json` (o mesmo arquivo que o build de
+navegador embute) e o `questoes.json`. As unidades são bytes e MiB — o "kB" da linha do arranque é
+KiB, como no resto do documento.
 
 A diferença entre os dois está isolada em `@fonte` (`src/infrastructure/content/fonte-web.ts` e
 `fonte-desktop.ts`): o repositório de conteúdo é o mesmo, e o resto do app não sabe de onde o
@@ -170,7 +180,7 @@ verdade: se o corte levar algo necessário, o teste falha em vez de o app aparec
 | AppImage | **104,0 MiB** (109.006.365 bytes) — O7, medido **antes do banco** entrar no pacote |
 | `app.asar` | 4,89 MiB (5.124.818 bytes): o `conteudo.json`, os 27 assets que sobraram e o `main`/`preload` — medido **antes do banco** |
 | `questoes.json` | 543.668 bytes (0,52 MiB): o banco de múltipla escolha, que agora viaja dentro do asar — eram 791.357 bytes antes de as questões discursivas saírem |
-| `dist-desktop/index.html` + assets | 952,7 kB (975.596 bytes) de JavaScript no arranque, contra 7,86 MiB (8.237.917 bytes) inlinados |
+| `dist-desktop/index.html` + assets | 953,3 kB (976.188 bytes) de JavaScript no arranque, contra 7,86 MiB (8.241.528 bytes) inlinados — remedido em 2026-09-27 |
 | Pasta desempacotada | 267 MiB — o binário do Electron sozinho tem 177,7 MiB — medido **antes do banco** |
 
 **O banco entrou no pacote depois destas medições.** A lista de `files` do `electron-builder.yml`
@@ -363,7 +373,7 @@ Esta é a tabela — e a coluna "medido" é a que diz o que ainda falta, não a 
 |---|---|---|---|
 | O1 arranque | — | **sim: 1ª pintura 338 ms, DOMContentLoaded 296 ms** | `npm run medir` |
 | O2 sem tela branca (`show:false` + `ready-to-show`) | sim | sim: o aviso "Carregando o roadmap…" sai quando a carga termina | `medir`, `main.tsx` |
-| O3 bundle dividido | **sim** | sim: 952,7 kB (975.596 bytes) de script no arranque, contra 7,86 MiB (8.237.917 bytes) inlinados | `vite.desktop.config.ts` |
+| O3 bundle dividido | **sim** | sim: 953,3 kB (976.188 bytes) de script no arranque, contra 7,86 MiB (8.241.528 bytes) inlinados | `vite.desktop.config.ts` |
 | O4 só o `flowchart` do Mermaid | **sim** | sim: 35 chunks de outros diagramas removidos; desenhar puxa 8 | `vite.desktop.config.ts`, `medir` |
 | O5 memória após navegações | — | sim: heap de 11 MB na primeira tela, 16 MB com o diagrama | `medir` |
 | O6 diagramas por tela | — | sim: 1 por tema | `medir` |
@@ -375,7 +385,7 @@ Esta é a tabela — e a coluna "medido" é a que diz o que ainda falta, não a 
 | S4 sem `webview`/janela nova | sim | sim | `smoke-desktop.mjs` |
 | S5 CSP como cabeçalho | sim | sim — e o desktop passou a `script-src 'self'`, sem `unsafe-inline` | `smoke-desktop.mjs` |
 | S6 o que cruza a ponte passa pelo normalizador | sim | sim — recusa e corte nos dois sentidos da ponte (escrita e leitura) | `smoke-desktop.mjs` |
-| S7 corte antes do `JSON.parse` | sim | sim — teto de 1 MB, provado com um arquivo válido acima dele | `smoke-desktop.mjs` |
+| S7 corte antes do `JSON.parse` | sim | sim — teto de 1 MB **em bytes**, conferido no descritor que é lido (`fstat`), não em `stat` sobre o caminho, e provado com um payload que passa em unidades de código e estoura em bytes | `smoke-desktop.mjs`, `progresso-desktop.test.ts` |
 | S8 importação com esquema e cópia campo a campo | sim | sim | `progresso.test.ts`, `persistencia.test.ts` |
 | S9 nenhuma requisição de rede | sim (`connect-src 'self'`, que é `app://`) | sim, com controle positivo (servidor local que responde) | `smoke-desktop.mjs` |
 | S10 permissões negadas | sim | sim — a checagem do pedido e a da consulta | `smoke-desktop.mjs` |
@@ -592,6 +602,11 @@ bloco dos acentos), exige que todas as palavras digitadas apareçam — "trust z
 e a contagem que ela atualiza é uma região `role="status"`, que é o que o leitor de tela ouve a cada
 tecla.
 
+**O casamento é por substring, sem fronteira de palavra, e isso é decisão.** "confid" acha
+"confidencialidade" enquanto se digita, e é esse o efeito desejado — exigir o termo inteiro faria a
+consulta parcial cair em "Nenhum termo bate". É uma escolha, não um descuido: `src/ui/Glossario.test.tsx`
+pina o comportamento, e trocá-lo por fronteira de palavra reprova o teste em vez de passar despercebido.
+
 Medido: **23 asserções** no cenário `glossario (navegavel por termo)` do `npm run smoke`, sobre os
 78 verbetes do material — a lista começa inteira, a busca encolhe e volta, o termo que não existe
 esvazia a lista com aviso, o índice cai em verbete (e não em título), e o endereço de um termo aberto
@@ -629,12 +644,22 @@ rota** — o texto fica, a marca de link sai. Os **586** externos (e os que saem
 intactos. O total de `href` caiu de **1914** para **1782**: a diferença são exatamente os 132 que
 viraram texto.
 
-**A âncora viaja como último segmento da rota.** O material escreve `README.md#4-temas`, com o slug
-do cabeçalho como o GitHub o monta; o app endereça seção por número. Como o fragmento da URL pertence
-à rota, a âncora entra depois dela — `#/area/01-fundamentos/secao-4` —, que é a mesma gramática do
-endereço de um termo do glossário. Um `#` a mais não serve: ele não é delimitador de segmento, e
-`#/area/x#secao-4` viraria o `areaId` `x#secao-4`, ou seja, "área não encontrada". O material de hoje
-tem **uma** âncora assim.
+**A âncora viaja como último segmento da rota, e é honrada na volta.** O material escreve
+`README.md#4-temas`, com o slug do cabeçalho como o GitHub o monta; o app endereça seção por número.
+Como o fragmento da URL pertence à rota, a âncora entra depois dela — `#/area/01-fundamentos/secao-4`
+—, que é a mesma gramática do endereço de um termo do glossário. Um `#` a mais não serve: ele não é
+delimitador de segmento, e `#/area/x#secao-4` viraria o `areaId` `x#secao-4`, ou seja, "área não
+encontrada". O material de hoje tem **uma** âncora assim. Ela era emitida e descartada: o roteador
+devolvia a área sem âncora e a seção 4 ficava a 4000 px de distância. O `useRota` passou a devolver
+`ancora` também para a rota de área e o efeito do `App` a lê, então o link chega à seção — a decisão
+foi **honrar** a âncora, e não parar de emiti-la.
+
+**O relatório de links acusa onde antes era mudo.** Link que **sai da raiz** do material, caminho
+**absoluto** (`/x.md`) e **protocol-relative** (`//host/x.md`) não entravam em `links.erros`, ao
+contrário do que o cabeçalho do próprio módulo prometia — os dois primeiros saíam no HTML com zero
+erros, e quem reprovava era só o gate, que não roda no `build:content`, o caminho do `npm run dev`.
+Os três ramos passaram a empurrar erro; a sonda sobre o material real confirma a não-regressão:
+1196 rotas, 132 como texto, 586 intactos, 0 erros — o mesmo de antes.
 
 **O que não tem rota está declarado num lugar só** (`scripts/lib/links-material.ts`,
 `DECLARADOS_SEM_ROTA`), com o motivo ao lado — quatro entradas: `CONTRIBUTING.md` (regra de autoria
@@ -722,6 +747,22 @@ mesmo dado; no Firefox o balde é por arquivo. Não guarde nada sensível ali.
 Exportar, importar e recomeçar existem nos dois, no painel e no menu do desktop. As duas vias não
 compartilham progresso direto: o **arquivo exportado** é a ponte.
 
+**O teto é medido em bytes — nos dois lados.** Gravação e leitura usam o mesmo limite de 1 MB sobre
+os **bytes** do texto, e não sobre unidades de código: antes a gravação media
+`JSON.stringify(valor).length` e a leitura media `stat.size`, então um arquivo que cabia no teto da
+gravação passava dele no disco — no relançamento a leitura devolvia nulo e o primeiro clique gravava
+por cima do que a pessoa tinha importado. No import, o teto é conferido sobre o **descritor lido**
+(`fstat`), e não sobre o caminho: com `stat` no caminho, um FIFO (`size == 0`) passava pelo teto e
+pendurava o handler para sempre.
+
+**Arquivo ausente e arquivo ilegível são coisas diferentes.** `lerProgresso` só trata `ENOENT` como
+"primeira vez aqui"; **truncado, com JSON quebrado ou acima do teto** ele sinaliza erro, e o app não
+deixa gravar por cima. É a diferença entre a tela avisar e o primeiro clique apagar o progresso: a
+defesa existia no store e nunca ligava no desktop. O `importar()` segue a mesma linha — só responde
+"Progresso importado." **depois** da gravação. E o normalizador passou a exigir uma janela sã para
+`proximaRevisao`: uma data no limite do `Date` fazia o clique de "Acertei sem consultar" lançar
+`RangeError: Invalid time value`.
+
 ## Pendências conhecidas
 
 Levantadas nas revisões de segurança, de testes, de frontend e de UI/UX, com a fase em que entram. O
@@ -765,10 +806,12 @@ que já fechou continua aqui, com a razão registrada, para o estado não se per
 | **A via da pasta com atalho tem portão**: `npm run smoke:pasta` monta a pasta, sobe o `servidor.py` numa porta efêmera, confere 200/421/404/501 e a CSP pelo fio, e encerra no `finally`. Entrou no `npm run verificar`. Fechada | — |
 | O `.gitattributes` promete CRLF para `*.bat`, mas o arquivo no repositório está em LF — a conversão de verdade é a do `empacotar.mjs`, e ela **não pode ser removida** achando que o git resolve | 6 |
 | Os smokes dependem de `google-chrome-stable` no PATH e de sessão gráfica para o Electron; nada disso está em CI, porque CI não existe | 7 |
-| **O pré-teste diagnóstico e os artefatos têm teste no domínio e na tela das trilhas, mas não na fila de hoje.** Medido: o redutor e o normalizador do progresso (`registrarDiagnostico`, `registrarArtefato`, `normalizarDiagnosticos`, `normalizarArtefatos`) somam 8 casos em `src/domain/progresso.test.ts`, e as duas telas das trilhas, 7 casos em `src/ui/Trilha.test.tsx`. O que **não** tem teste de componente é a `TarefaDaPassagem` e o ramo "sem tarefa tabelada" da fila, em `src/ui/Progresso.tsx`: ali só a camada de aplicação (`filaComTarefas`) é exercitada, e não o que a tela escreve — no `smoke`, a fila é conferida apenas vazia ("fila vazia no inicio"). É o que ficou pela metade quando o agente que implementou o pré-teste e os artefatos parou no limite de turnos | 6 |
-| **A revisão da fase 6 com os agentes não foi feita.** O código desta fase tem teste e passa pelos dois gates, mas não passou pela revisão adversarial que as fases anteriores tiveram — a de segurança, a de testes, a de frontend e a de UI/UX, que é de onde saíram as pendências de acessibilidade, de foco e de alvo de toque das fases anteriores | 6 |
-| **A varredura da fase 6 foi feita, e pegou um defeito de entrega: as telas novas foram entregues sem CSS.** No commit `5e0d460`, `src/ui/Trilha.tsx` e `src/ui/Progresso.tsx` entraram com **26 + 6** classes novas sem nenhuma regra em `src/styles.css` (26 no primeiro arquivo e 6 no segundo; contando `veredito`, que já existia antes, o segundo fica com 7) — e `git show --numstat --format= 5e0d460 -- app/src/styles.css` é **vazio**: o `styles.css` não foi tocado no commit. O efeito medido é que **"marco cumprido" não difere visualmente de "marco pendente"**: o JSX emite `class="selo selo-cumprido"` num caso e `class="selo"` no outro, `.selo` tem regra (linha 198 do CSS do commit) e `.selo-cumprido` não. É defeito de **entrega e não de conteúdo**, e nenhum portão o pegaria: teste e smoke passam com classe sem regra, porque nenhum dos dois casa `className` com seletor. Foi pego depois do commit, numa **varredura com agentes** que leu cada `className` das duas telas contra o `styles.css`. A correção está em andamento no diretório de trabalho e ainda **não commitada** — pelo que "26 + 6" é o número do commit, e não do arquivo de agora. **Aberto** | 6 |
-| **O smoke não assere o pré-teste diagnóstico nem o checklist de artefatos.** O cenário `trilha com diagrama` (`scripts/smoke.mjs`) confere título, número de seções, o SVG do Mermaid e os links internos, e nada de `.bloco-diagnostico` nem de `.checklist-trilha`. Um defeito de render numa das telas novas passa pelo `npm run smoke` sem quebrar nenhuma asserção. **Aberto**, em correção por outro agente | 6 |
-| **A conferência de `href` relativo não percorre `pagina.trilha.*`.** O `htmlDoConteudo` dos testes (`gerar-conteudo.test.ts` e `links-material.test.ts`) varre `guia.intro`/`guia.secoes`, `tema.intro`/`tema.secoes` e `pagina.intro`/`pagina.secoes`, mas **não** os **12** campos de HTML de `pagina.trilha`: `diagnostico.introHtml`, os dez `itens[].origemHtml` e `diagnostico.notaHtml`. Um `href` relativo que sobrevivesse ali não seria reprovado pelo gate. **Aberto**, em correção por outro agente | 6 |
-| **A `faseDeEstudoDasAreas` não tem teste próprio.** A função decide em que fase mora o checklist de cada área e é exercitada só de forma indireta pela tela, em `src/ui/Trilha.test.tsx`; `src/domain/trilha.test.ts` não tem caso para ela — e é ela que sustenta a regra "uma lista por área" do "Artefatos e marcos". **Aberto**, em correção por outro agente | 6 |
-| **Terceira condição do marco no plano de 24 meses — decisão do arquiteto (2026-09-27): não modelar.** A §7 do plano de 24 meses declara **três** condições por bloco, e a terceira é "no Bloco E, o laboratório correspondente concluído com dado real. Sem L1 e L2, o Bloco F não começa"; as §7 dos planos de 90 dias e de 12 meses declaram **duas**. O app modela as **duas condições por área** (checkpoint + artefato), e a §2.2 até oferece os cinco laboratórios numa tabela legível (coluna "#", L1–L5), mas **não** liga laboratório a bloco: essa ligação só existe em prosa na coluna "Marco de saída" da §3 ("Laboratório L1 concluído" no Bloco D, "Laboratórios L2 e L3" no E, "Laboratórios L4 e L5" no G), e a §7 ainda a repete divergindo — "o laboratório correspondente", no singular, contra L2 e L3 da §3, e "L1 e L2" como portão do Bloco F, contra L1 no D e L2/L3 no E. Decisão: **(B)** não modelar a terceira condição e o app **deixar de afirmar a contagem** — a tela passa a dizer "as condições que a seção 7 desta trilha declara", sem o "duas", e a omissão fica registrada aqui. Para **(A)** ser possível, o material precisaria de: (1) uma ligação laboratório→bloco legível por código (uma coluna em §2.2 ou §3, porque hoje só há a prosa do "Marco de saída"); (2) uma §7 de 24 meses que concorde com a §3 — hoje ela nomeia "o laboratório correspondente" no singular e toma "L1 e L2" como portão do Bloco F, contra a atribuição da §3. Quem implementar: a contagem estava afirmada em **quatro** pontos de `src/ui/Trilha.tsx` no commit `5e0d460` — dois comentários e duas frases visíveis (a `dica` do `ChecklistDaTrilha` e a linha do `fase-estado`). No diretório de trabalho, **ainda não commitado**, medido em 2026-09-27, os quatro já saíram: as frases passam a dizer "as condições que a seção 7 desta trilha declara", sem o número. **Decisão tomada em 2026-09-27; falta o commit.** | 6 |
+| **O pré-teste diagnóstico e os artefatos passaram a ter teste de componente na fila de hoje.** O buraco era a `TarefaDaPassagem` e o ramo "sem tarefa tabelada" da fila, em `src/ui/Progresso.tsx`: a camada de aplicação (`filaComTarefas`) era exercitada, e o que a tela escreve não era — no `smoke`, a fila só era conferida vazia ("fila vazia no inicio"). `src/ui/Progresso.test.tsx` ganhou caso para a `TarefaDaPassagem`, para a fila com a tarefa que a §11 declara, para o intervalo sem linha na §11 (que devolve o caminho da seção 10 sem emprestar tarefa de outro intervalo) e para a marca de releitura depois de duas falhas seguidas. Fechada | — |
+| **A revisão da fase 6 com os agentes foi feita, em três frentes.** A varredura que pegou o CSS sem regra veio primeiro; depois a de testes, que fechou a cobertura de componente que faltava; e por fim a de segurança, segmentada por superfície, cujos achados estão em "Onde o progresso mora" e em "Os links do material viram rota". Fechada | — |
+| **A varredura da fase 6 pegou um defeito de entrega — telas novas sem CSS — e ele foi corrigido.** No commit `5e0d460`, `src/ui/Trilha.tsx` e `src/ui/Progresso.tsx` entraram com **26 + 6** classes novas sem nenhuma regra em `src/styles.css`, e `git show --numstat --format= 5e0d460 -- app/src/styles.css` é **vazio**: o efeito medido era "marco cumprido" sem diferença visual de "marco pendente". O `e178217` levou ao `styles.css` as 265 linhas que faltavam. Fica o registro de que **nenhum portão pegaria isso**: teste e smoke passam com classe sem regra, porque nenhum dos dois casa `className` com seletor — quem pegou foi a varredura que leu cada `className` das duas telas contra o CSS. Fechada | — |
+| **O smoke passou a assere o pré-teste diagnóstico e o checklist de artefatos.** Três cenários `trilha <slug>` conferem o DOM contra o próprio `content.json`: um item de lista por item do material no pré-teste (`.lista-diagnostico > li`), uma linha por faixa (`.tabela-diagnostico tbody tr`), uma `.area-marco` por área **na fase que a estuda**, com uma caixa por atividade da §8 do guia dela, e as `.area-retomada` sem repetir a caixa. Os seletores assertados são esses — o cenário não olha para as classes `.bloco-diagnostico`/`.checklist-trilha`, que é o que a pendência anterior pedia por nome. Fechada | — |
+| **A conferência de `href` relativo passou a percorrer `pagina.trilha.*`.** O HTML do conteúdo virou **uma lista só**, em `scripts/lib/htmls-do-conteudo.ts`: `htmlsDaPagina` compõe `intro`, `secoes` e `htmlsDaTrilha(pagina.trilha)` — os **12** campos (`diagnostico.introHtml`, os dez `itens[].origemHtml` e `diagnostico.notaHtml`) —, e o gate e os testes leem a mesma lista em vez de cada um varrer os campos por conta própria. `gerar-conteudo.test.ts` prova que a varredura visita campo da trilha, e `validar-content.test.ts` prova que o gate reprova um `href` relativo escondido ali. Fechada | — |
+| **A `faseDeEstudoDasAreas` ganhou teste próprio.** `src/domain/trilha.test.ts` tem um `describe` para ela — inclusive com as fases do plano de 90 dias do material —, além do uso indireto pela tela, em `src/ui/Trilha.test.tsx`. É ela que sustenta a regra "uma lista por área" do "Artefatos e marcos". Fechada | — |
+| **Terceira condição do marco no plano de 24 meses — decisão do arquiteto (2026-09-27): não modelar.** A §7 do plano de 24 meses declara **três** condições por bloco, e a terceira é "no Bloco E, o laboratório correspondente concluído com dado real. Sem L1 e L2, o Bloco F não começa"; as §7 dos planos de 90 dias e de 12 meses declaram **duas**. O app modela as **duas condições por área** (checkpoint + artefato), e a §2.2 até oferece os cinco laboratórios numa tabela legível (coluna "#", L1–L5), mas **não** liga laboratório a bloco: essa ligação só existe em prosa na coluna "Marco de saída" da §3 ("Laboratório L1 concluído" no Bloco D, "Laboratórios L2 e L3" no E, "Laboratórios L4 e L5" no G), e a §7 ainda a repete divergindo — "o laboratório correspondente", no singular, contra L2 e L3 da §3, e "L1 e L2" como portão do Bloco F, contra L1 no D e L2/L3 no E. Decisão: **(B)** não modelar a terceira condição e o app **deixar de afirmar a contagem** — a tela passa a dizer "as condições que a seção 7 desta trilha declara", sem o "duas", e a omissão fica registrada aqui. Para **(A)** ser possível, o material precisaria de: (1) uma ligação laboratório→bloco legível por código (uma coluna em §2.2 ou §3, porque hoje só há a prosa do "Marco de saída"); (2) uma §7 de 24 meses que concorde com a §3 — hoje ela nomeia "o laboratório correspondente" no singular e toma "L1 e L2" como portão do Bloco F, contra a atribuição da §3. Quem implementar: a contagem estava afirmada em **quatro** pontos de `src/ui/Trilha.tsx` no commit `5e0d460` — dois comentários e duas frases visíveis (a `dica` do `ChecklistDaTrilha` e a linha do `fase-estado`). No diretório de trabalho os quatro já tinham saído; agora está no histórico: o commit `e178217` traz as frases dizendo "as condições que a seção 7 desta trilha declara", sem o número. **Decisão tomada em 2026-09-27 e implementada.** | 6 |
+| **Um FIFO sem escritor ainda bloqueia no `open(2)`.** `lerImportado` abre o arquivo uma vez e recusa o que não é arquivo comum pelo `fstat`, então diretório, FIFO e dispositivo não têm o conteúdo lido — mas o `open` de um FIFO **sem escritor** não retorna, e é antes da conferência: o handler do IPC fica sem resposta e a tela sem retorno. Sair disso pede `O_NONBLOCK` no `open`, que o `fs` do Node não expõe de forma portátil. É inerente ao arquivo especial, está declarado, e não é defeito do app | 6 |
+| **O `id` que vem do material não pode mais sombrear as âncoras do app.** O `id` sobrevive à sanitização e `getElementById` devolve o primeiro elemento da árvore, então um `id="secao-10"` escrito no material desviaria o "Ir para a seção 10" da fila e o item do sumário para o texto dele; um `id="checklist-da-trilha"` desviaria o índice da trilha. O comportamento de agora, medido por sonda em 2026-09-27: `renderSeguro` prefixa todo `id` do material com `material-` (`PREFIXO_ID_MATERIAL`, em `scripts/lib/markdown.ts`), religa o href de âncora da mesma página (`#nota` → `#material-nota`), deixa `#4-temas` como veio — quem o reprova continua sendo o gate — e nunca toca no href de rota (`#/…`). A correção está na árvore de trabalho, **ainda não commitada**. Fechada no código | — |

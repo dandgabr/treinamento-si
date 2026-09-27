@@ -50,7 +50,7 @@ export function idDaSecao(numero: number): string {
 }
 
 /**
- * Renderiza uma lista de secoes, exceto as que viram bloco interativo.
+ * Renderiza uma lista de secoes na ordem do material.
  *
  * O `id` e o `tabIndex` do titulo existem para o sumario: o botao de la move o foco e a
  * rolagem para este `h2`.
@@ -58,15 +58,17 @@ export function idDaSecao(numero: number): string {
  * `depoisDaSecao` encaixa um bloco do app imediatamente depois de uma secao do material. E como
  * o diagnostico da trilha volta para dentro do `1.1` de onde a extracao o tirou: o material
  * escreve o bloco no meio da secao 1, e a tela o devolve no mesmo lugar.
+ *
+ * Nao ha filtro por numero de secao, e nao deve haver: quem tira a regiao do diagnostico da
+ * secao e a extracao da trilha, na geracao, entao a secao chega aqui ja sem o bloco que o
+ * `depoisDaSecao` reinsere. Uma prop `excluir` existiu ate 2026-09-27 e nunca teve chamador.
  */
 export function Secoes({
   secoes,
-  excluir = [],
   escuro,
   depoisDaSecao,
 }: {
   secoes: Secao[]
-  excluir?: number[]
   escuro: boolean
   depoisDaSecao?: { numero: number; conteudo: ReactNode }
 }) {
@@ -78,23 +80,21 @@ export function Secoes({
 
   return (
     <div ref={ref}>
-      {secoes
-        .filter((s) => !excluir.includes(s.numero))
-        .map((s) => (
-          // A key inclui o tema: ao trocar claro/escuro o React remonta a secao,
-          // reinjeta o HTML original e o Mermaid volta a ter material para renderizar.
-          // Sem isso ele pula o no (ja marcado com data-processed) e o diagrama
-          // mantem as cores do tema anterior.
-          <Fragment key={`${s.numero}-${escuro}`}>
-            <section className="secao">
-              <h2 id={idDaSecao(s.numero)} tabIndex={-1}>
-                <span className="secao-num">{s.numero}.</span> {s.titulo}
-              </h2>
-              <Html html={s.html} />
-            </section>
-            {depoisDaSecao?.numero === s.numero ? depoisDaSecao.conteudo : null}
-          </Fragment>
-        ))}
+      {secoes.map((s) => (
+        // A key inclui o tema: ao trocar claro/escuro o React remonta a secao,
+        // reinjeta o HTML original e o Mermaid volta a ter material para renderizar.
+        // Sem isso ele pula o no (ja marcado com data-processed) e o diagrama
+        // mantem as cores do tema anterior.
+        <Fragment key={`${s.numero}-${escuro}`}>
+          <section className="secao">
+            <h2 id={idDaSecao(s.numero)} tabIndex={-1}>
+              <span className="secao-num">{s.numero}.</span> {s.titulo}
+            </h2>
+            <Html html={s.html} />
+          </section>
+          {depoisDaSecao?.numero === s.numero ? depoisDaSecao.conteudo : null}
+        </Fragment>
+      ))}
     </div>
   )
 }
