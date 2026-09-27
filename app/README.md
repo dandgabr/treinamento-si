@@ -346,7 +346,7 @@ existiu, **não** como algo que se possa baixar hoje.
 27/09 — 03:08 (`79bea35`, links do material virando rota e glossário navegável), 13:38 (`e178217`,
 o CSS das telas novas) e 14:48 (`68b6e6a`) —, e o arquivo é de 26/09 às 22:45, anterior a todos.
 Medido com a mesma regra de frescor que os smokes usam (`scripts/lib/frescor.mjs`): **82 arquivos de
-fonte do app são mais novos que o pacote**, 31 deles `.ts`/`.tsx` em `src/`. Ninguém reconstruiu o
+fonte do app são mais novos que o pacote**, 31 deles `.ts`/`.tsx` em `src/`. Na época, ninguém havia reconstruído o
 AppImage depois da fase 6 — e por isso este README não podia afirmar que o artefato publicado
 correspondia ao código de hoje. A tabela de "Empacotamento" acima também tinha três linhas marcadas
 como medidas "antes do banco" esperando um `distribuir`: a release abaixo é esse `distribuir`, e as
