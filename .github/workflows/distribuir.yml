@@ -115,12 +115,15 @@ jobs:
           merge-multiple: true
 
       - name: Garantir que a release da tag existe (cria com notas automaticas se nao existir)
+        # Sem `--verify-tag` de propósito: ele verifica a tag rodando `git` LOCAL, e este job
+        # nao faz checkout (nao precisa — a existencia da tag e o proprio gatilho do workflow,
+        # garantida pelo `if` acima). O `--repo` basta: a criacao e puramente via API.
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1 \
-            || gh release create "$GITHUB_REF_NAME" --verify-tag --generate-notes \
-                 --title "$GITHUB_REF_NAME"
+            || gh release create "$GITHUB_REF_NAME" --generate-notes --title "$GITHUB_REF_NAME" \
+                 --repo "$GITHUB_REPOSITORY"
 
       - name: Anexar os instaladores a release
         env:
