@@ -1,0 +1,130 @@
+# Distribuicao do aplicativo desktop — AppImage (Linux), instalador e portatil .exe (Windows)
+# e DMG + zip (macOS, Intel e Apple Silicon).
+#
+# Este workflow roda os MESMOS scripts `distribuir:*` que rodam na maquina (`npm run distribuir:linux`,
+# `distribuir:win`, `distribuir:mac`) — o que garante que o que sai daqui e o que ja foi exercitado
+# localmente — em tres runners em paralelo, um por sistema, e sobe os arquivos de `app/instalador/`
+# como artefatos do run. Disparado por tag `v*`, anexa os mesmos arquivos a release da tag.
+#
+# Fica DE FORA, com o motivo:
+#   - assinatura de codigo: o electron-builder.yml declara `identity: null` (macOS) e nao ha
+#     certificado — assinar e uma decisao separada (S14 do plano). O Gatekeeper pede "abrir mesmo
+#     assim" na primeira vez, que e o comportamento ja acordado para esta via;
+#   - auto-atualizacao: `publish: null` no electron-builder.yml, entao os `.blockmap` gerados ao
+#     lado dos instaladores nao sao artefatos desta via;
+#   - smoke de pacote (`smoke:pacote`): precisa do pacote construido MAIS rede local e display,
+#     que o runner nao tem — os pacotes daqui sao exercitados como os locais, na maquina.
+#
+# Sobre a release: disparada a tag, o job final cria a release (com notas automaticas) se ela
+# ainda nao existir e anexa os instaladores. E a unica escrita do workflow — os jobs de build
+# ficam com `contents: read`.
+name: distribuir
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  construir:
+    name: Instaladores — ${{ matrix.rotulo }}
+    strategy:
+      # Um sistema quebrando nao cancela os outros dois: os tres resultados aparecem.
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            alvo: linux
+            rotulo: Linux (AppImage)
+            artefatos: |
+              app/instalador/*.AppImage
+          - os: windows-latest
+            alvo: win
+            rotulo: Windows (instalador NSIS e portatil .exe)
+            artefatos: |
+              app/instalador/*.exe
+          - os: macos-latest
+            alvo: mac
+            rotulo: macOS (DMG e zip, x64 e arm64)
+            artefatos: |
+              app/instalador/*.dmg
+              app/instalador/*.zip
+
+    runs-on: ${{ matrix.os }}
+    # O macOS empacota quatro saidas (dmg e zip para as duas arquiteturas); 60 min dao folga
+    # sobra para o pior dos tres, e um runner travado nao segura o workflow a tarde inteira.
+    timeout-minutes: 60
+    defaults:
+      # O app e o dono dos scripts; `conteudo/` fica um nivel acima, como na maquina.
+      run:
+        working-directory: app
+
+    steps:
+      - name: Baixar o repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar o Node 22 (a faixa que o package.json exige) com cache do npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          # O lockfile e a unica entrada do cache — e ele que fica em `app/`.
+          cache-dependency-path: app/package-lock.json
+
+      - name: Instalar as dependencias exatas do package-lock.json
+        run: npm ci
+
+      # O script ja cobre a cadeia inteira: `preparar:conteudo` (gera e confere conteudo e
+      # questoes), `build:desktop`, `build:electron` e o electron-builder com `--publish never`,
+      # lendo o electron-builder.yml (fuses incluidos, saida em `app/instalador/`).
+      - name: Construir o instalador — ${{ matrix.rotulo }}
+        run: npm run distribuir:${{ matrix.alvo }}
+
+      - name: Subir os instaladores como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: instalador-${{ matrix.alvo }}
+          path: ${{ matrix.artefatos }}
+          # Instalador que nao saiu e falha, nao um aviso que ninguem le.
+          if-no-files-found: error
+          retention-days: 14
+
+  publicar-release:
+    name: Anexar os instaladores a release
+    # So em tag: disparo manual deixa so os artefatos do run, sem tocar em release nenhuma.
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: construir
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      # `gh release create/upload` grava na release da tag: a unica escrita do workflow.
+      contents: write
+    steps:
+      - name: Baixar os artefatos dos tres sistemas
+        uses: actions/download-artifact@v4
+        with:
+          path: artefatos
+          # Os tres artefatos viram um diretorio so, com todos os instaladores lado a lado.
+          merge-multiple: true
+
+      - name: Garantir que a release da tag existe (cria com notas automaticas se nao existir)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1 \
+            || gh release create "$GITHUB_REF_NAME" --verify-tag --generate-notes \
+                 --title "$GITHUB_REF_NAME"
+
+      - name: Anexar os instaladores a release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # `--clobber`: reexecutar a tag substitui o anexo em vez de falhar por nome repetido.
+        # A expansao do glob produz um argumento por arquivo, com espacos preservados no nome.
+        run: gh release upload "$GITHUB_REF_NAME" artefatos/* --clobber --repo "$GITHUB_REPOSITORY"
