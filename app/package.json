@@ -61,7 +61,7 @@
     "electron-builder": "^26.17.0",
     "gray-matter": "^4.0.3",
     "jsdom": "^25.0.1",
-    "markdown-it": "^14.1.0",
+    "markdown-it": "^14.3.3",
     "playwright": "^1.63.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
